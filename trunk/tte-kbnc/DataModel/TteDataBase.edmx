@@ -1,0 +1,644 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Campus" EntityType="Model.Store.Campus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Droit" EntityType="Model.Store.Droit" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Evenement" EntityType="Model.Store.Evenement" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Matiere" EntityType="Model.Store.Matiere" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Periode" EntityType="Model.Store.Periode" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Promotion" EntityType="Model.Store.Promotion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Utilisateur" EntityType="Model.Store.Utilisateur" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Droit_Campus" Association="Model.Store.FK_Droit_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Droit_Utilisateur" Association="Model.Store.FK_Droit_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Campus" Association="Model.Store.FK_Evenement_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Matiere" Association="Model.Store.FK_Evenement_Matiere">
+            <End Role="Matiere" EntitySet="Matiere" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Periode" Association="Model.Store.FK_Evenement_Periode">
+            <End Role="Periode" EntitySet="Periode" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Utilisateur" Association="Model.Store.FK_Evenement_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Utilisateur1" Association="Model.Store.FK_Evenement_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Periode_Promotion" Association="Model.Store.FK_Periode_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Periode" EntitySet="Periode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Campus" Association="Model.Store.FK_Utilisateur_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Promotion" Association="Model.Store.FK_Utilisateur_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Droit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Utilisateur" Type="int" Nullable="false" />
+          <Property Name="Campus" Type="int" />
+        </EntityType>
+        <EntityType Name="Evenement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Createur" Type="int" Nullable="false" />
+          <Property Name="Intervenant" Type="int" />
+          <Property Name="Campus" Type="int" />
+          <Property Name="Periode" Type="int" />
+          <Property Name="Matiere" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lieu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Debut" Type="datetime" Nullable="false" />
+          <Property Name="Fin" Type="datetime" Nullable="false" />
+          <Property Name="Obligatoire" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matiere">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Nbre_h" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Periode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Promo" Type="int" Nullable="false" />
+          <Property Name="Debut" Type="datetime" Nullable="false" />
+          <Property Name="Fin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Promotion" Type="int" />
+          <Property Name="Campus" Type="int" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Droit_Campus">
+          <End Role="Campus" Type="Model.Store.Campus" Multiplicity="0..1" />
+          <End Role="Droit" Type="Model.Store.Droit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Droit">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Droit_Utilisateur">
+          <End Role="Utilisateur" Type="Model.Store.Utilisateur" Multiplicity="1" />
+          <End Role="Droit" Type="Model.Store.Droit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Droit">
+              <PropertyRef Name="Utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Campus">
+          <End Role="Campus" Type="Model.Store.Campus" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Matiere">
+          <End Role="Matiere" Type="Model.Store.Matiere" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matiere">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Matiere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Periode">
+          <End Role="Periode" Type="Model.Store.Periode" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Periode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Utilisateur">
+          <End Role="Utilisateur" Type="Model.Store.Utilisateur" Multiplicity="1" />
+          <End Role="Evenement" Type="Model.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Createur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Utilisateur1">
+          <End Role="Utilisateur" Type="Model.Store.Utilisateur" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Intervenant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Periode_Promotion">
+          <End Role="Promotion" Type="Model.Store.Promotion" Multiplicity="1" />
+          <End Role="Periode" Type="Model.Store.Periode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Periode">
+              <PropertyRef Name="Promo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilisateur_Campus">
+          <End Role="Campus" Type="Model.Store.Campus" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="Model.Store.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilisateur_Promotion">
+          <End Role="Promotion" Type="Model.Store.Promotion" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="Model.Store.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="Promotion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="Entities">
+          <EntitySet Name="Campus" EntityType="Model.Campus" />
+          <EntitySet Name="Droit" EntityType="Model.Droit" />
+          <EntitySet Name="Evenement" EntityType="Model.Evenement" />
+          <EntitySet Name="Matiere" EntityType="Model.Matiere" />
+          <EntitySet Name="Periode" EntityType="Model.Periode" />
+          <EntitySet Name="Promotion" EntityType="Model.Promotion" />
+          <EntitySet Name="Utilisateur" EntityType="Model.Utilisateur" />
+          <AssociationSet Name="FK_Droit_Campus" Association="Model.FK_Droit_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Campus" Association="Model.FK_Evenement_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Campus" Association="Model.FK_Utilisateur_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Droit_Utilisateur" Association="Model.FK_Droit_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Matiere" Association="Model.FK_Evenement_Matiere">
+            <End Role="Matiere" EntitySet="Matiere" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Periode" Association="Model.FK_Evenement_Periode">
+            <End Role="Periode" EntitySet="Periode" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Utilisateur" Association="Model.FK_Evenement_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Utilisateur1" Association="Model.FK_Evenement_Utilisateur1">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Periode_Promotion" Association="Model.FK_Periode_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Periode" EntitySet="Periode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Promotion" Association="Model.FK_Utilisateur_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Droit" Relationship="Model.FK_Droit_Campus" FromRole="Campus" ToRole="Droit" />
+          <NavigationProperty Name="Evenement" Relationship="Model.FK_Evenement_Campus" FromRole="Campus" ToRole="Evenement" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.FK_Utilisateur_Campus" FromRole="Campus" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Droit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Campus" Relationship="Model.FK_Droit_Campus" FromRole="Droit" ToRole="Campus" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.FK_Droit_Utilisateur" FromRole="Droit" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Evenement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Lieu" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Debut" Type="DateTime" Nullable="false" />
+          <Property Name="Fin" Type="DateTime" Nullable="false" />
+          <Property Name="Obligatoire" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Campus" Relationship="Model.FK_Evenement_Campus" FromRole="Evenement" ToRole="Campus" />
+          <NavigationProperty Name="Matiere" Relationship="Model.FK_Evenement_Matiere" FromRole="Evenement" ToRole="Matiere" />
+          <NavigationProperty Name="Periode" Relationship="Model.FK_Evenement_Periode" FromRole="Evenement" ToRole="Periode" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.FK_Evenement_Utilisateur" FromRole="Evenement" ToRole="Utilisateur" />
+          <NavigationProperty Name="Utilisateur1" Relationship="Model.FK_Evenement_Utilisateur1" FromRole="Evenement" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Matiere">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Nbre_h" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Evenement" Relationship="Model.FK_Evenement_Matiere" FromRole="Matiere" ToRole="Evenement" />
+        </EntityType>
+        <EntityType Name="Periode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Debut" Type="DateTime" Nullable="false" />
+          <Property Name="Fin" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Evenement" Relationship="Model.FK_Evenement_Periode" FromRole="Periode" ToRole="Evenement" />
+          <NavigationProperty Name="Promotion" Relationship="Model.FK_Periode_Promotion" FromRole="Periode" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Periode" Relationship="Model.FK_Periode_Promotion" FromRole="Promotion" ToRole="Periode" />
+          <NavigationProperty Name="Utilisateur" Relationship="Model.FK_Utilisateur_Promotion" FromRole="Promotion" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Campus" Relationship="Model.FK_Utilisateur_Campus" FromRole="Utilisateur" ToRole="Campus" />
+          <NavigationProperty Name="Droit" Relationship="Model.FK_Droit_Utilisateur" FromRole="Utilisateur" ToRole="Droit" />
+          <NavigationProperty Name="Evenement" Relationship="Model.FK_Evenement_Utilisateur" FromRole="Utilisateur" ToRole="Evenement" />
+          <NavigationProperty Name="Evenement1" Relationship="Model.FK_Evenement_Utilisateur1" FromRole="Utilisateur" ToRole="Evenement" />
+          <NavigationProperty Name="Promotion" Relationship="Model.FK_Utilisateur_Promotion" FromRole="Utilisateur" ToRole="Promotion" />
+        </EntityType>
+        <Association Name="FK_Droit_Campus">
+          <End Role="Campus" Type="Model.Campus" Multiplicity="0..1" />
+          <End Role="Droit" Type="Model.Droit" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Campus">
+          <End Role="Campus" Type="Model.Campus" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Utilisateur_Campus">
+          <End Role="Campus" Type="Model.Campus" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="Model.Utilisateur" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Droit_Utilisateur">
+          <End Role="Utilisateur" Type="Model.Utilisateur" Multiplicity="1" />
+          <End Role="Droit" Type="Model.Droit" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Matiere">
+          <End Role="Matiere" Type="Model.Matiere" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Periode">
+          <End Role="Periode" Type="Model.Periode" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Utilisateur">
+          <End Role="Utilisateur" Type="Model.Utilisateur" Multiplicity="1" />
+          <End Role="Evenement" Type="Model.Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Utilisateur1">
+          <End Role="Utilisateur" Type="Model.Utilisateur" Multiplicity="0..1" />
+          <End Role="Evenement" Type="Model.Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Periode_Promotion">
+          <End Role="Promotion" Type="Model.Promotion" Multiplicity="1" />
+          <End Role="Periode" Type="Model.Periode" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Utilisateur_Promotion">
+          <End Role="Promotion" Type="Model.Promotion" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="Model.Utilisateur" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Campus">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Campus)">
+              <MappingFragment StoreEntitySet="Campus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Droit">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Droit)">
+              <MappingFragment StoreEntitySet="Droit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evenement">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Evenement)">
+              <MappingFragment StoreEntitySet="Evenement">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Lieu" ColumnName="Lieu" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Debut" ColumnName="Debut" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Obligatoire" ColumnName="Obligatoire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matiere">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Matiere)">
+              <MappingFragment StoreEntitySet="Matiere">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Nbre_h" ColumnName="Nbre_h" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periode">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Periode)">
+              <MappingFragment StoreEntitySet="Periode">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Debut" ColumnName="Debut" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotion">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Promotion)">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateur">
+            <EntityTypeMapping TypeName="IsTypeOf(Model.Utilisateur)">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Droit_Campus" TypeName="Model.FK_Droit_Campus" StoreEntitySet="Droit">
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="Campus" />
+            </EndProperty>
+            <EndProperty Name="Droit">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Campus" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Campus" TypeName="Model.FK_Evenement_Campus" StoreEntitySet="Evenement">
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="Campus" />
+            </EndProperty>
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Campus" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Utilisateur_Campus" TypeName="Model.FK_Utilisateur_Campus" StoreEntitySet="Utilisateur">
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="Campus" />
+            </EndProperty>
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Campus" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Droit_Utilisateur" TypeName="Model.FK_Droit_Utilisateur" StoreEntitySet="Droit">
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Utilisateur" />
+            </EndProperty>
+            <EndProperty Name="Droit">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Matiere" TypeName="Model.FK_Evenement_Matiere" StoreEntitySet="Evenement">
+            <EndProperty Name="Matiere">
+              <ScalarProperty Name="Id" ColumnName="Matiere" />
+            </EndProperty>
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Matiere" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Periode" TypeName="Model.FK_Evenement_Periode" StoreEntitySet="Evenement">
+            <EndProperty Name="Periode">
+              <ScalarProperty Name="Id" ColumnName="Periode" />
+            </EndProperty>
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Periode" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Utilisateur" TypeName="Model.FK_Evenement_Utilisateur" StoreEntitySet="Evenement">
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Createur" />
+            </EndProperty>
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Utilisateur1" TypeName="Model.FK_Evenement_Utilisateur1" StoreEntitySet="Evenement">
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Intervenant" />
+            </EndProperty>
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Intervenant" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Periode_Promotion" TypeName="Model.FK_Periode_Promotion" StoreEntitySet="Periode">
+            <EndProperty Name="Promotion">
+              <ScalarProperty Name="Id" ColumnName="Promo" />
+            </EndProperty>
+            <EndProperty Name="Periode">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Utilisateur_Promotion" TypeName="Model.FK_Utilisateur_Promotion" StoreEntitySet="Utilisateur">
+            <EndProperty Name="Promotion">
+              <ScalarProperty Name="Id" ColumnName="Promotion" />
+            </EndProperty>
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <Condition ColumnName="Promotion" IsNull="false" />
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="TteDataBase">
+        <EntityTypeShape EntityType="Model.Campus" Width="1.5" PointX="9.375" PointY="6.375" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Droit" Width="1.5" PointX="7" PointY="4.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Evenement" Width="1.5" PointX="0.625" PointY="4.625" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Matiere" Width="1.5" PointX="0.75" PointY="2.125" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Periode" Width="1.5" PointX="3.25" PointY="2.375" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Promotion" Width="1.5" PointX="6.125" PointY="2.625" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Utilisateur" Width="1.5" PointX="5" PointY="5.25" Height="2.5571907552083335" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Droit_Campus" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.375" PointY="7.5091362421875" />
+          <ConnectorPoint PointX="7.75" PointY="7.5091362421875" />
+          <ConnectorPoint PointX="7.75" PointY="6.6629850260416674" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Evenement_Campus" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.375" PointY="7.951396484375" />
+          <ConnectorPoint PointX="2.125" PointY="7.951396484375" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Utilisateur_Campus" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.375" PointY="7.6822916666666661" />
+          <ConnectorPoint PointX="6.5" PointY="7.6822916666666661" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Droit_Utilisateur" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.5" PointY="5.9564925130208337" />
+          <ConnectorPoint PointX="7" PointY="5.9564925130208337" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Evenement_Matiere" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.4375" PointY="3.9129850260416674" />
+          <ConnectorPoint PointX="1.4375" PointY="4.625" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Evenement_Periode" ManuallyRouted="false">
+          <ConnectorPoint PointX="4" PointY="4.547587890625" />
+          <ConnectorPoint PointX="4" PointY="5.161458333333333" />
+          <ConnectorPoint PointX="2.125" PointY="5.161458333333333" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Evenement_Utilisateur" ManuallyRouted="false">
+          <ConnectorPoint PointX="5" PointY="6.5285953776041667" />
+          <ConnectorPoint PointX="2.125" PointY="6.5285953776041667" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Evenement_Utilisateur1" ManuallyRouted="false">
+          <ConnectorPoint PointX="5" PointY="5.8267976888020829" />
+          <ConnectorPoint PointX="2.125" PointY="5.8267976888020829" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Periode_Promotion" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.125" PointY="3.5189925130208333" />
+          <ConnectorPoint PointX="4.75" PointY="3.5189925130208333" />
+          </AssociationConnector>
+        <AssociationConnector Association="Model.FK_Utilisateur_Promotion" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.3125" PointY="4.4129850260416665" />
+          <ConnectorPoint PointX="6.3125" PointY="5.25" />
+          </AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
