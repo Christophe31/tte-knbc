@@ -1,0 +1,14 @@
+=Index de TimeTebleEasy=
+=Fonctionnalités=
+ * Gestion de Calandriers publics
+ * Gestion de calandriers privés pour les utilisateurs individuels
+ * Gestion de droits pour administrateur
+ * Gestion de droits pour administrateur de campus
+ * Gestion de droits pour intervenants
+ * Warning en cas d'évènement sur une salle occupée
+ * Export Icalendar
+==Credits==
+ * Karamilo Jeremie     (interface/GUI)
+ * Narbonne Christophe  (Service WCF)
+ * Breil Romaric        (Interface/GUI, DB Designer)
+ * Cheynet de beauprés Romain (DB Designer)
