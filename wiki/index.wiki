@@ -8,7 +8,7 @@
  * Warning en cas d'évènement sur une salle occupée
  * Export Icalendar
 ==Credits==
- * Karamilo Jeremie     (interface/GUI)
+ * Kornylo Jeremy       (interface/GUI)
  * Narbonne Christophe  (Service WCF)
  * Breil Romaric        (Interface/GUI, DB Designer)
  * Cheynet de beauprés Romain (DB Designer)
