@@ -1,0 +1,6 @@
+C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\DataModel\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\DataModel\bin\Debug\WcfServiceLibrary1.dll.config
+C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\DataModel\bin\Debug\WcfServiceLibrary1.dll
+C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\DataModel\bin\Debug\WcfServiceLibrary1.pdb
+C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\DataModel\obj\Debug\WcfServiceLibrary1.dll
+C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\DataModel\obj\Debug\WcfServiceLibrary1.pdb
