@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
