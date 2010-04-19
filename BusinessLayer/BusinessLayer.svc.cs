@@ -24,7 +24,7 @@ namespace BusinessLayer
 
 			return db.Evenement.
 				Where(p=>p.Campus.Nom==CampusName).
-				Where(p=>p.Debut>Start && p.Fin<Stop).
+				Where(p=>p.Debut<Stop && p.Fin>Start).
 				Where(p=>p.Createur.LastChange>LastUpdate).
 				Select(p=>new EventData(p)).ToArray() ;
 		}
