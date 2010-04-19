@@ -11,14 +11,14 @@ namespace BusinessLayer
 	[ServiceContract]
 	public interface IBusinessLayer
 	{
+		[OperationContract]
+		List<EventData> getEventsData_Campus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate=DateTime.MinValue);
 
 		[OperationContract]
-		List<EventData> getEventsData_Campus(string CampusName);
+		List<EventData> getEventsData_University(DateTime Start, DateTime Stop, DateTime LastUpdate = DateTime.MinValue);
 		[OperationContract]
-		List<EventData> getEventsData_University();
+		List<EventData> getEventsData_Periode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate = DateTime.MinValue);
 		[OperationContract]
-		List<EventData> getEventsData_Periode(string PromoPeriodeName);
-		[OperationContract]
-		List<EventData> getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName);
+		List<EventData> getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate = DateTime.MinValue);
 	}
 }
