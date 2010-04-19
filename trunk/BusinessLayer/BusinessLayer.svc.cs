@@ -23,25 +23,42 @@ namespace BusinessLayer
 		{
 
 			return db.Evenement.
-				Where(p=>p.Campus.Nom==CampusName).
-				Where(p=>p.Debut<Stop && p.Fin>Start).
+				Where(p => p.Debut < Stop && p.Fin > Start).
+				Where(p => p.Campus.Nom == CampusName).
 				Where(p=>p.Createur.LastChange>LastUpdate).
 				Select(p=>new EventData(p)).ToArray() ;
 		}
 
 		public EventData[] getEventsData_University(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return null;
+			return db.Evenement.
+				Where(p => p.Debut < Stop && p.Fin > Start).
+				Where(p => p.Campus == null && p.Periode == null && p.Classe == null).
+				Where(p=>p.Createur.LastChange>LastUpdate).
+				Select(p=>new EventData(p)).ToArray() ;
 		}
 
 		public EventData[] getEventsData_Periode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return null;
+			return db.Evenement.
+				Where(p => p.Debut < Stop && p.Fin > Start).
+				Where(p => (p.Periode.Nom == PromoPeriodeName.Split('-')[1] && p.Periode.Promotion.Nom == PromoPeriodeName.Split('-')[0])).
+				Where(p => p.Createur.LastChange > LastUpdate).
+				Select(p => new EventData(p)).ToArray();
 		}
 
 		public EventData[] getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return null;
+			return db.Evenement.
+				Where(p => p.Debut < Stop && p.Fin > Start).
+				Where(p => (p.Classe == 
+						db.Classe.
+						Where(c =>(c.Campus.Nom==CampusName &&
+							  c.nom == ClassName &&
+							  c.Periode.Nom == PromoPeriodeName.Split('-')[1])).First())
+					  ).
+				Where(p => p.Createur.LastChange > LastUpdate).
+				Select(p => new EventData(p)).ToArray();
 		}
 
 		#endregion
