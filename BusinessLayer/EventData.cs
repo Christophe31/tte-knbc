@@ -11,15 +11,19 @@ namespace BusinessLayer
 	[DataContract]
 	public class EventData
 	{
-		public EventData(Evenement e)
+		/// <summary>
+		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
+		/// </summary>
+		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
+		public EventData(Evenement EventEntity)
 		{
-			this.Debut = e.Debut;
-			this.Fin = e.Fin;
-			this.Obligatoire = e.Obligatoire;
-			this.Nom = e.Nom;
-			this.Lieu = e.Lieu;
-			this.Matiere = e.Matiere.Nom;
-			this.Type = e.Type;
+			this.Debut = EventEntity.Debut;
+			this.Fin = EventEntity.Fin;
+			this.Obligatoire = EventEntity.Obligatoire;
+			this.Nom = EventEntity.Nom;
+			this.Lieu = EventEntity.Lieu;
+			this.Matiere = EventEntity.Matiere.Nom;
+			this.Type = EventEntity.Type;
 		} 
 
 		/// <summary>
