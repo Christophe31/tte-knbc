@@ -23,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Periode_Promotion", "Promotion", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.Promotion), "Periode", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Periode))]
 
 // Original file name:
-// Generation date: 19/04/2010 19:06:21
+// Generation date: 19/04/2010 20:47:54
 namespace DataModel
 {
     
@@ -1059,14 +1059,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Utilisateur in the schema.
+        /// There are no comments for Intervenant in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Intervenant", "Utilisateur")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Utilisateur
+        public Utilisateur Intervenant
         {
             get
             {
@@ -1078,12 +1078,12 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Utilisateur in the schema.
+        /// There are no comments for Intervenant in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> UtilisateurReference
+        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> IntervenantReference
         {
             get
             {
@@ -1176,14 +1176,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Utilisateur1 in the schema.
+        /// There are no comments for Createur in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Proprietaire", "Utilisateur")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Utilisateur1
+        public Utilisateur Createur
         {
             get
             {
@@ -1195,12 +1195,12 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Utilisateur1 in the schema.
+        /// There are no comments for Createur in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> Utilisateur1Reference
+        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> CreateurReference
         {
             get
             {
