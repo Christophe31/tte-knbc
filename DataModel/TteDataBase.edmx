@@ -1,0 +1,790 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TteDataBase.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="TteDataBaseStoreContainer">
+          <EntitySet Name="Campus" EntityType="TteDataBase.Store.Campus" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Classe" EntityType="TteDataBase.Store.Classe" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Droit" EntityType="TteDataBase.Store.Droit" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Evenement" EntityType="TteDataBase.Store.Evenement" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Matiere" EntityType="TteDataBase.Store.Matiere" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Periode" EntityType="TteDataBase.Store.Periode" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Promotion" EntityType="TteDataBase.Store.Promotion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Utilisateur" EntityType="TteDataBase.Store.Utilisateur" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Classe_Campus" Association="TteDataBase.Store.FK_Classe_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Classe" EntitySet="Classe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Classe_Periode" Association="TteDataBase.Store.FK_Classe_Periode">
+            <End Role="Periode" EntitySet="Periode" />
+            <End Role="Classe" EntitySet="Classe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Droit_Campus" Association="TteDataBase.Store.FK_Droit_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Droit_Utilisateur" Association="TteDataBase.Store.FK_Droit_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Campus" Association="TteDataBase.Store.FK_Evenement_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Classe" Association="TteDataBase.Store.FK_Evenement_Classe">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Intervenant" Association="TteDataBase.Store.FK_Evenement_Intervenant">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Matiere" Association="TteDataBase.Store.FK_Evenement_Matiere">
+            <End Role="Matiere" EntitySet="Matiere" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Periode" Association="TteDataBase.Store.FK_Evenement_Periode">
+            <End Role="Periode" EntitySet="Periode" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Proprietaire" Association="TteDataBase.Store.FK_Evenement_Proprietaire">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Periode_Promotion" Association="TteDataBase.Store.FK_Periode_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Periode" EntitySet="Periode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Campus" Association="TteDataBase.Store.FK_Utilisateur_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Classe" Association="TteDataBase.Store.FK_Utilisateur_Classe">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Classe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="campus" Type="int" Nullable="false" />
+          <Property Name="periode" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Droit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Utilisateur" Type="int" Nullable="false" />
+          <Property Name="Campus" Type="int" />
+        </EntityType>
+        <EntityType Name="Evenement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Createur" Type="int" Nullable="false" />
+          <Property Name="Intervenant" Type="int" />
+          <Property Name="Campus" Type="int" />
+          <Property Name="Periode" Type="int" />
+          <Property Name="Classe" Type="int" />
+          <Property Name="Matiere" Type="int" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lieu" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Debut" Type="datetime" Nullable="false" />
+          <Property Name="Fin" Type="datetime" Nullable="false" />
+          <Property Name="Obligatoire" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matiere">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Nbre_h" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Periode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Promo" Type="int" Nullable="false" />
+          <Property Name="Debut" Type="datetime" Nullable="false" />
+          <Property Name="Fin" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Classe" Type="int" />
+          <Property Name="Campus" Type="int" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Classe_Campus">
+          <End Role="Campus" Type="TteDataBase.Store.Campus" Multiplicity="1" />
+          <End Role="Classe" Type="TteDataBase.Store.Classe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Classe">
+              <PropertyRef Name="campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Classe_Periode">
+          <End Role="Periode" Type="TteDataBase.Store.Periode" Multiplicity="1" />
+          <End Role="Classe" Type="TteDataBase.Store.Classe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Classe">
+              <PropertyRef Name="periode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Droit_Campus">
+          <End Role="Campus" Type="TteDataBase.Store.Campus" Multiplicity="0..1" />
+          <End Role="Droit" Type="TteDataBase.Store.Droit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Droit">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Droit_Utilisateur">
+          <End Role="Utilisateur" Type="TteDataBase.Store.Utilisateur" Multiplicity="1" />
+          <End Role="Droit" Type="TteDataBase.Store.Droit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Droit">
+              <PropertyRef Name="Utilisateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Campus">
+          <End Role="Campus" Type="TteDataBase.Store.Campus" Multiplicity="0..1" />
+          <End Role="Evenement" Type="TteDataBase.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Classe">
+          <End Role="Classe" Type="TteDataBase.Store.Classe" Multiplicity="0..1" />
+          <End Role="Evenement" Type="TteDataBase.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Classe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Intervenant">
+          <End Role="Utilisateur" Type="TteDataBase.Store.Utilisateur" Multiplicity="0..1" />
+          <End Role="Evenement" Type="TteDataBase.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Intervenant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Matiere">
+          <End Role="Matiere" Type="TteDataBase.Store.Matiere" Multiplicity="0..1" />
+          <End Role="Evenement" Type="TteDataBase.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matiere">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Matiere" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Periode">
+          <End Role="Periode" Type="TteDataBase.Store.Periode" Multiplicity="0..1" />
+          <End Role="Evenement" Type="TteDataBase.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Periode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Evenement_Proprietaire">
+          <End Role="Utilisateur" Type="TteDataBase.Store.Utilisateur" Multiplicity="1" />
+          <End Role="Evenement" Type="TteDataBase.Store.Evenement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Evenement">
+              <PropertyRef Name="Createur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Periode_Promotion">
+          <End Role="Promotion" Type="TteDataBase.Store.Promotion" Multiplicity="1" />
+          <End Role="Periode" Type="TteDataBase.Store.Periode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Periode">
+              <PropertyRef Name="Promo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilisateur_Campus">
+          <End Role="Campus" Type="TteDataBase.Store.Campus" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="TteDataBase.Store.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Campus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Utilisateur_Classe">
+          <End Role="Classe" Type="TteDataBase.Store.Classe" Multiplicity="0..1" />
+          <End Role="Utilisateur" Type="TteDataBase.Store.Utilisateur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classe">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Utilisateur">
+              <PropertyRef Name="Classe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TteDataBase" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="TteDB">
+          <EntitySet Name="Campus" EntityType="TteDataBase.Campus" />
+          <EntitySet Name="Classe" EntityType="TteDataBase.Classe" />
+          <EntitySet Name="Droit" EntityType="TteDataBase.Droit" />
+          <EntitySet Name="Evenement" EntityType="TteDataBase.Evenement" />
+          <EntitySet Name="Matiere" EntityType="TteDataBase.Matiere" />
+          <EntitySet Name="Periode" EntityType="TteDataBase.Periode" />
+          <EntitySet Name="Promotion" EntityType="TteDataBase.Promotion" />
+          <EntitySet Name="Utilisateur" EntityType="TteDataBase.Utilisateur" />
+          <AssociationSet Name="FK_Classe_Campus" Association="TteDataBase.FK_Classe_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Classe" EntitySet="Classe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Droit_Campus" Association="TteDataBase.FK_Droit_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Campus" Association="TteDataBase.FK_Evenement_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Campus" Association="TteDataBase.FK_Utilisateur_Campus">
+            <End Role="Campus" EntitySet="Campus" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Classe_Periode" Association="TteDataBase.FK_Classe_Periode">
+            <End Role="Periode" EntitySet="Periode" />
+            <End Role="Classe" EntitySet="Classe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Classe" Association="TteDataBase.FK_Evenement_Classe">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Utilisateur_Classe" Association="TteDataBase.FK_Utilisateur_Classe">
+            <End Role="Classe" EntitySet="Classe" />
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Droit_Utilisateur" Association="TteDataBase.FK_Droit_Utilisateur">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Droit" EntitySet="Droit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Intervenant" Association="TteDataBase.FK_Evenement_Intervenant">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Matiere" Association="TteDataBase.FK_Evenement_Matiere">
+            <End Role="Matiere" EntitySet="Matiere" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Periode" Association="TteDataBase.FK_Evenement_Periode">
+            <End Role="Periode" EntitySet="Periode" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Evenement_Proprietaire" Association="TteDataBase.FK_Evenement_Proprietaire">
+            <End Role="Utilisateur" EntitySet="Utilisateur" />
+            <End Role="Evenement" EntitySet="Evenement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Periode_Promotion" Association="TteDataBase.FK_Periode_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Periode" EntitySet="Periode" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Campus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Classe" Relationship="TteDataBase.FK_Classe_Campus" FromRole="Campus" ToRole="Classe" />
+          <NavigationProperty Name="Droit" Relationship="TteDataBase.FK_Droit_Campus" FromRole="Campus" ToRole="Droit" />
+          <NavigationProperty Name="Evenement" Relationship="TteDataBase.FK_Evenement_Campus" FromRole="Campus" ToRole="Evenement" />
+          <NavigationProperty Name="Utilisateur" Relationship="TteDataBase.FK_Utilisateur_Campus" FromRole="Campus" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Classe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="nom" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Campus" Relationship="TteDataBase.FK_Classe_Campus" FromRole="Classe" ToRole="Campus" />
+          <NavigationProperty Name="Periode" Relationship="TteDataBase.FK_Classe_Periode" FromRole="Classe" ToRole="Periode" />
+          <NavigationProperty Name="Evenement" Relationship="TteDataBase.FK_Evenement_Classe" FromRole="Classe" ToRole="Evenement" />
+          <NavigationProperty Name="Utilisateur" Relationship="TteDataBase.FK_Utilisateur_Classe" FromRole="Classe" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Droit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Type" Nullable="false" />
+          <NavigationProperty Name="Campus" Relationship="TteDataBase.FK_Droit_Campus" FromRole="Droit" ToRole="Campus" />
+          <NavigationProperty Name="Utilisateur" Relationship="TteDataBase.FK_Droit_Utilisateur" FromRole="Droit" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Evenement">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Type" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Lieu" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="Debut" Nullable="false" />
+          <Property Type="DateTime" Name="Fin" Nullable="false" />
+          <Property Type="Boolean" Name="Obligatoire" Nullable="false" />
+          <NavigationProperty Name="Campus" Relationship="TteDataBase.FK_Evenement_Campus" FromRole="Evenement" ToRole="Campus" />
+          <NavigationProperty Name="Classe" Relationship="TteDataBase.FK_Evenement_Classe" FromRole="Evenement" ToRole="Classe" />
+          <NavigationProperty Name="Intervenant" Relationship="TteDataBase.FK_Evenement_Intervenant" FromRole="Evenement" ToRole="Utilisateur" />
+          <NavigationProperty Name="Matiere" Relationship="TteDataBase.FK_Evenement_Matiere" FromRole="Evenement" ToRole="Matiere" />
+          <NavigationProperty Name="Periode" Relationship="TteDataBase.FK_Evenement_Periode" FromRole="Evenement" ToRole="Periode" />
+          <NavigationProperty Name="Proprietaire" Relationship="TteDataBase.FK_Evenement_Proprietaire" FromRole="Evenement" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Matiere">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Nbre_h" Nullable="false" />
+          <NavigationProperty Name="Evenement" Relationship="TteDataBase.FK_Evenement_Matiere" FromRole="Matiere" ToRole="Evenement" />
+        </EntityType>
+        <EntityType Name="Periode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Debut" Nullable="false" />
+          <Property Type="DateTime" Name="Fin" Nullable="false" />
+          <NavigationProperty Name="Classe" Relationship="TteDataBase.FK_Classe_Periode" FromRole="Periode" ToRole="Classe" />
+          <NavigationProperty Name="Evenement" Relationship="TteDataBase.FK_Evenement_Periode" FromRole="Periode" ToRole="Evenement" />
+          <NavigationProperty Name="Promotion" Relationship="TteDataBase.FK_Periode_Promotion" FromRole="Periode" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Periode" Relationship="TteDataBase.FK_Periode_Promotion" FromRole="Promotion" ToRole="Periode" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Campus" Relationship="TteDataBase.FK_Utilisateur_Campus" FromRole="Utilisateur" ToRole="Campus" />
+          <NavigationProperty Name="Classe" Relationship="TteDataBase.FK_Utilisateur_Classe" FromRole="Utilisateur" ToRole="Classe" />
+          <NavigationProperty Name="Droit" Relationship="TteDataBase.FK_Droit_Utilisateur" FromRole="Utilisateur" ToRole="Droit" />
+          <NavigationProperty Name="Evenement" Relationship="TteDataBase.FK_Evenement_Intervenant" FromRole="Utilisateur" ToRole="Evenement" />
+          <NavigationProperty Name="Evenement1" Relationship="TteDataBase.FK_Evenement_Proprietaire" FromRole="Utilisateur" ToRole="Evenement" />
+        </EntityType>
+        <Association Name="FK_Classe_Campus">
+          <End Type="TteDataBase.Campus" Role="Campus" Multiplicity="1" />
+          <End Type="TteDataBase.Classe" Role="Classe" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Droit_Campus">
+          <End Type="TteDataBase.Campus" Role="Campus" Multiplicity="0..1" />
+          <End Type="TteDataBase.Droit" Role="Droit" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Campus">
+          <End Type="TteDataBase.Campus" Role="Campus" Multiplicity="0..1" />
+          <End Type="TteDataBase.Evenement" Role="Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Utilisateur_Campus">
+          <End Type="TteDataBase.Campus" Role="Campus" Multiplicity="0..1" />
+          <End Type="TteDataBase.Utilisateur" Role="Utilisateur" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Classe_Periode">
+          <End Type="TteDataBase.Periode" Role="Periode" Multiplicity="1" />
+          <End Type="TteDataBase.Classe" Role="Classe" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Classe">
+          <End Type="TteDataBase.Classe" Role="Classe" Multiplicity="0..1" />
+          <End Type="TteDataBase.Evenement" Role="Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Utilisateur_Classe">
+          <End Type="TteDataBase.Classe" Role="Classe" Multiplicity="0..1" />
+          <End Type="TteDataBase.Utilisateur" Role="Utilisateur" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Droit_Utilisateur">
+          <End Type="TteDataBase.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="TteDataBase.Droit" Role="Droit" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Intervenant">
+          <End Type="TteDataBase.Utilisateur" Role="Utilisateur" Multiplicity="0..1" />
+          <End Type="TteDataBase.Evenement" Role="Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Matiere">
+          <End Type="TteDataBase.Matiere" Role="Matiere" Multiplicity="0..1" />
+          <End Type="TteDataBase.Evenement" Role="Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Periode">
+          <End Type="TteDataBase.Periode" Role="Periode" Multiplicity="0..1" />
+          <End Type="TteDataBase.Evenement" Role="Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Evenement_Proprietaire">
+          <End Type="TteDataBase.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="TteDataBase.Evenement" Role="Evenement" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Periode_Promotion">
+          <End Type="TteDataBase.Promotion" Role="Promotion" Multiplicity="1" />
+          <End Type="TteDataBase.Periode" Role="Periode" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="TteDataBaseStoreContainer" CdmEntityContainer="TteDB">
+          <EntitySetMapping Name="Campus">
+            <EntityTypeMapping TypeName="TteDataBase.Campus">
+              <MappingFragment StoreEntitySet="Campus">
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Classe">
+            <EntityTypeMapping TypeName="TteDataBase.Classe">
+              <MappingFragment StoreEntitySet="Classe">
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Droit">
+            <EntityTypeMapping TypeName="TteDataBase.Droit">
+              <MappingFragment StoreEntitySet="Droit">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Evenement">
+            <EntityTypeMapping TypeName="TteDataBase.Evenement">
+              <MappingFragment StoreEntitySet="Evenement">
+                <ScalarProperty Name="Obligatoire" ColumnName="Obligatoire" />
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Debut" ColumnName="Debut" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Lieu" ColumnName="Lieu" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matiere">
+            <EntityTypeMapping TypeName="TteDataBase.Matiere">
+              <MappingFragment StoreEntitySet="Matiere">
+                <ScalarProperty Name="Nbre_h" ColumnName="Nbre_h" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periode">
+            <EntityTypeMapping TypeName="TteDataBase.Periode">
+              <MappingFragment StoreEntitySet="Periode">
+                <ScalarProperty Name="Fin" ColumnName="Fin" />
+                <ScalarProperty Name="Debut" ColumnName="Debut" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotion">
+            <EntityTypeMapping TypeName="TteDataBase.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Utilisateur">
+            <EntityTypeMapping TypeName="TteDataBase.Utilisateur">
+              <MappingFragment StoreEntitySet="Utilisateur">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Classe_Campus" TypeName="TteDataBase.FK_Classe_Campus" StoreEntitySet="Classe">
+            <EndProperty Name="Classe">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="campus" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Droit_Campus" TypeName="TteDataBase.FK_Droit_Campus" StoreEntitySet="Droit">
+            <EndProperty Name="Droit">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="Campus" />
+            </EndProperty>
+            <Condition ColumnName="Campus" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Campus" TypeName="TteDataBase.FK_Evenement_Campus" StoreEntitySet="Evenement">
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="Campus" />
+            </EndProperty>
+            <Condition ColumnName="Campus" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Utilisateur_Campus" TypeName="TteDataBase.FK_Utilisateur_Campus" StoreEntitySet="Utilisateur">
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Campus">
+              <ScalarProperty Name="Id" ColumnName="Campus" />
+            </EndProperty>
+            <Condition ColumnName="Campus" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Classe_Periode" TypeName="TteDataBase.FK_Classe_Periode" StoreEntitySet="Classe">
+            <EndProperty Name="Classe">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+            <EndProperty Name="Periode">
+              <ScalarProperty Name="Id" ColumnName="periode" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Classe" TypeName="TteDataBase.FK_Evenement_Classe" StoreEntitySet="Evenement">
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Classe">
+              <ScalarProperty Name="id" ColumnName="Classe" />
+            </EndProperty>
+            <Condition ColumnName="Classe" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Utilisateur_Classe" TypeName="TteDataBase.FK_Utilisateur_Classe" StoreEntitySet="Utilisateur">
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Classe">
+              <ScalarProperty Name="id" ColumnName="Classe" />
+            </EndProperty>
+            <Condition ColumnName="Classe" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Droit_Utilisateur" TypeName="TteDataBase.FK_Droit_Utilisateur" StoreEntitySet="Droit">
+            <EndProperty Name="Droit">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Utilisateur" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Intervenant" TypeName="TteDataBase.FK_Evenement_Intervenant" StoreEntitySet="Evenement">
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Intervenant" />
+            </EndProperty>
+            <Condition ColumnName="Intervenant" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Matiere" TypeName="TteDataBase.FK_Evenement_Matiere" StoreEntitySet="Evenement">
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Matiere">
+              <ScalarProperty Name="Id" ColumnName="Matiere" />
+            </EndProperty>
+            <Condition ColumnName="Matiere" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Periode" TypeName="TteDataBase.FK_Evenement_Periode" StoreEntitySet="Evenement">
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Periode">
+              <ScalarProperty Name="Id" ColumnName="Periode" />
+            </EndProperty>
+            <Condition ColumnName="Periode" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Evenement_Proprietaire" TypeName="TteDataBase.FK_Evenement_Proprietaire" StoreEntitySet="Evenement">
+            <EndProperty Name="Evenement">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Utilisateur">
+              <ScalarProperty Name="Id" ColumnName="Createur" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Periode_Promotion" TypeName="TteDataBase.FK_Periode_Promotion" StoreEntitySet="Periode">
+            <EndProperty Name="Periode">
+              <ScalarProperty Name="Id" ColumnName="Id" />
+            </EndProperty>
+            <EndProperty Name="Promotion">
+              <ScalarProperty Name="Id" ColumnName="Promo" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TteDataBase" ZoomLevel="84">
+        <EntityTypeShape EntityType="TteDataBase.Campus" Width="1.5" PointX="5.125" PointY="6.75" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="TteDataBase.Classe" Width="1.5" PointX="7.75" PointY="2.875" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="TteDataBase.Droit" Width="1.5" PointX="5.75" PointY="4.375" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="TteDataBase.Evenement" Width="1.5" PointX="9.875" PointY="5.25" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="TteDataBase.Matiere" Width="1.5" PointX="12.25" PointY="6.125" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="TteDataBase.Periode" Width="1.5" PointX="10.375" PointY="2.625" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="TteDataBase.Promotion" Width="1.5" PointX="12.5" PointY="3.125" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="TteDataBase.Utilisateur" Width="1.5" PointX="7.625" PointY="5.625" Height="2.5571907552083388" />
+        <AssociationConnector Association="TteDataBase.FK_Classe_Campus" >
+          <ConnectorPoint PointX="5.40625" PointY="6.75" />
+          <ConnectorPoint PointX="5.40625" PointY="3.59375" />
+          <ConnectorPoint PointX="7.75" PointY="3.59375" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Droit_Campus" >
+          <ConnectorPoint PointX="6.1875" PointY="6.75" />
+          <ConnectorPoint PointX="6.1875" PointY="6.1629850260416674" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Evenement_Campus" >
+          <ConnectorPoint PointX="6.625" PointY="8.5066943359375031" />
+          <ConnectorPoint PointX="9.875" PointY="8.5066943359375031" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Utilisateur_Campus" >
+          <ConnectorPoint PointX="6.625" PointY="7.4660953776041694" />
+          <ConnectorPoint PointX="7.625" PointY="7.4660953776041694" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Classe_Periode" >
+          <ConnectorPoint PointX="10.375" PointY="3.9324446614583337" />
+          <ConnectorPoint PointX="9.25" PointY="3.9324446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Evenement_Classe" >
+          <ConnectorPoint PointX="9.25" PointY="4.5212682760416687" />
+          <ConnectorPoint PointX="10.095385402722394" PointY="4.5212682760416687" />
+          <ConnectorPoint PointX="10.095385402722394" PointY="5.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Utilisateur_Classe" >
+          <ConnectorPoint PointX="8.4375" PointY="5.0475878906250031" />
+          <ConnectorPoint PointX="8.4375" PointY="5.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Droit_Utilisateur" >
+          <ConnectorPoint PointX="7.625" PointY="5.8939925130208337" />
+          <ConnectorPoint PointX="7.25" PointY="5.8939925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Evenement_Intervenant" >
+          <ConnectorPoint PointX="9.125" PointY="6.9035953776041694" />
+          <ConnectorPoint PointX="9.875" PointY="6.9035953776041694" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Evenement_Matiere" >
+          <ConnectorPoint PointX="12.25" PointY="7.0189925130208337" />
+          <ConnectorPoint PointX="11.375" PointY="7.0189925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Evenement_Periode" >
+          <ConnectorPoint PointX="10.875" PointY="4.9898893229166674" />
+          <ConnectorPoint PointX="10.875" PointY="5.25" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Evenement_Proprietaire" >
+          <ConnectorPoint PointX="9.125" PointY="6.2017976888020847" />
+          <ConnectorPoint PointX="9.875" PointY="6.2017976888020847" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataBase.FK_Periode_Promotion" >
+          <ConnectorPoint PointX="12.5" PointY="3.922841796874998" />
+          <ConnectorPoint PointX="11.875" PointY="3.922841796874998" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
