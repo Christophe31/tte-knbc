@@ -1,9 +1,0 @@
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\bin\WcfService1.dll
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\bin\WcfService1.pdb
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\bin\WcfService1.dll.CodeAnalysisLog.xml
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\bin\WcfService1.dll.lastcodeanalysissucceeded
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\bin\WcfServiceLibrary1.dll
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\bin\WcfServiceLibrary1.pdb
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\obj\Debug\WcfService1.dll
-C:\Users\Christophe\Documents\Dev\tte-knbc\tte-kbnc\WcfService1\obj\Debug\WcfService1.pdb
