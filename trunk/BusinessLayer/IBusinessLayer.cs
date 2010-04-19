@@ -19,12 +19,6 @@ namespace BusinessLayer
 		[OperationContract]
 		List<EventData> getEventsData_Periode(string PromoPeriodeName);
 		[OperationContract]
-		List<EventData> getEventsData_Class(string Campus);
-		[OperationContract]
-		List<EventData> getEventsData_Campus(string Campus);
-		[OperationContract]
-		List<EventData> getEventsData_Campus(string Campus);
-		[OperationContract]
-		List<EventData> getEventsData_Campus(string Campus);
+		List<EventData> getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName);
 	}
 }
