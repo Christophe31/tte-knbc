@@ -7,10 +7,18 @@ using DataModel;
 
 namespace BusinessLayer
 {
-	
+
 	[DataContract]
 	public class EventData
 	{
+		public enum EventCategory
+		{
+			UNIVERSITY,
+			CAMPUS,
+			PERIODE,
+			CLASSE,
+			UTILISATEUR
+		}
 		/// <summary>
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
@@ -24,6 +32,7 @@ namespace BusinessLayer
 			this.Lieu = EventEntity.Lieu;
 			this.Matiere = EventEntity.Matiere.Nom;
 			this.Type = EventEntity.Type;
+			this.Category = EventCategory.UNIVERSITY;
 		} 
 
 		/// <summary>
@@ -67,5 +76,8 @@ namespace BusinessLayer
 		/// </summary>
 		[DataMember]
 		public string Nom { get; set; }
+
+		[DataMember]
+		public EventCategory Category { get; set; }
 	}
 }
