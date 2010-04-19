@@ -12,7 +12,6 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Classe_Campus", "Campus", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.Campus), "Classe", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Classe))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Droit_Campus", "Campus", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataModel.Campus), "Droit", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Droit))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Evenement_Campus", "Campus", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataModel.Campus), "Evenement", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Evenement))]
-[assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Utilisateur_Campus", "Campus", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataModel.Campus), "Utilisateur", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Utilisateur))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Classe_Periode", "Periode", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.Periode), "Classe", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Classe))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Evenement_Classe", "Classe", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataModel.Classe), "Evenement", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Evenement))]
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Utilisateur_Classe", "Classe", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataModel.Classe), "Utilisateur", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Utilisateur))]
@@ -24,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Periode_Promotion", "Promotion", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.Promotion), "Periode", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Periode))]
 
 // Original file name:
-// Generation date: 19/04/2010 16:57:41
+// Generation date: 19/04/2010 19:06:21
 namespace DataModel
 {
     
@@ -400,28 +399,6 @@ namespace DataModel
                 if ((value != null))
                 {
                     ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Campus", "Evenement", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Utilisateur in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Utilisateur_Campus", "Utilisateur")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Utilisateur> Utilisateur
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Utilisateur>("TteDataBase.FK_Utilisateur_Campus", "Utilisateur");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Utilisateur>("TteDataBase.FK_Utilisateur_Campus", "Utilisateur", value);
                 }
             }
         }
@@ -1082,14 +1059,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Intervenant in the schema.
+        /// There are no comments for Utilisateur in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Intervenant", "Utilisateur")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Intervenant
+        public Utilisateur Utilisateur
         {
             get
             {
@@ -1101,12 +1078,12 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Intervenant in the schema.
+        /// There are no comments for Utilisateur in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> IntervenantReference
+        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> UtilisateurReference
         {
             get
             {
@@ -1199,14 +1176,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Proprietaire in the schema.
+        /// There are no comments for Utilisateur1 in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Proprietaire", "Utilisateur")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Proprietaire
+        public Utilisateur Utilisateur1
         {
             get
             {
@@ -1218,12 +1195,12 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Proprietaire in the schema.
+        /// There are no comments for Utilisateur1 in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> ProprietaireReference
+        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> Utilisateur1Reference
         {
             get
             {
@@ -1706,13 +1683,15 @@ namespace DataModel
         /// <param name="id">Initial value of Id.</param>
         /// <param name="nom">Initial value of Nom.</param>
         /// <param name="password">Initial value of Password.</param>
+        /// <param name="lastChange">Initial value of LastChange.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Utilisateur CreateUtilisateur(int id, string nom, string password)
+        public static Utilisateur CreateUtilisateur(int id, string nom, string password, global::System.DateTime lastChange)
         {
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.Id = id;
             utilisateur.Nom = nom;
             utilisateur.Password = password;
+            utilisateur.LastChange = lastChange;
             return utilisateur;
         }
         /// <summary>
@@ -1797,44 +1776,32 @@ namespace DataModel
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnPasswordChanged();
         /// <summary>
-        /// There are no comments for Campus in the schema.
+        /// There are no comments for property LastChange in the schema.
         /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Utilisateur_Campus", "Campus")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Campus Campus
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public global::System.DateTime LastChange
         {
             get
             {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Utilisateur_Campus", "Campus").Value;
+                return this._LastChange;
             }
             set
             {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Utilisateur_Campus", "Campus").Value = value;
+                this.OnLastChangeChanging(value);
+                this.ReportPropertyChanging("LastChange");
+                this._LastChange = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("LastChange");
+                this.OnLastChangeChanged();
             }
         }
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Utilisateur_Campus", "Campus");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Utilisateur_Campus", "Campus", value);
-                }
-            }
-        }
+        private global::System.DateTime _LastChange;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnLastChangeChanging(global::System.DateTime value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnLastChangeChanged();
         /// <summary>
         /// There are no comments for Classe in the schema.
         /// </summary>
