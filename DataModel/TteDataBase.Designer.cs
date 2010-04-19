@@ -21,7 +21,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("Model", "FK_Utilisateur_Promotion", "Promotion", global::System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataModel.Promotion), "Utilisateur", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Utilisateur))]
 
 // Original file name:
-// Generation date: 18/04/2010 21:26:40
+// Generation date: 19/04/2010 12:02:42
 namespace DataModel
 {
     

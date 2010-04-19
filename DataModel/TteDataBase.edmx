@@ -591,54 +591,54 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="TteDataBase">
-        <EntityTypeShape EntityType="Model.Campus" Width="1.5" PointX="9.375" PointY="6.375" Height="1.9802864583333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Droit" Width="1.5" PointX="7" PointY="4.875" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Evenement" Width="1.5" PointX="0.625" PointY="4.625" Height="3.3263964843749996" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Matiere" Width="1.5" PointX="0.75" PointY="2.125" Height="1.7879850260416674" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Periode" Width="1.5" PointX="3.25" PointY="2.375" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Promotion" Width="1.5" PointX="6.125" PointY="2.625" Height="1.7879850260416665" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Utilisateur" Width="1.5" PointX="5" PointY="5.25" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Campus" Width="1.5" PointX="6" PointY="4.125" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Droit" Width="1.5" PointX="6.125" PointY="1.875" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Evenement" Width="1.5" PointX="0.5" PointY="2.75" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Matiere" Width="1.5" PointX="0.625" PointY="0.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Periode" Width="1.5" PointX="2.5" PointY="0.75" Height="2.1725878906249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Promotion" Width="1.5" PointX="4.375" PointY="0.75" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Utilisateur" Width="1.5" PointX="3.5" PointY="3.25" Height="2.5571907552083335" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_Droit_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.375" PointY="7.5091362421875" />
-          <ConnectorPoint PointX="7.75" PointY="7.5091362421875" />
-          <ConnectorPoint PointX="7.75" PointY="6.6629850260416674" />
+          <ConnectorPoint PointX="6.8125" PointY="4.125" />
+          <ConnectorPoint PointX="6.8125" PointY="3.6629850260416674" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Evenement_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.375" PointY="7.951396484375" />
-          <ConnectorPoint PointX="2.125" PointY="7.951396484375" />
+          <ConnectorPoint PointX="6" PointY="5.9730436197916665" />
+          <ConnectorPoint PointX="2" PointY="5.9730436197916665" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Utilisateur_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="9.375" PointY="7.6822916666666661" />
-          <ConnectorPoint PointX="6.5" PointY="7.6822916666666661" />
+          <ConnectorPoint PointX="6" PointY="4.9660953776041667" />
+          <ConnectorPoint PointX="5" PointY="4.9660953776041667" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Droit_Utilisateur" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.5" PointY="5.9564925130208337" />
-          <ConnectorPoint PointX="7" PointY="5.9564925130208337" />
+          <ConnectorPoint PointX="5" PointY="3.4564925130208337" />
+          <ConnectorPoint PointX="6.125" PointY="3.4564925130208337" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Evenement_Matiere" ManuallyRouted="false">
-          <ConnectorPoint PointX="1.4375" PointY="3.9129850260416674" />
-          <ConnectorPoint PointX="1.4375" PointY="4.625" />
+          <ConnectorPoint PointX="1.3125" PointY="2.2879850260416674" />
+          <ConnectorPoint PointX="1.3125" PointY="2.75" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Evenement_Periode" ManuallyRouted="false">
-          <ConnectorPoint PointX="4" PointY="4.547587890625" />
-          <ConnectorPoint PointX="4" PointY="5.161458333333333" />
-          <ConnectorPoint PointX="2.125" PointY="5.161458333333333" />
+          <ConnectorPoint PointX="2.5" PointY="2.895833333333333" />
+          <ConnectorPoint PointX="2.26" PointY="2.895833333333333" />
+          <ConnectorPoint PointX="2.26" PointY="3.0235843014407457" />
+          <ConnectorPoint PointX="2" PointY="3.0235843014407457" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Evenement_Utilisateur" ManuallyRouted="false">
-          <ConnectorPoint PointX="5" PointY="6.5285953776041667" />
-          <ConnectorPoint PointX="2.125" PointY="6.5285953776041667" />
+          <ConnectorPoint PointX="3.5" PointY="4.5285953776041667" />
+          <ConnectorPoint PointX="2" PointY="4.5285953776041667" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Evenement_Utilisateur1" ManuallyRouted="false">
-          <ConnectorPoint PointX="5" PointY="5.8267976888020829" />
-          <ConnectorPoint PointX="2.125" PointY="5.8267976888020829" />
+          <ConnectorPoint PointX="3.5" PointY="3.8267976888020834" />
+          <ConnectorPoint PointX="2" PointY="3.8267976888020834" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Periode_Promotion" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.125" PointY="3.5189925130208333" />
-          <ConnectorPoint PointX="4.75" PointY="3.5189925130208333" />
+          <ConnectorPoint PointX="4.375" PointY="1.6439925130208333" />
+          <ConnectorPoint PointX="4" PointY="1.6439925130208333" />
           </AssociationConnector>
         <AssociationConnector Association="Model.FK_Utilisateur_Promotion" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.3125" PointY="4.4129850260416665" />
-          <ConnectorPoint PointX="6.3125" PointY="5.25" />
+          <ConnectorPoint PointX="4.6875" PointY="2.5379850260416665" />
+          <ConnectorPoint PointX="4.6875" PointY="3.25" />
           </AssociationConnector></Diagram></edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
