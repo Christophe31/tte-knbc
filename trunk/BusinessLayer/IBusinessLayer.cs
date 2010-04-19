@@ -11,7 +11,20 @@ namespace BusinessLayer
 	[ServiceContract]
 	public interface IBusinessLayer
 	{
+
 		[OperationContract]
-		void DoWork();
+		List<EventData> getEventsData_Campus(string CampusName);
+		[OperationContract]
+		List<EventData> getEventsData_University();
+		[OperationContract]
+		List<EventData> getEventsData_Periode(string PeriodeName);
+		[OperationContract]
+		List<EventData> getEventsData_Campus(string Campus);
+		[OperationContract]
+		List<EventData> getEventsData_Campus(string Campus);
+		[OperationContract]
+		List<EventData> getEventsData_Campus(string Campus);
+		[OperationContract]
+		List<EventData> getEventsData_Campus(string Campus);
 	}
 }

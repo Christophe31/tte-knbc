@@ -24,7 +24,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDataBase", "FK_Periode_Promotion", "Promotion", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.Promotion), "Periode", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Periode))]
 
 // Original file name:
-// Generation date: 19/04/2010 15:56:58
+// Generation date: 19/04/2010 16:57:41
 namespace DataModel
 {
     
