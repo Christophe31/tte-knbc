@@ -10,6 +10,7 @@ namespace BusinessLayer
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BusinessLayer" in code, svc and config file together.
 	public class BusinessLayer : IBusinessLayer
 	{
+		#region IBusinessLayer
 		public List<EventData> getEventsData_Campus(string CampusName)
 		{
 			return null;
@@ -26,5 +27,6 @@ namespace BusinessLayer
 		{
 			return null;
 		}
+		#endregion
 	}
 }
