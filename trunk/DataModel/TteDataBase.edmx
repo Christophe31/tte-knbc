@@ -390,10 +390,10 @@
           <Property Type="Boolean" Name="Obligatoire" Nullable="false" />
           <NavigationProperty Name="Campus" Relationship="TteDataBase.FK_Evenement_Campus" FromRole="Evenement" ToRole="Campus" />
           <NavigationProperty Name="Classe" Relationship="TteDataBase.FK_Evenement_Classe" FromRole="Evenement" ToRole="Classe" />
-          <NavigationProperty Name="Utilisateur" Relationship="TteDataBase.FK_Evenement_Intervenant" FromRole="Evenement" ToRole="Utilisateur" />
+          <NavigationProperty Name="Intervenant" Relationship="TteDataBase.FK_Evenement_Intervenant" FromRole="Evenement" ToRole="Utilisateur" />
           <NavigationProperty Name="Matiere" Relationship="TteDataBase.FK_Evenement_Matiere" FromRole="Evenement" ToRole="Matiere" />
           <NavigationProperty Name="Periode" Relationship="TteDataBase.FK_Evenement_Periode" FromRole="Evenement" ToRole="Periode" />
-          <NavigationProperty Name="Utilisateur1" Relationship="TteDataBase.FK_Evenement_Proprietaire" FromRole="Evenement" ToRole="Utilisateur" />
+          <NavigationProperty Name="Createur" Relationship="TteDataBase.FK_Evenement_Proprietaire" FromRole="Evenement" ToRole="Utilisateur" />
         </EntityType>
         <EntityType Name="Matiere">
           <Key>
@@ -689,64 +689,64 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="TteDataBase" ZoomLevel="80">
-        <EntityTypeShape EntityType="TteDataBase.Campus" Width="1.5" PointX="5.125" PointY="10" Height="1.9802864583333388" />
-        <EntityTypeShape EntityType="TteDataBase.Classe" Width="1.5" PointX="6.875" PointY="5.375" Height="2.1725878906250031" />
-        <EntityTypeShape EntityType="TteDataBase.Droit" Width="1.5" PointX="5" PointY="7.875" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="TteDataBase.Evenement" Width="1.5" PointX="8.875" PointY="7.375" Height="3.5186979166666674" />
-        <EntityTypeShape EntityType="TteDataBase.Matiere" Width="1.5" PointX="11.25" PointY="10.125" Height="1.7879850260416674" />
-        <EntityTypeShape EntityType="TteDataBase.Periode" Width="1.5" PointX="11.125" PointY="5.375" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="TteDataBase.Promotion" Width="1.5" PointX="11.25" PointY="8.25" Height="1.595683593749996" />
-        <EntityTypeShape EntityType="TteDataBase.Utilisateur" Width="1.5" PointX="6.75" PointY="7.875" Height="2.5571907552083246" />
-        <AssociationConnector Association="TteDataBase.FK_Classe_Campus" ManuallyRouted="true" >
-          <ConnectorPoint PointX="5.125" PointY="10.400409355300132" />
-          <ConnectorPoint PointX="4.75" PointY="10.400409355300132" />
-          <ConnectorPoint PointX="4.75" PointY="6.4612939453125016" />
-          <ConnectorPoint PointX="6.875" PointY="6.4612939453125016" />
+        <EntityTypeShape EntityType="TteDataBase.Campus" Width="1.5" PointX="0.5" PointY="4.625" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="TteDataBase.Classe" Width="1.5" PointX="2.5" PointY="0.5" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="TteDataBase.Droit" Width="1.5" PointX="0.5" PointY="2" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="TteDataBase.Evenement" Width="1.5" PointX="4.5" PointY="2.5" Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="TteDataBase.Matiere" Width="1.5" PointX="6.625" PointY="5" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="TteDataBase.Periode" Width="1.5" PointX="6.625" PointY="0.5" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="TteDataBase.Promotion" Width="1.5" PointX="6.625" PointY="3.25" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="TteDataBase.Utilisateur" Width="1.5" PointX="2.375" PointY="3.125" Height="2.5571907552083246" />
+        <AssociationConnector Association="TteDataBase.FK_Classe_Campus" ManuallyRouted="false" >
+          <ConnectorPoint PointX="0.5" PointY="4.8166046224394643" />
+          <ConnectorPoint PointX="0.25999999999999995" PointY="4.8166046224394643" />
+          <ConnectorPoint PointX="0.25999999999999995" PointY="1.2187505" />
+          <ConnectorPoint PointX="2.5" PointY="1.2187505" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Droit_Campus" >
-          <ConnectorPoint PointX="5.8125" PointY="10" />
-          <ConnectorPoint PointX="5.8125" PointY="9.6629850260416674" />
+          <ConnectorPoint PointX="1.25" PointY="4.625" />
+          <ConnectorPoint PointX="1.25" PointY="3.7879850260416674" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Evenement_Campus" >
-          <ConnectorPoint PointX="6.625" PointY="10.694194335937496" />
-          <ConnectorPoint PointX="8.875" PointY="10.694194335937496" />
+          <ConnectorPoint PointX="2" PointY="5.881694335937496" />
+          <ConnectorPoint PointX="4.5" PointY="5.881694335937496" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Classe_Periode" ManuallyRouted="false" >
-          <ConnectorPoint PointX="11.125" PointY="6.0756924185398216" />
-          <ConnectorPoint PointX="8.375" PointY="6.0756924185398216" />
+          <ConnectorPoint PointX="6.625" PointY="1.1953132500000003" />
+          <ConnectorPoint PointX="4" PointY="1.1953132500000003" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Evenement_Classe" >
-          <ConnectorPoint PointX="8.375" PointY="6.9013848370796422" />
-          <ConnectorPoint PointX="9.625" PointY="6.9013848370796422" />
-          <ConnectorPoint PointX="9.625" PointY="7.375" />
+          <ConnectorPoint PointX="4" PointY="2.0156265000000007" />
+          <ConnectorPoint PointX="5.25" PointY="2.0156265000000007" />
+          <ConnectorPoint PointX="5.25" PointY="2.5" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Utilisateur_Classe" >
-          <ConnectorPoint PointX="7.5625" PointY="7.5475878906250031" />
-          <ConnectorPoint PointX="7.5625" PointY="7.875" />
+          <ConnectorPoint PointX="3.1875" PointY="2.6725878906250031" />
+          <ConnectorPoint PointX="3.1875" PointY="3.125" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Droit_Utilisateur" >
-          <ConnectorPoint PointX="6.75" PointY="8.7689925130208337" />
-          <ConnectorPoint PointX="6.5" PointY="8.7689925130208337" />
+          <ConnectorPoint PointX="2.375" PointY="3.4564925130208337" />
+          <ConnectorPoint PointX="2" PointY="3.4564925130208337" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Evenement_Intervenant" >
-          <ConnectorPoint PointX="8.25" PointY="9.84576985677083" />
-          <ConnectorPoint PointX="8.875" PointY="9.84576985677083" />
+          <ConnectorPoint PointX="3.875" PointY="4.4035953776041623" />
+          <ConnectorPoint PointX="4.5" PointY="4.4035953776041623" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Evenement_Matiere" >
-          <ConnectorPoint PointX="11.25" PointY="10.509348958333334" />
-          <ConnectorPoint PointX="10.375" PointY="10.509348958333334" />
+          <ConnectorPoint PointX="6.625" PointY="5.5093489583333337" />
+          <ConnectorPoint PointX="6" PointY="5.5093489583333337" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Evenement_Periode" >
-          <ConnectorPoint PointX="11.125" PointY="7.5574446614583337" />
-          <ConnectorPoint PointX="10.375" PointY="7.5574446614583337" />
+          <ConnectorPoint PointX="6.625" PointY="2.6824446614583337" />
+          <ConnectorPoint PointX="6" PointY="2.6824446614583337" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Evenement_Proprietaire" ManuallyRouted="false" >
-          <ConnectorPoint PointX="8.25" PointY="8.4421744791666669" />
-          <ConnectorPoint PointX="8.875" PointY="8.4421744791666669" />
+          <ConnectorPoint PointX="3.875" PointY="3.7017976888020812" />
+          <ConnectorPoint PointX="4.5" PointY="3.7017976888020812" />
         </AssociationConnector>
         <AssociationConnector Association="TteDataBase.FK_Periode_Promotion" >
-          <ConnectorPoint PointX="11.9375" PointY="8.25" />
-          <ConnectorPoint PointX="11.9375" PointY="7.7398893229166674" />
+          <ConnectorPoint PointX="7.375" PointY="3.25" />
+          <ConnectorPoint PointX="7.375" PointY="2.8648893229166674" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
