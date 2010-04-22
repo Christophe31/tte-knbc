@@ -9,7 +9,7 @@ using DataModel;
 namespace BusinessLayer
 {
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BusinessLayer" in code, svc and config file together.
-	public class BusinessLayer : IBusinessLayer
+	public class BusinessLayer : IBusinessLayer, IDisposable
 	{
 		protected DataModel.TteDB db;
 		public BusinessLayer ()
@@ -59,6 +59,23 @@ namespace BusinessLayer
 					  ).
 				Where(p => p.Createur.LastChange > LastUpdate).
 				Select(p => new EventData(p)).ToArray();
+		}
+
+		#endregion
+
+		#region IDisposable Members
+
+		public void Dispose()
+		{
+			this.Dispose(true);
+		}
+
+		protected virtual void Dispose(bool fullyDispose)
+		{
+			this.db.SaveChanges();
+			this.db.Dispose();
+			if (fullyDispose == true)
+				GC.SuppressFinalize(this);
 		}
 
 		#endregion
