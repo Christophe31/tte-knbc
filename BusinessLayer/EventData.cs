@@ -24,7 +24,7 @@ namespace BusinessLayer
 			this.Lieu = EventEntity.Lieu;
 			this.Matiere = EventEntity.Matiere.Nom;
 			this.Type = EventEntity.Type;
-		} 
+		}
 
 		/// <summary>
 		/// Date de Début de l'évènement.
@@ -43,7 +43,7 @@ namespace BusinessLayer
 		/// </summary>
 		[DataMember]
 		public bool Obligatoire { get; set; }
-		
+
 		/// <summary>
 		/// Salle ou lieu où se déroullera l'évènement
 		/// </summary>

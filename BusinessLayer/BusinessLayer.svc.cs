@@ -12,7 +12,7 @@ namespace BusinessLayer
 	public class BusinessLayer : IBusinessLayer, IDisposable
 	{
 		protected DataModel.TteDB db;
-		public BusinessLayer ()
+		public BusinessLayer()
 		{
 			db = new TteDB();
 		}
@@ -25,8 +25,8 @@ namespace BusinessLayer
 			return db.Evenement.
 				Where(p => p.Debut < Stop && p.Fin > Start).
 				Where(p => p.Campus.Nom == CampusName).
-				Where(p=>p.Createur.LastChange>LastUpdate).
-				Select(p=>new EventData(p)).ToArray() ;
+				Where(p => p.Createur.LastChange > LastUpdate).
+				Select(p => new EventData(p)).ToArray();
 		}
 
 		public EventData[] getEventsData_University(DateTime Start, DateTime Stop, DateTime LastUpdate)
@@ -34,8 +34,8 @@ namespace BusinessLayer
 			return db.Evenement.
 				Where(p => p.Debut < Stop && p.Fin > Start).
 				Where(p => p.Campus == null && p.Periode == null && p.Classe == null).
-				Where(p=>p.Createur.LastChange>LastUpdate).
-				Select(p=>new EventData(p)).ToArray() ;
+				Where(p => p.Createur.LastChange > LastUpdate).
+				Select(p => new EventData(p)).ToArray();
 		}
 
 		public EventData[] getEventsData_Periode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
@@ -51,9 +51,9 @@ namespace BusinessLayer
 		{
 			return db.Evenement.
 				Where(p => p.Debut < Stop && p.Fin > Start).
-				Where(p => (p.Classe == 
+				Where(p => (p.Classe ==
 						db.Classe.
-						Where(c =>(c.Campus.Nom==CampusName &&
+						Where(c => (c.Campus.Nom == CampusName &&
 							  c.nom == ClassName &&
 							  c.Periode.Nom == PromoPeriodeName.Split('-')[1])).First())
 					  ).
