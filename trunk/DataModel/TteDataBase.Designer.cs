@@ -26,1886 +26,1886 @@
 // Generation date: 19/04/2010 20:47:54
 namespace DataModel
 {
-    
-    /// <summary>
-    /// There are no comments for TteDB in the schema.
-    /// </summary>
-    public partial class TteDB : global::System.Data.Objects.ObjectContext
-    {
-        /// <summary>
-        /// Initializes a new TteDB object using the connection string found in the 'TteDB' section of the application configuration file.
-        /// </summary>
-        public TteDB() : 
-                base("name=TteDB", "TteDB")
-        {
-            this.OnContextCreated();
-        }
-        /// <summary>
-        /// Initialize a new TteDB object.
-        /// </summary>
-        public TteDB(string connectionString) : 
-                base(connectionString, "TteDB")
-        {
-            this.OnContextCreated();
-        }
-        /// <summary>
-        /// Initialize a new TteDB object.
-        /// </summary>
-        public TteDB(global::System.Data.EntityClient.EntityConnection connection) : 
-                base(connection, "TteDB")
-        {
-            this.OnContextCreated();
-        }
-        partial void OnContextCreated();
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Campus> Campus
-        {
-            get
-            {
-                if ((this._Campus == null))
-                {
-                    this._Campus = base.CreateQuery<Campus>("[Campus]");
-                }
-                return this._Campus;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Campus> _Campus;
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Classe> Classe
-        {
-            get
-            {
-                if ((this._Classe == null))
-                {
-                    this._Classe = base.CreateQuery<Classe>("[Classe]");
-                }
-                return this._Classe;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Classe> _Classe;
-        /// <summary>
-        /// There are no comments for Droit in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Droit> Droit
-        {
-            get
-            {
-                if ((this._Droit == null))
-                {
-                    this._Droit = base.CreateQuery<Droit>("[Droit]");
-                }
-                return this._Droit;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Droit> _Droit;
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Evenement> Evenement
-        {
-            get
-            {
-                if ((this._Evenement == null))
-                {
-                    this._Evenement = base.CreateQuery<Evenement>("[Evenement]");
-                }
-                return this._Evenement;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Evenement> _Evenement;
-        /// <summary>
-        /// There are no comments for Matiere in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Matiere> Matiere
-        {
-            get
-            {
-                if ((this._Matiere == null))
-                {
-                    this._Matiere = base.CreateQuery<Matiere>("[Matiere]");
-                }
-                return this._Matiere;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Matiere> _Matiere;
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Periode> Periode
-        {
-            get
-            {
-                if ((this._Periode == null))
-                {
-                    this._Periode = base.CreateQuery<Periode>("[Periode]");
-                }
-                return this._Periode;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Periode> _Periode;
-        /// <summary>
-        /// There are no comments for Promotion in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Promotion> Promotion
-        {
-            get
-            {
-                if ((this._Promotion == null))
-                {
-                    this._Promotion = base.CreateQuery<Promotion>("[Promotion]");
-                }
-                return this._Promotion;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Promotion> _Promotion;
-        /// <summary>
-        /// There are no comments for Utilisateur in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.Data.Objects.ObjectQuery<Utilisateur> Utilisateur
-        {
-            get
-            {
-                if ((this._Utilisateur == null))
-                {
-                    this._Utilisateur = base.CreateQuery<Utilisateur>("[Utilisateur]");
-                }
-                return this._Utilisateur;
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.Data.Objects.ObjectQuery<Utilisateur> _Utilisateur;
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToCampus(Campus campus)
-        {
-            base.AddObject("Campus", campus);
-        }
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToClasse(Classe classe)
-        {
-            base.AddObject("Classe", classe);
-        }
-        /// <summary>
-        /// There are no comments for Droit in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToDroit(Droit droit)
-        {
-            base.AddObject("Droit", droit);
-        }
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToEvenement(Evenement evenement)
-        {
-            base.AddObject("Evenement", evenement);
-        }
-        /// <summary>
-        /// There are no comments for Matiere in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToMatiere(Matiere matiere)
-        {
-            base.AddObject("Matiere", matiere);
-        }
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToPeriode(Periode periode)
-        {
-            base.AddObject("Periode", periode);
-        }
-        /// <summary>
-        /// There are no comments for Promotion in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToPromotion(Promotion promotion)
-        {
-            base.AddObject("Promotion", promotion);
-        }
-        /// <summary>
-        /// There are no comments for Utilisateur in the schema.
-        /// </summary>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public void AddToUtilisateur(Utilisateur utilisateur)
-        {
-            base.AddObject("Utilisateur", utilisateur);
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Campus in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Campus")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Campus : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Campus object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="nom">Initial value of Nom.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Campus CreateCampus(int id, string nom)
-        {
-            Campus campus = new Campus();
-            campus.Id = id;
-            campus.Nom = nom;
-            return campus;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Nom
-        {
-            get
-            {
-                return this._Nom;
-            }
-            set
-            {
-                this.OnNomChanging(value);
-                this.ReportPropertyChanging("Nom");
-                this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Nom");
-                this.OnNomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanged();
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Campus", "Classe")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Classe> Classe
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Classe>("TteDataBase.FK_Classe_Campus", "Classe");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Classe>("TteDataBase.FK_Classe_Campus", "Classe", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Droit in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Campus", "Droit")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Droit> Droit
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Droit>("TteDataBase.FK_Droit_Campus", "Droit");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Droit>("TteDataBase.FK_Droit_Campus", "Droit", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Campus", "Evenement")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Campus", "Evenement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Campus", "Evenement", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Classe in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Classe")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Classe : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Classe object.
-        /// </summary>
-        /// <param name="id">Initial value of id.</param>
-        /// <param name="nom">Initial value of nom.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Classe CreateClasse(int id, string nom)
-        {
-            Classe classe = new Classe();
-            classe.id = id;
-            classe.nom = nom;
-            return classe;
-        }
-        /// <summary>
-        /// There are no comments for property id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int id
-        {
-            get
-            {
-                return this._id;
-            }
-            set
-            {
-                this.OnidChanging(value);
-                this.ReportPropertyChanging("id");
-                this._id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("id");
-                this.OnidChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnidChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnidChanged();
-        /// <summary>
-        /// There are no comments for property nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string nom
-        {
-            get
-            {
-                return this._nom;
-            }
-            set
-            {
-                this.OnnomChanging(value);
-                this.ReportPropertyChanging("nom");
-                this._nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("nom");
-                this.OnnomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnnomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnnomChanged();
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Campus", "Campus")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Campus Campus
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Periode", "Periode")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Periode Periode
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Periode> PeriodeReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Classe", "Evenement")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Classe", "Evenement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Classe", "Evenement", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Utilisateur in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Utilisateur_Classe", "Utilisateur")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Utilisateur> Utilisateur
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Utilisateur>("TteDataBase.FK_Utilisateur_Classe", "Utilisateur");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Utilisateur>("TteDataBase.FK_Utilisateur_Classe", "Utilisateur", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Droit in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Droit")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Droit : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Droit object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="type">Initial value of Type.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Droit CreateDroit(int id, int type)
-        {
-            Droit droit = new Droit();
-            droit.Id = id;
-            droit.Type = type;
-            return droit;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Type in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Type
-        {
-            get
-            {
-                return this._Type;
-            }
-            set
-            {
-                this.OnTypeChanging(value);
-                this.ReportPropertyChanging("Type");
-                this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Type");
-                this.OnTypeChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Type;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanged();
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Campus", "Campus")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Campus Campus
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Utilisateur in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Utilisateur", "Utilisateur")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Utilisateur
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Utilisateur in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> UtilisateurReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Evenement in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Evenement")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Evenement : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Evenement object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="nom">Initial value of Nom.</param>
-        /// <param name="debut">Initial value of Debut.</param>
-        /// <param name="fin">Initial value of Fin.</param>
-        /// <param name="obligatoire">Initial value of Obligatoire.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Evenement CreateEvenement(int id, string nom, global::System.DateTime debut, global::System.DateTime fin, bool obligatoire)
-        {
-            Evenement evenement = new Evenement();
-            evenement.Id = id;
-            evenement.Nom = nom;
-            evenement.Debut = debut;
-            evenement.Fin = fin;
-            evenement.Obligatoire = obligatoire;
-            return evenement;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Type in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Type
-        {
-            get
-            {
-                return this._Type;
-            }
-            set
-            {
-                this.OnTypeChanging(value);
-                this.ReportPropertyChanging("Type");
-                this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("Type");
-                this.OnTypeChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Type;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanged();
-        /// <summary>
-        /// There are no comments for property Lieu in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Lieu
-        {
-            get
-            {
-                return this._Lieu;
-            }
-            set
-            {
-                this.OnLieuChanging(value);
-                this.ReportPropertyChanging("Lieu");
-                this._Lieu = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("Lieu");
-                this.OnLieuChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Lieu;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnLieuChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnLieuChanged();
-        /// <summary>
-        /// There are no comments for property Nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Nom
-        {
-            get
-            {
-                return this._Nom;
-            }
-            set
-            {
-                this.OnNomChanging(value);
-                this.ReportPropertyChanging("Nom");
-                this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Nom");
-                this.OnNomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanged();
-        /// <summary>
-        /// There are no comments for property Debut in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime Debut
-        {
-            get
-            {
-                return this._Debut;
-            }
-            set
-            {
-                this.OnDebutChanging(value);
-                this.ReportPropertyChanging("Debut");
-                this._Debut = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Debut");
-                this.OnDebutChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _Debut;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnDebutChanging(global::System.DateTime value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnDebutChanged();
-        /// <summary>
-        /// There are no comments for property Fin in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime Fin
-        {
-            get
-            {
-                return this._Fin;
-            }
-            set
-            {
-                this.OnFinChanging(value);
-                this.ReportPropertyChanging("Fin");
-                this._Fin = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Fin");
-                this.OnFinChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _Fin;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFinChanging(global::System.DateTime value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFinChanged();
-        /// <summary>
-        /// There are no comments for property Obligatoire in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public bool Obligatoire
-        {
-            get
-            {
-                return this._Obligatoire;
-            }
-            set
-            {
-                this.OnObligatoireChanging(value);
-                this.ReportPropertyChanging("Obligatoire");
-                this._Obligatoire = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Obligatoire");
-                this.OnObligatoireChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private bool _Obligatoire;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnObligatoireChanging(bool value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnObligatoireChanged();
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Campus", "Campus")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Campus Campus
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Campus in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Classe", "Classe")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Classe Classe
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Classe> ClasseReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Intervenant in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Intervenant", "Utilisateur")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Intervenant
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Intervenant in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> IntervenantReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Matiere in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Matiere", "Matiere")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Matiere Matiere
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Matiere in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Matiere> MatiereReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Periode", "Periode")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Periode Periode
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Periode> PeriodeReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Createur in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Proprietaire", "Utilisateur")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Utilisateur Createur
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Createur in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> CreateurReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Matiere in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Matiere")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Matiere : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Matiere object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="nom">Initial value of Nom.</param>
-        /// <param name="nbre_h">Initial value of Nbre_h.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Matiere CreateMatiere(int id, string nom, int nbre_h)
-        {
-            Matiere matiere = new Matiere();
-            matiere.Id = id;
-            matiere.Nom = nom;
-            matiere.Nbre_h = nbre_h;
-            return matiere;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Nom
-        {
-            get
-            {
-                return this._Nom;
-            }
-            set
-            {
-                this.OnNomChanging(value);
-                this.ReportPropertyChanging("Nom");
-                this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Nom");
-                this.OnNomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanged();
-        /// <summary>
-        /// There are no comments for property Nbre_h in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Nbre_h
-        {
-            get
-            {
-                return this._Nbre_h;
-            }
-            set
-            {
-                this.OnNbre_hChanging(value);
-                this.ReportPropertyChanging("Nbre_h");
-                this._Nbre_h = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Nbre_h");
-                this.OnNbre_hChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Nbre_h;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNbre_hChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNbre_hChanged();
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Matiere", "Evenement")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Matiere", "Evenement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Matiere", "Evenement", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Periode in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Periode")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Periode : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Periode object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="nom">Initial value of Nom.</param>
-        /// <param name="debut">Initial value of Debut.</param>
-        /// <param name="fin">Initial value of Fin.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Periode CreatePeriode(int id, string nom, global::System.DateTime debut, global::System.DateTime fin)
-        {
-            Periode periode = new Periode();
-            periode.Id = id;
-            periode.Nom = nom;
-            periode.Debut = debut;
-            periode.Fin = fin;
-            return periode;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Nom
-        {
-            get
-            {
-                return this._Nom;
-            }
-            set
-            {
-                this.OnNomChanging(value);
-                this.ReportPropertyChanging("Nom");
-                this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Nom");
-                this.OnNomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanged();
-        /// <summary>
-        /// There are no comments for property Debut in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime Debut
-        {
-            get
-            {
-                return this._Debut;
-            }
-            set
-            {
-                this.OnDebutChanging(value);
-                this.ReportPropertyChanging("Debut");
-                this._Debut = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Debut");
-                this.OnDebutChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _Debut;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnDebutChanging(global::System.DateTime value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnDebutChanged();
-        /// <summary>
-        /// There are no comments for property Fin in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime Fin
-        {
-            get
-            {
-                return this._Fin;
-            }
-            set
-            {
-                this.OnFinChanging(value);
-                this.ReportPropertyChanging("Fin");
-                this._Fin = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Fin");
-                this.OnFinChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _Fin;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFinChanging(global::System.DateTime value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnFinChanged();
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Periode", "Classe")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Classe> Classe
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Classe>("TteDataBase.FK_Classe_Periode", "Classe");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Classe>("TteDataBase.FK_Classe_Periode", "Classe", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Periode", "Evenement")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Periode", "Evenement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Periode", "Evenement", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Promotion in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Periode_Promotion", "Promotion")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Promotion Promotion
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Promotion in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Promotion> PromotionReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Promotion in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Promotion")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Promotion : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Promotion object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="nom">Initial value of Nom.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Promotion CreatePromotion(int id, string nom)
-        {
-            Promotion promotion = new Promotion();
-            promotion.Id = id;
-            promotion.Nom = nom;
-            return promotion;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Nom
-        {
-            get
-            {
-                return this._Nom;
-            }
-            set
-            {
-                this.OnNomChanging(value);
-                this.ReportPropertyChanging("Nom");
-                this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Nom");
-                this.OnNomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanged();
-        /// <summary>
-        /// There are no comments for Periode in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Periode_Promotion", "Periode")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Periode> Periode
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Periode>("TteDataBase.FK_Periode_Promotion", "Periode");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Periode>("TteDataBase.FK_Periode_Promotion", "Periode", value);
-                }
-            }
-        }
-    }
-    /// <summary>
-    /// There are no comments for TteDataBase.Utilisateur in the schema.
-    /// </summary>
-    /// <KeyProperties>
-    /// Id
-    /// </KeyProperties>
-    [global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName="TteDataBase", Name="Utilisateur")]
-    [global::System.Runtime.Serialization.DataContractAttribute(IsReference=true)]
-    [global::System.Serializable()]
-    public partial class Utilisateur : global::System.Data.Objects.DataClasses.EntityObject
-    {
-        /// <summary>
-        /// Create a new Utilisateur object.
-        /// </summary>
-        /// <param name="id">Initial value of Id.</param>
-        /// <param name="nom">Initial value of Nom.</param>
-        /// <param name="password">Initial value of Password.</param>
-        /// <param name="lastChange">Initial value of LastChange.</param>
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Utilisateur CreateUtilisateur(int id, string nom, string password, global::System.DateTime lastChange)
-        {
-            Utilisateur utilisateur = new Utilisateur();
-            utilisateur.Id = id;
-            utilisateur.Nom = nom;
-            utilisateur.Password = password;
-            utilisateur.LastChange = lastChange;
-            return utilisateur;
-        }
-        /// <summary>
-        /// There are no comments for property Id in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Id
-        {
-            get
-            {
-                return this._Id;
-            }
-            set
-            {
-                this.OnIdChanging(value);
-                this.ReportPropertyChanging("Id");
-                this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Id");
-                this.OnIdChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Id;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Nom in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Nom
-        {
-            get
-            {
-                return this._Nom;
-            }
-            set
-            {
-                this.OnNomChanging(value);
-                this.ReportPropertyChanging("Nom");
-                this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Nom");
-                this.OnNomChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Nom;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnNomChanged();
-        /// <summary>
-        /// There are no comments for property Password in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Password
-        {
-            get
-            {
-                return this._Password;
-            }
-            set
-            {
-                this.OnPasswordChanging(value);
-                this.ReportPropertyChanging("Password");
-                this._Password = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
-                this.ReportPropertyChanged("Password");
-                this.OnPasswordChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Password;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnPasswordChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnPasswordChanged();
-        /// <summary>
-        /// There are no comments for property LastChange in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime LastChange
-        {
-            get
-            {
-                return this._LastChange;
-            }
-            set
-            {
-                this.OnLastChangeChanging(value);
-                this.ReportPropertyChanging("LastChange");
-                this._LastChange = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("LastChange");
-                this.OnLastChangeChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _LastChange;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnLastChangeChanging(global::System.DateTime value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnLastChangeChanged();
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Utilisateur_Classe", "Classe")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public Classe Classe
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe").Value;
-            }
-            set
-            {
-                ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe").Value = value;
-            }
-        }
-        /// <summary>
-        /// There are no comments for Classe in the schema.
-        /// </summary>
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<Classe> ClasseReference
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Droit in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Utilisateur", "Droit")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Droit> Droit
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Droit>("TteDataBase.FK_Droit_Utilisateur", "Droit");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Droit>("TteDataBase.FK_Droit_Utilisateur", "Droit", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Evenement in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Intervenant", "Evenement")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Intervenant", "Evenement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Intervenant", "Evenement", value);
-                }
-            }
-        }
-        /// <summary>
-        /// There are no comments for Evenement1 in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Proprietaire", "Evenement")]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        [global::System.Xml.Serialization.XmlIgnoreAttribute()]
-        [global::System.Xml.Serialization.SoapIgnoreAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement1
-        {
-            get
-            {
-                return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Proprietaire", "Evenement");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Proprietaire", "Evenement", value);
-                }
-            }
-        }
-    }
+
+	/// <summary>
+	/// There are no comments for TteDB in the schema.
+	/// </summary>
+	public partial class TteDB : global::System.Data.Objects.ObjectContext
+	{
+		/// <summary>
+		/// Initializes a new TteDB object using the connection string found in the 'TteDB' section of the application configuration file.
+		/// </summary>
+		public TteDB() :
+			base("name=TteDB", "TteDB")
+		{
+			this.OnContextCreated();
+		}
+		/// <summary>
+		/// Initialize a new TteDB object.
+		/// </summary>
+		public TteDB(string connectionString) :
+			base(connectionString, "TteDB")
+		{
+			this.OnContextCreated();
+		}
+		/// <summary>
+		/// Initialize a new TteDB object.
+		/// </summary>
+		public TteDB(global::System.Data.EntityClient.EntityConnection connection) :
+			base(connection, "TteDB")
+		{
+			this.OnContextCreated();
+		}
+		partial void OnContextCreated();
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Campus> Campus
+		{
+			get
+			{
+				if ((this._Campus == null))
+				{
+					this._Campus = base.CreateQuery<Campus>("[Campus]");
+				}
+				return this._Campus;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Campus> _Campus;
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Classe> Classe
+		{
+			get
+			{
+				if ((this._Classe == null))
+				{
+					this._Classe = base.CreateQuery<Classe>("[Classe]");
+				}
+				return this._Classe;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Classe> _Classe;
+		/// <summary>
+		/// There are no comments for Droit in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Droit> Droit
+		{
+			get
+			{
+				if ((this._Droit == null))
+				{
+					this._Droit = base.CreateQuery<Droit>("[Droit]");
+				}
+				return this._Droit;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Droit> _Droit;
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Evenement> Evenement
+		{
+			get
+			{
+				if ((this._Evenement == null))
+				{
+					this._Evenement = base.CreateQuery<Evenement>("[Evenement]");
+				}
+				return this._Evenement;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Evenement> _Evenement;
+		/// <summary>
+		/// There are no comments for Matiere in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Matiere> Matiere
+		{
+			get
+			{
+				if ((this._Matiere == null))
+				{
+					this._Matiere = base.CreateQuery<Matiere>("[Matiere]");
+				}
+				return this._Matiere;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Matiere> _Matiere;
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Periode> Periode
+		{
+			get
+			{
+				if ((this._Periode == null))
+				{
+					this._Periode = base.CreateQuery<Periode>("[Periode]");
+				}
+				return this._Periode;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Periode> _Periode;
+		/// <summary>
+		/// There are no comments for Promotion in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Promotion> Promotion
+		{
+			get
+			{
+				if ((this._Promotion == null))
+				{
+					this._Promotion = base.CreateQuery<Promotion>("[Promotion]");
+				}
+				return this._Promotion;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Promotion> _Promotion;
+		/// <summary>
+		/// There are no comments for Utilisateur in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.Data.Objects.ObjectQuery<Utilisateur> Utilisateur
+		{
+			get
+			{
+				if ((this._Utilisateur == null))
+				{
+					this._Utilisateur = base.CreateQuery<Utilisateur>("[Utilisateur]");
+				}
+				return this._Utilisateur;
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.Data.Objects.ObjectQuery<Utilisateur> _Utilisateur;
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToCampus(Campus campus)
+		{
+			base.AddObject("Campus", campus);
+		}
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToClasse(Classe classe)
+		{
+			base.AddObject("Classe", classe);
+		}
+		/// <summary>
+		/// There are no comments for Droit in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToDroit(Droit droit)
+		{
+			base.AddObject("Droit", droit);
+		}
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToEvenement(Evenement evenement)
+		{
+			base.AddObject("Evenement", evenement);
+		}
+		/// <summary>
+		/// There are no comments for Matiere in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToMatiere(Matiere matiere)
+		{
+			base.AddObject("Matiere", matiere);
+		}
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToPeriode(Periode periode)
+		{
+			base.AddObject("Periode", periode);
+		}
+		/// <summary>
+		/// There are no comments for Promotion in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToPromotion(Promotion promotion)
+		{
+			base.AddObject("Promotion", promotion);
+		}
+		/// <summary>
+		/// There are no comments for Utilisateur in the schema.
+		/// </summary>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public void AddToUtilisateur(Utilisateur utilisateur)
+		{
+			base.AddObject("Utilisateur", utilisateur);
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Campus in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Campus")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Campus : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Campus object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="nom">Initial value of Nom.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Campus CreateCampus(int id, string nom)
+		{
+			Campus campus = new Campus();
+			campus.Id = id;
+			campus.Nom = nom;
+			return campus;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				this.OnNomChanging(value);
+				this.ReportPropertyChanging("Nom");
+				this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Nom");
+				this.OnNomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanged();
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Campus", "Classe")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Classe> Classe
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Classe>("TteDataBase.FK_Classe_Campus", "Classe");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Classe>("TteDataBase.FK_Classe_Campus", "Classe", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Droit in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Campus", "Droit")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Droit> Droit
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Droit>("TteDataBase.FK_Droit_Campus", "Droit");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Droit>("TteDataBase.FK_Droit_Campus", "Droit", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Campus", "Evenement")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Campus", "Evenement");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Campus", "Evenement", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Classe in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Classe")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Classe : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Classe object.
+		/// </summary>
+		/// <param name="id">Initial value of id.</param>
+		/// <param name="nom">Initial value of nom.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Classe CreateClasse(int id, string nom)
+		{
+			Classe classe = new Classe();
+			classe.id = id;
+			classe.nom = nom;
+			return classe;
+		}
+		/// <summary>
+		/// There are no comments for property id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				this.OnidChanging(value);
+				this.ReportPropertyChanging("id");
+				this._id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("id");
+				this.OnidChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnidChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnidChanged();
+		/// <summary>
+		/// There are no comments for property nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string nom
+		{
+			get
+			{
+				return this._nom;
+			}
+			set
+			{
+				this.OnnomChanging(value);
+				this.ReportPropertyChanging("nom");
+				this._nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("nom");
+				this.OnnomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnnomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnnomChanged();
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Campus", "Campus")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Campus Campus
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Classe_Campus", "Campus", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Periode", "Periode")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Periode Periode
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Periode> PeriodeReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Periode>("TteDataBase.FK_Classe_Periode", "Periode", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Classe", "Evenement")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Classe", "Evenement");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Classe", "Evenement", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Utilisateur in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Utilisateur_Classe", "Utilisateur")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Utilisateur> Utilisateur
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Utilisateur>("TteDataBase.FK_Utilisateur_Classe", "Utilisateur");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Utilisateur>("TteDataBase.FK_Utilisateur_Classe", "Utilisateur", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Droit in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Droit")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Droit : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Droit object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="type">Initial value of Type.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Droit CreateDroit(int id, int type)
+		{
+			Droit droit = new Droit();
+			droit.Id = id;
+			droit.Type = type;
+			return droit;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Type in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				this.OnTypeChanging(value);
+				this.ReportPropertyChanging("Type");
+				this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Type");
+				this.OnTypeChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Type;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnTypeChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnTypeChanged();
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Campus", "Campus")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Campus Campus
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Droit_Campus", "Campus", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Utilisateur in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Utilisateur", "Utilisateur")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Utilisateur Utilisateur
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Utilisateur in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> UtilisateurReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Utilisateur>("TteDataBase.FK_Droit_Utilisateur", "Utilisateur", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Evenement in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Evenement")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Evenement : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Evenement object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="nom">Initial value of Nom.</param>
+		/// <param name="debut">Initial value of Debut.</param>
+		/// <param name="fin">Initial value of Fin.</param>
+		/// <param name="obligatoire">Initial value of Obligatoire.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Evenement CreateEvenement(int id, string nom, global::System.DateTime debut, global::System.DateTime fin, bool obligatoire)
+		{
+			Evenement evenement = new Evenement();
+			evenement.Id = id;
+			evenement.Nom = nom;
+			evenement.Debut = debut;
+			evenement.Fin = fin;
+			evenement.Obligatoire = obligatoire;
+			return evenement;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Type in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				this.OnTypeChanging(value);
+				this.ReportPropertyChanging("Type");
+				this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+				this.ReportPropertyChanged("Type");
+				this.OnTypeChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Type;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnTypeChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnTypeChanged();
+		/// <summary>
+		/// There are no comments for property Lieu in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Lieu
+		{
+			get
+			{
+				return this._Lieu;
+			}
+			set
+			{
+				this.OnLieuChanging(value);
+				this.ReportPropertyChanging("Lieu");
+				this._Lieu = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
+				this.ReportPropertyChanged("Lieu");
+				this.OnLieuChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Lieu;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnLieuChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnLieuChanged();
+		/// <summary>
+		/// There are no comments for property Nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				this.OnNomChanging(value);
+				this.ReportPropertyChanging("Nom");
+				this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Nom");
+				this.OnNomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanged();
+		/// <summary>
+		/// There are no comments for property Debut in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.DateTime Debut
+		{
+			get
+			{
+				return this._Debut;
+			}
+			set
+			{
+				this.OnDebutChanging(value);
+				this.ReportPropertyChanging("Debut");
+				this._Debut = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Debut");
+				this.OnDebutChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.DateTime _Debut;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnDebutChanging(global::System.DateTime value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnDebutChanged();
+		/// <summary>
+		/// There are no comments for property Fin in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.DateTime Fin
+		{
+			get
+			{
+				return this._Fin;
+			}
+			set
+			{
+				this.OnFinChanging(value);
+				this.ReportPropertyChanging("Fin");
+				this._Fin = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Fin");
+				this.OnFinChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.DateTime _Fin;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnFinChanging(global::System.DateTime value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnFinChanged();
+		/// <summary>
+		/// There are no comments for property Obligatoire in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public bool Obligatoire
+		{
+			get
+			{
+				return this._Obligatoire;
+			}
+			set
+			{
+				this.OnObligatoireChanging(value);
+				this.ReportPropertyChanging("Obligatoire");
+				this._Obligatoire = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Obligatoire");
+				this.OnObligatoireChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private bool _Obligatoire;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnObligatoireChanging(bool value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnObligatoireChanged();
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Campus", "Campus")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Campus Campus
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Campus in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Campus> CampusReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Campus>("TteDataBase.FK_Evenement_Campus", "Campus", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Classe", "Classe")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Classe Classe
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Classe> ClasseReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Classe>("TteDataBase.FK_Evenement_Classe", "Classe", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Intervenant in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Intervenant", "Utilisateur")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Utilisateur Intervenant
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Intervenant in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> IntervenantReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Intervenant", "Utilisateur", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Matiere in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Matiere", "Matiere")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Matiere Matiere
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Matiere in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Matiere> MatiereReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Matiere>("TteDataBase.FK_Evenement_Matiere", "Matiere", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Periode", "Periode")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Periode Periode
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Periode> PeriodeReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Periode>("TteDataBase.FK_Evenement_Periode", "Periode", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Createur in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Proprietaire", "Utilisateur")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Utilisateur Createur
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Createur in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Utilisateur> CreateurReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Utilisateur>("TteDataBase.FK_Evenement_Proprietaire", "Utilisateur", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Matiere in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Matiere")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Matiere : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Matiere object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="nom">Initial value of Nom.</param>
+		/// <param name="nbre_h">Initial value of Nbre_h.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Matiere CreateMatiere(int id, string nom, int nbre_h)
+		{
+			Matiere matiere = new Matiere();
+			matiere.Id = id;
+			matiere.Nom = nom;
+			matiere.Nbre_h = nbre_h;
+			return matiere;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				this.OnNomChanging(value);
+				this.ReportPropertyChanging("Nom");
+				this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Nom");
+				this.OnNomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanged();
+		/// <summary>
+		/// There are no comments for property Nbre_h in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Nbre_h
+		{
+			get
+			{
+				return this._Nbre_h;
+			}
+			set
+			{
+				this.OnNbre_hChanging(value);
+				this.ReportPropertyChanging("Nbre_h");
+				this._Nbre_h = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Nbre_h");
+				this.OnNbre_hChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Nbre_h;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNbre_hChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNbre_hChanged();
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Matiere", "Evenement")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Matiere", "Evenement");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Matiere", "Evenement", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Periode in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Periode")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Periode : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Periode object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="nom">Initial value of Nom.</param>
+		/// <param name="debut">Initial value of Debut.</param>
+		/// <param name="fin">Initial value of Fin.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Periode CreatePeriode(int id, string nom, global::System.DateTime debut, global::System.DateTime fin)
+		{
+			Periode periode = new Periode();
+			periode.Id = id;
+			periode.Nom = nom;
+			periode.Debut = debut;
+			periode.Fin = fin;
+			return periode;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				this.OnNomChanging(value);
+				this.ReportPropertyChanging("Nom");
+				this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Nom");
+				this.OnNomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanged();
+		/// <summary>
+		/// There are no comments for property Debut in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.DateTime Debut
+		{
+			get
+			{
+				return this._Debut;
+			}
+			set
+			{
+				this.OnDebutChanging(value);
+				this.ReportPropertyChanging("Debut");
+				this._Debut = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Debut");
+				this.OnDebutChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.DateTime _Debut;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnDebutChanging(global::System.DateTime value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnDebutChanged();
+		/// <summary>
+		/// There are no comments for property Fin in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.DateTime Fin
+		{
+			get
+			{
+				return this._Fin;
+			}
+			set
+			{
+				this.OnFinChanging(value);
+				this.ReportPropertyChanging("Fin");
+				this._Fin = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Fin");
+				this.OnFinChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.DateTime _Fin;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnFinChanging(global::System.DateTime value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnFinChanged();
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Classe_Periode", "Classe")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Classe> Classe
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Classe>("TteDataBase.FK_Classe_Periode", "Classe");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Classe>("TteDataBase.FK_Classe_Periode", "Classe", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Periode", "Evenement")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Periode", "Evenement");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Periode", "Evenement", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Promotion in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Periode_Promotion", "Promotion")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Promotion Promotion
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Promotion in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Promotion> PromotionReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Promotion>("TteDataBase.FK_Periode_Promotion", "Promotion", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Promotion in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Promotion")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Promotion : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Promotion object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="nom">Initial value of Nom.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Promotion CreatePromotion(int id, string nom)
+		{
+			Promotion promotion = new Promotion();
+			promotion.Id = id;
+			promotion.Nom = nom;
+			return promotion;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				this.OnNomChanging(value);
+				this.ReportPropertyChanging("Nom");
+				this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Nom");
+				this.OnNomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanged();
+		/// <summary>
+		/// There are no comments for Periode in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Periode_Promotion", "Periode")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Periode> Periode
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Periode>("TteDataBase.FK_Periode_Promotion", "Periode");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Periode>("TteDataBase.FK_Periode_Promotion", "Periode", value);
+				}
+			}
+		}
+	}
+	/// <summary>
+	/// There are no comments for TteDataBase.Utilisateur in the schema.
+	/// </summary>
+	/// <KeyProperties>
+	/// Id
+	/// </KeyProperties>
+	[global::System.Data.Objects.DataClasses.EdmEntityTypeAttribute(NamespaceName = "TteDataBase", Name = "Utilisateur")]
+	[global::System.Runtime.Serialization.DataContractAttribute(IsReference = true)]
+	[global::System.Serializable()]
+	public partial class Utilisateur : global::System.Data.Objects.DataClasses.EntityObject
+	{
+		/// <summary>
+		/// Create a new Utilisateur object.
+		/// </summary>
+		/// <param name="id">Initial value of Id.</param>
+		/// <param name="nom">Initial value of Nom.</param>
+		/// <param name="password">Initial value of Password.</param>
+		/// <param name="lastChange">Initial value of LastChange.</param>
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public static Utilisateur CreateUtilisateur(int id, string nom, string password, global::System.DateTime lastChange)
+		{
+			Utilisateur utilisateur = new Utilisateur();
+			utilisateur.Id = id;
+			utilisateur.Nom = nom;
+			utilisateur.Password = password;
+			utilisateur.LastChange = lastChange;
+			return utilisateur;
+		}
+		/// <summary>
+		/// There are no comments for property Id in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(EntityKeyProperty = true, IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				this.OnIdChanging(value);
+				this.ReportPropertyChanging("Id");
+				this._Id = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("Id");
+				this.OnIdChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private int _Id;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanging(int value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnIdChanged();
+		/// <summary>
+		/// There are no comments for property Nom in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Nom
+		{
+			get
+			{
+				return this._Nom;
+			}
+			set
+			{
+				this.OnNomChanging(value);
+				this.ReportPropertyChanging("Nom");
+				this._Nom = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Nom");
+				this.OnNomChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Nom;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnNomChanged();
+		/// <summary>
+		/// There are no comments for property Password in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				this.OnPasswordChanging(value);
+				this.ReportPropertyChanging("Password");
+				this._Password = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+				this.ReportPropertyChanged("Password");
+				this.OnPasswordChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private string _Password;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnPasswordChanging(string value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnPasswordChanged();
+		/// <summary>
+		/// There are no comments for property LastChange in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable = false)]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		public global::System.DateTime LastChange
+		{
+			get
+			{
+				return this._LastChange;
+			}
+			set
+			{
+				this.OnLastChangeChanging(value);
+				this.ReportPropertyChanging("LastChange");
+				this._LastChange = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+				this.ReportPropertyChanged("LastChange");
+				this.OnLastChangeChanged();
+			}
+		}
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		private global::System.DateTime _LastChange;
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnLastChangeChanging(global::System.DateTime value);
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		partial void OnLastChangeChanged();
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Utilisateur_Classe", "Classe")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public Classe Classe
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe").Value;
+			}
+			set
+			{
+				((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe").Value = value;
+			}
+		}
+		/// <summary>
+		/// There are no comments for Classe in the schema.
+		/// </summary>
+		[global::System.ComponentModel.BrowsableAttribute(false)]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityReference<Classe> ClasseReference
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedReference<Classe>("TteDataBase.FK_Utilisateur_Classe", "Classe", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Droit in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Droit_Utilisateur", "Droit")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Droit> Droit
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Droit>("TteDataBase.FK_Droit_Utilisateur", "Droit");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Droit>("TteDataBase.FK_Droit_Utilisateur", "Droit", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Evenement in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Intervenant", "Evenement")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Intervenant", "Evenement");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Intervenant", "Evenement", value);
+				}
+			}
+		}
+		/// <summary>
+		/// There are no comments for Evenement1 in the schema.
+		/// </summary>
+		[global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDataBase", "FK_Evenement_Proprietaire", "Evenement")]
+		[global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+		[global::System.Xml.Serialization.XmlIgnoreAttribute()]
+		[global::System.Xml.Serialization.SoapIgnoreAttribute()]
+		[global::System.Runtime.Serialization.DataMemberAttribute()]
+		public global::System.Data.Objects.DataClasses.EntityCollection<Evenement> Evenement1
+		{
+			get
+			{
+				return ((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.GetRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Proprietaire", "Evenement");
+			}
+			set
+			{
+				if ((value != null))
+				{
+					((global::System.Data.Objects.DataClasses.IEntityWithRelationships)(this)).RelationshipManager.InitializeRelatedCollection<Evenement>("TteDataBase.FK_Evenement_Proprietaire", "Evenement", value);
+				}
+			}
+		}
+	}
 }
