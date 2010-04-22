@@ -26,8 +26,9 @@ namespace Client
 
 		private void button1_Click(object sender, RoutedEventArgs e)
 		{
+			BusinessLayerClient bc = new BusinessLayerClient();
 
-			this.button1.Content = "bonjour";
+			this.button1.Content = bc.getEventsData_Campus("Toulouse",DateTime.MinValue,DateTime.MaxValue, DateTime.MinValue).First().Nom;
 		}
 	}
 }
