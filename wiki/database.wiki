@@ -1,3 +1,5 @@
+=Base de donnée=
+_par Cheynet Romain_
 ==Schéma==
 Voici le schéma de la base de donnée:
 

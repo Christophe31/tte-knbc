@@ -1,0 +1,12 @@
+=Service Web WCF=
+_par Narbonne Christophe_
+
+==Choix du service web==
+Le choix de mettre en place un service web c'est pris assez vite. Exposer une base de donnée nue si on veut une gestion fine des droits, ça a ses limites. Du fait que le sujet semblait encourager les technologies Microsoft, nous avont donc pris celles les plus à jour que l'on pouvais trouver.
+	* .NET4
+	* Visual Studio 2010
+	* SQL Server 2008 R2
+	* WPF
+une fois ces briques en place il aurait été étonnant que le web service ne tire pas profit de *LINQ* et de *WCF*.
+
+WCF (_*W*indows *C*omunication *F*ondation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'interet est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
