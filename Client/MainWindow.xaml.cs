@@ -28,7 +28,7 @@ namespace Client
 		{
 			BusinessLayerClient bc = new BusinessLayerClient();
 
-			this.button1.Content = bc.getEventsData_Campus("Toulouse",DateTime.MinValue,DateTime.MaxValue, DateTime.MinValue).First().Nom;
+			this.button1.Content = bc.getEventsData_Campus("Toulouse", new DateTime(1999, 12, 5), new DateTime(2999, 12, 5), new DateTime(1999, 12, 5)).First().Matiere;
 		}
 	}
 }

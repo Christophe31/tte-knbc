@@ -21,45 +21,54 @@ namespace BusinessLayer
 
 		public EventData[] getEventsData_Campus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-
-			Evenement[] es= db.Evenement.
-				Where(p => p.Debut < Stop && p.Fin > Start &&
-					p.Campus.Nom == CampusName &&
-					p.Createur.LastChange > LastUpdate).
-				ToArray();
-			return es.Select(p=>EventData.ED(p)).ToArray();
+			return (from e in
+						(from p in db.Evenement
+						 where p.Debut < Stop && p.Fin > Start &&
+							 p.Campus.Nom == CampusName &&
+							 p.Createur.LastChange > LastUpdate
+						 select new { e=p, m=p.Matiere }).ToArray()
+					select EventData.ED(e.e, e.m)).ToArray();
 		}
 
 		public EventData[] getEventsData_University(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return db.Evenement.
-				Where(p => p.Debut < Stop && p.Fin > Start).
-				Where(p => p.Campus == null && p.Periode == null && p.Classe == null).
-				Where(p => p.Createur.LastChange > LastUpdate).
-				Select(p => p).ToArray().Select(p => new EventData(p)).ToArray();
+			return (from e in
+						(from p in db.Evenement
+						 where p.Debut < Stop && p.Fin > Start &&
+							 p.Campus == null && p.Periode == null && p.Classe == null &&
+							 p.Createur.LastChange > LastUpdate
+						 select new { e = p, m = p.Matiere }).ToArray()
+					select EventData.ED(e.e, e.m)).ToArray(); 
 		}
 
 		public EventData[] getEventsData_Periode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return db.Evenement.
-				Where(p => p.Debut < Stop && p.Fin > Start).
-				Where(p => (p.Periode.Nom == PromoPeriodeName.Split('-')[1] && p.Periode.Promotion.Nom == PromoPeriodeName.Split('-')[0])).
-				Where(p => p.Createur.LastChange > LastUpdate).
-				Select(p => p).ToArray().Select(p => new EventData(p)).ToArray();
+			return (from e in
+						(from p in db.Evenement
+						 where p.Debut < Stop && p.Fin > Start &&
+							p.Periode.Nom == PromoPeriodeName.Split('-')[1] &&
+							p.Periode.Promotion.Nom == PromoPeriodeName.Split('-')[0] &&
+							p.Createur.LastChange > LastUpdate
+						 select new { e = p, m = p.Matiere }).ToArray()
+					select EventData.ED(e.e, e.m)).ToArray();
+			
 		}
 
 		public EventData[] getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return db.Evenement.
-				Where(p => p.Debut < Stop && p.Fin > Start).
-				Where(p => (p.Classe ==
-						db.Classe.
-						Where(c => (c.Campus.Nom == CampusName &&
-							  c.nom == ClassName &&
-							  c.Periode.Nom == PromoPeriodeName.Split('-')[1])).First())
-					  ).
-				Where(p => p.Createur.LastChange > LastUpdate).
-				Select(p => p).ToArray().Select(p => new EventData(p)).ToArray();
+			return (from e in
+						(from p in db.Evenement
+						 where p.Debut < Stop && p.Fin > Start &&
+							p.Classe ==
+							(from c in db.Classe
+								where c.Campus.Nom == CampusName &&
+									c.nom == ClassName &&
+									c.Periode.Nom == PromoPeriodeName.Split('-')[1]
+								select c
+									).First() &&
+							p.Createur.LastChange > LastUpdate
+						 select new { e = p, m = p.Matiere }).ToArray()
+					select EventData.ED(e.e, e.m)).ToArray();
 		}
 
 		#endregion

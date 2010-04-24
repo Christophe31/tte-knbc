@@ -19,24 +19,24 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public EventData(Evenement EventEntity)
+		public EventData(Evenement EventEntity, Matiere eMatiere)
 		{
 			this.Debut = EventEntity.Debut;
 			this.Fin = EventEntity.Fin;
 			this.Obligatoire = EventEntity.Obligatoire;
 			this.Nom = EventEntity.Nom;
 			this.Lieu = EventEntity.Lieu;
-			this.Matiere = EventEntity.Matiere.Nom;
+			this.Matiere = eMatiere.Nom;
 			this.Type = EventEntity.Type;
 		}
-		public static EventData ED(Evenement EventEntity)
+		public static EventData ED(Evenement EventEntity, Matiere eMatiere)
 		{
 			return new EventData {
 				Debut = EventEntity.Debut,
 				Fin = EventEntity.Fin,
 				Nom = EventEntity.Nom,
 				Lieu = EventEntity.Lieu,
-				Matiere = EventEntity.Matiere.Nom,
+				Matiere = eMatiere.Nom,
 				Obligatoire = EventEntity.Obligatoire,
 				Type = EventEntity.Type};
 		}
