@@ -83,9 +83,10 @@ namespace BusinessLayer
 							select e.Nom).Distinct().ToArray();
 				}
 
-				public string[] getPromoPeriodeNames()
+				public string[] getPeriodeNames()
 				{
-					throw new NotImplementedException();
+					return (from p in db.Periode
+								select p.Nom).Distinct().ToArray();
 				}
 			#endregion
 			#region Ecriture
@@ -106,6 +107,7 @@ namespace BusinessLayer
 					u.Nom = UserName;
 					u.Password = UserPassword;
 					u.Classe=c;
+					db.AddToUtilisateur(u);
 					db.SaveChanges();
 					return "ok";
 				}
@@ -118,6 +120,7 @@ namespace BusinessLayer
 					c.Nom = CampusName;
 					c.Id = 2;
 					db.AddToCampus(c);
+					db.SaveChanges();
 					return "ok";
 				}
 				public string addClasse(string ClassName, string CampusName, string PeriodeName)
@@ -125,7 +128,7 @@ namespace BusinessLayer
 					if (db.Campus.FirstOrDefault(p => p.Nom == CampusName) == null)
 						return "Le Campus " + CampusName + " n'existe pas.";
 					if (db.Periode.FirstOrDefault(p => p.Nom == PeriodeName) == null)
-						return "Le Campus " + PeriodeName + " n'existe pas.";
+						return "La Periode " + PeriodeName + " n'existe pas.";
 					if (db.Classe.Where(p => p.nom == ClassName).Count() > 0)
 						return "La classe " + ClassName + " existe déjà.";
 
@@ -134,6 +137,7 @@ namespace BusinessLayer
 					c.Periode = db.Periode.First(p => p.Nom == PeriodeName);
 					c.Campus = db.Campus.First(p => p.Nom == CampusName);
 					db.AddToClasse(c);
+					db.SaveChanges();
 					return "ok";
 				}
 				public string addPromotion(string PromotionName)
@@ -143,6 +147,7 @@ namespace BusinessLayer
 					Promotion prom = new Promotion();
 					prom.Nom = PromotionName;
 					db.AddToPromotion(prom);
+					db.SaveChanges();
 					return "ok";
 				}
 				public string addMatiere(string MatiereName, int MatiereHours)
@@ -153,11 +158,23 @@ namespace BusinessLayer
 					m.Nom = MatiereName;
 					m.Nbre_h = MatiereHours;
 					db.AddToMatiere(m);
+					db.SaveChanges();
 					return "ok";
 				}
 				public string addPeriode(string PeriodeName, string PromoName, DateTime PeriodeStart, DateTime PeriodeEnd)
 				{
-					return "Toujours pas implementé";
+					if (db.Promotion.FirstOrDefault(p => p.Nom == PromoName) == null)
+						return "La Promo " + PromoName + " n'existe pas.";
+					if (db.Periode.Where(p => p.Nom == PeriodeName).Count() > 0)
+						return "La Periode " + PeriodeName + " existe déjà.";
+					Periode per = new Periode();
+					per.Nom = PeriodeName;
+					per.Debut = PeriodeStart;
+					per.Fin = PeriodeEnd;
+					per.Promotion = db.Promotion.First(p=>p.Nom == PromoName);
+					db.AddToPeriode(per);
+					db.SaveChanges();
+					return "ok";
 				}
 				public string grantNewRight(string UserName, int Type, string CampusName)
 				{
@@ -170,21 +187,19 @@ namespace BusinessLayer
 			#endregion
 		#endregion
 
-				#region IDisposable Members
+		#region IDisposable Members
+			public void Dispose()
+			{
+				this.Dispose(true);
+			}
 
-				public void Dispose()
-		{
-			this.Dispose(true);
-		}
-
-		protected virtual void Dispose(bool fullyDispose)
-		{
-			this.db.SaveChanges();
-			this.db.Dispose();
-			if (fullyDispose == true)
-				GC.SuppressFinalize(this);
-		}
-
+			protected virtual void Dispose(bool fullyDispose)
+			{
+				this.db.SaveChanges();
+				this.db.Dispose();
+				if (fullyDispose == true)
+					GC.SuppressFinalize(this);
+			}
 		#endregion
 
 	}

@@ -167,8 +167,8 @@ public interface IBusinessLayer
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPromotionsNames", ReplyAction="http://tempuri.org/IBusinessLayer/getPromotionsNamesResponse")]
     string[] getPromotionsNames();
     
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPromoPeriodeNames", ReplyAction="http://tempuri.org/IBusinessLayer/getPromoPeriodeNamesResponse")]
-    string[] getPromoPeriodeNames();
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPeriodeNames", ReplyAction="http://tempuri.org/IBusinessLayer/getPeriodeNamesResponse")]
+    string[] getPeriodeNames();
     
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addUser", ReplyAction="http://tempuri.org/IBusinessLayer/addUserResponse")]
     string addUser(string UserName, string UserPassword, string UserClassName);
@@ -264,9 +264,9 @@ public partial class BusinessLayerClient : System.ServiceModel.ClientBase<IBusin
         return base.Channel.getPromotionsNames();
     }
     
-    public string[] getPromoPeriodeNames()
+    public string[] getPeriodeNames()
     {
-        return base.Channel.getPromoPeriodeNames();
+        return base.Channel.getPeriodeNames();
     }
     
     public string addUser(string UserName, string UserPassword, string UserClassName)

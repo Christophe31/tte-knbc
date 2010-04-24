@@ -29,7 +29,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string[] getPromotionsNames();
 			[OperationContract]
-			string[] getPromoPeriodeNames();
+			string[] getPeriodeNames();
 		#endregion
 		#region ecriture
 			[OperationContract]

@@ -1,18 +1,33 @@
 ﻿<Window x:Class="Client.ApiTestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Window1" Height="351" Width="376" Loaded="Window_Loaded">
+        Title="ApiTestWindow" Height="351" Width="376">
     <Grid>
-		<Button Content="Complete!" Height="23" HorizontalAlignment="Left" Margin="279,289,0,0" Name="SimpleTestButton" VerticalAlignment="Top" Width="75" Click="button1_Click" />
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,1,0,0" Name="CampusBox" VerticalAlignment="Top" Width="120" />
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,26,0,0" Name="ClasseBox" VerticalAlignment="Top" Width="120" />
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,51,0,0" Name="PromotionBox" VerticalAlignment="Top" Width="120" />
-		<TextBox Height="23" HorizontalAlignment="Left" Margin="1,76,0,0" Name="TextArg1" VerticalAlignment="Top" Width="120" />
-		<TextBox Height="23" HorizontalAlignment="Left" Margin="1,101,0,0" Name="TextArg2" VerticalAlignment="Top" Width="120" />
-		<Button Content="AddUsr" Height="23" HorizontalAlignment="Left" Margin="279,1,0,0" Name="AddUserButton" VerticalAlignment="Top" Width="75" Click="AddUserButton_Click" />
-		<Button Content="AddCampus" Height="23" HorizontalAlignment="Left" Margin="279,26,0,0" Name="AddCampusButton" VerticalAlignment="Top" Width="75" Click="AddCampusButton_Click" />
-		<Button Content="AddClasse" Height="23" HorizontalAlignment="Left" Margin="279,51,0,0" Name="AddClasseButton" VerticalAlignment="Top" Width="75" Click="AddClasseButton_Click" />
-		<Button Content="AddPromo" Height="23" HorizontalAlignment="Left" Margin="279,76,0,0" Name="AddPromoButton" VerticalAlignment="Top" Width="75" Click="AddPromoButton_Click" />
+		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,76,0,0" Name="PeriodeBox" VerticalAlignment="Top" Width="120" />
+		<TextBox Height="23" HorizontalAlignment="Left" Margin="1,101,0,0" Name="TextArg1" VerticalAlignment="Top" Width="120" />
+		<TextBox Height="23" HorizontalAlignment="Left" Margin="1,126,0,0" Name="TextArg2" VerticalAlignment="Top" Width="120" />
+		<Slider Height="23" HorizontalAlignment="Left" Margin="1,151,0,0" Name="DateSlider" VerticalAlignment="Top" Width="120" />
+
+		<Label Content=": Campus" Height="28" HorizontalAlignment="Left" Margin="121,-1,0,0" VerticalAlignment="Top" />
+		<Label Content=": Class" Height="28" HorizontalAlignment="Left" Margin="121,24,0,0" VerticalAlignment="Top" />
+		<Label Content=": Promotion" Height="28" HorizontalAlignment="Left" Margin="121,49,0,0" VerticalAlignment="Top" />
+		<Label Content=": Periode" Height="28" HorizontalAlignment="Left" Margin="121,74,0,0" VerticalAlignment="Top" />
+		<Label Content=": Arg1" Height="28" HorizontalAlignment="Left" Margin="121,99,0,0" VerticalAlignment="Top" />
+		<Label Content=": Arg2" Height="28" HorizontalAlignment="Left" Margin="121,124,0,0" VerticalAlignment="Top" />
+		<Label Content=": DateSlide" Height="28" HorizontalAlignment="Left" Margin="121,149,0,0" VerticalAlignment="Top" />
+
+
+		<Button Content="AddCampus" Height="23" HorizontalAlignment="Left" Margin="279,1,0,0" Name="AddCampusButton" VerticalAlignment="Top" Width="75" Click="AddCampusButton_Click" />
+		<Button Content="AddClasse" Height="23" HorizontalAlignment="Left" Margin="279,26,0,0" Name="AddClasseButton" VerticalAlignment="Top" Width="75" Click="AddClasseButton_Click" />
+		<Button Content="AddPromo" Height="23" HorizontalAlignment="Left" Margin="279,51,0,0" Name="AddPromoButton" VerticalAlignment="Top" Width="75" Click="AddPromoButton_Click" />
+		<Button Content="AddPeriode" Height="23" HorizontalAlignment="Left" Margin="279,76,0,0" Name="AddPeriodeButton" VerticalAlignment="Top" Width="75" Click="AddPeriodeButton_Click" />
+		<Button Content="AddUsr" Height="23" HorizontalAlignment="Left" Margin="279,101,0,0" Name="AddUserButton" VerticalAlignment="Top" Width="75" Click="AddUserButton_Click" />
+		<Button Content="AddEvnt" Height="23" HorizontalAlignment="Left" Margin="279,126,0,0" Name="AddEventButton" VerticalAlignment="Top" Width="75" Click="AddEventButton_Click" />
+
 		<Label Content="Last Error" Height="28" HorizontalAlignment="Left" Margin="1,261,0,0" Name="ErrorLabel" VerticalAlignment="Top" Width="353" />
+		<Button Content="Complete!" Height="23" HorizontalAlignment="Left" Margin="279,289,0,0" Name="SimpleTestButton" VerticalAlignment="Top" Width="75" Click="button1_Click" />
 	</Grid>
 </Window>
