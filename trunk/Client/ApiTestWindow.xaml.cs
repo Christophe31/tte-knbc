@@ -9,26 +9,32 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BusinessLayer;
 
 namespace Client
 {
 	/// <summary>
-	/// Interaction logic for MainWindow.xaml
+	/// La fenetre de tests à Christophe, merci de ne pas en faire n'importe quoi.
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class ApiTestWindow : Window
 	{
-		public MainWindow()
+		protected BusinessLayerClient Api;
+
+		public ApiTestWindow()
 		{
 			InitializeComponent();
+			Api = new BusinessLayerClient();
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+
 		}
 
 		private void button1_Click(object sender, RoutedEventArgs e)
 		{
-			ApiTestWindow api = new ApiTestWindow();
-			api.Show();
+			this.button1.Content = Api.getEventsByCampus("Toulouse", new DateTime(1999, 12, 5), new DateTime(2999, 12, 5), new DateTime(1999, 12, 5)).First().Matiere;
+
 		}
 	}
 }
