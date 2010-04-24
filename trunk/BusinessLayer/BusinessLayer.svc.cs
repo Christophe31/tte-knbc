@@ -85,8 +85,7 @@ namespace BusinessLayer
 
 				public string[] getPromoPeriodeNames()
 				{
-					return (from e in db.Periode
-							select e.Nom +'-'+ e.Promotion.Nom).Distinct().ToArray();
+					throw new NotImplementedException();
 				}
 			#endregion
 			#region Ecriture
@@ -113,12 +112,12 @@ namespace BusinessLayer
 				public string addCampus(string CampusName)
 				{
 					if (db.Campus.Where(p => p.Nom == CampusName).Count() > 0)
-					{
 						return "Le Campus " + CampusName + " existe déjà.";
-					}
+
 					Campus c = new Campus();
 					c.Nom = CampusName;
-					db.SaveChanges();
+					c.Id = 2;
+					db.AddToCampus(c);
 					return "ok";
 				}
 				public string addClasse(string ClassName, string CampusName, string PeriodeName)
@@ -134,7 +133,7 @@ namespace BusinessLayer
 					c.nom = ClassName;
 					c.Periode = db.Periode.First(p => p.Nom == PeriodeName);
 					c.Campus = db.Campus.First(p => p.Nom == CampusName);
-					db.SaveChanges();
+					db.AddToClasse(c);
 					return "ok";
 				}
 				public string addPromotion(string PromotionName)
@@ -143,12 +142,18 @@ namespace BusinessLayer
 						return "La Promotion " + PromotionName + " existe déjà.";
 					Promotion prom = new Promotion();
 					prom.Nom = PromotionName;
-					db.SaveChanges();
+					db.AddToPromotion(prom);
 					return "ok";
 				}
 				public string addMatiere(string MatiereName, int MatiereHours)
 				{
-					return "Toujours pas implementé";
+					if (db.Matiere.Where(p => p.Nom == MatiereName).Count() > 0)
+						return "La Matiere " + MatiereName + " existe déjà.";
+					Matiere m = new Matiere();
+					m.Nom = MatiereName;
+					m.Nbre_h = MatiereHours;
+					db.AddToMatiere(m);
+					return "ok";
 				}
 				public string addPeriode(string PeriodeName, string PromoName, DateTime PeriodeStart, DateTime PeriodeEnd)
 				{
