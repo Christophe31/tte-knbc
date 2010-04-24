@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BusinessLayer;
 
 namespace Client
 {
@@ -28,7 +29,7 @@ namespace Client
 		{
 			BusinessLayerClient bc = new BusinessLayerClient();
 
-			this.button1.Content = bc.getEventsData_Campus("Toulouse", new DateTime(1999, 12, 5), new DateTime(2999, 12, 5), new DateTime(1999, 12, 5)).First().Matiere;
+			this.button1.Content = bc.getEventsByCampus("Toulouse", new DateTime(1999, 12, 5), new DateTime(2999, 12, 5), new DateTime(1999, 12, 5)).First().Matiere;
 		}
 	}
 }

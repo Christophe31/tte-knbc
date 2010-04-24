@@ -19,7 +19,7 @@ namespace BusinessLayer
 
 		#region IBusinessLayer Members
 			#region Lecture d'évènements
-				public EventData[] getEventsData_Campus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					return (from e in
 								(from p in db.Evenement
@@ -30,7 +30,7 @@ namespace BusinessLayer
 							select EventData.ED(e.e, e.m)).ToArray();
 				}
 
-				public EventData[] getEventsData_University(DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					return (from e in
 								(from p in db.Evenement
@@ -41,31 +41,24 @@ namespace BusinessLayer
 							select EventData.ED(e.e, e.m)).ToArray(); 
 				}
 
-				public EventData[] getEventsData_Periode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByPeriode(string PeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					return (from e in
 								(from p in db.Evenement
 								 where p.Debut < Stop && p.Fin > Start &&
-									p.Periode.Nom == PromoPeriodeName.Split('-')[1] &&
-									p.Periode.Promotion.Nom == PromoPeriodeName.Split('-')[0] &&
+									p.Periode.Nom == PeriodeName &&
 									p.Createur.LastChange > LastUpdate
 								 select new { e = p, m = p.Matiere.Nom }).ToArray()
 							select EventData.ED(e.e, e.m)).ToArray();
 			
 				}
 
-				public EventData[] getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					return (from e in
 								(from p in db.Evenement
 								 where p.Debut < Stop && p.Fin > Start &&
-									p.Classe ==
-									(from c in db.Classe
-										where c.Campus.Nom == CampusName &&
-											c.nom == ClassName &&
-											c.Periode.Nom == PromoPeriodeName.Split('-')[1]
-										select c
-											).First() &&
+									p.Classe.nom ==ClassName &&
 									p.Createur.LastChange > LastUpdate
 								 select new { e = p, m = p.Matiere.Nom }).ToArray()
 							select EventData.ED(e.e, e.m)).ToArray();
@@ -97,37 +90,77 @@ namespace BusinessLayer
 				}
 			#endregion
 			#region Ecriture
-				public string addUser(string UserName, string UserPassword, string UserCampusName)
+				public string addUser(string UserName, string UserPassword, string UserClassName)
 				{
+					if (db.Utilisateur.Where(p=>p.Nom==UserName).Count()>0)
+					{
+						return "L'utilisateur "+UserName+" existe déjà.";
+					}
+					//warn
+					Classe c = db.Classe.FirstOrDefault(p => p.nom == UserClassName);
+					if (c == null)
+					{
+						return "La classe "+UserClassName+" n'existe pas";
+					}
 					Utilisateur u = new Utilisateur();
 					u.LastChange = DateTime.Now;
 					u.Nom = UserName;
 					u.Password = UserPassword;
-					//!!!!!
-					//TODO: modifier cette ligne de test!
-					u.Classe=db.Classe.First();
+					u.Classe=c;
 					db.SaveChanges();
 					return "ok";
 				}
 				public string addCampus(string CampusName)
 				{
-					throw new NotImplementedException();
+					if (db.Campus.Where(p => p.Nom == CampusName).Count() > 0)
+					{
+						return "Le Campus " + CampusName + " existe déjà.";
+					}
+					Campus c = new Campus();
+					c.Nom = CampusName;
+					db.SaveChanges();
+					return "ok";
 				}
-				public string addClasse(string ClassName, string ClassCampusName, string ClassPeriode)
+				public string addClasse(string ClassName, string CampusName, string PeriodeName)
 				{
-					throw new NotImplementedException();
+					if (db.Campus.FirstOrDefault(p => p.Nom == CampusName) == null)
+						return "Le Campus " + CampusName + " n'existe pas.";
+					if (db.Periode.FirstOrDefault(p => p.Nom == PeriodeName) == null)
+						return "Le Campus " + PeriodeName + " n'existe pas.";
+					if (db.Classe.Where(p => p.nom == ClassName).Count() > 0)
+						return "La classe " + ClassName + " existe déjà.";
+
+					Classe c = new Classe();
+					c.nom = ClassName;
+					c.Periode = db.Periode.First(p => p.Nom == PeriodeName);
+					c.Campus = db.Campus.First(p => p.Nom == CampusName);
+					db.SaveChanges();
+					return "ok";
 				}
-				public string addPromotion(string UserName, string UserPassword, string UserCampusName)
+				public string addPromotion(string PromotionName)
 				{
-					throw new NotImplementedException();
+					if (db.Promotion.Where(p => p.Nom == PromotionName).Count() > 0)
+						return "La Promotion " + PromotionName + " existe déjà.";
+					Promotion prom = new Promotion();
+					prom.Nom = PromotionName;
+					db.SaveChanges();
+					return "ok";
 				}
-				public string addMatiere(string UserName, string UserPassword, string UserCampusName)
+				public string addMatiere(string MatiereName, int MatiereHours)
 				{
-					throw new NotImplementedException();
+					return "Toujours pas implementé";
 				}
-				public string addPeriode(string UserName, string UserPassword, string UserCampusName)
+				public string addPeriode(string PeriodeName, string PromoName, DateTime PeriodeStart, DateTime PeriodeEnd)
 				{
-					throw new NotImplementedException();
+					return "Toujours pas implementé";
+				}
+				public string grantNewRight(string UserName, int Type, string CampusName)
+				{
+					return "Toujours pas implementé";
+				}
+				public string addEvent(string EventName, DateTime Start, DateTime End, bool Obligatoire, string IntervenatName, string CampusName, string PeriodeName, string MatiereName, string Type, string Lieu)
+				{
+					return "Toujours pas implementé";
 				}
 			#endregion
 		#endregion
