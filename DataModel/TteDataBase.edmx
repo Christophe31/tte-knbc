@@ -688,7 +688,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="TteDataBase" ZoomLevel="80">
+      <Diagram Name="TteDataBase" ZoomLevel="88">
         <EntityTypeShape EntityType="TteDataBase.Campus" Width="1.5" PointX="0.5" PointY="4.625" Height="1.9802864583333388" />
         <EntityTypeShape EntityType="TteDataBase.Classe" Width="1.5" PointX="2.5" PointY="0.5" Height="2.1725878906250031" />
         <EntityTypeShape EntityType="TteDataBase.Droit" Width="1.5" PointX="0.5" PointY="2" Height="1.7879850260416674" />
