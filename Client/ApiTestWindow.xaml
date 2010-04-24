@@ -3,6 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Window1" Height="351" Width="376" Loaded="Window_Loaded">
     <Grid>
-		<Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="279,289,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+		<Button Content="Complete!" Height="23" HorizontalAlignment="Left" Margin="279,289,0,0" Name="SimpleTestButton" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,1,0,0" Name="CampusBox" VerticalAlignment="Top" Width="120" />
+		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,26,0,0" Name="ClasseBox" VerticalAlignment="Top" Width="120" />
+		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,51,0,0" Name="PromotionBox" VerticalAlignment="Top" Width="120" />
+		<TextBox Height="23" HorizontalAlignment="Left" Margin="1,76,0,0" Name="TextArg1" VerticalAlignment="Top" Width="120" />
+		<TextBox Height="23" HorizontalAlignment="Left" Margin="1,101,0,0" Name="TextArg2" VerticalAlignment="Top" Width="120" />
+		<Button Content="AddUsr" Height="23" HorizontalAlignment="Left" Margin="279,1,0,0" Name="AddUserButton" VerticalAlignment="Top" Width="75" Click="AddUserButton_Click" />
+		<Button Content="AddCampus" Height="23" HorizontalAlignment="Left" Margin="279,26,0,0" Name="AddCampusButton" VerticalAlignment="Top" Width="75" Click="AddCampusButton_Click" />
+		<Button Content="AddClasse" Height="23" HorizontalAlignment="Left" Margin="279,51,0,0" Name="AddClasseButton" VerticalAlignment="Top" Width="75" Click="AddClasseButton_Click" />
+		<Button Content="AddPromo" Height="23" HorizontalAlignment="Left" Margin="279,76,0,0" Name="AddPromoButton" VerticalAlignment="Top" Width="75" Click="AddPromoButton_Click" />
+		<Label Content="Last Error" Height="28" HorizontalAlignment="Left" Margin="1,261,0,0" Name="ErrorLabel" VerticalAlignment="Top" Width="353" />
 	</Grid>
 </Window>
