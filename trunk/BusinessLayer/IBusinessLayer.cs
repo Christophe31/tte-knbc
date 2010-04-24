@@ -11,13 +11,29 @@ namespace BusinessLayer
 	[ServiceContract]
 	public interface IBusinessLayer
 	{
-		[OperationContract]
-		EventData[] getEventsData_Campus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEventsData_University(DateTime Start, DateTime Stop, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEventsData_Periode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEventsData_Class(string ClassName, string CampusName, string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+		#region Lecture d'évènements
+			[OperationContract]
+			EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			[OperationContract]
+			EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
+			[OperationContract]
+			EventData[] getEventsByPeriode(string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			[OperationContract]
+			EventData[] getEventsByClass(string ClassName, string CampusName, string PromoPeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+		#endregion
+		#region completion
+			string[] getCampusNames();
+			string[] getClassesNames();
+			string[] getPromotionsNames();
+			string[] getPromoPeriodeNames();
+		#endregion
+		#region ecriture
+			string addUser(string UserName, string UserPassword, string UserCampusName);
+			string addCampus(string CampusName);
+			string addClasse(string ClassName, string ClassCampusName, string ClassPeriode);
+			string addPromotion(string UserName, string UserPassword, string UserCampusName);
+			string addMatiere(string UserName, string UserPassword, string UserCampusName);
+			string addPeriode(string UserName, string UserPassword, string UserCampusName);
+		#endregion
 	}
 }
