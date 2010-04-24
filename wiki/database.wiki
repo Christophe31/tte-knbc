@@ -1,0 +1,27 @@
+==Schéma==
+Voici le schéma de la base de donnée:
+
+http://www.mypicturesbox.com/photos/originales/crovax31/54793.png
+==Tables==
+===Campus===
+Représente la région de l'école
+cette tables n'as que deux champ, l'ID et le nom (exemple: Toulouse)
+===Classe===
+La classe est la représentation d'une periode sur un campus particulier.
+Elle a 4 champs:
+	# ID
+	# Nom	:nom de la classe (B3B Toulouse)
+	# Campus	:pointe vers le campus ou réside la classe
+	# Periode	:pointe vers la periode à la quelle est sujette la classe
+===Droit===
+Droit est la table qui permet de déterminer si l'utilisateur qui envoie une requete de modification a le droit de les exécuter.
+cette table a 4 champs:
+	# ID
+	# Type
+	# Campus
+	# Utilisateur	:pointe vers l'utilisateur soumis au droit
+===Evenement===
+===Matiere===
+===Periode===
+===Promotion===
+===Utilisateu===

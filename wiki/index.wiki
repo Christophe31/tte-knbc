@@ -12,3 +12,4 @@
  * Narbonne Christophe  (Service WCF)
  * Breil Romaric        (Interface/GUI, DB Designer)
  * Cheynet de beauprés Romain (DB Designer)
+ * Despax Tomas		(Imports, exports et cache)
