@@ -19,57 +19,59 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public EventData(Evenement EventEntity, string nomMatiere)
+		public EventData(Event EventEntity, string NameSubject, string NameSpeaker)
 		{
-			this.Debut = EventEntity.Debut;
-			this.Fin = EventEntity.Fin;
-			this.Obligatoire = EventEntity.Obligatoire;
-			this.Nom = EventEntity.Nom;
-			this.Lieu = EventEntity.Lieu;
-			this.Matiere = nomMatiere;
+			this.Start = EventEntity.Start;
+			this.End = EventEntity.End;
+			this.Mandatory = EventEntity.Mandatory;
+			this.Name = EventEntity.Name;
+			this.Place = EventEntity.Place;
+			this.Subject = NameSubject;
 			this.Type = EventEntity.Type;
+			this.Speaker = NameSpeaker;
 		}
-		public static EventData ED(Evenement EventEntity, string nomMatiere)
+		public static EventData ED(Event EventEntity, string NameSubject, string NameSpeaker)
 		{
 			return new EventData {
-				Debut = EventEntity.Debut,
-				Fin = EventEntity.Fin,
-				Nom = EventEntity.Nom,
-				Lieu = EventEntity.Lieu,
-				Matiere = nomMatiere,
-				Obligatoire = EventEntity.Obligatoire,
-				Type = EventEntity.Type};
+				Start = EventEntity.Start,
+				End = EventEntity.End,
+				Name = EventEntity.Name,
+				Place = EventEntity.Place,
+				Subject = NameSubject,
+				Mandatory = EventEntity.Mandatory,
+				Type = EventEntity.Type,
+				Speaker = NameSpeaker};
 		}
 
 		/// <summary>
 		/// Date de Début de l'évènement.
 		/// </summary>
 		[DataMember]
-		public DateTime Debut { get; set; }
+		public DateTime Start { get; set; }
 
 		/// <summary>
-		/// Date de fin de l'évènement
+		/// Date de End de l'évènement
 		/// </summary>
 		[DataMember]
-		public DateTime Fin { get; set; }
+		public DateTime End { get; set; }
 
 		/// <summary>
 		/// bligation D'afficher l'évènement dans le calandrier
 		/// </summary>
 		[DataMember]
-		public bool Obligatoire { get; set; }
+		public bool Mandatory { get; set; }
 
 		/// <summary>
-		/// Salle ou lieu où se déroullera l'évènement
+		/// Salle ou Place où se déroullera l'évènement
 		/// </summary>
 		[DataMember]
-		public string Lieu { get; set; }
+		public string Place { get; set; }
 
 		/// <summary>
-		/// Nom de la matière
+		/// Name de la matière
 		/// </summary>
 		[DataMember]
-		public string Matiere { get; set; }
+		public string Subject { get; set; }
 
 		/// <summary>
 		/// Type d'évènement (Distanciel, Présentiel...)
@@ -78,9 +80,15 @@ namespace BusinessLayer
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Titre/nom de l'évènement
+		/// Titre/Name de l'évènement
 		/// </summary>
 		[DataMember]
-		public string Nom { get; set; }
+		public string Name { get; set; }
+
+		/// <summary>
+		/// Nom du prof
+		/// </summary>
+		[DataMember]
+		public string Speaker { get; set; }
 	}
 }

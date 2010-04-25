@@ -23,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDb", "FK_Droit_Utilisateur", "User", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.User), "Right", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Right))]
 
 // Original file name:
-// Generation date: 25/04/2010 19:24:37
+// Generation date: 25/04/2010 21:29:56
 namespace DataModel
 {
     
@@ -391,14 +391,14 @@ namespace DataModel
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnLastChangeChanged();
         /// <summary>
-        /// There are no comments for Class in the schema.
+        /// There are no comments for Classes in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Classe_Campus", "Class")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Class> Class
+        public global::System.Data.Objects.DataClasses.EntityCollection<Class> Classes
         {
             get
             {
@@ -413,14 +413,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Right in the schema.
+        /// There are no comments for ManagerRights in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Droit_Campus", "Right")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Right> Right
+        public global::System.Data.Objects.DataClasses.EntityCollection<Right> ManagerRights
         {
             get
             {
@@ -435,14 +435,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Event in the schema.
+        /// There are no comments for Events in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Campus", "Event")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Event
+        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Events
         {
             get
             {
@@ -665,14 +665,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for User in the schema.
+        /// There are no comments for Students in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Utilisateur_Classe", "User")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<User> User
+        public global::System.Data.Objects.DataClasses.EntityCollection<User> Students
         {
             get
             {
@@ -985,14 +985,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for User in the schema.
+        /// There are no comments for Speaker in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Intervenant", "User")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public User User
+        public User Speaker
         {
             get
             {
@@ -1004,12 +1004,12 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for User in the schema.
+        /// There are no comments for Speaker in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<User> UserReference
+        public global::System.Data.Objects.DataClasses.EntityReference<User> SpeakerReference
         {
             get
             {
@@ -1102,14 +1102,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for User1 in the schema.
+        /// There are no comments for Creator in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Proprietaire", "User")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public User User1
+        public User Creator
         {
             get
             {
@@ -1121,12 +1121,12 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for User1 in the schema.
+        /// There are no comments for Creator in the schema.
         /// </summary>
         [global::System.ComponentModel.BrowsableAttribute(false)]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityReference<User> User1Reference
+        public global::System.Data.Objects.DataClasses.EntityReference<User> CreatorReference
         {
             get
             {
@@ -1159,16 +1159,16 @@ namespace DataModel
         /// <param name="name">Initial value of Name.</param>
         /// <param name="start">Initial value of Start.</param>
         /// <param name="end">Initial value of End.</param>
-        /// <param name="lastUpdate">Initial value of LastUpdate.</param>
+        /// <param name="lastChange">Initial value of LastChange.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Period CreatePeriod(int id, string name, global::System.DateTime start, global::System.DateTime end, global::System.DateTime lastUpdate)
+        public static Period CreatePeriod(int id, string name, global::System.DateTime start, global::System.DateTime end, global::System.DateTime lastChange)
         {
             Period period = new Period();
             period.Id = id;
             period.Name = name;
             period.Start = start;
             period.End = end;
-            period.LastUpdate = lastUpdate;
+            period.LastChange = lastChange;
             return period;
         }
         /// <summary>
@@ -1280,32 +1280,32 @@ namespace DataModel
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnEndChanged();
         /// <summary>
-        /// There are no comments for property LastUpdate in the schema.
+        /// There are no comments for property LastChange in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public global::System.DateTime LastUpdate
+        public global::System.DateTime LastChange
         {
             get
             {
-                return this._LastUpdate;
+                return this._LastChange;
             }
             set
             {
-                this.OnLastUpdateChanging(value);
-                this.ReportPropertyChanging("LastUpdate");
-                this._LastUpdate = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("LastUpdate");
-                this.OnLastUpdateChanged();
+                this.OnLastChangeChanging(value);
+                this.ReportPropertyChanging("LastChange");
+                this._LastChange = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("LastChange");
+                this.OnLastChangeChanged();
             }
         }
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private global::System.DateTime _LastUpdate;
+        private global::System.DateTime _LastChange;
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnLastUpdateChanging(global::System.DateTime value);
+        partial void OnLastChangeChanging(global::System.DateTime value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnLastUpdateChanged();
+        partial void OnLastChangeChanged();
         /// <summary>
         /// There are no comments for Class in the schema.
         /// </summary>
@@ -1329,14 +1329,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Event in the schema.
+        /// There are no comments for Events in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Periode", "Event")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Event
+        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Events
         {
             get
             {
@@ -1498,14 +1498,14 @@ namespace DataModel
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnLastChangeChanged();
         /// <summary>
-        /// There are no comments for Period in the schema.
+        /// There are no comments for Periods in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Periode_Promotion", "Period")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Period> Period
+        public global::System.Data.Objects.DataClasses.EntityCollection<Period> Periods
         {
             get
             {
@@ -1785,14 +1785,14 @@ namespace DataModel
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnHoursChanged();
         /// <summary>
-        /// There are no comments for Event in the schema.
+        /// There are no comments for Events in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Matiere", "Event")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Event
+        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Events
         {
             get
             {
@@ -2062,14 +2062,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Event in the schema.
+        /// There are no comments for SpeakingEvents in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Intervenant", "Event")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Event
+        public global::System.Data.Objects.DataClasses.EntityCollection<Event> SpeakingEvents
         {
             get
             {
@@ -2084,14 +2084,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Event1 in the schema.
+        /// There are no comments for OwnedEvents in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Evenement_Proprietaire", "Event")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Event> Event1
+        public global::System.Data.Objects.DataClasses.EntityCollection<Event> OwnedEvents
         {
             get
             {
@@ -2106,14 +2106,14 @@ namespace DataModel
             }
         }
         /// <summary>
-        /// There are no comments for Right in the schema.
+        /// There are no comments for Rights in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Droit_Utilisateur", "Right")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Right> Right
+        public global::System.Data.Objects.DataClasses.EntityCollection<Right> Rights
         {
             get
             {
