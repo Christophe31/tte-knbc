@@ -63,6 +63,19 @@ namespace BusinessLayer
 								 select new { e = p, m = p.Matiere.Nom }).ToArray()
 							select EventData.ED(e.e, e.m)).ToArray();
 				}
+
+				public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate) 
+				{
+					return (from e in
+								(from p in db.Evenement
+								 where p.Debut < Stop && p.Fin > Start &&
+//TODO:Modifier quand les sessions seront gérées
+									p.Createur.Nom == "christophe"  &&
+									p.Intervenant == null &&
+									p.Createur.LastChange > LastUpdate
+								 select new { e = p, m = p.Matiere.Nom }).ToArray()
+							select EventData.ED(e.e, e.m)).ToArray();
+				}
 			#endregion
 			#region Completions
 				public string[] getCampusNames()
@@ -182,6 +195,7 @@ namespace BusinessLayer
 				}
 				public string addEvent(string EventName, DateTime Start, DateTime End, bool Obligatoire, string IntervenatName, string CampusName, string PeriodeName, string MatiereName, string Type, string Lieu)
 				{
+//TODO:Need Sessions
 					return "Toujours pas implementé";
 				}
 			#endregion

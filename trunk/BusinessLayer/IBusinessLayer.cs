@@ -20,6 +20,8 @@ namespace BusinessLayer
 			EventData[] getEventsByPeriode(string PeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
 			EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			[OperationContract]
+			EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate);
 		#endregion
 		#region completion
 			[OperationContract]
