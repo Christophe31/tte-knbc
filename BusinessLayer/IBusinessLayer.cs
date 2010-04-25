@@ -17,7 +17,7 @@ namespace BusinessLayer
 			[OperationContract]
 			EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
-			EventData[] getEventsByPeriode(string PeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByPeriode(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
 			EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
@@ -31,7 +31,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string[] getPromotionsNames();
 			[OperationContract]
-			string[] getPeriodeNames();
+			string[] getPeriodsNames();
 		#endregion
 		#region ecriture
 			[OperationContract]
@@ -39,17 +39,17 @@ namespace BusinessLayer
 			[OperationContract]
 			string addCampus(string CampusName);
 			[OperationContract]
-			string addClasse(string ClassName, string CampusName, string PeriodeName);
+			string addClass(string ClassName, string CampusName, string PeriodeName);
 			[OperationContract]
 			string addPromotion(string PromotionName);
 			[OperationContract]
-			string addMatiere(string MatiereName, int MatiereHours);
+			string addSubject(string SubjectName, int Hours);
 			[OperationContract]
-			string addPeriode(string PeriodeName, string PromoName, DateTime PeriodeStart, DateTime PeriodeEnd);
+			string addPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
 			[OperationContract]
 			string grantNewRight(string UserName, int Type, string CampusName);
 			[OperationContract]
-			string addEvent(string EventName, DateTime Start, DateTime End, bool Obligatoire, string IntervenatName, string CampusName, string PeriodeName, string MatiereName, string Type, string Lieu);
+			string addEvent(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string PeriodName, string SubjectName, string Type, string Place);
 		#endregion
 	}
 }
