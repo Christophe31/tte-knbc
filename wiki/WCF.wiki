@@ -10,9 +10,11 @@ Le choix de mettre en place un service web c'est pris assez vite. Exposer une ba
 une fois ces briques en place il aurait été étonnant que le web service ne tire pas profit de *LINQ* et de *WCF*.
 
 WCF (_*W* indows *C* omunication *F* ondation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'intérêt est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
+
 ==Implémentation API==
 Voilà la partie publique (au 25 avril 2010) du service.
 Du fait que le développement soit en Français et que les noms des tables et champs en français, un mélange original se fait. 
+
 {{{
 public interface IBusinessLayer
 {
@@ -41,5 +43,8 @@ public interface IBusinessLayer
 	#endregion
 }
 }}}
-_*Note: Les extrémums de DateTime en SQLServer et en .NET ne sont pas les mêmes, SQLServer étant le limitant, faites gaffes aux valeurs entrées
-Note2: Si l'API est mise à jour mais que le wraper client n'as pas été mis en conformité, lancez le service WCF, placez vous dans le dossier du client (sous 7 shift+click sur le dossier, open in terminal) puis exécutez `.\Client>"c:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\SvcUtil.exe" http://localhost:1620/BusinessLayer.svc?wsdl`(en changeant le port si besoin)*_
+
+Pour comprendre la teneur des objets en jeux, je vous recommande de vous référer à [database la partie traitant de la DB]
+
+ * _*Note:* Les extrémums de DateTime en SQLServer et en .NET ne sont pas les mêmes, SQLServer étant le limitant, faites gaffes aux valeurs entrées
+ * *Note2:* Si l'API est mise à jour mais que le wraper client n'as pas été mis en conformité, lancez le service WCF, placez vous dans le dossier du client (sous 7 shift+click sur le dossier, open in terminal) puis exécutez `.\Client>"c:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\SvcUtil.exe" http://localhost:1620/BusinessLayer.svc?wsdl`(en changeant le port si besoin)_
