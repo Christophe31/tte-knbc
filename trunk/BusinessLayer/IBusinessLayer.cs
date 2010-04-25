@@ -32,6 +32,10 @@ namespace BusinessLayer
 			string[] getPromotionsNames();
 			[OperationContract]
 			string[] getPeriodsNames();
+			[OperationContract]
+			string[] getSubjectsNames();
+			[OperationContract]
+			string[] getUsersNames();
 		#endregion
 		#region ecriture
 			[OperationContract]
