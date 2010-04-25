@@ -39,7 +39,7 @@ namespace Client
 			Dictionary<foo,ComboBox> Complete = new Dictionary<foo,ComboBox>();
 			Complete.Add(Api.getCampusNames,CampusBox);
 			Complete.Add(Api.getClassesNames, ClasseBox);
-			Complete.Add(Api.getPeriodeNames, PeriodeBox);
+			Complete.Add(Api.getPeriodsNames, PeriodeBox);
 			Complete.Add(Api.getPromotionsNames, PromotionBox);
 			//this.SimpleTestButton.Content = Api.getEventsByCampus("Toulouse", new DateTime(1999, 12, 5), new DateTime(2999, 12, 5), new DateTime(1999, 12, 5)).First().Matiere;
 			foreach (var kv in Complete)
@@ -69,7 +69,7 @@ namespace Client
 		private void AddClasseButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() + 
-				Api.addClasse(TextArg1.Text, CampusBox.SelectedItem.ToString(), "Semestre 1");
+				Api.addClass(TextArg1.Text, CampusBox.SelectedItem.ToString(), "Semestre 1");
 		}
 
 		private void AddPromoButton_Click(object sender, RoutedEventArgs e)
@@ -81,7 +81,7 @@ namespace Client
 		private void AddPeriodeButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.addPeriode(TextArg1.Text, PromotionBox.SelectedItem.ToString(), DateTime.Now.AddMonths(- (int)DateSlider.Value), DateTime.Now.AddMonths((int)DateSlider.Value));
+				Api.addPeriod(TextArg1.Text, PromotionBox.SelectedItem.ToString(), DateTime.Now.AddMonths(- (int)DateSlider.Value), DateTime.Now.AddMonths((int)DateSlider.Value));
 
 		}
 

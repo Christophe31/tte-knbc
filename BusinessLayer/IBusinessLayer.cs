@@ -17,7 +17,7 @@ namespace BusinessLayer
 			[OperationContract]
 			EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
-			EventData[] getEventsByPeriode(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
 			EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
