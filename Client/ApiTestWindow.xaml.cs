@@ -15,6 +15,9 @@ namespace Client
 {
 	/// <summary>
 	/// La fenetre de tests à Christophe, merci de ne pas en faire n'importe quoi.
+	/// Pour regenerer le BusinessLayerWraper.cs:
+	/// .\Client>"c:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\SvcUtil.exe" http://localhost:1620/BusinessLayer.svc?wsdl
+	/// (note: le fichier ne sera pas écrasé automatiquement car j'ai changé la convention de nomage en ajoutant "wrapper")
 	/// </summary>
 	public partial class ApiTestWindow : Window
 	{

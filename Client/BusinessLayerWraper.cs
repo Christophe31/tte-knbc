@@ -158,6 +158,9 @@ public interface IBusinessLayer
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getEventsByClass", ReplyAction="http://tempuri.org/IBusinessLayer/getEventsByClassResponse")]
     BusinessLayer.EventData[] getEventsByClass(string ClassName, System.DateTime Start, System.DateTime Stop, System.DateTime LastUpdate);
     
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPrivateEvents", ReplyAction="http://tempuri.org/IBusinessLayer/getPrivateEventsResponse")]
+    BusinessLayer.EventData[] getPrivateEvents(System.DateTime Start, System.DateTime Stop, System.DateTime LastUpdate);
+    
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getCampusNames", ReplyAction="http://tempuri.org/IBusinessLayer/getCampusNamesResponse")]
     string[] getCampusNames();
     
@@ -247,6 +250,11 @@ public partial class BusinessLayerClient : System.ServiceModel.ClientBase<IBusin
     public BusinessLayer.EventData[] getEventsByClass(string ClassName, System.DateTime Start, System.DateTime Stop, System.DateTime LastUpdate)
     {
         return base.Channel.getEventsByClass(ClassName, Start, Stop, LastUpdate);
+    }
+    
+    public BusinessLayer.EventData[] getPrivateEvents(System.DateTime Start, System.DateTime Stop, System.DateTime LastUpdate)
+    {
+        return base.Channel.getPrivateEvents(Start, Stop, LastUpdate);
     }
     
     public string[] getCampusNames()
