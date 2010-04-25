@@ -100,6 +100,17 @@ namespace BusinessLayer
 					return (from p in db.Period
 								select p.Name).Distinct().ToArray();
 				}
+
+				public string[] getSubjectsNames()
+				{
+					return db.Subject.Select(p => p.Name).ToArray();
+				}
+
+				public string[] getUsersNames()
+				{
+					return (from u in db.User
+							select u.Name).Distinct().ToArray();
+				}
 			#endregion
 			#region Ecriture
 				public string addUser(string UserName, string UserPassword, string UserClassName)

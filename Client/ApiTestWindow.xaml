@@ -1,7 +1,8 @@
 ﻿<Window x:Class="Client.ApiTestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="ApiTestWindow" Height="351" Width="376">
+        Title="ApiTestWindow" Height="417" Width="414"
+		Icon="ApiTestWindowIcon.ico">
     <Grid>
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,1,0,0" Name="CampusBox" VerticalAlignment="Top" Width="120" />
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,26,0,0" Name="ClasseBox" VerticalAlignment="Top" Width="120" />
@@ -20,14 +21,26 @@
 		<Label Content=": DateSlide" Height="28" HorizontalAlignment="Left" Margin="121,149,0,0" VerticalAlignment="Top" />
 
 
-		<Button Content="AddCampus" Height="23" HorizontalAlignment="Left" Margin="279,1,0,0" Name="AddCampusButton" VerticalAlignment="Top" Width="75" Click="AddCampusButton_Click" />
-		<Button Content="AddClasse" Height="23" HorizontalAlignment="Left" Margin="279,26,0,0" Name="AddClasseButton" VerticalAlignment="Top" Width="75" Click="AddClasseButton_Click" />
-		<Button Content="AddPromo" Height="23" HorizontalAlignment="Left" Margin="279,51,0,0" Name="AddPromoButton" VerticalAlignment="Top" Width="75" Click="AddPromoButton_Click" />
-		<Button Content="AddPeriode" Height="23" HorizontalAlignment="Left" Margin="279,76,0,0" Name="AddPeriodeButton" VerticalAlignment="Top" Width="75" Click="AddPeriodeButton_Click" />
-		<Button Content="AddUsr" Height="23" HorizontalAlignment="Left" Margin="279,101,0,0" Name="AddUserButton" VerticalAlignment="Top" Width="75" Click="AddUserButton_Click" />
-		<Button Content="AddEvnt" Height="23" HorizontalAlignment="Left" Margin="279,126,0,0" Name="AddEventButton" VerticalAlignment="Top" Width="75" Click="AddEventButton_Click" />
+		<Button Content="AddCampus" Height="23" HorizontalAlignment="Left" Margin="317,1,0,0" Name="AddCampusButton" VerticalAlignment="Top" Width="75" Click="AddCampusButton_Click" />
+		<Button Content="AddClasse" Height="23" HorizontalAlignment="Left" Margin="317,26,0,0" Name="AddClasseButton" VerticalAlignment="Top" Width="75" Click="AddClasseButton_Click" />
+		<Button Content="AddPromo" Height="23" HorizontalAlignment="Left" Margin="317,51,0,0" Name="AddPromoButton" VerticalAlignment="Top" Width="75" Click="AddPromoButton_Click" />
+		<Button Content="AddPeriode" Height="23" HorizontalAlignment="Left" Margin="317,76,0,0" Name="AddPeriodeButton" VerticalAlignment="Top" Width="75" Click="AddPeriodeButton_Click" />
+		<Button Content="AddUsr" Height="23" HorizontalAlignment="Left" Margin="317,101,0,0" Name="AddUserButton" VerticalAlignment="Top" Width="75" Click="AddUserButton_Click" />
+		<Button Content="AddEvnt" Height="23" HorizontalAlignment="Left" Margin="317,126,0,0" Name="AddEventButton" VerticalAlignment="Top" Width="75" Click="AddEventButton_Click" />
+		<Button Content="GrantRight" Height="23" HorizontalAlignment="Left" Margin="317,151,0,0" Name="GrantRightButton" VerticalAlignment="Top" Width="75" Click="GrantRightButton_Click" />
 
-		<Label Content="Last Error" Height="28" HorizontalAlignment="Left" Margin="1,261,0,0" Name="ErrorLabel" VerticalAlignment="Top" Width="353" />
-		<Button Content="Complete!" Height="23" HorizontalAlignment="Left" Margin="279,289,0,0" Name="SimpleTestButton" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+		<Label Content="Last Error" Height="25" HorizontalAlignment="Left" Margin="1,325,0,0" Name="ErrorLabel" Foreground="Green" VerticalAlignment="Top" Width="391" />
+		<Button Content="Complete!" Height="23" HorizontalAlignment="Left" Margin="317,355,0,0" Name="SimpleTestButton" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+		<Label Height="124" HorizontalAlignment="Left" Margin="6,195,0,0" Name="label1" VerticalAlignment="Top" Width="386">
+			<TextBlock>
+Note à les gens: <LineBreak/>
+1 Cliquez sur `Complete!`,<LineBreak/>
+2 Remplissez lez champs à gauches (listes incluses)<LineBreak/>
+3 Vous pouvez cliquez les boutons à droite<LineBreak/>
+<LineBreak/>
+(pas la peine de reporter un bug si vous avez clické addXXX direct.<LineBreak/>
+ça plante, c'est normal)
+			</TextBlock>
+		</Label>
 	</Grid>
 </Window>
