@@ -1,2 +1,12 @@
 =Gestion du cache=
 _par Despax Tomas_
+
+==Le découpage local du cache==
+un fichier de cache par classe, pour les events persos, pour les évènements d'université, de periode, de campus...
+
+==Le rechargement du cache==
+pas très compliqué, on efface tout et on recommance... d'ou l'interet de la granularrité en différent caches.
+
+==Les entrées et sorties du module==
+prend en entrée des EventData[] et ressort... à toi Tomas, je serais toi je sortirais la même chose... réversible c'est bien... si c'est le cas on peut s'entendre ensemble sur les spécificités de la classe.
+Le tout étant stocké en ICal...

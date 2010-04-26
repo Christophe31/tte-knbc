@@ -11,17 +11,37 @@ une fois ces briques en place il aurait été étonnant que le web service ne ti
 
 WCF (_*W* indows *C* omunication *F* ondation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'intérêt est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
 
-==Implémentation API==
-Voilà la partie publique (au 25 avril 2010) du service.
-Du fait que le développement soit en Français et que les noms des tables et champs en français, un mélange original se fait. 
+==Echanges d'evenements==
+Les évènements étant des objets échangés en quantité, et étant le coeur de l'application il paraissait important de les cadrer clairement, nous avons donc aggrégé la partie publique c'est à la partie qui interesse le client dans une classe avec le nombre de champs le plus mince nécessaire.
 
 {{{
+
+ EventData= {
+	DateTime  Start          // Date de début
+	DateTime  End           // Date de fin
+	string    Name         // Titre/nom de l'évènement
+	string    Place       // Lieu (utilisé pour la gestion des salles)
+	string    Subject    // Nom de la matière
+	bool      Mandatory // L'affichage est il Obligatoire?
+	string    Type     // Distanciel, Cours, sortie entre pote?
+	string    Speaker // Qui organise/gère l'évènement? (prof)
+	};
+
+
+}}}
+==Implémentation API==
+Voilà la partie publique (au 26 avril 2010) du service.
+Du fait que le développement soit en Français et que les noms des tables et champs en français, un mélange original se fait.
+
+{{{
+
 public interface IBusinessLayer
 {
+
 	#region Lecture d'évènements
 		EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 		EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
-		EventData[] getEventsByPeriode(string PeriodeName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+		EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 		EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate);
 		EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate);
 	#endregion
@@ -29,19 +49,22 @@ public interface IBusinessLayer
 		string[] getCampusNames();
 		string[] getClassesNames();
 		string[] getPromotionsNames();
-		string[] getPeriodeNames();
+		string[] getPeriodsNames();
+		string[] getSubjectsNames();
+		string[] getUsersNames();
 	#endregion
 	#region ecriture
 		string addUser(string UserName, string UserPassword, string UserClassName);
 		string addCampus(string CampusName);
-		string addClasse(string ClassName, string CampusName, string PeriodeName);
+		string addClass(string ClassName, string CampusName, string PeriodeName);
 		string addPromotion(string PromotionName);
-		string addMatiere(string MatiereName, int MatiereHours);
-		string addPeriode(string PeriodeName, string PromoName, DateTime PeriodeStart, DateTime PeriodeEnd);
+		string addSubject(string SubjectName, int Hours);
+		string addPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
 		string grantNewRight(string UserName, int Type, string CampusName);
-		string addEvent(string EventName, DateTime Start, DateTime End, bool Obligatoire, string IntervenatName, string CampusName, string PeriodeName, string MatiereName, string Type, string Lieu);
+		string addEvent(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string PeriodName, string SubjectName, string Type, string Place);
 	#endregion
 }
+
 }}}
 
 Pour comprendre la teneur des objets en jeux, je vous recommande de vous référer à [database la partie traitant de la DB]
