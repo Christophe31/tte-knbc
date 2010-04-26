@@ -16,17 +16,17 @@ Les évènements étant des objets échangés en quantité, et étant le coeur d
 
 {{{
 
- EventData= {
-	DateTime  Start          // Date de début
-	DateTime  End           // Date de fin
-	string    Name         // Titre/nom de l'évènement
-	string    Place       // Lieu (utilisé pour la gestion des salles)
-	string    Subject    // Nom de la matière
-	bool      Mandatory // L'affichage est il Obligatoire?
-	string    Type     // Distanciel, Cours, sortie entre pote?
-	string    Speaker // Qui organise/gère l'évènement? (prof)
-	};
-
+class EventData
+{
+	DateTime  Start;          // Date de début
+	DateTime  End;           // Date de fin
+	string    Name;         // Titre/nom de l'évènement
+	string    Place;       // Lieu (utilisé pour la gestion des salles)
+	string    Subject;    // Nom de la matière
+	bool      Mandatory; // L'affichage est il Obligatoire?
+	string    Type;     // Distanciel, Cours, sortie entre pote?
+	string    Speaker; // Qui organise/gère l'évènement? (prof)
+}
 
 }}}
 ==Implémentation API==
