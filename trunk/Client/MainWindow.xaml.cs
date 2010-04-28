@@ -25,12 +25,6 @@ namespace Client
 		public MainWindow()
 		{
 			InitializeComponent();
-
-            Api = new BusinessLayerClient();
-
-            CampusList.DataContext = Api.getCampusNames();
-            PeriodList.DataContext = Api.getPeriodsNames();
-            ClassList.DataContext = Api.getClassesNames();
 		}
 
 		private void button1_Click(object sender, RoutedEventArgs e)
@@ -41,7 +35,36 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            Api = new BusinessLayerClient();
 
+            ViewType.SelectedIndex = 4;
+        }
+
+        private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (ViewType.SelectedIndex)
+            {
+                case 0:
+                case 4:
+                    ViewName.IsEnabled = false;
+                    ViewName.DataContext = null;
+                    break;
+                case 1:
+                    ViewName.DataContext = Api.getCampusNames();
+                    ViewName.IsEnabled = true;
+                    ViewName.SelectedIndex = 0;
+                    break;
+                case 2:
+                    ViewName.DataContext = Api.getPeriodsNames();
+                    ViewName.IsEnabled = true;
+                    ViewName.SelectedIndex = 0;
+                    break;
+                case 3:
+                    ViewName.DataContext = Api.getClassesNames();
+                    ViewName.IsEnabled = true;
+                    ViewName.SelectedIndex = 0;
+                    break;
+            }
         }
 	}
 }

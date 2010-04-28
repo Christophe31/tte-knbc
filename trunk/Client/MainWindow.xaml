@@ -2,28 +2,20 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="350" Width="525" Loaded="Window_Loaded">
-    <StackPanel>
+    <StackPanel Margin="3">
         <StackPanel Orientation="Horizontal">
-            <ComboBox Name="CampusList" ItemsSource="{Binding}" SelectedIndex="0" />
-            <ComboBox Name="PeriodList" ItemsSource="{Binding}" SelectedIndex="0" />
-            <ComboBox Name="ClassList" ItemsSource="{Binding}" SelectedIndex="0" />
+            <ComboBox Name="ViewType" SelectionChanged="ViewType_SelectionChanged">
+                <ComboBoxItem>Université</ComboBoxItem>
+                <ComboBoxItem>Campus</ComboBoxItem>
+                <ComboBoxItem>Période</ComboBoxItem>
+                <ComboBoxItem>Classe</ComboBoxItem>
+                <ComboBoxItem>Utilisateur</ComboBoxItem>
+            </ComboBox>
+            
+            <ComboBox IsEnabled="False" Name="ViewName" ItemsSource="{Binding}" SelectedIndex="0" />
         </StackPanel>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            
+        <UniformGrid Margin="0,3" Rows="1" Columns="7">
             <TextBlock Grid.Column="0">Lundi</TextBlock>
             <TextBlock Grid.Column="1">Mardi</TextBlock>
             <TextBlock Grid.Column="2">Mrecredi</TextBlock>
@@ -31,7 +23,7 @@
             <TextBlock Grid.Column="4">Vendredi</TextBlock>
             <TextBlock Grid.Column="5">Samedi</TextBlock>
             <TextBlock Grid.Column="6">Dimanche</TextBlock>
-        </Grid>
+        </UniformGrid>
 
         <Button Content="TestApi" HorizontalAlignment="Right" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </StackPanel>
