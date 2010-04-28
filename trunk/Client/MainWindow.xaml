@@ -4,6 +4,7 @@
         Title="MainWindow" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" Height="350" Width="525" Loaded="Window_Loaded">
     <StackPanel Margin="3">
         <StackPanel Orientation="Horizontal">
+            <Label>Type de vue</Label>
             <ComboBox Name="ViewType" SelectionChanged="ViewType_SelectionChanged">
                 <ComboBoxItem>Université</ComboBoxItem>
                 <ComboBoxItem>Campus</ComboBoxItem>
@@ -11,19 +12,58 @@
                 <ComboBoxItem>Classe</ComboBoxItem>
                 <ComboBoxItem>Utilisateur</ComboBoxItem>
             </ComboBox>
-            
-            <ComboBox IsEnabled="False" Name="ViewName" ItemsSource="{Binding}" SelectedIndex="0" />
+
+            <ComboBox Margin="3,0" Visibility="Collapsed" Name="ViewName" ItemsSource="{Binding}" SelectedIndex="0" />
         </StackPanel>
 
-        <UniformGrid Margin="0,3" Rows="1" Columns="7">
-            <TextBlock Grid.Column="0">Lundi</TextBlock>
-            <TextBlock Grid.Column="1">Mardi</TextBlock>
-            <TextBlock Grid.Column="2">Mrecredi</TextBlock>
-            <TextBlock Grid.Column="3">Jeudi</TextBlock>
-            <TextBlock Grid.Column="4">Vendredi</TextBlock>
-            <TextBlock Grid.Column="5">Samedi</TextBlock>
-            <TextBlock Grid.Column="6">Dimanche</TextBlock>
-        </UniformGrid>
+        <TabControl Margin="0,3">
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>Semaine</TextBlock>
+                </TabItem.Header>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+            
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+            
+                    <TextBlock Grid.Column="0" Grid.Row="0">Lundi</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0">Mardi</TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="0">Mercredi</TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="0">Jeudi</TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="0">Vendredi</TextBlock>
+                    <TextBlock Grid.Column="5" Grid.Row="0">Samedi</TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="0">Dimanche</TextBlock>
+                </Grid>
+            </TabItem>
+            
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>Jour</TextBlock>
+                </TabItem.Header>
+                    
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                    <TextBlock Grid.Column="0" Grid.Row="0">Lundi</TextBlock>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
         <Button Content="TestApi" HorizontalAlignment="Right" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </StackPanel>
