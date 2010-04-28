@@ -111,6 +111,11 @@ namespace BusinessLayer
 					return (from u in db.User
 							select u.Name).Distinct().ToArray();
 				}
+				public string[] getEventsTypes() 
+				{
+					return (from evt in db.Event
+								select evt.Type).Distinct().ToArray();
+				}
 			#endregion
 			#region Ecriture
 				public string addUser(string UserName, string UserPassword, string UserClassName)
@@ -189,6 +194,8 @@ namespace BusinessLayer
 				}
 				public string addPeriod(string PeriodName, string PromoName, DateTime PeriodStart, DateTime PeriodEnd)
 				{
+					if (PeriodStart >= PeriodEnd)
+						return "Dates incorrectes";
 					if (db.Promotion.FirstOrDefault(p => p.Name == PromoName) == null)
 						return "La Promo " + PromoName + " n'existe pas.";
 					if (db.Period.Where(p => p.Name == PeriodName).Count() > 0)
@@ -207,11 +214,112 @@ namespace BusinessLayer
 				{
 					return "Toujours pas implementé";
 				}
-				public string addEvent(string EventName, DateTime Start, DateTime End, bool Obligatoire, string IntervenatName, string CampusName, string PeriodName, string SubjectName, string Type, string Lieu)
+				public string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, 
+					string SpeakerName, string CampusName, string Type, string Place)
 				{
-//TODO:Need Sessions
-					return "Toujours pas implementé";
+					if (Start >= End )
+						return "Dates incorrectes";
+					Campus c = db.Campus.FirstOrDefault(p => p.Name == CampusName);
+					if ( c == null)
+						return "Le Campus " + CampusName + " n'existe pas.";
+
+					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
+						return "L'intervenant " + SpeakerName + " n'existe pas.";
+					Event e = new Event();
+					e.Name = EventName;
+					e.Start = Start;
+					e.End = End;
+					e.Mandatory = Mandatory;
+					e.Speaker= db.User.First(p=>p.Name==SpeakerName);
+					e.Campus = c;
+					e.Type = Type;
+					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
+					e.Place = Place;
+					db.AddToEvent(e);
+					c.LastChange = DateTime.Now;
+					db.SaveChanges();
+					return "ok";
 				}
+
+				public string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodName, string Type, string Place) 
+				{
+					if (Start >= End)
+						return "Dates incorrectes";
+					Period per = db.Period.FirstOrDefault(pi => pi.Name == PeriodName);
+					if (per == null)
+						return "Le Campus " + PeriodName + " n'existe pas.";
+
+					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
+						return "L'intervenant " + SpeakerName + " n'existe pas.";
+					Event e = new Event();
+					e.Name = EventName;
+					e.Start = Start;
+					e.End = End;
+					e.Mandatory = Mandatory;
+					e.Speaker = db.User.First(p => p.Name == SpeakerName);
+					e.Period = per;
+					e.Type = Type;
+					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
+					e.Place = Place;
+					db.AddToEvent(e);
+					per.LastChange = DateTime.Now;
+					db.SaveChanges();
+					return "ok";
+				}
+
+				public string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName,string Subject ,string Type, string Place)
+				{
+					if (Start >= End)
+						return "Dates incorrectes";
+
+					Class c = db.Class.FirstOrDefault(p => p.Name == ClassName);
+					Subject s = db.Subject.FirstOrDefault(p=> p.Name == Subject );
+					if (c == null)
+						return "Le Campus " + ClassName + " n'existe pas.";
+
+					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
+						return "L'intervenant " + SpeakerName + " n'existe pas.";
+					Event e = new Event();
+					e.Name = EventName;
+					e.Start = Start;
+					e.End = End;
+					e.Mandatory = Mandatory;
+					e.Speaker = db.User.First(p => p.Name == SpeakerName);
+					e.Class = c;
+					e.Subject = s;
+					e.Type = Type;
+					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
+					e.Place = Place;
+					db.AddToEvent(e);
+					c.LastChange = DateTime.Now;
+					db.SaveChanges();
+					return "ok";
+				}
+
+				public string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Type, string Place)
+				{
+					if (Start >= End)
+						return "Dates incorrectes";
+					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
+						return "L'intervenant " + SpeakerName + " n'existe pas.";
+					Event e = new Event();
+					e.Name = EventName;
+					e.Start = Start;
+					e.End = End;
+					e.Mandatory = Mandatory;
+					e.Speaker = db.User.First(p => p.Name == SpeakerName);
+					e.Type = Type;
+					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
+					e.Place = Place;
+					db.AddToEvent(e);
+					db.University.First().LastChange = DateTime.Now;
+					db.SaveChanges();
+					return "ok";
+				}
+
+				public string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Type, string Place)
+				{ return "still not implemented"; }
+
 			#endregion
 		#endregion
 
