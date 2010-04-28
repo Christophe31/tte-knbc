@@ -36,6 +36,8 @@ namespace BusinessLayer
 			string[] getSubjectsNames();
 			[OperationContract]
 			string[] getUsersNames();
+			[OperationContract]
+			string[] getEventsTypes();
 		#endregion
 		#region ecriture
 			[OperationContract]
@@ -53,7 +55,15 @@ namespace BusinessLayer
 			[OperationContract]
 			string grantNewRight(string UserName, int Type, string CampusName);
 			[OperationContract]
-			string addEvent(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string PeriodName, string SubjectName, string Type, string Place);
+			string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Type, string Place);
+			[OperationContract]
+			string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Type, string Place);
+			[OperationContract]
+			string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Type, string Place);
+ 			[OperationContract]
+			string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Type, string Place);
+			[OperationContract]
+			string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Type, string Place); 
 		#endregion
 	}
 }
