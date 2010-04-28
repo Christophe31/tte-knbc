@@ -124,8 +124,7 @@ namespace BusinessLayer
 					{
 						return "L'User "+UserName+" existe déjà.";
 					}
-					//warn
-					if (db.Class.Where(p => p.Name == UserClassName).Count() > 0)
+					if (db.Class.Where(p => p.Name == UserClassName).Count() == 0)
 					{
 						return "La Class "+UserClassName+" n'existe pas";
 					}
