@@ -88,7 +88,7 @@ namespace Client
 		private void AddEventButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.addEvent(TextArg1.Text, DateTime.Now.AddHours(-(int)DateSlider.Value), DateTime.Now.AddHours((int)DateSlider.Value),false,"christophe",CampusBox.SelectedIndex.ToString(),PeriodeBox.SelectedIndex.ToString(),"linux","presentiel","salle1");
+				Api.addEventToUniversity(TextArg1.Text, DateTime.Now.AddHours(-(int)DateSlider.Value), DateTime.Now.AddHours((int)DateSlider.Value),false,"christophe","presentiel","salle1");
 
 		}
 
