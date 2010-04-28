@@ -125,8 +125,7 @@ namespace BusinessLayer
 						return "L'User "+UserName+" existe déjà.";
 					}
 					//warn
-					Class c = db.Class.FirstOrDefault(p => p.Name == UserClassName);
-					if (c == null)
+					if (db.Class.Where(p => p.Name == UserClassName).Count() > 0)
 					{
 						return "La Class "+UserClassName+" n'existe pas";
 					}
@@ -134,7 +133,7 @@ namespace BusinessLayer
 					u.LastChange = DateTime.Now;
 					u.Name = UserName;
 					u.Password = UserPassword;
-					u.Class=c;
+					u.Class = db.Class.First(p => p.Name == UserClassName);
 					db.AddToUser(u);
 					db.SaveChanges();
 					return "ok";
