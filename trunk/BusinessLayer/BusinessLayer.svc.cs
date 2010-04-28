@@ -233,7 +233,7 @@ namespace BusinessLayer
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
 					db.AddToEvent(e);
-					c.LastChange = DateTime.Now;
+					e.Campus.LastChange = DateTime.Now;
 					db.SaveChanges();
 					return "ok";
 				}
