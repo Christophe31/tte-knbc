@@ -98,5 +98,12 @@ namespace Client
 				Api.grantNewRight("",1, CampusBox.SelectedIndex.ToString());
 
 		}
+
+        private void button1_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainAdmin fenetreAdmin = new MainAdmin();
+            fenetreAdmin.Show();
+
+        }
 	}
 }
