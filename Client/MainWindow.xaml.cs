@@ -19,10 +19,18 @@ namespace Client
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
-	{
+    {
+        protected BusinessLayerClient Api;
+
 		public MainWindow()
 		{
 			InitializeComponent();
+
+            Api = new BusinessLayerClient();
+
+            CampusList.DataContext = Api.getCampusNames();
+            PeriodList.DataContext = Api.getPeriodsNames();
+            ClassList.DataContext = Api.getClassesNames();
 		}
 
 		private void button1_Click(object sender, RoutedEventArgs e)
@@ -30,5 +38,10 @@ namespace Client
 			ApiTestWindow api = new ApiTestWindow();
 			api.Show();
 		}
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
 	}
 }
