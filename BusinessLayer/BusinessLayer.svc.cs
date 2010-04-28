@@ -124,7 +124,7 @@ namespace BusinessLayer
 					{
 						return "L'User "+UserName+" existe déjà.";
 					}
-					if (db.Class.Where(p => p.Name == UserClassName).Count() == 0)
+					if (db.Class.Where(p => p.Name == UserClassName).Count() < 1)
 					{
 						return "La Class "+UserClassName+" n'existe pas";
 					}
@@ -132,7 +132,7 @@ namespace BusinessLayer
 					u.LastChange = DateTime.Now;
 					u.Name = UserName;
 					u.Password = UserPassword;
-					u.Class = db.Class.First(p => p.Name == UserClassName);
+					u.Class = db.Class.Where(p => p.Name == UserClassName).First();
 					db.AddToUser(u);
 					db.SaveChanges();
 					return "ok";
@@ -217,8 +217,7 @@ namespace BusinessLayer
 				{
 					if (Start >= End )
 						return "Dates incorrectes";
-					Campus c = db.Campus.FirstOrDefault(p => p.Name == CampusName);
-					if ( c == null)
+					if ( db.Campus.FirstOrDefault(p => p.Name == CampusName) == null)
 						return "Le Campus " + CampusName + " n'existe pas.";
 
 					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
@@ -229,7 +228,7 @@ namespace BusinessLayer
 					e.End = End;
 					e.Mandatory = Mandatory;
 					e.Speaker= db.User.First(p=>p.Name==SpeakerName);
-					e.Campus = c;
+					e.Campus = db.Campus.First(p => p.Name == CampusName);
 					e.Type = Type;
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
