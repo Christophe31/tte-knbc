@@ -38,32 +38,33 @@ namespace Client
             Api = new BusinessLayerClient();
 
             ViewType.SelectedIndex = 4;
+
+
         }
 
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch (ViewType.SelectedIndex)
+            var selected = ViewType.SelectedIndex;
+            // University or user
+            if (selected == 0 || selected == 4)
             {
-                case 0:
-                case 4:
-                    ViewName.IsEnabled = false;
-                    ViewName.DataContext = null;
-                    break;
-                case 1:
+                ViewName.Visibility = System.Windows.Visibility.Collapsed;
+                ViewName.DataContext = null;
+            }
+            else
+            {
+                // Campus
+                if (selected == 1)
                     ViewName.DataContext = Api.getCampusNames();
-                    ViewName.IsEnabled = true;
-                    ViewName.SelectedIndex = 0;
-                    break;
-                case 2:
+                // Period
+                else if (selected == 2)
                     ViewName.DataContext = Api.getPeriodsNames();
-                    ViewName.IsEnabled = true;
-                    ViewName.SelectedIndex = 0;
-                    break;
-                case 3:
+                // Class
+                else if (selected == 3)
                     ViewName.DataContext = Api.getClassesNames();
-                    ViewName.IsEnabled = true;
-                    ViewName.SelectedIndex = 0;
-                    break;
+
+                ViewName.Visibility = System.Windows.Visibility.Visible;
+                ViewName.SelectedIndex = 0;
             }
         }
 	}
