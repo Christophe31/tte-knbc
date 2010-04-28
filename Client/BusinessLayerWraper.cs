@@ -188,6 +188,15 @@ public interface IBusinessLayer
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPeriodsNames", ReplyAction="http://tempuri.org/IBusinessLayer/getPeriodsNamesResponse")]
     string[] getPeriodsNames();
     
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSubjectsNames", ReplyAction="http://tempuri.org/IBusinessLayer/getSubjectsNamesResponse")]
+    string[] getSubjectsNames();
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUsersNames", ReplyAction="http://tempuri.org/IBusinessLayer/getUsersNamesResponse")]
+    string[] getUsersNames();
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getEventsTypes", ReplyAction="http://tempuri.org/IBusinessLayer/getEventsTypesResponse")]
+    string[] getEventsTypes();
+    
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addUser", ReplyAction="http://tempuri.org/IBusinessLayer/addUserResponse")]
     string addUser(string UserName, string UserPassword, string UserClassName);
     
@@ -209,8 +218,20 @@ public interface IBusinessLayer
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/grantNewRight", ReplyAction="http://tempuri.org/IBusinessLayer/grantNewRightResponse")]
     string grantNewRight(string UserName, int Type, string CampusName);
     
-    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addEventResponse")]
-    string addEvent(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string PeriodName, string SubjectName, string Type, string Place);
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToCampus", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToCampusResponse")]
+    string addEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Type, string Place);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToPeriode", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToPeriodeResponse")]
+    string addEventToPeriode(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Type, string Place);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToClass", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToClassResponse")]
+    string addEventToClass(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Type, string Place);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToUniversity", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToUniversityResponse")]
+    string addEventToUniversity(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string Type, string Place);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToUser", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToUserResponse")]
+    string addEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Type, string Place);
 }
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -292,6 +313,21 @@ public partial class BusinessLayerClient : System.ServiceModel.ClientBase<IBusin
         return base.Channel.getPeriodsNames();
     }
     
+    public string[] getSubjectsNames()
+    {
+        return base.Channel.getSubjectsNames();
+    }
+    
+    public string[] getUsersNames()
+    {
+        return base.Channel.getUsersNames();
+    }
+    
+    public string[] getEventsTypes()
+    {
+        return base.Channel.getEventsTypes();
+    }
+    
     public string addUser(string UserName, string UserPassword, string UserClassName)
     {
         return base.Channel.addUser(UserName, UserPassword, UserClassName);
@@ -327,8 +363,28 @@ public partial class BusinessLayerClient : System.ServiceModel.ClientBase<IBusin
         return base.Channel.grantNewRight(UserName, Type, CampusName);
     }
     
-    public string addEvent(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string PeriodName, string SubjectName, string Type, string Place)
+    public string addEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Type, string Place)
     {
-        return base.Channel.addEvent(EventName, Start, End, Mandatory, SpeakerName, CampusName, PeriodName, SubjectName, Type, Place);
+        return base.Channel.addEventToCampus(EventName, Start, End, Mandatory, SpeakerName, CampusName, Type, Place);
+    }
+    
+    public string addEventToPeriode(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Type, string Place)
+    {
+        return base.Channel.addEventToPeriode(EventName, Start, End, Mandatory, SpeakerName, PeriodeName, Type, Place);
+    }
+    
+    public string addEventToClass(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Type, string Place)
+    {
+        return base.Channel.addEventToClass(EventName, Start, End, Mandatory, SpeakerName, ClassName, Subject, Type, Place);
+    }
+    
+    public string addEventToUniversity(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string Type, string Place)
+    {
+        return base.Channel.addEventToUniversity(EventName, Start, End, Mandatory, SpeakerName, Type, Place);
+    }
+    
+    public string addEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Type, string Place)
+    {
+        return base.Channel.addEventToUser(EventName, Start, End, Mandatory, Type, Place);
     }
 }
