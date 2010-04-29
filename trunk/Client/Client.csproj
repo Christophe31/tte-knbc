@@ -110,6 +110,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="RefreshWcfWrap.bat" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ApiTestWindowIcon.ico" />
