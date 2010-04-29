@@ -30,42 +30,9 @@ class EventData
 
 }}}
 ==Implémentation API==
-Voilà la partie publique (au 26 avril 2010) du service.
-Du fait que le développement soit en Français et que les noms des tables et champs en français, un mélange original se fait.
+Voilà la partie/API publique du service avec les signatures des méthodes (Comme cette interface est encore en modification régulière, je lie le fichier plutot que d'en actualiser le contenu manuellement).
+http://code.google.com/p/tte-knbc/source/browse/trunk/BusinessLayer/IBusinessLayer.cs
 
-{{{
-
-public interface IBusinessLayer
-{
-
-	#region Lecture d'évènements
-		EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate);
-		EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
-		EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate);
-		EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate);
-		EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate);
-	#endregion
-	#region completion
-		string[] getCampusNames();
-		string[] getClassesNames();
-		string[] getPromotionsNames();
-		string[] getPeriodsNames();
-		string[] getSubjectsNames();
-		string[] getUsersNames();
-	#endregion
-	#region ecriture
-		string addUser(string UserName, string UserPassword, string UserClassName);
-		string addCampus(string CampusName);
-		string addClass(string ClassName, string CampusName, string PeriodeName);
-		string addPromotion(string PromotionName);
-		string addSubject(string SubjectName, int Hours);
-		string addPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
-		string grantNewRight(string UserName, int Type, string CampusName);
-		string addEvent(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string PeriodName, string SubjectName, string Type, string Place);
-	#endregion
-}
-
-}}}
 
 Pour comprendre la teneur des objets en jeux, je vous recommande de vous référer à [database la partie traitant de la DB]
 
