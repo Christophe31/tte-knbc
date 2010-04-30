@@ -20,7 +20,7 @@ namespace Client
 	/// </summary>
 	public partial class MainWindow : Window
     {
-        protected BusinessLayerClient Api;
+        protected CacheBusinessWrapper Api;
 
 		public MainWindow()
 		{
@@ -35,7 +35,7 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Api = new BusinessLayerClient();
+            Api = CacheBusinessWrapper.getCacheWrapper();
 
             ViewType.SelectedIndex = 4;
 

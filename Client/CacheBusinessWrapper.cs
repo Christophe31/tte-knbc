@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BusinessLayer;
 
-namespace BusinessLayer
+namespace Client
 {
     public class CacheBusinessWrapper
 	{

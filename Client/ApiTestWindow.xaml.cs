@@ -23,7 +23,7 @@ namespace Client
 	{
 		protected int compteur;
 		protected delegate string[] foo();
-		protected BusinessLayer.CacheBusinessWrapper Api;
+		protected CacheBusinessWrapper Api;
 
 		public ApiTestWindow()
 		{
@@ -31,7 +31,7 @@ namespace Client
 			InitializeComponent();
 			DateSlider.Maximum = 200;
 			DateSlider.Minimum = 0;
-			Api = BusinessLayer.CacheBusinessWrapper.getCacheWrapper() ;
+			Api = CacheBusinessWrapper.getCacheWrapper() ;
 		}
 
 		private void button1_Click(object sender, RoutedEventArgs e)
