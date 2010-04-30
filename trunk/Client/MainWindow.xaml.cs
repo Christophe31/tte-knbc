@@ -39,7 +39,9 @@ namespace Client
 
             ViewType.SelectedIndex = 4;
 
-
+            CampusName.DataContext = Api.getCampusNames();
+            PeriodName.DataContext = Api.getPeriodsNames();
+            ClassName.DataContext = Api.getClassesNames();
         }
 
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -48,23 +50,33 @@ namespace Client
             // University or user
             if (selected == 0 || selected == 4)
             {
-                ViewName.Visibility = System.Windows.Visibility.Collapsed;
-                ViewName.DataContext = null;
+                CampusName.Visibility = System.Windows.Visibility.Collapsed;
+                PeriodName.Visibility = System.Windows.Visibility.Collapsed;
+                ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             else
             {
                 // Campus
                 if (selected == 1)
-                    ViewName.DataContext = Api.getCampusNames();
+                {
+                    CampusName.Visibility = System.Windows.Visibility.Visible;
+                    PeriodName.Visibility = System.Windows.Visibility.Collapsed;
+                    ClassName.Visibility = System.Windows.Visibility.Collapsed;
+                }
                 // Period
                 else if (selected == 2)
-                    ViewName.DataContext = Api.getPeriodsNames();
+                {
+                    CampusName.Visibility = System.Windows.Visibility.Collapsed;
+                    PeriodName.Visibility = System.Windows.Visibility.Visible;
+                    ClassName.Visibility = System.Windows.Visibility.Collapsed;
+                }
                 // Class
                 else if (selected == 3)
-                    ViewName.DataContext = Api.getClassesNames();
-
-                ViewName.Visibility = System.Windows.Visibility.Visible;
-                ViewName.SelectedIndex = 0;
+                {
+                    CampusName.Visibility = System.Windows.Visibility.Visible;
+                    PeriodName.Visibility = System.Windows.Visibility.Visible;
+                    ClassName.Visibility = System.Windows.Visibility.Visible;
+                }
             }
         }
 	}
