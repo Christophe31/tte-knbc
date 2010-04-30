@@ -5,7 +5,7 @@
     <StackPanel Margin="3">
         <StackPanel Orientation="Horizontal">
             <Label>Type de vue</Label>
-            <ComboBox Name="ViewType" SelectionChanged="ViewType_SelectionChanged">
+            <ComboBox Margin="0,0,3,0" Name="ViewType" SelectionChanged="ViewType_SelectionChanged">
                 <ComboBoxItem>Université</ComboBoxItem>
                 <ComboBoxItem>Campus</ComboBoxItem>
                 <ComboBoxItem>Période</ComboBoxItem>
@@ -13,7 +13,9 @@
                 <ComboBoxItem>Utilisateur</ComboBoxItem>
             </ComboBox>
 
-            <ComboBox Margin="3,0" Visibility="Collapsed" Name="ViewName" ItemsSource="{Binding}" SelectedIndex="0" />
+            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="CampusName" ItemsSource="{Binding}" SelectedIndex="0" />
+            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="PeriodName" ItemsSource="{Binding}" SelectedIndex="0" />
+            <ComboBox Margin="0" Visibility="Collapsed" Name="ClassName" ItemsSource="{Binding}" SelectedIndex="0" />
         </StackPanel>
 
         <TabControl Margin="0,3">
