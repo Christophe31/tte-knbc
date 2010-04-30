@@ -116,6 +116,11 @@ namespace BusinessLayer
 					return (from evt in db.Event
 								select evt.Type).Distinct().ToArray();
 				}
+				public Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
+				{
+					/// Dictionary<campus, Dictionary<period, classes[]>>
+					return new Dictionary<string, Dictionary<string, string[]>>();
+				}
 			#endregion
 			#region Ecriture
 				public string addUser(string UserName, string UserPassword, string UserClassName)

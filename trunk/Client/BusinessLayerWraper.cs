@@ -197,6 +197,9 @@ public interface IBusinessLayer
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getEventsTypes", ReplyAction="http://tempuri.org/IBusinessLayer/getEventsTypesResponse")]
     string[] getEventsTypes();
     
+    [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTree", ReplyAction="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTreeResponse")]
+    System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string[]>> getCampusPeriodClassTree();
+    
     [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addUser", ReplyAction="http://tempuri.org/IBusinessLayer/addUserResponse")]
     string addUser(string UserName, string UserPassword, string UserClassName);
     
@@ -326,6 +329,11 @@ public partial class BusinessLayerClient : System.ServiceModel.ClientBase<IBusin
     public string[] getEventsTypes()
     {
         return base.Channel.getEventsTypes();
+    }
+    
+    public System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string[]>> getCampusPeriodClassTree()
+    {
+        return base.Channel.getCampusPeriodClassTree();
     }
     
     public string addUser(string UserName, string UserPassword, string UserClassName)
