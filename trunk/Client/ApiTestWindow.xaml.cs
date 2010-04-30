@@ -23,7 +23,7 @@ namespace Client
 	{
 		protected int compteur;
 		protected delegate string[] foo();
-		protected BusinessLayerClient Api;
+		protected BusinessLayer.CacheBusinessWrapper Api;
 
 		public ApiTestWindow()
 		{
@@ -31,7 +31,7 @@ namespace Client
 			InitializeComponent();
 			DateSlider.Maximum = 200;
 			DateSlider.Minimum = 0;
-			Api = new BusinessLayerClient();
+			Api = BusinessLayer.CacheBusinessWrapper.getCacheWrapper() ;
 		}
 
 		private void button1_Click(object sender, RoutedEventArgs e)
@@ -57,45 +57,45 @@ namespace Client
 		private void AddUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.addUser(this.TextArg1.Text, this.TextArg2.Text, this.ClasseBox.SelectedItem.ToString());
+				Api.Server.addUser(this.TextArg1.Text, this.TextArg2.Text, this.ClasseBox.SelectedItem.ToString());
 		}
 
 		private void AddCampusButton_Click(object sender, RoutedEventArgs e)
 		{
-			this.ErrorLabel.Content = (++compteur).ToString() + 
-				Api.addCampus(TextArg1.Text);
+			this.ErrorLabel.Content = (++compteur).ToString() +
+				Api.Server.addCampus(TextArg1.Text);
 		}
 
 		private void AddClasseButton_Click(object sender, RoutedEventArgs e)
 		{
-			this.ErrorLabel.Content = (++compteur).ToString() + 
-				Api.addClass(TextArg1.Text, CampusBox.SelectedItem.ToString(), "Semestre 1");
+			this.ErrorLabel.Content = (++compteur).ToString() +
+				Api.Server.addClass(TextArg1.Text, CampusBox.SelectedItem.ToString(), "Semestre 1");
 		}
 
 		private void AddPromoButton_Click(object sender, RoutedEventArgs e)
 		{
-			this.ErrorLabel.Content = (++compteur).ToString() + 
-				Api.addPromotion(TextArg1.Text);
+			this.ErrorLabel.Content = (++compteur).ToString() +
+				Api.Server.addPromotion(TextArg1.Text);
 		}
 
 		private void AddPeriodeButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.addPeriod(TextArg1.Text, PromotionBox.SelectedItem.ToString(), DateTime.Now.AddMonths(- (int)DateSlider.Value), DateTime.Now.AddMonths((int)DateSlider.Value));
+				Api.Server.addPeriod(TextArg1.Text, PromotionBox.SelectedItem.ToString(), DateTime.Now.AddMonths(-(int)DateSlider.Value), DateTime.Now.AddMonths((int)DateSlider.Value));
 
 		}
 
 		private void AddEventButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.addEventToUniversity(TextArg1.Text, DateTime.Now.AddHours(-(int)DateSlider.Value), DateTime.Now.AddHours((int)DateSlider.Value),false,"christophe","presentiel","salle1");
+				Api.Server.addEventToUniversity(TextArg1.Text, DateTime.Now.AddHours(-(int)DateSlider.Value), DateTime.Now.AddHours((int)DateSlider.Value), false, "christophe", "presentiel", "salle1");
 
 		}
 
 		private void GrantRightButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.grantNewRight("",1, CampusBox.SelectedIndex.ToString());
+				Api.Server.grantNewRight("", 1, CampusBox.SelectedIndex.ToString());
 
 		}
 

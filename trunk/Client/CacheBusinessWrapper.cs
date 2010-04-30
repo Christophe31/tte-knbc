@@ -24,57 +24,57 @@ namespace BusinessLayer
 		public BusinessLayerClient Server;
 
 		#region Lecture d'évènements
-		EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
 			return Server.getEventsByCampus(CampusName, Start, Stop, LastUpdate);
 		}
-		EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
 			return Server.getEventsByUniversity(Start, Stop, LastUpdate);
 		}
-		EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate) 
+		public EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate) 
 		{
 			return Server.getEventsByPeriod(PeriodName, Start, Stop, LastUpdate);
 		}
-		EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
 			return Server.getEventsByClass(ClassName, Start, Stop, LastUpdate);
 		}
-		EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
 			return Server.getPrivateEvents(Start, Stop, LastUpdate);
 		}
 		#endregion
 		#region completion
-		string[] getCampusNames()
+		public string[] getCampusNames()
 		{
 			return Server.getCampusNames();
 		}
-		string[] getClassesNames()
+		public string[] getClassesNames()
 		{
 			return Server.getClassesNames();
 		}
-		string[] getPromotionsNames()
+		public string[] getPromotionsNames()
 		{
 			return Server.getPromotionsNames();
 		}
-		string[] getPeriodsNames()
+		public string[] getPeriodsNames()
 		{
 			return Server.getPeriodsNames();
 		}
-		string[] getSubjectsNames()
+		public string[] getSubjectsNames()
 		{
 			return Server.getSubjectsNames();
 		}
-		string[] getUsersNames()
+		public string[] getUsersNames()
 		{
 			return Server.getUsersNames();
 		}
-		string[] getEventsTypes()
+		public string[] getEventsTypes()
 		{
 			return Server.getEventsTypes();
 		}
-		Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
+		public Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
 		{
 			return Server.getCampusPeriodClassTree();
 		}
