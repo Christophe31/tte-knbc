@@ -21,6 +21,7 @@ namespace Client
 	public partial class MainWindow : Window
     {
         protected CacheBusinessWrapper Api;
+        protected Dictionary<string, Dictionary<string, string[]>> CampusPeriodClassTree;
 
 		public MainWindow()
 		{
@@ -36,6 +37,7 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Api = CacheBusinessWrapper.getCacheWrapper();
+            CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
             // ComboBoxes initialisation
             ViewType.SelectedIndex = 4;
@@ -73,11 +75,38 @@ namespace Client
                 // Class
                 else if (selected == 3)
                 {
+                    RefreshClassName();
+
                     CampusName.Visibility = System.Windows.Visibility.Visible;
                     PeriodName.Visibility = System.Windows.Visibility.Visible;
                     ClassName.Visibility = System.Windows.Visibility.Visible;
                 }
             }
+        }
+
+        private void CampusName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshClassName();
+        }
+
+        private void RefreshClassName()
+        {
+            if (ViewType.SelectedIndex == 3)
+            {
+                try
+                {
+                    ClassName.DataContext = CampusPeriodClassTree[(string)CampusName.SelectedValue][(string)PeriodName.SelectedValue];
+                }
+                catch (KeyNotFoundException ex)
+                {
+                    ClassName.DataContext = null;
+                }
+            }
+        }
+
+        private void PeriodName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshClassName();
         }
 	}
 }

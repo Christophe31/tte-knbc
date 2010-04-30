@@ -24,8 +24,8 @@
                 <ComboBoxItem>Utilisateur</ComboBoxItem>
             </ComboBox>
 
-            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="CampusName" ItemsSource="{Binding}" SelectedIndex="0" />
-            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="PeriodName" ItemsSource="{Binding}" SelectedIndex="0" />
+            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="CampusName" ItemsSource="{Binding}" SelectedIndex="0" SelectionChanged="CampusName_SelectionChanged" />
+            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="PeriodName" ItemsSource="{Binding}" SelectedIndex="0" SelectionChanged="PeriodName_SelectionChanged" />
             <ComboBox Margin="0" Visibility="Collapsed" Name="ClassName" ItemsSource="{Binding}" SelectedIndex="0" />
         </StackPanel>
 
