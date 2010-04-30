@@ -73,6 +73,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BusinessLayerWraper.cs" />
+    <Compile Include="CacheBusinessWraper.cs" />
+    <Compile Include="EventData.cs" />
     <Compile Include="RandomPassword.cs" />
     <Compile Include="MainAdmin.xaml.cs">
       <DependentUpon>MainAdmin.xaml</DependentUpon>
