@@ -5,5 +5,5 @@ rem ##########################
 "c:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\SvcUtil.exe" http://localhost:2900/BusinessLayer.svc?wsdl
 del App.config
 del BusinessLayerWraper.cs
-rename BusinessLayer.cs BusinessLayerWraper.cs
+rename BusinessLayer.cs BusinessLayerWrapper.cs
 rename output.config App.config
