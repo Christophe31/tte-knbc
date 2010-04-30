@@ -123,6 +123,13 @@ namespace BusinessLayer
 				}
 			#endregion
 			#region Ecriture
+                /// <summary>
+                /// Ne fonctonne pas
+                /// </summary>
+                /// <param name="UserName"></param>
+                /// <param name="UserPassword"></param>
+                /// <param name="UserClassName"></param>
+                /// <returns></returns>
 				public string addUser(string UserName, string UserPassword, string UserClassName)
 				{
 					if (db.User.Where(p=>p.Name==UserName).Count()>0)
