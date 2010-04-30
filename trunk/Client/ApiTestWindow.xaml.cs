@@ -36,16 +36,22 @@ namespace Client
 
 		private void button1_Click(object sender, RoutedEventArgs e)
 		{
+			Dictionary<string,Dictionary<string,string[]>> truc = Api.getCampusPeriodClassTree();
+			Dictionary<string[], ComboBox> Complete0 = new Dictionary<string[], ComboBox>();
+			Complete0.Add(truc.Keys.ToArray(),CampusBox);
+			Complete0.Add(truc.Values.SelectMany(p=>p.Keys).Distinct().ToArray(),PeriodeBox);
+			Complete0.Add(truc.Values.SelectMany(p => p.Values.SelectMany(g=>g)).ToArray(), ClasseBox);
+
 			Dictionary<foo,ComboBox> Complete = new Dictionary<foo,ComboBox>();
 			Complete.Add(Api.getCampusNames,CampusBox);
 			Complete.Add(Api.getClassesNames, ClasseBox);
 			Complete.Add(Api.getPeriodsNames, PeriodeBox);
 			Complete.Add(Api.getPromotionsNames, PromotionBox);
 			//this.SimpleTestButton.Content = Api.getEventsByCampus("Toulouse", new DateTime(1999, 12, 5), new DateTime(2999, 12, 5), new DateTime(1999, 12, 5)).First().Matiere;
-			foreach (var kv in Complete)
+			foreach (var kv in Complete0)
 			{
 				kv.Value.Items.Clear();
-				foreach (string s in kv.Key())
+				foreach (string s in kv.Key)
 				{
 					kv.Value.Items.Add(s);
 				}
