@@ -38,6 +38,9 @@ namespace BusinessLayer
 			string[] getUsersNames();
 			[OperationContract]
 			string[] getEventsTypes();
+			[OperationContract]
+			Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree();
+			/// Dictionary<campus, Dictionary<period, classes[]>>
 		#endregion
 		#region ecriture
 			[OperationContract]
