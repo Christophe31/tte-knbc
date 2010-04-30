@@ -37,8 +37,8 @@ namespace Client
         {
             Api = CacheBusinessWrapper.getCacheWrapper();
 
+            // ComboBoxes initialisation
             ViewType.SelectedIndex = 4;
-
             CampusName.DataContext = Api.getCampusNames();
             PeriodName.DataContext = Api.getPeriodsNames();
             ClassName.DataContext = Api.getClassesNames();
