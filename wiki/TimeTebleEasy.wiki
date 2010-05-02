@@ -1,0 +1,38 @@
+=Index de TimeTebleEasy=
+
+Cette video ne montre que l'activité du début du projet (faite le 1 mai 2010)
+
+<wiki:video url="http://www.youtube.com/watch?v=W0bQ0SNGRos" />
+
+=Fonctionnalités=
+ * Gestion de Calandriers publics
+ * Gestion de calandriers privés pour les utilisateurs individuels
+ * Gestion de droits pour administrateur
+ * Gestion de droits pour administrateur de campus
+ * Gestion de droits pour intervenants
+ * Warning en cas d'évènement sur une salle occupée
+ * Export Icalendar
+ 
+==Credits==
+ * Breil Romaric: *_leprodupure_*
+  * Contrôle calandrier
+  * Lecture et compréhension du cahier des charges
+  * Gros contributeur de l'organisation de la base de donnée
+  * Suggestions de fonctionnalités pour le service WCF
+  * Co-Animateur du projet. Rôle du client grâce à sa bonne connaisance du cahier des charges et sa bonne vision d'ensemble.
+ * Cheynet de beauprés Romain: *_romain.cheynet_*
+  * Organisation avec Romaric de la base de donnée.
+ * Despax Thomas: *_thomas.despax_*
+  * Imports
+  * Exports
+  * Cache
+  * Interface entre la GUI et le service WCF (pour gérer le cache)
+ * Kornylo Jeremy: *_mugimasaka_*
+  * Design de toute l'interface d'administration hors ajout/suppression d'évènements
+  * Suggestions de fonctionnalités pour le service WCF
+ * Narbonne Christophe: *_Christophe31_*
+  * Implémentation du service WCF
+  * Implémentation DB organisée par romaric et romain
+  * Maintien de la configuration coté client
+  * Un client WCF basique de démo.
+  * Co-Animateur du projet. Rôle relatif de chef de projet, assez bonne vision d'ensemble car son service est en contact direct avec toutes les parties du développement.
