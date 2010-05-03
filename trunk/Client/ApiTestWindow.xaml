@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="ApiTestWindow" Height="417" Width="414"
 		Icon="ApiTestWindowIcon.ico">
-    <Grid>
+
+	<Grid>
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,1,0,0" Name="CampusBox" VerticalAlignment="Top" Width="120" />
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,26,0,0" Name="ClasseBox" VerticalAlignment="Top" Width="120" />
 		<ComboBox Height="23" HorizontalAlignment="Left" Margin="1,51,0,0" Name="PromotionBox" VerticalAlignment="Top" Width="120" />
@@ -19,7 +20,6 @@
 		<Label Content=": Arg1" Height="28" HorizontalAlignment="Left" Margin="121,99,0,0" VerticalAlignment="Top" />
 		<Label Content=": Arg2" Height="28" HorizontalAlignment="Left" Margin="121,124,0,0" VerticalAlignment="Top" />
 		<Label Content=": DateSlide" Height="28" HorizontalAlignment="Left" Margin="121,149,0,0" VerticalAlignment="Top" />
-
 
 		<Button Content="AddCampus" Height="23" HorizontalAlignment="Left" Margin="317,1,0,0" Name="AddCampusButton" VerticalAlignment="Top" Width="75" Click="AddCampusButton_Click" />
 		<Button Content="AddClasse" Height="23" HorizontalAlignment="Left" Margin="317,26,0,0" Name="AddClasseButton" VerticalAlignment="Top" Width="75" Click="AddClasseButton_Click" />

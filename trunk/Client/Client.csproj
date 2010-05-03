@@ -38,6 +38,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DDay.iCal">
+      <HintPath>.\DDay.iCal.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -62,6 +65,11 @@
     <Compile Include="ApiTestWindow.xaml.cs">
       <DependentUpon>ApiTestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service References\BusinessLayer\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Page Include="CalendarDay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,7 +86,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BusinessLayerWrapper.cs" />
     <Compile Include="CacheBusinessWrapper.cs" />
     <Compile Include="EventData.cs" />
     <Compile Include="CalendarDay.xaml.cs">
@@ -123,13 +130,47 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="RefreshWcfWrap.bat" />
+    <None Include="Service References\BusinessLayer\BusinessLayer.wsdl" />
+    <None Include="Service References\BusinessLayer\BusinessLayer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessLayer\BusinessLayer1.wsdl" />
+    <None Include="Service References\BusinessLayer\BusinessLayer1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessLayer\BusinessLayer2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessLayer\BusinessLayer3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessLayer\Client.BusinessLayer.EventData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ApiTestWindowIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BusinessLayer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BusinessLayer\BusinessLayer.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BusinessLayer\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BusinessLayer\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BusinessLayer\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
