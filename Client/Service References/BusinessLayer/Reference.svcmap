@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="3c578e8d-5ee9-4d62-b4de-6fd856350aaf" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2900/BusinessLayer.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BusinessLayer.wsdl" MetadataType="Wsdl" ID="b6d0de7d-47c1-4789-8168-047a407a00ea" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?wsdl" />
+    <MetadataFile FileName="BusinessLayer.xsd" MetadataType="Schema" ID="6482cee7-29b8-4d46-868a-04e200d5298e" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" />
+    <MetadataFile FileName="BusinessLayer1.xsd" MetadataType="Schema" ID="e7613c03-cb1b-40d0-ba59-8a7054c40132" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd1" />
+    <MetadataFile FileName="BusinessLayer.disco" MetadataType="Disco" ID="3cdd5079-2180-4eaf-930e-5e5e368ffd54" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?disco" />
+    <MetadataFile FileName="BusinessLayer2.xsd" MetadataType="Schema" ID="403123ac-8ac8-4fa6-afbb-9d9e72172e89" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd2" />
+    <MetadataFile FileName="BusinessLayer1.wsdl" MetadataType="Wsdl" ID="6f766615-151b-49c0-865f-ab9de50e4e02" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="BusinessLayer3.xsd" MetadataType="Schema" ID="be3fc072-747c-42fd-bd39-059b4ce1fa96" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

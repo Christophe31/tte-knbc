@@ -6,6 +6,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{BF192F1E-A817-4F84-A557-0DC02DD2D6BF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F} = {ADB5F73C-C9E2-4E41-9D45-18D243933E4F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
