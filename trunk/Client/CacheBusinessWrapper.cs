@@ -72,9 +72,9 @@ namespace Client
 		{
 			return Server.getUsersNames();
 		}
-		public string[] getEventsTypes()
+		public string[] getModalities()
 		{
-			return Server.getEventsTypes();
+			return Server.getModalities();
 		}
 		public Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
 		{
