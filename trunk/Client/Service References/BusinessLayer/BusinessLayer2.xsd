@@ -10,12 +10,12 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="End" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Speaker" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="EventData" nillable="true" type="tns:EventData" />

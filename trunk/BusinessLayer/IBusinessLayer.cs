@@ -37,10 +37,9 @@ namespace BusinessLayer
 			[OperationContract]
 			string[] getUsersNames();
 			[OperationContract]
-			string[] getEventsTypes();
+			string[] getModalities();
 			[OperationContract]
 			Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree();
-			/// Dictionary<campus, Dictionary<period, classes[]>>
 		#endregion
 		#region ecriture
 			[OperationContract]
@@ -58,15 +57,15 @@ namespace BusinessLayer
 			[OperationContract]
 			string grantNewRight(string UserName, int Type, string CampusName);
 			[OperationContract]
-			string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Type, string Place);
+			string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
 			[OperationContract]
-			string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Type, string Place);
+			string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
 			[OperationContract]
-			string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Type, string Place);
+			string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
  			[OperationContract]
-			string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Type, string Place);
+			string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName,  string Place);
 			[OperationContract]
-			string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Type, string Place); 
+			string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place); 
 		#endregion
 	}
 }
