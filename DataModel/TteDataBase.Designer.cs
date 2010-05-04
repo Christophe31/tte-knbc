@@ -23,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDb", "FK_Droit_Utilisateur", "User", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.User), "Right", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Right))]
 
 // Original file name:
-// Generation date: 28/04/2010 13:00:28
+// Generation date: 04/05/2010 10:17:33
 namespace DataModel
 {
     
@@ -744,33 +744,6 @@ namespace DataModel
         partial void OnIdChanging(int value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Type in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute()]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public string Type
-        {
-            get
-            {
-                return this._Type;
-            }
-            set
-            {
-                this.OnTypeChanging(value);
-                this.ReportPropertyChanging("Type");
-                this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, true);
-                this.ReportPropertyChanged("Type");
-                this.OnTypeChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private string _Type;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanging(string value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanged();
         /// <summary>
         /// There are no comments for property Place in the schema.
         /// </summary>
@@ -1535,13 +1508,11 @@ namespace DataModel
         /// Create a new Right object.
         /// </summary>
         /// <param name="id">Initial value of Id.</param>
-        /// <param name="type">Initial value of Type.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Right CreateRight(int id, int type)
+        public static Right CreateRight(int id)
         {
             Right right = new Right();
             right.Id = id;
-            right.Type = type;
             return right;
         }
         /// <summary>
@@ -1571,33 +1542,6 @@ namespace DataModel
         partial void OnIdChanging(int value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnIdChanged();
-        /// <summary>
-        /// There are no comments for property Type in the schema.
-        /// </summary>
-        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
-        [global::System.Runtime.Serialization.DataMemberAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public int Type
-        {
-            get
-            {
-                return this._Type;
-            }
-            set
-            {
-                this.OnTypeChanging(value);
-                this.ReportPropertyChanging("Type");
-                this._Type = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
-                this.ReportPropertyChanged("Type");
-                this.OnTypeChanged();
-            }
-        }
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        private int _Type;
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanging(int value);
-        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        partial void OnTypeChanged();
         /// <summary>
         /// There are no comments for Campus in the schema.
         /// </summary>
@@ -1694,13 +1638,15 @@ namespace DataModel
         /// <param name="id">Initial value of Id.</param>
         /// <param name="name">Initial value of Name.</param>
         /// <param name="hours">Initial value of Hours.</param>
+        /// <param name="modality">Initial value of Modality.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Subject CreateSubject(int id, string name, int hours)
+        public static Subject CreateSubject(int id, string name, int hours, string modality)
         {
             Subject subject = new Subject();
             subject.Id = id;
             subject.Name = name;
             subject.Hours = hours;
+            subject.Modality = modality;
             return subject;
         }
         /// <summary>
@@ -1784,6 +1730,33 @@ namespace DataModel
         partial void OnHoursChanging(int value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnHoursChanged();
+        /// <summary>
+        /// There are no comments for property Modality in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public string Modality
+        {
+            get
+            {
+                return this._Modality;
+            }
+            set
+            {
+                this.OnModalityChanging(value);
+                this.ReportPropertyChanging("Modality");
+                this._Modality = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value, false);
+                this.ReportPropertyChanged("Modality");
+                this.OnModalityChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private string _Modality;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnModalityChanging(string value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnModalityChanged();
         /// <summary>
         /// There are no comments for Events in the schema.
         /// </summary>

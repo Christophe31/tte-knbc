@@ -26,8 +26,8 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus.Name == CampusName &&
 									 p.Campus.LastChange > LastUpdate
-								 select new { evt = p, sub = p.Subject.Name, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.spk)).ToArray();
+								 select new { evt = p, sub = p.Subject.Name,mod=p.Subject.Modality , spk = p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, e.sub,e.mod, e.spk)).ToArray();
 				}
 
 				public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
@@ -37,8 +37,8 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus == null && p.Period == null && p.Class == null &&
 									 db.University.First().LastChange > LastUpdate
-								 select new { evt = p, sub = p.Subject.Name,spk=p.Speaker.Name  }).ToArray()
-							select EventData.ED(e.evt, e.sub,e.spk)).ToArray(); 
+								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 
 				public EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate)
@@ -48,8 +48,8 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									p.Period.Name == PeriodName &&
 									p.Period.LastChange > LastUpdate
-								 select new { evt = p, sub = p.Subject.Name, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.spk)).ToArray();			
+								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 
 				public EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
@@ -59,8 +59,8 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									p.Class.Name ==ClassName &&
 									p.Class.LastChange > LastUpdate
-								 select new { evt = p, sub = p.Subject.Name, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.spk)).ToArray();
+								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 
 				public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate) 
@@ -72,8 +72,8 @@ namespace BusinessLayer
 									p.Creator.Name == "christophe"  &&
 									p.Speaker == null &&
 									p.Creator.LastChange > LastUpdate
-								 select new { evt = p, sub = p.Subject.Name, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.spk)).ToArray();
+								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 			#endregion
 			#region Completions
@@ -111,10 +111,10 @@ namespace BusinessLayer
 					return (from u in db.User
 							select u.Name).Distinct().ToArray();
 				}
-				public string[] getEventsTypes() 
+				public string[] getModalities() 
 				{
-					return (from evt in db.Event
-								select evt.Type).Distinct().ToArray();
+					return (from sub in db.Subject
+								select sub.Modality).Distinct().ToArray();
 				}
 				public Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
 				{
@@ -233,7 +233,7 @@ namespace BusinessLayer
 					return "Toujours pas implementé";
 				}
 				public string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, 
-					string SpeakerName, string CampusName, string Type, string Place)
+					string SpeakerName, string CampusName, string Place)
 				{
 					if (Start >= End )
 						return "Dates incorrectes";
@@ -249,7 +249,6 @@ namespace BusinessLayer
 					e.Mandatory = Mandatory;
 					e.Speaker= db.User.First(p=>p.Name==SpeakerName);
 					e.Campus = db.Campus.First(p => p.Name == CampusName);
-					e.Type = Type;
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
 					db.AddToEvent(e);
@@ -258,7 +257,7 @@ namespace BusinessLayer
 					return "ok";
 				}
 
-				public string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodName, string Type, string Place) 
+				public string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodName, string Place) 
 				{
 					if (Start >= End)
 						return "Dates incorrectes";
@@ -275,7 +274,6 @@ namespace BusinessLayer
 					e.Mandatory = Mandatory;
 					e.Speaker = db.User.First(p => p.Name == SpeakerName);
 					e.Period = per;
-					e.Type = Type;
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
 					db.AddToEvent(e);
@@ -284,13 +282,13 @@ namespace BusinessLayer
 					return "ok";
 				}
 
-				public string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName,string Subject ,string Type, string Place)
+				public string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName,string Subject ,string Modality, string Place)
 				{
 					if (Start >= End)
 						return "Dates incorrectes";
 
 					Class c = db.Class.FirstOrDefault(p => p.Name == ClassName);
-					Subject s = db.Subject.FirstOrDefault(p=> p.Name == Subject );
+					Subject s = db.Subject.FirstOrDefault(p=> p.Name == Subject && p.Modality==Modality);
 					if (c == null)
 						return "Le Campus " + ClassName + " n'existe pas.";
 
@@ -304,7 +302,6 @@ namespace BusinessLayer
 					e.Speaker = db.User.First(p => p.Name == SpeakerName);
 					e.Class = c;
 					e.Subject = s;
-					e.Type = Type;
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
 					db.AddToEvent(e);
@@ -313,7 +310,7 @@ namespace BusinessLayer
 					return "ok";
 				}
 
-				public string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Type, string Place)
+				public string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName,  string Place)
 				{
 					if (Start >= End)
 						return "Dates incorrectes";
@@ -325,7 +322,6 @@ namespace BusinessLayer
 					e.End = End;
 					e.Mandatory = Mandatory;
 					e.Speaker = db.User.First(p => p.Name == SpeakerName);
-					e.Type = Type;
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
 					db.AddToEvent(e);
@@ -334,7 +330,7 @@ namespace BusinessLayer
 					return "ok";
 				}
 
-				public string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Type, string Place)
+				public string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
 				{ return "still not implemented"; }
 
 			#endregion

@@ -157,15 +157,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getEventsTypes">
+  <xs:element name="getModalities">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="getEventsTypesResponse">
+  <xs:element name="getModalitiesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getEventsTypesResult" nillable="true" type="q12:ArrayOfstring" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getModalitiesResult" nillable="true" type="q12:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -298,7 +298,6 @@
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -319,7 +318,6 @@
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -341,7 +339,7 @@
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -361,7 +359,6 @@
         <xs:element minOccurs="0" name="End" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -380,7 +377,6 @@
         <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         <xs:element minOccurs="0" name="End" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>

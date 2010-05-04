@@ -19,7 +19,7 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public EventData(Event EventEntity, string NameSubject, string NameSpeaker)
+		public EventData(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
 		{
 			this.Start = EventEntity.Start;
 			this.End = EventEntity.End;
@@ -27,10 +27,10 @@ namespace BusinessLayer
 			this.Name = EventEntity.Name;
 			this.Place = EventEntity.Place;
 			this.Subject = NameSubject;
-			this.Type = EventEntity.Type;
+			this.Modality = Modality;
 			this.Speaker = NameSpeaker;
 		}
-		public static EventData ED(Event EventEntity, string NameSubject, string NameSpeaker)
+		public static EventData ED(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
 		{
 			return new EventData {
 				Start = EventEntity.Start,
@@ -39,7 +39,7 @@ namespace BusinessLayer
 				Place = EventEntity.Place,
 				Subject = NameSubject,
 				Mandatory = EventEntity.Mandatory,
-				Type = EventEntity.Type,
+				Modality = Modality,
 				Speaker = NameSpeaker};
 		}
 
@@ -77,7 +77,7 @@ namespace BusinessLayer
 		/// Type d'évènement (Distanciel, Présentiel...)
 		/// </summary>
 		[DataMember]
-		public string Type { get; set; }
+		public string Modality { get; set; }
 
 		/// <summary>
 		/// Titre/Name de l'évènement

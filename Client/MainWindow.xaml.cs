@@ -93,14 +93,18 @@ namespace Client
         {
             if (ViewType.SelectedIndex == 3)
             {
-                try
-                {
-                    ClassName.DataContext = CampusPeriodClassTree[(string)CampusName.SelectedValue][(string)PeriodName.SelectedValue];
-                }
-                catch (KeyNotFoundException ex)
-                {
-                    ClassName.DataContext = null;
-                }
+				try
+				{
+					ClassName.DataContext = CampusPeriodClassTree[(string)CampusName.SelectedValue][(string)PeriodName.SelectedValue];
+				}
+				catch (KeyNotFoundException)
+				{
+					ClassName.DataContext = null;
+				}
+				catch (ArgumentNullException)
+				{
+					ClassName.DataContext = null;
+				}
             }
         }
 

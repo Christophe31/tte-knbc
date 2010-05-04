@@ -75,11 +75,11 @@
   <wsdl:message name="IBusinessLayer_getUsersNames_OutputMessage">
     <wsdl:part name="parameters" element="tns:getUsersNamesResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getEventsTypes_InputMessage">
-    <wsdl:part name="parameters" element="tns:getEventsTypes" />
+  <wsdl:message name="IBusinessLayer_getModalities_InputMessage">
+    <wsdl:part name="parameters" element="tns:getModalities" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getEventsTypes_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getEventsTypesResponse" />
+  <wsdl:message name="IBusinessLayer_getModalities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getModalitiesResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getCampusPeriodClassTree_InputMessage">
     <wsdl:part name="parameters" element="tns:getCampusPeriodClassTree" />
@@ -204,9 +204,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUsersNames" message="tns:IBusinessLayer_getUsersNames_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUsersNamesResponse" message="tns:IBusinessLayer_getUsersNames_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getEventsTypes">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getEventsTypes" message="tns:IBusinessLayer_getEventsTypes_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getEventsTypesResponse" message="tns:IBusinessLayer_getEventsTypes_OutputMessage" />
+    <wsdl:operation name="getModalities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getModalities" message="tns:IBusinessLayer_getModalities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getModalitiesResponse" message="tns:IBusinessLayer_getModalities_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getCampusPeriodClassTree">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTree" message="tns:IBusinessLayer_getCampusPeriodClassTree_InputMessage" />
