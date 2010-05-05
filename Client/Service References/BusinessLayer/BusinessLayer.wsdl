@@ -7,8 +7,129 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IBusinessLayer_setPromotion_InputMessage">
+    <wsdl:part name="parameters" element="tns:setPromotion" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setPromotion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setPromotionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setSubject_InputMessage">
+    <wsdl:part name="parameters" element="tns:setSubject" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setSubject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:setPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setPeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToCampus_InputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToCampus" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToCampus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToCampusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToPeriode_InputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToPeriode" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToPeriode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToPeriodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToUniversity_InputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToUniversity" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToUniversity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToUniversityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToUser" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEventToUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setEventToUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:delUser" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delCampus_InputMessage">
+    <wsdl:part name="parameters" element="tns:delCampus" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delCampus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delCampusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:delClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delPromotion_InputMessage">
+    <wsdl:part name="parameters" element="tns:delPromotion" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delPromotion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delPromotionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delSubject_InputMessage">
+    <wsdl:part name="parameters" element="tns:delSubject" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delSubject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:delPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delPeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delRight_InputMessage">
+    <wsdl:part name="parameters" element="tns:delRight" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delRight_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToCampus_InputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToCampus" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToCampus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToCampusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToPeriode_InputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToPeriode" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToPeriode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToPeriodeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToClassResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToUniversity_InputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToUniversity" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToUniversity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToUniversityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToUser" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delEventToUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delEventToUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_getEventsByCampus_InputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByCampus" />
   </wsdl:message>
@@ -159,7 +280,105 @@
   <wsdl:message name="IBusinessLayer_addEventToUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:addEventToUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:setUser" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setCampus_InputMessage">
+    <wsdl:part name="parameters" element="tns:setCampus" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setCampus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setCampusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:setClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setClassResponse" />
+  </wsdl:message>
   <wsdl:portType name="IBusinessLayer">
+    <wsdl:operation name="setPromotion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPromotion" message="tns:IBusinessLayer_setPromotion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPromotionResponse" message="tns:IBusinessLayer_setPromotion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setSubject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setSubject" message="tns:IBusinessLayer_setSubject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setSubjectResponse" message="tns:IBusinessLayer_setSubject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPeriod" message="tns:IBusinessLayer_setPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPeriodResponse" message="tns:IBusinessLayer_setPeriod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setEventToCampus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToCampus" message="tns:IBusinessLayer_setEventToCampus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToCampusResponse" message="tns:IBusinessLayer_setEventToCampus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setEventToPeriode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToPeriode" message="tns:IBusinessLayer_setEventToPeriode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToPeriodeResponse" message="tns:IBusinessLayer_setEventToPeriode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setEventToClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToClass" message="tns:IBusinessLayer_setEventToClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToClassResponse" message="tns:IBusinessLayer_setEventToClass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setEventToUniversity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToUniversity" message="tns:IBusinessLayer_setEventToUniversity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToUniversityResponse" message="tns:IBusinessLayer_setEventToUniversity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setEventToUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToUser" message="tns:IBusinessLayer_setEventToUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventToUserResponse" message="tns:IBusinessLayer_setEventToUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delCampus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delCampus" message="tns:IBusinessLayer_delCampus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delCampusResponse" message="tns:IBusinessLayer_delCampus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delClass" message="tns:IBusinessLayer_delClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delClassResponse" message="tns:IBusinessLayer_delClass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delPromotion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delPromotion" message="tns:IBusinessLayer_delPromotion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delPromotionResponse" message="tns:IBusinessLayer_delPromotion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delSubject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delSubject" message="tns:IBusinessLayer_delSubject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delSubjectResponse" message="tns:IBusinessLayer_delSubject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delPeriod" message="tns:IBusinessLayer_delPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delPeriodResponse" message="tns:IBusinessLayer_delPeriod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delRight">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delRight" message="tns:IBusinessLayer_delRight_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delRightResponse" message="tns:IBusinessLayer_delRight_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delEventToCampus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToCampus" message="tns:IBusinessLayer_delEventToCampus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToCampusResponse" message="tns:IBusinessLayer_delEventToCampus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delEventToPeriode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToPeriode" message="tns:IBusinessLayer_delEventToPeriode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToPeriodeResponse" message="tns:IBusinessLayer_delEventToPeriode_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delEventToClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToClass" message="tns:IBusinessLayer_delEventToClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToClassResponse" message="tns:IBusinessLayer_delEventToClass_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delEventToUniversity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToUniversity" message="tns:IBusinessLayer_delEventToUniversity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToUniversityResponse" message="tns:IBusinessLayer_delEventToUniversity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delEventToUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToUser" message="tns:IBusinessLayer_delEventToUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delEventToUserResponse" message="tns:IBusinessLayer_delEventToUser_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getEventsByCampus">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getEventsByCampus" message="tns:IBusinessLayer_getEventsByCampus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getEventsByCampusResponse" message="tns:IBusinessLayer_getEventsByCampus_OutputMessage" />
@@ -259,6 +478,18 @@
     <wsdl:operation name="addEventToUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/addEventToUser" message="tns:IBusinessLayer_addEventToUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/addEventToUserResponse" message="tns:IBusinessLayer_addEventToUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setUser" message="tns:IBusinessLayer_setUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setUserResponse" message="tns:IBusinessLayer_setUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setCampus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setCampus" message="tns:IBusinessLayer_setCampus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setCampusResponse" message="tns:IBusinessLayer_setCampus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setClass" message="tns:IBusinessLayer_setClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setClassResponse" message="tns:IBusinessLayer_setClass_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="BusinessLayer">

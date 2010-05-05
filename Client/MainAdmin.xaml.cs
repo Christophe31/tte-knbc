@@ -490,7 +490,7 @@ namespace Client
             {
                 hours = int.Parse(tbSubjectAdd_Hours.Text);
             }
-            catch (FormatException MyError)
+            catch (FormatException)
             {
                 //On change la StatusBar
                 sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
@@ -499,7 +499,7 @@ namespace Client
             }
 
             //On tente d'insérer la matière
-            string returnValue = Api.addSubject(tbSubjectAdd_Subj.Text, hours);
+            string returnValue = Api.addSubject(tbSubjectAdd_Subj.Text, hours, Api.getModalities().First());
 
             //Si l'insertion s'est correctement déroulée
             if (returnValue.Equals("ok"))
@@ -565,7 +565,7 @@ namespace Client
                 StartHour = DateTime.Parse(tbPeriodAdd_DStart.Text);
                 EndHour = DateTime.Parse(tbPeriodAdd_DEnd.Text);
             }
-            catch (FormatException MyError)
+            catch (FormatException)
             {
                 //On change la StatusBar
                 sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;

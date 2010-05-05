@@ -174,6 +174,66 @@ namespace Client.BusinessLayer {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BusinessLayer.IBusinessLayer")]
     public interface IBusinessLayer {
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPromotion", ReplyAction="http://tempuri.org/IBusinessLayer/setPromotionResponse")]
+        string setPromotion(string PromotionName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setSubject", ReplyAction="http://tempuri.org/IBusinessLayer/setSubjectResponse")]
+        string setSubject(string SubjectName, int Hours);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/setPeriodResponse")]
+        string setPeriod(string PeriodName, string PromotionName, System.DateTime PeriodStart, System.DateTime PeriodEnd);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEventToCampus", ReplyAction="http://tempuri.org/IBusinessLayer/setEventToCampusResponse")]
+        string setEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEventToPeriode", ReplyAction="http://tempuri.org/IBusinessLayer/setEventToPeriodeResponse")]
+        string setEventToPeriode(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEventToClass", ReplyAction="http://tempuri.org/IBusinessLayer/setEventToClassResponse")]
+        string setEventToClass(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEventToUniversity", ReplyAction="http://tempuri.org/IBusinessLayer/setEventToUniversityResponse")]
+        string setEventToUniversity(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEventToUser", ReplyAction="http://tempuri.org/IBusinessLayer/setEventToUserResponse")]
+        string setEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delUser", ReplyAction="http://tempuri.org/IBusinessLayer/delUserResponse")]
+        string delUser(string UserName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delCampus", ReplyAction="http://tempuri.org/IBusinessLayer/delCampusResponse")]
+        string delCampus(string CampusName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delClass", ReplyAction="http://tempuri.org/IBusinessLayer/delClassResponse")]
+        string delClass(string ClassName, string CampusName, string PeriodeName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delPromotion", ReplyAction="http://tempuri.org/IBusinessLayer/delPromotionResponse")]
+        string delPromotion(string PromotionName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delSubject", ReplyAction="http://tempuri.org/IBusinessLayer/delSubjectResponse")]
+        string delSubject(string SubjectName, int Hours);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/delPeriodResponse")]
+        string delPeriod(string PeriodName, string PromotionName, System.DateTime PeriodStart, System.DateTime PeriodEnd);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delRight", ReplyAction="http://tempuri.org/IBusinessLayer/delRightResponse")]
+        string delRight(string UserName, string CampusName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delEventToCampus", ReplyAction="http://tempuri.org/IBusinessLayer/delEventToCampusResponse")]
+        string delEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delEventToPeriode", ReplyAction="http://tempuri.org/IBusinessLayer/delEventToPeriodeResponse")]
+        string delEventToPeriode(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delEventToClass", ReplyAction="http://tempuri.org/IBusinessLayer/delEventToClassResponse")]
+        string delEventToClass(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delEventToUniversity", ReplyAction="http://tempuri.org/IBusinessLayer/delEventToUniversityResponse")]
+        string delEventToUniversity(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delEventToUser", ReplyAction="http://tempuri.org/IBusinessLayer/delEventToUserResponse")]
+        string delEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Place);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getEventsByCampus", ReplyAction="http://tempuri.org/IBusinessLayer/getEventsByCampusResponse")]
         Client.BusinessLayer.EventData[] getEventsByCampus(string CampusName, System.DateTime Start, System.DateTime Stop, System.DateTime LastUpdate);
         
@@ -226,13 +286,13 @@ namespace Client.BusinessLayer {
         string addPromotion(string PromotionName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addSubject", ReplyAction="http://tempuri.org/IBusinessLayer/addSubjectResponse")]
-        string addSubject(string SubjectName, int Hours);
+        string addSubject(string SubjectName, int Hours, string Modality);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/addPeriodResponse")]
         string addPeriod(string PeriodName, string PromotionName, System.DateTime PeriodStart, System.DateTime PeriodEnd);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/grantNewRight", ReplyAction="http://tempuri.org/IBusinessLayer/grantNewRightResponse")]
-        string grantNewRight(string UserName, int Type, string CampusName);
+        string grantNewRight(string UserName, string CampusName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToCampus", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToCampusResponse")]
         string addEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
@@ -248,6 +308,15 @@ namespace Client.BusinessLayer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEventToUser", ReplyAction="http://tempuri.org/IBusinessLayer/addEventToUserResponse")]
         string addEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Place);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setUser", ReplyAction="http://tempuri.org/IBusinessLayer/setUserResponse")]
+        System.Tuple<string> setUser(string UserName, string UserPassword, string UserClassName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setCampus", ReplyAction="http://tempuri.org/IBusinessLayer/setCampusResponse")]
+        string setCampus(string CampusName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setClass", ReplyAction="http://tempuri.org/IBusinessLayer/setClassResponse")]
+        string setClass(string ClassName, string CampusName, string PeriodeName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -275,6 +344,86 @@ namespace Client.BusinessLayer {
         
         public BusinessLayerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public string setPromotion(string PromotionName) {
+            return base.Channel.setPromotion(PromotionName);
+        }
+        
+        public string setSubject(string SubjectName, int Hours) {
+            return base.Channel.setSubject(SubjectName, Hours);
+        }
+        
+        public string setPeriod(string PeriodName, string PromotionName, System.DateTime PeriodStart, System.DateTime PeriodEnd) {
+            return base.Channel.setPeriod(PeriodName, PromotionName, PeriodStart, PeriodEnd);
+        }
+        
+        public string setEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place) {
+            return base.Channel.setEventToCampus(EventName, Start, End, Mandatory, SpeakerName, CampusName, Place);
+        }
+        
+        public string setEventToPeriode(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place) {
+            return base.Channel.setEventToPeriode(EventName, Start, End, Mandatory, SpeakerName, PeriodeName, Place);
+        }
+        
+        public string setEventToClass(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place) {
+            return base.Channel.setEventToClass(EventName, Start, End, Mandatory, SpeakerName, ClassName, Subject, Modality, Place);
+        }
+        
+        public string setEventToUniversity(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string Place) {
+            return base.Channel.setEventToUniversity(EventName, Start, End, Mandatory, SpeakerName, Place);
+        }
+        
+        public string setEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Place) {
+            return base.Channel.setEventToUser(EventName, Start, End, Mandatory, Place);
+        }
+        
+        public string delUser(string UserName) {
+            return base.Channel.delUser(UserName);
+        }
+        
+        public string delCampus(string CampusName) {
+            return base.Channel.delCampus(CampusName);
+        }
+        
+        public string delClass(string ClassName, string CampusName, string PeriodeName) {
+            return base.Channel.delClass(ClassName, CampusName, PeriodeName);
+        }
+        
+        public string delPromotion(string PromotionName) {
+            return base.Channel.delPromotion(PromotionName);
+        }
+        
+        public string delSubject(string SubjectName, int Hours) {
+            return base.Channel.delSubject(SubjectName, Hours);
+        }
+        
+        public string delPeriod(string PeriodName, string PromotionName, System.DateTime PeriodStart, System.DateTime PeriodEnd) {
+            return base.Channel.delPeriod(PeriodName, PromotionName, PeriodStart, PeriodEnd);
+        }
+        
+        public string delRight(string UserName, string CampusName) {
+            return base.Channel.delRight(UserName, CampusName);
+        }
+        
+        public string delEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place) {
+            return base.Channel.delEventToCampus(EventName, Start, End, Mandatory, SpeakerName, CampusName, Place);
+        }
+        
+        public string delEventToPeriode(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place) {
+            return base.Channel.delEventToPeriode(EventName, Start, End, Mandatory, SpeakerName, PeriodeName, Place);
+        }
+        
+        public string delEventToClass(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place) {
+            return base.Channel.delEventToClass(EventName, Start, End, Mandatory, SpeakerName, ClassName, Subject, Modality, Place);
+        }
+        
+        public string delEventToUniversity(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string Place) {
+            return base.Channel.delEventToUniversity(EventName, Start, End, Mandatory, SpeakerName, Place);
+        }
+        
+        public string delEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Place) {
+            return base.Channel.delEventToUser(EventName, Start, End, Mandatory, Place);
         }
         
         public Client.BusinessLayer.EventData[] getEventsByCampus(string CampusName, System.DateTime Start, System.DateTime Stop, System.DateTime LastUpdate) {
@@ -345,16 +494,16 @@ namespace Client.BusinessLayer {
             return base.Channel.addPromotion(PromotionName);
         }
         
-        public string addSubject(string SubjectName, int Hours) {
-            return base.Channel.addSubject(SubjectName, Hours);
+        public string addSubject(string SubjectName, int Hours, string Modality) {
+            return base.Channel.addSubject(SubjectName, Hours, Modality);
         }
         
         public string addPeriod(string PeriodName, string PromotionName, System.DateTime PeriodStart, System.DateTime PeriodEnd) {
             return base.Channel.addPeriod(PeriodName, PromotionName, PeriodStart, PeriodEnd);
         }
         
-        public string grantNewRight(string UserName, int Type, string CampusName) {
-            return base.Channel.grantNewRight(UserName, Type, CampusName);
+        public string grantNewRight(string UserName, string CampusName) {
+            return base.Channel.grantNewRight(UserName, CampusName);
         }
         
         public string addEventToCampus(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place) {
@@ -375,6 +524,18 @@ namespace Client.BusinessLayer {
         
         public string addEventToUser(string EventName, System.DateTime Start, System.DateTime End, bool Mandatory, string Place) {
             return base.Channel.addEventToUser(EventName, Start, End, Mandatory, Place);
+        }
+        
+        public System.Tuple<string> setUser(string UserName, string UserPassword, string UserClassName) {
+            return base.Channel.setUser(UserName, UserPassword, UserClassName);
+        }
+        
+        public string setCampus(string CampusName) {
+            return base.Channel.setCampus(CampusName);
+        }
+        
+        public string setClass(string ClassName, string CampusName, string PeriodeName) {
+            return base.Channel.setClass(ClassName, CampusName, PeriodeName);
         }
     }
 }
