@@ -41,23 +41,27 @@ namespace BusinessLayer
 			[OperationContract]
 			Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree();
         
-            //Fonctions de modification à implémenter
+			///note de christophe: ce message est de mugimasaka
+			///tu veux faire quoi de l'association derierre?
+			///si tu veux computer quelquechose entre l'entrée et la sortie, c'est que c'est au serveur (moi) de le faire ^^
+			///cette partie là pourait être gérée avec du cache mais ça ne me parait pas pertinant si c'est pour ta prtie uniquement
+			//Fonctions de modification à implémenter
             //Si tu veux remplacer les champs par des id je te laisse faire
             //C'est juste pour te donner une idée globale des fonctions qu'il me faut
 
             //Permet de récupérer la classe d'un utilisateur
-            //string classname getClassOfUser(string username);
+            //string getClassOfUser(string username);
 
             //Permet de récupérer le campus d'une classe
-            //string campus getCampusOfClass(string classname);
+            //string getCampusOfClass(string classname);
 
             //Permet de récupérer la période d'une classe
-            //string periodname getPeriodOfClass(string classname);
+            //string getPeriodOfClass(string classname);
 
             //Permet de récupérer la date de début (DateTime), la date de fin (DateTime) et la promotion d'une période
             //Je te laisse l'implementer comme tu veux (genre en une ou trois fonctions)
 		#endregion
-		#region ecriture
+		#region add
 			[OperationContract]
 			string addUser(string UserName, string UserPassword, string UserClassName);
 			[OperationContract]
@@ -67,22 +71,71 @@ namespace BusinessLayer
 			[OperationContract]
 			string addPromotion(string PromotionName);
 			[OperationContract]
-            //Modifier pour ajouter le champ Modality
-			string addSubject(string SubjectName, int Hours);
+			string addSubject(string SubjectName, int Hours, string Modality);
 			[OperationContract]
 			string addPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
 			[OperationContract]
-			string grantNewRight(string UserName, int Type, string CampusName);
+			string grantNewRight(string UserName, string CampusName);
 			[OperationContract]
 			string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
 			[OperationContract]
 			string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
 			[OperationContract]
 			string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
- 			[OperationContract]
-			string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName,  string Place);
 			[OperationContract]
-			string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place); 
+			string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
+			[OperationContract]
+			string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
+		#endregion
+		#region set
+			[OperationContract]
+			Tuple<string> setUser(string UserName, string UserPassword, string UserClassName);
+			[OperationContract]
+			string setCampus(string CampusName);
+			[OperationContract]
+			string setClass(string ClassName, string CampusName, string PeriodeName);
+			[OperationContract]
+			string setPromotion(string PromotionName);
+			[OperationContract]
+			string setSubject(string SubjectName, int Hours);
+			[OperationContract]
+			string setPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
+			[OperationContract]
+			string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
+			[OperationContract]
+			string setEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
+			[OperationContract]
+			string setEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
+			[OperationContract]
+			string setEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
+			[OperationContract]
+			string setEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
+		#endregion
+		#region del
+			[OperationContract]
+			string delUser(string UserName);
+			[OperationContract]
+			string delCampus(string CampusName);
+			[OperationContract]
+			string delClass(string ClassName, string CampusName, string PeriodeName);
+			[OperationContract]
+			string delPromotion(string PromotionName);
+			[OperationContract]
+			string delSubject(string SubjectName, int Hours);
+			[OperationContract]
+			string delPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
+			[OperationContract]
+			string delRight(string UserName, string CampusName);
+			[OperationContract]
+			string delEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
+			[OperationContract]
+			string delEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
+			[OperationContract]
+			string delEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
+			[OperationContract]
+			string delEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
+			[OperationContract]
+			string delEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
 		#endregion
 	}
 }

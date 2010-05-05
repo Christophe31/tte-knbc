@@ -101,7 +101,7 @@ namespace Client
 		private void GrantRightButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.Server.grantNewRight("", 1, CampusBox.SelectedIndex.ToString());
+				Api.Server.grantNewRight("",  CampusBox.SelectedIndex.ToString());
 
 		}
 

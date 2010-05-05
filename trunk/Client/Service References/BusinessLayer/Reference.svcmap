@@ -22,6 +22,7 @@
   </MetadataSources>
   <Metadata>
     <MetadataFile FileName="BusinessLayer.wsdl" MetadataType="Wsdl" ID="b6d0de7d-47c1-4789-8168-047a407a00ea" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?wsdl" />
+    <MetadataFile FileName="BusinessLayer4.xsd" MetadataType="Schema" ID="482e6faf-4429-4e37-bba8-069ef8af6b23" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd4" />
     <MetadataFile FileName="BusinessLayer.xsd" MetadataType="Schema" ID="6482cee7-29b8-4d46-868a-04e200d5298e" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" />
     <MetadataFile FileName="BusinessLayer1.xsd" MetadataType="Schema" ID="e7613c03-cb1b-40d0-ba59-8a7054c40132" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?xsd=xsd1" />
     <MetadataFile FileName="BusinessLayer.disco" MetadataType="Disco" ID="3cdd5079-2180-4eaf-930e-5e5e368ffd54" SourceId="1" SourceUrl="http://localhost:2900/BusinessLayer.svc?disco" />

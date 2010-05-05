@@ -144,6 +144,9 @@
     <None Include="Service References\BusinessLayer\BusinessLayer3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\BusinessLayer\BusinessLayer4.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\BusinessLayer\Client.BusinessLayer.EventData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

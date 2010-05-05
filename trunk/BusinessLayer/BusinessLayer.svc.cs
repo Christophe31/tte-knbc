@@ -199,13 +199,14 @@ namespace BusinessLayer
 					db.SaveChanges();
 					return "ok";
 				}
-				public string addSubject(string SubjectName, int SubjectHours)
+				public string addSubject(string SubjectName, int SubjectHours, string Modality)
 				{
 					if (db.Subject.Where(p => p.Name == SubjectName).Count() > 0)
 						return "La Subject " + SubjectName + " existe déjà.";
 					Subject m = new Subject();
 					m.Name = SubjectName;
 					m.Hours = SubjectHours;
+					m.Modality = Modality;
 					db.AddToSubject(m);
 					db.SaveChanges();
 					return "ok";
@@ -228,7 +229,7 @@ namespace BusinessLayer
 					db.SaveChanges();
 					return "ok";
 				}
-				public string grantNewRight(string UserName, int Type, string CampusName)
+				public string grantNewRight(string UserName, string CampusName)
 				{
 					return "Toujours pas implementé";
 				}
@@ -334,6 +335,57 @@ namespace BusinessLayer
 				{ return "still not implemented"; }
 
 			#endregion
+				#region set
+					public Tuple<string> setUser(string UserName, string UserPassword, string UserClassName)
+					{return new Tuple<string>("not implemented yet");}
+					public string setCampus(string CampusName)
+					{return "not implemented yet";}
+					public string setClass(string ClassName, string CampusName, string PeriodeName)
+					{return "not implemented yet";}
+					public string setPromotion(string PromotionName)
+					{return "not implemented yet";}
+					public string setSubject(string SubjectName, int Hours)
+					{return "not implemented yet";}
+					public string setPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd)
+					{return "not implemented yet";}
+					public string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
+					{return "not implemented yet";}
+					public string setEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place)
+					{return "not implemented yet";}
+					public string setEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place)
+					{return "not implemented yet";}
+					public string setEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place)
+					{return "not implemented yet";}
+					public string setEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
+					{return "not implemented yet";}
+				#endregion
+				#region del
+					public string delUser(string UserName)
+					{return "not implemented yet";}
+					public string delCampus(string CampusName)
+					{return "not implemented yet";}
+					public string delClass(string ClassName, string CampusName, string PeriodeName)
+					{return "not implemented yet";}
+					public string delPromotion(string PromotionName)
+					{return "not implemented yet";}
+					public string delSubject(string SubjectName, int Hours)
+					{return "not implemented yet";}
+					public string delPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd)
+					{return "not implemented yet";}
+					public string delRight(string UserName, string CampusName)
+					{return "not implemented yet";}
+					public string delEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
+					{return "not implemented yet";}
+					public string delEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place)
+					{return "not implemented yet";}
+					public string delEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place)
+					{return "not implemented yet";}
+					public string delEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place)
+					{return "not implemented yet";}
+					public string delEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
+					{return "not implemented yet";}
+				#endregion
+
 		#endregion
 
 		#region IDisposable Members
