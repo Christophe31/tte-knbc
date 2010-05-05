@@ -40,6 +40,22 @@ namespace BusinessLayer
 			string[] getModalities();
 			[OperationContract]
 			Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree();
+        
+            //Fonctions de modification à implémenter
+            //Si tu veux remplacer les champs par des id je te laisse faire
+            //C'est juste pour te donner une idée globale des fonctions qu'il me faut
+
+            //Permet de récupérer la classe d'un utilisateur
+            //string classname getClassOfUser(string username);
+
+            //Permet de récupérer le campus d'une classe
+            //string campus getCampusOfClass(string classname);
+
+            //Permet de récupérer la période d'une classe
+            //string periodname getPeriodOfClass(string classname);
+
+            //Permet de récupérer la date de début (DateTime), la date de fin (DateTime) et la promotion d'une période
+            //Je te laisse l'implementer comme tu veux (genre en une ou trois fonctions)
 		#endregion
 		#region ecriture
 			[OperationContract]
@@ -51,6 +67,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string addPromotion(string PromotionName);
 			[OperationContract]
+            //Modifier pour ajouter le champ Modality
 			string addSubject(string SubjectName, int Hours);
 			[OperationContract]
 			string addPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);

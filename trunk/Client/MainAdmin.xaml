@@ -150,12 +150,83 @@
             </TabItem>
             <TabItem Header="Matières" Name="Matieres">
                 <Grid>
-
+                    <TabControl Name="tcOngletsSubjects" SelectionChanged="tcOngletsSubjects_SelectionChanged">
+                        <TabItem Header="Ajouter" Name="SubjectAdd">
+                            <Grid>
+                                <Button Content="Ajouter" Height="21" Margin="444,189,22,0" Name="bSubjectAdd_Add" VerticalAlignment="Top" Width="120" Click="bSubjectAdd_Add_Click" />
+                                <TextBox Height="22" HorizontalAlignment="Left" Margin="20,91,0,0" Name="tbSubjectAdd_Subj" VerticalAlignment="Top" Width="118" />
+                                <Label Content="Nom de la matière:" Height="33" HorizontalAlignment="Left" Margin="20,52,0,0" VerticalAlignment="Top" Width="128" />
+                                <TextBox Height="22" HorizontalAlignment="Left" Margin="233,91,0,0" Name="tbSubjectAdd_Hours" VerticalAlignment="Top" Width="90" />
+                                <Label Content="Durée de la matière:" Height="33" HorizontalAlignment="Left" Margin="207,52,0,0" VerticalAlignment="Top" Width="128" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Modifier / Supprimer" Name="SubjectChange">
+                            <Grid>
+                                <ComboBox Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="39,104,0,0" Name="cbSubjectChange_Subj" VerticalAlignment="Top" Width="120" />
+                                <Label Content="Nom de la matière:" Height="25" HorizontalAlignment="Left" Margin="39,75,0,0" VerticalAlignment="Top" Width="133" />
+                                <GroupBox Header="Propriétés:" Height="140" HorizontalAlignment="Left" Margin="206,66,0,0" VerticalAlignment="Top" Width="244">
+                                    <Grid Height="106" Width="214">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="219*" />
+                                            <ColumnDefinition Width="13*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Height="22" HorizontalAlignment="Left" Margin="8,45,0,0" Name="tbSubjectChange_Subject" VerticalAlignment="Top" Width="118" />
+                                        <Label Content="Nom de la matière:" Height="25" HorizontalAlignment="Left" Margin="8,14,0,0" VerticalAlignment="Top" Width="133" />
+                                    </Grid>
+                                </GroupBox>
+                                <Button Content="Modifier" Height="21" Margin="39,152,427,0" Name="bSubjectChange_Change" VerticalAlignment="Top" Width="120" />
+                                <Button Content="Supprimer" Height="21" Margin="39,0,427,33" Name="bSubjectChange_Del" VerticalAlignment="Bottom" Width="120" />
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </TabItem>
             <TabItem Header="Périodes" Name="Periods">
                 <Grid>
-
+                    <TabControl Name="tcOngletsPeriods" SelectionChanged="tcOngletsPeriods_SelectionChanged">
+                        <TabItem Header="Ajouter" Name="PeriodsAdd">
+                            <Grid>
+                                <TextBox Height="22" HorizontalAlignment="Left" Margin="19,102,0,0" Name="tbPeriodAdd_Period" VerticalAlignment="Top" Width="118" />
+                                <Label Content="Nom de la période:" Height="32" HorizontalAlignment="Left" Margin="19,73,0,0" VerticalAlignment="Top" Width="120" />
+                                <Button Content="Ajouter" Height="21" Margin="439,187,27,0" Name="bPeriodAdd_Add" VerticalAlignment="Top" Width="120" Click="bPeriodAdd_Add_Click" />
+                                <ComboBox Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="19,173,0,0" Name="cbPeriodAdd_Promo" VerticalAlignment="Top" Width="120" />
+                                <Label Content="Date de début:" Height="32" HorizontalAlignment="Left" Margin="204,73,0,0" VerticalAlignment="Top" Width="120" />
+                                <TextBox Height="22" HorizontalAlignment="Left" Margin="206,101,0,0" Name="tbPeriodAdd_DStart" VerticalAlignment="Top" Width="118" />
+                                <Label Content="Date de fin:" Height="32" HorizontalAlignment="Left" Margin="343,73,0,0" VerticalAlignment="Top" Width="120" />
+                                <TextBox Height="22" HorizontalAlignment="Left" Margin="345,101,0,0" Name="tbPeriodAdd_DEnd" VerticalAlignment="Top" Width="118" />
+                                <Label Content="Promotion de la période:" Height="32" HorizontalAlignment="Left" Margin="19,143,0,0" VerticalAlignment="Top" Width="146" />
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Modifier / Supprimer" Name="PeriodsChange">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="6" />
+                                    <ColumnDefinition Width="580" />
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="31,82,0,0" Name="cbPeriodChange_Period" VerticalAlignment="Top" Width="120" Grid.Column="1" SelectionChanged="cbPeriodChange_Period_SelectionChanged" />
+                                <Label Content="Nom de la période:" Height="25" HorizontalAlignment="Left" Margin="31,53,0,0" VerticalAlignment="Top" Width="133" Grid.Column="1" />
+                                <GroupBox Header="Propriétés:" Height="193" HorizontalAlignment="Left" Margin="188,22,0,0" VerticalAlignment="Top" Width="370" Grid.Column="1">
+                                    <Grid Height="170" Width="354">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20*" />
+                                            <ColumnDefinition Width="182*" />
+                                            <ColumnDefinition Width="12*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox Height="22" HorizontalAlignment="Left" Margin="20,45,0,0" Name="tbPeriodChange_Period" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" />
+                                        <Label Content="Nom de la période:" Height="25" HorizontalAlignment="Left" Margin="20,14,0,0" VerticalAlignment="Top" Width="133" Grid.ColumnSpan="2" />
+                                        <Label Content="Date de début:" Height="32" HorizontalAlignment="Left" Margin="20,91,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" />
+                                        <TextBox Height="22" HorizontalAlignment="Left" Margin="22,119,0,0" Name="tbPeriodChange_DStart" VerticalAlignment="Top" Width="118" Grid.ColumnSpan="2" />
+                                        <Label Content="Date de fin:" Grid.Column="1" Height="32" HorizontalAlignment="Left" Margin="157,91,0,0" VerticalAlignment="Top" Width="120" />
+                                        <TextBox Grid.Column="1" Height="22" HorizontalAlignment="Left" Margin="159,119,0,0" Name="tbPeriodChange_DEnd" VerticalAlignment="Top" Width="118" />
+                                        <ComboBox Height="23" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="157,44,0,0" Name="cbPeriodChange_Promo" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                                        <Label Content="Promotion de la période:" Height="32" HorizontalAlignment="Left" Margin="157,14,0,0" VerticalAlignment="Top" Width="146" Grid.Column="1" Grid.ColumnSpan="2" />
+                                    </Grid>
+                                </GroupBox>
+                                <Button Content="Modifier" Height="21" Margin="31,130,429,0" Name="bPeriodChange_Change" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+                                <Button Content="Supprimer" Height="21" Margin="31,0,429,55" Name="bPeriodChange_Del" VerticalAlignment="Bottom" Width="120" Grid.Column="1" />
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
                 </Grid>
             </TabItem>
         </TabControl>
