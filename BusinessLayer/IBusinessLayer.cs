@@ -61,6 +61,22 @@ namespace BusinessLayer
             //Permet de récupérer la date de début (DateTime), la date de fin (DateTime) et la promotion d'une période
             //Je te laisse l'implementer comme tu veux (genre en une ou trois fonctions)
 		#endregion
+		#region Identified completion
+			[OperationContract]
+			Tuple<int,string>[] getIdCampusNames();
+			[OperationContract]
+			Tuple<int, string>[] getIdClassesNames();
+			[OperationContract]
+			Tuple<int, string>[] getIdPromotionsNames();
+			[OperationContract]
+			Tuple<int, string>[] getIdPeriodsNames();
+			[OperationContract]
+			Tuple<int, string, string>[] getIdSubjectsNamesModality();
+			[OperationContract]
+			Tuple<int, string>[] getIdUsersNames();
+			[OperationContract]
+			Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> getIdCampusPeriodClassTree();
+		#endregion
 		#region add
 			[OperationContract]
 			string addUser(string UserName, string UserPassword, string UserClassName);
