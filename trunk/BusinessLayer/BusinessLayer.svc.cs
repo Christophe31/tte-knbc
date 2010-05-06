@@ -130,7 +130,45 @@ namespace BusinessLayer
 							).ToDictionary(p => p.key, p => p.value.ToDictionary(e => e.periodName, e => e.val.ToArray()));
 				}
 			#endregion
-			#region Ecriture
+			#region Identified completion
+				public Tuple<int, string>[] getIdCampusNames()
+				{
+ 					return db.Campus.Select(p=>new Tuple<int,string>(p.Id,p.Name)).ToArray();
+				}
+				public Tuple<int, string>[] getIdClassesNames()
+				{
+ 					return db.Class.Select(p=>new Tuple<int,string>(p.Id,p.Name)).ToArray();
+				}
+				public Tuple<int, string>[] getIdPromotionsNames()
+				{
+					return db.Promotion.Select(p => new Tuple<int, string>(p.Id, p.Name)).ToArray();
+				}
+				public Tuple<int, string>[] getIdPeriodsNames()
+				{
+ 					return db.Period.Select(p=>new Tuple<int,string>(p.Id,p.Name)).ToArray();
+				}
+				public Tuple<int, string, string>[] getIdSubjectsNamesModality()
+				{
+ 					return db.Subject.Select(p=>new Tuple<int,string,string>(p.Id,p.Name, p.Modality)).ToArray();
+				}
+				public Tuple<int, string>[] getIdUsersNames()
+				{
+ 					return db.User.Select(p=>new Tuple<int,string>(p.Id,p.Name)).ToArray();
+				}
+				public Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> getIdCampusPeriodClassTree()
+				{
+					return (from campus in db.Campus
+								where campus.Classes.Any(p=>p.Period.Name!=null)
+								select new {key=new Tuple<int,string>(campus.Id,campus.Name), value=(
+									from period in db.Period
+									where period.Class.Any(ca=>ca.Campus.Name==campus.Name)
+									select new {periodName=new Tuple<int,string>(period.Id, period.Name), val=period.Class.Where(p=>p.Campus==campus).Select(p=>new Tuple<int,string>(p.Id,p.Name))}
+									)
+								}
+							).ToDictionary(p => p.key, p => p.value.ToDictionary(e => e.periodName, e => e.val.ToArray()));
+				}
+			#endregion
+			#region add
                 /// <summary>
                 /// Ne fonctonne pas
                 /// </summary>
@@ -335,7 +373,7 @@ namespace BusinessLayer
 				{ return "still not implemented"; }
 
 			#endregion
-				#region set
+			#region set
 					public Tuple<string> setUser(string UserName, string UserPassword, string UserClassName)
 					{return new Tuple<string>("not implemented yet");}
 					public string setCampus(string CampusName)
@@ -359,7 +397,7 @@ namespace BusinessLayer
 					public string setEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
 					{return "not implemented yet";}
 				#endregion
-				#region del
+			#region del
 					public string delUser(string UserName)
 					{return "not implemented yet";}
 					public string delCampus(string CampusName)

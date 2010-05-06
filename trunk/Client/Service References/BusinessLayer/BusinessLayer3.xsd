@@ -1,8 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
-  <xs:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
+  <xs:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="addEventToPeriode">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToPeriodeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addEventToPeriodeResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToClass">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToClassResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addEventToClassResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToUniversity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToUniversityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addEventToUniversityResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
+        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addEventToUserResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserPassword" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserClassName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="setUserResult" nillable="true" type="q1:TupleOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setCampus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setCampusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="setCampusResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setClass">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="setClassResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="setClassResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="setPromotion">
     <xs:complexType>
       <xs:sequence>
@@ -365,7 +490,7 @@
   <xs:element name="getEventsByCampusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByCampusResult" nillable="true" type="q1:ArrayOfEventData" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByCampusResult" nillable="true" type="q2:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -381,7 +506,7 @@
   <xs:element name="getEventsByUniversityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByUniversityResult" nillable="true" type="q2:ArrayOfEventData" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByUniversityResult" nillable="true" type="q3:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -398,7 +523,7 @@
   <xs:element name="getEventsByPeriodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByPeriodResult" nillable="true" type="q3:ArrayOfEventData" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByPeriodResult" nillable="true" type="q4:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -415,7 +540,7 @@
   <xs:element name="getEventsByClassResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByClassResult" nillable="true" type="q4:ArrayOfEventData" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByClassResult" nillable="true" type="q5:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -431,7 +556,7 @@
   <xs:element name="getPrivateEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPrivateEventsResult" nillable="true" type="q5:ArrayOfEventData" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPrivateEventsResult" nillable="true" type="q6:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -443,7 +568,7 @@
   <xs:element name="getCampusNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusNamesResult" nillable="true" type="q6:ArrayOfstring" />
+        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusNamesResult" nillable="true" type="q7:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -455,7 +580,7 @@
   <xs:element name="getClassesNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getClassesNamesResult" nillable="true" type="q7:ArrayOfstring" />
+        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getClassesNamesResult" nillable="true" type="q8:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -467,7 +592,7 @@
   <xs:element name="getPromotionsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPromotionsNamesResult" nillable="true" type="q8:ArrayOfstring" />
+        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPromotionsNamesResult" nillable="true" type="q9:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -479,7 +604,7 @@
   <xs:element name="getPeriodsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPeriodsNamesResult" nillable="true" type="q9:ArrayOfstring" />
+        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPeriodsNamesResult" nillable="true" type="q10:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -491,7 +616,7 @@
   <xs:element name="getSubjectsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getSubjectsNamesResult" nillable="true" type="q10:ArrayOfstring" />
+        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getSubjectsNamesResult" nillable="true" type="q11:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -503,7 +628,7 @@
   <xs:element name="getUsersNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersNamesResult" nillable="true" type="q11:ArrayOfstring" />
+        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersNamesResult" nillable="true" type="q12:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -515,7 +640,7 @@
   <xs:element name="getModalitiesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getModalitiesResult" nillable="true" type="q12:ArrayOfstring" />
+        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getModalitiesResult" nillable="true" type="q13:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -527,7 +652,91 @@
   <xs:element name="getCampusPeriodClassTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusPeriodClassTreeResult" nillable="true" type="q13:ArrayOfKeyValueOfstringArrayOfKeyValueOfstringArrayOfstringty7Ep6D1ty7Ep6D1" />
+        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusPeriodClassTreeResult" nillable="true" type="q14:ArrayOfKeyValueOfstringArrayOfKeyValueOfstringArrayOfstringty7Ep6D1ty7Ep6D1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdCampusNames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdCampusNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdCampusNamesResult" nillable="true" type="q15:ArrayOfTupleOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdClassesNames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdClassesNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdClassesNamesResult" nillable="true" type="q16:ArrayOfTupleOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdPromotionsNames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdPromotionsNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdPromotionsNamesResult" nillable="true" type="q17:ArrayOfTupleOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdPeriodsNames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdPeriodsNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdPeriodsNamesResult" nillable="true" type="q18:ArrayOfTupleOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdSubjectsNamesModality">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdSubjectsNamesModalityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdSubjectsNamesModalityResult" nillable="true" type="q19:ArrayOfTupleOfintstringstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdUsersNames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdUsersNamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdUsersNamesResult" nillable="true" type="q20:ArrayOfTupleOfintstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdCampusPeriodClassTree">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getIdCampusPeriodClassTreeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getIdCampusPeriodClassTreeResult" nillable="true" type="q21:ArrayOfKeyValueOfTupleOfintstringArrayOfKeyValueOfTupleOfintstringArrayOfTupleOfintstring_ShTDFhl_P2OQwrKDV" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -656,131 +865,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="addEventToCampusResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToPeriode">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToPeriodeResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addEventToPeriodeResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToClass">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToClassResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addEventToClassResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToUniversity">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToUniversityResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addEventToUniversityResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addEventToUserResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="UserPassword" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="UserClassName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="setUserResult" nillable="true" type="q14:TupleOfstring" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setCampus">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setCampusResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="setCampusResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setClass">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="setClassResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="setClassResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
