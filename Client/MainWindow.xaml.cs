@@ -20,7 +20,7 @@ namespace Client
 	/// </summary>
 	public partial class MainWindow : Window
     {
-        protected CacheBusinessWrapper Api;
+        protected CacheWrapper Api;
         protected Dictionary<string, Dictionary<string, string[]>> CampusPeriodClassTree;
 
 		public MainWindow()
@@ -36,7 +36,7 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Api = CacheBusinessWrapper.getCacheWrapper();
+            Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
             // ComboBoxes initialisation

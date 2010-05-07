@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IBusinessLayer" in both code and config file together.
 	[ServiceContract]
-	public interface IBusinessLayer
+	public interface IBusinessService
 	{
 		#region Lecture d'évènements
 			[OperationContract]
