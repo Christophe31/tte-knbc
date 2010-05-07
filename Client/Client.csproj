@@ -71,6 +71,9 @@
     <Compile Include="Tests\ApiTestWindow.xaml.cs">
       <DependentUpon>ApiTestWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TteSplash.xaml.cs">
+      <DependentUpon>TteSplash.xaml</DependentUpon>
+    </Compile>
     <Page Include="Calendar\CalendarDay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +106,10 @@
     <Page Include="Tests\ApiTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TteSplash.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>

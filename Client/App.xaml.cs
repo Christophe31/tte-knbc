@@ -12,5 +12,11 @@ namespace Client
     /// </summary>
     public partial class App : Application
     {
-    }
+		public App()
+		{
+			//TteSplash s = new TteSplash();
+			//s.Close();
+			//new MainWindow();
+		}
+	}
 }
