@@ -28,16 +28,10 @@ namespace Client
 			InitializeComponent();
 		}
 
-		private void button1_Click(object sender, RoutedEventArgs e)
-		{
-			ApiTestWindow api = new ApiTestWindow();
-			api.Show();
-		}
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Api = new CacheWrapper();
-            CampusPeriodClassTree = Api.getCampusPeriodClassTree();
+			Api = new CacheWrapper();
+			CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
             // ComboBoxes initialisation
             ViewType.SelectedIndex = 4;
@@ -112,5 +106,19 @@ namespace Client
         {
             RefreshClassName();
         }
+
+		private void button1_Click_1(object sender, RoutedEventArgs e)
+		{
+			MainAdmin fenetreAdmin = new MainAdmin();
+			fenetreAdmin.Show();
+
+		}
+
+		private void button1_Click(object sender, RoutedEventArgs e)
+		{
+			ApiTestWindow api = new ApiTestWindow();
+			api.Show();
+		}
+
 	}
 }
