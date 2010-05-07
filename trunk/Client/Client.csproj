@@ -62,19 +62,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApiTestWindow.xaml.cs">
-      <DependentUpon>ApiTestWindow.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Cache\CacheProcess.cs" />
     <Compile Include="Service References\BusinessLayer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Page Include="CalendarDay.xaml">
+    <Compile Include="Tests\ApiTestWindow.xaml.cs">
+      <DependentUpon>ApiTestWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Calendar\CalendarDay.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainAdmin.xaml">
+    <Page Include="Admin\MainAdmin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -86,20 +87,20 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CacheBusinessWrapper.cs" />
-    <Compile Include="EventData.cs" />
-    <Compile Include="CalendarDay.xaml.cs">
+    <Compile Include="Cache\CacheWrapper.cs" />
+    <Compile Include="Calendar\EventData.cs" />
+    <Compile Include="Calendar\CalendarDay.xaml.cs">
       <DependentUpon>CalendarDay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RandomPassword.cs" />
-    <Compile Include="MainAdmin.xaml.cs">
+    <Compile Include="Admin\RandomPassword.cs" />
+    <Compile Include="Admin\MainAdmin.xaml.cs">
       <DependentUpon>MainAdmin.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ApiTestWindow.xaml">
+    <Page Include="Tests\ApiTestWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -130,21 +131,21 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\BusinessLayer\BusinessLayer.wsdl" />
-    <None Include="Service References\BusinessLayer\BusinessLayer.xsd">
+    <None Include="Service References\BusinessLayer\BusinessService.wsdl" />
+    <None Include="Service References\BusinessLayer\BusinessService.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BusinessLayer\BusinessLayer1.wsdl" />
-    <None Include="Service References\BusinessLayer\BusinessLayer1.xsd">
+    <None Include="Service References\BusinessLayer\BusinessService1.wsdl" />
+    <None Include="Service References\BusinessLayer\BusinessService1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BusinessLayer\BusinessLayer2.xsd">
+    <None Include="Service References\BusinessLayer\BusinessService2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BusinessLayer\BusinessLayer3.xsd">
+    <None Include="Service References\BusinessLayer\BusinessService3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\BusinessLayer\BusinessLayer4.xsd">
+    <None Include="Service References\BusinessLayer\BusinessService4.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\BusinessLayer\Client.BusinessLayer.EventData.datasource">
@@ -152,7 +153,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ApiTestWindowIcon.ico" />
+    <Resource Include="Tests\ApiTestWindowIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -161,7 +162,7 @@
     <WCFMetadataStorage Include="Service References\BusinessLayer\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BusinessLayer\BusinessLayer.disco" />
+    <None Include="Service References\BusinessLayer\BusinessService.disco" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BusinessLayer\configuration91.svcinfo" />
