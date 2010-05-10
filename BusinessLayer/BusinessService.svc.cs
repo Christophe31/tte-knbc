@@ -384,17 +384,17 @@ namespace BusinessLayer
 
 			#endregion
 			#region set
-					public string setUser(int Id, string UserName, string UserPassword, string UserClassName)
+					public string setUser(UserData UD)
 					{return "not implemented yet";}
 					public string setCampus(int Id, string CampusName)
 					{return "not implemented yet";}
-					public string setClass(int Id, string ClassName, string CampusName, string PeriodeName)
+					public string setClass(ClassData CD)
 					{return "not implemented yet";}
 					public string setPromotion(int Id, string PromotionName)
 					{return "not implemented yet";}
-					public string setSubject(int Id, string SubjectName, int Hours)
+					public string setSubject(SubjectData SD)
 					{return "not implemented yet";}
-					public string setPeriod(int Id, string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd)
+					public string setPeriod(PeriodData PD)
 					{return "not implemented yet";}
 					public string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
 					{return "not implemented yet";}
@@ -406,7 +406,7 @@ namespace BusinessLayer
 					{return "not implemented yet";}
 					public string setEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
 					{return "not implemented yet";}
-				#endregion
+			#endregion
 			#region del
 					public string delUser(int Id)
 					{
@@ -474,8 +474,32 @@ namespace BusinessLayer
 					{return "not implemented yet";}
 					public string delEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
 					{return "not implemented yet";}
-				#endregion
+			#endregion
+			#region get Current
 
+					public UserData getUser(int ID)
+					{ 
+						return db.User.Where(u => u.Id == ID).
+						Select(p=> new {u=p, camp=p.Class.Campus.Name, clas=p.Class.Id }).ToArray().
+						Select(u=>UserData.UD(u.u,u.camp,u.clas)).Single(); 
+					}
+					public ClassData getClass(int ID)
+					{ 
+						return db.Class.Where(c => c.Id == ID).
+						Select(p=> new {u=p, camp=p.Campus.Name, per=p.Period.Id }).ToArray().
+						Select(u=>ClassData.CD(u.u,u.camp,u.per)).Single(); 
+					}
+					public PeriodData getPeriod(int ID)
+					{ 
+						return db.Period.Where(u => u.Id == ID).
+						Select(p=> new {u=p, prom=p.Promotion.Name}).ToArray().
+						Select(u=>PeriodData.PD(u.u,u.prom)).Single(); 
+					}
+					public SubjectData getSubject(int ID)
+					{ 
+						return SubjectData.SD(db.Subject.Where(u => u.Id == ID).Single()); 
+					}
+			#endregion
 		#endregion
 
 		#region IDisposable Members
