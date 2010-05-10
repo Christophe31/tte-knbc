@@ -41,7 +41,7 @@
                                     </Grid>
                                 </GroupBox>
                                 <Button Content="Modifier" Height="21" Margin="6,125,460,0" Name="bUserChange_ChangeUser" VerticalAlignment="Top" Width="120" Click="bUserChange_ChangeUser_Click" Grid.ColumnSpan="2" />
-                                <Button Content="Supprimer" Height="21" Margin="6,156,460,0" Name="bUserChange_DelUser" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" />
+                                <Button Content="Supprimer" Height="21" Margin="6,156,460,0" Name="bUserChange_DelUser" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" Click="bUserChange_DelUser_Click" />
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -72,7 +72,7 @@
                                     </Grid>
                                 </GroupBox>
                                 <Button Content="Modifier" Height="21" Margin="16,122,450,0" Name="bCampusChange_Change" VerticalAlignment="Top" Width="120" />
-                                <Button Content="Supprimer" Height="21" Margin="16,157,450,0" Name="bCampusChange_Del" VerticalAlignment="Top" Width="120" />
+                                <Button Content="Supprimer" Height="21" Margin="16,157,450,0" Name="bCampusChange_Del" VerticalAlignment="Top" Width="120" Click="bCampusChange_Del_Click" />
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -111,7 +111,7 @@
                                         <Label Content="Période de la classe:" Height="23" HorizontalAlignment="Left" Margin="169,81,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" />
                                     </Grid>
                                 </GroupBox>
-                                <Button Content="Supprimer" Height="21" Margin="23,0,443,46" Name="bClassChange_Del" VerticalAlignment="Bottom" Width="120" />
+                                <Button Content="Supprimer" Height="21" Margin="23,0,443,46" Name="bClassChange_Del" VerticalAlignment="Bottom" Width="120" Click="bClassChange_Del_Click" />
                             </Grid>
                         </TabItem>
                     </TabControl>
@@ -142,7 +142,7 @@
                                     </Grid>
                                 </GroupBox>
                                 <Button Content="Modifier" Height="21" Margin="24,141,442,0" Name="bPromoChange_Change" VerticalAlignment="Top" Width="120" />
-                                <Button Content="Supprimer" Height="21" Margin="24,0,442,50" Name="bPromoChange_Del" VerticalAlignment="Bottom" Width="120" />
+                                <Button Content="Supprimer" Height="21" Margin="24,0,442,50" Name="bPromoChange_Del" VerticalAlignment="Bottom" Width="120" Click="bPromoChange_Del_Click" />
                             </Grid>
                         </TabItem>
                     </TabControl>
