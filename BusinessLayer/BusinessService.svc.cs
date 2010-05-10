@@ -414,7 +414,8 @@ namespace BusinessLayer
 						if (u == null)
 							return "l'utilisateur n'existe pas";
 						db.DeleteObject(u);
-						return "utilisateur suprimé";
+						db.SaveChanges();
+						return "ok";
 					}
 					public string delCampus(int Id)
 					{
@@ -422,7 +423,8 @@ namespace BusinessLayer
 						if (u == null)
 							return "l'campus n'existe pas";
 						db.DeleteObject(u);
-						return "campus suprimé";
+						db.SaveChanges(); 
+						return "ok";
 					}
 					public string delClass(int Id)
 					{
@@ -430,7 +432,8 @@ namespace BusinessLayer
 						if (u == null)
 							return "la classe n'existe pas";
 						db.DeleteObject(u);
-						return "classe suprimé";
+						db.SaveChanges(); 
+						return "ok";
 					}
 					public string delPromotion(int Id)
 					{
@@ -438,7 +441,8 @@ namespace BusinessLayer
 						if (u == null)
 							return "la promotion n'existe pas";
 						db.DeleteObject(u);
-						return "promotion suprimé";
+						db.SaveChanges(); 
+						return "ok";
 					}
 					public string delSubject(int Id)
 					{
@@ -446,7 +450,8 @@ namespace BusinessLayer
 						if (u == null)
 							return "la matière n'existe pas";
 						db.DeleteObject(u);
-						return "matière suprimé";
+						db.SaveChanges(); 
+						return "ok";
 					}
 					public string delPeriod(int Id)
 					{
@@ -454,7 +459,8 @@ namespace BusinessLayer
 						if (u == null)
 							return "la periode n'existe pas";
 						db.DeleteObject(u);
-						return "periode suprimé";
+						db.SaveChanges(); 
+						return "ok";
 					}
 					public string delRight(string UserName, string CampusName)
 					{return "not implemented yet";}
