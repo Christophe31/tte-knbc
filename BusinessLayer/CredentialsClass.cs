@@ -8,18 +8,14 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel;
 using DataModel;
 
-namespace BusinessLayer
+namespace CustomValidator
 {
-	public class CredentialsClass:UserNamePasswordValidator
+	public class MyCustomValidator : UserNamePasswordValidator
 	{
 
 		TteDataBase db = new TteDataBase();
 		public override void Validate(string userName, string password)
 		{
-			if (null == userName || null == password)
-			{
-				throw new ArgumentNullException();
-			}
 			if (db.User.Where(p=>p.Name==userName && p.Password == password).FirstOrDefault()==null)
 			{
 				// This throws an informative fault to the client.

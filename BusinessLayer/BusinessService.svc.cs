@@ -374,17 +374,17 @@ namespace BusinessLayer
 
 			#endregion
 			#region set
-					public Tuple<string> setUser(string UserName, string UserPassword, string UserClassName)
-					{return new Tuple<string>("not implemented yet");}
-					public string setCampus(string CampusName)
+					public string setUser(int Id, string UserName, string UserPassword, string UserClassName)
 					{return "not implemented yet";}
-					public string setClass(string ClassName, string CampusName, string PeriodeName)
+					public string setCampus(int Id, string CampusName)
 					{return "not implemented yet";}
-					public string setPromotion(string PromotionName)
+					public string setClass(int Id, string ClassName, string CampusName, string PeriodeName)
 					{return "not implemented yet";}
-					public string setSubject(string SubjectName, int Hours)
+					public string setPromotion(int Id, string PromotionName)
 					{return "not implemented yet";}
-					public string setPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd)
+					public string setSubject(int Id, string SubjectName, int Hours)
+					{return "not implemented yet";}
+					public string setPeriod(int Id, string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd)
 					{return "not implemented yet";}
 					public string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
 					{return "not implemented yet";}
@@ -398,17 +398,17 @@ namespace BusinessLayer
 					{return "not implemented yet";}
 				#endregion
 			#region del
-					public string delUser(string UserName)
+					public string delUser(int Id)
 					{return "not implemented yet";}
-					public string delCampus(string CampusName)
+					public string delCampus(int Id)
 					{return "not implemented yet";}
-					public string delClass(string ClassName, string CampusName, string PeriodeName)
+					public string delClass(int Id)
 					{return "not implemented yet";}
-					public string delPromotion(string PromotionName)
+					public string delPromotion(int Id)
 					{return "not implemented yet";}
-					public string delSubject(string SubjectName, int Hours)
+					public string delSubject(int Id)
 					{return "not implemented yet";}
-					public string delPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd)
+					public string delPeriod(int Id)
 					{return "not implemented yet";}
 					public string delRight(string UserName, string CampusName)
 					{return "not implemented yet";}

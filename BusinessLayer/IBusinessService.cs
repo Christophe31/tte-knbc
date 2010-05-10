@@ -105,19 +105,19 @@ namespace BusinessLayer
 		#endregion
 		#region set
 			[OperationContract]
-			Tuple<string> setUser(string UserName, string UserPassword, string UserClassName);
+			string setUser(int Id, string UserName, string UserPassword, string UserClassName);
 			[OperationContract]
-			string setCampus(string CampusName);
+			string setCampus(int Id, string CampusName);
 			[OperationContract]
-			string setClass(string ClassName, string CampusName, string PeriodeName);
+			string setClass(int Id, string ClassName, string CampusName, string PeriodeName);
 			[OperationContract]
-			string setPromotion(string PromotionName);
+			string setPromotion(int Id, string PromotionName);
 			[OperationContract]
-			string setSubject(string SubjectName, int Hours);
+			string setSubject(int Id, string SubjectName, int Hours);
 			[OperationContract]
-			string setPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
+			string setPeriod(int Id, string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
 			[OperationContract]
-			string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
+			string setEventToCampus( string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
 			[OperationContract]
 			string setEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
 			[OperationContract]
@@ -129,17 +129,17 @@ namespace BusinessLayer
 		#endregion
 		#region del
 			[OperationContract]
-			string delUser(string UserName);
+			string delUser(int Id);
 			[OperationContract]
-			string delCampus(string CampusName);
+			string delCampus(int Id);
 			[OperationContract]
-			string delClass(string ClassName, string CampusName, string PeriodeName);
+			string delClass(int Id);
 			[OperationContract]
-			string delPromotion(string PromotionName);
+			string delPromotion(int Id);
 			[OperationContract]
-			string delSubject(string SubjectName, int Hours);
+			string delSubject(int Id);
 			[OperationContract]
-			string delPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
+			string delPeriod(int Id);
 			[OperationContract]
 			string delRight(string UserName, string CampusName);
 			[OperationContract]
