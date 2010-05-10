@@ -166,13 +166,16 @@ namespace BusinessLayer
 								value = (
 									from period in db.Period
 									where period.Class.Any(ca => ca.Campus.Name == campus.Name)
-									select new { periodid = period.Id, periodName = period.Name, val = period.Class.Where(p => p.Campus == campus).Select(p => new { classid = p.Id, classname = p.Name }) }
+									select new { periodid = period.Id, periodName = period.Name, 
+												 val = period.Class.Where(p => p.Campus == campus).Select(p => new { classid = p.Id, classname = p.Name }) 
+											   }
 									)
 							}
 							).ToDictionary(p => new Tuple<int,string>(p.campid, p.campname), 
 								p => p.value.ToDictionary(
 									e => new Tuple<int, string> (e.periodid,e.periodName), 
-									e => e.val.Select(f=>new Tuple<int,string>(f.classid,f.classname)).ToArray()));
+									e => e.val.Select(f=>new Tuple<int,string>(f.classid,f.classname)).ToArray()
+								));
 				}
 			#endregion
 			#region add
@@ -406,17 +409,53 @@ namespace BusinessLayer
 				#endregion
 			#region del
 					public string delUser(int Id)
-					{return "not implemented yet";}
+					{
+						User u = db.User.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "l'utilisateur n'existe pas";
+						db.DeleteObject(u);
+						return "utilisateur suprimé";
+					}
 					public string delCampus(int Id)
-					{return "not implemented yet";}
+					{
+						Campus u = db.Campus.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "l'campus n'existe pas";
+						db.DeleteObject(u);
+						return "campus suprimé";
+					}
 					public string delClass(int Id)
-					{return "not implemented yet";}
+					{
+						Class u = db.Class.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "la classe n'existe pas";
+						db.DeleteObject(u);
+						return "classe suprimé";
+					}
 					public string delPromotion(int Id)
-					{return "not implemented yet";}
+					{
+						Promotion u = db.Promotion.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "la promotion n'existe pas";
+						db.DeleteObject(u);
+						return "promotion suprimé";
+					}
 					public string delSubject(int Id)
-					{return "not implemented yet";}
+					{
+						Subject u = db.Subject.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "la matière n'existe pas";
+						db.DeleteObject(u);
+						return "matière suprimé";
+					}
 					public string delPeriod(int Id)
-					{return "not implemented yet";}
+					{
+						Period u = db.Period.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "la periode n'existe pas";
+						db.DeleteObject(u);
+						return "periode suprimé";
+					}
 					public string delRight(string UserName, string CampusName)
 					{return "not implemented yet";}
 					public string delEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
