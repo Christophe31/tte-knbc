@@ -27,23 +27,37 @@ namespace Client
             Api = new CacheWrapper();
         }
 
+        #region Tuple utilisés par l'interface
+            Tuple<int, string>[] classList = null;
+            Tuple<int, string>[] userList = null;
+            Tuple<int, string>[] campusList = null;
+            Tuple<int, string>[] periodList = null;
+            Tuple<int, string>[] promoList = null;
+        #endregion
         #region Onglet "Utilisateurs"
         #region Gestion des onglets
 
-        //Un sous-onglet dans "Utilisateurs" a été choisi
-        private void tcOngletsUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            //Un sous-onglet dans "Utilisateurs" a été choisi
+            private void tcOngletsUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (sender == e.OriginalSource)
             {
                 if (tcOngletsUsers.SelectedIndex == 0)
                 {
                     //On charge la ComboBox
-                    cbUserAdd_Class.DataContext = Api.getClassesNames();
+                    //cbUserAdd_Class.DataContext = Api.getClassesNames();
+                    classList = Api.Server.getIdClassesNames();
+                    cbUserAdd_Class.DataContext = classList.Select(p => p.Item2);
                 }
                 else if (tcOngletsUsers.SelectedIndex == 1)
                 {
-                    cbUserChange_Username.DataContext = Api.getUsersNames();
-                    cbUserChange_Class.DataContext = Api.getClassesNames();
+                    //cbUserChange_Username.DataContext = Api.getUsersNames();
+                    userList = Api.Server.getIdUsersNames();
+                    cbUserChange_Username.DataContext = userList.Select(p => p.Item2);
+                    //cbUserChange_Class.DataContext = Api.getClassesNames();
+                    classList = Api.Server.getIdClassesNames();
+                    cbUserChange_Class.DataContext = classList.Select(p => p.Item2);
+
                 }
 
                 //On prépare la StatusBar
@@ -67,7 +81,6 @@ namespace Client
         {
             tbUserAdd_Password.IsEnabled = true;
         }
-
 
         //On va insérer l'utilisateur
         private void bUserAdd_AddUser_Click(object sender, RoutedEventArgs e)
@@ -149,6 +162,7 @@ namespace Client
             tbUserChange_Password.IsEnabled = true;
         }
 
+        //Si l'administrateur souhaite modifier un utilisateur
         private void bUserChange_ChangeUser_Click(object sender, RoutedEventArgs e)
         {
             string username, password, passwordHashed;
@@ -215,6 +229,43 @@ namespace Client
             */
         }
 
+        //Si l'administrateur souhaite supprimer un utilisateur
+        private void bUserChange_DelUser_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbUserChange_Username.SelectedIndex >= 0)
+            {
+                //On récupère l'id de l'utilisateur actuel à partir du Tuple
+                int idUser = userList[cbUserChange_Username.SelectedIndex].Item1;
+
+                //On tente de supprimer l'utilisateur
+                string returnValue = Api.Server.delUser(idUser);
+
+                //Si la suppression s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
+                    sbStatusText.Text = "Utilisateur \""+cbUserChange_Username.SelectedItem.ToString()+"\"supprimé avec succès!";
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
+                    sbStatusText.Text = returnValue;
+                }
+
+                //On rafraichit la combobox des utilisateurs
+                userList = Api.Server.getIdUsersNames();
+                cbUserChange_Username.DataContext = userList.Select(p => p.Item2);
+
+                //On met à zéro la combox des classes et le textbox de l'utilisateur
+                tbUserChange_Username.Text = "";
+                cbUserChange_Class.SelectedIndex = -1;
+
+            }
+
+        }
+
         #endregion
         #endregion
         #region Onglet "Campus"
@@ -228,7 +279,9 @@ namespace Client
 
                 if (tcOngletsCampus.SelectedIndex == 1)
                 {
-                    cbCampusChange_Campus.DataContext = Api.getCampusNames();
+                    //cbCampusChange_Campus.DataContext = Api.getCampusNames();
+                    campusList = Api.Server.getIdCampusNames();
+                    cbCampusChange_Campus.DataContext = campusList.Select(p => p.Item2);
                 }
 
                 //On prépare la StatusBar
@@ -245,7 +298,7 @@ namespace Client
         private void cbUserChange_Username_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Si un utilisateur a été choisi
-            if (cbUserChange_Username.SelectedIndex > 0)
+            if (cbUserChange_Username.SelectedIndex >= 0)
             {
                 //On met à jour ses propriétés (sauf le mot de passe)
                 tbUserChange_Username.Text = cbUserChange_Username.SelectedItem.ToString();
@@ -286,13 +339,49 @@ namespace Client
 
         #endregion
         #region Onglet "Campus -> Modifier / Supprimer"
-        //Si l'utilisateur choisit un Campus
-        private void cbCampusChange_Campus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+            //Si l'utilisateur choisit un Campus
+            private void cbCampusChange_Campus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cbCampusChange_Campus.SelectedIndex >= 0)
             {
                 //On change la TextBox
                 tbCampusChange_Campus.Text = cbCampusChange_Campus.SelectedItem.ToString();
+            }
+        }
+
+            //Si l'administrateur souhaite supprimer un Campus
+            private void bCampusChange_Del_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbCampusChange_Campus.SelectedIndex >= 0)
+            {
+                //On récupère l'id du campus actuel à partir du Tuple
+                int idCampus = campusList[cbCampusChange_Campus.SelectedIndex].Item1;
+
+                //On tente de supprimer le campus
+                string returnValue = Api.Server.delCampus(idCampus);
+
+
+                //Si la suppression s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
+                    sbStatusText.Text = "Campus \"" + cbCampusChange_Campus.SelectedItem.ToString()+ "\"supprimé avec succès!";
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
+                    sbStatusText.Text = returnValue;
+                }
+
+                //On met à jour la combobox des campus
+                campusList = Api.Server.getIdCampusNames();
+                cbCampusChange_Campus.DataContext = campusList.Select(p => p.Item2);
+
+                //On remet à zéro le textbox du campus
+                tbCampusChange_Campus.Text = "";
             }
         }
 
@@ -308,15 +397,26 @@ namespace Client
                 if (tcOngletsClasses.SelectedIndex == 0)
                 {
                     //On charge les ComboBox
-                    cbClassAdd_Campus.DataContext = Api.getCampusNames();
-                    cbClassAdd_Period.DataContext = Api.getPeriodsNames();
+                    //cbClassAdd_Campus.DataContext = Api.getCampusNames();
+                    campusList = Api.Server.getIdCampusNames();
+                    cbClassAdd_Campus.DataContext = campusList.Select(p => p.Item2);
+                    //cbClassAdd_Period.DataContext = Api.getPeriodsNames();
+                    periodList = Api.Server.getIdPeriodsNames();
+                    cbClassAdd_Period.DataContext = periodList.Select(p => p.Item2);
+
                 }
                 else if (tcOngletsClasses.SelectedIndex == 1)
                 {
                     //On charge les ComboBox
-                    cbClassChange_Class.DataContext = Api.getClassesNames();
-                    cbClassChange_Campus.DataContext = Api.getCampusNames();
-                    cbClassChange_Period.DataContext = Api.getPeriodsNames();
+                    //cbClassChange_Class.DataContext = Api.getClassesNames();
+                    classList = Api.Server.getIdClassesNames();
+                    cbClassChange_Class.DataContext = classList.Select(p => p.Item2);
+                    //cbClassChange_Campus.DataContext = Api.getCampusNames();
+                    campusList = Api.Server.getIdCampusNames();
+                    cbClassChange_Campus.DataContext = campusList.Select(p => p.Item2);
+                    //cbClassChange_Period.DataContext = Api.getPeriodsNames();
+                    periodList = Api.Server.getIdPeriodsNames();
+                    cbClassChange_Period.DataContext = periodList.Select(p => p.Item2);
                 }
 
                 //On prépare la StatusBar
@@ -380,6 +480,47 @@ namespace Client
             }
         }
 
+        //Si l'administrateur souhaite supprimer une classe
+        private void bClassChange_Del_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbClassChange_Class.SelectedIndex >= 0)
+            {
+                //On récupère l'id de la classe actuelle à partir du Tuple
+                int idClass = classList[cbClassChange_Class.SelectedIndex].Item1;
+
+                //On tente de supprimer le campus
+                string returnValue = Api.Server.delClass(idClass);
+
+
+                //Si la suppression s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
+                    sbStatusText.Text = "Classe \"" + cbClassChange_Class.SelectedItem.ToString() + "\"supprimée avec succès!";
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
+                    sbStatusText.Text = returnValue;
+                }
+
+                //On met à jour la combobox des classes
+                classList = Api.Server.getIdClassesNames();
+                cbClassChange_Class.DataContext = classList.Select(p => p.Item2);
+
+                //On met à zéro la combobox des campus
+                cbClassChange_Campus.SelectedIndex = -1;
+
+                //On met à zéro la combobox des périodes
+                cbClassChange_Period.SelectedIndex = -1;
+
+                //On remet à zéro le textbox du campus
+                tbCampusChange_Campus.Text = "";
+            }
+        }
+
         #endregion
 
 
@@ -394,7 +535,9 @@ namespace Client
                 if (tcOngletsPromotions.SelectedIndex == 1)
                 {
                     //On charge la ComboBox
-                    cbPromoChange_Promo.DataContext = Api.getPromotionsNames();
+                    //cbPromoChange_Promo.DataContext = Api.getPromotionsNames();
+                    promoList = Api.Server.getIdPromotionsNames();
+                    cbPromoChange_Promo.DataContext = promoList.Select(p => p.Item2);
                 }
 
                 //On prépare la StatusBar
@@ -444,8 +587,45 @@ namespace Client
         //Si l'utilisateur choisit une Promotion
         private void cbPromoChange_Promo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //On rafraichit la textbox
-            tbPromoChange_Promo.Text = cbPromoChange_Promo.SelectedItem.ToString();
+            if (cbPromoChange_Promo.SelectedIndex >= 0)
+            {
+                //On rafraichit la textbox
+                tbPromoChange_Promo.Text = cbPromoChange_Promo.SelectedItem.ToString();
+            }
+        }
+
+        //Si l'administrateur souhaite supprimer une promotion
+        private void bPromoChange_Del_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbPromoChange_Promo.SelectedIndex >= 0)
+            {
+                //On récupère l'id de la promotion actuelle à partir du Tuple
+                int idPromo = promoList[cbPromoChange_Promo.SelectedIndex].Item1;
+
+                //On tente de supprimer la promotion
+                string returnValue = Api.Server.delPromotion(idPromo);
+
+                //Si la suppression s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
+                    sbStatusText.Text = "Promotion \"" + cbPromoChange_Promo.SelectedItem.ToString() + "\"supprimée avec succès!";
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
+                    sbStatusText.Text = returnValue;
+                }
+
+                //On rafraichit la combobox des promotion
+                promoList = Api.Server.getIdPromotionsNames();
+                cbPromoChange_Promo.DataContext = promoList.Select(p => p.Item2);
+
+                //On met à zéro le textbox de la promotion
+                tbPromoChange_Promo.Text = "";
+            }
         }
 
         #endregion
@@ -622,6 +802,14 @@ namespace Client
             }
         }
         #endregion
+
+        
+
+        
+
+        
+
+        
         #endregion
     }
 }
