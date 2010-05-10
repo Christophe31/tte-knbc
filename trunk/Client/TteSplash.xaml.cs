@@ -14,34 +14,41 @@ using System.Threading;
 
 namespace Client
 {
+	/// <summary>
+	/// Classe de lancement et du splashscreen.
+	/// </summary>
 	public partial class TteSplash : Window
 	{
+		protected MainWindow t;
 		public TteSplash()
 		{
-			
 			InitializeComponent();
 			this.Show();
 			this.BeginStoryboard((Storyboard)FindResource("Storyboard1"));
-			// Insert code required on object creation below this point.
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			new Thread((ThreadStart)DelayedStart).Start();
 			t = new MainWindow();
-			new Thread((ThreadStart)thded).Start();
 		}
-
-		static MainWindow t;
-		private void thded()
+		private void DelayedStart()
 		{
 			CacheWrapper c = new CacheWrapper();
-			t.Dispatcher.BeginInvoke((ThreadStart)nothded);
-		}
-		private void nothded()
-		{
-			t.Show();
-			this.Close();
+			this.Dispatcher.BeginInvoke((ThreadStart)Hide);
+			t.Dispatcher.BeginInvoke((ThreadStart)Ending);
 		}
 
+		private void Hide()
+		{	this.Visibility = System.Windows.Visibility.Hidden;
+			t.Visibility = System.Windows.Visibility.Hidden;
+		}
+		private void Ending()
+		{
+			t.Show();
+			Thread.Sleep(500);
+			t.Visibility = System.Windows.Visibility.Visible;
+			this.Close();
+		}
 	}
 }
