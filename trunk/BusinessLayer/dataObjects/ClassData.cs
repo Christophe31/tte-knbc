@@ -9,9 +9,9 @@ namespace BusinessLayer
 {
 
 	[DataContract]
-	public class UserData
+	public class ClassData
 	{
-		public UserData()
+		public ClassData()
 		{
 
 		}
@@ -19,53 +19,45 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public UserData(User UserEntity, string CampusName, int ClassId)
+		public ClassData(Class ClassEntity, string CampusName, int PeriodId)
 		{
-			this.Id = UserEntity.Id;
-			this.Name = UserEntity.Name;
+			this.Id = ClassEntity.Id;
+			this.Name = ClassEntity.Name;
 			this.CampusName = CampusName;
-			this.ClassId = ClassId;
-			this.Password = null;
+			this.Period = PeriodId;
 		}
-		public static UserData UD(User UserEntity, string CampusName, int ClassId)
+		public static ClassData CD(Class ClassEntity, string CampusName, int PeriodId)
 		{
-			return new UserData
+			return new ClassData
 			{
-				Id = UserEntity.Id,
-				Name = UserEntity.Name,
+				Id = ClassEntity.Id,
+				Name = ClassEntity.Name,
 				CampusName = CampusName,
-				ClassId = ClassId,
-				Password=null
+				Period=PeriodId
 			};
 		}
 		/// <sumClassName = ClassName;mary>
-		/// Date de Début de l'évènement.
+		/// Id.
 		/// </summary>
 		[DataMember]
 		public int Id { get; set; }
 
 		/// <summary>
-		/// Campus de l'utilisateur
+		/// Campus de la classe
 		/// </summary>
 		[DataMember]
 		public string CampusName { get; set; }
 
 		/// <summary>
-		/// nom de la classe de l'utilisateur
-		/// </summary>
-		[DataMember]
-		public int ClassId { get; set; }
-
-		/// <summary>
-		/// Nom de l'utilisateur
+		/// Nom de la classe
 		/// </summary>
 		[DataMember]
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Mot de passe de l'utilisateur... acessible pour les objets recus, envoyé uniquement à null.
+		/// Id de la periode
 		/// </summary>
 		[DataMember]
-		public string Password { get; set; }
+		public int Period { get; set; }
 	}
 }

@@ -62,6 +62,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="dataObjects\ClassData.cs" />
+    <Compile Include="dataObjects\PeriodData.cs" />
+    <Compile Include="dataObjects\SubjectData.cs" />
+    <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="Cache\CacheProcess.cs" />
     <Compile Include="Service References\BusinessLayer\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -91,7 +95,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Cache\CacheWrapper.cs" />
-    <Compile Include="Calendar\EventData.cs" />
+    <Compile Include="dataObjects\EventData.cs" />
     <Compile Include="Calendar\CalendarDay.xaml.cs">
       <DependentUpon>CalendarDay.xaml</DependentUpon>
     </Compile>
@@ -155,6 +159,9 @@
     <None Include="Service References\BusinessLayer\BusinessService4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\BusinessLayer\Client.BusinessLayer.ClassData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BusinessLayer\Client.BusinessLayer.EventData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -172,6 +179,15 @@
     <None Include="Service References\BusinessLayer\BusinessService.disco" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\BusinessLayer\Client.BusinessLayer.PeriodData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessLayer\Client.BusinessLayer.SubjectData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessLayer\Client.BusinessLayer.UserData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BusinessLayer\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>

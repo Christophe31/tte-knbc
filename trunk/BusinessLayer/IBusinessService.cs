@@ -105,17 +105,17 @@ namespace BusinessLayer
 		#endregion
 		#region set
 			[OperationContract]
-			string setUser(int Id, string UserName, string UserPassword, string UserClassName);
+			string setUser(UserData UD);
 			[OperationContract]
 			string setCampus(int Id, string CampusName);
 			[OperationContract]
-			string setClass(int Id, string ClassName, string CampusName, string PeriodeName);
+			string setClass(ClassData CD);
 			[OperationContract]
 			string setPromotion(int Id, string PromotionName);
 			[OperationContract]
-			string setSubject(int Id, string SubjectName, int Hours);
+			string setSubject(SubjectData SD);
 			[OperationContract]
-			string setPeriod(int Id, string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
+			string setPeriod(PeriodData PD);
 			[OperationContract]
 			string setEventToCampus( string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
 			[OperationContract]
@@ -152,6 +152,16 @@ namespace BusinessLayer
 			string delEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
 			[OperationContract]
 			string delEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
+		#endregion
+		#region get Current
+			[OperationContract]
+			UserData getUser(int ID);
+			[OperationContract]
+			ClassData getClass(int ID);
+			[OperationContract]
+			PeriodData getPeriod(int ID);
+			[OperationContract]
+			SubjectData getSubject(int ID);
 		#endregion
 	}
 }

@@ -80,6 +80,9 @@
       <DependentUpon>BusinessService.svc</DependentUpon>
     </Compile>
     <Compile Include="CredentialsClass.cs" />
+    <Compile Include="dataObjects\ClassData.cs" />
+    <Compile Include="dataObjects\PeriodData.cs" />
+    <Compile Include="dataObjects\Subject.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="dataObjects\EventData.cs" />
     <Compile Include="IBusinessService.cs" />
