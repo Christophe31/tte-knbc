@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using Client.BusinessLayer;
 
 namespace Client
@@ -30,15 +31,24 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+			new Thread((ThreadStart)FillCombobox).Start();
+        }
+
+		private void FillCombobox()
+		{
+			this.Dispatcher.BeginInvoke((ThreadStart)FillComboboxes);
+		}
+		private void FillComboboxes()
+		{
 			Api = new CacheWrapper();
 			CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
-            // ComboBoxes initialisation
-            ViewType.SelectedIndex = 4;
-            CampusName.DataContext = Api.getCampusNames();
-            PeriodName.DataContext = Api.getPeriodsNames();
-            ClassName.DataContext = Api.getClassesNames();
-        }
+			// ComboBoxes initialisation
+			ViewType.SelectedIndex = 4;
+			CampusName.DataContext = Api.getCampusNames();
+			PeriodName.DataContext = Api.getPeriodsNames();
+			ClassName.DataContext = Api.getClassesNames();
+		}
 
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
