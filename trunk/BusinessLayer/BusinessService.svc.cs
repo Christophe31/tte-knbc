@@ -179,13 +179,6 @@ namespace BusinessLayer
 				}
 			#endregion
 			#region add
-                /// <summary>
-                /// Ne fonctonne pas
-                /// </summary>
-                /// <param name="UserName"></param>
-                /// <param name="UserPassword"></param>
-                /// <param name="UserClassName"></param>
-                /// <returns></returns>
 				public string addUser(string UserName, string UserPassword, string UserClassName)
 				{
 					if (db.User.Where(p=>p.Name==UserName).Count()>0)
@@ -385,17 +378,75 @@ namespace BusinessLayer
 			#endregion
 			#region set
 					public string setUser(UserData UD)
-					{return "not implemented yet";}
+					{
+						if (db.User.Any(p => p.Id != UD.Id != null))
+							return "L'utilisateur n'existe pas";
+						User u = db.User.Where(p => p.Id == UD.Id).Single();
+						u.Name = UD.Name;
+						if (UD.Password!=null)
+							u.Password=UD.Password;
+						u.Class = db.Class.Where(p => p.Id == UD.ClassId).FirstOrDefault();
+						db.SaveChanges();
+						return "ok";
+					}
 					public string setCampus(int Id, string CampusName)
-					{return "not implemented yet";}
+					{
+						if (db.Campus.Any(p => p.Id != Id != null))
+							return "Le campus n'existe pas";
+						Campus c = db.Campus.Where(p => p.Id == Id).Single();
+						c.Name = CampusName;
+						db.SaveChanges();
+						return "ok";
+					}
 					public string setClass(ClassData CD)
-					{return "not implemented yet";}
+					{
+						if (db.Class.Any(p => p.Id != CD.Id) != null)
+							return "La classe n'existe pas";
+						if (db.Campus.Where(p => p.Name == CD.CampusName).FirstOrDefault() != null)
+							return "Le Campus n'existe pas";
+						if (db.Period.Where(p => p.Id == CD.Period).FirstOrDefault() != null)
+							return "La Period n'existe pas";
+						Class c = db.Class.Where(p => p.Id == CD.Id).Single();
+						c.Name = CD.Name;
+						c.Campus = db.Campus.Where(p => p.Name == CD.CampusName).FirstOrDefault();
+						c.Period = db.Period.Where(p => p.Id == CD.Period).FirstOrDefault();
+						db.SaveChanges();
+						return "ok";
+					}
 					public string setPromotion(int Id, string PromotionName)
-					{return "not implemented yet";}
+					{
+						if (db.Promotion.Any(p => p.Id != Id))
+							return "La Promotion n'existe pas";
+						Promotion c = db.Promotion.Where(p => p.Id == Id).Single();
+						c.Name = PromotionName;
+						db.SaveChanges();
+						return "ok";
+					}
 					public string setSubject(SubjectData SD)
-					{return "not implemented yet";}
+					{
+						if (db.Subject.Any(p => p.Id == SD.Id)!=null)
+							return "Le sujet n'existe pas";;
+						Subject s = db.Subject.Where(p => p.Id == SD.Id).Single();
+						s.Name = SD.Name;
+						s.Modality = SD.Modality;
+						s.Hours = SD.Hours;
+						db.SaveChanges();
+						return "ok";
+					}
 					public string setPeriod(PeriodData PD)
-					{return "not implemented yet";}
+					{
+						if (db.Period.Any(p => p.Id == PD.Id) != null)
+							return "Le period n'existe pas";
+						if (db.Promotion.Where(p => p.Name == PD.PromotionName).FirstOrDefault() != null)
+							return "La promotion n'existe pas";
+						Period per = db.Period.Where(p => p.Id == PD.Id).Single();
+						per.Name = PD.Name;
+						per.Start = PD.Start;
+						per.End = PD.End;
+						per.Promotion=db.Promotion.Where(p => p.Name == PD.PromotionName).Single();
+						db.SaveChanges();
+						return "ok";
+					}
 					public string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
 					{return "not implemented yet";}
 					public string setEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place)
