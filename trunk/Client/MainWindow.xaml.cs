@@ -29,6 +29,12 @@ namespace Client
 			InitializeComponent();
 		}
 
+        /// <summary>
+        /// Called when the window is ready.
+        /// Launches a thread which will fill ComboBoxes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 			new Thread((ThreadStart)FillCombobox).Start();
@@ -38,6 +44,10 @@ namespace Client
 		{
 			this.Dispatcher.BeginInvoke((ThreadStart)FillComboboxes);
 		}
+
+        /// <summary>
+        /// Fill ComboBoxes.
+        /// </summary>
 		private void FillComboboxes()
 		{
 			Api = new CacheWrapper();
@@ -48,8 +58,19 @@ namespace Client
 			CampusName.DataContext = Api.getCampusNames();
 			PeriodName.DataContext = Api.getPeriodsNames();
 			ClassName.DataContext = Api.getClassesNames();
+
+            // Events DataGrid initialisation
+            EventData[] events = Api.getEventsByUniversity(DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), DateTime.MinValue);
+            EventsGrid.DataContext = events;
+            
 		}
 
+        /// <summary>
+        /// Called when an item is selected in ComboBoxes.
+        /// Display and hide required ComboBoxes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = ViewType.SelectedIndex;
@@ -93,6 +114,14 @@ namespace Client
             RefreshClassName();
         }
 
+        private void PeriodName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshClassName();
+        }
+
+        /// <summary>
+        /// The ClassName ComboBox is filled in function of the selected campus and period.
+        /// </summary>
         private void RefreshClassName()
         {
             if (ViewType.SelectedIndex == 3)
@@ -110,11 +139,6 @@ namespace Client
 					ClassName.DataContext = null;
 				}
             }
-        }
-
-        private void PeriodName_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            RefreshClassName();
         }
 
 		private void button1_Click_1(object sender, RoutedEventArgs e)
