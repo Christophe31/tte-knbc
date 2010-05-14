@@ -69,9 +69,9 @@ namespace Client
 		{
 			return Server.getModalities();
 		}
-		public Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
+        public Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> getCampusPeriodClassTree()
 		{
-			return Server.getCampusPeriodClassTree();
+			return Server.getIdCampusPeriodClassTree();
 		}
 		#endregion
 

@@ -36,7 +36,7 @@ namespace Client
 
 		private void button1_Click(object sender, RoutedEventArgs e)
 		{
-			Dictionary<string,Dictionary<string,string[]>> truc = Api.getCampusPeriodClassTree();
+            Dictionary<string, Dictionary<string, string[]>> truc = null;//Api.getCampusPeriodClassTree();
 			Dictionary<string[], ComboBox> Complete0 = new Dictionary<string[], ComboBox>();
 			Complete0.Add(truc.Keys.ToArray(),CampusBox);
 			Complete0.Add(truc.Values.SelectMany(p=>p.Keys).Distinct().ToArray(),PeriodeBox);
