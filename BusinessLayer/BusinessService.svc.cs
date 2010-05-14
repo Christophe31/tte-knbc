@@ -16,11 +16,22 @@ namespace BusinessLayer
 		{
 			db = new TteDataBase();
 		}
+		public void centerToSqlDate(ref DateTime d)
+		{
+			//The range of SQL's datetime starts at January 1st, 1753 and ends in 9999.
+			DateTime min = new DateTime(1753, 1, 2);
+			DateTime max = new DateTime(9998, 12, 31);
+			if (d < min)
+				d=min;
+			else if (d > max)
+				d=max;
+		}
 
 		#region IBusinessLayer Members
 			#region Lecture d'évènements
 				public EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
+					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
@@ -32,17 +43,19 @@ namespace BusinessLayer
 
 				public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
+					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus == null && p.Period == null && p.Class == null &&
-									 db.University.First().LastChange > LastUpdate
+									 db.University.FirstOrDefault().LastChange > LastUpdate
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 
 				public EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
+					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
@@ -54,6 +67,7 @@ namespace BusinessLayer
 
 				public EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
+					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
@@ -65,6 +79,7 @@ namespace BusinessLayer
 
 				public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate) 
 				{
+					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
@@ -118,7 +133,6 @@ namespace BusinessLayer
 				}
 				public Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree()
 				{
-					/// Dictionary<campus, Dictionary<period, classes[]>>
 					return (from campus in db.Campus
 								where campus.Classes.Any(p=>p.Period.Name!=null)
 								select new {key=campus.Name, value=(
