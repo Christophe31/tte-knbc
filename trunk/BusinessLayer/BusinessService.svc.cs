@@ -29,13 +29,13 @@ namespace BusinessLayer
 
 		#region IBusinessLayer Members
 			#region Lecture d'évènements
-				public EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									 p.Campus.Name == CampusName &&
+									 p.Campus.Id == CampusId &&
 									 p.Campus.LastChange > LastUpdate
 								 select new { evt = p, sub = p.Subject.Name,mod=p.Subject.Modality , spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub,e.mod, e.spk)).ToArray();
@@ -53,25 +53,25 @@ namespace BusinessLayer
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 
-				public EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									p.Period.Name == PeriodName &&
+									p.Period.Id == PeriodId &&
 									p.Period.LastChange > LastUpdate
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
 
-				public EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop, DateTime LastUpdate)
 				{
 					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									p.Class.Name ==ClassName &&
+									p.Class.Id ==ClassId &&
 									p.Class.LastChange > LastUpdate
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
@@ -461,15 +461,7 @@ namespace BusinessLayer
 						db.SaveChanges();
 						return "ok";
 					}
-					public string setEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
-					{return "not implemented yet";}
-					public string setEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place)
-					{return "not implemented yet";}
-					public string setEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place)
-					{return "not implemented yet";}
-					public string setEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place)
-					{return "not implemented yet";}
-					public string setEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
+					public string setEvent(EventData EditedEvent)
 					{return "not implemented yet";}
 			#endregion
 			#region del

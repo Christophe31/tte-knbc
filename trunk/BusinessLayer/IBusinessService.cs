@@ -13,13 +13,13 @@ namespace BusinessLayer
 	{
 		#region Lecture d'évènements
 			[OperationContract]
-			EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
 			EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
-			EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
-			EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop, DateTime LastUpdate);
 			[OperationContract]
 			EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate);
 		#endregion
@@ -117,15 +117,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string setPeriod(PeriodData PD);
 			[OperationContract]
-			string setEventToCampus( string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
-			[OperationContract]
-			string setEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
-			[OperationContract]
-			string setEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
-			[OperationContract]
-			string setEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
-			[OperationContract]
-			string setEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
+			string setEvent( EventData EditedEvent);
 		#endregion
 		#region del
 			[OperationContract]

@@ -19,21 +19,21 @@ namespace Client
 
 
 		#region Lecture d'évènements
-		public EventData[] getEventsByCampus(string CampusName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return Server.getEventsByCampus(CampusName, Start, Stop, LastUpdate);
+			return Server.getEventsByCampus(CampusId, Start, Stop, LastUpdate);
 		}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
 			return Server.getEventsByUniversity(Start, Stop, LastUpdate);
 		}
-		public EventData[] getEventsByPeriod(string PeriodName, DateTime Start, DateTime Stop, DateTime LastUpdate) 
+		public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop, DateTime LastUpdate) 
 		{
-			return Server.getEventsByPeriod(PeriodName, Start, Stop, LastUpdate);
+			return Server.getEventsByPeriod(PeriodId, Start, Stop, LastUpdate);
 		}
-		public EventData[] getEventsByClass(string ClassName, DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return Server.getEventsByClass(ClassName, Start, Stop, LastUpdate);
+			return Server.getEventsByClass(ClassId, Start, Stop, LastUpdate);
 		}
 		public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{

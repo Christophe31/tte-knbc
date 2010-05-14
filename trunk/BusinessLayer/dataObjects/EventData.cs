@@ -21,6 +21,7 @@ namespace BusinessLayer
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
 		public EventData(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
 		{
+			this.Id = EventEntity.Id;
 			this.Start = EventEntity.Start;
 			this.End = EventEntity.End;
 			this.Mandatory = EventEntity.Mandatory;
@@ -33,6 +34,7 @@ namespace BusinessLayer
 		public static EventData ED(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
 		{
 			return new EventData {
+				Id = EventEntity.Id,
 				Start = EventEntity.Start,
 				End = EventEntity.End,
 				Name = EventEntity.Name,
@@ -43,6 +45,8 @@ namespace BusinessLayer
 				Speaker = NameSpeaker};
 		}
 
+		[DataMember]
+		public int Id { get; set; }
 		/// <summary>
 		/// Date de Début de l'évènement.
 		/// </summary>
