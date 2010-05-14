@@ -33,7 +33,7 @@
             <ComboBox Margin="0" Visibility="Collapsed" Name="ClassName" ItemsSource="{Binding}" SelectedIndex="0" />
         </StackPanel>
 
-        <TabControl Grid.Column="0" Grid.Row="1" Margin="0,3">
+        <TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="1" Margin="0,3">
             <TabItem>
                 <TabItem.Header>
                     <TextBlock>Semaine</TextBlock>
@@ -86,6 +86,7 @@
                     </ScrollViewer>
                 </Grid>
             </TabItem>
+            
             <TabItem>
                 <TabItem.Header>
                     <TextBlock>Liste</TextBlock>
@@ -93,6 +94,12 @@
                 <DataGrid Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
+                        <DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
+                        <DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
+                        <DataGridTextColumn Header="Début" Binding="{Binding Start}"/>
+                        <DataGridTextColumn Header="Fin" Binding="{Binding End}"/>
+                        <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
