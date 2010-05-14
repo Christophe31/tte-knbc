@@ -55,11 +55,9 @@ namespace Client
 
 			// ComboBoxes initialisation
 			ViewType.SelectedIndex = 0;
-            CampusName.DataContext = (from tuple in CampusPeriodClassTree.Keys
-                                      select tuple.Item2).ToList();
-			PeriodName.DataContext = Api.getPeriodsNames();
+            CampusName.DataContext = Api.getCampusNames();
+            PeriodName.DataContext = Api.getPeriodsNames();
 			//ClassName.DataContext = Api.getClassesNames();
-            RefreshClassName();
 
             // Events DataGrid initialisation
             EventsGrid.DataContext = Api.getEventsByUniversity(DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), new DateTime(2010, 5, 12));
@@ -127,7 +125,13 @@ namespace Client
             {
 				try
 				{
-					//ClassName.DataContext = CampusPeriodClassTree[(string)CampusName.SelectedValue][(string)PeriodName.SelectedValue];
+                    Tuple<int, string> campus = (from c in CampusPeriodClassTree.Keys
+                                                 where c.Item2 == CampusName.SelectedValue
+                                                 select c).FirstOrDefault();
+                    Tuple<int, string> period = (from p in CampusPeriodClassTree[campus].Keys
+                                                 where p.Item2 == PeriodName.SelectedValue
+                                                 select p).FirstOrDefault();
+					ClassName.DataContext = CampusPeriodClassTree[campus][period];
 				}
 				catch (KeyNotFoundException)
 				{
