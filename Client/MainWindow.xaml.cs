@@ -60,9 +60,8 @@ namespace Client
 			ClassName.DataContext = Api.getClassesNames();
 
             // Events DataGrid initialisation
-            EventData[] events = Api.getEventsByUniversity(DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), DateTime.MinValue);
+            EventData[] events = Api.getEventsByClass("B3A", DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), new DateTime(2010, 5, 12));
             EventsGrid.DataContext = events;
-            
 		}
 
         /// <summary>
