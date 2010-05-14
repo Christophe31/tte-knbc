@@ -33,16 +33,7 @@ namespace BusinessLayer
 		}
 		public static EventData ED(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
 		{
-			return new EventData {
-				Id = EventEntity.Id,
-				Start = EventEntity.Start,
-				End = EventEntity.End,
-				Name = EventEntity.Name,
-				Place = EventEntity.Place,
-				Subject = NameSubject,
-				Mandatory = EventEntity.Mandatory,
-				Modality = Modality,
-				Speaker = NameSpeaker};
+			return new EventData (EventEntity, NameSubject, Modality, NameSpeaker);
 		}
 
 		[DataMember]

@@ -63,19 +63,19 @@ namespace BusinessLayer
 		#endregion
 		#region Identified completion
 			[OperationContract]
-			Tuple<int,string>[] getIdCampusNames();
+			IdName[] getIdCampusNames();
 			[OperationContract]
-			Tuple<int, string>[] getIdClassesNames();
+			IdName[] getIdClassesNames();
 			[OperationContract]
-			Tuple<int, string>[] getIdPromotionsNames();
+			IdName[] getIdPromotionsNames();
 			[OperationContract]
-			Tuple<int, string>[] getIdPeriodsNames();
+			IdName[] getIdPeriodsNames();
 			[OperationContract]
 			Tuple<int, string, string>[] getIdSubjectsNamesModality();
 			[OperationContract]
-			Tuple<int, string>[] getIdUsersNames();
+			IdName[] getIdUsersNames();
 			[OperationContract]
-			Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> getIdCampusPeriodClassTree();
+			Dictionary<IdName, Dictionary<IdName, IdName[]>> getIdCampusPeriodClassTree();
 		#endregion
 		#region add
 			[OperationContract]

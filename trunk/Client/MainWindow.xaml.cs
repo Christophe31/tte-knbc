@@ -22,7 +22,7 @@ namespace Client
 	public partial class MainWindow : Window
     {
         protected CacheWrapper Api;
-        protected Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> CampusPeriodClassTree;
+        protected Dictionary<IdName, Dictionary<IdName, IdName[]>> CampusPeriodClassTree;
 
 		public MainWindow()
 		{
@@ -55,8 +55,10 @@ namespace Client
 
 			// ComboBoxes initialisation
 			ViewType.SelectedIndex = 0;
+
             CampusName.DataContext = Api.getCampusNames();
             PeriodName.DataContext = Api.getPeriodsNames();
+
 			//ClassName.DataContext = Api.getClassesNames();
 
             // Events DataGrid initialisation
@@ -125,11 +127,11 @@ namespace Client
             {
 				try
 				{
-                    Tuple<int, string> campus = (from c in CampusPeriodClassTree.Keys
-                                                 where c.Item2 == CampusName.SelectedValue
+                    IdName campus = (from c in CampusPeriodClassTree.Keys
+                                                 where c.Name == CampusName.SelectedValue
                                                  select c).FirstOrDefault();
-                    Tuple<int, string> period = (from p in CampusPeriodClassTree[campus].Keys
-                                                 where p.Item2 == PeriodName.SelectedValue
+                    IdName period = (from p in CampusPeriodClassTree[campus].Keys
+                                                 where p.Name == PeriodName.SelectedValue
                                                  select p).FirstOrDefault();
 					ClassName.DataContext = CampusPeriodClassTree[campus][period];
 				}

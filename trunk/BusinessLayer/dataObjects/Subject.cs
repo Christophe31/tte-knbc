@@ -28,13 +28,7 @@ namespace BusinessLayer
 		}
 		public static SubjectData SD(Subject SubjectEntity)
 		{
-			return new SubjectData
-			{
-				Id = SubjectEntity.Id,
-				Name = SubjectEntity.Name,
-				Modality = SubjectEntity.Modality,
-				Hours = SubjectEntity.Hours
-			};
+			return new SubjectData(SubjectEntity);
 		}
 		/// <sumSubjectName = SubjectName;mary>
 		/// Id.

@@ -28,11 +28,11 @@ namespace Client
         }
 
         #region Tuple utilisés par l'interface
-            TupleWraper[] classList = null;
-			TupleWraper[] userList = null;
-			TupleWraper[] campusList = null;
-			TupleWraper[] periodList = null;
-			TupleWraper[] promoList = null;
+            IdName[] classList = null;
+			IdName[] userList = null;
+			IdName[] campusList = null;
+			IdName[] periodList = null;
+			IdName[] promoList = null;
         #endregion
         #region Onglet "Utilisateurs"
         #region Gestion des onglets
@@ -46,16 +46,16 @@ namespace Client
                 {
                     //On charge la ComboBox
                     //cbUserAdd_Class.DataContext = Api.getClassesNames();
-                    classList = Api.Server.getIdClassesNames().Select(p=>new TupleWraper(p)).ToArray();
+                    classList = Api.Server.getIdClassesNames().ToArray();
                     cbUserAdd_Class.DataContext = classList;
                 }
                 else if (tcOngletsUsers.SelectedIndex == 1)
                 {
                     //cbUserChange_Username.DataContext = Api.getUsersNames();
-					userList = Api.Server.getIdUsersNames().Select(p => new TupleWraper(p)).ToArray();
+					userList = Api.Server.getIdUsersNames().ToArray();
                     cbUserChange_Username.DataContext = userList;
                     //cbUserChange_Class.DataContext = Api.getClassesNames();
-					classList = Api.Server.getIdClassesNames().Select(p => new TupleWraper(p)).ToArray();
+					classList = Api.Server.getIdClassesNames().ToArray();
                     cbUserChange_Class.DataContext = classList;
 
                 }
@@ -255,7 +255,7 @@ namespace Client
                 }
 
                 //On rafraichit la combobox des utilisateurs
-                userList = Api.Server.getIdUsersNames().Select(p=>new TupleWraper(p)).ToArray();
+                userList = Api.Server.getIdUsersNames().ToArray();
                 cbUserChange_Username.DataContext = userList;
 
                 //On met à zéro la combox des classes et le textbox de l'utilisateur
@@ -280,7 +280,7 @@ namespace Client
                 if (tcOngletsCampus.SelectedIndex == 1)
                 {
                     //cbCampusChange_Campus.DataContext = Api.getCampusNames();
-					campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+					campusList = Api.Server.getIdCampusNames().ToArray();
                     cbCampusChange_Campus.DataContext = campusList;
                 }
 
@@ -377,7 +377,7 @@ namespace Client
                 }
 
                 //On met à jour la combobox des campus
-				campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+				campusList = Api.Server.getIdCampusNames().ToArray();
                 cbCampusChange_Campus.DataContext = campusList;
 
                 //On remet à zéro le textbox du campus
@@ -398,10 +398,10 @@ namespace Client
                 {
                     //On charge les ComboBox
                     //cbClassAdd_Campus.DataContext = Api.getCampusNames();
-					campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+					campusList = Api.Server.getIdCampusNames().ToArray();
                     cbClassAdd_Campus.DataContext = campusList;
                     //cbClassAdd_Period.DataContext = Api.getPeriodsNames();
-					periodList = Api.Server.getIdPeriodsNames().Select(p => new TupleWraper(p)).ToArray();
+					periodList = Api.Server.getIdPeriodsNames().ToArray();
                     cbClassAdd_Period.DataContext = periodList;
 
                 }
@@ -409,13 +409,13 @@ namespace Client
                 {
                     //On charge les ComboBox
                     //cbClassChange_Class.DataContext = Api.getClassesNames();
-					classList = Api.Server.getIdClassesNames().Select(p => new TupleWraper(p)).ToArray();
+					classList = Api.Server.getIdClassesNames().ToArray();
                     cbClassChange_Class.DataContext = classList;
                     //cbClassChange_Campus.DataContext = Api.getCampusNames();
-					campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+					campusList = Api.Server.getIdCampusNames().ToArray();
                     cbClassChange_Campus.DataContext = campusList;
                     //cbClassChange_Period.DataContext = Api.getPeriodsNames();
-					periodList = Api.Server.getIdPeriodsNames().Select(p => new TupleWraper(p)).ToArray();
+					periodList = Api.Server.getIdPeriodsNames().ToArray();
                     cbClassChange_Period.DataContext = periodList;
                 }
 
@@ -507,7 +507,7 @@ namespace Client
                 }
 
                 //On met à jour la combobox des classes
-				classList = Api.Server.getIdClassesNames().Select(p => new TupleWraper(p)).ToArray();
+				classList = Api.Server.getIdClassesNames().ToArray();
                 cbClassChange_Class.DataContext = classList;
 
                 //On met à zéro la combobox des campus
@@ -536,7 +536,7 @@ namespace Client
                 {
                     //On charge la ComboBox
                     //cbPromoChange_Promo.DataContext = Api.getPromotionsNames();
-					promoList = Api.Server.getIdPromotionsNames().Select(p => new TupleWraper(p)).ToArray();
+					promoList = Api.Server.getIdPromotionsNames().ToArray();
                     cbPromoChange_Promo.DataContext = promoList;
                 }
 
@@ -620,7 +620,7 @@ namespace Client
                 }
 
                 //On rafraichit la combobox des promotion
-				promoList = Api.Server.getIdPromotionsNames().Select(p => new TupleWraper(p)).ToArray();
+				promoList = Api.Server.getIdPromotionsNames().ToArray();
                 cbPromoChange_Promo.DataContext = promoList;
 
                 //On met à zéro le textbox de la promotion

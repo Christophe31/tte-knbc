@@ -145,31 +145,31 @@ namespace BusinessLayer
 				}
 			#endregion
 			#region Identified completion
-				public Tuple<int, string>[] getIdCampusNames()
+				public IdName[] getIdCampusNames()
 				{
- 					return db.Campus.Select(p=>new {Id=p.Id, name=p.Name}).ToArray().Select(p=>new Tuple<int,string>(p.Id,p.name)).ToArray();
+ 					return db.Campus.Select(p=>new {Id=p.Id, name=p.Name}).ToArray().Select(p=>IdName.IN(p.Id,p.name)).ToArray();
 				}
-				public Tuple<int, string>[] getIdClassesNames()
+				public IdName[] getIdClassesNames()
 				{
- 					return db.Class.Select(p=>new {Id=p.Id, name=p.Name}).ToArray().Select(p=>new Tuple<int,string>(p.Id,p.name)).ToArray();
+					return db.Class.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => IdName.IN(p.Id, p.name)).ToArray();
 				}
-				public Tuple<int, string>[] getIdPromotionsNames()
+				public IdName[] getIdPromotionsNames()
 				{
-					return db.Promotion.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => new Tuple<int, string>(p.Id, p.name)).ToArray();
+					return db.Promotion.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => IdName.IN(p.Id, p.name)).ToArray();
 				}
-				public Tuple<int, string>[] getIdPeriodsNames()
+				public IdName[] getIdPeriodsNames()
 				{
-					return db.Period.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => new Tuple<int, string>(p.Id, p.name)).ToArray();
+					return db.Period.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => IdName.IN(p.Id, p.name)).ToArray();
 				}
 				public Tuple<int, string, string>[] getIdSubjectsNamesModality()
 				{
 					return db.Subject.Select(p => new { Id = p.Id, name = p.Name, mod=p.Modality }).ToArray().Select(p => new Tuple<int, string,string>(p.Id, p.name,p.mod)).ToArray();
 				}
-				public Tuple<int, string>[] getIdUsersNames()
+				public IdName[] getIdUsersNames()
 				{
-					return db.User.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => new Tuple<int, string>(p.Id, p.name)).ToArray();
+					return db.User.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => IdName.IN(p.Id, p.name)).ToArray();
 				}
-				public Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> getIdCampusPeriodClassTree()
+				public Dictionary<IdName, Dictionary<IdName, IdName[]>> getIdCampusPeriodClassTree()
 				{
 					return (from campus in db.Campus
 							where campus.Classes.Any(p => p.Period.Name != null)
@@ -185,10 +185,10 @@ namespace BusinessLayer
 											   }
 									)
 							}
-							).ToDictionary(p => new Tuple<int,string>(p.campid, p.campname), 
+							).ToDictionary(p => IdName.IN(p.campid, p.campname), 
 								p => p.value.ToDictionary(
-									e => new Tuple<int, string> (e.periodid,e.periodName), 
-									e => e.val.Select(f=>new Tuple<int,string>(f.classid,f.classname)).ToArray()
+									e => IdName.IN(e.periodid, e.periodName),
+									e => e.val.Select(f => IdName.IN(f.classid, f.classname)).ToArray()
 								));
 				}
 			#endregion

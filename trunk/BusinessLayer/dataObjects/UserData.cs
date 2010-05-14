@@ -29,14 +29,7 @@ namespace BusinessLayer
 		}
 		public static UserData UD(User UserEntity, string CampusName, int ClassId)
 		{
-			return new UserData
-			{
-				Id = UserEntity.Id,
-				Name = UserEntity.Name,
-				CampusName = CampusName,
-				ClassId = ClassId,
-				Password=null
-			};
+			return new UserData( UserEntity, CampusName, ClassId);
 		}
 		/// <sumClassName = ClassName;mary>
 		/// Date de Début de l'évènement.
