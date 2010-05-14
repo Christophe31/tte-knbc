@@ -22,7 +22,7 @@ namespace Client
 	public partial class MainWindow : Window
     {
         protected CacheWrapper Api;
-        protected Dictionary<string, Dictionary<string, string[]>> CampusPeriodClassTree;
+        protected Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> CampusPeriodClassTree;
 
 		public MainWindow()
 		{
@@ -54,14 +54,15 @@ namespace Client
 			CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
 			// ComboBoxes initialisation
-			ViewType.SelectedIndex = 4;
-			CampusName.DataContext = Api.getCampusNames();
+			ViewType.SelectedIndex = 0;
+            CampusName.DataContext = (from tuple in CampusPeriodClassTree.Keys
+                                      select tuple.Item2).ToList();
 			PeriodName.DataContext = Api.getPeriodsNames();
-			ClassName.DataContext = Api.getClassesNames();
+			//ClassName.DataContext = Api.getClassesNames();
+            RefreshClassName();
 
             // Events DataGrid initialisation
-            EventData[] events = Api.getEventsByClass("B3A", DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), new DateTime(2010, 5, 12));
-            EventsGrid.DataContext = events;
+            EventsGrid.DataContext = Api.getEventsByUniversity(DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), new DateTime(2010, 5, 12));
 		}
 
         /// <summary>
@@ -112,7 +113,6 @@ namespace Client
         {
             RefreshClassName();
         }
-
         private void PeriodName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshClassName();
@@ -127,7 +127,7 @@ namespace Client
             {
 				try
 				{
-					ClassName.DataContext = CampusPeriodClassTree[(string)CampusName.SelectedValue][(string)PeriodName.SelectedValue];
+					//ClassName.DataContext = CampusPeriodClassTree[(string)CampusName.SelectedValue][(string)PeriodName.SelectedValue];
 				}
 				catch (KeyNotFoundException)
 				{
@@ -144,7 +144,6 @@ namespace Client
 		{
 			MainAdmin fenetreAdmin = new MainAdmin();
 			fenetreAdmin.Show();
-
 		}
 
 		private void button1_Click(object sender, RoutedEventArgs e)
