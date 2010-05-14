@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Client
 {
-	public class TupleWrapperForComboBox
+	public class TupleWraper
 	{
 		public int Id;
 		public string Name;
-		public TupleWrapperForComboBox(Tuple<int,string> t)
+		public TupleWraper(Tuple<int,string> t)
 		{
 			Id = t.Item1;
 			Name = t.Item2;
