@@ -65,6 +65,7 @@
     <Compile Include="dataObjects\ClassData.cs" />
     <Compile Include="dataObjects\PeriodData.cs" />
     <Compile Include="dataObjects\SubjectData.cs" />
+    <Compile Include="dataObjects\TupleWrapperForComboBox.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="Cache\CacheProcess.cs" />
     <Compile Include="Service References\BusinessLayer\Reference.cs">
