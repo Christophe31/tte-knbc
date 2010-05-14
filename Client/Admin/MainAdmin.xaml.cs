@@ -28,11 +28,11 @@ namespace Client
         }
 
         #region Tuple utilisés par l'interface
-            Tuple<int, string>[] classList = null;
-            Tuple<int, string>[] userList = null;
-            Tuple<int, string>[] campusList = null;
-            Tuple<int, string>[] periodList = null;
-            Tuple<int, string>[] promoList = null;
+            TupleWraper[] classList = null;
+			TupleWraper[] userList = null;
+			TupleWraper[] campusList = null;
+			TupleWraper[] periodList = null;
+			TupleWraper[] promoList = null;
         #endregion
         #region Onglet "Utilisateurs"
         #region Gestion des onglets
@@ -46,17 +46,17 @@ namespace Client
                 {
                     //On charge la ComboBox
                     //cbUserAdd_Class.DataContext = Api.getClassesNames();
-                    classList = Api.Server.getIdClassesNames();
-                    cbUserAdd_Class.DataContext = classList.Select(p => p.Item2);
+                    classList = Api.Server.getIdClassesNames().Select(p=>new TupleWraper(p)).ToArray();
+                    cbUserAdd_Class.DataContext = classList;
                 }
                 else if (tcOngletsUsers.SelectedIndex == 1)
                 {
                     //cbUserChange_Username.DataContext = Api.getUsersNames();
-                    userList = Api.Server.getIdUsersNames();
-                    cbUserChange_Username.DataContext = userList.Select(p => p.Item2);
+					userList = Api.Server.getIdUsersNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbUserChange_Username.DataContext = userList;
                     //cbUserChange_Class.DataContext = Api.getClassesNames();
-                    classList = Api.Server.getIdClassesNames();
-                    cbUserChange_Class.DataContext = classList.Select(p => p.Item2);
+					classList = Api.Server.getIdClassesNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbUserChange_Class.DataContext = classList;
 
                 }
 
@@ -235,7 +235,7 @@ namespace Client
             if (cbUserChange_Username.SelectedIndex >= 0)
             {
                 //On récupère l'id de l'utilisateur actuel à partir du Tuple
-                int idUser = userList[cbUserChange_Username.SelectedIndex].Item1;
+                int idUser = userList[cbUserChange_Username.SelectedIndex].Id;
 
                 //On tente de supprimer l'utilisateur
                 string returnValue = Api.Server.delUser(idUser);
@@ -255,8 +255,8 @@ namespace Client
                 }
 
                 //On rafraichit la combobox des utilisateurs
-                userList = Api.Server.getIdUsersNames();
-                cbUserChange_Username.DataContext = userList.Select(p => p.Item2);
+                userList = Api.Server.getIdUsersNames().Select(p=>new TupleWraper(p)).ToArray();
+                cbUserChange_Username.DataContext = userList;
 
                 //On met à zéro la combox des classes et le textbox de l'utilisateur
                 tbUserChange_Username.Text = "";
@@ -280,8 +280,8 @@ namespace Client
                 if (tcOngletsCampus.SelectedIndex == 1)
                 {
                     //cbCampusChange_Campus.DataContext = Api.getCampusNames();
-                    campusList = Api.Server.getIdCampusNames();
-                    cbCampusChange_Campus.DataContext = campusList.Select(p => p.Item2);
+					campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbCampusChange_Campus.DataContext = campusList;
                 }
 
                 //On prépare la StatusBar
@@ -356,7 +356,7 @@ namespace Client
             if (cbCampusChange_Campus.SelectedIndex >= 0)
             {
                 //On récupère l'id du campus actuel à partir du Tuple
-                int idCampus = campusList[cbCampusChange_Campus.SelectedIndex].Item1;
+                int idCampus = campusList[cbCampusChange_Campus.SelectedIndex].Id;
 
                 //On tente de supprimer le campus
                 string returnValue = Api.Server.delCampus(idCampus);
@@ -377,8 +377,8 @@ namespace Client
                 }
 
                 //On met à jour la combobox des campus
-                campusList = Api.Server.getIdCampusNames();
-                cbCampusChange_Campus.DataContext = campusList.Select(p => p.Item2);
+				campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+                cbCampusChange_Campus.DataContext = campusList;
 
                 //On remet à zéro le textbox du campus
                 tbCampusChange_Campus.Text = "";
@@ -398,25 +398,25 @@ namespace Client
                 {
                     //On charge les ComboBox
                     //cbClassAdd_Campus.DataContext = Api.getCampusNames();
-                    campusList = Api.Server.getIdCampusNames();
-                    cbClassAdd_Campus.DataContext = campusList.Select(p => p.Item2);
+					campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbClassAdd_Campus.DataContext = campusList;
                     //cbClassAdd_Period.DataContext = Api.getPeriodsNames();
-                    periodList = Api.Server.getIdPeriodsNames();
-                    cbClassAdd_Period.DataContext = periodList.Select(p => p.Item2);
+					periodList = Api.Server.getIdPeriodsNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbClassAdd_Period.DataContext = periodList;
 
                 }
                 else if (tcOngletsClasses.SelectedIndex == 1)
                 {
                     //On charge les ComboBox
                     //cbClassChange_Class.DataContext = Api.getClassesNames();
-                    classList = Api.Server.getIdClassesNames();
-                    cbClassChange_Class.DataContext = classList.Select(p => p.Item2);
+					classList = Api.Server.getIdClassesNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbClassChange_Class.DataContext = classList;
                     //cbClassChange_Campus.DataContext = Api.getCampusNames();
-                    campusList = Api.Server.getIdCampusNames();
-                    cbClassChange_Campus.DataContext = campusList.Select(p => p.Item2);
+					campusList = Api.Server.getIdCampusNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbClassChange_Campus.DataContext = campusList;
                     //cbClassChange_Period.DataContext = Api.getPeriodsNames();
-                    periodList = Api.Server.getIdPeriodsNames();
-                    cbClassChange_Period.DataContext = periodList.Select(p => p.Item2);
+					periodList = Api.Server.getIdPeriodsNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbClassChange_Period.DataContext = periodList;
                 }
 
                 //On prépare la StatusBar
@@ -486,7 +486,7 @@ namespace Client
             if (cbClassChange_Class.SelectedIndex >= 0)
             {
                 //On récupère l'id de la classe actuelle à partir du Tuple
-                int idClass = classList[cbClassChange_Class.SelectedIndex].Item1;
+                int idClass = classList[cbClassChange_Class.SelectedIndex].Id;
 
                 //On tente de supprimer le campus
                 string returnValue = Api.Server.delClass(idClass);
@@ -507,8 +507,8 @@ namespace Client
                 }
 
                 //On met à jour la combobox des classes
-                classList = Api.Server.getIdClassesNames();
-                cbClassChange_Class.DataContext = classList.Select(p => p.Item2);
+				classList = Api.Server.getIdClassesNames().Select(p => new TupleWraper(p)).ToArray();
+                cbClassChange_Class.DataContext = classList;
 
                 //On met à zéro la combobox des campus
                 cbClassChange_Campus.SelectedIndex = -1;
@@ -536,8 +536,8 @@ namespace Client
                 {
                     //On charge la ComboBox
                     //cbPromoChange_Promo.DataContext = Api.getPromotionsNames();
-                    promoList = Api.Server.getIdPromotionsNames();
-                    cbPromoChange_Promo.DataContext = promoList.Select(p => p.Item2);
+					promoList = Api.Server.getIdPromotionsNames().Select(p => new TupleWraper(p)).ToArray();
+                    cbPromoChange_Promo.DataContext = promoList;
                 }
 
                 //On prépare la StatusBar
@@ -600,7 +600,7 @@ namespace Client
             if (cbPromoChange_Promo.SelectedIndex >= 0)
             {
                 //On récupère l'id de la promotion actuelle à partir du Tuple
-                int idPromo = promoList[cbPromoChange_Promo.SelectedIndex].Item1;
+                int idPromo = promoList[cbPromoChange_Promo.SelectedIndex].Id;
 
                 //On tente de supprimer la promotion
                 string returnValue = Api.Server.delPromotion(idPromo);
@@ -620,8 +620,8 @@ namespace Client
                 }
 
                 //On rafraichit la combobox des promotion
-                promoList = Api.Server.getIdPromotionsNames();
-                cbPromoChange_Promo.DataContext = promoList.Select(p => p.Item2);
+				promoList = Api.Server.getIdPromotionsNames().Select(p => new TupleWraper(p)).ToArray();
+                cbPromoChange_Promo.DataContext = promoList;
 
                 //On met à zéro le textbox de la promotion
                 tbPromoChange_Promo.Text = "";
@@ -802,12 +802,6 @@ namespace Client
             }
         }
         #endregion
-
-        
-
-        
-
-        
 
         
         #endregion
