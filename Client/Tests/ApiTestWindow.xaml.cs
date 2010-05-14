@@ -36,11 +36,11 @@ namespace Client
 
 		private void button1_Click(object sender, RoutedEventArgs e)
 		{
-            Dictionary<string, Dictionary<string, string[]>> truc = null;//Api.getCampusPeriodClassTree();
-			Dictionary<string[], ComboBox> Complete0 = new Dictionary<string[], ComboBox>();
-			Complete0.Add(truc.Keys.ToArray(),CampusBox);
-			Complete0.Add(truc.Values.SelectMany(p=>p.Keys).Distinct().ToArray(),PeriodeBox);
-			Complete0.Add(truc.Values.SelectMany(p => p.Values.SelectMany(g=>g)).ToArray(), ClasseBox);
+			Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> truc = Api.Server.getIdCampusPeriodClassTree();
+			Dictionary<TupleWrapperForComboBox[], ComboBox> Complete0 = new Dictionary<TupleWrapperForComboBox[], ComboBox>();
+			Complete0.Add(truc.Keys.Select(p=>new TupleWrapperForComboBox(p)).ToArray(),CampusBox);
+			Complete0.Add(truc.Values.SelectMany(p=> p.Keys).Select(p=>new TupleWrapperForComboBox(p)).Distinct().ToArray(),PeriodeBox);
+			Complete0.Add(truc.Values.SelectMany(p => p.Values.SelectMany(g => g)).Select(p => new TupleWrapperForComboBox(p)).ToArray(), ClasseBox);
 
 			Dictionary<foo,ComboBox> Complete = new Dictionary<foo,ComboBox>();
 			Complete.Add(Api.getCampusNames,CampusBox);
@@ -51,7 +51,7 @@ namespace Client
 			foreach (var kv in Complete0)
 			{
 				kv.Value.Items.Clear();
-				foreach (string s in kv.Key)
+				foreach (TupleWrapperForComboBox s in kv.Key)
 				{
 					kv.Value.Items.Add(s);
 				}
@@ -63,7 +63,7 @@ namespace Client
 		private void AddUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.Server.addUser(this.TextArg1.Text, this.TextArg2.Text, this.ClasseBox.SelectedItem.ToString());
+				Api.Server.addUser(this.TextArg1.Text, this.TextArg2.Text, (this.ClasseBox.SelectedItem as TupleWrapperForComboBox).Name);
 		}
 
 		private void AddCampusButton_Click(object sender, RoutedEventArgs e)
