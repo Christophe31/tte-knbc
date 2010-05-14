@@ -83,6 +83,7 @@
     <Compile Include="dataObjects\ClassData.cs" />
     <Compile Include="dataObjects\PeriodData.cs" />
     <Compile Include="dataObjects\Subject.cs" />
+    <Compile Include="dataObjects\IdName.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="dataObjects\EventData.cs" />
     <Compile Include="IBusinessService.cs" />

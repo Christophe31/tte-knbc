@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Client.BusinessLayer;
 
 namespace Client
 {
@@ -36,11 +37,11 @@ namespace Client
 
 		private void button1_Click(object sender, RoutedEventArgs e)
 		{
-			Dictionary<Tuple<int, string>, Dictionary<Tuple<int, string>, Tuple<int, string>[]>> truc = Api.Server.getIdCampusPeriodClassTree();
-			Dictionary<TupleWraper[], ComboBox> Complete0 = new Dictionary<TupleWraper[], ComboBox>();
-			Complete0.Add(truc.Keys.Select(p=>new TupleWraper(p)).ToArray(),CampusBox);
-			Complete0.Add(truc.Values.SelectMany(p=> p.Keys).Select(p=>new TupleWraper(p)).Distinct().ToArray(),PeriodeBox);
-			Complete0.Add(truc.Values.SelectMany(p => p.Values.SelectMany(g => g)).Select(p => new TupleWraper(p)).ToArray(), ClasseBox);
+			Dictionary<IdName, Dictionary<IdName, IdName[]>> truc = Api.Server.getIdCampusPeriodClassTree();
+			Dictionary<IdName[], ComboBox> Complete0 = new Dictionary<IdName[], ComboBox>();
+			Complete0.Add(truc.Keys.ToArray(),CampusBox);
+			Complete0.Add(truc.Values.SelectMany(p=> p.Keys).Distinct().ToArray(),PeriodeBox);
+			Complete0.Add(truc.Values.SelectMany(p => p.Values.SelectMany(g => g)).ToArray(), ClasseBox);
 
 			Dictionary<foo,ComboBox> Complete = new Dictionary<foo,ComboBox>();
 			Complete.Add(Api.getCampusNames,CampusBox);
@@ -51,7 +52,7 @@ namespace Client
 			foreach (var kv in Complete0)
 			{
 				kv.Value.Items.Clear();
-				foreach (TupleWraper s in kv.Key)
+				foreach (IdName s in kv.Key)
 				{
 					kv.Value.Items.Add(s);
 				}
@@ -63,7 +64,7 @@ namespace Client
 		private void AddUserButton_Click(object sender, RoutedEventArgs e)
 		{
 			this.ErrorLabel.Content = (++compteur).ToString() +
-				Api.Server.addUser(this.TextArg1.Text, this.TextArg2.Text, (this.ClasseBox.SelectedItem as TupleWraper).Name);
+				Api.Server.addUser(this.TextArg1.Text, this.TextArg2.Text, (this.ClasseBox.SelectedItem as IdName).Name);
 		}
 
 		private void AddCampusButton_Click(object sender, RoutedEventArgs e)

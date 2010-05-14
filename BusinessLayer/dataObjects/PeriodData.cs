@@ -29,14 +29,7 @@ namespace BusinessLayer
 		}
 		public static PeriodData PD(Period PeriodEntity, string PromotionName)
 		{
-			return new PeriodData
-			{
-				Id = PeriodEntity.Id,
-				Name = PeriodEntity.Name,
-				PromotionName = PromotionName,
-				Start = PeriodEntity.Start,
-				End = PeriodEntity.End
-			};
+			return new PeriodData(PeriodEntity, PromotionName);
 		}
 		/// <sumClassName = ClassName;mary>
 		/// Id.

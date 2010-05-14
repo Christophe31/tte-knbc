@@ -65,7 +65,7 @@
     <Compile Include="dataObjects\ClassData.cs" />
     <Compile Include="dataObjects\PeriodData.cs" />
     <Compile Include="dataObjects\SubjectData.cs" />
-    <Compile Include="dataObjects\TupleWraper.cs" />
+    <Compile Include="dataObjects\IdName.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="Cache\CacheProcess.cs" />
     <Compile Include="Service References\BusinessLayer\Reference.cs">
@@ -180,6 +180,9 @@
     <None Include="Service References\BusinessLayer\BusinessService.disco" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\BusinessLayer\Client.BusinessLayer.IdName.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BusinessLayer\Client.BusinessLayer.PeriodData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -198,6 +201,7 @@
     <None Include="Service References\BusinessLayer\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

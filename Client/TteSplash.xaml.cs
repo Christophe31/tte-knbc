@@ -35,11 +35,11 @@ namespace Client
 		private void DelayedStart()
 		{
 			CacheWrapper c = new CacheWrapper();
-			this.Dispatcher.BeginInvoke((ThreadStart)Hide);
+			this.Dispatcher.BeginInvoke((ThreadStart)Hiding);
 			t.Dispatcher.BeginInvoke((ThreadStart)Ending);
 		}
 
-		private void Hide()
+		private void Hiding()
 		{	this.Visibility = System.Windows.Visibility.Hidden;
 			t.Visibility = System.Windows.Visibility.Hidden;
 		}

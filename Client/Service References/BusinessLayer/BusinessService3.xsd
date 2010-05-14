@@ -58,4 +58,17 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfEventData" nillable="true" type="tns:ArrayOfEventData" />
+  <xs:complexType name="ArrayOfIdName">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IdName" nillable="true" type="tns:IdName" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfIdName" nillable="true" type="tns:ArrayOfIdName" />
+  <xs:complexType name="IdName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IdName" nillable="true" type="tns:IdName" />
 </xs:schema>

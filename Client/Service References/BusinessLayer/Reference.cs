@@ -590,6 +590,67 @@ namespace Client.BusinessLayer {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IdName", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class IdName : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BusinessLayer.IBusinessService")]
     public interface IBusinessService {
@@ -715,25 +776,25 @@ namespace Client.BusinessLayer {
         System.Collections.Generic.Dictionary<string, System.Collections.Generic.Dictionary<string, string[]>> getCampusPeriodClassTree();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdCampusNames", ReplyAction="http://tempuri.org/IBusinessService/getIdCampusNamesResponse")]
-        System.Tuple<int, string>[] getIdCampusNames();
+        Client.BusinessLayer.IdName[] getIdCampusNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdClassesNames", ReplyAction="http://tempuri.org/IBusinessService/getIdClassesNamesResponse")]
-        System.Tuple<int, string>[] getIdClassesNames();
+        Client.BusinessLayer.IdName[] getIdClassesNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdPromotionsNames", ReplyAction="http://tempuri.org/IBusinessService/getIdPromotionsNamesResponse")]
-        System.Tuple<int, string>[] getIdPromotionsNames();
+        Client.BusinessLayer.IdName[] getIdPromotionsNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdPeriodsNames", ReplyAction="http://tempuri.org/IBusinessService/getIdPeriodsNamesResponse")]
-        System.Tuple<int, string>[] getIdPeriodsNames();
+        Client.BusinessLayer.IdName[] getIdPeriodsNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdSubjectsNamesModality", ReplyAction="http://tempuri.org/IBusinessService/getIdSubjectsNamesModalityResponse")]
         System.Tuple<int, string, string>[] getIdSubjectsNamesModality();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdUsersNames", ReplyAction="http://tempuri.org/IBusinessService/getIdUsersNamesResponse")]
-        System.Tuple<int, string>[] getIdUsersNames();
+        Client.BusinessLayer.IdName[] getIdUsersNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdCampusPeriodClassTree", ReplyAction="http://tempuri.org/IBusinessService/getIdCampusPeriodClassTreeResponse")]
-        System.Collections.Generic.Dictionary<System.Tuple<int, string>, System.Collections.Generic.Dictionary<System.Tuple<int, string>, System.Tuple<int, string>[]>> getIdCampusPeriodClassTree();
+        System.Collections.Generic.Dictionary<Client.BusinessLayer.IdName, System.Collections.Generic.Dictionary<Client.BusinessLayer.IdName, Client.BusinessLayer.IdName[]>> getIdCampusPeriodClassTree();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/addUser", ReplyAction="http://tempuri.org/IBusinessService/addUserResponse")]
         string addUser(string UserName, string UserPassword, string UserClassName);
@@ -947,19 +1008,19 @@ namespace Client.BusinessLayer {
             return base.Channel.getCampusPeriodClassTree();
         }
         
-        public System.Tuple<int, string>[] getIdCampusNames() {
+        public Client.BusinessLayer.IdName[] getIdCampusNames() {
             return base.Channel.getIdCampusNames();
         }
         
-        public System.Tuple<int, string>[] getIdClassesNames() {
+        public Client.BusinessLayer.IdName[] getIdClassesNames() {
             return base.Channel.getIdClassesNames();
         }
         
-        public System.Tuple<int, string>[] getIdPromotionsNames() {
+        public Client.BusinessLayer.IdName[] getIdPromotionsNames() {
             return base.Channel.getIdPromotionsNames();
         }
         
-        public System.Tuple<int, string>[] getIdPeriodsNames() {
+        public Client.BusinessLayer.IdName[] getIdPeriodsNames() {
             return base.Channel.getIdPeriodsNames();
         }
         
@@ -967,11 +1028,11 @@ namespace Client.BusinessLayer {
             return base.Channel.getIdSubjectsNamesModality();
         }
         
-        public System.Tuple<int, string>[] getIdUsersNames() {
+        public Client.BusinessLayer.IdName[] getIdUsersNames() {
             return base.Channel.getIdUsersNames();
         }
         
-        public System.Collections.Generic.Dictionary<System.Tuple<int, string>, System.Collections.Generic.Dictionary<System.Tuple<int, string>, System.Tuple<int, string>[]>> getIdCampusPeriodClassTree() {
+        public System.Collections.Generic.Dictionary<Client.BusinessLayer.IdName, System.Collections.Generic.Dictionary<Client.BusinessLayer.IdName, Client.BusinessLayer.IdName[]>> getIdCampusPeriodClassTree() {
             return base.Channel.getIdCampusPeriodClassTree();
         }
         

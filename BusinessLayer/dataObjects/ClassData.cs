@@ -28,13 +28,7 @@ namespace BusinessLayer
 		}
 		public static ClassData CD(Class ClassEntity, string CampusName, int PeriodId)
 		{
-			return new ClassData
-			{
-				Id = ClassEntity.Id,
-				Name = ClassEntity.Name,
-				CampusName = CampusName,
-				Period=PeriodId
-			};
+			return new ClassData(ClassEntity, CampusName, PeriodId);
 		}
 		/// <sumClassName = ClassName;mary>
 		/// Id.
