@@ -86,6 +86,16 @@
                     </ScrollViewer>
                 </Grid>
             </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock>Liste</TextBlock>
+                </TabItem.Header>
+                <DataGrid Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
         </TabControl>
 
 		<Button Content="clic la" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" />
