@@ -14,9 +14,9 @@ cette tables n'as que deux champ, l'ID et le nom (exemple: Toulouse)
 La classe est la représentation d'une periode sur un campus particulier.
 Elle a 4 champs:
 	# ID
-	# Nom	:nom de la classe (B3B Toulouse)
+	# Name	:nom de la classe (B3B Toulouse)
 	# Campus	:pointe vers le campus ou réside la classe
-	# Periode	:pointe vers la periode à la quelle est sujette la classe
+	# Period	:pointe vers la periode à la quelle est sujette la classe
 ===Droit===
 Droit est la table qui permet de déterminer si l'utilisateur qui envoie une requete de modification a le droit de les exécuter.
 cette table a 4 champs:
@@ -25,6 +25,23 @@ cette table a 4 champs:
 	# Campus
 	# Utilisateur	:pointe vers l'utilisateur soumis au droit
 ===Evenement===
+Evenement est la table dans laquelle sont stockés tous les evenements, privés ou publiques.
+
+si un des 4 champs nullables, est null, alors l'evenement est privé.
+
+	# ID
+	# Place : la salle du cours
+	# Name : Nom de l'evenement 
+	# Start : date et heure de debut
+	# End : date et heure de fin
+	# Mandatory : obligatoire ?
+	# Campus : (nullable) Le ampus du cours
+	# Class : (nullable) La classe du cours
+	# Speaker : (nullable) Le professeur
+	# Subject : (nullable) La matière enseignée
+	# Period : cursus
+	# Creator : Créateur de l'evenement
+
 ===Matiere===
 ===Periode===
 ===Promotion===
