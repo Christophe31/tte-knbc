@@ -69,6 +69,6 @@ Promotion est la table dans laquelle sont référencés toutes les promotions de
 Utilisateur est la table dans laquelle sont inscrits touts les élèves, enseignant, ou membres de l'administration de l'établissement.
 
 	# ID
-	# Name : Nom de l'evenement 
+	# Name : Nom de l'élève
 	# Password : Le mot de passe de l'utilisateur
 	# Class : classe de l'utilisateur
