@@ -40,9 +40,35 @@ si un des 4 champs nullables, est null, alors l'evenement est privé.
 	# Speaker : (nullable) Le professeur
 	# Subject : (nullable) La matière enseignée
 	# Period : cursus
-	# Creator : Créateur de l'evenement
+	# Creator : Créateur de l'évènement
 
 ===Matiere===
+Subject est la table dans laquelle sont inscrites toutes les matières enseignés dans l'etablissement.
+
+	# ID
+	# Name : le nom de la matière
+	# Hours : le nombre d'heure necessaires pour cette matière 
+	# Modality : les modalités du cours
+	# Events : 
+
 ===Periode===
+
+	# ID
+	# Name : Nom de la période 
+	# Start : date et heure de debut
+	# End : date et heure de fin
+	# Promotion : la promotion à laquelle s'applique cette période
+
 ===Promotion===
-===Utilisateu===
+Promotion est la table dans laquelle sont référencés toutes les promotions de l'établissement.
+
+	# ID
+	# Name : Nom de la promotion
+
+===Utilisateur===
+Utilisateur est la table dans laquelle sont inscrits touts les élèves, enseignant, ou membres de l'administration de l'établissement.
+
+	# ID
+	# Name : Nom de l'evenement 
+	# Password : Le mot de passe de l'utilisateur
+	# Class : classe de l'utilisateur
