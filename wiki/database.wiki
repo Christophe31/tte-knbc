@@ -3,7 +3,7 @@ _par Cheynet Romain_
 ==Schéma==
 Voici le schéma de la base de donnée:
 
-http://www.mypicturesbox.com/photos/originales/crovax31/54794.png
+http://www.mypicturesbox.com/photos/originales/crovax31/54920.png
 
 (Les noms de liens précédées d'un slash rouge mentionne le coté cible et une croix à droite d'un champ mentionne qu'il peut être mis à null)
 ==Tables==
