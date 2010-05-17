@@ -5,8 +5,10 @@ _par Despax Tomas_
 un fichier de cache par classe, pour les events persos, pour les évènements d'université, de periode, de campus...
 
 ==Le rechargement du cache==
-pas très compliqué, on efface tout et on recommance... d'ou l'interet de la granularrité en différent caches.
+pas très compliqué, on efface tout et on recommence... d'où l'intéret de la granularité en différent caches.
+
+==Le background process==
 
 ==Les entrées et sorties du module==
-prend en entrée des EventData[] et ressort... à toi Tomas, je serais toi je sortirais la même chose... réversible c'est bien... si c'est le cas on peut s'entendre ensemble sur les spécificités de la classe.
+Wrape les fonctions WCF et de fait a des signatures identiques.
 Le tout étant stocké en ICal...
