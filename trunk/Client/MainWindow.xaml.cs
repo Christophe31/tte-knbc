@@ -128,10 +128,10 @@ namespace Client
 				try
 				{
                     IdName campus = (from c in CampusPeriodClassTree.Keys
-                                                 where c.Name == CampusName.SelectedValue
+                                                 where c.Name == CampusName.SelectedValue.ToString()
                                                  select c).FirstOrDefault();
                     IdName period = (from p in CampusPeriodClassTree[campus].Keys
-                                                 where p.Name == PeriodName.SelectedValue
+                                                 where p.Name == PeriodName.SelectedValue.ToString()
                                                  select p).FirstOrDefault();
 					ClassName.DataContext = CampusPeriodClassTree[campus][period];
 				}
