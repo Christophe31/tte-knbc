@@ -137,8 +137,8 @@ namespace BusinessLayer
 								where campus.Classes.Any(p=>p.Period.Name!=null)
 								select new {key=campus.Name, value=(
 									from period in db.Period
-									where period.Class.Any(ca=>ca.Campus.Name==campus.Name)
-									select new {periodName=period.Name, val=period.Class.Where(p=>p.Campus==campus).Select(p=>p.Name)}
+									where period.Classes.Any(ca=>ca.Campus.Name==campus.Name)
+									select new {periodName=period.Name, val=period.Classes.Where(p=>p.Campus==campus).Select(p=>p.Name)}
 									)
 								}
 							).ToDictionary(p => p.key, p => p.value.ToDictionary(e => e.periodName, e => e.val.ToArray()));
@@ -179,9 +179,9 @@ namespace BusinessLayer
 								campname = campus.Name,
 								value = (
 									from period in db.Period
-									where period.Class.Any(ca => ca.Campus.Name == campus.Name)
+									where period.Classes.Any(ca => ca.Campus.Name == campus.Name)
 									select new { periodid = period.Id, periodName = period.Name, 
-												 val = period.Class.Where(p => p.Campus == campus).Select(p => new { classid = p.Id, classname = p.Name }) 
+												 val = period.Classes.Where(p => p.Campus == campus).Select(p => new { classid = p.Id, classname = p.Name }) 
 											   }
 									)
 							}

@@ -23,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDb", "FK_Droit_Utilisateur", "User", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.User), "Right", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Right))]
 
 // Original file name:
-// Generation date: 04/05/2010 10:17:33
+// Generation date: 19/05/2010 10:41:42
 namespace DataModel
 {
     
@@ -1280,14 +1280,14 @@ namespace DataModel
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnLastChangeChanged();
         /// <summary>
-        /// There are no comments for Class in the schema.
+        /// There are no comments for Classes in the schema.
         /// </summary>
         [global::System.Data.Objects.DataClasses.EdmRelationshipNavigationPropertyAttribute("TteDb", "FK_Classe_Periode", "Class")]
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         [global::System.Xml.Serialization.XmlIgnoreAttribute()]
         [global::System.Xml.Serialization.SoapIgnoreAttribute()]
         [global::System.Runtime.Serialization.DataMemberAttribute()]
-        public global::System.Data.Objects.DataClasses.EntityCollection<Class> Class
+        public global::System.Data.Objects.DataClasses.EntityCollection<Class> Classes
         {
             get
             {

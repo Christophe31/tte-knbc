@@ -13,7 +13,7 @@ namespace Client
 		public BusinessServiceClient Server;
 		public CacheWrapper()
 		{
-			cacheProcess = CacheProcess.getCacheProcess();
+			cacheProcess = CacheProcess.Current;
 			Server = cacheProcess.Server;
 		}
 

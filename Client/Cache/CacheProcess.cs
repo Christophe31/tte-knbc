@@ -20,12 +20,16 @@ namespace Client
 				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
 				//this.Run();
 			}
-			static public CacheProcess getCacheProcess()
+
+			static public CacheProcess Current
 			{
-				if (self != null)
+				get
+				{
+					if (self != null)
+						return self;
+					self = new CacheProcess();
 					return self;
-				self = new CacheProcess();
-				return self;
+				}
 			}
 		#endregion
 
