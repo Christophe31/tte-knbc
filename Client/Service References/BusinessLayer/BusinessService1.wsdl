@@ -564,9 +564,9 @@
   </wsdl:portType>
   <wsdl:service name="BusinessService">
     <wsdl:port name="BusinessService" binding="i0:BusinessService">
-      <soap12:address location="http://localhost:2900/BusinessService.svc" />
+      <soap12:address location="http://localhost:2900/BusinessService.svc/BusinessService" />
       <wsa10:EndpointReference>
-        <wsa10:Address>http://localhost:2900/BusinessService.svc</wsa10:Address>
+        <wsa10:Address>http://localhost:2900/BusinessService.svc/BusinessService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

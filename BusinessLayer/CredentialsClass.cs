@@ -8,9 +8,9 @@ using System.IdentityModel.Selectors;
 using System.IdentityModel;
 using DataModel;
 
-namespace CustomValidator
+namespace BusinessLayer
 {
-	public class MyCustomValidator : UserNamePasswordValidator
+	public class AuthValidator : UserNamePasswordValidator
 	{
 
 		TteDataBase db = new TteDataBase();
