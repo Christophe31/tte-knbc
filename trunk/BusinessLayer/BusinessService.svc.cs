@@ -467,6 +467,8 @@ namespace BusinessLayer
 			#region del
 					public string delUser(int Id)
 					{
+						if(OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name == "popi")
+							return "test, tu es popi!";
 						User u = db.User.Where(p => p.Id == Id).FirstOrDefault();
 						if (u == null)
 							return "l'utilisateur n'existe pas";

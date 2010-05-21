@@ -16,6 +16,8 @@ namespace Client
 			protected CacheProcess()
 			{
 				Server = new BusinessServiceClient();
+				Server.ClientCredentials.UserName.UserName = "admin";
+				Server.ClientCredentials.UserName.Password = "motdepasse";
 				Server.Open();
 				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
 				//this.Run();
