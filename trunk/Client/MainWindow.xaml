@@ -91,17 +91,63 @@
                 <TabItem.Header>
                     <TextBlock>Liste</TextBlock>
                 </TabItem.Header>
-                <DataGrid Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
-                        <DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
-                        <DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
-                        <DataGridTextColumn Header="Début" Binding="{Binding Start}"/>
-                        <DataGridTextColumn Header="Fin" Binding="{Binding End}"/>
-                        <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Label>Début</Label>
+                        <DatePicker Name="StartDate"/>
+                        <Label>Fin</Label>
+                        <DatePicker Name="EndDate"/>
+                    </StackPanel>
+                    
+                    <DataGrid Grid.Row="1" Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"
+                              CanUserAddRows="True" CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Type" Binding="{Binding LinkedTo}"/>
+                            <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
+                            <DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
+                            <DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
+                            <DataGridTemplateColumn Header="Début">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Start}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <DatePicker SelectedDate="{Binding Start}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Header="Fin">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding End}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <DatePicker SelectedDate="{Binding End}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
         </TabControl>
 

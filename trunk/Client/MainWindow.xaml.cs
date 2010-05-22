@@ -42,13 +42,13 @@ namespace Client
 
 		private void FillCombobox()
 		{
-			this.Dispatcher.BeginInvoke((ThreadStart)FillComboboxes);
+			this.Dispatcher.BeginInvoke((ThreadStart)FillControls);
 		}
 
         /// <summary>
         /// Fill ComboBoxes.
         /// </summary>
-		private void FillComboboxes()
+		private void FillControls()
 		{
 			Api = new CacheWrapper();
 			CampusPeriodClassTree = Api.getCampusPeriodClassTree();
@@ -59,11 +59,28 @@ namespace Client
             CampusName.DataContext = Api.getCampusNames();
             PeriodName.DataContext = Api.getPeriodsNames();
 
-			//ClassName.DataContext = Api.getClassesNames();
+            // DatePickers
+            StartDate.SelectedDate = DateTime.Now.AddMonths(-12);
+            EndDate.SelectedDate = DateTime.Now.AddMonths(12);
 
             // Events DataGrid initialisation
-            EventsGrid.DataContext = Api.getEventsByUniversity(DateTime.Now.AddDays(-3), DateTime.Now.AddDays(3), new DateTime(2010, 5, 12));
+            EventsGrid.DataContext = GetAllEvents(DateTime.Now.AddMonths(-12), DateTime.Now.AddMonths(12));
 		}
+
+        /// <summary>
+        /// Get all events for a period, including (or excluding) mandatory events.
+        /// </summary>
+        /// <param name="start">Start of the period</param>
+        /// <param name="end">End of the period</param>
+        /// <returns>An array of events</returns>
+        private EventData[] GetAllEvents(DateTime start, DateTime end)
+        {
+            EventData[] universityEvents = Api.getEventsByUniversity(start, end, new DateTime(2010, 5, 12));
+            foreach (EventData ev in universityEvents)
+                ev.LinkedTo = "Université";
+
+            return universityEvents;
+        }
 
         /// <summary>
         /// Called when an item is selected in ComboBoxes.
