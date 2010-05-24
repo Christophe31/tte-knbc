@@ -27,6 +27,14 @@ namespace Client
             Api = new CacheWrapper();
         }
 
+        /*
+         * Pourquoi un onglet Ajouter et modifier/supprimer pour chaque catégorie ?
+         * Il suffirait d'avoir une page pour les trois opérations, qui partageraient les mêmes champs.
+         * Tu mettrais dans la ComboBox une valeur "Ajouter" par défaut, et tu regarderais si cette valeur
+         * est sélectionnée ou non pour choisir l'action à effectuer. ça permet de supprimer une ligne d'onglets,
+         * et éventuellement d'intégrer ta fenêtre à la fenêtre principale, dans un onglet "Administration".
+         */
+
         #region Tuple utilisés par l'interface
             IdName[] classList = null;
 			IdName[] userList = null;
