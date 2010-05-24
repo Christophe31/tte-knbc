@@ -31,7 +31,7 @@ namespace Client
             }
 			return Server.getEventsByCampus(CampusId, Start, Stop);
 		}
-		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 		{
 			return Server.getEventsByUniversity(Start, Stop);
 		}
