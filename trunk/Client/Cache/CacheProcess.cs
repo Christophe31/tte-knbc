@@ -18,10 +18,15 @@ namespace Client
 			protected CacheProcess()
 			{
 				Server = new BusinessServiceClient();
+				//Server.ClientCredentials.ServiceCertificate.SetDefaultCertificate();
 				Server.ClientCredentials.UserName.UserName = "admin";
 				Server.ClientCredentials.UserName.Password = "motdepasse";
+				Server.ChannelFactory.Credentials.UserName.UserName = "admin";
+				Server.ChannelFactory.Credentials.UserName.Password = "motdepasse";
+
 				Server.Open();
 				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
+				ToDoList = new List<Tuple<EventsGetter, int>>();
 				this.Run();
 			}
 
@@ -41,8 +46,10 @@ namespace Client
 			Thread Reactor;
 			public void Run()
 			{
-				if(!Reactor.IsAlive)
-					Reactor=new Thread((ThreadStart)this.LaunchReactor);
+				if (Reactor==null)
+					Reactor = new Thread((ThreadStart)this.LaunchReactor);
+				if (!Reactor.IsAlive)
+					Reactor.Start();
 			}
 			private void LaunchReactor()
 			{	while (true)

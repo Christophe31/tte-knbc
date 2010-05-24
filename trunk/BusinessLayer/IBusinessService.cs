@@ -13,15 +13,25 @@ namespace BusinessLayer
 	{
 		#region Lecture d'évènements
 			[OperationContract]
-			EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop);
 			[OperationContract]
-			EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate);
+			bool isUpToDateByCampus(int Id, DateTime LastUpdate);
 			[OperationContract]
-			EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByUniversity(DateTime Start, DateTime Stop);
 			[OperationContract]
-			EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop, DateTime LastUpdate);
+			bool isUpToDateByUniversity(DateTime LastUpdate);
 			[OperationContract]
-			EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate);
+			EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop);
+			[OperationContract]
+			bool isUpToDateByPeriod(int Id, DateTime LastUpdate);
+			[OperationContract]
+			EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop);
+			[OperationContract]
+			bool isUpToDateByClass(int Id, DateTime LastUpdate);
+			[OperationContract]
+			EventData[] getPrivateEvents(DateTime Start, DateTime Stop);
+			[OperationContract]
+			bool isUpToDateByPrivate(DateTime LastUpdate);
 		#endregion
 		#region completion
 			[OperationContract]
@@ -135,15 +145,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string delRight(string UserName, string CampusName);
 			[OperationContract]
-			string delEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
-			[OperationContract]
-			string delEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
-			[OperationContract]
-			string delEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
-			[OperationContract]
-			string delEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
-			[OperationContract]
-			string delEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
+			string delEvent(int Id);
 		#endregion
 		#region get Current
 			[OperationContract]

@@ -169,11 +169,7 @@ namespace Client
 			fenetreAdmin.Show();
 		}
 
-		private void button1_Click(object sender, RoutedEventArgs e)
-		{
-			ApiTestWindow api = new ApiTestWindow();
-			api.Show();
-		}
+
 
 	}
 }

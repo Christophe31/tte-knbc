@@ -13,6 +13,51 @@
   <wsdl:binding name="BusinessService" type="i0:IBusinessService">
     <wsp:PolicyReference URI="#BusinessService_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="addPromotion">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addPromotion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addSubject">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addSubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addPeriod">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addPeriod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="grantNewRight">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/grantNewRight" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addEventToCampus">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addEventToCampus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="addEventToPeriode">
       <soap12:operation soapAction="http://tempuri.org/IBusinessService/addEventToPeriode" style="document" />
       <wsdl:input>
@@ -175,44 +220,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="delEventToCampus">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/delEventToCampus" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delEventToPeriode">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/delEventToPeriode" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delEventToClass">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/delEventToClass" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delEventToUniversity">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/delEventToUniversity" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delEventToUser">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/delEventToUser" style="document" />
+    <wsdl:operation name="delEvent">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/delEvent" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -265,8 +274,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="isUpToDateByCampus">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/isUpToDateByCampus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getEventsByUniversity">
       <soap12:operation soapAction="http://tempuri.org/IBusinessService/getEventsByUniversity" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUpToDateByUniversity">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/isUpToDateByUniversity" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -283,6 +310,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="isUpToDateByPeriod">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/isUpToDateByPeriod" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getEventsByClass">
       <soap12:operation soapAction="http://tempuri.org/IBusinessService/getEventsByClass" style="document" />
       <wsdl:input>
@@ -292,8 +328,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="isUpToDateByClass">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/isUpToDateByClass" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getPrivateEvents">
       <soap12:operation soapAction="http://tempuri.org/IBusinessService/getPrivateEvents" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUpToDateByPrivate">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessService/isUpToDateByPrivate" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -456,51 +510,6 @@
     </wsdl:operation>
     <wsdl:operation name="addClass">
       <soap12:operation soapAction="http://tempuri.org/IBusinessService/addClass" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="addPromotion">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addPromotion" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="addSubject">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addSubject" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="addPeriod">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addPeriod" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="grantNewRight">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/grantNewRight" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="addEventToCampus">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessService/addEventToCampus" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
