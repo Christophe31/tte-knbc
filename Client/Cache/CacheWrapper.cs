@@ -21,6 +21,14 @@ namespace Client
 		#region Lecture d'évènements
 		public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
+            if (cacheProcess.ServerReachable.Item1)
+            {
+                if (!Server.isUpToDateByCampus(CampusId, LastUpdate))
+                {
+                    return Server.getEventsByCampus(CampusId, Start, Stop, LastUpdate);
+                }
+
+            }
 			return Server.getEventsByCampus(CampusId, Start, Stop, LastUpdate);
 		}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)

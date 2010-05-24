@@ -9,7 +9,9 @@ namespace Client
 {
 	internal class CacheProcess
 	{
-		public BusinessServiceClient Server;
+        public delegate EventData[] EventsGetter(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate);
+        public List<Tuple<EventsGetter,int>> ToDoList;
+        public BusinessServiceClient Server;
 		public Tuple<bool,DateTime> ServerReachable;
 		#region singleton
 			static protected CacheProcess self;
@@ -20,7 +22,7 @@ namespace Client
 				Server.ClientCredentials.UserName.Password = "motdepasse";
 				Server.Open();
 				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
-				//this.Run();
+				this.Run();
 			}
 
 			static public CacheProcess Current
@@ -43,13 +45,21 @@ namespace Client
 					Reactor=new Thread((ThreadStart)this.LaunchReactor);
 			}
 			private void LaunchReactor()
-			{
-				while (true)
+			{	while (true)
 				{
-					
+					if (ServerReachable.Item1 && (ServerReachable.Item2-DateTime.Now).Minutes>3)             
+                        ServerReachable = new Tuple<bool, DateTime>(Server.State == System.ServiceModel.CommunicationState.Opened,DateTime.Now);
+                    if (ToDoList.Count>0)
+                    
 					Thread.Sleep(2000);
-				}
-			}
+			}}
+            public void RunToDoList()
+            {
+                foreach (var e in ToDoList)
+                {
+                    e.Item1(e.Item2, DateTime.MinValue, DateTime.MaxValue, DateTime.MinValue);
+                }
+            }
 		#endregion
 
 	}
