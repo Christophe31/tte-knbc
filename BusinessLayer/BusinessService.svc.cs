@@ -11,7 +11,7 @@ namespace BusinessLayer
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BusinessLayer" in code, svc and config file together.
 	public class BusinessService : IBusinessService, IDisposable
 	{
-		protected TteDataBase db;
+		protected  TteDataBase db;
 		public BusinessService()
 		{
 			db = new TteDataBase();
@@ -29,66 +29,84 @@ namespace BusinessLayer
 
 		#region IBusinessLayer Members
 			#region Lecture d'évènements
-				public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop)
 				{
-					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
+					centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									 p.Campus.Id == CampusId &&
-									 p.Campus.LastChange > LastUpdate
+									 p.Campus.Id == CampusId
 								 select new { evt = p, sub = p.Subject.Name,mod=p.Subject.Modality , spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub,e.mod, e.spk)).ToArray();
 				}
-
-				public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public bool isUpToDateByCampus(int id,DateTime LastUpdate)
 				{
-					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
+					return db.Campus.Where(p=>p.Id==id).Single().LastChange.CompareTo(LastUpdate)>=0;
+				}
+
+				public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
+				{
+					centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									 p.Campus == null && p.Period == null && p.Class == null &&
-									 db.University.FirstOrDefault().LastChange > LastUpdate
+									 p.Campus == null && p.Period == null && p.Class == null
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
-
-				public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public bool isUpToDateByUniversity(DateTime LastUpdate)
 				{
-					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
+					return db.University.Single().LastChange.CompareTo(LastUpdate) >= 0;
+				}
+
+
+				public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop)
+				{
+					centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									p.Period.Id == PeriodId &&
-									p.Period.LastChange > LastUpdate
+									p.Period.Id == PeriodId
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
-
-				public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop, DateTime LastUpdate)
+				public bool isUpToDateByPeriod(int id, DateTime LastUpdate)
 				{
-					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
+					return db.Period.Where(p => p.Id == id).Single().LastChange.CompareTo(LastUpdate) >= 0;
+				}
+
+
+				public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop)
+				{
+					centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
-									p.Class.Id ==ClassId &&
-									p.Class.LastChange > LastUpdate
+									p.Class.Id ==ClassId 
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
 				}
-
-				public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate) 
+				public bool isUpToDateByClass(int id, DateTime LastUpdate)
 				{
-					centerToSqlDate(ref LastUpdate); centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
+					return db.Class.Where(p => p.Id == id).Single().LastChange.CompareTo(LastUpdate) >= 0;
+				}
+
+				public EventData[] getPrivateEvents(DateTime Start, DateTime Stop) 
+				{
+					centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
 					return (from e in
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
 //TODO:Modifier quand les sessions seront gérées
 									p.Creator.Name == "christophe"  &&
-									p.Speaker == null &&
-									p.Creator.LastChange > LastUpdate
+									p.Speaker == null 
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
 							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
+				}
+				public bool isUpToDateByPrivate(DateTime LastUpdate)
+				{
+					//not implemented yet
+					return false;
 				}
 			#endregion
 			#region Completions
@@ -523,16 +541,16 @@ namespace BusinessLayer
 					}
 					public string delRight(string UserName, string CampusName)
 					{return "not implemented yet";}
-					public string delEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place)
-					{return "not implemented yet";}
-					public string delEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place)
-					{return "not implemented yet";}
-					public string delEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place)
-					{return "not implemented yet";}
-					public string delEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place)
-					{return "not implemented yet";}
-					public string delEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place)
-					{return "not implemented yet";}
+					public string delEvent(int Id)
+					{
+						Event u = db.Event.Where(p => p.Id == Id).FirstOrDefault();
+						if (u == null)
+							return "l' évennement n'existe pas";
+						db.DeleteObject(u);
+						db.SaveChanges();
+						return "ok";
+					}
+
 			#endregion
 			#region get Current
 

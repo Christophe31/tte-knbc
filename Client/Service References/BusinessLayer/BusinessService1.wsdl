@@ -10,6 +10,36 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IBusinessService_addPromotion_InputMessage">
+    <wsdl:part name="parameters" element="tns:addPromotion" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addPromotion_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addPromotionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addSubject_InputMessage">
+    <wsdl:part name="parameters" element="tns:addSubject" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addSubject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:addPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addPeriodResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_grantNewRight_InputMessage">
+    <wsdl:part name="parameters" element="tns:grantNewRight" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_grantNewRight_OutputMessage">
+    <wsdl:part name="parameters" element="tns:grantNewRightResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addEventToCampus_InputMessage">
+    <wsdl:part name="parameters" element="tns:addEventToCampus" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_addEventToCampus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addEventToCampusResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessService_addEventToPeriode_InputMessage">
     <wsdl:part name="parameters" element="tns:addEventToPeriode" />
   </wsdl:message>
@@ -118,35 +148,11 @@
   <wsdl:message name="IBusinessService_delRight_OutputMessage">
     <wsdl:part name="parameters" element="tns:delRightResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToCampus_InputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToCampus" />
+  <wsdl:message name="IBusinessService_delEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:delEvent" />
   </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToCampus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToCampusResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToPeriode_InputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToPeriode" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToPeriode_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToPeriodeResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToClass_InputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToClass" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToClass_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToClassResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToUniversity_InputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToUniversity" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToUniversity_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToUniversityResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToUser" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_delEventToUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delEventToUserResponse" />
+  <wsdl:message name="IBusinessService_delEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delEventResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessService_getUser_InputMessage">
     <wsdl:part name="parameters" element="tns:getUser" />
@@ -178,11 +184,23 @@
   <wsdl:message name="IBusinessService_getEventsByCampus_OutputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByCampusResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByCampus_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByCampus" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByCampus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByCampusResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessService_getEventsByUniversity_InputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByUniversity" />
   </wsdl:message>
   <wsdl:message name="IBusinessService_getEventsByUniversity_OutputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByUniversityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByUniversity_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByUniversity" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByUniversity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByUniversityResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessService_getEventsByPeriod_InputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByPeriod" />
@@ -190,17 +208,35 @@
   <wsdl:message name="IBusinessService_getEventsByPeriod_OutputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByPeriodResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByPeriod_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByPeriod" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByPeriod_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByPeriodResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessService_getEventsByClass_InputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByClass" />
   </wsdl:message>
   <wsdl:message name="IBusinessService_getEventsByClass_OutputMessage">
     <wsdl:part name="parameters" element="tns:getEventsByClassResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByClassResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessService_getPrivateEvents_InputMessage">
     <wsdl:part name="parameters" element="tns:getPrivateEvents" />
   </wsdl:message>
   <wsdl:message name="IBusinessService_getPrivateEvents_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPrivateEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByPrivate_InputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByPrivate" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessService_isUpToDateByPrivate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:isUpToDateByPrivateResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessService_getCampusNames_InputMessage">
     <wsdl:part name="parameters" element="tns:getCampusNames" />
@@ -310,37 +346,27 @@
   <wsdl:message name="IBusinessService_addClass_OutputMessage">
     <wsdl:part name="parameters" element="tns:addClassResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessService_addPromotion_InputMessage">
-    <wsdl:part name="parameters" element="tns:addPromotion" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addPromotion_OutputMessage">
-    <wsdl:part name="parameters" element="tns:addPromotionResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addSubject_InputMessage">
-    <wsdl:part name="parameters" element="tns:addSubject" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addSubject_OutputMessage">
-    <wsdl:part name="parameters" element="tns:addSubjectResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addPeriod_InputMessage">
-    <wsdl:part name="parameters" element="tns:addPeriod" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addPeriod_OutputMessage">
-    <wsdl:part name="parameters" element="tns:addPeriodResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_grantNewRight_InputMessage">
-    <wsdl:part name="parameters" element="tns:grantNewRight" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_grantNewRight_OutputMessage">
-    <wsdl:part name="parameters" element="tns:grantNewRightResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addEventToCampus_InputMessage">
-    <wsdl:part name="parameters" element="tns:addEventToCampus" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessService_addEventToCampus_OutputMessage">
-    <wsdl:part name="parameters" element="tns:addEventToCampusResponse" />
-  </wsdl:message>
   <wsdl:portType name="IBusinessService">
+    <wsdl:operation name="addPromotion">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addPromotion" message="tns:IBusinessService_addPromotion_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addPromotionResponse" message="tns:IBusinessService_addPromotion_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addSubject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addSubject" message="tns:IBusinessService_addSubject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addSubjectResponse" message="tns:IBusinessService_addSubject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addPeriod" message="tns:IBusinessService_addPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addPeriodResponse" message="tns:IBusinessService_addPeriod_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="grantNewRight">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/grantNewRight" message="tns:IBusinessService_grantNewRight_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/grantNewRightResponse" message="tns:IBusinessService_grantNewRight_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addEventToCampus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addEventToCampus" message="tns:IBusinessService_addEventToCampus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addEventToCampusResponse" message="tns:IBusinessService_addEventToCampus_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="addEventToPeriode">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addEventToPeriode" message="tns:IBusinessService_addEventToPeriode_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addEventToPeriodeResponse" message="tns:IBusinessService_addEventToPeriode_OutputMessage" />
@@ -413,25 +439,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delRight" message="tns:IBusinessService_delRight_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delRightResponse" message="tns:IBusinessService_delRight_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="delEventToCampus">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delEventToCampus" message="tns:IBusinessService_delEventToCampus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delEventToCampusResponse" message="tns:IBusinessService_delEventToCampus_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delEventToPeriode">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delEventToPeriode" message="tns:IBusinessService_delEventToPeriode_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delEventToPeriodeResponse" message="tns:IBusinessService_delEventToPeriode_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delEventToClass">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delEventToClass" message="tns:IBusinessService_delEventToClass_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delEventToClassResponse" message="tns:IBusinessService_delEventToClass_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delEventToUniversity">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delEventToUniversity" message="tns:IBusinessService_delEventToUniversity_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delEventToUniversityResponse" message="tns:IBusinessService_delEventToUniversity_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delEventToUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delEventToUser" message="tns:IBusinessService_delEventToUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delEventToUserResponse" message="tns:IBusinessService_delEventToUser_OutputMessage" />
+    <wsdl:operation name="delEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/delEvent" message="tns:IBusinessService_delEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/delEventResponse" message="tns:IBusinessService_delEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getUser" message="tns:IBusinessService_getUser_InputMessage" />
@@ -453,21 +463,41 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getEventsByCampus" message="tns:IBusinessService_getEventsByCampus_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/getEventsByCampusResponse" message="tns:IBusinessService_getEventsByCampus_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="isUpToDateByCampus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByCampus" message="tns:IBusinessService_isUpToDateByCampus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByCampusResponse" message="tns:IBusinessService_isUpToDateByCampus_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getEventsByUniversity">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getEventsByUniversity" message="tns:IBusinessService_getEventsByUniversity_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/getEventsByUniversityResponse" message="tns:IBusinessService_getEventsByUniversity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isUpToDateByUniversity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByUniversity" message="tns:IBusinessService_isUpToDateByUniversity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByUniversityResponse" message="tns:IBusinessService_isUpToDateByUniversity_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getEventsByPeriod">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getEventsByPeriod" message="tns:IBusinessService_getEventsByPeriod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/getEventsByPeriodResponse" message="tns:IBusinessService_getEventsByPeriod_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="isUpToDateByPeriod">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByPeriod" message="tns:IBusinessService_isUpToDateByPeriod_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByPeriodResponse" message="tns:IBusinessService_isUpToDateByPeriod_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getEventsByClass">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getEventsByClass" message="tns:IBusinessService_getEventsByClass_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/getEventsByClassResponse" message="tns:IBusinessService_getEventsByClass_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="isUpToDateByClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByClass" message="tns:IBusinessService_isUpToDateByClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByClassResponse" message="tns:IBusinessService_isUpToDateByClass_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getPrivateEvents">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getPrivateEvents" message="tns:IBusinessService_getPrivateEvents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/getPrivateEventsResponse" message="tns:IBusinessService_getPrivateEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="isUpToDateByPrivate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByPrivate" message="tns:IBusinessService_isUpToDateByPrivate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/isUpToDateByPrivateResponse" message="tns:IBusinessService_isUpToDateByPrivate_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getCampusNames">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/getCampusNames" message="tns:IBusinessService_getCampusNames_InputMessage" />
@@ -540,26 +570,6 @@
     <wsdl:operation name="addClass">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addClass" message="tns:IBusinessService_addClass_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addClassResponse" message="tns:IBusinessService_addClass_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="addPromotion">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addPromotion" message="tns:IBusinessService_addPromotion_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addPromotionResponse" message="tns:IBusinessService_addPromotion_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="addSubject">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addSubject" message="tns:IBusinessService_addSubject_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addSubjectResponse" message="tns:IBusinessService_addSubject_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="addPeriod">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addPeriod" message="tns:IBusinessService_addPeriod_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addPeriodResponse" message="tns:IBusinessService_addPeriod_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="grantNewRight">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/grantNewRight" message="tns:IBusinessService_grantNewRight_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/grantNewRightResponse" message="tns:IBusinessService_grantNewRight_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="addEventToCampus">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessService/addEventToCampus" message="tns:IBusinessService_addEventToCampus_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessService/addEventToCampusResponse" message="tns:IBusinessService_addEventToCampus_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="BusinessService">

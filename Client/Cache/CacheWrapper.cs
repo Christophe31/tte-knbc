@@ -19,33 +19,33 @@ namespace Client
 
 
 		#region Lecture d'évènements
-		public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop)
 		{
             if (cacheProcess.ServerReachable.Item1)
             {
-                if (!Server.isUpToDateByCampus(CampusId, LastUpdate))
+                if (!Server.isUpToDateByCampus(CampusId , DateTime.Now /*LastUpdate*/))
                 {
-                    return Server.getEventsByCampus(CampusId, Start, Stop, LastUpdate);
+                    return Server.getEventsByCampus(CampusId, Start, Stop);
                 }
 
             }
-			return Server.getEventsByCampus(CampusId, Start, Stop, LastUpdate);
+			return Server.getEventsByCampus(CampusId, Start, Stop);
 		}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop, DateTime LastUpdate)
 		{
-			return Server.getEventsByUniversity(Start, Stop, LastUpdate);
+			return Server.getEventsByUniversity(Start, Stop);
 		}
-		public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop, DateTime LastUpdate) 
+		public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop) 
 		{
-			return Server.getEventsByPeriod(PeriodId, Start, Stop, LastUpdate);
+			return Server.getEventsByPeriod(PeriodId, Start, Stop);
 		}
-		public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop)
 		{
-			return Server.getEventsByClass(ClassId, Start, Stop, LastUpdate);
+			return Server.getEventsByClass(ClassId, Start, Stop);
 		}
-		public EventData[] getPrivateEvents(DateTime Start, DateTime Stop, DateTime LastUpdate)
+		public EventData[] getPrivateEvents(DateTime Start, DateTime Stop)
 		{
-			return Server.getPrivateEvents(Start, Stop, LastUpdate);
+			return Server.getPrivateEvents(Start, Stop);
 		}
 		#endregion
 		#region completion
@@ -53,9 +53,9 @@ namespace Client
 		{
 			return Server.getCampusNames();
 		}
-		public string[] getClassesNames()
+		public IdName[] getIdClassesNames()
 		{
-			return Server.getClassesNames();
+			return Server.getIdClassesNames();
 		}
 		public string[] getPromotionsNames()
 		{
@@ -68,10 +68,6 @@ namespace Client
 		public string[] getSubjectsNames()
 		{
 			return Server.getSubjectsNames();
-		}
-		public string[] getUsersNames()
-		{
-			return Server.getUsersNames();
 		}
 		public string[] getModalities()
 		{

@@ -3,6 +3,88 @@
   <xs:import schemaLocation="http://localhost:2900/BusinessService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
   <xs:import schemaLocation="http://localhost:2900/BusinessService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:2900/BusinessService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/System" />
+  <xs:element name="addPromotion">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addPromotionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addPromotionResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addSubject">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SubjectName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Hours" type="xs:int" />
+        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addSubjectResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addSubjectResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addPeriod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PeriodName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PeriodStart" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="PeriodEnd" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addPeriodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addPeriodResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="grantNewRight">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="grantNewRightResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="grantNewRightResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToCampus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
+        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="addEventToCampusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="addEventToCampusResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="addEventToPeriode">
     <xs:complexType>
       <xs:sequence>
@@ -281,102 +363,17 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="delEventToCampus">
+  <xs:element name="delEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Id" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="delEventToCampusResponse">
+  <xs:element name="delEventResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="delEventToCampusResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToPeriode">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToPeriodeResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="delEventToPeriodeResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToClass">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToClassResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="delEventToClassResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToUniversity">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToUniversityResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="delEventToUniversityResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToUser">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delEventToUserResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="delEventToUserResult" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="delEventResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -442,7 +439,6 @@
         <xs:element minOccurs="0" name="CampusId" type="xs:int" />
         <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Stop" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -453,12 +449,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="isUpToDateByCampus">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Id" type="xs:int" />
+        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isUpToDateByCampusResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="isUpToDateByCampusResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getEventsByUniversity">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Stop" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -469,13 +479,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="isUpToDateByUniversity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isUpToDateByUniversityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="isUpToDateByUniversityResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getEventsByPeriod">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="PeriodId" type="xs:int" />
         <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Stop" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -486,13 +509,27 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="isUpToDateByPeriod">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Id" type="xs:int" />
+        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isUpToDateByPeriodResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="isUpToDateByPeriodResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getEventsByClass">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="ClassId" type="xs:int" />
         <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Stop" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -503,12 +540,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="isUpToDateByClass">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Id" type="xs:int" />
+        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isUpToDateByClassResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="isUpToDateByClassResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getPrivateEvents">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Stop" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -516,6 +567,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPrivateEventsResult" nillable="true" type="q14:ArrayOfEventData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isUpToDateByPrivate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LastUpdate" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="isUpToDateByPrivateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="isUpToDateByPrivateResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -742,88 +807,6 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="addClassResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addPromotion">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addPromotionResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addPromotionResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addSubject">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="SubjectName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Hours" type="xs:int" />
-        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addSubjectResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addSubjectResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addPeriod">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="PeriodName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PeriodStart" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="PeriodEnd" type="xs:dateTime" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addPeriodResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addPeriodResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="grantNewRight">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="grantNewRightResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="grantNewRightResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToCampus">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="EventName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-        <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-        <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="addEventToCampusResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addEventToCampusResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

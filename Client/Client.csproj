@@ -73,9 +73,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Tests\ApiTestWindow.xaml.cs">
-      <DependentUpon>ApiTestWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="TteSplash.xaml.cs">
       <DependentUpon>TteSplash.xaml</DependentUpon>
     </Compile>
@@ -108,10 +105,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Tests\ApiTestWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="TteSplash.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,9 +159,6 @@
     <None Include="Service References\BusinessLayer\Client.BusinessLayer.EventData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Tests\ApiTestWindowIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
