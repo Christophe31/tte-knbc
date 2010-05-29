@@ -21,6 +21,7 @@ namespace Client
 	/// </summary>
 	public partial class MainWindow : Window
     {
+        #region attributes
         /// <summary>
         /// Api allowing to manipulate data stored in the database
         /// </summary>
@@ -33,8 +34,10 @@ namespace Client
         /// List storing all events to be displayed.
         /// </summary>
         protected List<EventData> AllEvents;
+        #endregion
 
-		public MainWindow()
+        #region Window init
+        public MainWindow()
 		{
 			InitializeComponent();
 		}
@@ -79,7 +82,9 @@ namespace Client
             RefreshAllEvents();
             EventsGrid.DataContext = AllEvents;
 		}
+        #endregion
 
+        #region Refreshes
         /// <summary>
         /// Refresh the events list, for the period specified in the GUI, including (or excluding) mandatory events.
         /// </summary>
@@ -97,7 +102,8 @@ namespace Client
             }
 
             // Campus
-            if (ViewType.SelectedIndex == 1 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+            if ((ViewType.SelectedIndex == 1 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+                && CampusName.SelectedValue != null)
             {
                 foreach (EventData ev in Api.getEventsByCampus(((IdName)CampusName.SelectedValue).Id, start, end))
                 {
@@ -107,7 +113,8 @@ namespace Client
             }
 
             // Period
-            if (ViewType.SelectedIndex == 2 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+            if ((ViewType.SelectedIndex == 2 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+                && PeriodName.SelectedValue != null)
             {
 
                 foreach (EventData ev in Api.getEventsByPeriod(((IdName)PeriodName.SelectedValue).Id, start, end))
@@ -142,6 +149,37 @@ namespace Client
                 EventsGrid.DataContext = AllEvents;
         }
 
+        /// <summary>
+        /// The ClassName ComboBox is filled in function of the selected campus and period.
+        /// </summary>
+        private void RefreshClassName()
+        {
+            if (ViewType.SelectedIndex == 3)
+            {
+                try
+                {
+                    IdName campus = (from c in CampusPeriodClassTree.Keys
+                                     where c.Name == CampusName.SelectedValue.ToString()
+                                     select c).FirstOrDefault();
+                    IdName period = (from p in CampusPeriodClassTree[campus].Keys
+                                     where p.Name == PeriodName.SelectedValue.ToString()
+                                     select p).FirstOrDefault();
+                    ClassName.DataContext = CampusPeriodClassTree[campus][period];
+                    ClassName.SelectedIndex = 0;
+                }
+                catch (KeyNotFoundException)
+                {
+                    ClassName.DataContext = null;
+                }
+                catch (ArgumentNullException)
+                {
+                    ClassName.DataContext = null;
+                }
+            }
+        }
+        #endregion
+
+        #region User actions
         /// <summary>
         /// Called when an item is selected in ComboBoxes.
         /// Display and hide required ComboBoxes.
@@ -200,35 +238,6 @@ namespace Client
             RefreshAllEvents();
         }
 
-        /// <summary>
-        /// The ClassName ComboBox is filled in function of the selected campus and period.
-        /// </summary>
-        private void RefreshClassName()
-        {
-            if (ViewType.SelectedIndex == 3)
-            {
-				try
-				{
-                    IdName campus = (from c in CampusPeriodClassTree.Keys
-                                                 where c.Name == CampusName.SelectedValue.ToString()
-                                                 select c).FirstOrDefault();
-                    IdName period = (from p in CampusPeriodClassTree[campus].Keys
-                                                 where p.Name == PeriodName.SelectedValue.ToString()
-                                                 select p).FirstOrDefault();
-					ClassName.DataContext = CampusPeriodClassTree[campus][period];
-                    ClassName.SelectedIndex = 0;
-				}
-				catch (KeyNotFoundException)
-				{
-					ClassName.DataContext = null;
-				}
-				catch (ArgumentNullException)
-				{
-					ClassName.DataContext = null;
-				}
-            }
-        }
-
 		private void button1_Click_1(object sender, RoutedEventArgs e)
 		{
 			MainAdmin fenetreAdmin = new MainAdmin();
@@ -254,6 +263,6 @@ namespace Client
             else
                 box.Text = "0";
         }
-
-	}
+        #endregion
+    }
 }
