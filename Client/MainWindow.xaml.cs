@@ -170,6 +170,20 @@ namespace Client
 		}
 
 
+        private void TimeBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox box = (TextBox) sender;
+            int value = 0;
+            if (Int32.TryParse(box.Text, out value))
+            {
+                if (value < 0)
+                    box.Text = "0";
+                else if (value >= 24)
+                    box.Text = "23";
+            }
+            else
+                box.Text = "0";
+        }
 
 	}
 }
