@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 		x:Class="Client.MainWindow"
-        Title="MainWindow" 
+        Title="TimeTableEasy" 
 		mc:Ignorable="d" 
 		Height="350" Width="525" Loaded="Window_Loaded">
     <Grid Margin="3">
@@ -116,34 +116,41 @@
                             <DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
                             <DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
                             <DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
+                            
                             <DataGridTemplateColumn Header="Début">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Start}"/>
+                                        <TextBlock Text="{Binding StringFormat=\{0:g\}, Path=Start}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <DatePicker SelectedDate="{Binding Start}"/>
+                                            <DatePicker SelectedDate="{Binding StringFormat=\{0:d\}, Path=StartDate}"/>
+                                            <TextBox Text="{Binding StartHour}" TextChanged="TimeBox_TextChanged" />
+                                            <Label>:00</Label>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
+
                             <DataGridTemplateColumn Header="Fin">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding End}"/>
+                                        <TextBlock Text="{Binding StringFormat=\{0:g\}, Path=End, Mode=TwoWay, NotifyOnSourceUpdated=True}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
-                                            <DatePicker SelectedDate="{Binding End}"/>
+                                            <DatePicker SelectedDate="{Binding StringFormat=\{0:d\}, Path=EndDate, Mode=TwoWay}" />
+                                            <TextBox Text="{Binding EndHour, Mode=TwoWay}" TextChanged="TimeBox_TextChanged" />
+                                            <Label>:00</Label>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
+                            
                             <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
                         </DataGrid.Columns>
                     </DataGrid>
