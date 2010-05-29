@@ -21,8 +21,18 @@ namespace Client
 	/// </summary>
 	public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Api allowing to manipulate data stored in the database
+        /// </summary>
         protected CacheWrapper Api;
+        /// <summary>
+        /// Tree storing names of campuses, associated periods and classes.
+        /// </summary>
         protected Dictionary<IdName, Dictionary<IdName, IdName[]>> CampusPeriodClassTree;
+        /// <summary>
+        /// List storing all events to be displayed.
+        /// </summary>
+        protected List<EventData> AllEvents;
 
 		public MainWindow()
 		{
@@ -51,35 +61,85 @@ namespace Client
 		private void FillControls()
 		{
 			Api = new CacheWrapper();
-			CampusPeriodClassTree = Api.getCampusPeriodClassTree();
+            CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
 			// ComboBoxes initialisation
 			ViewType.SelectedIndex = 0;
 
-            CampusName.DataContext = Api.getCampusNames();
-            PeriodName.DataContext = Api.getPeriodsNames();
+            CampusName.DataContext = Api.Server.getIdCampusNames(); ;
+            CampusName.SelectedIndex = 0;
+            PeriodName.DataContext = Api.Server.getIdPeriodsNames();
+            PeriodName.SelectedIndex = 0;
 
             // DatePickers
             StartDate.SelectedDate = DateTime.Now.AddMonths(-12);
             EndDate.SelectedDate = DateTime.Now.AddMonths(12);
 
             // Events DataGrid initialisation
-            EventsGrid.DataContext = GetAllEvents(DateTime.Now.AddMonths(-12), DateTime.Now.AddMonths(12));
+            RefreshAllEvents();
+            EventsGrid.DataContext = AllEvents;
 		}
 
         /// <summary>
-        /// Get all events for a period, including (or excluding) mandatory events.
+        /// Refresh the events list, for the period specified in the GUI, including (or excluding) mandatory events.
         /// </summary>
-        /// <param name="start">Start of the period</param>
-        /// <param name="end">End of the period</param>
-        /// <returns>An array of events</returns>
-        private EventData[] GetAllEvents(DateTime start, DateTime end)
+        private void RefreshAllEvents()
         {
-            EventData[] universityEvents = Api.getEventsByUniversity(start, end, new DateTime(2010, 5, 12));
-            foreach (EventData ev in universityEvents)
-                ev.LinkedTo = "Université";
+            DateTime start = StartDate.SelectedDate.GetValueOrDefault();
+            DateTime end = EndDate.SelectedDate.GetValueOrDefault();
+            AllEvents = new List<EventData>();
 
-            return universityEvents;
+            // University
+            foreach (EventData ev in Api.getEventsByUniversity(start, end))
+            {
+                ev.LinkedTo = "Université";
+                AllEvents.Add(ev);
+            }
+
+            // Campus
+            if (ViewType.SelectedIndex == 1 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+            {
+                foreach (EventData ev in Api.getEventsByCampus(((IdName)CampusName.SelectedValue).Id, start, end))
+                {
+                    ev.LinkedTo = "Campus";
+                    AllEvents.Add(ev);
+                }
+            }
+
+            // Period
+            if (ViewType.SelectedIndex == 2 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+            {
+
+                foreach (EventData ev in Api.getEventsByPeriod(((IdName)PeriodName.SelectedValue).Id, start, end))
+                {
+                    ev.LinkedTo = "Période";
+                    AllEvents.Add(ev);
+                }
+            }
+
+            // Class;
+            if ((ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4) && ClassName.SelectedValue != null)
+            {
+                foreach (EventData ev in Api.getEventsByClass(((IdName)ClassName.SelectedValue).Id, start, end))
+                {
+                    ev.LinkedTo = "Classe";
+                    AllEvents.Add(ev);
+                }
+            }
+
+            // User
+            if (ViewType.SelectedIndex == 4)
+            {
+                foreach (EventData ev in Api.getPrivateEvents(start, end))
+                {
+                    ev.LinkedTo = "Privé";
+                    AllEvents.Add(ev);
+                }
+            }
+
+            // Refresh views
+            if (ViewsControl.SelectedIndex == 2)
+                EventsGrid.DataContext = AllEvents;
         }
 
         /// <summary>
@@ -98,41 +158,46 @@ namespace Client
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
-            else
+            // Campus
+            else if (selected == 1)
             {
-                // Campus
-                if (selected == 1)
-                {
-                    CampusName.Visibility = System.Windows.Visibility.Visible;
-                    PeriodName.Visibility = System.Windows.Visibility.Collapsed;
-                    ClassName.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                // Period
-                else if (selected == 2)
-                {
-                    CampusName.Visibility = System.Windows.Visibility.Collapsed;
-                    PeriodName.Visibility = System.Windows.Visibility.Visible;
-                    ClassName.Visibility = System.Windows.Visibility.Collapsed;
-                }
-                // Class
-                else if (selected == 3)
-                {
-                    RefreshClassName();
-
-                    CampusName.Visibility = System.Windows.Visibility.Visible;
-                    PeriodName.Visibility = System.Windows.Visibility.Visible;
-                    ClassName.Visibility = System.Windows.Visibility.Visible;
-                }
+                CampusName.Visibility = System.Windows.Visibility.Visible;
+                PeriodName.Visibility = System.Windows.Visibility.Collapsed;
+                ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
+            // Period
+            else if (selected == 2)
+            {
+                CampusName.Visibility = System.Windows.Visibility.Collapsed;
+                PeriodName.Visibility = System.Windows.Visibility.Visible;
+                ClassName.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            // Class
+            else if (selected == 3)
+            {
+                RefreshClassName();
+
+                CampusName.Visibility = System.Windows.Visibility.Visible;
+                PeriodName.Visibility = System.Windows.Visibility.Visible;
+                ClassName.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            RefreshAllEvents();
         }
 
         private void CampusName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshClassName();
+            RefreshAllEvents();
         }
         private void PeriodName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshClassName();
+            RefreshAllEvents();
+        }
+        private void ClassName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshAllEvents();
         }
 
         /// <summary>
@@ -151,6 +216,7 @@ namespace Client
                                                  where p.Name == PeriodName.SelectedValue.ToString()
                                                  select p).FirstOrDefault();
 					ClassName.DataContext = CampusPeriodClassTree[campus][period];
+                    ClassName.SelectedIndex = 0;
 				}
 				catch (KeyNotFoundException)
 				{
@@ -169,7 +235,11 @@ namespace Client
 			fenetreAdmin.Show();
 		}
 
-
+        /// <summary>
+        /// Controls that the new value of the TextBox is a correct hour, and corrects it if required.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TimeBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             TextBox box = (TextBox) sender;

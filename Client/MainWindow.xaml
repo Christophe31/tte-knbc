@@ -28,12 +28,12 @@
                 <ComboBoxItem>Utilisateur</ComboBoxItem>
             </ComboBox>
 
-            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="CampusName" ItemsSource="{Binding}" SelectedIndex="0" SelectionChanged="CampusName_SelectionChanged" />
-            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="PeriodName" ItemsSource="{Binding}" SelectedIndex="0" SelectionChanged="PeriodName_SelectionChanged" />
-            <ComboBox Margin="0" Visibility="Collapsed" Name="ClassName" ItemsSource="{Binding}" SelectedIndex="0" />
+            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="CampusName" ItemsSource="{Binding}" SelectionChanged="CampusName_SelectionChanged" />
+            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="PeriodName" ItemsSource="{Binding}" SelectionChanged="PeriodName_SelectionChanged" />
+            <ComboBox Margin="0" Visibility="Collapsed" Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
         </StackPanel>
 
-        <TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="1" Margin="0,3">
+        <TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="1" Margin="0,3" Name="ViewsControl">
             <TabItem>
                 <TabItem.Header>
                     <TextBlock>Semaine</TextBlock>
