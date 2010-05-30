@@ -14,8 +14,10 @@ namespace Client
 {
 	internal class CacheProcess
 	{
-        public delegate EventData[] EventsGetter(int Id, DateTime Start, DateTime Stop, DateTime LastUpdate);
-        public List<Tuple<EventsGetter,int,string>> ToDoListId;
+        public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop, DateTime LastUpdate);
+        public List<Tuple<EventsGetterId,int,string>> ToDoListId;
+        public delegate EventData[] EventsGetter(DateTime Start, DateTime Stop, DateTime LastUpdate);
+        public List<Tuple<EventsGetter, int, string>> ToDoList;
         public BusinessServiceClient Server;
 		public Tuple<bool,DateTime> ServerReachable;
 		Thread reactor;
@@ -33,9 +35,17 @@ namespace Client
 
 				Server.Open();
 				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
-				ToDoListId = new List<Tuple<EventsGetter, int, string>>();
+				ToDoListId = new List<Tuple<EventsGetterId, int, string>>();
 				reactor = new Thread((ThreadStart)this.LaunchReactor);
+                ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
+                ToDoList = new List<Tuple<EventsGetter, int, string>>();
+                this.Run();
 			}
+
+            private void Run()
+            {
+                throw new NotImplementedException();
+            }
 
 			static public CacheProcess Current
 			{
@@ -83,6 +93,21 @@ namespace Client
 				formatter.Serialize(str, obj);
 				str.Close();
 			}
+            public void RunToDoList()
+            {
+                foreach (var e in ToDoList)
+                {
+                    iCalendar iCal = new iCalendar();
+                    foreach (var i in e.Item1(e.Item2, DateTime.MinValue, DateTime.MaxValue, DateTime.MinValue))
+                    {
+                        i.AddEventToCalendar(ref iCal);
+                    }
+                    iCal.AddProperty("LastUpdate", DateTime.Now.ToString());
+
+                    iCalendarSerializer serializer = new iCalendarSerializer(iCal);
+                    serializer.Serialize(e.Item3+"\\"+e.Item2.ToString()+@".ics");
+                }
+             }
 		#endregion
 		
 	}
