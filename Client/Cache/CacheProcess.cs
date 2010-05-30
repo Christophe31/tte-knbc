@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 using Client.BusinessLayer;
 using System.Threading;
+using System.Runtime.Serialization;
 using DDay.iCal;
 using DDay.iCal.Serialization.iCalendar;
+
 
 namespace Client
 {
@@ -15,6 +18,8 @@ namespace Client
         public List<Tuple<EventsGetter,int,string>> ToDoListId;
         public BusinessServiceClient Server;
 		public Tuple<bool,DateTime> ServerReachable;
+		Thread reactor;
+		System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 		#region singleton
 			static protected CacheProcess self;
 			protected CacheProcess()
@@ -29,7 +34,7 @@ namespace Client
 				Server.Open();
 				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
 				ToDoListId = new List<Tuple<EventsGetter, int, string>>();
-				this.Run();
+				reactor = new Thread((ThreadStart)this.LaunchReactor);
 			}
 
 			static public CacheProcess Current
@@ -45,14 +50,6 @@ namespace Client
 		#endregion
 
 		#region Reactor
-			Thread Reactor;
-			public void Run()
-			{
-				if (Reactor==null)
-					Reactor = new Thread((ThreadStart)this.LaunchReactor);
-				if (!Reactor.IsAlive)
-					Reactor.Start();
-			}
 			private void LaunchReactor()
 			{	while (true)
 				{
@@ -62,7 +59,10 @@ namespace Client
                     
 					Thread.Sleep(2000);
 			}}
-            public void RunToDoListId()
+		#endregion
+
+		#region foos
+			public void RunToDoListId()
             {
                 foreach (var e in ToDoListId)
                 {
@@ -75,10 +75,15 @@ namespace Client
                     
                     iCalendarSerializer serializer = new iCalendarSerializer(iCal);
                     serializer.Serialize(e.Item3+"\\"+e.Item2.ToString()+@".ics");
-
                 }
-            }
+			}
+			private void WriteToFile(ISerializable obj, string fileName)
+			{
+				Stream str = File.OpenWrite(fileName);
+				formatter.Serialize(str, obj);
+				str.Close();
+			}
 		#endregion
-
+		
 	}
 }
