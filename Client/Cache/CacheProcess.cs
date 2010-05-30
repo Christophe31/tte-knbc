@@ -7,7 +7,6 @@ using Client.BusinessLayer;
 using System.Threading;
 using System.Runtime.Serialization;
 using DDay.iCal;
-using DDay.iCal.Serialization.iCalendar;
 
 
 namespace Client
@@ -17,11 +16,12 @@ namespace Client
         public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop, DateTime LastUpdate);
         public List<Tuple<EventsGetterId,int,string>> ToDoListId;
         public delegate EventData[] EventsGetter(DateTime Start, DateTime Stop, DateTime LastUpdate);
-        public List<Tuple<EventsGetter, int, string>> ToDoList;
+        public List<Tuple<EventsGetter, string>> ToDoList;
         public BusinessServiceClient Server;
 		public Tuple<bool,DateTime> ServerReachable;
 		Thread reactor;
 		System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
 		#region singleton
 			static protected CacheProcess self;
 			protected CacheProcess()
@@ -38,14 +38,10 @@ namespace Client
 				ToDoListId = new List<Tuple<EventsGetterId, int, string>>();
 				reactor = new Thread((ThreadStart)this.LaunchReactor);
                 ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
-                ToDoList = new List<Tuple<EventsGetter, int, string>>();
-                this.Run();
+                ToDoList = new List<Tuple<EventsGetter, string>>();
+                reactor=new Thread((ThreadStart)LaunchReactor);
+				reactor.Start();
 			}
-
-            private void Run()
-            {
-                throw new NotImplementedException();
-            }
 
 			static public CacheProcess Current
 			{
@@ -82,9 +78,7 @@ namespace Client
                         i.AddEventToCalendar(ref iCal);
                     }
                     iCal.AddProperty("LastUpdate", DateTime.Now.ToString());
-                    
-                    iCalendarSerializer serializer = new iCalendarSerializer(iCal);
-                    serializer.Serialize(e.Item3+"\\"+e.Item2.ToString()+@".ics");
+					calSerializer.Serialize(iCal,e.Item3 + "\\" + e.Item2.ToString() + @".ics");
                 }
 			}
 			private void WriteToFile(ISerializable obj, string fileName)
@@ -98,14 +92,12 @@ namespace Client
                 foreach (var e in ToDoList)
                 {
                     iCalendar iCal = new iCalendar();
-                    foreach (var i in e.Item1(e.Item2, DateTime.MinValue, DateTime.MaxValue, DateTime.MinValue))
+                    foreach (var i in e.Item1( DateTime.MinValue, DateTime.MaxValue, DateTime.MinValue))
                     {
                         i.AddEventToCalendar(ref iCal);
                     }
                     iCal.AddProperty("LastUpdate", DateTime.Now.ToString());
-
-                    iCalendarSerializer serializer = new iCalendarSerializer(iCal);
-                    serializer.Serialize(e.Item3+"\\"+e.Item2.ToString()+@".ics");
+					calSerializer.Serialize(iCal,e.Item2 + "\\" + e.Item2.ToString() + @".ics");
                 }
              }
 		#endregion
