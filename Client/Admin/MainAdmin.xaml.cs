@@ -717,12 +717,12 @@ namespace Client
                 if (tcOngletsSubjects.SelectedIndex == 0)
                 {
                     //On charge la ComboBox
-                    cbPeriodAdd_Promo.DataContext = Api.getPromotionsNames();
+                    cbPeriodAdd_Promo.DataContext = Api.getIdPromotionsNames();
                 }
                 else if (tcOngletsSubjects.SelectedIndex == 1)
                 {
                     //On charge la ComboBox
-                    cbPeriodChange_Period.DataContext = Api.getPromotionsNames();
+                    cbPeriodChange_Period.DataContext = Api.getIdPromotionsNames();
                 }
 
                 //On prépare la StatusBar
