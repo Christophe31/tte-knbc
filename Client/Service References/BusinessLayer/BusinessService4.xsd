@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/System" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/System" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfTupleOfintstringstring">
+  <xs:import schemaLocation="http://localhost:2900/BusinessService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
+  <xs:complexType name="ArrayOfTupleOfIdNamestringNWQKE3VB">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="TupleOfintstringstring" nillable="true" type="tns:TupleOfintstringstring" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TupleOfIdNamestringNWQKE3VB" nillable="true" type="tns:TupleOfIdNamestringNWQKE3VB" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfTupleOfintstringstring" nillable="true" type="tns:ArrayOfTupleOfintstringstring" />
-  <xs:complexType name="TupleOfintstringstring">
+  <xs:element name="ArrayOfTupleOfIdNamestringNWQKE3VB" nillable="true" type="tns:ArrayOfTupleOfIdNamestringNWQKE3VB" />
+  <xs:complexType name="TupleOfIdNamestringNWQKE3VB">
     <xs:annotation>
       <xs:appinfo>
-        <GenericType Name="TupleOf{0}{1}{2}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
-          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
-          <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
+        <GenericType Name="TupleOf{0}{1}{#}" Namespace="http://schemas.datacontract.org/2004/07/System" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="IdName" Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer" />
           <GenericParameter Name="string" Namespace="http://www.w3.org/2001/XMLSchema" />
         </GenericType>
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element name="m_Item1" type="xs:int" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessLayer" name="m_Item1" nillable="true" type="q1:IdName" />
       <xs:element name="m_Item2" nillable="true" type="xs:string" />
-      <xs:element name="m_Item3" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="TupleOfintstringstring" nillable="true" type="tns:TupleOfintstringstring" />
+  <xs:element name="TupleOfIdNamestringNWQKE3VB" nillable="true" type="tns:TupleOfIdNamestringNWQKE3VB" />
 </xs:schema>

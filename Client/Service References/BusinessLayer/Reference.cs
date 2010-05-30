@@ -806,7 +806,7 @@ namespace Client.BusinessLayer {
         Client.BusinessLayer.IdName[] getIdPeriodsNames();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdSubjectsNamesModality", ReplyAction="http://tempuri.org/IBusinessService/getIdSubjectsNamesModalityResponse")]
-        System.Tuple<int, string, string>[] getIdSubjectsNamesModality();
+        System.Tuple<Client.BusinessLayer.IdName, string>[] getIdSubjectsNamesModality();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessService/getIdUsersNames", ReplyAction="http://tempuri.org/IBusinessService/getIdUsersNamesResponse")]
         Client.BusinessLayer.IdName[] getIdUsersNames();
@@ -1051,7 +1051,7 @@ namespace Client.BusinessLayer {
             return base.Channel.getIdPeriodsNames();
         }
         
-        public System.Tuple<int, string, string>[] getIdSubjectsNamesModality() {
+        public System.Tuple<Client.BusinessLayer.IdName, string>[] getIdSubjectsNamesModality() {
             return base.Channel.getIdSubjectsNamesModality();
         }
         
