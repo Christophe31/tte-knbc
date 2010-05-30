@@ -118,7 +118,7 @@ namespace Client
                 || viewType == EventType.Type.User)
                 && CampusName.SelectedValue != null)
             {
-                foreach (EventData ev in Api.getEventsByCampus(((IdName)CampusName.SelectedValue).Id, start, end))
+				foreach (EventData ev in Api.getEventsByCampus(CampusName.SelectedValue as IdName, start, end))
                 {
                     ev.Type = EventType.Type.Campus;
                     AllEvents.Add(ev);
@@ -132,7 +132,7 @@ namespace Client
                 && PeriodName.SelectedValue != null)
             {
 
-                foreach (EventData ev in Api.getEventsByPeriod(((IdName)PeriodName.SelectedValue).Id, start, end))
+                foreach (EventData ev in Api.getEventsByPeriod(PeriodName.SelectedValue as IdName, start, end))
                 {
                     ev.Type = EventType.Type.Period;
                     AllEvents.Add(ev);
@@ -143,7 +143,7 @@ namespace Client
             if ((viewType == EventType.Type.Class || viewType == EventType.Type.User)
                 && ClassName.SelectedValue != null)
             {
-                foreach (EventData ev in Api.getEventsByClass(((IdName)ClassName.SelectedValue).Id, start, end))
+                foreach (EventData ev in Api.getEventsByClass(ClassName.SelectedValue as IdName, start, end))
                 {
                     ev.Type = EventType.Type.Class;
                     AllEvents.Add(ev);
