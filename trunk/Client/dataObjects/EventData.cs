@@ -7,13 +7,23 @@ using DDay.iCal;
 
 namespace Client.BusinessLayer
 {
-    public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, INotifyPropertyChanged
+    public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, INotifyPropertyChanged, IEditableObject
     {
         /// <summary>
-        /// Defines to which type of element this event is linked.
-        /// For example: University, Campus, Period, Class or Private.
+        /// Defines to which type of element this event is linked (University, Campus, Period, Class or Private)
         /// </summary>
-        public String LinkedTo { get; set; }
+        public EventType.Type Type { get; set; }
+
+        /// <summary>
+        /// Returns the string corresponding to the Type property
+        /// </summary>
+        public string LinkedTo
+        {
+            get
+            {
+                return eventType.EventTypeNames[Type];
+            }
+        }
 
         /// <summary>
         /// Gets or sets the hour component of the Start date
@@ -85,6 +95,12 @@ namespace Client.BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Api allowing to manipulate data stored in the database
+        /// </summary>
+        private CacheWrapper Api;
+        private EventType eventType;
+
         // Create the OnPropertyChanged method to raise the event
         protected void OnPropertyChanged(string name)
         {
@@ -95,10 +111,10 @@ namespace Client.BusinessLayer
             }
         }
 
-
         public EventData()
         {
-           
+            Api = new CacheWrapper();
+            eventType = new EventType();
         }
 
 
@@ -115,5 +131,30 @@ namespace Client.BusinessLayer
             e.AddProperty(new CalendarProperty("Speaker", this.Speaker));
             e.AddProperty(new CalendarProperty("Subject", this.Subject));    
         }
+
+        #region IEditableObject Members
+
+        void IEditableObject.BeginEdit()
+        {
+        }
+
+        void IEditableObject.CancelEdit()
+        {
+        }
+
+        void IEditableObject.EndEdit()
+        {
+            // Event creation
+            if (Id == 0)
+            {
+            }
+
+            // Event edition
+            else
+            {
+            }
+        }
+
+        #endregion
     }
 }

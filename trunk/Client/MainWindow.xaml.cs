@@ -34,6 +34,10 @@ namespace Client
         /// List storing all events to be displayed.
         /// </summary>
         protected List<EventData> AllEvents;
+        /// <summary>
+        /// 
+        /// </summary>
+        protected EventType eventType;
         #endregion
 
         #region Window init
@@ -65,8 +69,10 @@ namespace Client
 		{
 			Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
+            eventType = new EventType();
 
 			// ComboBoxes initialisation
+            ViewType.DataContext = eventType.EventTypeNames;
 			ViewType.SelectedIndex = 0;
 
             CampusName.DataContext = Api.Server.getIdCampusNames(); ;
@@ -94,52 +100,62 @@ namespace Client
             DateTime end = EndDate.SelectedDate.GetValueOrDefault();
             AllEvents = new List<EventData>();
 
+            EventType.Type viewType = EventType.Type.University;
+            if (ViewType.SelectedValue != null)
+                viewType = ((KeyValuePair<EventType.Type, string>) ViewType.SelectedValue).Key;
+
+
             // University
             foreach (EventData ev in Api.getEventsByUniversity(start, end))
             {
-                ev.LinkedTo = "Université";
+                ev.Type = EventType.Type.University;
                 AllEvents.Add(ev);
             }
 
             // Campus
-            if ((ViewType.SelectedIndex == 1 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+            if ((viewType == EventType.Type.Campus
+                || viewType == EventType.Type.Class
+                || viewType == EventType.Type.User)
                 && CampusName.SelectedValue != null)
             {
                 foreach (EventData ev in Api.getEventsByCampus(((IdName)CampusName.SelectedValue).Id, start, end))
                 {
-                    ev.LinkedTo = "Campus";
+                    ev.Type = EventType.Type.Campus;
                     AllEvents.Add(ev);
                 }
             }
 
             // Period
-            if ((ViewType.SelectedIndex == 2 || ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4)
+            if ((viewType == EventType.Type.Period
+                || viewType == EventType.Type.Class
+                || viewType == EventType.Type.User)
                 && PeriodName.SelectedValue != null)
             {
 
                 foreach (EventData ev in Api.getEventsByPeriod(((IdName)PeriodName.SelectedValue).Id, start, end))
                 {
-                    ev.LinkedTo = "Période";
+                    ev.Type = EventType.Type.Period;
                     AllEvents.Add(ev);
                 }
             }
 
-            // Class;
-            if ((ViewType.SelectedIndex == 3 || ViewType.SelectedIndex == 4) && ClassName.SelectedValue != null)
+            // Class
+            if ((viewType == EventType.Type.Class || viewType == EventType.Type.User)
+                && ClassName.SelectedValue != null)
             {
                 foreach (EventData ev in Api.getEventsByClass(((IdName)ClassName.SelectedValue).Id, start, end))
                 {
-                    ev.LinkedTo = "Classe";
+                    ev.Type = EventType.Type.Class;
                     AllEvents.Add(ev);
                 }
             }
 
             // User
-            if (ViewType.SelectedIndex == 4)
+            if (viewType == EventType.Type.User)
             {
                 foreach (EventData ev in Api.getPrivateEvents(start, end))
                 {
-                    ev.LinkedTo = "Privé";
+                    ev.Type = EventType.Type.User;
                     AllEvents.Add(ev);
                 }
             }
@@ -154,7 +170,7 @@ namespace Client
         /// </summary>
         private void RefreshClassName()
         {
-            if (ViewType.SelectedIndex == 3)
+            if (((KeyValuePair<EventType.Type, string>)ViewType.SelectedValue).Key == EventType.Type.Class)
             {
                 try
                 {
@@ -188,30 +204,30 @@ namespace Client
         /// <param name="e"></param>
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = ViewType.SelectedIndex;
+            var selected = ((KeyValuePair<EventType.Type, string>)ViewType.SelectedValue).Key;
             // University or user
-            if (selected == 0 || selected == 4)
+            if (selected == EventType.Type.University || selected == EventType.Type.User)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             // Campus
-            else if (selected == 1)
+            else if (selected == EventType.Type.Campus)
             {
                 CampusName.Visibility = System.Windows.Visibility.Visible;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             // Period
-            else if (selected == 2)
+            else if (selected == EventType.Type.Period)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Visible;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             // Class
-            else if (selected == 3)
+            else if (selected == EventType.Type.Class)
             {
                 RefreshClassName();
 
