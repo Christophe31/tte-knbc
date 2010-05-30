@@ -49,21 +49,21 @@ namespace Client
 		}
 		#endregion
 		#region completion
-		public string[] getCampusNames()
+		public IdName[] getCampusNames()
 		{
-			return Server.getCampusNames();
+			return Server.getIdCampusNames();
 		}
 		public IdName[] getIdClassesNames()
 		{
 			return Server.getIdClassesNames();
 		}
-		public string[] getPromotionsNames()
+		public IdName[] getIdPromotionsNames()
 		{
-			return Server.getPromotionsNames();
+			return Server.getIdPromotionsNames();
 		}
-		public string[] getPeriodsNames()
+		public IdName[] getIdPeriodsNames()
 		{
-			return Server.getPeriodsNames();
+			return Server.getIdPeriodsNames();
 		}
 		public string[] getSubjectsNames()
 		{
