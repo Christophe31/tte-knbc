@@ -179,9 +179,9 @@ namespace BusinessLayer
 				{
 					return db.Period.Select(p => new { Id = p.Id, name = p.Name }).ToArray().Select(p => IdName.IN(p.Id, p.name)).ToArray();
 				}
-				public Tuple<int, string, string>[] getIdSubjectsNamesModality()
+				public Tuple<IdName, string>[] getIdSubjectsNamesModality()
 				{
-					return db.Subject.Select(p => new { Id = p.Id, name = p.Name, mod=p.Modality }).ToArray().Select(p => new Tuple<int, string,string>(p.Id, p.name,p.mod)).ToArray();
+					return db.Subject.Select(p => new { Id = p.Id, name = p.Name, mod=p.Modality }).ToArray().Select(p => new Tuple<IdName,string>(IdName.IN(p.Id, p.name),p.mod)).ToArray();
 				}
 				public IdName[] getIdUsersNames()
 				{

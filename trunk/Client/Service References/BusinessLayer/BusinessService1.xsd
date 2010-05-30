@@ -736,7 +736,7 @@
   <xs:element name="getIdSubjectsNamesModalityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdSubjectsNamesModalityResult" nillable="true" type="q27:ArrayOfTupleOfintstringstring" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdSubjectsNamesModalityResult" nillable="true" type="q27:ArrayOfTupleOfIdNamestringNWQKE3VB" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

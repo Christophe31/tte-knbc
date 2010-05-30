@@ -81,7 +81,7 @@ namespace BusinessLayer
 			[OperationContract]
 			IdName[] getIdPeriodsNames();
 			[OperationContract]
-			Tuple<int, string, string>[] getIdSubjectsNamesModality();
+			Tuple<IdName, string>[] getIdSubjectsNamesModality();
 			[OperationContract]
 			IdName[] getIdUsersNames();
 			[OperationContract]

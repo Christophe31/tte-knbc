@@ -14,11 +14,11 @@ namespace Client
 	internal class CacheProcess
 	{
         public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop);
-        public List<Tuple<EventsGetterId,int,string>> ToDoListId;
+        public List<Tuple<EventsGetterId,IdName>> ToDoListId;
         public delegate EventData[] EventsGetter(DateTime Start, DateTime Stop);
         public List<Tuple<EventsGetter, string>> ToDoList;
         public BusinessServiceClient Server;
-		public Tuple<bool,DateTime> ServerReachable;
+		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
 		Thread reactor;
 		System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
@@ -34,10 +34,8 @@ namespace Client
 				Server.ChannelFactory.Credentials.UserName.Password = "motdepasse";
 
 				Server.Open();
-				ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
-				ToDoListId = new List<Tuple<EventsGetterId, int, string>>();
-				reactor = new Thread((ThreadStart)this.LaunchReactor);
-                ServerReachable = new Tuple<bool, DateTime>(true, DateTime.Now);
+
+				ToDoListId = new List<Tuple<EventsGetterId, IdName>>();
                 ToDoList = new List<Tuple<EventsGetter, string>>();
                 reactor=new Thread((ThreadStart)LaunchReactor);
 				reactor.Start();
@@ -59,10 +57,10 @@ namespace Client
 			private void LaunchReactor()
 			{	while (true)
 				{
-					if (ServerReachable.Item1 && (ServerReachable.Item2-DateTime.Now).Minutes>3)             
-                        ServerReachable = new Tuple<bool, DateTime>(Server.State == System.ServiceModel.CommunicationState.Opened,DateTime.Now);
-                    if (ToDoListId.Count>0)
-                    
+					if (ToDoListId.Count > 0)
+						new Thread((ThreadStart)RunToDoListId).Start();
+					if (ToDoList.Count > 0)
+						new Thread((ThreadStart)RunToDoList).Start();
 					Thread.Sleep(2000);
 			}}
 		#endregion
@@ -73,12 +71,12 @@ namespace Client
                 foreach (var e in ToDoListId)
                 {
                     iCalendar iCal = new iCalendar();
-                    foreach (var i in e.Item1(e.Item2, DateTime.MinValue, DateTime.MaxValue))
+                    foreach (var i in e.Item1(e.Item2.Id, DateTime.MinValue, DateTime.MaxValue))
                     {
                         i.AddEventToCalendar(ref iCal);
                     }
                     iCal.AddProperty("LastUpdate", DateTime.Now.ToString());
-					calSerializer.Serialize(iCal,e.Item3 + "\\" + e.Item2.ToString() + @".ics");
+					calSerializer.Serialize(iCal,"cache\\"+e.Item2.Name + "-" + e.Item2.Id + @".ics");
                 }
 			}
 			private void WriteToFile(ISerializable obj, string fileName)
@@ -97,7 +95,7 @@ namespace Client
                         i.AddEventToCalendar(ref iCal);
                     }
                     iCal.AddProperty("LastUpdate", DateTime.Now.ToString());
-					calSerializer.Serialize(iCal,e.Item2 + "\\" + e.Item2.ToString() + @".ics");
+					calSerializer.Serialize(iCal,"cache\\"+ e.Item2 + @".ics");
                 }
              }
 		#endregion
