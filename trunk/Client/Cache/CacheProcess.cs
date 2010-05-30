@@ -13,9 +13,9 @@ namespace Client
 {
 	internal class CacheProcess
 	{
-        public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop, DateTime LastUpdate);
+        public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop);
         public List<Tuple<EventsGetterId,int,string>> ToDoListId;
-        public delegate EventData[] EventsGetter(DateTime Start, DateTime Stop, DateTime LastUpdate);
+        public delegate EventData[] EventsGetter(DateTime Start, DateTime Stop);
         public List<Tuple<EventsGetter, string>> ToDoList;
         public BusinessServiceClient Server;
 		public Tuple<bool,DateTime> ServerReachable;
@@ -73,7 +73,7 @@ namespace Client
                 foreach (var e in ToDoListId)
                 {
                     iCalendar iCal = new iCalendar();
-                    foreach (var i in e.Item1(e.Item2, DateTime.MinValue, DateTime.MaxValue, DateTime.MinValue))
+                    foreach (var i in e.Item1(e.Item2, DateTime.MinValue, DateTime.MaxValue))
                     {
                         i.AddEventToCalendar(ref iCal);
                     }
@@ -92,7 +92,7 @@ namespace Client
                 foreach (var e in ToDoList)
                 {
                     iCalendar iCal = new iCalendar();
-                    foreach (var i in e.Item1( DateTime.MinValue, DateTime.MaxValue, DateTime.MinValue))
+                    foreach (var i in e.Item1( DateTime.MinValue, DateTime.MaxValue))
                     {
                         i.AddEventToCalendar(ref iCal);
                     }

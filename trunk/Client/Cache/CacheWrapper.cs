@@ -19,29 +19,30 @@ namespace Client
 
 
 		#region Lecture d'évènements
-		public EventData[] getEventsByCampus(int CampusId, DateTime Start, DateTime Stop)
+		public EventData[] getEventsByCampus(IdName Campus, DateTime Start, DateTime Stop)
 		{
             if (cacheProcess.ServerReachable.Item1)
             {
-                if (!Server.isUpToDateByCampus(CampusId , DateTime.Now /*LastUpdate*/))
+                if (!Server.isUpToDateByCampus(Campus.Id , DateTime.Now /*LastUpdate*/))
                 {
-                    return Server.getEventsByCampus(CampusId, Start, Stop);
+					cacheProcess.ToDoListId.Add(new Tuple<CacheProcess.EventsGetterId, int, string>(((CacheProcess.EventsGetterId)Server.getEventsByCampus), Campus.Id, Campus.Name));
+                    return Server.getEventsByCampus(Campus.Id, Start, Stop);
                 }
 
             }
-			return Server.getEventsByCampus(CampusId, Start, Stop);
+			return Server.getEventsByCampus(Campus.Id, Start, Stop);
 		}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 		{
 			return Server.getEventsByUniversity(Start, Stop);
 		}
-		public EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop) 
+		public EventData[] getEventsByPeriod(IdName Period, DateTime Start, DateTime Stop) 
 		{
-			return Server.getEventsByPeriod(PeriodId, Start, Stop);
+			return Server.getEventsByPeriod(Period.Id, Start, Stop);
 		}
-		public EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop)
+		public EventData[] getEventsByClass(IdName Class, DateTime Start, DateTime Stop)
 		{
-			return Server.getEventsByClass(ClassId, Start, Stop);
+			return Server.getEventsByClass(Class.Id, Start, Stop);
 		}
 		public EventData[] getPrivateEvents(DateTime Start, DateTime Stop)
 		{

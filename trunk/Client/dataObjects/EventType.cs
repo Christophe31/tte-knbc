@@ -6,6 +6,12 @@ using Client.BusinessLayer;
 
 namespace Client.BusinessLayer
 {
+	/// <summary>
+	/// should it be static (or singleton) for meaning purposes?
+	/// because here it means 1 event type in RAM and a StoredDictionnary 
+	/// (which will always be the same) by event in memory...
+	/// 
+	/// </summary>
     public class EventType
     {
         /// <summary>
@@ -20,11 +26,14 @@ namespace Client.BusinessLayer
             User
         }
 
-        /// <summary>
-        /// String equivalence of events types
-        /// </summary>
-        private SortedDictionary<Type, string> eventTypeNames;
-        public SortedDictionary<Type, string> EventTypeNames
+		// to switch the comment looks ugly but it's better to document public element than privates one.
+        private readonly SortedDictionary<Type, string> eventTypeNames;
+		/// <summary>
+		/// String equivalence of events types
+		/// http://jefferytay.wordpress.com/2009/04/16/performance-of-generics-sorteddictionary-and-dictionary/
+		/// why a SortedDictionary?
+		/// </summary>
+		public SortedDictionary<Type, string> EventTypeNames
         {
             get
             {
