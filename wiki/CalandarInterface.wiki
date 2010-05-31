@@ -1,2 +1,8 @@
 =Calandrier=
 _par Breil Romaric_
+
+==Todo list==
+  * Events list
+      * Create an event
+      * Update an event
+      * Delete an event
