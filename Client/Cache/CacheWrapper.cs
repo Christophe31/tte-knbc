@@ -26,7 +26,7 @@ namespace Client
             {
                 if (!Server.isUpToDateByCampus(Campus.Id , DateTime.Now ))
                 {
-					cacheProcess.ToDoListId.Add(new Tuple<CacheProcess.EventsGetterId, IdName>(((CacheProcess.EventsGetterId)Server.getEventsByCampus), Campus));
+					cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByCampus, Campus);
                     return Server.getEventsByCampus(Campus.Id, Start, Stop);
                 }
 

@@ -23,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDb", "FK_Droit_Utilisateur", "User", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.User), "Right", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Right))]
 
 // Original file name:
-// Generation date: 19/05/2010 10:41:42
+// Generation date: 31/05/2010 14:30:22
 namespace DataModel
 {
     
@@ -706,8 +706,9 @@ namespace DataModel
         /// <param name="start">Initial value of Start.</param>
         /// <param name="end">Initial value of End.</param>
         /// <param name="mandatory">Initial value of Mandatory.</param>
+        /// <param name="university">Initial value of University.</param>
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
-        public static Event CreateEvent(int id, string name, global::System.DateTime start, global::System.DateTime end, bool mandatory)
+        public static Event CreateEvent(int id, string name, global::System.DateTime start, global::System.DateTime end, bool mandatory, bool university)
         {
             Event @event = new Event();
             @event.Id = id;
@@ -715,6 +716,7 @@ namespace DataModel
             @event.Start = start;
             @event.End = end;
             @event.Mandatory = mandatory;
+            @event.University = university;
             return @event;
         }
         /// <summary>
@@ -879,6 +881,33 @@ namespace DataModel
         partial void OnMandatoryChanging(bool value);
         [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         partial void OnMandatoryChanged();
+        /// <summary>
+        /// There are no comments for property University in the schema.
+        /// </summary>
+        [global::System.Data.Objects.DataClasses.EdmScalarPropertyAttribute(IsNullable=false)]
+        [global::System.Runtime.Serialization.DataMemberAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        public bool University
+        {
+            get
+            {
+                return this._University;
+            }
+            set
+            {
+                this.OnUniversityChanging(value);
+                this.ReportPropertyChanging("University");
+                this._University = global::System.Data.Objects.DataClasses.StructuralObject.SetValidValue(value);
+                this.ReportPropertyChanged("University");
+                this.OnUniversityChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        private bool _University;
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnUniversityChanging(bool value);
+        [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
+        partial void OnUniversityChanged();
         /// <summary>
         /// There are no comments for Campus in the schema.
         /// </summary>
