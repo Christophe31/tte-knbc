@@ -7,12 +7,10 @@ using Client.BusinessLayer;
 namespace Client.BusinessLayer
 {
 	/// <summary>
-	/// should it be static (or singleton) for meaning purposes?
-	/// because here it means 1 event type in RAM and a StoredDictionnary 
-	/// (which will always be the same) by event in memory...
-	/// 
+	/// Stores informations to manage and display event types.
+    /// It allows to define to what an event is linked to (campus, period...)
 	/// </summary>
-    public class EventType
+    public static class EventType
     {
         /// <summary>
         /// Enumeration of objects an event can be linked to.
@@ -26,31 +24,25 @@ namespace Client.BusinessLayer
             User
         }
 
-		// to switch the comment looks ugly but it's better to document public element than privates one.
-        private readonly SortedDictionary<Type, string> eventTypeNames;
+        private static SortedDictionary<Type, string> eventTypeNames;
 		/// <summary>
-		/// String equivalence of events types
-		/// http://jefferytay.wordpress.com/2009/04/16/performance-of-generics-sorteddictionary-and-dictionary/
-		/// why a SortedDictionary?
+		/// String equivalence of events types.
 		/// </summary>
-		public SortedDictionary<Type, string> EventTypeNames
+		public static SortedDictionary<Type, string> EventTypeNames
         {
             get
             {
+                if (eventTypeNames == null)
+                    eventTypeNames = new SortedDictionary<Type, string>
+                    {
+                        { Type.University, "Université" },
+                        { Type.Campus, "Campus" },
+                        { Type.Period, "Période" },
+                        { Type.Class, "Classe" },
+                        { Type.User, "Utilisateur" }
+                    };
                 return eventTypeNames;
             }
-        }
-
-        public EventType()
-        {
-            eventTypeNames = new SortedDictionary<Type, string>
-            {
-                { Type.University, "Université" },
-                { Type.Campus, "Campus" },
-                { Type.Period, "Période" },
-                { Type.Class, "Classe" },
-                { Type.User, "Utilisateur" }
-            };
         }
     }
 }

@@ -34,10 +34,6 @@ namespace Client
         /// List storing all events to be displayed.
         /// </summary>
         protected List<EventData> AllEvents;
-        /// <summary>
-        /// 
-        /// </summary>
-        protected EventType eventType;
         #endregion
 
         #region Window init
@@ -69,10 +65,9 @@ namespace Client
 		{
 			Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
-            eventType = new EventType();
 
 			// ComboBoxes initialisation
-            ViewType.DataContext = eventType.EventTypeNames;
+            ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 0;
 
             CampusName.DataContext = Api.Server.getIdCampusNames(); ;
@@ -170,7 +165,7 @@ namespace Client
         /// </summary>
         private void RefreshClassName()
         {
-            if (((KeyValuePair<EventType.Type, string>)ViewType.SelectedValue).Key == EventType.Type.Class)
+            if (ViewType.SelectedValue != null && ((KeyValuePair<EventType.Type, string>)ViewType.SelectedValue).Key == EventType.Type.Class)
             {
                 try
                 {
