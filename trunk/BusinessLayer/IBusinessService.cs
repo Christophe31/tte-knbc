@@ -103,11 +103,11 @@ namespace BusinessLayer
 			[OperationContract]
 			string grantNewRight(string UserName, string CampusName);
 			[OperationContract]
-			string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string CampusName, string Place);
+			string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Campus, string Place);
 			[OperationContract]
-			string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodeName, string Place);
+			string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Periode, string Place);
 			[OperationContract]
-			string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName, string Subject, string Modality, string Place);
+			string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Class, IdName Subject, string Place);
 			[OperationContract]
 			string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
 			[OperationContract]

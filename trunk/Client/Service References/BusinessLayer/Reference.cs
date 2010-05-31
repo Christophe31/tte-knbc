@@ -430,7 +430,7 @@ namespace Client.BusinessLayer {
         private System.DateTime EndField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool MandatoryField;
@@ -477,7 +477,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }

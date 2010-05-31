@@ -55,6 +55,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Event" EntitySet="Event" />
           </AssociationSet>
+          <AssociationSet Name="FK_Event_Event" Association="TteDb.Store.FK_Event_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Event1" EntitySet="Event" />
+          </AssociationSet>
           <AssociationSet Name="FK_Periode_Promotion" Association="TteDb.Store.FK_Periode_Promotion">
             <End Role="Promotion" EntitySet="Promotion" />
             <End Role="Period" EntitySet="Period" />
@@ -93,12 +97,12 @@
           <Property Name="Period" Type="int" />
           <Property Name="Class" Type="int" />
           <Property Name="Subject" Type="int" />
-          <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Place" Type="nvarchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Start" Type="datetime" Nullable="false" />
           <Property Name="End" Type="datetime" Nullable="false" />
           <Property Name="Mandatory" Type="bit" Nullable="false" />
+          <Property Name="University" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Period">
           <Key>
@@ -273,6 +277,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Event_Event">
+          <End Role="Event" Type="TteDb.Store.Event" Multiplicity="1" />
+          <End Role="Event1" Type="TteDb.Store.Event" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Periode_Promotion">
           <End Role="Promotion" Type="TteDb.Store.Promotion" Multiplicity="1" />
           <End Role="Period" Type="TteDb.Store.Period" Multiplicity="*" />
@@ -399,6 +415,7 @@
           <NavigationProperty Name="Subject" Relationship="TteDb.FK_Evenement_Matiere" FromRole="Event" ToRole="Subject" />
           <NavigationProperty Name="Period" Relationship="TteDb.FK_Evenement_Periode" FromRole="Event" ToRole="Period" />
           <NavigationProperty Name="Creator" Relationship="TteDb.FK_Evenement_Proprietaire" FromRole="Event" ToRole="User" />
+          <Property Type="Boolean" Name="University" Nullable="false" />
         </EntityType>
         <EntityType Name="Period">
           <Key>
@@ -525,7 +542,8 @@
             <ScalarProperty Name="LastChange" ColumnName="LastChange" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
           <EntitySetMapping Name="Event"><EntityTypeMapping TypeName="TteDb.Event"><MappingFragment StoreEntitySet="Event">
-            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="University" ColumnName="University" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
             <ScalarProperty Name="Place" ColumnName="Place" />
             <ScalarProperty Name="Name" ColumnName="Name" />
             <ScalarProperty Name="Start" ColumnName="Start" />
@@ -693,22 +711,22 @@
         <EntityTypeShape EntityType="TteDb.Period" Width="1.5" PointX="6.125" PointY="0.5" Height="2.2496956380208331" IsExpanded="true" />
         <EntityTypeShape EntityType="TteDb.Promotion" Width="1.5" PointX="8.125" PointY="1.125" Height="1.5923063151041665" IsExpanded="true" />
         <EntityTypeShape EntityType="TteDb.Right" Width="1.5" PointX="0.5" PointY="2.125" Height="1.59568359375" IsExpanded="true" />
-        <EntityTypeShape EntityType="TteDb.Subject" Width="1.5" PointX="6.25" PointY="4" Height="1.7566536458333335" IsExpanded="true" />
-        <EntityTypeShape EntityType="TteDb.University" Width="1.5" PointX="8" PointY="3.25" Height="1.2836116536458322" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDb.Subject" Width="1.5" PointX="6.25" PointY="4.375" Height="1.7566536458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDb.University" Width="1.5" PointX="8.375" PointY="3.25" Height="1.2636116536458326" IsExpanded="true" />
         <EntityTypeShape EntityType="TteDb.User" Width="1.5" PointX="2.625" PointY="3.5" Height="2.2496956380208335" IsExpanded="true" />
         <AssociationConnector Association="TteDb.FK_Classe_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="0.5" PointY="4.4897419200380764" />
-          <ConnectorPoint PointX="0.25999999999999995" PointY="4.4897419200380764" />
-          <ConnectorPoint PointX="0.25999999999999995" PointY="1.5743617083955419" />
-          <ConnectorPoint PointX="2.5" PointY="1.5743617083955419" />
+          <ConnectorPoint PointX="0.5" PointY="4.5849169648624226" />
+          <ConnectorPoint PointX="0.25999999999999995" PointY="4.5849169648624226" />
+          <ConnectorPoint PointX="0.25999999999999995" PointY="1.5239702212310506" />
+          <ConnectorPoint PointX="2.5" PointY="1.5239702212310506" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Droit_Campus" ManuallyRouted="false">
           <ConnectorPoint PointX="1.25" PointY="4.25" />
           <ConnectorPoint PointX="1.25" PointY="3.72068359375" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Evenement_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="2" PointY="5.9915983072916665" />
-          <ConnectorPoint PointX="5.125" PointY="5.9915983072916665" />
+          <ConnectorPoint PointX="2" PointY="5.8964693481445316" />
+          <ConnectorPoint PointX="5.125" PointY="5.8964693481445316" />
           <ConnectorPoint PointX="5.125" PointY="5.1570849609375" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Classe_Periode" ManuallyRouted="false">
@@ -730,10 +748,8 @@
           <ConnectorPoint PointX="4.375" PointY="4.6466199294243369" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Evenement_Matiere" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.25" PointY="4.8688206866252433" />
-          <ConnectorPoint PointX="6.058" PointY="4.8688206866252433" />
-          <ConnectorPoint PointX="6.058" PointY="4.56936094923015" />
-          <ConnectorPoint PointX="5.875" PointY="4.56936094923015" />
+          <ConnectorPoint PointX="6.25" PointY="4.8482161458333337" />
+          <ConnectorPoint PointX="5.875" PointY="4.8482161458333337" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Evenement_Periode" ManuallyRouted="false">
           <ConnectorPoint PointX="6.125" PointY="1.7127209812635882" />
@@ -741,18 +757,18 @@
           <ConnectorPoint PointX="5.125" PointY="2.25" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Evenement_Proprietaire" ManuallyRouted="false">
-          <ConnectorPoint PointX="4.125" PointY="3.8992162386847777" />
-          <ConnectorPoint PointX="4.24788" PointY="3.8992162386847777" />
-          <ConnectorPoint PointX="4.24788" PointY="3.6420151566731835" />
-          <ConnectorPoint PointX="4.375" PointY="3.6420151566731835" />
+          <ConnectorPoint PointX="4.125" PointY="3.8897922940076146" />
+          <ConnectorPoint PointX="4.24788" PointY="3.8897922940076146" />
+          <ConnectorPoint PointX="4.24788" PointY="3.401816331939048" />
+          <ConnectorPoint PointX="4.375" PointY="3.401816331939048" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Periode_Promotion" ManuallyRouted="false">
           <ConnectorPoint PointX="8.125" PointY="1.9211531575520833" />
           <ConnectorPoint PointX="7.625" PointY="1.9211531575520833" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Droit_Utilisateur" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.625" PointY="4.0215366872347982" />
-          <ConnectorPoint PointX="2.24" PointY="4.0215366872347982" />
+          <ConnectorPoint PointX="2.625" PointY="3.9276537082147325" />
+          <ConnectorPoint PointX="2.24" PointY="3.9276537082147325" />
           <ConnectorPoint PointX="2.24" PointY="2.8389794921875" />
           <ConnectorPoint PointX="2" PointY="2.8389794921875" />
         </AssociationConnector>

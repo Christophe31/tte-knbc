@@ -37,7 +37,7 @@ namespace BusinessLayer
 		}
 
 		[DataMember]
-		public int Id { get; set; }
+		public int? Id { get; set; }
 		/// <summary>
 		/// Date de Début de l'évènement.
 		/// </summary>

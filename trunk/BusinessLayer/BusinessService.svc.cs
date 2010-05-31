@@ -306,13 +306,12 @@ namespace BusinessLayer
 				{
 					return "Toujours pas implementé";
 				}
-				public string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, 
-					string SpeakerName, string CampusName, string Place)
+				public string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Campus, string Place)
 				{
 					if (Start >= End )
 						return "Dates incorrectes";
-					if ( db.Campus.FirstOrDefault(p => p.Name == CampusName) == null)
-						return "Le Campus " + CampusName + " n'existe pas.";
+					if ( db.Campus.FirstOrDefault(p => p.Id == Campus.Id) == null)
+						return "Le Campus " + Campus.Name + " n'existe pas.";
 
 					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
 						return "L'intervenant " + SpeakerName + " n'existe pas.";
@@ -322,7 +321,7 @@ namespace BusinessLayer
 					e.End = End;
 					e.Mandatory = Mandatory;
 					e.Speaker= db.User.First(p=>p.Name==SpeakerName);
-					e.Campus = db.Campus.First(p => p.Name == CampusName);
+					e.Campus = db.Campus.First(p => p.Id == Campus.Id);
 					e.Creator = db.User.FirstOrDefault(p => p.Name == "admin");
 					e.Place = Place;
 					db.AddToEvent(e);
@@ -331,13 +330,13 @@ namespace BusinessLayer
 					return "ok";
 				}
 
-				public string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string PeriodName, string Place) 
+				public string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Period, string Place) 
 				{
 					if (Start >= End)
 						return "Dates incorrectes";
-					Period per = db.Period.FirstOrDefault(pi => pi.Name == PeriodName);
+					Period per = db.Period.FirstOrDefault(p => p.Id == Period.Id);
 					if (per == null)
-						return "Le Campus " + PeriodName + " n'existe pas.";
+						return "La periode " + Period.Name + " n'existe pas.";
 
 					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
 						return "L'intervenant " + SpeakerName + " n'existe pas.";
@@ -356,15 +355,15 @@ namespace BusinessLayer
 					return "ok";
 				}
 
-				public string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string ClassName,string Subject ,string Modality, string Place)
+				public string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Class, IdName Subject, string Place)
 				{
 					if (Start >= End)
 						return "Dates incorrectes";
 
-					Class c = db.Class.FirstOrDefault(p => p.Name == ClassName);
-					Subject s = db.Subject.FirstOrDefault(p=> p.Name == Subject && p.Modality==Modality);
+					Class c = db.Class.FirstOrDefault(p => p.Id == Class.Id);
+					Subject s = db.Subject.FirstOrDefault(p=> p.Id == Subject.Id);
 					if (c == null)
-						return "Le Campus " + ClassName + " n'existe pas.";
+						return "Le Campus " + Class.Name + " n'existe pas.";
 
 					if (db.User.FirstOrDefault(p => p.Name == SpeakerName) == null)
 						return "L'intervenant " + SpeakerName + " n'existe pas.";
