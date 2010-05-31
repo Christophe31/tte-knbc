@@ -21,9 +21,10 @@ namespace Client
 		#region Lecture d'évènements
 		public EventData[] getEventsByCampus(IdName Campus, DateTime Start, DateTime Stop)
 		{
+            return Server.getEventsByCampus(Campus.Id, Start, Stop);/*
             if (cacheProcess.ServerReachable)
             {
-                if (!Server.isUpToDateByCampus(Campus.Id , DateTime.Now /*LastUpdate*/))
+                if (!Server.isUpToDateByCampus(Campus.Id , DateTime.Now ))
                 {
 					cacheProcess.ToDoListId.Add(new Tuple<CacheProcess.EventsGetterId, IdName>(((CacheProcess.EventsGetterId)Server.getEventsByCampus), Campus));
                     return Server.getEventsByCampus(Campus.Id, Start, Stop);
@@ -31,7 +32,7 @@ namespace Client
 
             }
 			return Server.getEventsByCampus(Campus.Id, Start, Stop);
-		}
+		*/}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 		{
 			return Server.getEventsByUniversity(Start, Stop);

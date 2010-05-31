@@ -21,7 +21,7 @@ namespace Client.BusinessLayer
         {
             get
             {
-                return eventType.EventTypeNames[Type];
+                return EventType.EventTypeNames[Type];
             }
         }
 
@@ -95,12 +95,6 @@ namespace Client.BusinessLayer
             }
         }
 
-        /// <summary>
-        /// Api allowing to manipulate data stored in the database
-        /// </summary>
-        private CacheWrapper Api;
-        private EventType eventType;
-
         // Create the OnPropertyChanged method to raise the event
         protected void OnPropertyChanged(string name)
         {
@@ -113,8 +107,6 @@ namespace Client.BusinessLayer
 
         public EventData()
         {
-            Api = new CacheWrapper();
-            eventType = new EventType();
         }
 
 
@@ -144,8 +136,9 @@ namespace Client.BusinessLayer
 
         void IEditableObject.EndEdit()
         {
+            CacheWrapper Api = new CacheWrapper();
             // Event creation
-            if (Id == 0)
+            if (Id == null)
             {
             }
 
