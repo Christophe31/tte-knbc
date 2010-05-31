@@ -704,7 +704,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="TteDataBase" ZoomLevel="108">
+      <Diagram Name="TteDataBase" ZoomLevel="93">
         <EntityTypeShape EntityType="TteDb.Campus" Width="1.5" PointX="0.5" PointY="4.25" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="TteDb.Class" Width="1.5" PointX="2.5" PointY="0.875" Height="2.3648893229166665" IsExpanded="true" />
         <EntityTypeShape EntityType="TteDb.Event" Width="1.5" PointX="4.375" PointY="2.25" Height="2.9070849609374996" IsExpanded="true" />
@@ -715,19 +715,19 @@
         <EntityTypeShape EntityType="TteDb.University" Width="1.5" PointX="8.375" PointY="3.25" Height="1.2636116536458326" IsExpanded="true" />
         <EntityTypeShape EntityType="TteDb.User" Width="1.5" PointX="2.625" PointY="3.5" Height="2.2496956380208335" IsExpanded="true" />
         <AssociationConnector Association="TteDb.FK_Classe_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="0.5" PointY="4.5849169648624226" />
-          <ConnectorPoint PointX="0.25999999999999995" PointY="4.5849169648624226" />
-          <ConnectorPoint PointX="0.25999999999999995" PointY="1.5239702212310506" />
-          <ConnectorPoint PointX="2.5" PointY="1.5239702212310506" />
+          <ConnectorPoint PointX="0.5" PointY="4.4643307051380976" />
+          <ConnectorPoint PointX="0.25999999999999995" PointY="4.4643307051380976" />
+          <ConnectorPoint PointX="0.25999999999999995" PointY="1.4687505" />
+          <ConnectorPoint PointX="2.5" PointY="1.4687505" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Droit_Campus" ManuallyRouted="false">
           <ConnectorPoint PointX="1.25" PointY="4.25" />
           <ConnectorPoint PointX="1.25" PointY="3.72068359375" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Evenement_Campus" ManuallyRouted="false">
-          <ConnectorPoint PointX="2" PointY="5.8964693481445316" />
-          <ConnectorPoint PointX="5.125" PointY="5.8964693481445316" />
-          <ConnectorPoint PointX="5.125" PointY="5.1570849609375" />
+          <ConnectorPoint PointX="2" PointY="5.8917129001871746" />
+          <ConnectorPoint PointX="5.125" PointY="5.8917129001871746" />
+          <ConnectorPoint PointX="5.125" PointY="5.3214322916666665" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Classe_Periode" ManuallyRouted="false">
           <ConnectorPoint PointX="6.125" PointY="1.2722722303608891" />
@@ -767,8 +767,8 @@
           <ConnectorPoint PointX="7.625" PointY="1.9211531575520833" />
         </AssociationConnector>
         <AssociationConnector Association="TteDb.FK_Droit_Utilisateur" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.625" PointY="3.9276537082147325" />
-          <ConnectorPoint PointX="2.24" PointY="3.9276537082147325" />
+          <ConnectorPoint PointX="2.625" PointY="4.0369368406001671" />
+          <ConnectorPoint PointX="2.24" PointY="4.0369368406001671" />
           <ConnectorPoint PointX="2.24" PointY="2.8389794921875" />
           <ConnectorPoint PointX="2" PointY="2.8389794921875" />
         </AssociationConnector>
