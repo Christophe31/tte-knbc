@@ -11,6 +11,15 @@ namespace BusinessLayer
 	[DataContract]
 	public class EventData
 	{
+		public enum TypeEnum
+        {
+            University,
+            Campus,
+            Period,
+            Class,
+            User
+        }
+
 		public EventData()
 		{
 
@@ -19,7 +28,7 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public EventData(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
+		public EventData(Event EventEntity, string NameSubject,string Modality, string NameSpeaker, TypeEnum aType)
 		{
 			this.Id = EventEntity.Id;
 			this.Start = EventEntity.Start;
@@ -30,11 +39,15 @@ namespace BusinessLayer
 			this.Subject = NameSubject;
 			this.Modality = Modality;
 			this.Speaker = NameSpeaker;
+			this.Type = aType;
 		}
-		public static EventData ED(Event EventEntity, string NameSubject,string Modality, string NameSpeaker)
+		public static EventData ED(Event EventEntity, string NameSubject, string Modality, string NameSpeaker, TypeEnum aType)
 		{
-			return new EventData (EventEntity, NameSubject, Modality, NameSpeaker);
+			return new EventData (EventEntity, NameSubject, Modality, NameSpeaker, aType);
 		}
+
+		[DataMember]
+		public TypeEnum Type { get; set; }
 
 		[DataMember]
 		public int? Id { get; set; }

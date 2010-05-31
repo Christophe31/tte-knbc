@@ -12,7 +12,7 @@ namespace Client.BusinessLayer
         /// <summary>
         /// Defines to which type of element this event is linked (University, Campus, Period, Class or Private)
         /// </summary>
-        public EventType.Type Type { get; set; }
+        //public EventType.Type Type { get; set; }
 
         /// <summary>
         /// Returns the string corresponding to the Type property

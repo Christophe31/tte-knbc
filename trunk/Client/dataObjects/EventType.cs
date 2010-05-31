@@ -24,22 +24,22 @@ namespace Client.BusinessLayer
             User
         }
 
-        private static SortedDictionary<Type, string> eventTypeNames;
+        private static SortedDictionary<EventData.TypeEnum, string> eventTypeNames;
 		/// <summary>
 		/// String equivalence of events types.
 		/// </summary>
-		public static SortedDictionary<Type, string> EventTypeNames
+		public static SortedDictionary<EventData.TypeEnum, string> EventTypeNames
         {
             get
             {
                 if (eventTypeNames == null)
-                    eventTypeNames = new SortedDictionary<Type, string>
+                    eventTypeNames = new SortedDictionary<EventData.TypeEnum, string>
                     {
-                        { Type.University, "Université" },
-                        { Type.Campus, "Campus" },
-                        { Type.Period, "Période" },
-                        { Type.Class, "Classe" },
-                        { Type.User, "Utilisateur" }
+                        { EventData.TypeEnum.University, "Université" },
+                        { EventData.TypeEnum.Campus, "Campus" },
+                        { EventData.TypeEnum.Period, "Période" },
+                        { EventData.TypeEnum.Class, "Classe" },
+                        { EventData.TypeEnum.User, "Utilisateur" }
                     };
                 return eventTypeNames;
             }
