@@ -66,6 +66,8 @@ namespace Client
 			Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
+            OptionalEventTypes.DataContext = EventType.EventTypeNames;
+
 			// ComboBoxes initialisation
             ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 0;
