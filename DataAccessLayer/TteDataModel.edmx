@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TteDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="TteDataModelStoreContainer">
+          <EntitySet Name="Class" EntityType="TteDataModel.Store.Class" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Event" EntityType="TteDataModel.Store.Event" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Modality" EntityType="TteDataModel.Store.Modality" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Period" EntityType="TteDataModel.Store.Period" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Planning" EntityType="TteDataModel.Store.Planning" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Right" EntityType="TteDataModel.Store.Right" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="TteDataModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Class_Period" Association="TteDataModel.Store.FK_Class_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Class_PeriodPlanning" Association="TteDataModel.Store.FK_Class_PeriodPlanning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Class_Planning" Association="TteDataModel.Store.FK_Class_Planning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Owner" Association="TteDataModel.Store.FK_Event_Owner">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_OwnerPlanning" Association="TteDataModel.Store.FK_Event_OwnerPlanning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Planning" Association="TteDataModel.Store.FK_Event_Planning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Speaker" Association="TteDataModel.Store.FK_Event_Speaker">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_SpeakerPlaning" Association="TteDataModel.Store.FK_Event_SpeakerPlaning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Subject" Association="TteDataModel.Store.FK_Event_Subject">
+            <End Role="Modality" EntitySet="Modality" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modality_Subject" Association="TteDataModel.Store.FK_Modality_Subject">
+            <End Role="Modality" EntitySet="Modality" />
+            <End Role="Modality1" EntitySet="Modality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Period_Planning" Association="TteDataModel.Store.FK_Period_Planning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Period" EntitySet="Period" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plannings_Parent" Association="TteDataModel.Store.FK_Plannings_Parent">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Planning1" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Right_Campus" Association="TteDataModel.Store.FK_Right_Campus">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Right" EntitySet="Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Right_User" Association="TteDataModel.Store.FK_Right_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Right" EntitySet="Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Planing" Association="TteDataModel.Store.FK_User_Planing">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Period" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Planning" Type="int" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+          <Property Name="Mandatory" Type="bit" Nullable="false" />
+          <Property Name="Place" Type="varchar" MaxLength="50" />
+          <Property Name="Speaker" Type="int" />
+          <Property Name="Owner" Type="int" Nullable="false" />
+          <Property Name="Subject" Type="int" />
+        </EntityType>
+        <EntityType Name="Modality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varbinary" Nullable="false" MaxLength="50" />
+          <Property Name="Subject" Type="int" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="End" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Planning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Parent" Type="int" />
+          <Property Name="LastChange" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Right">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="int" Nullable="false" />
+          <Property Name="Campus" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Class_Period">
+          <End Role="Period" Type="TteDataModel.Store.Period" Multiplicity="1" />
+          <End Role="Class" Type="TteDataModel.Store.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Class_PeriodPlanning">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="1" />
+          <End Role="Class" Type="TteDataModel.Store.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Class_Planning">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="1" />
+          <End Role="Class" Type="TteDataModel.Store.Class" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Owner">
+          <End Role="User" Type="TteDataModel.Store.User" Multiplicity="1" />
+          <End Role="Event" Type="TteDataModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_OwnerPlanning">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="1" />
+          <End Role="Event" Type="TteDataModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Planning">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="1" />
+          <End Role="Event" Type="TteDataModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Planning" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Speaker">
+          <End Role="User" Type="TteDataModel.Store.User" Multiplicity="0..1" />
+          <End Role="Event" Type="TteDataModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Speaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_SpeakerPlaning">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="0..1" />
+          <End Role="Event" Type="TteDataModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Speaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Subject">
+          <End Role="Modality" Type="TteDataModel.Store.Modality" Multiplicity="0..1" />
+          <End Role="Event" Type="TteDataModel.Store.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modality_Subject">
+          <End Role="Modality" Type="TteDataModel.Store.Modality" Multiplicity="0..1" />
+          <End Role="Modality1" Type="TteDataModel.Store.Modality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modality1">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Period_Planning">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="1" />
+          <End Role="Period" Type="TteDataModel.Store.Period" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Period">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plannings_Parent">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="0..1" />
+          <End Role="Planning1" Type="TteDataModel.Store.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Right_Campus">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="0..1" />
+          <End Role="Right" Type="TteDataModel.Store.Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Right">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Right_User">
+          <End Role="User" Type="TteDataModel.Store.User" Multiplicity="1" />
+          <End Role="Right" Type="TteDataModel.Store.Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Right">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Planing">
+          <End Role="Planning" Type="TteDataModel.Store.Planning" Multiplicity="1" />
+          <End Role="User" Type="TteDataModel.Store.User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TteDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Class" EntityType="TteDataModel.Class" />
+          <EntitySet Name="Event" EntityType="TteDataModel.Event" />
+          <EntitySet Name="Modality" EntityType="TteDataModel.Modality" />
+          <EntitySet Name="Period" EntityType="TteDataModel.Period" />
+          <EntitySet Name="Planning" EntityType="TteDataModel.Planning" />
+          <EntitySet Name="Right" EntityType="TteDataModel.Right" />
+          <EntitySet Name="User" EntityType="TteDataModel.User" />
+          <AssociationSet Name="FK_Class_Period" Association="TteDataModel.FK_Class_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Class_PeriodPlanning" Association="TteDataModel.FK_Class_PeriodPlanning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Class_Planning" Association="TteDataModel.FK_Class_Planning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Class" EntitySet="Class" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Owner" Association="TteDataModel.FK_Event_Owner">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_OwnerPlanning" Association="TteDataModel.FK_Event_OwnerPlanning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Planning" Association="TteDataModel.FK_Event_Planning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Speaker" Association="TteDataModel.FK_Event_Speaker">
+            <End Role="User" EntitySet="User" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_SpeakerPlaning" Association="TteDataModel.FK_Event_SpeakerPlaning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_Subject" Association="TteDataModel.FK_Event_Subject">
+            <End Role="Modality" EntitySet="Modality" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Modality_Subject" Association="TteDataModel.FK_Modality_Subject">
+            <End Role="Modality" EntitySet="Modality" />
+            <End Role="Modality1" EntitySet="Modality" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Period_Planning" Association="TteDataModel.FK_Period_Planning">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Period" EntitySet="Period" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plannings_Parent" Association="TteDataModel.FK_Plannings_Parent">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Planning1" EntitySet="Planning" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Right_Campus" Association="TteDataModel.FK_Right_Campus">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="Right" EntitySet="Right" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Planing" Association="TteDataModel.FK_User_Planing">
+            <End Role="Planning" EntitySet="Planning" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Right_User" Association="TteDataModel.FK_Right_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Right" EntitySet="Right" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Class">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Period" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Period1" Relationship="TteDataModel.FK_Class_Period" FromRole="Class" ToRole="Period" />
+          <NavigationProperty Name="Planning" Relationship="TteDataModel.FK_Class_PeriodPlanning" FromRole="Class" ToRole="Planning" />
+          <NavigationProperty Name="Planning1" Relationship="TteDataModel.FK_Class_Planning" FromRole="Class" ToRole="Planning" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Planning" Type="Int32" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="End" Type="DateTime" Nullable="false" />
+          <Property Name="Mandatory" Type="Boolean" Nullable="false" />
+          <Property Name="Place" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Speaker" Type="Int32" />
+          <Property Name="Owner" Type="Int32" Nullable="false" />
+          <Property Name="Subject" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TteDataModel.FK_Event_Owner" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="Planning1" Relationship="TteDataModel.FK_Event_OwnerPlanning" FromRole="Event" ToRole="Planning" />
+          <NavigationProperty Name="Planning2" Relationship="TteDataModel.FK_Event_Planning" FromRole="Event" ToRole="Planning" />
+          <NavigationProperty Name="User1" Relationship="TteDataModel.FK_Event_Speaker" FromRole="Event" ToRole="User" />
+          <NavigationProperty Name="Planning3" Relationship="TteDataModel.FK_Event_SpeakerPlaning" FromRole="Event" ToRole="Planning" />
+          <NavigationProperty Name="Modality" Relationship="TteDataModel.FK_Event_Subject" FromRole="Event" ToRole="Modality" />
+        </EntityType>
+        <EntityType Name="Modality">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Name="Subject" Type="Int32" />
+          <NavigationProperty Name="Event" Relationship="TteDataModel.FK_Event_Subject" FromRole="Modality" ToRole="Event" />
+          <NavigationProperty Name="Modality1" Relationship="TteDataModel.FK_Modality_Subject" FromRole="Modality" ToRole="Modality1" />
+          <NavigationProperty Name="Modality2" Relationship="TteDataModel.FK_Modality_Subject" FromRole="Modality1" ToRole="Modality" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Start" Type="DateTime" Nullable="false" />
+          <Property Name="End" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="TteDataModel.FK_Class_Period" FromRole="Period" ToRole="Class" />
+          <NavigationProperty Name="Planning" Relationship="TteDataModel.FK_Period_Planning" FromRole="Period" ToRole="Planning" />
+        </EntityType>
+        <EntityType Name="Planning">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Parent" Type="Int32" />
+          <Property Name="LastChange" Type="DateTime" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Class" Relationship="TteDataModel.FK_Class_PeriodPlanning" FromRole="Planning" ToRole="Class" />
+          <NavigationProperty Name="Class1" Relationship="TteDataModel.FK_Class_Planning" FromRole="Planning" ToRole="Class" />
+          <NavigationProperty Name="Event" Relationship="TteDataModel.FK_Event_OwnerPlanning" FromRole="Planning" ToRole="Event" />
+          <NavigationProperty Name="Event1" Relationship="TteDataModel.FK_Event_Planning" FromRole="Planning" ToRole="Event" />
+          <NavigationProperty Name="Event2" Relationship="TteDataModel.FK_Event_SpeakerPlaning" FromRole="Planning" ToRole="Event" />
+          <NavigationProperty Name="Period" Relationship="TteDataModel.FK_Period_Planning" FromRole="Planning" ToRole="Period" />
+          <NavigationProperty Name="Planning1" Relationship="TteDataModel.FK_Plannings_Parent" FromRole="Planning" ToRole="Planning1" />
+          <NavigationProperty Name="Planning2" Relationship="TteDataModel.FK_Plannings_Parent" FromRole="Planning1" ToRole="Planning" />
+          <NavigationProperty Name="Right" Relationship="TteDataModel.FK_Right_Campus" FromRole="Planning" ToRole="Right" />
+          <NavigationProperty Name="User" Relationship="TteDataModel.FK_User_Planing" FromRole="Planning" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Right">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="Int32" Nullable="false" />
+          <Property Name="Campus" Type="Int32" />
+          <NavigationProperty Name="Planning" Relationship="TteDataModel.FK_Right_Campus" FromRole="Right" ToRole="Planning" />
+          <NavigationProperty Name="User1" Relationship="TteDataModel.FK_Right_User" FromRole="Right" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Event" Relationship="TteDataModel.FK_Event_Owner" FromRole="User" ToRole="Event" />
+          <NavigationProperty Name="Event1" Relationship="TteDataModel.FK_Event_Speaker" FromRole="User" ToRole="Event" />
+          <NavigationProperty Name="Planning" Relationship="TteDataModel.FK_User_Planing" FromRole="User" ToRole="Planning" />
+          <NavigationProperty Name="Right" Relationship="TteDataModel.FK_Right_User" FromRole="User" ToRole="Right" />
+        </EntityType>
+        <Association Name="FK_Class_Period">
+          <End Role="Period" Type="TteDataModel.Period" Multiplicity="1" />
+          <End Role="Class" Type="TteDataModel.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Class_PeriodPlanning">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="1" />
+          <End Role="Class" Type="TteDataModel.Class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Period" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Class_Planning">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="1" />
+          <End Role="Class" Type="TteDataModel.Class" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Class">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Owner">
+          <End Role="User" Type="TteDataModel.User" Multiplicity="1" />
+          <End Role="Event" Type="TteDataModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_OwnerPlanning">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="1" />
+          <End Role="Event" Type="TteDataModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Planning">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="1" />
+          <End Role="Event" Type="TteDataModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Planning" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Speaker">
+          <End Role="User" Type="TteDataModel.User" Multiplicity="0..1" />
+          <End Role="Event" Type="TteDataModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Speaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_SpeakerPlaning">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="0..1" />
+          <End Role="Event" Type="TteDataModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Speaker" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_Subject">
+          <End Role="Modality" Type="TteDataModel.Modality" Multiplicity="0..1" />
+          <End Role="Event" Type="TteDataModel.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Modality_Subject">
+          <End Role="Modality" Type="TteDataModel.Modality" Multiplicity="0..1" />
+          <End Role="Modality1" Type="TteDataModel.Modality" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modality">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Modality1">
+              <PropertyRef Name="Subject" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Period_Planning">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="1" />
+          <End Role="Period" Type="TteDataModel.Period" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Period">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Plannings_Parent">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="0..1" />
+          <End Role="Planning1" Type="TteDataModel.Planning" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Planning1">
+              <PropertyRef Name="Parent" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Right_Campus">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="0..1" />
+          <End Role="Right" Type="TteDataModel.Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Right">
+              <PropertyRef Name="Campus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Planing">
+          <End Role="Planning" Type="TteDataModel.Planning" Multiplicity="1" />
+          <End Role="User" Type="TteDataModel.User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Planning">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Right_User">
+          <End Role="User" Type="TteDataModel.User" Multiplicity="1" />
+          <End Role="Right" Type="TteDataModel.Right" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Right">
+              <PropertyRef Name="User" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TteDataModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Class"><EntityTypeMapping TypeName="TteDataModel.Class"><MappingFragment StoreEntitySet="Class">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Period" ColumnName="Period" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Event"><EntityTypeMapping TypeName="TteDataModel.Event"><MappingFragment StoreEntitySet="Event">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Planning" ColumnName="Planning" />
+            <ScalarProperty Name="Start" ColumnName="Start" />
+            <ScalarProperty Name="End" ColumnName="End" />
+            <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+            <ScalarProperty Name="Place" ColumnName="Place" />
+            <ScalarProperty Name="Speaker" ColumnName="Speaker" />
+            <ScalarProperty Name="Owner" ColumnName="Owner" />
+            <ScalarProperty Name="Subject" ColumnName="Subject" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Modality"><EntityTypeMapping TypeName="TteDataModel.Modality"><MappingFragment StoreEntitySet="Modality">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Subject" ColumnName="Subject" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Period"><EntityTypeMapping TypeName="TteDataModel.Period"><MappingFragment StoreEntitySet="Period">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Start" ColumnName="Start" />
+            <ScalarProperty Name="End" ColumnName="End" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Planning"><EntityTypeMapping TypeName="TteDataModel.Planning"><MappingFragment StoreEntitySet="Planning">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Parent" ColumnName="Parent" />
+            <ScalarProperty Name="LastChange" ColumnName="LastChange" />
+            <ScalarProperty Name="Type" ColumnName="Type" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Right"><EntityTypeMapping TypeName="TteDataModel.Right"><MappingFragment StoreEntitySet="Right">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="User" ColumnName="User" />
+            <ScalarProperty Name="Campus" ColumnName="Campus" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="User"><EntityTypeMapping TypeName="TteDataModel.User"><MappingFragment StoreEntitySet="User">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Login" ColumnName="Login" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="TteDataModel">
+        <EntityTypeShape EntityType="TteDataModel.Class" Width="1.5" PointX="2.875" PointY="0.5" Height="1.7566536458333353" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDataModel.Event" Width="1.5" PointX="2.875" PointY="2.875" Height="3.5644742838541674" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDataModel.Modality" Width="1.5" PointX="0.75" PointY="3.875" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDataModel.Period" Width="1.5" PointX="0.875" PointY="1.75" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDataModel.Planning" Width="1.5" PointX="4.875" PointY="1" Height="3.4001269531249996" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDataModel.Right" Width="1.5" PointX="6.875" PointY="1.375" Height="1.7566536458333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="TteDataModel.User" Width="1.5" PointX="6.75" PointY="4.375" Height="2.0853483072916674" IsExpanded="true" />
+        <AssociationConnector Association="TteDataModel.FK_Class_Period" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.375" PointY="2.0033268229166676" />
+          <ConnectorPoint PointX="2.875" PointY="2.0033268229166676" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Class_PeriodPlanning" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="1.6283268229166676" />
+          <ConnectorPoint PointX="4.375" PointY="1.6283268229166676" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Class_Planning" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="1.2516634114583338" />
+          <ConnectorPoint PointX="4.375" PointY="1.2516634114583338" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Event_Owner" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="5.6073006184895835" />
+          <ConnectorPoint PointX="4.375" PointY="5.6073006184895835" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Event_OwnerPlanning" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="3.6375634765625" />
+          <ConnectorPoint PointX="4.375" PointY="3.6375634765625" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Event_Planning" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="3.19378173828125" />
+          <ConnectorPoint PointX="4.375" PointY="3.19378173828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Event_Speaker" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="5.1287137858072915" />
+          <ConnectorPoint PointX="4.375" PointY="5.1287137858072915" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Event_SpeakerPlaning" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="4.08134521484375" />
+          <ConnectorPoint PointX="4.375" PointY="4.08134521484375" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Event_Subject" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.83550048828125" />
+          <ConnectorPoint PointX="2.875" PointY="4.83550048828125" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Modality_Subject" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="5.7960009765625" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="6.0460009765625" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="6.0460009765625" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="5.7960009765625" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Period_Planning" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="2.5658268229166676" />
+          <ConnectorPoint PointX="2.375" PointY="2.5658268229166676" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Plannings_Parent" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.625" PointY="4.400126953125" />
+          <ConnectorPoint PointX="5.625" PointY="4.650126953125" />
+          <ConnectorPoint PointX="5.9573076923076922" PointY="4.650126953125" />
+          <ConnectorPoint PointX="5.9573076923076922" PointY="4.400126953125" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Right_Campus" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.375" PointY="2.2533268229166659" />
+          <ConnectorPoint PointX="6.875" PointY="2.2533268229166659" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_User_Planing" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.375" PointY="3.8738578657670453" />
+          <ConnectorPoint PointX="7.124998" PointY="3.8738578657670453" />
+          <ConnectorPoint PointX="7.124998" PointY="4.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="TteDataModel.FK_Right_User" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.5625" PointY="4.375" />
+          <ConnectorPoint PointX="7.5625" PointY="3.1316536458333317" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

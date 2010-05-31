@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csp
 		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F} = {ADB5F73C-C9E2-4E41-9D45-18D243933E4F}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{3E35A16F-1637-46B3-B84E-E84AAC4B9314}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -54,6 +56,16 @@ Global
 		{BF192F1E-A817-4F84-A557-0DC02DD2D6BF}.Release|Mixed Platforms.Build.0 = Release|x86
 		{BF192F1E-A817-4F84-A557-0DC02DD2D6BF}.Release|x86.ActiveCfg = Release|x86
 		{BF192F1E-A817-4F84-A557-0DC02DD2D6BF}.Release|x86.Build.0 = Release|x86
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3E35A16F-1637-46B3-B84E-E84AAC4B9314}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
