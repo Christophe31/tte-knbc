@@ -6,7 +6,7 @@
 		x:Class="Client.MainWindow"
         Title="TimeTableEasy" 
 		mc:Ignorable="d" 
-		Height="350" Width="525" Loaded="Window_Loaded">
+		Height="480" Width="640" Loaded="Window_Loaded">
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -14,72 +14,96 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-            <Label>Type de vue</Label>
-            <ComboBox Margin="0,0,3,0" Name="ViewType" ItemsSource="{Binding}" SelectionChanged="ViewType_SelectionChanged">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding Value}"/>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
+                <Label Content="Type de vue"/>
+                <ComboBox Margin="0,0,0,3" x:Name="ViewType" ItemsSource="{Binding}" SelectionChanged="ViewType_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
-            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="CampusName" ItemsSource="{Binding}" SelectionChanged="CampusName_SelectionChanged" />
-            <ComboBox Margin="0,0,3,0" Visibility="Collapsed" Name="PeriodName" ItemsSource="{Binding}" SelectionChanged="PeriodName_SelectionChanged" />
-            <ComboBox Margin="0" Visibility="Collapsed" Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
+                <ComboBox Margin="0,0,0,3" Visibility="Collapsed" x:Name="CampusName" ItemsSource="{Binding}" SelectionChanged="CampusName_SelectionChanged" />
+                <ComboBox Margin="0,0,0,3" Visibility="Collapsed" x:Name="PeriodName" ItemsSource="{Binding}" SelectionChanged="PeriodName_SelectionChanged" />
+                <ComboBox Margin="0" Visibility="Collapsed" x:Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
+            </StackPanel>
+            
+            <StackPanel Orientation="Vertical">
+                <Label>Afficher les évènements facultatifs</Label>
+                <ListBox Name="OptionalEventTypes" ItemsSource="{Binding}"
+                         SelectionMode="Multiple" HorizontalAlignment="Left">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Value}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
         </StackPanel>
+        
+        <Menu>
+            <MenuItem Header="Optionnel">
+                <MenuItem Name="DisplayOptUnivEvts" Header="Université" IsCheckable="True"/>
+                <MenuItem Name="DisplayOptCampusEvts" Header="Campus" IsCheckable="True"/>
+                <MenuItem Name="DisplayOptPeriodEvts" Header="Période" IsCheckable="True"/>
+                <MenuItem Name="DisplayOptClassEvts" Header="Classe" IsCheckable="True"/>
+            </MenuItem>
+        </Menu>
 
-        <TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="1" Margin="0,3" Name="ViewsControl">
+        <TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock>Semaine</TextBlock>
+                    <TextBlock><Run Text="Semaine"/></TextBlock>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
+                    	<ColumnDefinition />
+                    	<ColumnDefinition />
+                    	<ColumnDefinition />
+                    	<ColumnDefinition />
+                    	<ColumnDefinition />
+                    	<ColumnDefinition />
+                    	<ColumnDefinition />
                     </Grid.ColumnDefinitions>
             
                     <Grid.RowDefinitions>
-                        <RowDefinition />
+                    	<RowDefinition />
                     </Grid.RowDefinitions>
             
-                    <TextBlock Grid.Column="0" Grid.Row="0">Lundi</TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="0">Mardi</TextBlock>
-                    <TextBlock Grid.Column="2" Grid.Row="0">Mercredi</TextBlock>
-                    <TextBlock Grid.Column="3" Grid.Row="0">Jeudi</TextBlock>
-                    <TextBlock Grid.Column="4" Grid.Row="0">Vendredi</TextBlock>
-                    <TextBlock Grid.Column="5" Grid.Row="0">Samedi</TextBlock>
-                    <TextBlock Grid.Column="6" Grid.Row="0">Dimanche</TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="0"><Run Text="Lundi"/></TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0"><Run Text="Mardi"/></TextBlock>
+                    <TextBlock Grid.Column="2" Grid.Row="0"><Run Text="Mercredi"/></TextBlock>
+                    <TextBlock Grid.Column="3" Grid.Row="0"><Run Text="Jeudi"/></TextBlock>
+                    <TextBlock Grid.Column="4" Grid.Row="0"><Run Text="Vendredi"/></TextBlock>
+                    <TextBlock Grid.Column="5" Grid.Row="0"><Run Text="Samedi"/></TextBlock>
+                    <TextBlock Grid.Column="6" Grid.Row="0"><Run Text="Dimanche"/></TextBlock>
                 </Grid>
             </TabItem>
             
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock>Jour</TextBlock>
+                    <TextBlock><Run Text="Jour"/></TextBlock>
                 </TabItem.Header>
                 
-                <Grid Name="CalendarDay">
+                <Grid x:Name="CalendarDay">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition />
+                    	<ColumnDefinition Width="Auto" />
+                    	<ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition />
+                    	<RowDefinition Height="Auto" />
+                    	<RowDefinition />
                     </Grid.RowDefinitions>
                     
-                    <TextBlock Grid.Column="1" Grid.Row="0">Lundi</TextBlock>
+                    <TextBlock Grid.Column="1" Grid.Row="0"><Run Text="Lundi"/></TextBlock>
 
                     <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
                         <local:CalendarDay />
@@ -89,75 +113,75 @@
             
             <TabItem>
                 <TabItem.Header>
-                    <TextBlock>Liste</TextBlock>
+                    <TextBlock><Run Text="Liste"/></TextBlock>
                 </TabItem.Header>
                 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                    	<ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                    	<RowDefinition Height="auto"/>
+                    	<RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <Label>Début</Label>
-                        <DatePicker Name="StartDate"/>
-                        <Label>Fin</Label>
-                        <DatePicker Name="EndDate"/>
+                        <Label Content="Début"/>
+                        <DatePicker x:Name="StartDate"/>
+                        <Label Content="Fin"/>
+                        <DatePicker x:Name="EndDate"/>
                     </StackPanel>
                     
-                    <DataGrid Grid.Row="1" Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"
+                    <DataGrid Grid.Row="1" x:Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"
                               CanUserAddRows="True" CanUserDeleteRows="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Type" Binding="{Binding Path=LinkedTo, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
-                            <DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
-                            <DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
+                        	<DataGridTextColumn Header="Type" Binding="{Binding LinkedTo, Mode=OneWay}"/>
+                        	<DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
+                        	<DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
+                        	<DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
+                        	<DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
                             
-                            <DataGridTemplateColumn Header="Début" SortMemberPath="Start">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding StringFormat=\{0:g\}, Path=Start}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <DatePicker SelectedDate="{Binding StringFormat=\{0:d\}, Path=StartDate}"/>
-                                            <TextBox Text="{Binding StartHour}" TextChanged="TimeBox_TextChanged" />
-                                            <Label>:00</Label>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
+                        	<DataGridTemplateColumn Header="Début" SortMemberPath="Start">
+                        		<DataGridTemplateColumn.CellTemplate>
+                        			<DataTemplate>
+                        				<TextBlock Text="{Binding Start, StringFormat=\{0:g\}}" />
+                        			</DataTemplate>
+                        		</DataGridTemplateColumn.CellTemplate>
+                        		<DataGridTemplateColumn.CellEditingTemplate>
+                        			<DataTemplate>
+                        				<StackPanel Orientation="Horizontal">
+                        					<DatePicker SelectedDate="{Binding StartDate, StringFormat=\{0:d\}}"/>
+                        					<TextBox Text="{Binding StartHour}" TextChanged="TimeBox_TextChanged" />
+                        					<Label Content=":00"/>
+                        				</StackPanel>
+                        			</DataTemplate>
+                        		</DataGridTemplateColumn.CellEditingTemplate>
+                        	</DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="Fin" SortMemberPath="End">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding StringFormat=\{0:g\}, Path=End, Mode=TwoWay, NotifyOnSourceUpdated=True}" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <DatePicker SelectedDate="{Binding StringFormat=\{0:d\}, Path=EndDate, Mode=TwoWay}" />
-                                            <TextBox Text="{Binding EndHour, Mode=TwoWay}" TextChanged="TimeBox_TextChanged" />
-                                            <Label>:00</Label>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
+                        	<DataGridTemplateColumn Header="Fin" SortMemberPath="End">
+                        		<DataGridTemplateColumn.CellTemplate>
+                        			<DataTemplate>
+                        				<TextBlock Text="{Binding End, Mode=TwoWay, NotifyOnSourceUpdated=True, StringFormat=\{0:g\}}" />
+                        			</DataTemplate>
+                        		</DataGridTemplateColumn.CellTemplate>
+                        		<DataGridTemplateColumn.CellEditingTemplate>
+                        			<DataTemplate>
+                        				<StackPanel Orientation="Horizontal">
+                        					<DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, StringFormat=\{0:d\}}" />
+                        					<TextBox Text="{Binding EndHour, Mode=TwoWay}" TextChanged="TimeBox_TextChanged" />
+                        					<Label Content=":00"/>
+                        				</StackPanel>
+                        			</DataTemplate>
+                        		</DataGridTemplateColumn.CellEditingTemplate>
+                        	</DataGridTemplateColumn>
                             
-                            <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
+                        	<DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>
 
-		<Button Content="clic la" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" />
+		<Button Content="clic la" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" x:Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" />
 	</Grid>
 </Window>
