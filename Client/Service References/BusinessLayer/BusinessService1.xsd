@@ -73,7 +73,7 @@
         <xs:element minOccurs="0" name="End" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Campus" nillable="true" type="q1:IdName" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -93,7 +93,7 @@
         <xs:element minOccurs="0" name="End" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="PeriodeName" nillable="true" type="xs:string" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Periode" nillable="true" type="q2:IdName" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -113,9 +113,8 @@
         <xs:element minOccurs="0" name="End" type="xs:dateTime" />
         <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
         <xs:element minOccurs="0" name="SpeakerName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="ClassName" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
-        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Class" nillable="true" type="q3:IdName" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Subject" nillable="true" type="q4:IdName" />
         <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -167,7 +166,7 @@
   <xs:element name="setUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="UD" nillable="true" type="q1:UserData" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="UD" nillable="true" type="q5:UserData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -196,7 +195,7 @@
   <xs:element name="setClass">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="CD" nillable="true" type="q2:ClassData" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="CD" nillable="true" type="q6:ClassData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -225,7 +224,7 @@
   <xs:element name="setSubject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="SD" nillable="true" type="q3:SubjectData" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="SD" nillable="true" type="q7:SubjectData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -239,7 +238,7 @@
   <xs:element name="setPeriod">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="PD" nillable="true" type="q4:PeriodData" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="PD" nillable="true" type="q8:PeriodData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -253,7 +252,7 @@
   <xs:element name="setEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="EditedEvent" nillable="true" type="q5:EventData" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="EditedEvent" nillable="true" type="q9:EventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -387,7 +386,7 @@
   <xs:element name="getUserResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getUserResult" nillable="true" type="q6:UserData" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getUserResult" nillable="true" type="q10:UserData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -401,7 +400,7 @@
   <xs:element name="getClassResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getClassResult" nillable="true" type="q7:ClassData" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getClassResult" nillable="true" type="q11:ClassData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -415,7 +414,7 @@
   <xs:element name="getPeriodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPeriodResult" nillable="true" type="q8:PeriodData" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPeriodResult" nillable="true" type="q12:PeriodData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -429,7 +428,7 @@
   <xs:element name="getSubjectResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getSubjectResult" nillable="true" type="q9:SubjectData" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getSubjectResult" nillable="true" type="q13:SubjectData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -445,7 +444,7 @@
   <xs:element name="getEventsByCampusResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByCampusResult" nillable="true" type="q10:ArrayOfEventData" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByCampusResult" nillable="true" type="q14:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -475,7 +474,7 @@
   <xs:element name="getEventsByUniversityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByUniversityResult" nillable="true" type="q11:ArrayOfEventData" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByUniversityResult" nillable="true" type="q15:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -505,7 +504,7 @@
   <xs:element name="getEventsByPeriodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByPeriodResult" nillable="true" type="q12:ArrayOfEventData" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByPeriodResult" nillable="true" type="q16:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -536,7 +535,7 @@
   <xs:element name="getEventsByClassResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByClassResult" nillable="true" type="q13:ArrayOfEventData" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getEventsByClassResult" nillable="true" type="q17:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -566,7 +565,7 @@
   <xs:element name="getPrivateEventsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPrivateEventsResult" nillable="true" type="q14:ArrayOfEventData" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getPrivateEventsResult" nillable="true" type="q18:ArrayOfEventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -592,7 +591,7 @@
   <xs:element name="getCampusNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusNamesResult" nillable="true" type="q15:ArrayOfstring" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusNamesResult" nillable="true" type="q19:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -604,7 +603,7 @@
   <xs:element name="getClassesNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getClassesNamesResult" nillable="true" type="q16:ArrayOfstring" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getClassesNamesResult" nillable="true" type="q20:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -616,7 +615,7 @@
   <xs:element name="getPromotionsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPromotionsNamesResult" nillable="true" type="q17:ArrayOfstring" />
+        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPromotionsNamesResult" nillable="true" type="q21:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -628,7 +627,7 @@
   <xs:element name="getPeriodsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPeriodsNamesResult" nillable="true" type="q18:ArrayOfstring" />
+        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPeriodsNamesResult" nillable="true" type="q22:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -640,7 +639,7 @@
   <xs:element name="getSubjectsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getSubjectsNamesResult" nillable="true" type="q19:ArrayOfstring" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getSubjectsNamesResult" nillable="true" type="q23:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -652,7 +651,7 @@
   <xs:element name="getUsersNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersNamesResult" nillable="true" type="q20:ArrayOfstring" />
+        <xs:element xmlns:q24="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getUsersNamesResult" nillable="true" type="q24:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -664,7 +663,7 @@
   <xs:element name="getModalitiesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getModalitiesResult" nillable="true" type="q21:ArrayOfstring" />
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getModalitiesResult" nillable="true" type="q25:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -676,7 +675,7 @@
   <xs:element name="getCampusPeriodClassTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusPeriodClassTreeResult" nillable="true" type="q22:ArrayOfKeyValueOfstringArrayOfKeyValueOfstringArrayOfstringty7Ep6D1ty7Ep6D1" />
+        <xs:element xmlns:q26="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusPeriodClassTreeResult" nillable="true" type="q26:ArrayOfKeyValueOfstringArrayOfKeyValueOfstringArrayOfstringty7Ep6D1ty7Ep6D1" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -688,7 +687,7 @@
   <xs:element name="getIdCampusNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdCampusNamesResult" nillable="true" type="q23:ArrayOfIdName" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdCampusNamesResult" nillable="true" type="q27:ArrayOfIdName" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -700,7 +699,7 @@
   <xs:element name="getIdClassesNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdClassesNamesResult" nillable="true" type="q24:ArrayOfIdName" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdClassesNamesResult" nillable="true" type="q28:ArrayOfIdName" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -712,7 +711,7 @@
   <xs:element name="getIdPromotionsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdPromotionsNamesResult" nillable="true" type="q25:ArrayOfIdName" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdPromotionsNamesResult" nillable="true" type="q29:ArrayOfIdName" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -724,7 +723,7 @@
   <xs:element name="getIdPeriodsNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdPeriodsNamesResult" nillable="true" type="q26:ArrayOfIdName" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdPeriodsNamesResult" nillable="true" type="q30:ArrayOfIdName" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -736,7 +735,7 @@
   <xs:element name="getIdSubjectsNamesModalityResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdSubjectsNamesModalityResult" nillable="true" type="q27:ArrayOfTupleOfIdNamestringNWQKE3VB" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/System" minOccurs="0" name="getIdSubjectsNamesModalityResult" nillable="true" type="q31:ArrayOfTupleOfIdNamestringNWQKE3VB" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -748,7 +747,7 @@
   <xs:element name="getIdUsersNamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdUsersNamesResult" nillable="true" type="q28:ArrayOfIdName" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getIdUsersNamesResult" nillable="true" type="q32:ArrayOfIdName" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -760,7 +759,7 @@
   <xs:element name="getIdCampusPeriodClassTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getIdCampusPeriodClassTreeResult" nillable="true" type="q29:ArrayOfKeyValueOfIdNameArrayOfKeyValueOfIdNameArrayOfIdNameEz4IOnmdAhmTgu40" />
+        <xs:element xmlns:q33="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getIdCampusPeriodClassTreeResult" nillable="true" type="q33:ArrayOfKeyValueOfIdNameArrayOfKeyValueOfIdNameArrayOfIdNameEz4IOnmdAhmTgu40" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

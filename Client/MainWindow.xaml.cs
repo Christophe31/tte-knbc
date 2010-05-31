@@ -97,62 +97,64 @@ namespace Client
             DateTime end = EndDate.SelectedDate.GetValueOrDefault();
             AllEvents = new List<EventData>();
 
-            EventType.Type viewType = EventType.Type.University;
+            EventData.TypeEnum viewType = EventData.TypeEnum.University;
             if (ViewType.SelectedValue != null)
-                viewType = ((KeyValuePair<EventType.Type, string>) ViewType.SelectedValue).Key;
+                viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
 
 
-            // University
+			// University
             foreach (EventData ev in Api.getEventsByUniversity(start, end))
-            {
-                ev.Type = EventType.Type.University;
+			{// vu que je compte m'en occuper moi... ou bien Tom ce serait aussi logique, je pense que ce serait un Concat à la place du foreach...
+			 // ça dois déjà marcher car le serveur renseigne déjà le type à la construction.
+			 //	AllEvents.Concat(Api.getEventsByUniversity(start, end));
+                ev.Type = EventData.TypeEnum.University;
                 AllEvents.Add(ev);
             }
 
             // Campus
-            if ((viewType == EventType.Type.Campus
-                || viewType == EventType.Type.Class
-                || viewType == EventType.Type.User)
+			if ((viewType == EventData.TypeEnum.Campus
+				|| viewType == EventData.TypeEnum.Class
+				|| viewType == EventData.TypeEnum.User)
                 && CampusName.SelectedValue != null)
             {
 				foreach (EventData ev in Api.getEventsByCampus(CampusName.SelectedValue as IdName, start, end))
                 {
-                    ev.Type = EventType.Type.Campus;
+                    ev.Type = EventData.TypeEnum.Campus;
                     AllEvents.Add(ev);
                 }
             }
 
             // Period
-            if ((viewType == EventType.Type.Period
-                || viewType == EventType.Type.Class
-                || viewType == EventType.Type.User)
+            if ((viewType == EventData.TypeEnum.Period
+                || viewType == EventData.TypeEnum.Class
+                || viewType == EventData.TypeEnum.User)
                 && PeriodName.SelectedValue != null)
             {
 
                 foreach (EventData ev in Api.getEventsByPeriod(PeriodName.SelectedValue as IdName, start, end))
                 {
-                    ev.Type = EventType.Type.Period;
+                    ev.Type = EventData.TypeEnum.Period;
                     AllEvents.Add(ev);
                 }
             }
 
             // Class
-            if ((viewType == EventType.Type.Class || viewType == EventType.Type.User)
+            if ((viewType == EventData.TypeEnum.Class || viewType == EventData.TypeEnum.User)
                 && ClassName.SelectedValue != null)
             {
                 foreach (EventData ev in Api.getEventsByClass(ClassName.SelectedValue as IdName, start, end))
                 {
-                    ev.Type = EventType.Type.Class;
+                    ev.Type = EventData.TypeEnum.Class;
                     AllEvents.Add(ev);
                 }
             }
 
             // User
-            if (viewType == EventType.Type.User)
+            if (viewType == EventData.TypeEnum.User)
             {
                 foreach (EventData ev in Api.getPrivateEvents(start, end))
                 {
-                    ev.Type = EventType.Type.User;
+                    ev.Type = EventData.TypeEnum.User;
                     AllEvents.Add(ev);
                 }
             }
@@ -167,7 +169,7 @@ namespace Client
         /// </summary>
         private void RefreshClassName()
         {
-            if (ViewType.SelectedValue != null && ((KeyValuePair<EventType.Type, string>)ViewType.SelectedValue).Key == EventType.Type.Class)
+            if (ViewType.SelectedValue != null && ((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key == EventData.TypeEnum.Class)
             {
                 try
                 {
@@ -201,30 +203,30 @@ namespace Client
         /// <param name="e"></param>
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selected = ((KeyValuePair<EventType.Type, string>)ViewType.SelectedValue).Key;
+            var selected = ((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key;
             // University or user
-            if (selected == EventType.Type.University || selected == EventType.Type.User)
+            if (selected == EventData.TypeEnum.University || selected == EventData.TypeEnum.User)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             // Campus
-            else if (selected == EventType.Type.Campus)
+            else if (selected == EventData.TypeEnum.Campus)
             {
                 CampusName.Visibility = System.Windows.Visibility.Visible;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             // Period
-            else if (selected == EventType.Type.Period)
+            else if (selected == EventData.TypeEnum.Period)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Visible;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
             }
             // Class
-            else if (selected == EventType.Type.Class)
+            else if (selected == EventData.TypeEnum.Class)
             {
                 RefreshClassName();
 

@@ -37,7 +37,7 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus.Id == CampusId
 								 select new { evt = p, sub = p.Subject.Name,mod=p.Subject.Modality , spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub,e.mod, e.spk)).ToArray();
+							select EventData.ED(e.evt, e.sub,e.mod, e.spk,EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByCampus(int id,DateTime LastUpdate)
 				{
@@ -52,7 +52,7 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus == null && p.Period == null && p.Class == null
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.University)).ToArray();
 				}
 				public bool isUpToDateByUniversity(DateTime LastUpdate)
 				{
@@ -68,7 +68,7 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									p.Period.Id == PeriodId
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.Period)).ToArray();
 				}
 				public bool isUpToDateByPeriod(int id, DateTime LastUpdate)
 				{
@@ -84,7 +84,7 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									p.Class.Id ==ClassId 
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.Class)).ToArray();
 				}
 				public bool isUpToDateByClass(int id, DateTime LastUpdate)
 				{
@@ -101,7 +101,7 @@ namespace BusinessLayer
 									p.Creator.Name == "christophe"  &&
 									p.Speaker == null 
 								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk)).ToArray();
+							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.User)).ToArray();
 				}
 				public bool isUpToDateByPrivate(DateTime LastUpdate)
 				{

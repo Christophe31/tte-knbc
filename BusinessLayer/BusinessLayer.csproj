@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApiTestWindowIcon.ico" />
+    <Content Include="BusinessLayer.svc" />
     <Content Include="BusinessService.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -76,6 +77,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLayer.svc.cs">
+      <DependentUpon>BusinessLayer.svc</DependentUpon>
+    </Compile>
     <Compile Include="BusinessService.svc.cs">
       <DependentUpon>BusinessService.svc</DependentUpon>
     </Compile>
@@ -86,6 +90,7 @@
     <Compile Include="dataObjects\IdName.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="dataObjects\EventData.cs" />
+    <Compile Include="IBusinessLayer.cs" />
     <Compile Include="IBusinessService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
