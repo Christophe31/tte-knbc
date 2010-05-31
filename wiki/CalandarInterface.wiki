@@ -3,6 +3,7 @@ _par Breil Romaric_
 
 ==Todo list==
   * Events list
+      * Display/hide non mandatory events
       * Create an event
       * Update an event
       * Delete an event
