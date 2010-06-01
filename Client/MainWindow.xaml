@@ -35,25 +35,25 @@
             </ToolBar>
             
             <ToolBar Header="Type de vue">
-                <CheckBox Name="ShowOptionalUniversityEvents">
+                <CheckBox Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\world.png"/>
                         <TextBlock>Université</TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox Name="ShowOptionalCampusEvents">
+                <CheckBox Name="ShowOptionalCampusEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\building.png"/>
                         <TextBlock>Campus</TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox Name="ShowOptionalPeriodEvents">
+                <CheckBox Name="ShowOptionalPeriodEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\hourglass.png"/>
                         <TextBlock>Période</TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox Name="ShowOptionalClassEvents">
+                <CheckBox Name="ShowOptionalClassEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\group.png"/>
                         <TextBlock>Classe</TextBlock>

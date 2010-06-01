@@ -101,14 +101,18 @@ namespace Client
                 viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
 
 
-			// University
-            foreach (EventData ev in Api.getEventsByUniversity(start, end))
+            // University
+            AllEvents.Concat(Api.getEventsByUniversity(start, end)
+                .Where(p => p.Mandatory
+                    || viewType == EventData.TypeEnum.University
+                    || ShowOptionalUniversityEvents.IsChecked.GetValueOrDefault()));
+            /*foreach (EventData ev in Api.getEventsByUniversity(start, end))
 			{// vu que je compte m'en occuper moi... ou bien Tom ce serait aussi logique, je pense que ce serait un Concat à la place du foreach...
 			 // ça dois déjà marcher car le serveur renseigne déjà le type à la construction.
 			 //	AllEvents.Concat(Api.getEventsByUniversity(start, end));
                 ev.Type = EventData.TypeEnum.University;
                 AllEvents.Add(ev);
-            }
+            }*/
 
             // Campus
 			if ((viewType == EventData.TypeEnum.Campus
@@ -116,11 +120,15 @@ namespace Client
 				|| viewType == EventData.TypeEnum.User)
                 && CampusName.SelectedValue != null)
             {
-				foreach (EventData ev in Api.getEventsByCampus(CampusName.SelectedValue as IdName, start, end))
+                AllEvents.Concat(Api.getEventsByCampus(CampusName.SelectedValue as IdName, start, end)
+                    .Where(p => p.Mandatory
+                        || viewType == EventData.TypeEnum.Campus
+                        || ShowOptionalCampusEvents.IsChecked.GetValueOrDefault()));
+				/*foreach (EventData ev in Api.getEventsByCampus(CampusName.SelectedValue as IdName, start, end))
                 {
                     ev.Type = EventData.TypeEnum.Campus;
                     AllEvents.Add(ev);
-                }
+                }*/
             }
 
             // Period
@@ -129,33 +137,44 @@ namespace Client
                 || viewType == EventData.TypeEnum.User)
                 && PeriodName.SelectedValue != null)
             {
+                AllEvents.Concat(Api.getEventsByPeriod(PeriodName.SelectedValue as IdName, start, end)
+                    .Where(p => p.Mandatory
+                        || viewType == EventData.TypeEnum.Period
+                        || ShowOptionalPeriodEvents.IsChecked.GetValueOrDefault()));
 
-                foreach (EventData ev in Api.getEventsByPeriod(PeriodName.SelectedValue as IdName, start, end))
+                /*foreach (EventData ev in Api.getEventsByPeriod(PeriodName.SelectedValue as IdName, start, end))
                 {
                     ev.Type = EventData.TypeEnum.Period;
                     AllEvents.Add(ev);
-                }
+                }*/
             }
 
             // Class
             if ((viewType == EventData.TypeEnum.Class || viewType == EventData.TypeEnum.User)
                 && ClassName.SelectedValue != null)
             {
-                foreach (EventData ev in Api.getEventsByClass(ClassName.SelectedValue as IdName, start, end))
+                AllEvents.Concat(Api.getEventsByClass(ClassName.SelectedValue as IdName, start, end)
+                    .Where(p => p.Mandatory
+                        || viewType == EventData.TypeEnum.Class
+                        || ShowOptionalClassEvents.IsChecked.GetValueOrDefault()));
+
+                /*foreach (EventData ev in Api.getEventsByClass(ClassName.SelectedValue as IdName, start, end))
                 {
                     ev.Type = EventData.TypeEnum.Class;
                     AllEvents.Add(ev);
-                }
+                }*/
             }
 
             // User
             if (viewType == EventData.TypeEnum.User)
             {
-                foreach (EventData ev in Api.getPrivateEvents(start, end))
+                AllEvents.Concat(Api.getPrivateEvents(start, end));
+
+                /*foreach (EventData ev in Api.getPrivateEvents(start, end))
                 {
                     ev.Type = EventData.TypeEnum.User;
                     AllEvents.Add(ev);
-                }
+                }*/
             }
 
             // Refresh views
@@ -248,6 +267,11 @@ namespace Client
             RefreshAllEvents();
         }
         private void ClassName_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshAllEvents();
+        }
+
+        private void ShowOptionalEvents_Changed(object sender, RoutedEventArgs e)
         {
             RefreshAllEvents();
         }
