@@ -66,8 +66,6 @@ namespace Client
 			Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
-            OptionalEventTypes.DataContext = EventType.EventTypeNames;
-
 			// ComboBoxes initialisation
             ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 0;
@@ -93,6 +91,7 @@ namespace Client
         /// </summary>
         private void RefreshAllEvents()
         {
+            return;
             DateTime start = StartDate.SelectedDate.GetValueOrDefault();
             DateTime end = EndDate.SelectedDate.GetValueOrDefault();
             AllEvents = new List<EventData>();

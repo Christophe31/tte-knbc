@@ -53,7 +53,7 @@ namespace BusinessLayer
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus == null && p.Period == null && p.Class == null
 								 select new { evt = p, subn = p.Subject.Name, subi=(int?)p.Subject.Id
-									 ,mod=p.Subject.Modality , spki = p.Speaker.Id, spkn=p.Speaker.Name }).ToArray();
+									 ,mod=p.Subject.Modality , spki = (int?)p.Speaker.Id, spkn=p.Speaker.Name }).ToArray();
 						return	g.Select(p=> EventData.ED(p.evt, IdName.IN(p.subi, p.subn), p.mod, IdName.IN(p.spki, p.spkn), EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByUniversity(DateTime LastUpdate)
