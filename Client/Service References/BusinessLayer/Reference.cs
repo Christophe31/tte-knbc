@@ -84,10 +84,7 @@ namespace Client.BusinessLayer {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CampusNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ClassIdField;
+        private Client.BusinessLayer.IdName ClassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -109,27 +106,14 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CampusName {
+        public Client.BusinessLayer.IdName Class {
             get {
-                return this.CampusNameField;
+                return this.ClassField;
             }
             set {
-                if ((object.ReferenceEquals(this.CampusNameField, value) != true)) {
-                    this.CampusNameField = value;
-                    this.RaisePropertyChanged("CampusName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ClassId {
-            get {
-                return this.ClassIdField;
-            }
-            set {
-                if ((this.ClassIdField.Equals(value) != true)) {
-                    this.ClassIdField = value;
-                    this.RaisePropertyChanged("ClassId");
+                if ((object.ReferenceEquals(this.ClassField, value) != true)) {
+                    this.ClassField = value;
+                    this.RaisePropertyChanged("Class");
                 }
             }
         }
@@ -193,7 +177,7 @@ namespace Client.BusinessLayer {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CampusNameField;
+        private Client.BusinessLayer.IdName CampusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -202,7 +186,7 @@ namespace Client.BusinessLayer {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PeriodField;
+        private Client.BusinessLayer.IdName PeriodField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -215,14 +199,14 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CampusName {
+        public Client.BusinessLayer.IdName Campus {
             get {
-                return this.CampusNameField;
+                return this.CampusField;
             }
             set {
-                if ((object.ReferenceEquals(this.CampusNameField, value) != true)) {
-                    this.CampusNameField = value;
-                    this.RaisePropertyChanged("CampusName");
+                if ((object.ReferenceEquals(this.CampusField, value) != true)) {
+                    this.CampusField = value;
+                    this.RaisePropertyChanged("Campus");
                 }
             }
         }
@@ -254,12 +238,12 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Period {
+        public Client.BusinessLayer.IdName Period {
             get {
                 return this.PeriodField;
             }
             set {
-                if ((this.PeriodField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.PeriodField, value) != true)) {
                     this.PeriodField = value;
                     this.RaisePropertyChanged("Period");
                 }
@@ -289,7 +273,7 @@ namespace Client.BusinessLayer {
         private int HoursField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private System.Nullable<int> IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModalityField;
@@ -321,7 +305,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public System.Nullable<int> Id {
             get {
                 return this.IdField;
             }
@@ -491,7 +475,7 @@ namespace Client.BusinessLayer {
         private System.DateTime EndField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> IdField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool MandatoryField;
@@ -506,13 +490,13 @@ namespace Client.BusinessLayer {
         private string PlaceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SpeakerField;
+        private Client.BusinessLayer.IdName SpeakerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SubjectField;
+        private Client.BusinessLayer.IdName SubjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.BusinessLayer.EventData.TypeEnum TypeField;
@@ -541,7 +525,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Id {
+        public int Id {
             get {
                 return this.IdField;
             }
@@ -606,7 +590,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Speaker {
+        public Client.BusinessLayer.IdName Speaker {
             get {
                 return this.SpeakerField;
             }
@@ -632,7 +616,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Subject {
+        public Client.BusinessLayer.IdName Subject {
             get {
                 return this.SubjectField;
             }

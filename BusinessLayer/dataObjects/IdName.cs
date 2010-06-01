@@ -15,9 +15,11 @@ namespace BusinessLayer
 		[DataMember]
 		public string Name { get; set; }
 
-		public static IdName IN(int i,string s)
+		public static IdName IN(int? i,string s)
 		{
-			return new IdName(i,s);
+			if (i == null)
+			{ return null; }
+			return new IdName((int)i,s);
 		}
 		public IdName(int i,string s)
 		{

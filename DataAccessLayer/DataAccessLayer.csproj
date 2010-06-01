@@ -56,11 +56,14 @@
       <LastGenOutput>TteDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
+<<<<<<< .mine
+=======
   <ItemGroup>
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+>>>>>>> .r144
   <ItemGroup>
     <Content Include="TteDataModel.edmx.sql" />
   </ItemGroup>

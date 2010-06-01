@@ -19,16 +19,16 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public ClassData(Class ClassEntity, string CampusName, int PeriodId)
+		public ClassData(Class ClassEntity, IdName Campus, IdName Period)
 		{
 			this.Id = ClassEntity.Id;
 			this.Name = ClassEntity.Name;
-			this.CampusName = CampusName;
-			this.Period = PeriodId;
+			this.Campus = Campus;
+			this.Period = Period;
 		}
-		public static ClassData CD(Class ClassEntity, string CampusName, int PeriodId)
+		public static ClassData CD(Class ClassEntity, IdName Campus, IdName Period)
 		{
-			return new ClassData(ClassEntity, CampusName, PeriodId);
+			return new ClassData(ClassEntity, Campus, Period);
 		}
 		/// <sumClassName = ClassName;mary>
 		/// Id.
@@ -40,7 +40,7 @@ namespace BusinessLayer
 		/// Campus de la classe
 		/// </summary>
 		[DataMember]
-		public string CampusName { get; set; }
+		public IdName Campus { get; set; }
 
 		/// <summary>
 		/// Nom de la classe
@@ -52,6 +52,6 @@ namespace BusinessLayer
 		/// Id de la periode
 		/// </summary>
 		[DataMember]
-		public int Period { get; set; }
+		public IdName Period { get; set; }
 	}
 }

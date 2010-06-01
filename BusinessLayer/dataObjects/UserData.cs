@@ -19,17 +19,16 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public UserData(User UserEntity, string CampusName, int ClassId)
+		public UserData(User UserEntity, IdName Class)
 		{
 			this.Id = UserEntity.Id;
 			this.Name = UserEntity.Name;
-			this.CampusName = CampusName;
-			this.ClassId = ClassId;
+			this.Class = Class;
 			this.Password = null;
 		}
-		public static UserData UD(User UserEntity, string CampusName, int ClassId)
+		public static UserData UD(User UserEntity, IdName Class)
 		{
-			return new UserData( UserEntity, CampusName, ClassId);
+			return new UserData( UserEntity, Class);
 		}
 		/// <sumClassName = ClassName;mary>
 		/// Date de Début de l'évènement.
@@ -38,16 +37,10 @@ namespace BusinessLayer
 		public int Id { get; set; }
 
 		/// <summary>
-		/// Campus de l'utilisateur
-		/// </summary>
-		[DataMember]
-		public string CampusName { get; set; }
-
-		/// <summary>
 		/// nom de la classe de l'utilisateur
 		/// </summary>
 		[DataMember]
-		public int ClassId { get; set; }
+		public IdName Class { get; set; }
 
 		/// <summary>
 		/// Nom de l'utilisateur
