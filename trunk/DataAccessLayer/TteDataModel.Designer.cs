@@ -27,9 +27,9 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Modality_Subject", "Modality", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Modality), "Modality1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Modality), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Period_Planning", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Planning), "Period", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Period), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Plannings_Parent", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Planning), "Planning1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Planning), true)]
-[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Right_Campus", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Planning), "Right", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Right), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_User_Planing", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Planning), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.User), true)]
-[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Right_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.User), "Right", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Right), true)]
+[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Right_Campus1", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Planning), "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Role), true)]
+[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Right_User1", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.User), "Role", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Role), true)]
 
 #endregion
 
@@ -164,22 +164,6 @@ namespace DataAccessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Right> Right
-        {
-            get
-            {
-                if ((_Right == null))
-                {
-                    _Right = base.CreateObjectSet<Right>("Right");
-                }
-                return _Right;
-            }
-        }
-        private ObjectSet<Right> _Right;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<User> User
         {
             get
@@ -192,6 +176,22 @@ namespace DataAccessLayer
             }
         }
         private ObjectSet<User> _User;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Role> Role
+        {
+            get
+            {
+                if ((_Role == null))
+                {
+                    _Role = base.CreateObjectSet<Role>("Role");
+                }
+                return _Role;
+            }
+        }
+        private ObjectSet<Role> _Role;
 
         #endregion
         #region AddTo Methods
@@ -237,19 +237,19 @@ namespace DataAccessLayer
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Right EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToRight(Right right)
-        {
-            base.AddObject("Right", right);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the User EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToUser(User user)
         {
             base.AddObject("User", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Role EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRole(Role role)
+        {
+            base.AddObject("Role", role);
         }
 
         #endregion
@@ -1609,28 +1609,6 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_Campus", "Right")]
-        public EntityCollection<Right> Rights
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Right>("TteDataModel.FK_Right_Campus", "Right");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Right>("TteDataModel.FK_Right_Campus", "Right", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_User_Planing", "User")]
         public User User
         {
@@ -1662,6 +1640,28 @@ namespace DataAccessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_Campus1", "Role")]
+        public EntityCollection<Role> Role
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Role>("TteDataModel.FK_Right_Campus1", "Role");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Role>("TteDataModel.FK_Right_Campus1", "Role", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1669,24 +1669,24 @@ namespace DataAccessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="TteDataModel", Name="Right")]
+    [EdmEntityTypeAttribute(NamespaceName="TteDataModel", Name="Role")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Right : EntityObject
+    public partial class Role : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Right object.
+        /// Create a new Role object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="user">Initial value of the User property.</param>
-        public static Right CreateRight(global::System.Int32 id, global::System.Int32 user)
+        public static Role CreateRole(global::System.Int32 id, global::System.Int32 user)
         {
-            Right right = new Right();
-            right.Id = id;
-            right.User = user;
-            return right;
+            Role role = new Role();
+            role.Id = id;
+            role.User = user;
+            return role;
         }
 
         #endregion
@@ -1748,24 +1748,24 @@ namespace DataAccessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Campus
+        public Nullable<global::System.Int32> Target
         {
             get
             {
-                return _Campus;
+                return _Target;
             }
             set
             {
-                OnCampusChanging(value);
-                ReportPropertyChanging("Campus");
-                _Campus = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Campus");
-                OnCampusChanged();
+                OnTargetChanging(value);
+                ReportPropertyChanging("Target");
+                _Target = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Target");
+                OnTargetChanged();
             }
         }
-        private Nullable<global::System.Int32> _Campus;
-        partial void OnCampusChanging(Nullable<global::System.Int32> value);
-        partial void OnCampusChanged();
+        private Nullable<global::System.Int32> _Target;
+        partial void OnTargetChanging(Nullable<global::System.Int32> value);
+        partial void OnTargetChanged();
 
         #endregion
     
@@ -1777,16 +1777,16 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_Campus", "Planning")]
-        public Planning CampusPlanning
+        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_Campus1", "Planning")]
+        public Planning Planning
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Planning>("TteDataModel.FK_Right_Campus", "Planning").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Planning>("TteDataModel.FK_Right_Campus1", "Planning").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Planning>("TteDataModel.FK_Right_Campus", "Planning").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Planning>("TteDataModel.FK_Right_Campus1", "Planning").Value = value;
             }
         }
         /// <summary>
@@ -1794,17 +1794,17 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> CampusPlanningReference
+        public EntityReference<Planning> PlanningReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Planning>("TteDataModel.FK_Right_Campus", "Planning");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Planning>("TteDataModel.FK_Right_Campus1", "Planning");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Planning>("TteDataModel.FK_Right_Campus", "Planning", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Planning>("TteDataModel.FK_Right_Campus1", "Planning", value);
                 }
             }
         }
@@ -1815,16 +1815,16 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_User", "User")]
+        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_User1", "User")]
         public User UserRef
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Right_User", "User").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Right_User1", "User").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Right_User", "User").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Right_User1", "User").Value = value;
             }
         }
         /// <summary>
@@ -1836,13 +1836,13 @@ namespace DataAccessLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Right_User", "User");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Right_User1", "User");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("TteDataModel.FK_Right_User", "User", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("TteDataModel.FK_Right_User1", "User", value);
                 }
             }
         }
@@ -2001,18 +2001,18 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_User", "Right")]
-        public EntityCollection<Right> Rights
+        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_User1", "Role")]
+        public EntityCollection<Role> Roles
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Right>("TteDataModel.FK_Right_User", "Right");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Role>("TteDataModel.FK_Right_User1", "Role");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Right>("TteDataModel.FK_Right_User", "Right", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Role>("TteDataModel.FK_Right_User1", "Role", value);
                 }
             }
         }

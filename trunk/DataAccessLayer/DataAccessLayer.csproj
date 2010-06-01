@@ -56,16 +56,11 @@
       <LastGenOutput>TteDataModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
-<<<<<<< .mine
-=======
-  <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
->>>>>>> .r144
   <ItemGroup>
     <Content Include="TteDataModel.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

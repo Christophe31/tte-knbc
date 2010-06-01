@@ -11,7 +11,7 @@ namespace BusinessLayer
 	interface IBusinessLayer
 	{
 		[OperationContract]
-		RoleData logIn(string UserName,string UserPassword);
+		RoleData[] logIn(string UserName,string UserPassword);
 		
 		#region Lecture d'évènements
 			[OperationContract]
@@ -19,7 +19,6 @@ namespace BusinessLayer
 			[OperationContract]
 			bool isPlanningUpToDate(int Planning, DateTime LastUpdate);
 		#endregion
-
 		#region Identified completion
 			[OperationContract]
 			IdName[] getCampuses();
@@ -40,7 +39,6 @@ namespace BusinessLayer
 			[OperationContract]
 			Dictionary<IdName, Dictionary<IdName, IdName[]>> getCampusPeriodClassTree();
 		#endregion
-
 		#region add
 			[OperationContract]
 			string addUser(UserData User);
@@ -61,7 +59,6 @@ namespace BusinessLayer
 			[OperationContract]
 			string addPrivateEvent(EventData Event);
 		#endregion
-
 		#region set
 			[OperationContract]
 			string setUser(UserData UD);
@@ -80,7 +77,6 @@ namespace BusinessLayer
 			[OperationContract]
 			string setPrivateEvent(EventData EditedEvent);
 		#endregion
-
 		#region del
 			[OperationContract]
 			string delUser(int Id);
@@ -99,7 +95,6 @@ namespace BusinessLayer
 			[OperationContract]
 			string delPromotion(int Id);
 		#endregion
-
 		#region get Current
 			[OperationContract]
 			UserData getUser(int ID);
