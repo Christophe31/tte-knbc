@@ -232,6 +232,47 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\calendar.png" />
+    <Resource Include="Icons\calendar_add.png" />
+    <Resource Include="Icons\calendar_delete.png" />
+    <Resource Include="Icons\calendar_edit.png" />
+    <Resource Include="Icons\calendar_view_day.png" />
+    <Resource Include="Icons\calendar_view_month.png" />
+    <Resource Include="Icons\calendar_view_week.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\building.png" />
+    <Resource Include="Icons\building_add.png" />
+    <Resource Include="Icons\building_delete.png" />
+    <Resource Include="Icons\building_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\application_view_list.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\hourglass.png" />
+    <Resource Include="Icons\hourglass_add.png" />
+    <Resource Include="Icons\hourglass_delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\report.png" />
+    <Resource Include="Icons\report_user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\user.png" />
+    <Resource Include="Icons\user_add.png" />
+    <Resource Include="Icons\user_delete.png" />
+    <Resource Include="Icons\user_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\COPYRIGHT.txt" />
+    <Resource Include="Icons\group.png" />
+    <Resource Include="Icons\group_add.png" />
+    <Resource Include="Icons\group_delete.png" />
+    <Resource Include="Icons\group_edit.png" />
+    <Resource Include="Icons\world.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
