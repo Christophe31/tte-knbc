@@ -6,7 +6,7 @@
 		x:Class="Client.MainWindow"
         Title="TimeTableEasy" 
 		mc:Ignorable="d" 
-		Height="480" Width="640" Loaded="Window_Loaded">
+		Height="600" Width="800" Loaded="Window_Loaded">
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -19,10 +19,9 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Margin="0,0,3,0">
-                <Label Content="Type de vue"/>
-                <ComboBox Margin="0,0,0,3" x:Name="ViewType" ItemsSource="{Binding}" SelectionChanged="ViewType_SelectionChanged">
+        <ToolBarTray Grid.Column="0" Grid.Row="1">
+            <ToolBar Header="Planning">
+                <ComboBox Margin="0,0,3,0" x:Name="ViewType" ItemsSource="{Binding}" SelectionChanged="ViewType_SelectionChanged">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Value}"/>
@@ -30,23 +29,38 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
 
-                <ComboBox Margin="0,0,0,3" Visibility="Collapsed" x:Name="CampusName" ItemsSource="{Binding}" SelectionChanged="CampusName_SelectionChanged" />
-                <ComboBox Margin="0,0,0,3" Visibility="Collapsed" x:Name="PeriodName" ItemsSource="{Binding}" SelectionChanged="PeriodName_SelectionChanged" />
+                <ComboBox Margin="0,0,3,0" Visibility="Collapsed" x:Name="CampusName" ItemsSource="{Binding}" SelectionChanged="CampusName_SelectionChanged" />
+                <ComboBox Margin="0,0,3,0" Visibility="Collapsed" x:Name="PeriodName" ItemsSource="{Binding}" SelectionChanged="PeriodName_SelectionChanged" />
                 <ComboBox Margin="0" Visibility="Collapsed" x:Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
-            </StackPanel>
+            </ToolBar>
             
-            <StackPanel Orientation="Vertical">
-                <Label>Afficher les évènements facultatifs</Label>
-                <ListBox Name="OptionalEventTypes" ItemsSource="{Binding}"
-                         SelectionMode="Multiple" HorizontalAlignment="Left">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Value}"/>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-        </StackPanel>
+            <ToolBar Header="Type de vue">
+                <CheckBox Name="ShowOptionalUniversityEvents">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,3,0" Source="Icons\world.png"/>
+                        <TextBlock>Université</TextBlock>
+                    </StackPanel>
+                </CheckBox>
+                <CheckBox Name="ShowOptionalCampusEvents">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,3,0" Source="Icons\building.png"/>
+                        <TextBlock>Campus</TextBlock>
+                    </StackPanel>
+                </CheckBox>
+                <CheckBox Name="ShowOptionalPeriodEvents">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,3,0" Source="Icons\hourglass.png"/>
+                        <TextBlock>Période</TextBlock>
+                    </StackPanel>
+                </CheckBox>
+                <CheckBox Name="ShowOptionalClassEvents">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,3,0" Source="Icons\group.png"/>
+                        <TextBlock>Classe</TextBlock>
+                    </StackPanel>
+                </CheckBox>
+            </ToolBar>
+        </ToolBarTray>
         
         <Menu>
             <MenuItem Header="Optionnel">
