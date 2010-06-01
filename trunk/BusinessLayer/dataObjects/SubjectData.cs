@@ -34,7 +34,7 @@ namespace BusinessLayer
 		/// Id.
 		/// </summary>
 		[DataMember]
-		public int Id { get; set; }
+		public int? Id { get; set; }
 
 		/// <summary>
 		/// Campus de la Subjecte

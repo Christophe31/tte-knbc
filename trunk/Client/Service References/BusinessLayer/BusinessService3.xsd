@@ -9,8 +9,7 @@
   <xs:element name="IdName" nillable="true" type="tns:IdName" />
   <xs:complexType name="UserData">
     <xs:sequence>
-      <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="ClassId" type="xs:int" />
+      <xs:element minOccurs="0" name="Class" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
@@ -19,17 +18,17 @@
   <xs:element name="UserData" nillable="true" type="tns:UserData" />
   <xs:complexType name="ClassData">
     <xs:sequence>
-      <xs:element minOccurs="0" name="CampusName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Campus" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Period" type="xs:int" />
+      <xs:element minOccurs="0" name="Period" nillable="true" type="tns:IdName" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ClassData" nillable="true" type="tns:ClassData" />
   <xs:complexType name="SubjectData">
     <xs:sequence>
       <xs:element minOccurs="0" name="Hours" type="xs:int" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
@@ -48,14 +47,14 @@
   <xs:complexType name="EventData">
     <xs:sequence>
       <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
       <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Speaker" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Speaker" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Type" type="tns:EventData.TypeEnum" />
     </xs:sequence>
   </xs:complexType>

@@ -10,8 +10,14 @@ namespace BusinessLayer
 	[ServiceContract]
 	interface IBusinessLayer
 	{
+		[OperationContract]
+		RoleData logIn(string UserName,string UserPassword);
 		
-/*		#region Lecture d'évènements
+		#region Lecture d'évènements
+			[OperationContract]
+			EventData[] getEvents(int Planning, DateTime Start, DateTime Stop);
+			[OperationContract]
+			bool isPlanningUpToDate(int Planning, DateTime LastUpdate);
 		[OperationContract]
 		EventData[] getEvents(IdName Planning, DateTime Start, DateTime Stop);
 		[OperationContract]
@@ -32,131 +38,96 @@ namespace BusinessLayer
 		EventData[] getPrivateEvents(DateTime Start, DateTime Stop);
 		[OperationContract]
 		bool isUpToDateByPrivate(DateTime LastUpdate);
+>>>>>>> .r145
 		#endregion
-		#region completion
-		[OperationContract]
-		string[] getCampusNames();
-		[OperationContract]
-		string[] getClassesNames();
-		[OperationContract]
-		string[] getPromotionsNames();
-		[OperationContract]
-		string[] getPeriodsNames();
-		[OperationContract]
-		string[] getSubjectsNames();
-		[OperationContract]
-		string[] getUsersNames();
-		[OperationContract]
-		string[] getModalities();
-		[OperationContract]
-		Dictionary<string, Dictionary<string, string[]>> getCampusPeriodClassTree();
 
-		///note de christophe: ce message est de mugimasaka
-		///tu veux faire quoi de l'association derierre?
-		///si tu veux computer quelquechose entre l'entrée et la sortie, c'est que c'est au serveur (moi) de le faire ^^
-		///cette partie là pourait être gérée avec du cache mais ça ne me parait pas pertinant si c'est pour ta prtie uniquement
-		//Fonctions de modification à implémenter
-		//Si tu veux remplacer les champs par des id je te laisse faire
-		//C'est juste pour te donner une idée globale des fonctions qu'il me faut
-
-		//Permet de récupérer la classe d'un utilisateur
-		//string getClassOfUser(string username);
-
-		//Permet de récupérer le campus d'une classe
-		//string getCampusOfClass(string classname);
-
-		//Permet de récupérer la période d'une classe
-		//string getPeriodOfClass(string classname);
-
-		//Permet de récupérer la date de début (DateTime), la date de fin (DateTime) et la promotion d'une période
-		//Je te laisse l'implementer comme tu veux (genre en une ou trois fonctions)
-		#endregion
 		#region Identified completion
-		[OperationContract]
-		IdName[] getIdCampusNames();
-		[OperationContract]
-		IdName[] getIdClassesNames();
-		[OperationContract]
-		IdName[] getIdPromotionsNames();
-		[OperationContract]
-		IdName[] getIdPeriodsNames();
-		[OperationContract]
-		Tuple<IdName, string>[] getIdSubjectsNamesModality();
-		[OperationContract]
-		IdName[] getIdUsersNames();
-		[OperationContract]
-		Dictionary<IdName, Dictionary<IdName, IdName[]>> getIdCampusPeriodClassTree();
+			[OperationContract]
+			IdName[] getCampuses();
+			[OperationContract]
+			IdName[] getClasses();
+			[OperationContract]
+			IdName[] getPromotions();
+			[OperationContract]
+			IdName[] getPeriods();
+			[OperationContract]
+			SubjectData[] getSubjects();
+			[OperationContract]
+			IdName[] getUsers();
+			[OperationContract]
+			IdName[] getSpeakers();
+			[OperationContract]
+			IdName getUniversity();
+			[OperationContract]
+			Dictionary<IdName, Dictionary<IdName, IdName[]>> getCampusPeriodClassTree();
 		#endregion
+
 		#region add
-		[OperationContract]
-		string addUser(string UserName, string UserPassword, string UserClassName);
-		[OperationContract]
-		string addCampus(string CampusName);
-		[OperationContract]
-		string addClass(string ClassName, string CampusName, string PeriodeName);
-		[OperationContract]
-		string addPromotion(string PromotionName);
-		[OperationContract]
-		string addSubject(string SubjectName, int Hours, string Modality);
-		[OperationContract]
-		string addPeriod(string PeriodName, string PromotionName, DateTime PeriodStart, DateTime PeriodEnd);
-		[OperationContract]
-		string grantNewRight(string UserName, string CampusName);
-		[OperationContract]
-		string addEventToCampus(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Campus, string Place);
-		[OperationContract]
-		string addEventToPeriode(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Periode, string Place);
-		[OperationContract]
-		string addEventToClass(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, IdName Class, IdName Subject, string Place);
-		[OperationContract]
-		string addEventToUniversity(string EventName, DateTime Start, DateTime End, bool Mandatory, string SpeakerName, string Place);
-		[OperationContract]
-		string addEventToUser(string EventName, DateTime Start, DateTime End, bool Mandatory, string Place);
+			[OperationContract]
+			string addUser(UserData User);
+			[OperationContract]
+			string addCampus(string CampusName);
+			[OperationContract]
+			string addClass(ClassData Class);
+			[OperationContract]
+			string addPromotion(string PromotionName);
+			[OperationContract]
+			string addSubject(SubjectData Subject);
+			[OperationContract]
+			string addPeriod(PeriodData Period);
+			[OperationContract]
+			string grantRole(int UserId, int? Target);
+			[OperationContract]
+			string addEvent(EventData Event);
+			[OperationContract]
+			string addPrivateEvent(EventData Event);
 		#endregion
+
 		#region set
-		[OperationContract]
-		string setUser(UserData UD);
-		[OperationContract]
-		string setCampus(int Id, string CampusName);
-		[OperationContract]
-		string setClass(ClassData CD);
-		[OperationContract]
-		string setPromotion(int Id, string PromotionName);
-		[OperationContract]
-		string setSubject(SubjectData SD);
-		[OperationContract]
-		string setPeriod(PeriodData PD);
-		[OperationContract]
-		string setEvent(EventData EditedEvent);
+			[OperationContract]
+			string setUser(UserData UD);
+			[OperationContract]
+			string setCampus(int Id, string CampusName);
+			[OperationContract]
+			string setClass(ClassData CD);
+			[OperationContract]
+			string setPromotion(int Id, string PromotionName);
+			[OperationContract]
+			string setSubject(SubjectData SD);
+			[OperationContract]
+			string setPeriod(PeriodData PD);
+			[OperationContract]
+			string setEvent(EventData EditedEvent);
+			[OperationContract]
+			string setPrivateEvent(EventData EditedEvent);
 		#endregion
+
 		#region del
-		[OperationContract]
-		string delUser(int Id);
-		[OperationContract]
-		string delCampus(int Id);
-		[OperationContract]
-		string delClass(int Id);
-		[OperationContract]
-		string delPromotion(int Id);
-		[OperationContract]
-		string delSubject(int Id);
-		[OperationContract]
-		string delPeriod(int Id);
-		[OperationContract]
-		string delRight(string UserName, string CampusName);
-		[OperationContract]
-		string delEvent(int Id);
+			[OperationContract]
+			string delUser(int Id);
+			[OperationContract]
+			string delClass(int Id);
+			[OperationContract]
+			string delSubject(int Id);
+			[OperationContract]
+			string delPeriod(int Id);
+			[OperationContract]
+			string delRole(int User, int? Target);
+			[OperationContract]
+			string delEvent(int Id);
+			[OperationContract]
+			string delCampus(int Id);
+			[OperationContract]
+			string delPromotion(int Id);
 		#endregion
+
 		#region get Current
-		[OperationContract]
-		UserData getUser(int ID);
-		[OperationContract]
-		ClassData getClass(int ID);
-		[OperationContract]
-		PeriodData getPeriod(int ID);
-		[OperationContract]
-		SubjectData getSubject(int ID);
+			[OperationContract]
+			UserData getUser(int ID);
+			[OperationContract]
+			ClassData getClass(int ID);
+			[OperationContract]
+			PeriodData getPeriod(int ID);
 		#endregion
-		*/
 	}
 }

@@ -36,8 +36,9 @@ namespace BusinessLayer
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus.Id == CampusId
-								 select new { evt = p, sub = p.Subject.Name,mod=p.Subject.Modality , spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub,e.mod, e.spk,EventData.TypeEnum.Campus)).ToArray();
+								 select new { evt = p, subn = p.Subject.Name, subi=p.Subject.Id
+									 ,mod=p.Subject.Modality , spki = p.Speaker.Id, spkn=p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, IdName.IN(e.subi, e.subn), e.mod, IdName.IN(e.spki, e.spkn), EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByCampus(int id,DateTime LastUpdate)
 				{
@@ -47,12 +48,13 @@ namespace BusinessLayer
 				public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 				{
 					centerToSqlDate(ref Start); centerToSqlDate(ref Stop);
-					return (from e in
+					var g=
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
 									 p.Campus == null && p.Period == null && p.Class == null
-								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.University)).ToArray();
+								 select new { evt = p, subn = p.Subject.Name, subi=(int?)p.Subject.Id
+									 ,mod=p.Subject.Modality , spki = p.Speaker.Id, spkn=p.Speaker.Name }).ToArray();
+						return	g.Select(p=> EventData.ED(p.evt, IdName.IN(p.subi, p.subn), p.mod, IdName.IN(p.spki, p.spkn), EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByUniversity(DateTime LastUpdate)
 				{
@@ -67,8 +69,9 @@ namespace BusinessLayer
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
 									p.Period.Id == PeriodId
-								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.Period)).ToArray();
+								 select new { evt = p, subn = p.Subject.Name, subi=p.Subject.Id
+									 ,mod=p.Subject.Modality , spki = p.Speaker.Id, spkn=p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, IdName.IN(e.subi, e.subn), e.mod, IdName.IN(e.spki, e.spkn), EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByPeriod(int id, DateTime LastUpdate)
 				{
@@ -83,8 +86,9 @@ namespace BusinessLayer
 								(from p in db.Event
 								 where p.Start < Stop && p.End > Start &&
 									p.Class.Id ==ClassId 
-								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.Class)).ToArray();
+								 select new { evt = p, subn = p.Subject.Name, subi=p.Subject.Id
+									 ,mod=p.Subject.Modality , spki = p.Speaker.Id, spkn=p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, IdName.IN(e.subi, e.subn), e.mod, IdName.IN(e.spki, e.spkn), EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByClass(int id, DateTime LastUpdate)
 				{
@@ -100,8 +104,9 @@ namespace BusinessLayer
 //TODO:Modifier quand les sessions seront gérées
 									p.Creator.Name == "christophe"  &&
 									p.Speaker == null 
-								 select new { evt = p, sub = p.Subject.Name, mod = p.Subject.Modality, spk = p.Speaker.Name }).ToArray()
-							select EventData.ED(e.evt, e.sub, e.mod, e.spk, EventData.TypeEnum.User)).ToArray();
+								 select new { evt = p, subn = p.Subject.Name, subi=p.Subject.Id
+									 ,mod=p.Subject.Modality , spki = p.Speaker.Id, spkn=p.Speaker.Name }).ToArray()
+							select EventData.ED(e.evt, IdName.IN(e.subi, e.subn), e.mod, IdName.IN(e.spki, e.spkn), EventData.TypeEnum.Campus)).ToArray();
 				}
 				public bool isUpToDateByPrivate(DateTime LastUpdate)
 				{
@@ -416,7 +421,7 @@ namespace BusinessLayer
 						u.Name = UD.Name;
 						if (UD.Password!=null)
 							u.Password=UD.Password;
-						u.Class = db.Class.Where(p => p.Id == UD.ClassId).FirstOrDefault();
+						u.Class = db.Class.Where(p => p.Id == UD.Class.Id).FirstOrDefault();
 						db.SaveChanges();
 						return "ok";
 					}
@@ -431,16 +436,16 @@ namespace BusinessLayer
 					}
 					public string setClass(ClassData CD)
 					{
-						if (db.Class.Any(p => p.Id != CD.Id) != null)
+						if (db.Class.Any(p => p.Id == CD.Id) != null)
 							return "La classe n'existe pas";
-						if (db.Campus.Where(p => p.Name == CD.CampusName).FirstOrDefault() != null)
+						if (db.Campus.Where(p => p.Id == CD.Campus.Id).FirstOrDefault() != null)
 							return "Le Campus n'existe pas";
-						if (db.Period.Where(p => p.Id == CD.Period).FirstOrDefault() != null)
+						if (db.Period.Where(p => p.Id == CD.Period.Id).FirstOrDefault() != null)
 							return "La Period n'existe pas";
 						Class c = db.Class.Where(p => p.Id == CD.Id).Single();
 						c.Name = CD.Name;
-						c.Campus = db.Campus.Where(p => p.Name == CD.CampusName).FirstOrDefault();
-						c.Period = db.Period.Where(p => p.Id == CD.Period).FirstOrDefault();
+						c.Campus = db.Campus.Where(p => p.Name == CD.Campus.Name).FirstOrDefault();
+						c.Period = db.Period.Where(p => p.Id == CD.Period.Id).FirstOrDefault();
 						db.SaveChanges();
 						return "ok";
 					}
@@ -556,14 +561,14 @@ namespace BusinessLayer
 					public UserData getUser(int ID)
 					{ 
 						return db.User.Where(u => u.Id == ID).
-						Select(p=> new {u=p, camp=p.Class.Campus.Name, clas=p.Class.Id }).ToArray().
-						Select(u=>UserData.UD(u.u,u.camp,u.clas)).Single(); 
+						Select(p=> new {u=p, camp=p.Class.Campus.Name, clasi=p.Class.Id, clasn=p.Class.Name }).ToArray().
+						Select(u=>UserData.UD(u.u,IdName.IN(u.clasi, u.clasn))).Single(); 
 					}
 					public ClassData getClass(int ID)
 					{ 
 						return db.Class.Where(c => c.Id == ID).
-						Select(p=> new {u=p, camp=p.Campus.Name, per=p.Period.Id }).ToArray().
-						Select(u=>ClassData.CD(u.u,u.camp,u.per)).Single(); 
+						Select(p => new { u = p, campn = p.Campus.Name, campi = p.Campus.Id, peri = p.Period.Id, pern = p.Period.Name }).ToArray().
+						Select(u=>ClassData.CD(u.u,IdName.IN(u.campi,u.campn), IdName.IN(u.peri,u.pern))).Single(); 
 					}
 					public PeriodData getPeriod(int ID)
 					{ 

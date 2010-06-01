@@ -873,11 +873,13 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Modality CreateModality(global::System.Int32 id, global::System.Byte[] name)
+        /// <param name="hours">Initial value of the Hours property.</param>
+        public static Modality CreateModality(global::System.Int32 id, global::System.Byte[] name, global::System.Int32 hours)
         {
             Modality modality = new Modality();
             modality.Id = id;
             modality.Name = name;
+            modality.Hours = hours;
             return modality;
         }
 
@@ -958,6 +960,30 @@ namespace DataAccessLayer
         private Nullable<global::System.Int32> _Subject;
         partial void OnSubjectChanging(Nullable<global::System.Int32> value);
         partial void OnSubjectChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Hours
+        {
+            get
+            {
+                return _Hours;
+            }
+            set
+            {
+                OnHoursChanging(value);
+                ReportPropertyChanging("Hours");
+                _Hours = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Hours");
+                OnHoursChanged();
+            }
+        }
+        private global::System.Int32 _Hours;
+        partial void OnHoursChanging(global::System.Int32 value);
+        partial void OnHoursChanged();
 
         #endregion
     
