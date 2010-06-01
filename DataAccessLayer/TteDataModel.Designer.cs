@@ -18,13 +18,10 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Class_Period", "Period", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Period), "Class", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Class), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Class_PeriodPlanning", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Planning), "Class", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Class), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Class_Planning", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Planning), "Class", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Class), true)]
-[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Event_Owner", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.User), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Event), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Event_OwnerPlanning", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Planning), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Event), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Event_Planning", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataAccessLayer.Planning), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Event), true)]
-[assembly: EdmRelationshipAttribute("TteDataModel", "FK_Event_Speaker", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.User), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Event), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Event_SpeakerPlaning", "Planning", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Planning), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Event), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Event_Subject", "Modality", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Modality), "Event", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Event), true)]
 [assembly: EdmRelationshipAttribute("TteDataModel", "FK_Modality_Subject", "Modality", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(DataAccessLayer.Modality), "Modality1", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataAccessLayer.Modality), true)]
@@ -350,46 +347,8 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Class_Period", "Period")]
-        public Period Period1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Period>("TteDataModel.FK_Class_Period", "Period").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Period>("TteDataModel.FK_Class_Period", "Period").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Period> Period1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Period>("TteDataModel.FK_Class_Period", "Period");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Period>("TteDataModel.FK_Class_Period", "Period", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Class_PeriodPlanning", "Planning")]
-        public Planning Planning
+        public Planning PeriodPlanning
         {
             get
             {
@@ -405,7 +364,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> PlanningReference
+        public EntityReference<Planning> PeriodPlanningReference
         {
             get
             {
@@ -427,7 +386,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Class_Planning", "Planning")]
-        public Planning Planning1
+        public Planning Planning
         {
             get
             {
@@ -443,7 +402,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> Planning1Reference
+        public EntityReference<Planning> PlanningReference
         {
             get
             {
@@ -750,46 +709,8 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Owner", "User")]
-        public User User
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Event_Owner", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Event_Owner", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> UserReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Event_Owner", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("TteDataModel.FK_Event_Owner", "User", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_OwnerPlanning", "Planning")]
-        public Planning Planning1
+        public Planning OwnerRef
         {
             get
             {
@@ -805,7 +726,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> Planning1Reference
+        public EntityReference<Planning> OwnerRefReference
         {
             get
             {
@@ -827,7 +748,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Planning", "Planning")]
-        public Planning Planning2
+        public Planning PlaningRef
         {
             get
             {
@@ -843,7 +764,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> Planning2Reference
+        public EntityReference<Planning> PlaningRefReference
         {
             get
             {
@@ -864,46 +785,8 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Speaker", "User")]
-        public User User1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Event_Speaker", "User").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Event_Speaker", "User").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<User> User1Reference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("TteDataModel.FK_Event_Speaker", "User");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("TteDataModel.FK_Event_Speaker", "User", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_SpeakerPlaning", "Planning")]
-        public Planning Planning3
+        public Planning SpeakerRef
         {
             get
             {
@@ -919,7 +802,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> Planning3Reference
+        public EntityReference<Planning> SpeakerRefReference
         {
             get
             {
@@ -1087,7 +970,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Subject", "Event")]
-        public EntityCollection<Event> Event
+        public EntityCollection<Event> Events
         {
             get
             {
@@ -1109,7 +992,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Modality_Subject", "Modality1")]
-        public EntityCollection<Modality> Modality1
+        public EntityCollection<Modality> Modalitys
         {
             get
             {
@@ -1131,7 +1014,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Modality_Subject", "Modality")]
-        public Modality Modality2
+        public Modality OnSubject
         {
             get
             {
@@ -1147,7 +1030,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Modality> Modality2Reference
+        public EntityReference<Modality> OnSubjectReference
         {
             get
             {
@@ -1271,28 +1154,6 @@ namespace DataAccessLayer
         #endregion
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Class_Period", "Class")]
-        public EntityCollection<Class> Class
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Class>("TteDataModel.FK_Class_Period", "Class");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Class>("TteDataModel.FK_Class_Period", "Class", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1499,7 +1360,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Class_PeriodPlanning", "Class")]
-        public EntityCollection<Class> Class
+        public EntityCollection<Class> PeriodClasses
         {
             get
             {
@@ -1521,7 +1382,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Class_Planning", "Class")]
-        public Class Class1
+        public Class Class
         {
             get
             {
@@ -1537,7 +1398,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Class> Class1Reference
+        public EntityReference<Class> ClassReference
         {
             get
             {
@@ -1559,7 +1420,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_OwnerPlanning", "Event")]
-        public EntityCollection<Event> Event
+        public EntityCollection<Event> OwnedEvents
         {
             get
             {
@@ -1581,7 +1442,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Planning", "Event")]
-        public EntityCollection<Event> Event1
+        public EntityCollection<Event> Events
         {
             get
             {
@@ -1603,7 +1464,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_SpeakerPlaning", "Event")]
-        public EntityCollection<Event> Event2
+        public EntityCollection<Event> SpeakingEvents
         {
             get
             {
@@ -1663,7 +1524,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Plannings_Parent", "Planning1")]
-        public EntityCollection<Planning> Planning1
+        public EntityCollection<Planning> ChildrenPlannings
         {
             get
             {
@@ -1685,7 +1546,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Plannings_Parent", "Planning")]
-        public Planning Planning2
+        public Planning ParentPlanning
         {
             get
             {
@@ -1701,7 +1562,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> Planning2Reference
+        public EntityReference<Planning> ParentPlanningReference
         {
             get
             {
@@ -1723,7 +1584,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_Campus", "Right")]
-        public EntityCollection<Right> Right
+        public EntityCollection<Right> Rights
         {
             get
             {
@@ -1891,7 +1752,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_Campus", "Planning")]
-        public Planning Planning
+        public Planning CampusPlanning
         {
             get
             {
@@ -1907,7 +1768,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Planning> PlanningReference
+        public EntityReference<Planning> CampusPlanningReference
         {
             get
             {
@@ -1929,7 +1790,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_User", "User")]
-        public User User1
+        public User UserRef
         {
             get
             {
@@ -1945,7 +1806,7 @@ namespace DataAccessLayer
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<User> User1Reference
+        public EntityReference<User> UserRefReference
         {
             get
             {
@@ -2076,50 +1937,6 @@ namespace DataAccessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Owner", "Event")]
-        public EntityCollection<Event> Event
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("TteDataModel.FK_Event_Owner", "Event");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("TteDataModel.FK_Event_Owner", "Event", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Event_Speaker", "Event")]
-        public EntityCollection<Event> Event1
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Event>("TteDataModel.FK_Event_Speaker", "Event");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Event>("TteDataModel.FK_Event_Speaker", "Event", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_User_Planing", "Planning")]
         public Planning Planning
         {
@@ -2159,7 +1976,7 @@ namespace DataAccessLayer
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("TteDataModel", "FK_Right_User", "Right")]
-        public EntityCollection<Right> Right
+        public EntityCollection<Right> Rights
         {
             get
             {
