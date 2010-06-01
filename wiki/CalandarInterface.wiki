@@ -3,7 +3,13 @@ _par Breil Romaric_
 
 ==Todo list==
   * Events list
-      * Display/hide non mandatory events
-      * Create an event
-      * Update an event
-      * Delete an event
+    * ~~Display/hide non mandatory events~~ (to be tested)
+    * Create an event
+    * Update an event
+    * Delete an event
+
+  * Day/week calendar
+    * Creation of a control which displays an event
+    * Display of an event in each case of the grid
+    * Display of some events in a case
+    * Display of an event on many cases
