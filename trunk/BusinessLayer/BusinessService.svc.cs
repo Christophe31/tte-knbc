@@ -436,7 +436,7 @@ namespace BusinessLayer
 					}
 					public string setClass(ClassData CD)
 					{
-						if (db.Class.Any(p => p.Id == CD.Id) != null)
+						if (!db.Class.Any(p => p.Id == CD.Id))
 							return "La classe n'existe pas";
 						if (db.Campus.Where(p => p.Id == CD.Campus.Id).FirstOrDefault() != null)
 							return "Le Campus n'existe pas";
@@ -460,7 +460,7 @@ namespace BusinessLayer
 					}
 					public string setSubject(SubjectData SD)
 					{
-						if (db.Subject.Any(p => p.Id == SD.Id)!=null)
+						if (!db.Subject.Any(p => p.Id == SD.Id))
 							return "Le sujet n'existe pas";;
 						Subject s = db.Subject.Where(p => p.Id == SD.Id).Single();
 						s.Name = SD.Name;
@@ -471,7 +471,7 @@ namespace BusinessLayer
 					}
 					public string setPeriod(PeriodData PD)
 					{
-						if (db.Period.Any(p => p.Id == PD.Id) != null)
+						if (!db.Period.Any(p => p.Id == PD.Id))
 							return "Le period n'existe pas";
 						if (db.Promotion.Where(p => p.Name == PD.PromotionName).FirstOrDefault() != null)
 							return "La promotion n'existe pas";
