@@ -11,12 +11,12 @@ namespace BusinessLayer
 	interface IBusinessLayer
 	{
 		
-		#region Lecture d'évènements
+/*		#region Lecture d'évènements
 		[OperationContract]
 		EventData[] getEvents(IdName Planning, DateTime Start, DateTime Stop);
 		[OperationContract]
 		bool isPlanningUpToDate(int Id, DateTime LastUpdate);
-/*		[OperationContract]
+		[OperationContract]
 		EventData[] getEventsByUniversity(DateTime Start, DateTime Stop);
 		[OperationContract]
 		bool isUpToDateByUniversity(DateTime LastUpdate);
