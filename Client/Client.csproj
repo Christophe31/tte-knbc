@@ -84,6 +84,11 @@
     <Compile Include="dataObjects\IdName.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="Cache\CacheProcess.cs" />
+    <Compile Include="Service References\BL2\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\BusinessLayer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -152,6 +157,41 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\BL2\BusinessLayer.wsdl" />
+    <None Include="Service References\BL2\BusinessLayer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BL2\BusinessLayer1.wsdl" />
+    <None Include="Service References\BL2\BusinessLayer1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BL2\BusinessLayer2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BL2\BusinessLayer3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.ClassData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.EventData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.IdName.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.PeriodData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.RoleData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.SubjectData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BL2\Client.BL2.UserData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\BusinessLayer\BusinessService.wsdl" />
     <None Include="Service References\BusinessLayer\BusinessService.xsd">
       <SubType>Designer</SubType>
@@ -180,6 +220,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\BL2\" />
     <WCFMetadataStorage Include="Service References\BusinessLayer\" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +313,21 @@
     <Resource Include="Icons\group_delete.png" />
     <Resource Include="Icons\group_edit.png" />
     <Resource Include="Icons\world.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BL2\BusinessLayer.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BL2\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BL2\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\BL2\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

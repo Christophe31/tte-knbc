@@ -19,14 +19,15 @@ namespace BusinessLayer
 			Speaker
 		}
 
-		public RoleData()
+		public RoleData(IdName Campus,RoleType type)
 		{
-
+			this.Campus = Campus;
+			this.Role = Role;
 		}
 
-		public static RoleData RD()
+		public static RoleData RD(IdName Campus, RoleType type)
 		{
-			return new RoleData();
+			return new RoleData(Campus, type);
 		}
 
 		[DataMember]
@@ -34,6 +35,6 @@ namespace BusinessLayer
 
 
 		[DataMember]
-		public int? CampusId { get; set; }
+		public IdName Campus { get; set; }
 	}
 }

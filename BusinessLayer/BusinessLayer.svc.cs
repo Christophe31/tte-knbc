@@ -4,21 +4,34 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using DataAccessLayer;
 
 namespace BusinessLayer
 {
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BusinessLayer" in code, svc and config file together.
 	public class BusinessLayer : IBusinessLayer
 	{
-		public void DoWork()
-		{
-		}
-
+		Entities db = new Entities();
 		#region IBusinessLayer Members
 
-		RoleData IBusinessLayer.logIn(string UserName, string UserPassword)
+		RoleData[] IBusinessLayer.logIn(string UserLogin, string UserPassword)
 		{
-			throw new NotImplementedException();
+			if (db.User.Any(p => p.Login == UserLogin && p.Password == UserPassword))
+			{
+				return db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
+					.Select(p => RoleData.RD
+						(IdName.IN(p.Target, p.Planning.Name),
+							(p.Planning.Type == 1 ?
+								RoleData.RoleType.Administrator :
+								(p.Planning.Type == 2 ?
+									RoleData.RoleType.CampusManager :
+									RoleData.RoleType.Speaker
+								)
+							)
+						)
+				).ToArray();
+			}
+			throw new FaultException("Unknown Username or Incorrect Password");
 		}
 
 		EventData[] IBusinessLayer.getEvents(int Planning, DateTime Start, DateTime Stop)
