@@ -18,27 +18,6 @@ namespace BusinessLayer
 			EventData[] getEvents(int Planning, DateTime Start, DateTime Stop);
 			[OperationContract]
 			bool isPlanningUpToDate(int Planning, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEvents(IdName Planning, DateTime Start, DateTime Stop);
-		[OperationContract]
-		bool isPlanningUpToDate(int Id, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEventsByUniversity(DateTime Start, DateTime Stop);
-		[OperationContract]
-		bool isUpToDateByUniversity(DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEventsByPeriod(int PeriodId, DateTime Start, DateTime Stop);
-		[OperationContract]
-		bool isUpToDateByPeriod(int Id, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getEventsByClass(int ClassId, DateTime Start, DateTime Stop);
-		[OperationContract]
-		bool isUpToDateByClass(int Id, DateTime LastUpdate);
-		[OperationContract]
-		EventData[] getPrivateEvents(DateTime Start, DateTime Stop);
-		[OperationContract]
-		bool isUpToDateByPrivate(DateTime LastUpdate);
->>>>>>> .r145
 		#endregion
 
 		#region Identified completion
