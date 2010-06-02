@@ -24,12 +24,16 @@ Class, Period and User Id columns are a primary *and* a foreign key, because a r
 University, Campus, Period, Class and User are now considered as Planning. They share the same basic informations (a name and a last change date). Those entities are also organised into a tree, that is why there is a Parent field:
 
 {{{
-  -> University (root of the tree: Parent null)
-    -> Campus
-      -> Class
-        -> User (can be null, if the user is not a student)
-    -> Promotion
-      -> Period
+University (root of the tree: Parent null)
+  |
+  +-> Campus
+  |    |
+  |    +-> Class
+  |         |
+  |         +-> User (can be null, if the user is not a student)
+  +-> Promotion
+       |
+       +-> Period
 }}}
 
 Place in the tree is confirmed by the Type enumeration, that can take those values (the real value is an `int`, corresponding to a C# `enum`). The exception is Promotion, which is null, because it is not a real planning (no event is linked to this).
