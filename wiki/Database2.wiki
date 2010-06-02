@@ -9,7 +9,7 @@ This new design is more extensible and simple than the older one. Requests are a
 
 == Schema ==
 
-http://www.mypicturesbox.com/photos/originales/crovax31/55006.png
+http://www.mypicturesbox.com/photos/originales/crovax31/55007.png
 
 
 == Explanation ==
