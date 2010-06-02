@@ -16,6 +16,8 @@ http://www.mypicturesbox.com/photos/originales/crovax31/55006.png
 
 The database is organised around 2 tables, Planning and Event, complementary information is added by some other tables. User, Right and Modality haven't changed a lot.
 
+Class, Period and User Id columns are a primary *and* a foreign key, because a row of those tables correspond to only one row in Planning (1-to-1 link). 
+
 
 === Planning ===
 
@@ -30,7 +32,7 @@ University, Campus, Period, Class and User are now considered as Planning. They 
       -> Period
 }}}
 
-Place in the tree is confirmed by the Type enum, that can take those values (the real value is an `int`, corresponding to a C# enum). The exception is Promotion, which is null, because it is not a real planning (no event is linked to this).
+Place in the tree is confirmed by the Type enumeration, that can take those values (the real value is an `int`, corresponding to a C# `enum`). The exception is Promotion, which is null, because it is not a real planning (no event is linked to this).
 
 Two tables, Class and Period, add some informations to the corresponding planning. Class creates a link between a period and a class. Period adds the Start and the End of this period.
 
@@ -38,3 +40,5 @@ Two tables, Class and Period, add some informations to the corresponding plannin
 === Event ===
 
 Events have not changed dramatically, but a lot of nullable foreign keys were deleted. An event is now linked only to a planning. Since every user has a planning, Owner and Speaker are also linked to Planning.
+
+Modality is linked to itself, because a Subject and a Modality have the same attributes (a name and a maximal number of hours). So, the parent of a modality is a Subject.
