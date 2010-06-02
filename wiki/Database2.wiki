@@ -1,0 +1,30 @@
+# Description of the new database
+
+= Introduction =
+
+This new design is more extensible and simple than the older one. Requests are also more generic.
+
+
+= Organisation =
+
+== Schema ==
+
+http://www.mypicturesbox.com/photos/originales/crovax31/55006.png
+
+
+== Explanation ==
+
+The database is organised around 2 tables, Planning and Event, complementary information is added by some other tables. User, Right and Modality haven't changed a lot.
+
+University, Campus, Period, Class and User are now considered as Planning. They share the same basic informations (a name and a last change date). Those entities are also organised into a tree, that is why there is a Parent field:
+
+{{{
+  -> University (root of the tree: Parent null)
+    -> Campus
+      -> Class
+        -> User (can be null, if the user is not a student)
+    -> Promotion
+      -> Period
+}}}
+
+Place in the tree is confirmed by the Type enum, that can take those values (the real value is an `int`, corresponding to a C# enum). The exception is Promotion, which is null, because it is not a real planning (no event is linked to this).
