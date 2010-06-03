@@ -120,7 +120,7 @@
                     <TextBlock Grid.Column="1" Grid.Row="0"><Run Text="Lundi"/></TextBlock>
 
                     <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
-                        <local:CalendarDay />
+                        <local:EventControl x:Name="EventCtl" />
                     </ScrollViewer>
                 </Grid>
             </TabItem>

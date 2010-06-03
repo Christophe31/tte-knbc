@@ -82,6 +82,16 @@ namespace Client
             // Events DataGrid initialisation
             RefreshAllEvents();
             EventsGrid.DataContext = AllEvents;
+
+            EventCtl.DataContext = new EventData()
+            {
+                Name = "Event",
+                Modality = "Cours",
+                Place = "Salle 1",
+                Speaker = new IdName() { Name = "Toto", Id = 0 },
+                Subject = new IdName() { Name = "Java", Id = 0 },
+                Type = EventData.TypeEnum.Class
+            };
 		}
         #endregion
 

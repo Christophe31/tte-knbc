@@ -1,0 +1,25 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Client.EventControl"
+	x:Name="UserControl"
+	UseLayoutRounding="True">
+
+	<StackPanel Orientation="Vertical">
+		<StackPanel Orientation="Horizontal">
+			<TextBlock x:Name="Modality" TextWrapping="Wrap" Text="{Binding Modality}"/>
+            <TextBlock x:Name="Planning" TextWrapping="Wrap" Text="{Binding Path=LinkedTo, Mode=OneWay}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="Subject" TextWrapping="Wrap" Text="{Binding Subject}"/>
+            <TextBlock x:Name="Name" TextWrapping="Wrap" Text="{Binding Name}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+            <TextBlock x:Name="Speaker" TextWrapping="Wrap" Text="{Binding Speaker}"/>
+            <TextBlock x:Name="Place" TextWrapping="Wrap" Text="{Binding Place}"/>
+		</StackPanel>
+	</StackPanel>
+</UserControl>
