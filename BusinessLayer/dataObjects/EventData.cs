@@ -41,6 +41,11 @@ namespace BusinessLayer
 			this.Speaker = Speaker;
 			this.Type = aType;
 		}
+
+		/// <summary>
+		/// pour économiser le mot clef new dans les requetes déjà longues
+		/// </summary>
+		/// <returns>Nouvelle instance</returns>
 		public static EventData ED(Event EventEntity, IdName Subject, string Modality, IdName Speaker, TypeEnum aType)
 		{
 			return new EventData (EventEntity, Subject, Modality, Speaker, aType);

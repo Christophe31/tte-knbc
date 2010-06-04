@@ -18,6 +18,7 @@ namespace BusinessLayer
 		{
 			if (db.User.Any(p => p.Login == UserLogin && p.Password == UserPassword))
 			{
+				
 				return db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
 					.Select(p => RoleData.RD
 						(IdName.IN(p.Target, p.Planning.Name),

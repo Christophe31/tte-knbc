@@ -12,18 +12,6 @@ namespace Client.BusinessLayer
 	/// </summary>
     public static class EventType
     {
-        /// <summary>
-        /// Enumeration of objects an event can be linked to.
-        /// </summary>
-        public enum Type
-        {
-            University,
-            Campus,
-            Period,
-            Class,
-            User
-        }
-
         private static SortedDictionary<EventData.TypeEnum, string> eventTypeNames;
 		/// <summary>
 		/// String equivalence of events types.

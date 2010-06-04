@@ -7,6 +7,14 @@ using DDay.iCal;
 
 namespace Client.BusinessLayer
 {
+	/// <summary>
+	/// This object represents all the events attributes to displays in the calandar, 
+	/// 
+	/// It implements those interfaces:
+	/// IExtensibleDataObject, allow us to extend a serializable object
+	/// INotifyPropertyChanged,
+	/// IEditableObject
+	/// </summary>
     public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, INotifyPropertyChanged, IEditableObject
     {
         /// <summary>
@@ -138,13 +146,15 @@ namespace Client.BusinessLayer
         {
             CacheWrapper Api = new CacheWrapper();
             // Event creation
-            if (Id == null)
+            if (Id == 0)
             {
+				Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker.Name, Place);
             }
 
             // Event edition
             else
             {
+				Api.Server.setEvent(this);
             }
         }
 

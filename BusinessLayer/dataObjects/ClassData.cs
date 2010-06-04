@@ -11,10 +11,6 @@ namespace BusinessLayer
 	[DataContract]
 	public class ClassData
 	{
-		public ClassData()
-		{
-
-		}
 		/// <summary>
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
@@ -26,6 +22,7 @@ namespace BusinessLayer
 			this.Campus = Campus;
 			this.Period = Period;
 		}
+
 		public static ClassData CD(Class ClassEntity, IdName Campus, IdName Period)
 		{
 			return new ClassData(ClassEntity, Campus, Period);
