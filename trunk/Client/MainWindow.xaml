@@ -184,6 +184,62 @@
                     </DataGrid>
                 </Grid>
             </TabItem>
+
+            <TabItem Header="Admin" Name="Administration">
+                <Grid>
+                <TabControl Name="tcOnglets" SelectionChanged="tcOnglets_SelectionChanged">
+                    <TabItem Header="Utilisateurs" Name="Users">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                                <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
+                                    <Label Content="Utilisateur:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <ComboBox HorizontalAlignment="Center" ItemsSource="{Binding}" Name="cbUsers_Users" VerticalAlignment="Center"/>
+                                    <Button Content="Ajouter"  Name="bUsers_Add" VerticalAlignment="Center" Width="Auto"/>
+                                    <Button Content="Modifier" Name="bUsers_Change" VerticalAlignment="Center"/>
+                                    <Button Content="Supprimer" Name="bUsers_DelUser" VerticalAlignment="Center" />
+                                </StackPanel>
+                                
+                                <StackPanel Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+                                    <GroupBox Header="Propriétés:" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Vertical">
+                                            <Label Content="Utilisateur:" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            <TextBox HorizontalAlignment="Center" Name="tbUsers_Username" VerticalAlignment="Center" />
+                                            <Label Content="Mot de passe:" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox HorizontalAlignment="Center" IsEnabled="False" Name="tbUsers_Password" VerticalAlignment="Center" />
+                                                <CheckBox HorizontalAlignment="Center" IsChecked="True" Name="cbUsers_Password" VerticalAlignment="Center" />
+                                                <Label Content="Générer un mot de passe aléatoire"  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <Label Content="Classe:" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                                            <ComboBox HorizontalAlignment="Center" ItemsSource="{Binding}"  Name="cbUsers_Class" VerticalAlignment="Center"  />
+                                        </StackPanel>
+                                    </GroupBox>
+                                </StackPanel>
+                            </Grid>
+                    </TabItem>
+                    <TabItem Header="Campus" Name="Campus">
+                    </TabItem>
+                    <TabItem Header="Classes" Name="Classes">
+                    </TabItem>
+                    <TabItem Header="Promotions" Name="Promotions">
+                    </TabItem>
+                    <TabItem Header="Matières" Name="Subjetcs">
+                    </TabItem>
+                    <TabItem Header="Périodes" Name="Periods">
+                    </TabItem>
+                </TabControl>
+                <StatusBar Name="sbStatus" Height="20" VerticalAlignment="Bottom">
+                    <TextBlock Name="sbStatusText" Text="Prêt" />
+                </StatusBar>
+                </Grid>
+            </TabItem>
         </TabControl>
 
 		<Button Content="clic la" Grid.Row="1" HorizontalAlignment="Left" x:Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" Margin="685,5,0,0" />
