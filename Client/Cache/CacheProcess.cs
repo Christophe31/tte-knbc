@@ -9,11 +9,13 @@ using System.Runtime.Serialization;
 using DDay.iCal;
 
 
+
 namespace Client
 {
 	internal class CacheProcess
 	{
 		public BusinessServiceClient Server;
+		public BL2.BusinessLayerClient ServerBL2;
 		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
 		System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
@@ -27,13 +29,11 @@ namespace Client
 			static protected CacheProcess self;
 			protected CacheProcess()
 			{
+				ServerBL2 = new BL2.BusinessLayerClient();
 				Server = new BusinessServiceClient();
-				//Server.ClientCredentials.ServiceCertificate.SetDefaultCertificate();
-				Server.ClientCredentials.UserName.UserName = "admin";
-				Server.ClientCredentials.UserName.Password = "motdepasse";
-				Server.ChannelFactory.Credentials.UserName.UserName = "admin";
-				Server.ChannelFactory.Credentials.UserName.Password = "motdepasse";
 				Server.Open();
+				ServerBL2.Open();
+				ServerBL2.logIn("popi", "popi");
 			}
 
 			static public CacheProcess Current
@@ -67,7 +67,7 @@ namespace Client
 			private void refreshCache(EventsGetterId eventGetter,IdName idn)
             {
                 iCalendar iCal = new iCalendar();
-				EventData[]tmp = eventGetter(idn.Id, DateTime.MinValue, DateTime.MaxValue);
+				EventData[] tmp = eventGetter(idn.Id, DateTime.MinValue, DateTime.MaxValue);
 				foreach (var i in tmp )
 				{
 					i.AddEventToCalendar(ref iCal); 

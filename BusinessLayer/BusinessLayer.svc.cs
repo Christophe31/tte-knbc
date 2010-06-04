@@ -18,6 +18,8 @@ namespace BusinessLayer
 		{
 			if (db.User.Any(p => p.Login == UserLogin && p.Password == UserPassword))
 			{
+				UserOperationContext.Current.UserProperty = db.User.Where(p => p.Login == UserLogin && p.Password == UserPassword).
+					Select(p=>UserData.UD(p.Id,p.Planning.Name, IdName.IN(p.Planning.Class.Id, p.Planning.Name))).First() ;
 				
 				return db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
 					.Select(p => RoleData.RD

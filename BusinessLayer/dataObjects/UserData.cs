@@ -15,6 +15,7 @@ namespace BusinessLayer
 		{
 
 		}
+
 		/// <summary>
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
@@ -26,10 +27,21 @@ namespace BusinessLayer
 			this.Class = Class;
 			this.Password = null;
 		}
+
 		public static UserData UD(User UserEntity, IdName Class)
 		{
-			return new UserData( UserEntity, Class);
+			return new UserData(UserEntity, Class);
 		}
+		public static UserData UD(int Id , string Name, IdName Class)
+		{
+			return new UserData() 
+			{
+				Id=Id, 
+				Class=Class,
+				Name=Name
+			};
+		}
+
 		/// <sumClassName = ClassName;mary>
 		/// Date de Début de l'évènement.
 		/// </summary>
