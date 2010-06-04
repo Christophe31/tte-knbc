@@ -61,17 +61,7 @@
                 </CheckBox>
             </ToolBar>
         </ToolBarTray>
-        
-        <Menu>
-            <MenuItem Header="Optionnel">
-                <MenuItem Name="DisplayOptUnivEvts" Header="Université" IsCheckable="True"/>
-                <MenuItem Name="DisplayOptCampusEvts" Header="Campus" IsCheckable="True"/>
-                <MenuItem Name="DisplayOptPeriodEvts" Header="Période" IsCheckable="True"/>
-                <MenuItem Name="DisplayOptClassEvts" Header="Classe" IsCheckable="True"/>
-            </MenuItem>
-        </Menu>
-
-        <TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
+		<TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
             <TabItem>
                 <TabItem.Header>
                     <TextBlock><Run Text="Semaine"/></TextBlock>
@@ -196,6 +186,6 @@
             </TabItem>
         </TabControl>
 
-		<Button Content="clic la" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" x:Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" />
+		<Button Content="clic la" Grid.Row="1" HorizontalAlignment="Left" x:Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" Margin="685,5,0,0" />
 	</Grid>
 </Window>

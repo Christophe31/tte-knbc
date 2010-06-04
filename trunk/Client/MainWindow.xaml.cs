@@ -101,7 +101,6 @@ namespace Client
         /// </summary>
         private void RefreshAllEvents()
         {
-            return;
             DateTime start = StartDate.SelectedDate.GetValueOrDefault();
             DateTime end = EndDate.SelectedDate.GetValueOrDefault();
             AllEvents = new List<EventData>();

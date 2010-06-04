@@ -23,7 +23,7 @@
 [assembly: global::System.Data.Objects.DataClasses.EdmRelationshipAttribute("TteDb", "FK_Droit_Utilisateur", "User", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(DataModel.User), "Right", global::System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(DataModel.Right))]
 
 // Original file name:
-// Generation date: 01/06/2010 10:28:38
+// Generation date: 03/06/2010 18:56:20
 namespace DataModel
 {
     

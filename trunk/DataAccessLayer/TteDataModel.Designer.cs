@@ -1237,15 +1237,11 @@ namespace DataAccessLayer
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="lastChange">Initial value of the LastChange property.</param>
-        /// <param name="type">Initial value of the Type property.</param>
-        public static Planning CreatePlanning(global::System.Int32 id, global::System.String name, global::System.DateTime lastChange, global::System.Int32 type)
+        public static Planning CreatePlanning(global::System.Int32 id, global::System.String name)
         {
             Planning planning = new Planning();
             planning.Id = id;
             planning.Name = name;
-            planning.LastChange = lastChange;
-            planning.Type = type;
             return planning;
         }
 
@@ -1330,9 +1326,9 @@ namespace DataAccessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime LastChange
+        public Nullable<global::System.DateTime> LastChange
         {
             get
             {
@@ -1347,16 +1343,16 @@ namespace DataAccessLayer
                 OnLastChangeChanged();
             }
         }
-        private global::System.DateTime _LastChange;
-        partial void OnLastChangeChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _LastChange;
+        partial void OnLastChangeChanging(Nullable<global::System.DateTime> value);
         partial void OnLastChangeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 Type
+        public Nullable<global::System.Int32> Type
         {
             get
             {
@@ -1371,8 +1367,8 @@ namespace DataAccessLayer
                 OnTypeChanged();
             }
         }
-        private global::System.Int32 _Type;
-        partial void OnTypeChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _Type;
+        partial void OnTypeChanging(Nullable<global::System.Int32> value);
         partial void OnTypeChanged();
 
         #endregion

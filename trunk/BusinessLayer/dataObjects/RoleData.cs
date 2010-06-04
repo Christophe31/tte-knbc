@@ -11,7 +11,9 @@ namespace BusinessLayer
 	[DataContract]
 	public class RoleData
 	{
-
+		/// <summary>
+		/// Différents rôles ou statuts des utilisateurs.
+		/// </summary>
 		public enum RoleType
 		{
 			Administrator,
@@ -30,10 +32,17 @@ namespace BusinessLayer
 			return new RoleData(Campus, type);
 		}
 
+		/// <summary>
+		/// indique le type de rôle
+		/// </summary>
 		[DataMember]
 		public RoleType Role { get; set; }
 
-
+		/// <summary>
+		/// pointe vers l'unniversté pour un admin, 
+		/// vers un campus pour un campus mannager ou
+		/// vaut null pour un speaker
+		/// </summary>
 		[DataMember]
 		public IdName Campus { get; set; }
 	}
