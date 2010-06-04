@@ -7,7 +7,6 @@ using DataModel;
 
 namespace BusinessLayer
 {
-
 	[DataContract]
 	public class EventData
 	{

@@ -80,6 +80,13 @@
     <Compile Include="Calendar\EventControl.xaml.cs">
       <DependentUpon>EventControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="dataObjectsBL2\ClassData.cs" />
+    <Compile Include="dataObjectsBL2\EventData.cs" />
+    <Compile Include="dataObjectsBL2\EventType.cs" />
+    <Compile Include="dataObjectsBL2\IdName.cs" />
+    <Compile Include="dataObjectsBL2\PeriodData.cs" />
+    <Compile Include="dataObjectsBL2\SubjectData.cs" />
+    <Compile Include="dataObjectsBL2\UserData.cs" />
     <Compile Include="dataObjects\ClassData.cs" />
     <Compile Include="dataObjects\EventType.cs" />
     <Compile Include="dataObjects\PeriodData.cs" />
