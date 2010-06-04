@@ -47,56 +47,31 @@ namespace Client
 
             //Un sous-onglet dans "Utilisateurs" a été choisi
             private void tcOngletsUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender == e.OriginalSource)
             {
-                if (tcOngletsUsers.SelectedIndex == 0)
-                {
-                    //On charge la ComboBox
-                    //cbUserAdd_Class.DataContext = Api.getClassesNames();
-                    classList = Api.Server.getIdClassesNames().ToArray();
-                    cbUserAdd_Class.DataContext = classList;
-                }
-                else if (tcOngletsUsers.SelectedIndex == 1)
-                {
-                    //cbUserChange_Username.DataContext = Api.getUsersNames();
-					userList = Api.Server.getIdUsersNames().ToArray();
-                    cbUserChange_Username.DataContext = userList;
-                    //cbUserChange_Class.DataContext = Api.getClassesNames();
-					classList = Api.Server.getIdClassesNames().ToArray();
-                    cbUserChange_Class.DataContext = classList;
-
-                }
-
-                //On prépare la StatusBar
-                sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
-                sbStatusText.Text = "Prêt";
-
+                
             }
-        }
-
         #endregion
         #region Onglet "Utilisateurs -> Ajouter"
 
         //Si la checkbox de l'onglet "Utilisateurs->Ajout" est cochée
         private void cbUserAdd_Password_Checked(object sender, RoutedEventArgs e)
         {
-            tbUserAdd_Password.IsEnabled = false;
+            cbUserChange_Password.IsEnabled = false;
         }
 
         //Si la checkbox de l'onglet "Utilisateurs->Ajout" est décochée
         private void cbUserAdd_Password_Unchecked(object sender, RoutedEventArgs e)
         {
-            tbUserAdd_Password.IsEnabled = true;
+            cbUserChange_Password.IsEnabled = true;
         }
 
         //On va insérer l'utilisateur
-        private void bUserAdd_AddUser_Click(object sender, RoutedEventArgs e)
+        private void bUserAdd_AddUser_Click_1(object sender, RoutedEventArgs e)
         {
             string username, password, passwordHashed;
 
             //On vérifie que l'utilisateur entré n'est pas vide
-            if (tbUserAdd_Username.Text.Trim().Equals(""))
+            if (tbUserChange_Username.Text.Trim().Equals(""))
             {
                 //On change la StatusBar
                 sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
@@ -105,7 +80,7 @@ namespace Client
             }
 
             //Et qu'une classe a été choisie
-            if (cbUserAdd_Class.SelectedIndex < 0)
+            if (cbUserChange_Class.SelectedIndex < 0)
             {
                 //On change la StatusBar
                 sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
@@ -113,23 +88,23 @@ namespace Client
                 return;
             }
 
-            username = tbUserAdd_Username.Text;
+            username = tbUserChange_Username.Text;
 
             //On récupère le mot de passe
-            if (cbUserAdd_Password.IsChecked == true) //Si l'administrateur veut une génération aléatoire du mot de passe...
+            if (cbUserChange_Password.IsChecked == true) //Si l'administrateur veut une génération aléatoire du mot de passe...
             {
                 password = RandomPassword.Generate(8, 10);
             }
             else //Si l'administrateur a défini lui même un mot de passe...
             {
-                if (tbUserAdd_Password.Text.Trim().Equals(""))
+                if (tbUserChange_Password.Text.Trim().Equals(""))
                 {
                     //On change la StatusBar
                     sbStatusText.Foreground = new SolidColorBrush(Colors.Red); ;
                     sbStatusText.Text = "Veuillez choisir un mot de passe valide!";
                     return;
                 }
-                password = tbUserAdd_Password.Text;
+                password = tbUserChange_Password.Text;
             }
 
             //On hashe le mot de passe
@@ -138,7 +113,7 @@ namespace Client
 
 
             //On tente d'insérer l'utilisateur
-            string returnValue = Api.Server.addUser(username, passwordHashed, cbUserAdd_Class.SelectedItem.ToString());
+            string returnValue = Api.Server.addUser(username, passwordHashed, cbUserChange_Class.SelectedItem.ToString());
 
             //Si l'insertion s'est correctement déroulée
             if (returnValue.Equals("ok"))
@@ -810,6 +785,27 @@ namespace Client
             }
         }
         #endregion
+
+        private void tcOnglets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender == e.OriginalSource)
+            {
+                //On charge la ComboBox
+                //cbUserAdd_Class.DataContext = Api.getClassesNames();
+                classList = Api.Server.getIdClassesNames().ToArray();
+                cbUserChange_Class.DataContext = classList;
+
+                //cbUserChange_Username.DataContext = Api.getUsersNames();
+                userList = Api.Server.getIdUsersNames().ToArray();
+                cbUserChange_Username.DataContext = userList;
+
+                //On prépare la StatusBar
+                sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
+                sbStatusText.Text = "Prêt";
+
+            }
+        }
+
 
         
         #endregion
