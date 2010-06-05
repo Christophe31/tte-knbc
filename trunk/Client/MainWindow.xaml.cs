@@ -82,16 +82,6 @@ namespace Client
             // Events DataGrid initialisation
             RefreshAllEvents();
             EventsGrid.DataContext = AllEvents;
-
-            EventCtl.DataContext = new EventData()
-            {
-                Name = "Event",
-                Modality = "Cours",
-                Place = "Salle 1",
-                Speaker =  "Toto",
-                Subject = "Java",
-                Type = EventData.TypeEnum.Class
-            };
 		}
         #endregion
 
@@ -155,8 +145,8 @@ namespace Client
             }
 
             // Refresh views
-            if (ViewsControl.SelectedIndex == 2)
-                EventsGrid.DataContext = AllEvents;
+            EventsGrid.DataContext = AllEvents;
+            RefreshDayCanvas();
         }
 
         /// <summary>
@@ -186,6 +176,81 @@ namespace Client
                     ClassName.DataContext = null;
                 }
             }
+        }
+
+        /// <summary>
+        /// Draws day events in a canvas.
+        /// </summary>
+        /// <param name="canvas">Canvas to draw in</param>
+        /// <param name="left">Left coordinate of the day in the canvas</param>
+        /// <param name="width">Width of the day in the canvas</param>
+        /// <param name="date">Date to draw</param>
+        public void DrawDay(Canvas canvas, double left, double width, DateTime date)
+        {
+            foreach (EventData ev in AllEvents
+                .Where(p => p.Start < date.AddDays(1) && p.End > date)
+                .OrderBy(p => p.Start))
+            {
+                // Normalise start and end of the event
+                ev.Start = ev.Start < date ? date : ev.Start;
+                ev.End = ev.End > date.AddDays(1) ? date.AddDays(1) : ev.End;
+
+                // Draw the control
+                EventControl evc = new EventControl();
+                evc.DataContext = ev;
+                evc.Width = width;
+                evc.Height = canvas.Height * (ev.End - ev.Start).Hours / 24;
+                Canvas.SetTop(evc, canvas.Height * ev.Start.Hour / 24);
+                Canvas.SetLeft(evc, left);
+                canvas.Children.Add(evc);
+            }
+        }
+
+        /// <summary>
+        /// Draw hours and lines in a canvas.
+        /// </summary>
+        /// <param name="canvas">Canvas to draw in</param>
+        /// <returns>Width of hour TextBlocks</returns>
+        public double DrawHoursGrid(Canvas canvas)
+        {
+            // Maximum size of hours TextBlocks
+            double width = 0;
+
+            // Draw hours strings
+            for (int i = 0; i < 24; i++)
+            {
+                // Create the TextBlock
+                TextBlock tb = new TextBlock();
+                tb.Text = i.ToString() + ":00";
+                Canvas.SetLeft(tb, 0);
+                Canvas.SetTop(tb, canvas.Height * i / 24);
+                canvas.Children.Add(tb);
+
+                // Actualise its width
+                tb.Measure(new Size(canvas.Width, canvas.Height));
+
+                // Search the maximum width
+                width = width > tb.DesiredSize.Width ? width : tb.DesiredSize.Width;
+            }
+
+            // Draw lines
+            for (int i = 1; i < 24; i++)
+            {
+                Line l = new Line();
+                l.Stroke = System.Windows.Media.Brushes.LightBlue;
+                l.X1 = 0;
+                l.X2 = canvas.Width;
+                l.Y1 = l.Y2 = canvas.Height * i / 24;
+                canvas.Children.Add(l);
+            }
+
+            return width;
+        }
+
+        public void RefreshDayCanvas()
+        {
+            double hoursWidth = DrawHoursGrid(DayCanvas) + 5;
+            DrawDay(DayCanvas, hoursWidth, DayCanvas.Width - hoursWidth, new DateTime(2010, 6, 7));
         }
         #endregion
 
