@@ -74,9 +74,15 @@ namespace Client
 					i.AddEventToCalendar(ref iCal); 
 				}
                 iCal.AddProperty("X-LastUpdate", DateTime.Now.ToString());
-				calSerializer.Serialize(iCal,"cache__"+idn.Name + "-" + idn.Id + @".ics");
+				calSerializer.Serialize(iCal,fileNameFromIdName(idn));
 			}
 
+            public string fileNameFromIdName(IdName idn)
+            {
+                return "cache__" + idn.Name + "-" + idn.Id + @".ics";
+            }
+
+             [Obsolete]
 			private void refreshCache(EventsGetter eventGetter, string name)
 	        {
                 iCalendar iCal = new iCalendar();

@@ -24,29 +24,120 @@ namespace Client
 		#region Lecture d'évènements
 		public EventData[] getEventsByCampus(IdName Campus, DateTime Start, DateTime Stop)
 		{
-            return Server.getEventsByCampus(Campus.Id, Start, Stop);/*
-            if (cacheProcess.ServerReachable)
+            if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Campus)))
             {
-                if (!Server.isUpToDateByCampus(Campus.Id , DateTime.Now ))
+                var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Campus));
+                var lastUpdate =
+                        DateTime.Parse(
+                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
+                        );
+                if (cacheProcess.ServerReachable && !Server.isUpToDateByCampus(Campus.Id, lastUpdate))
                 {
-					cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByCampus, Campus);
+                    cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByCampus, Campus);
                     return Server.getEventsByCampus(Campus.Id, Start, Stop);
                 }
 
+                else
+                {
+                    return calendars.First().Events.Select(
+                        p => EventData.CreateFromICalEvent(p)
+                        ).ToArray();
+                }
             }
+
+            else
+            {
+                if (cacheProcess.ServerReachable)
+                {
+                    cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByCampus, Campus);
+                    return Server.getEventsByCampus(Campus.Id, Start, Stop);
+                }
+                else
+                {
+                    throw new Exception("No cache file, neither connexion to Web Service available");
+                }
+            }
+            
+           // return Server.getEventsByCampus(Campus.Id, Start, Stop);
+
 			return Server.getEventsByCampus(Campus.Id, Start, Stop);
-		*/}
+		}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 		{
 			return Server.getEventsByUniversity(Start, Stop);
 		}
 		public EventData[] getEventsByPeriod(IdName Period, DateTime Start, DateTime Stop) 
-		{
+            {
+            if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Period)))
+            {
+                var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Period));
+                var lastUpdate =
+                        DateTime.Parse(
+                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
+                        );
+                if (cacheProcess.ServerReachable && !Server.isUpToDateByPeriod(Period.Id, lastUpdate))
+                {
+                    cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByPeriod, Period);
+                    return Server.getEventsByPeriod(Period.Id, Start, Stop);
+                }
+
+                else
+                {
+                    return calendars.First().Events.Select(
+                        p => EventData.CreateFromICalEvent(p)
+                        ).ToArray();
+                }
+            }
+
+            else
+            {
+                if (cacheProcess.ServerReachable)
+                {
+                    cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByPeriod, Period);
+                    return Server.getEventsByPeriod(Period.Id, Start, Stop);
+                }
+                else
+                {
+                    throw new Exception("No cache file, neither connexion to Web Service available");
+                }
+            }
 			return Server.getEventsByPeriod(Period.Id, Start, Stop);
 		}
 		public EventData[] getEventsByClass(IdName Class, DateTime Start, DateTime Stop)
 		{
-			return Server.getEventsByClass(Class.Id, Start, Stop);
+            if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Class)))
+            {
+                var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Class));
+                var lastUpdate =
+                        DateTime.Parse(
+                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
+                        );
+                if (cacheProcess.ServerReachable && !Server.isUpToDateByClass(Class.Id, lastUpdate))
+                {
+                    cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByClass, Class);
+                    return Server.getEventsByClass(Class.Id, Start, Stop);
+                }
+
+                else
+                {
+                    return calendars.First().Events.Select(
+                        p => EventData.CreateFromICalEvent(p)
+                        ).ToArray();
+                }
+            }
+
+            else
+            {
+                if (cacheProcess.ServerReachable)
+                {
+                    cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByClass, Class);
+                    return Server.getEventsByClass(Class.Id, Start, Stop);
+                }
+                else
+                {
+                    throw new Exception("No cache file, neither connexion to Web Service available");
+                }
+            }
 		}
 		public EventData[] getPrivateEvents(DateTime Start, DateTime Stop)
 		{
