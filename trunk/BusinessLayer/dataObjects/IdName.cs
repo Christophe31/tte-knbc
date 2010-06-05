@@ -21,7 +21,11 @@ namespace BusinessLayer
 			{ return null; }
 			return new IdName((int)i,s);
 		}
-		public IdName(int i,string s)
+		public IdName()
+		{
+		}
+
+		public IdName(int i, string s)
 		{
 			Id = i;
 			Name = s;

@@ -12,7 +12,20 @@ namespace BusinessLayer
 	[UserContextBehavior]
 	public class BusinessLayer : IBusinessLayer
 	{
+		DateTime sqlMin = new DateTime(1753, 1, 2);
+		DateTime sqlMax = new DateTime(9998, 12, 31);
 		Entities db = new Entities();
+
+		public void centerToSqlDate(ref DateTime d)
+		{
+			d = ((d < sqlMin) ? sqlMin : ((d > sqlMax) ? sqlMax : d));
+		}
+		public void centerToSqlDate(ref DateTime d1, ref DateTime d2)
+		{
+			d1 = ((d1 < sqlMin) ? sqlMin : ((d1 > sqlMax) ? sqlMax : d1));
+			d2 = ((d2 < sqlMin) ? sqlMin : ((d2 > sqlMax) ? sqlMax : d2));
+		}
+
 		#region IBusinessLayer Members
 
 		RoleData[] IBusinessLayer.logIn(string UserLogin, string UserPassword)
@@ -23,65 +36,58 @@ namespace BusinessLayer
 				UserOperationContext.Current.UserProperty = db.User.Where(p => p.Login == UserLogin && p.Password == UserPassword).
 					Select(p => new {id= p.Id, name=p.Planning.Name, cid=p.Planning.ParentPlanning.Id, cname=p.Planning.ParentPlanning.Name}).ToArray().Select(p=>UserData.UD(p.id,p.name,IdName.IN(p.cid,p.cname))).First();
 
-				var t = db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
-					.Select(p => new
+				return db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
+					.Select(p => new RoleData()
 					{
-						id = p.Target,
-						type =p.Planning.Type
+						TargetId = p.Planning.Id,
+						Role=	p.Planning.Type == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator :
+								p.Planning.Type == (int)EventData.TypeEnum.Campus     ? RoleData.RoleType.CampusManager :
+								RoleData.RoleType.Speaker 
 					}
-				);
-				return t.ToArray().Select(p=> RoleData.RD(p.id,
-					(p.type.Value == 1 ?
-							RoleData.RoleType.Administrator :
-							(p.type.Value == 2 ?
-								RoleData.RoleType.CampusManager :
-								RoleData.RoleType.Speaker
-							)
-						))).ToArray();
+				).ToArray();
 			}
 			throw new FaultException("Unknown Username or Incorrect Password");
 		}
 
 		EventData[] IBusinessLayer.getEvents(int Planning, DateTime Start, DateTime Stop)
 		{
+			centerToSqlDate(ref Start, ref Stop);
 			if (Planning == UserOperationContext.Current.UserProperty.Id || db.Planning.Where(p=>p.Id==Planning).Any(p=>p.Type!=5))
 			{
- 				return db.Planning.Where(p=>p.Id==Planning).Single().Events.
+ 				return db.Planning.Where(p=>p.Id==Planning).Single().Events.Where(p=>p.Start < Stop && p.End > Start ).
 					Select(p=> 
-						new {
-							ev = p ,
-							sub= p.Modality.OnSubject.Name,
-							mod= p.Modality.Name,
-							spkr=p.SpeakerRef.Name,
-							typ=p.PlaningRef.Type
-					}).ToArray().Select(p=>EventData.ED(p.ev, p.sub.ToString(), p.mod.ToString(), p.spkr, p.typ)).ToArray();
+						new EventData(){
+							Id = p.Id,
+							Start = p.Start,
+							End = p.End,
+							Mandatory = p.Mandatory,
+							Name = p.Name,
+							Place = p.Place,
+							Subject = p.Modality.OnSubject.Name,
+							Modality = p.Modality.Name,
+							Speaker = p.SpeakerRef.Name,
+							Type = (EventData.TypeEnum)p.PlaningRef.Type
+					}).ToArray();
 			};
-			throw new FaultException("try to access to a private planning");
+			throw new FaultException("try to access to a non accessible private planning");
 		}
 
 		bool IBusinessLayer.isPlanningUpToDate(int Planning, DateTime LastUpdate)
 		{
-			throw new NotImplementedException();
+			centerToSqlDate(ref LastUpdate);
+			return db.Planning.Any(p=>p.Id == Planning && ((p.LastChange??DateTime.Now) >= LastUpdate));
 		}
 
-		IdName[] IBusinessLayer.getCampuses()
+		IdName[] IBusinessLayer.getPlannings(EventData.TypeEnum Type)
 		{
-			throw new NotImplementedException();
+			return db.Planning.Where(p => p.Type == (int)Type)
+				.Select(p => new IdName() {Id=p.Id, Name=p.Name}).ToArray();
 		}
 
-		IdName[] IBusinessLayer.getClasses()
+		IdName IBusinessLayer.getUniversity()
 		{
-			throw new NotImplementedException();
-		}
-
-		IdName[] IBusinessLayer.getPromotions()
-		{
-			throw new NotImplementedException();
-		}
-
-		IdName[] IBusinessLayer.getPeriods()
-		{
-			throw new NotImplementedException();
+			return db.Planning.Where(p => p.Type == (int)EventData.TypeEnum.University)
+				.Select(p => new IdName() { Id = p.Id, Name = p.Name }).First();
 		}
 
 		SubjectData[] IBusinessLayer.getSubjects()
@@ -96,17 +102,36 @@ namespace BusinessLayer
 
 		IdName[] IBusinessLayer.getSpeakers()
 		{
-			throw new NotImplementedException();
-		}
-
-		IdName IBusinessLayer.getUniversity()
-		{
-			throw new NotImplementedException();
+			return db.Role.Where(p => p.Planning == null).Select(p => new IdName() {Id=p.User, Name=p.UserRef.Planning.Name }).ToArray();
 		}
 
 		Dictionary<IdName, Dictionary<IdName, IdName[]>> IBusinessLayer.getCampusPeriodClassTree()
 		{
-			throw new NotImplementedException();
+			return db.Planning.Where(
+								p => p.Type == (int)EventData.TypeEnum.Campus &&
+									p.ChildrenPlannings.Any(
+										cl => cl.Type == (int)EventData.TypeEnum.Class &&
+										cl.Class.Period != null
+									)
+								)
+				.Select(camp => new
+				{
+					campus = (new IdName() { Id = camp.Id, Name = camp.Name }),
+					val = (db.Planning.Where(p=> p.Type == (int)EventData.TypeEnum.Period &&
+										p.PeriodClasses.Any(cl=>cl.Planning.ParentPlanning.Id==camp.Id))
+							.Select(p=>new{
+									period = new IdName(){Id=p.Id,Name=p.Name},
+									cls= p.PeriodClasses.Select(cl => new IdName() {Id=cl.Id, Name=cl.Planning.Name}).ToArray()
+									}
+								)
+							)
+				})
+				.ToDictionary(
+					p => p.campus,
+					p => p.val.ToDictionary(f=>f.period,
+							f => f.cls
+					)
+				);
 		}
 
 		string IBusinessLayer.addUser(UserData User)

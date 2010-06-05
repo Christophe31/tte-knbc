@@ -25,6 +25,10 @@ namespace BusinessLayer
 			Speaker
 		}
 
+		public RoleData() 
+		{ 
+		}
+		
 		public RoleData(int? TargetId,RoleType type)
 		{
 			this.TargetId = TargetId;

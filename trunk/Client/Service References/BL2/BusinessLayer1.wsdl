@@ -17,33 +17,6 @@
   <wsdl:binding name="BusinessLayer" type="i0:IBusinessLayer">
     <wsp:PolicyReference URI="#BusinessLayer_policy" />
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="setPrivateEvent">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/setPrivateEvent" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delUser">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/delUser" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="delClass">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/delClass" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="delSubject">
       <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/delSubject" style="document" />
       <wsdl:input>
@@ -152,35 +125,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getCampuses">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getCampuses" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getClasses">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getClasses" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getPromotions">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getPromotions" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="getPeriods">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getPeriods" style="document" />
+    <wsdl:operation name="getPlannings">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getPlannings" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -370,6 +316,33 @@
     </wsdl:operation>
     <wsdl:operation name="setEvent">
       <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/setEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setPrivateEvent">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/setPrivateEvent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delUser">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/delUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="delClass">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/delClass" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

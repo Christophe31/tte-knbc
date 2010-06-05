@@ -21,13 +21,7 @@ namespace BusinessLayer
 		#endregion
 		#region Identified completion
 			[OperationContract]
-			IdName[] getCampuses();
-			[OperationContract]
-			IdName[] getClasses();
-			[OperationContract]
-			IdName[] getPromotions();
-			[OperationContract]
-			IdName[] getPeriods();
+			IdName[] getPlannings(EventData.TypeEnum Type);
 			[OperationContract]
 			SubjectData[] getSubjects();
 			[OperationContract]

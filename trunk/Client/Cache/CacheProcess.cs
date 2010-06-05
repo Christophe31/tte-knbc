@@ -17,7 +17,7 @@ namespace Client
 		public BusinessServiceClient Server;
 		public BL2.BusinessLayerClient ServerBL2;
 		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
-		System.Runtime.Serialization.Formatters.Binary.BinaryFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+		new System.Runtime.Serialization.NetDataContractSerializer formatter = new System.Runtime.Serialization.NetDataContractSerializer();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
 		#region delegate
 		public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop);
@@ -50,11 +50,53 @@ namespace Client
 		#endregion
 
 		#region foos
-			private void WriteToFile(ISerializable obj, string fileName)
+			public EventData[] CacheEventGetter(IdName idn,  DateTime Start, DateTime Stop)
+			{
+			if (System.IO.File.Exists(fileNameFromIdName(Class)))
+            {
+                var calendars = DDay.iCal.iCalendar.LoadFromFile(fileNameFromIdName(Class));
+                var lastUpdate =
+                        DateTime.Parse(
+                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
+                        );
+                if (ServerReachable && !Server.isUpToDateByClass(Class.Id, lastUpdate))
+                {
+                    RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByClass, Class);
+                    return Server.getEventsByClass(Class.Id, Start, Stop);
+                }
+
+                else
+                {
+                    return calendars.First().Events.Select(
+                        p => EventData.CreateFromICalEvent(p)
+                        ).ToArray();
+                }
+            }
+
+            else
+            {
+                if (ServerReachable)
+                {
+                    RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByClass, Class);
+                    return Server.getEventsByClass(Class.Id, Start, Stop);
+                }
+                else
+                {
+                    throw new Exception("No cache file, neither connexion to Web Service available");
+                }
+            }
+			}
+			public void WriteToFile(object obj, string fileName)
 			{
 				Stream str = File.OpenWrite(fileName);
 				formatter.Serialize(str, obj);
 				str.Close();
+			}
+			public object ReadFromFile(string fileName)
+			{
+				Stream str = File.OpenRead(fileName);
+				object o = formatter.ReadObject(str);
+				return o;
 			}
 			public void RefreshCache(EventsGetterId eventGetter, IdName idn)
 			{

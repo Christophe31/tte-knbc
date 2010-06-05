@@ -27,10 +27,7 @@ namespace Client
             if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Campus)))
             {
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Campus));
-                var lastUpdate =
-                        DateTime.Parse(
-                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
-                        );
+                var lastUpdate = DateTime.Parse(calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString());
                 if (cacheProcess.ServerReachable && !Server.isUpToDateByCampus(Campus.Id, lastUpdate))
                 {
                     cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByCampus, Campus);
@@ -57,10 +54,6 @@ namespace Client
                     throw new Exception("No cache file, neither connexion to Web Service available");
                 }
             }
-            
-           // return Server.getEventsByCampus(Campus.Id, Start, Stop);
-
-			return Server.getEventsByCampus(Campus.Id, Start, Stop);
 		}
 		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 		{
@@ -101,7 +94,6 @@ namespace Client
                     throw new Exception("No cache file, neither connexion to Web Service available");
                 }
             }
-			return Server.getEventsByPeriod(Period.Id, Start, Stop);
 		}
 		public EventData[] getEventsByClass(IdName Class, DateTime Start, DateTime Stop)
 		{
@@ -147,7 +139,19 @@ namespace Client
 		#region completion
 		public IdName[] getCampusNames()
 		{
-			return Server.getIdCampusNames();
+			string fname="getCampusNames.cache";
+			if (cacheProcess.ServerReachable)
+			{
+				IdName[] t = Server.getIdCampusNames();
+				cacheProcess.WriteToFile(t,fname );
+				return t;
+			}
+			if (System.IO.File.Exists(fname))
+			{
+				return cacheProcess.ReadFromFile(fname) as IdName[];
+			}
+			throw new Exception("No cache file, neither connexion to Web Service available");
+
 		}
 		public IdName[] getIdClassesNames()
 		{
