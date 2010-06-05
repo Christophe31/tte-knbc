@@ -117,6 +117,20 @@ namespace Client.BusinessLayer
         {
         }
 
+        public static EventData CreateFromICalEvent(IEvent p)
+        {
+            EventData ED = new EventData();
+            ED.Id = int.Parse(p.Properties.Where(f => f.Key == "X-Id").First().Value.ToString());
+            ED.Mandatory = bool.Parse(p.Properties.Where(f => f.Key == "X-Mandatory").First().Value.ToString());
+            ED.Modality = p.Properties.Where(f => f.Key == "X-Modality").First().Value.ToString();
+            ED.Place = p.Properties.Where(f => f.Key == "X-Place").First().Value.ToString();
+            ED.Speaker = p.Properties.Where(f => f.Key == "X-Speaker").First().Value.ToString();
+            ED.Subject = p.Properties.Where(f => f.Key == "X-Subject").First().Value.ToString();
+            ED.Start = DateTime.Parse(p.Properties.Where(f => f.Key == "X-Start").First().Value.ToString());
+            ED.End = DateTime.Parse(p.Properties.Where(f => f.Key == "X-End").First().Value.ToString());
+            ED.Name = p.Properties.Where(f => f.Key == "X-Name").First().Value.ToString();
+            return ED;
+        }
 
         public void AddEventToCalendar(ref iCalendar ic) 
         {
@@ -131,6 +145,7 @@ namespace Client.BusinessLayer
             e.AddProperty(new CalendarProperty("X-Speaker", this.Speaker));
             e.AddProperty(new CalendarProperty("X-Subject", this.Subject));    
         }
+
 
         #region IEditableObject Members
 
