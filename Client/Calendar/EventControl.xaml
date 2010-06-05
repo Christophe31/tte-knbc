@@ -8,18 +8,20 @@
 	x:Name="UserControl"
 	UseLayoutRounding="True">
 
-	<StackPanel Orientation="Vertical">
-		<StackPanel Orientation="Horizontal">
-			<TextBlock x:Name="Modality" TextWrapping="Wrap" Text="{Binding Modality}"/>
-            <TextBlock x:Name="Planning" TextWrapping="Wrap" Text="{Binding Path=LinkedTo, Mode=OneWay}"/>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal">
-            <TextBlock x:Name="Subject" TextWrapping="Wrap" Text="{Binding Subject}"/>
-            <TextBlock x:Name="EventName" TextWrapping="Wrap" Text="{Binding Name}"/>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal">
-            <TextBlock x:Name="Speaker" TextWrapping="Wrap" Text="{Binding Speaker}"/>
-            <TextBlock x:Name="Place" TextWrapping="Wrap" Text="{Binding Place}"/>
-		</StackPanel>
-	</StackPanel>
+    <Border CornerRadius="3" Background="LightBlue" BorderThickness="1" BorderBrush="Blue">
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="Modality" TextWrapping="Wrap" Text="{Binding Modality}"/>
+                <TextBlock x:Name="Planning" TextWrapping="Wrap" Text="{Binding Path=LinkedTo, Mode=OneWay}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="Subject" TextWrapping="Wrap" Text="{Binding Subject}"/>
+                <TextBlock x:Name="EventName" TextWrapping="Wrap" Text="{Binding Name}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="Speaker" TextWrapping="Wrap" Text="{Binding Speaker}"/>
+                <TextBlock x:Name="Place" TextWrapping="Wrap" Text="{Binding Place}"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
 </UserControl>

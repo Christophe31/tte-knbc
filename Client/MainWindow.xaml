@@ -33,7 +33,7 @@
                 <ComboBox Margin="0,0,3,0" Visibility="Collapsed" x:Name="PeriodName" ItemsSource="{Binding}" SelectionChanged="PeriodName_SelectionChanged" />
                 <ComboBox Margin="0" Visibility="Collapsed" x:Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
             </ToolBar>
-            
+
             <ToolBar Header="Type de vue">
                 <CheckBox Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
@@ -60,12 +60,16 @@
                     </StackPanel>
                 </CheckBox>
             </ToolBar>
+            
+            <ToolBar>
+                <Button Content="Administration" Click="button1_Click_1"/>
+            </ToolBar>
         </ToolBarTray>
+        
 		<TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock><Run Text="Semaine"/></TextBlock>
-                </TabItem.Header>
+            <TabItem Header="Mois"></TabItem>
+            
+            <TabItem Header="Semaine">
                 <Grid>
                     <Grid.ColumnDefinitions>
                     	<ColumnDefinition />
@@ -91,11 +95,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock><Run Text="Jour"/></TextBlock>
-                </TabItem.Header>
-                
+            <TabItem Header="Jour">
                 <Grid x:Name="CalendarDay">
                     <Grid.ColumnDefinitions>
                     	<ColumnDefinition Width="Auto" />
@@ -106,20 +106,19 @@
                     	<RowDefinition Height="Auto" />
                     	<RowDefinition />
                     </Grid.RowDefinitions>
-                    
-                    <TextBlock Grid.Column="1" Grid.Row="0"><Run Text="Lundi"/></TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+                        <TextBlock>Lundi</TextBlock>
+                    </StackPanel>
 
                     <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
-                        <local:EventControl x:Name="EventCtl" />
+                        <!--<local:EventControl x:Name="EventCtl" />-->
+                        <Canvas Name="DayCanvas" Width="500" Height="500"/>
                     </ScrollViewer>
                 </Grid>
             </TabItem>
             
-            <TabItem>
-                <TabItem.Header>
-                    <TextBlock><Run Text="Liste"/></TextBlock>
-                </TabItem.Header>
-                
+            <TabItem Header="Liste">
                 <Grid>
                     <Grid.ColumnDefinitions>
                     	<ColumnDefinition/>
@@ -241,7 +240,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-
-		<Button Content="clic la" Grid.Row="1" HorizontalAlignment="Left" x:Name="truc" VerticalAlignment="Top" Width="75" Click="button1_Click_1" Margin="685,5,0,0" />
 	</Grid>
 </Window>
