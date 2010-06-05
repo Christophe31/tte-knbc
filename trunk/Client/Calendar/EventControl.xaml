@@ -15,7 +15,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal">
             <TextBlock x:Name="Subject" TextWrapping="Wrap" Text="{Binding Subject}"/>
-            <TextBlock x:Name="Name" TextWrapping="Wrap" Text="{Binding Name}"/>
+            <TextBlock x:Name="EventName" TextWrapping="Wrap" Text="{Binding Name}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal">
             <TextBlock x:Name="Speaker" TextWrapping="Wrap" Text="{Binding Speaker}"/>
