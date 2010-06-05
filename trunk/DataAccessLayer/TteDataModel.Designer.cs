@@ -874,7 +874,7 @@ namespace DataAccessLayer
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="hours">Initial value of the Hours property.</param>
-        public static Modality CreateModality(global::System.Int32 id, global::System.Byte[] name, global::System.Int32 hours)
+        public static Modality CreateModality(global::System.Int32 id, global::System.String name, global::System.Int32 hours)
         {
             Modality modality = new Modality();
             modality.Id = id;
@@ -918,11 +918,11 @@ namespace DataAccessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Byte[] Name
+        public global::System.String Name
         {
             get
             {
-                return StructuralObject.GetValidValue(_Name);
+                return _Name;
             }
             set
             {
@@ -933,8 +933,8 @@ namespace DataAccessLayer
                 OnNameChanged();
             }
         }
-        private global::System.Byte[] _Name;
-        partial void OnNameChanging(global::System.Byte[] value);
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
     
         /// <summary>

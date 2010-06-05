@@ -29,7 +29,7 @@ namespace Client.BL2
         {
             get
             {
-                return EventType.EventTypeNames[Type];
+                return EventType.EventTypeNames[Type.Value];
             }
         }
 
@@ -148,7 +148,7 @@ namespace Client.BL2
             // Event creation
             if (Id == 0)
             {
-				Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker.Name, Place);
+				Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker, Place);
             }
 
             // Event edition

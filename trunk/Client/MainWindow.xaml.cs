@@ -88,8 +88,8 @@ namespace Client
                 Name = "Event",
                 Modality = "Cours",
                 Place = "Salle 1",
-                Speaker = new IdName() { Name = "Toto", Id = 0 },
-                Subject = new IdName() { Name = "Java", Id = 0 },
+                Speaker =  "Toto",
+                Subject = "Java",
                 Type = EventData.TypeEnum.Class
             };
 		}

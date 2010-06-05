@@ -29,11 +29,12 @@ namespace Client
 			static protected CacheProcess self;
 			protected CacheProcess()
 			{
-				//ServerBL2 = new BL2.BusinessLayerClient();
+				ServerBL2 = new BL2.BusinessLayerClient();
 				Server = new BusinessServiceClient();
 				Server.Open();
 				//ServerBL2.Open();
 				//ServerBL2.logIn("popi", "popi");
+				//ServerBL2.getEvents(3, DateTime.Now, DateTime.Now);
 			}
 
 			static public CacheProcess Current

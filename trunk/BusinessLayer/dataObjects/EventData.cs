@@ -10,12 +10,18 @@ namespace BusinessLayer
 	[DataContract]
 	public class EventData
 	{
+		[DataContract]
 		public enum TypeEnum
         {
+			[EnumMember]
             University,
+			[EnumMember]
             Campus,
+			[EnumMember]
             Period,
+			[EnumMember]
             Class,
+			[EnumMember]
             User
         }
 
@@ -27,7 +33,7 @@ namespace BusinessLayer
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
 		/// </summary>
 		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public EventData(Event EventEntity, IdName Subject,string Modality, IdName Speaker, TypeEnum aType)
+		public EventData(Event EventEntity, string Subject,string Modality, string Speaker, TypeEnum? aType)
 		{
 			this.Id = EventEntity.Id;
 			this.Start = EventEntity.Start;
@@ -45,13 +51,39 @@ namespace BusinessLayer
 		/// pour économiser le mot clef new dans les requetes déjà longues
 		/// </summary>
 		/// <returns>Nouvelle instance</returns>
-		public static EventData ED(Event EventEntity, IdName Subject, string Modality, IdName Speaker, TypeEnum aType)
+		public static EventData ED(Event EventEntity, string Subject, string Modality, string Speaker, TypeEnum aType)
 		{
-			return new EventData (EventEntity, Subject, Modality, Speaker, aType);
+			return new EventData(EventEntity, Subject, Modality, Speaker, aType);
+		}
+
+
+
+		public EventData(DataAccessLayer.Event EventEntity, string Subject, string Modality, string Speaker, TypeEnum? aType)
+		{
+			this.Id = EventEntity.Id;
+			this.Start = EventEntity.Start;
+			this.End = EventEntity.End;
+			this.Mandatory = EventEntity.Mandatory;
+			this.Name = EventEntity.Name;
+			this.Place = EventEntity.Place;
+			this.Subject = Subject;
+			this.Modality = Modality;
+			this.Speaker = Speaker;
+			this.Type = aType;
+		}
+		public static EventData ED(DataAccessLayer.Event EventEntity, string Subject, string Modality, string Speaker,int? atype)
+		{
+			
+			return new EventData(EventEntity, Subject, Modality, Speaker, 
+				atype==1? TypeEnum.University:
+					atype==2?TypeEnum.Campus:
+						atype==3?TypeEnum.Class:
+							atype==4?TypeEnum.Period:
+								TypeEnum.User);
 		}
 
 		[DataMember]
-		public TypeEnum Type { get; set; }
+		public TypeEnum? Type { get; set; }
 
 		[DataMember]
 		public int Id { get; set; }
@@ -83,7 +115,7 @@ namespace BusinessLayer
 		/// Name de la matière
 		/// </summary>
 		[DataMember]
-		public IdName Subject { get; set; }
+		public string Subject { get; set; }
 
 		/// <summary>
 		/// Type d'évènement (Distanciel, Présentiel...)
@@ -101,6 +133,6 @@ namespace BusinessLayer
 		/// Nom du prof
 		/// </summary>
 		[DataMember]
-		public IdName Speaker { get; set; }
+		public string Speaker { get; set; }
 	}
 }
