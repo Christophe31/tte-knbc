@@ -490,16 +490,16 @@ namespace Client.BusinessLayer {
         private string PlaceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessLayer.IdName SpeakerField;
+        private string SpeakerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessLayer.IdName SubjectField;
+        private string SubjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessLayer.EventData.TypeEnum TypeField;
+        private System.Nullable<Client.BusinessLayer.EventData.TypeEnum> TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -590,7 +590,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessLayer.IdName Speaker {
+        public string Speaker {
             get {
                 return this.SpeakerField;
             }
@@ -616,7 +616,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessLayer.IdName Subject {
+        public string Subject {
             get {
                 return this.SubjectField;
             }
@@ -629,7 +629,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessLayer.EventData.TypeEnum Type {
+        public System.Nullable<Client.BusinessLayer.EventData.TypeEnum> Type {
             get {
                 return this.TypeField;
             }

@@ -9,6 +9,7 @@ using DataAccessLayer;
 namespace BusinessLayer
 {
 	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BusinessLayer" in code, svc and config file together.
+	[UserContextBehavior]
 	public class BusinessLayer : IBusinessLayer
 	{
 		Entities db = new Entities();
@@ -18,28 +19,44 @@ namespace BusinessLayer
 		{
 			if (db.User.Any(p => p.Login == UserLogin && p.Password == UserPassword))
 			{
+				OperationContext.Current.Extensions.Add(new UserOperationContext());
 				UserOperationContext.Current.UserProperty = db.User.Where(p => p.Login == UserLogin && p.Password == UserPassword).
-					Select(p=>UserData.UD(p.Id,p.Planning.Name, IdName.IN(p.Planning.Class.Id, p.Planning.Name))).First() ;
-				
-				return db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
-					.Select(p => RoleData.RD
-						(IdName.IN(p.Target, p.Planning.Name),
-							(p.Planning.Type == 1 ?
-								RoleData.RoleType.Administrator :
-								(p.Planning.Type == 2 ?
-									RoleData.RoleType.CampusManager :
-									RoleData.RoleType.Speaker
-								)
+					Select(p => new {id= p.Id, name=p.Planning.Name, cid=p.Planning.ParentPlanning.Id, cname=p.Planning.ParentPlanning.Name}).ToArray().Select(p=>UserData.UD(p.id,p.name,IdName.IN(p.cid,p.cname))).First();
+
+				var t = db.Role.Where(p => p.UserRef.Login == UserLogin && p.UserRef.Password == UserPassword)
+					.Select(p => new
+					{
+						id = p.Target,
+						type =p.Planning.Type
+					}
+				);
+				return t.ToArray().Select(p=> RoleData.RD(p.id,
+					(p.type.Value == 1 ?
+							RoleData.RoleType.Administrator :
+							(p.type.Value == 2 ?
+								RoleData.RoleType.CampusManager :
+								RoleData.RoleType.Speaker
 							)
-						)
-				).ToArray();
+						))).ToArray();
 			}
 			throw new FaultException("Unknown Username or Incorrect Password");
 		}
 
 		EventData[] IBusinessLayer.getEvents(int Planning, DateTime Start, DateTime Stop)
 		{
-			throw new NotImplementedException();
+			if (Planning == UserOperationContext.Current.UserProperty.Id || db.Planning.Where(p=>p.Id==Planning).Any(p=>p.Type!=5))
+			{
+ 				return db.Planning.Where(p=>p.Id==Planning).Single().Events.
+					Select(p=> 
+						new {
+							ev = p ,
+							sub= p.Modality.OnSubject.Name,
+							mod= p.Modality.Name,
+							spkr=p.SpeakerRef.Name,
+							typ=p.PlaningRef.Type
+					}).ToArray().Select(p=>EventData.ED(p.ev, p.sub.ToString(), p.mod.ToString(), p.spkr, p.typ)).ToArray();
+			};
+			throw new FaultException("try to access to a private planning");
 		}
 
 		bool IBusinessLayer.isPlanningUpToDate(int Planning, DateTime LastUpdate)

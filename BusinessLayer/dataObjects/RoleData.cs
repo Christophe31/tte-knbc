@@ -14,22 +14,26 @@ namespace BusinessLayer
 		/// <summary>
 		/// Différents rôles ou statuts des utilisateurs.
 		/// </summary>
+		[DataContract]
 		public enum RoleType
 		{
+			[EnumMember]
 			Administrator,
+			[EnumMember]
 			CampusManager,
+			[EnumMember]
 			Speaker
 		}
 
-		public RoleData(IdName Campus,RoleType type)
+		public RoleData(int? TargetId,RoleType type)
 		{
-			this.Campus = Campus;
+			this.TargetId = TargetId;
 			this.Role = Role;
 		}
 
-		public static RoleData RD(IdName Campus, RoleType type)
+		public static RoleData RD(int? TargetId, RoleType type)
 		{
-			return new RoleData(Campus, type);
+			return new RoleData(TargetId, type);
 		}
 
 		/// <summary>
@@ -44,6 +48,6 @@ namespace BusinessLayer
 		/// vaut null pour un speaker
 		/// </summary>
 		[DataMember]
-		public IdName Campus { get; set; }
+		public int? TargetId { get; set; }
 	}
 }

@@ -3,7 +3,11 @@
   <wsp:Policy wsu:Id="BusinessService_policy">
     <wsp:ExactlyOne>
       <wsp:All>
-        <IncludeContext ProtectionLevel="None" xmlns="http://schemas.microsoft.com/ws/2006/05/context" />
+        <IncludeContext ProtectionLevel="Sign" xmlns="http://schemas.microsoft.com/ws/2006/05/context" />
+        <wsrm:RMAssertion xmlns:wsrm="http://schemas.xmlsoap.org/ws/2005/02/rm/policy">
+          <wsrm:InactivityTimeout Milliseconds="600000" />
+          <wsrm:AcknowledgementInterval Milliseconds="200" />
+        </wsrm:RMAssertion>
         <wsaw:UsingAddressing />
       </wsp:All>
     </wsp:ExactlyOne>

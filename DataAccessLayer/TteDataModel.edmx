@@ -66,7 +66,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Period" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
@@ -89,15 +89,15 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varbinary" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Subject" Type="int" />
-          <Property Name="Hours" Type="int" Nullable="false" />
+          <Property Name="Hours" Type="int" />
         </EntityType>
         <EntityType Name="Period">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Start" Type="datetime" Nullable="false" />
           <Property Name="End" Type="datetime" Nullable="false" />
         </EntityType>
@@ -105,7 +105,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Parent" Type="int" />
           <Property Name="LastChange" Type="datetime" />
@@ -123,7 +123,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Login" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
@@ -365,7 +365,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
           <Property Name="Subject" Type="Int32" />
           <NavigationProperty Name="Events" Relationship="TteDataModel.FK_Event_Subject" FromRole="Modality" ToRole="Event" />
           <NavigationProperty Name="Modalitys" Relationship="TteDataModel.FK_Modality_Subject" FromRole="Modality" ToRole="Modality1" />
