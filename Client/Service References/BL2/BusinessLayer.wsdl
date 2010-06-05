@@ -9,24 +9,6 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IBusinessLayer_setPrivateEvent_InputMessage">
-    <wsdl:part name="parameters" element="tns:setPrivateEvent" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_setPrivateEvent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:setPrivateEventResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:delUser" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delUserResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delClass_InputMessage">
-    <wsdl:part name="parameters" element="tns:delClass" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delClass_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delClassResponse" />
-  </wsdl:message>
   <wsdl:message name="IBusinessLayer_delSubject_InputMessage">
     <wsdl:part name="parameters" element="tns:delSubject" />
   </wsdl:message>
@@ -99,29 +81,11 @@
   <wsdl:message name="IBusinessLayer_isPlanningUpToDate_OutputMessage">
     <wsdl:part name="parameters" element="tns:isPlanningUpToDateResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getCampuses_InputMessage">
-    <wsdl:part name="parameters" element="tns:getCampuses" />
+  <wsdl:message name="IBusinessLayer_getPlannings_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPlannings" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getCampuses_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getCampusesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getClasses_InputMessage">
-    <wsdl:part name="parameters" element="tns:getClasses" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getClasses_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getClassesResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getPromotions_InputMessage">
-    <wsdl:part name="parameters" element="tns:getPromotions" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getPromotions_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getPromotionsResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getPeriods_InputMessage">
-    <wsdl:part name="parameters" element="tns:getPeriods" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getPeriods_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getPeriodsResponse" />
+  <wsdl:message name="IBusinessLayer_getPlannings_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPlanningsResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getSubjects_InputMessage">
     <wsdl:part name="parameters" element="tns:getSubjects" />
@@ -249,19 +213,25 @@
   <wsdl:message name="IBusinessLayer_setEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:setEventResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setPrivateEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:setPrivateEvent" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setPrivateEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setPrivateEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:delUser" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:delClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delClassResponse" />
+  </wsdl:message>
   <wsdl:portType name="IBusinessLayer">
-    <wsdl:operation name="setPrivateEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEvent" message="tns:IBusinessLayer_setPrivateEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEventResponse" message="tns:IBusinessLayer_setPrivateEvent_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delClass">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delClass" message="tns:IBusinessLayer_delClass_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delClassResponse" message="tns:IBusinessLayer_delClass_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="delSubject">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delSubject" message="tns:IBusinessLayer_delSubject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delSubjectResponse" message="tns:IBusinessLayer_delSubject_OutputMessage" />
@@ -310,21 +280,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/isPlanningUpToDate" message="tns:IBusinessLayer_isPlanningUpToDate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/isPlanningUpToDateResponse" message="tns:IBusinessLayer_isPlanningUpToDate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getCampuses">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getCampuses" message="tns:IBusinessLayer_getCampuses_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getCampusesResponse" message="tns:IBusinessLayer_getCampuses_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="getClasses">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getClasses" message="tns:IBusinessLayer_getClasses_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getClassesResponse" message="tns:IBusinessLayer_getClasses_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="getPromotions">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPromotions" message="tns:IBusinessLayer_getPromotions_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPromotionsResponse" message="tns:IBusinessLayer_getPromotions_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="getPeriods">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriods" message="tns:IBusinessLayer_getPeriods_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriodsResponse" message="tns:IBusinessLayer_getPeriods_OutputMessage" />
+    <wsdl:operation name="getPlannings">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPlannings" message="tns:IBusinessLayer_getPlannings_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPlanningsResponse" message="tns:IBusinessLayer_getPlannings_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getSubjects">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjects" message="tns:IBusinessLayer_getSubjects_InputMessage" />
@@ -409,6 +367,18 @@
     <wsdl:operation name="setEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEvent" message="tns:IBusinessLayer_setEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventResponse" message="tns:IBusinessLayer_setEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setPrivateEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEvent" message="tns:IBusinessLayer_setPrivateEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEventResponse" message="tns:IBusinessLayer_setPrivateEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="delClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delClass" message="tns:IBusinessLayer_delClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delClassResponse" message="tns:IBusinessLayer_delClass_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="BusinessLayer">
