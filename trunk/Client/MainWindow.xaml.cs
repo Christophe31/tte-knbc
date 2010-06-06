@@ -358,6 +358,7 @@ namespace Client
         {
             if (sender == e.OriginalSource)
             {
+                if (tcOnglets.SelectedIndex == 4)
                 //On charge la ComboBox
                 classList = Api.Server.getIdClassesNames().ToArray();
                 cbUsers_Class.DataContext = classList;
