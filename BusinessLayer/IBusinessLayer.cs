@@ -23,13 +23,15 @@ namespace BusinessLayer
 			[OperationContract]
 			IdName[] getPlannings(EventData.TypeEnum Type);
 			[OperationContract]
-			SubjectData[] getSubjects();
+			IdName getUniversity();
 			[OperationContract]
 			IdName[] getUsers();
 			[OperationContract]
-			IdName[] getSpeakers();
+			IdName[] getPeriods();
 			[OperationContract]
-			IdName getUniversity();
+			SubjectData[] getSubjects();
+			[OperationContract]
+			IdName[] getSpeakers();
 			[OperationContract]
 			Dictionary<IdName, Dictionary<IdName, IdName[]>> getCampusPeriodClassTree();
 		#endregion
@@ -81,7 +83,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string delPeriod(int Id);
 			[OperationContract]
-			string delRole(int User, int? Target);
+			string delRole(int Id);
 			[OperationContract]
 			string delEvent(int Id);
 			[OperationContract]

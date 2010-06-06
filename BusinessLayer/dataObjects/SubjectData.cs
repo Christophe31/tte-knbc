@@ -34,13 +34,16 @@ namespace BusinessLayer
 		/// Id.
 		/// </summary>
 		[DataMember]
-		public int? Id { get; set; }
+		public int Id { get; set; }
 
 		/// <summary>
 		/// Campus de la Subjecte
 		/// </summary>
 		[DataMember]
 		public string Modality { get; set; }
+
+		[DataMember]
+		public ModalityData[]  Modalities { get; set; }
 
 		/// <summary>
 		/// Nom de la Subjecte

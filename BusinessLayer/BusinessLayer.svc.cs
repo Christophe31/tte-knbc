@@ -90,14 +90,27 @@ namespace BusinessLayer
 				.Select(p => new IdName() { Id = p.Id, Name = p.Name }).First();
 		}
 
+		IdName[] IBusinessLayer.getPeriods()
+		{
+			return db.Planning.Where(p => p.Type == null)
+				.Select(p => new IdName() { Id = p.Id, Name = p.Name }).ToArray();
+		}
+
 		SubjectData[] IBusinessLayer.getSubjects()
 		{
-			throw new NotImplementedException();
+			return db.Modality.Where(p => p.OnSubject == null && p.Hours == null).
+				Select(p => new SubjectData()
+				{
+					Id = p.Id,
+					Modalities = p.Modalitys.Select(m => new ModalityData() { Id = m.Id, Name = m.Name, Hours = m.Hours }).ToArray(),
+					Name = p.Name
+				}).ToArray();
 		}
 
 		IdName[] IBusinessLayer.getUsers()
 		{
-			throw new NotImplementedException();
+			return db.Planning.Where(p => p.Type ==(int)EventData.TypeEnum.User)
+				.Select(p => new IdName() { Id = p.Id, Name = p.Name }).ToArray();
 		}
 
 		IdName[] IBusinessLayer.getSpeakers()
@@ -221,42 +234,94 @@ namespace BusinessLayer
 
 		string IBusinessLayer.delUser(int Id)
 		{
-			throw new NotImplementedException();
+			var usr = db.User.Where(p => p.Id == Id).First();
+			var plan = usr.Planning;
+			foreach (Role r in usr.Roles)
+			{
+				db.Role.DeleteObject(r);
+			}
+			foreach(Event e in plan.Events.Concat(plan.OwnedEvents).Distinct())
+			{
+				e.PlaningRef.LastChange = DateTime.Now;
+				db.Event.DeleteObject(e);
+			}
+			db.User.DeleteObject(usr);
+			db.Planning.DeleteObject(plan);
+			db.SaveChanges();
+			return "ok";
+
 		}
 
 		string IBusinessLayer.delClass(int Id)
 		{
-			throw new NotImplementedException();
+			var clas = db.Class.Where(p => p.Id == Id).First();
+			var plan = clas.Planning;
+			if(plan.ChildrenPlannings.Count>0)
+				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu";
+			db.Class.DeleteObject(clas);
+			db.Planning.DeleteObject(plan);
+			return "ok";
+			
 		}
 
 		string IBusinessLayer.delSubject(int Id)
 		{
-			throw new NotImplementedException();
+			var sub = db.Modality.Where(m => m.Id == Id).First();
+			foreach (Event e in sub.Modalitys.SelectMany(p => p.Events))
+			{
+				e.PlaningRef.LastChange = DateTime.Now;
+				db.Event.DeleteObject(e);
+			}
+			foreach (Modality m in sub.Modalitys)
+				db.Modality.DeleteObject(m);
+			db.Modality.DeleteObject(sub);
+			db.SaveChanges();
+			return "ok";
 		}
 
 		string IBusinessLayer.delPeriod(int Id)
 		{
-			throw new NotImplementedException();
+			var per= db.Period.Where(p => p.Id == Id).First();
+			var plan = per.Planning;
+			if (plan.PeriodClasses.Count>0)
+				return "D'autres objests en dépendent, merci de les suprimmer en premier lieu";
+			db.Period.DeleteObject(per);
+			db.Planning.DeleteObject(plan);
+			db.SaveChanges();
+			return "ok";
+
 		}
 
-		string IBusinessLayer.delRole(int User, int? Target)
+		string IBusinessLayer.delRole(int Id)
 		{
-			throw new NotImplementedException();
+			db.Role.DeleteObject(db.Role.Where(r => r.Id == Id).First());
+			db.SaveChanges();
+			return "ok";
 		}
 
 		string IBusinessLayer.delEvent(int Id)
 		{
-			throw new NotImplementedException();
+			var ev=db.Event.Where(p=>p.Id==Id).First();
+			ev.PlaningRef.LastChange = DateTime.Now;
+			db.Event.DeleteObject(ev);
+			db.SaveChanges();
+			return "ok";
 		}
 
 		string IBusinessLayer.delCampus(int Id)
 		{
-			throw new NotImplementedException();
+			var c = db.Planning.Where(camp => camp.Id == Id);
+			return "ok";
 		}
 
 		string IBusinessLayer.delPromotion(int Id)
 		{
-			throw new NotImplementedException();
+			var plan = db.Planning.Where(p => p.Id == Id).First();
+			if (plan.ChildrenPlannings.Count > 0)
+				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu";
+			db.Planning.DeleteObject(plan);
+			db.SaveChanges();
+			return "ok";
 		}
 
 		UserData IBusinessLayer.getUser(int ID)

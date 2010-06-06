@@ -27,7 +27,7 @@ namespace Client
             if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Campus)))
             {
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Campus));
-                var lastUpdate = DateTime.Parse(calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString());
+                var lastUpdate = DateTime.Parse(calendars.Select(p => p.Properties.Where(f => f.Key == "X-LASTUPDATE").FirstOrDefault()).Where(f=>f!=null).First().Value.ToString());
                 if (cacheProcess.ServerReachable && !Server.isUpToDateByCampus(Campus.Id, lastUpdate))
                 {
                     cacheProcess.RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByCampus, Campus);
@@ -66,7 +66,7 @@ namespace Client
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Period));
                 var lastUpdate =
                         DateTime.Parse(
-                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
+                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LASTUPDATE").FirstOrDefault()).Where(f=>f!=null).First().Value.ToString()
                         );
                 if (cacheProcess.ServerReachable && !Server.isUpToDateByPeriod(Period.Id, lastUpdate))
                 {
@@ -102,7 +102,7 @@ namespace Client
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Class));
                 var lastUpdate =
                         DateTime.Parse(
-                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
+                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LASTUPDATE").First()).First().Value.ToString()
                         );
                 if (cacheProcess.ServerReachable && !Server.isUpToDateByClass(Class.Id, lastUpdate))
                 {

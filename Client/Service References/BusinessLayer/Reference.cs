@@ -273,7 +273,10 @@ namespace Client.BusinessLayer {
         private int HoursField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> IdField;
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessLayer.ModalityData[] ModalitiesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModalityField;
@@ -305,7 +308,7 @@ namespace Client.BusinessLayer {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> Id {
+        public int Id {
             get {
                 return this.IdField;
             }
@@ -313,6 +316,19 @@ namespace Client.BusinessLayer {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessLayer.ModalityData[] Modalities {
+            get {
+                return this.ModalitiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModalitiesField, value) != true)) {
+                    this.ModalitiesField = value;
+                    this.RaisePropertyChanged("Modalities");
                 }
             }
         }
@@ -326,6 +342,83 @@ namespace Client.BusinessLayer {
                 if ((object.ReferenceEquals(this.ModalityField, value) != true)) {
                     this.ModalityField = value;
                     this.RaisePropertyChanged("Modality");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModalityData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class ModalityData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HoursField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Hours {
+            get {
+                return this.HoursField;
+            }
+            set {
+                if ((this.HoursField.Equals(value) != true)) {
+                    this.HoursField = value;
+                    this.RaisePropertyChanged("Hours");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }

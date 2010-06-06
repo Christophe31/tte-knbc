@@ -87,6 +87,7 @@
     </Compile>
     <Compile Include="CredentialsClass.cs" />
     <Compile Include="dataObjects\ClassData.cs" />
+    <Compile Include="dataObjects\ModalityData.cs" />
     <Compile Include="dataObjects\PeriodData.cs" />
     <Compile Include="dataObjects\RoleData.cs" />
     <Compile Include="dataObjects\SubjectData.cs" />
