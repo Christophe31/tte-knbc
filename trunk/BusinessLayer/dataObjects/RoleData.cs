@@ -47,6 +47,12 @@ namespace BusinessLayer
 		public RoleType Role { get; set; }
 
 		/// <summary>
+		/// indique l'id rôle
+		/// </summary>
+		[DataMember]
+		public int Id { get; set; }
+
+		/// <summary>
 		/// pointe vers l'unniversté pour un admin, 
 		/// vers un campus pour un campus mannager ou
 		/// vaut null pour un speaker

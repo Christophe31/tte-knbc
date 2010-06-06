@@ -9,6 +9,12 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IBusinessLayer_delClass_InputMessage">
+    <wsdl:part name="parameters" element="tns:delClass" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delClass_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delClassResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_delSubject_InputMessage">
     <wsdl:part name="parameters" element="tns:delSubject" />
   </wsdl:message>
@@ -87,11 +93,11 @@
   <wsdl:message name="IBusinessLayer_getPlannings_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPlanningsResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getSubjects_InputMessage">
-    <wsdl:part name="parameters" element="tns:getSubjects" />
+  <wsdl:message name="IBusinessLayer_getUniversity_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUniversity" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getSubjects_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getSubjectsResponse" />
+  <wsdl:message name="IBusinessLayer_getUniversity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUniversityResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:getUsers" />
@@ -99,17 +105,23 @@
   <wsdl:message name="IBusinessLayer_getUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getPeriods_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPeriods" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getPeriods_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPeriodsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSubjects_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSubjects" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSubjects_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSubjectsResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_getSpeakers_InputMessage">
     <wsdl:part name="parameters" element="tns:getSpeakers" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getSpeakers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getSpeakersResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getUniversity_InputMessage">
-    <wsdl:part name="parameters" element="tns:getUniversity" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getUniversity_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getUniversityResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getCampusPeriodClassTree_InputMessage">
     <wsdl:part name="parameters" element="tns:getCampusPeriodClassTree" />
@@ -225,13 +237,11 @@
   <wsdl:message name="IBusinessLayer_delUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:delUserResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delClass_InputMessage">
-    <wsdl:part name="parameters" element="tns:delClass" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delClass_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delClassResponse" />
-  </wsdl:message>
   <wsdl:portType name="IBusinessLayer">
+    <wsdl:operation name="delClass">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delClass" message="tns:IBusinessLayer_delClass_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delClassResponse" message="tns:IBusinessLayer_delClass_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="delSubject">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delSubject" message="tns:IBusinessLayer_delSubject_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delSubjectResponse" message="tns:IBusinessLayer_delSubject_OutputMessage" />
@@ -284,21 +294,25 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPlannings" message="tns:IBusinessLayer_getPlannings_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPlanningsResponse" message="tns:IBusinessLayer_getPlannings_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getSubjects">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjects" message="tns:IBusinessLayer_getSubjects_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjectsResponse" message="tns:IBusinessLayer_getSubjects_OutputMessage" />
+    <wsdl:operation name="getUniversity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUniversity" message="tns:IBusinessLayer_getUniversity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUniversityResponse" message="tns:IBusinessLayer_getUniversity_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUsers" message="tns:IBusinessLayer_getUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUsersResponse" message="tns:IBusinessLayer_getUsers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getPeriods">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriods" message="tns:IBusinessLayer_getPeriods_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriodsResponse" message="tns:IBusinessLayer_getPeriods_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getSubjects">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjects" message="tns:IBusinessLayer_getSubjects_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjectsResponse" message="tns:IBusinessLayer_getSubjects_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getSpeakers">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakers" message="tns:IBusinessLayer_getSpeakers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakersResponse" message="tns:IBusinessLayer_getSpeakers_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="getUniversity">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUniversity" message="tns:IBusinessLayer_getUniversity_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUniversityResponse" message="tns:IBusinessLayer_getUniversity_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getCampusPeriodClassTree">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTree" message="tns:IBusinessLayer_getCampusPeriodClassTree_InputMessage" />
@@ -375,10 +389,6 @@
     <wsdl:operation name="delUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delClass">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delClass" message="tns:IBusinessLayer_delClass_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delClassResponse" message="tns:IBusinessLayer_delClass_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="BusinessLayer">

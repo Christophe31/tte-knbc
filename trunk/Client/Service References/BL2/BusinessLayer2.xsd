@@ -43,6 +43,7 @@
   <xs:element name="ArrayOfRoleData" nillable="true" type="tns:ArrayOfRoleData" />
   <xs:complexType name="RoleData">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Role" type="tns:RoleData.RoleType" />
       <xs:element minOccurs="0" name="TargetId" nillable="true" type="xs:int" />
     </xs:sequence>
@@ -102,10 +103,25 @@
   <xs:complexType name="SubjectData">
     <xs:sequence>
       <xs:element minOccurs="0" name="Hours" type="xs:int" />
-      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Modalities" nillable="true" type="tns:ArrayOfModalityData" />
       <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="SubjectData" nillable="true" type="tns:SubjectData" />
+  <xs:complexType name="ArrayOfModalityData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModalityData" nillable="true" type="tns:ModalityData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModalityData" nillable="true" type="tns:ArrayOfModalityData" />
+  <xs:complexType name="ModalityData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Hours" type="xs:int" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ModalityData" nillable="true" type="tns:ModalityData" />
 </xs:schema>
