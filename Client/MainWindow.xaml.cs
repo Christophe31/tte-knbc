@@ -356,7 +356,7 @@ namespace Client
 
         private void tcOnglets_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (sender == e.OriginalSource)
+            /*if (sender == e.OriginalSource)
             {
                 if (tcOnglets.SelectedIndex == 4)
                 //On charge la ComboBox
@@ -371,6 +371,7 @@ namespace Client
                 sbStatusText.Text = "Prêt";
 
             }
+             */
         }
 
         #endregion
