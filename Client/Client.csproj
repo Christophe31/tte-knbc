@@ -53,6 +53,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="antlr.runtime">
+      <HintPath>.\antlr.runtime.dll</HintPath>
+    </Reference>
     <Reference Include="DDay.iCal">
       <HintPath>.\DDay.iCal.dll</HintPath>
     </Reference>
