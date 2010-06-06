@@ -6,7 +6,11 @@
 		x:Class="Client.MainWindow"
         Title="TimeTableEasy" 
 		mc:Ignorable="d" 
-		Height="768" Width="1024" Loaded="Window_Loaded">
+		Height="768" Width="1024" Loaded="Window_Loaded" xmlns:my="clr-namespace:Client.Calendar">
+    <Window.Resources>
+        <my:GridSizeConverter x:Key="GridSizeConverter" />
+    </Window.Resources>
+    
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -113,7 +117,23 @@
 
                     <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
                         <!--<local:EventControl x:Name="EventCtl" />-->
-                        <Canvas Name="DayCanvas" Width="500" Height="500"/>
+                        <Grid ShowGridLines="True" Name="DayGrid"
+                              Height="{Binding Converter={StaticResource GridSizeConverter},
+                                               RelativeSource={RelativeSource FindAncestor,
+                                                                              AncestorType=ScrollViewer,
+                                                                              AncestorLevel=1},
+                                               Path=ActualHeight}" SizeChanged="DayGrid_SizeChanged">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid Name="DayContentGrid" Grid.Row="0" Grid.Column="1"/>
+                        </Grid>
                     </ScrollViewer>
                 </Grid>
             </TabItem>

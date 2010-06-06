@@ -88,6 +88,7 @@
     <Compile Include="Calendar\EventControl.xaml.cs">
       <DependentUpon>EventControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Calendar\GridSizeConverter.cs" />
     <Compile Include="dataObjectsBL2\ClassData.cs" />
     <Compile Include="dataObjectsBL2\EventData.cs" />
     <Compile Include="dataObjectsBL2\EventType.cs" />
