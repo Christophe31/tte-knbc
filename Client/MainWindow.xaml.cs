@@ -110,6 +110,7 @@ namespace Client
                 // Create the TextBlock
                 TextBlock tb = new TextBlock();
                 tb.Text = i.ToString() + ":00";
+                tb.Margin = new Thickness(0,0,5,0);
 
                 Grid.SetColumn(tb, 0);
                 Grid.SetRow(tb, i);
