@@ -186,66 +186,7 @@
 
             <TabItem Header="Admin" Name="Administration">
                 <Grid>
-                <TabControl Name="tcOnglets" SelectionChanged="tcOnglets_SelectionChanged">
-                    <TabItem Header="Campus" Name="Campus">
-                    </TabItem>
-                    <TabItem Header="Promotions" Name="Promotions">
-                    </TabItem>
-                    <TabItem Header="Périodes" Name="Periods">
-                    </TabItem>
-                    <TabItem Header="Classes" Name="Classes">
-                    </TabItem>
-                        <TabItem Header="Utilisateurs" Name="Users">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2*" />
-                                </Grid.ColumnDefinitions>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Orientation="Vertical" Grid.Column="0" VerticalAlignment="Center">
-                                    <Label Content="Utilisateur:" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                    <ComboBox HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding}" Name="cbUsers_Users" MaxWidth="200" VerticalAlignment="Center" Margin="70,00,70,0"/>
-                                    <Button MaxWidth="200" Content="Ajouter"  Name="bUsers_Add" VerticalAlignment="Center" Margin="70,30,70,0"/>
-                                    <Button MaxWidth="200" Content="Modifier" Name="bUsers_Change" VerticalAlignment="Center" Margin="70,10,70,0"/>
-                                    <Button MaxWidth="200" Content="Supprimer" Name="bUsers_DelUser" VerticalAlignment="Center" Margin="70,10,70,0"/>
-                                </StackPanel>
-
-                                <GroupBox Grid.Column="1" Header="Propriétés:" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MaxWidth="700" MaxHeight="400" Margin="40,100,40,100">
-                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Stretch">
-                                        <Label Content="Utilisateur:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0"/>
-                                        <TextBox MaxWidth="200" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" Name="tbUsers_Username" VerticalAlignment="Center" Margin="150,0,150,0"/>
-                                        <Label Content="Mot de passe:" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,0"/>
-
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"/>
-                                            </Grid.RowDefinitions>
-
-                                            <TextBox HorizontalContentAlignment="Center" MaxWidth="200" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Stretch" IsEnabled="False" Name="tbUsers_Password" VerticalAlignment="Center" Margin="70,0,20,0"/>
-                                            <CheckBox Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" IsChecked="True" Name="cbUsers_Password" VerticalAlignment="Center" />
-                                            <Label Grid.Column="2" Grid.Row="0" Content="Générer un mot de passe aléatoire"  HorizontalAlignment="Left" VerticalAlignment="Center" />
-                                        </Grid>
-                                        <Label Content="Classe:" HorizontalAlignment="Center"  VerticalAlignment="Center" Margin="0,30,0,0"/>
-                                        <ComboBox MaxWidth="200" HorizontalContentAlignment="Center"  HorizontalAlignment="Stretch" ItemsSource="{Binding}"  Name="cbUsers_Class" VerticalAlignment="Center" Margin="150,0,150,20" />
-                                    </StackPanel>
-                                </GroupBox>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Matières" Name="Subjetcs">
-                    </TabItem>
-                    </TabControl>
-                <StatusBar Name="sbStatus" Height="20" VerticalAlignment="Bottom">
-                    <TextBlock Name="sbStatusText" Text="Prêt" />
-                </StatusBar>
+                    <local:Administration x:Name="PanelAdmin" />               
                 </Grid>
             </TabItem>
         </TabControl>
