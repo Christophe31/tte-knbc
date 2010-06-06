@@ -50,42 +50,6 @@ namespace Client
 		#endregion
 
 		#region foos
-			public EventData[] CacheEventGetter(IdName idn,  DateTime Start, DateTime Stop)
-			{
-			if (System.IO.File.Exists(fileNameFromIdName(Class)))
-            {
-                var calendars = DDay.iCal.iCalendar.LoadFromFile(fileNameFromIdName(Class));
-                var lastUpdate =
-                        DateTime.Parse(
-                            calendars.Select(p => p.Properties.Where(f => f.Key == "X-LastUpdate").First()).First().Value.ToString()
-                        );
-                if (ServerReachable && !Server.isUpToDateByClass(Class.Id, lastUpdate))
-                {
-                    RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByClass, Class);
-                    return Server.getEventsByClass(Class.Id, Start, Stop);
-                }
-
-                else
-                {
-                    return calendars.First().Events.Select(
-                        p => EventData.CreateFromICalEvent(p)
-                        ).ToArray();
-                }
-            }
-
-            else
-            {
-                if (ServerReachable)
-                {
-                    RefreshCache((CacheProcess.EventsGetterId)Server.getEventsByClass, Class);
-                    return Server.getEventsByClass(Class.Id, Start, Stop);
-                }
-                else
-                {
-                    throw new Exception("No cache file, neither connexion to Web Service available");
-                }
-            }
-			}
 			public void WriteToFile(object obj, string fileName)
 			{
 				Stream str = File.OpenWrite(fileName);
