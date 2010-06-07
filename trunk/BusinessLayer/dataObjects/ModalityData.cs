@@ -15,18 +15,24 @@ namespace BusinessLayer
 		{
 		}
 
-		/// <sumSubjectName = SubjectName;mary>
+		/// <summary>
 		/// Id.
 		/// </summary>
 		[DataMember]
 		public int Id { get; set; }
 
 		/// <summary>
-		/// Nom de la Subjecte
+		/// Nom de la modalité
 		/// </summary>
 		[DataMember]
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Lien vers le sujet
+		/// </summary>
+		[DataMember]
+		public int SubjectId { get; set; }
+		
 		/// <summary>
 		/// Id de la periode
 		/// </summary>
