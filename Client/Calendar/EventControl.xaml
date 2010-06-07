@@ -6,22 +6,30 @@
 	mc:Ignorable="d"
 	x:Class="Client.EventControl"
 	x:Name="UserControl"
-	UseLayoutRounding="True">
+	UseLayoutRounding="True"
+    d:DesignHeight="80" d:DesignWidth="140">
 
     <Border CornerRadius="3" Background="LightBlue" BorderThickness="1" BorderBrush="Blue">
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="Modality" TextWrapping="Wrap" Text="{Binding Modality}"/>
-                <TextBlock x:Name="Planning" TextWrapping="Wrap" Text="{Binding Path=LinkedTo, Mode=OneWay}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="Subject" TextWrapping="Wrap" Text="{Binding Subject}"/>
-                <TextBlock x:Name="EventName" TextWrapping="Wrap" Text="{Binding Name}"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="Speaker" TextWrapping="Wrap" Text="{Binding Speaker}"/>
-                <TextBlock x:Name="Place" TextWrapping="Wrap" Text="{Binding Place}"/>
-            </StackPanel>
-        </StackPanel>
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock x:Name="Modality" TextWrapping="Wrap" Text="{Binding Modality}" Margin="0,0,3,0" Grid.Row="0" Grid.Column="0" />
+            <TextBlock x:Name="Planning" TextWrapping="Wrap" Text="{Binding Path=LinkedTo, Mode=OneWay}" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1" />
+
+            <TextBlock x:Name="Subject" TextWrapping="Wrap" Text="{Binding Subject}" Margin="0,0,3,0" Grid.Row="1" Grid.Column="0" />
+            <TextBlock x:Name="EventName" TextWrapping="Wrap" Text="{Binding Name}" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="1" />
+
+            <TextBlock x:Name="Speaker" TextWrapping="Wrap" Text="{Binding Speaker}" Margin="0,0,3,0" Grid.Row="2" Grid.Column="0" />
+            <TextBlock x:Name="Place" TextWrapping="Wrap" Text="{Binding Place}" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" />
+        </Grid>
     </Border>
 </UserControl>
