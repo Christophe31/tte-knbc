@@ -83,6 +83,7 @@ namespace Client
             EndDate.SelectedDate = DateTime.Now.AddMonths(12);
 
             // Draw Grids
+            ((ScrollViewer)DayGrid.Parent).ScrollToVerticalOffset(DayGrid.Height * 7 / 24);
             DayGrid.Children.Add(GetHoursGrid());
 
             // Events DataGrid initialisation
