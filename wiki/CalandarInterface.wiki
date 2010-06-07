@@ -1,5 +1,5 @@
 =Calandrier=
-_par Breil Romaric_
+_by Breil Romaric_
 
 ==Todo list==
 
@@ -7,7 +7,7 @@ _par Breil Romaric_
     * Create an event
     * Update an event
     * Delete an event
-    * Display hours repports (planified/theorical): CSV ?
+    * Display hours reports (planed/theoretical): CSV ?
 
   * Events list
     * ~~Display/hide non mandatory events~~
@@ -15,7 +15,7 @@ _par Breil Romaric_
   * Day/week calendar
     * ~~Creation of a control which displays an event~~
     * ~~Display of events on the controls~~
-    * Colored events
+    * Coloured events
     * Events display improvement
 
   * Week calendar
