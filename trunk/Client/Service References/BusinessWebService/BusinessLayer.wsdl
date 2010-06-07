@@ -105,11 +105,11 @@
   <wsdl:message name="IBusinessLayer_getUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getUsersResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getPeriods_InputMessage">
-    <wsdl:part name="parameters" element="tns:getPeriods" />
+  <wsdl:message name="IBusinessLayer_getPromotions_InputMessage">
+    <wsdl:part name="parameters" element="tns:getPromotions" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getPeriods_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getPeriodsResponse" />
+  <wsdl:message name="IBusinessLayer_getPromotions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getPromotionsResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getSubjects_InputMessage">
     <wsdl:part name="parameters" element="tns:getSubjects" />
@@ -302,9 +302,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUsers" message="tns:IBusinessLayer_getUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUsersResponse" message="tns:IBusinessLayer_getUsers_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getPeriods">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriods" message="tns:IBusinessLayer_getPeriods_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriodsResponse" message="tns:IBusinessLayer_getPeriods_OutputMessage" />
+    <wsdl:operation name="getPromotions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPromotions" message="tns:IBusinessLayer_getPromotions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPromotionsResponse" message="tns:IBusinessLayer_getPromotions_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getSubjects">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjects" message="tns:IBusinessLayer_getSubjects_InputMessage" />

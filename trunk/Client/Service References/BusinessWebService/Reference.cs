@@ -812,6 +812,9 @@ namespace Client.BusinessWebService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SubjectIdField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -857,6 +860,19 @@ namespace Client.BusinessWebService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SubjectId {
+            get {
+                return this.SubjectIdField;
+            }
+            set {
+                if ((this.SubjectIdField.Equals(value) != true)) {
+                    this.SubjectIdField = value;
+                    this.RaisePropertyChanged("SubjectId");
                 }
             }
         }
@@ -923,8 +939,8 @@ namespace Client.BusinessWebService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUsers", ReplyAction="http://tempuri.org/IBusinessLayer/getUsersResponse")]
         Client.BusinessWebService.IdName[] getUsers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPeriods", ReplyAction="http://tempuri.org/IBusinessLayer/getPeriodsResponse")]
-        Client.BusinessWebService.IdName[] getPeriods();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPromotions", ReplyAction="http://tempuri.org/IBusinessLayer/getPromotionsResponse")]
+        Client.BusinessWebService.IdName[] getPromotions();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSubjects", ReplyAction="http://tempuri.org/IBusinessLayer/getSubjectsResponse")]
         Client.BusinessWebService.SubjectData[] getSubjects();
@@ -957,7 +973,7 @@ namespace Client.BusinessWebService {
         string grantRole(int UserId, System.Nullable<int> Target);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addEventResponse")]
-        string addEvent(Client.BusinessWebService.EventData Event);
+        string addEvent(Client.BusinessWebService.EventData Event, int PlanningId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPrivateEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addPrivateEventResponse")]
         string addPrivateEvent(Client.BusinessWebService.EventData Event);
@@ -1081,8 +1097,8 @@ namespace Client.BusinessWebService {
             return base.Channel.getUsers();
         }
         
-        public Client.BusinessWebService.IdName[] getPeriods() {
-            return base.Channel.getPeriods();
+        public Client.BusinessWebService.IdName[] getPromotions() {
+            return base.Channel.getPromotions();
         }
         
         public Client.BusinessWebService.SubjectData[] getSubjects() {
@@ -1125,8 +1141,8 @@ namespace Client.BusinessWebService {
             return base.Channel.grantRole(UserId, Target);
         }
         
-        public string addEvent(Client.BusinessWebService.EventData Event) {
-            return base.Channel.addEvent(Event);
+        public string addEvent(Client.BusinessWebService.EventData Event, int PlanningId) {
+            return base.Channel.addEvent(Event, PlanningId);
         }
         
         public string addPrivateEvent(Client.BusinessWebService.EventData Event) {
