@@ -6,7 +6,7 @@
 		x:Class="Client.MainWindow"
         Title="TimeTableEasy" 
 		mc:Ignorable="d" 
-		Height="768" Width="1024" Loaded="Window_Loaded" xmlns:my="clr-namespace:Client.Calendar">
+		Height="768" Width="1024" Loaded="Window_Loaded" xmlns:my="clr-namespace:Client.Calendar" MinHeight="575" MinWidth="787">
     <Window.Resources>
         <my:GridSizeConverter x:Key="GridSizeConverter" />
     </Window.Resources>

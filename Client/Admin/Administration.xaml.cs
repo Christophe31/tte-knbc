@@ -23,5 +23,10 @@ namespace Client
         {
             InitializeComponent();
         }
+
+        private void bPromo_AddMod_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(generalAdmin.ActualHeight + " " + generalAdmin.ActualWidth);
+        }
     }
 }
