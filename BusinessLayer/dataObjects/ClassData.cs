@@ -23,6 +23,10 @@ namespace BusinessLayer
 			this.Period = Period;
 		}
 
+		public ClassData()
+		{
+		}
+
 		public static ClassData CD(Class ClassEntity, IdName Campus, IdName Period)
 		{
 			return new ClassData(ClassEntity, Campus, Period);

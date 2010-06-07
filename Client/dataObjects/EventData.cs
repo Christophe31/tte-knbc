@@ -114,7 +114,7 @@ namespace Client.BusinessLayer
         public int EventIndex { get; set; }
 
         // Create the OnPropertyChanged method to raise the event
-        protected void OnPropertyChanged(string name)
+		protected void OnPropertyChanged(string name)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
@@ -184,115 +184,5 @@ namespace Client.BusinessLayer
         }
 
         #endregion
-
-
-		#region IEncodableDataType Members
-
-		public string Encoding
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		#endregion
-
-		#region ICalendarDataType Members
-
-		public ICalendarObject AssociatedObject
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public IICalendar Calendar
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		public Type GetValueType()
-		{
-			throw new NotImplementedException();
-		}
-
-		public string Language
-		{
-			get
-			{
-				throw new NotImplementedException();
-			}
-			set
-			{
-				throw new NotImplementedException();
-			}
-		}
-
-		public void SetValueType(string type)
-		{
-			throw new NotImplementedException();
-		}
-
-		#endregion
-
-		#region ICalendarParameterListContainer Members
-
-		public ICalendarParameterList Parameters
-		{
-			get { throw new NotImplementedException(); }
-		}
-
-		#endregion
-
-		#region ICopyable Members
-
-		public T Copy<T>()
-		{
-			throw new NotImplementedException();
-		}
-
-		public void CopyFrom(ICopyable obj)
-		{
-			throw new NotImplementedException();
-		}
-
-		#endregion
-
-		#region IServiceProvider Members
-
-		public object GetService(Type serviceType)
-		{
-			throw new NotImplementedException();
-		}
-
-		#endregion
-
-		#region IComparable<IDateTime> Members
-
-		public int CompareTo(IDateTime other)
-		{
-			throw new NotImplementedException();
-		}
-
-		#endregion
-
-		#region IFormattable Members
-
-		public string ToString(string format, IFormatProvider formatProvider)
-		{
-			throw new NotImplementedException();
-		}
-
-		#endregion
 	}
 }

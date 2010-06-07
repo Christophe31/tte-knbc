@@ -27,7 +27,7 @@ namespace BusinessLayer
 			[OperationContract]
 			IdName[] getUsers();
 			[OperationContract]
-			IdName[] getPeriods();
+			IdName[] getPromotions();
 			[OperationContract]
 			SubjectData[] getSubjects();
 			[OperationContract]
@@ -51,7 +51,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string grantRole(int UserId, int? Target);
 			[OperationContract]
-			string addEvent(EventData Event);
+			string addEvent(EventData Event,int PlanningId);
 			[OperationContract]
 			string addPrivateEvent(EventData Event);
 		#endregion
