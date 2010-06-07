@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Client.BusinessLayer;
 
-namespace Client.BL2
+namespace Client.BusinessWebService
 {
 	/// <summary>
 	/// Stores informations to manage and display event types.

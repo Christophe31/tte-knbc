@@ -88,14 +88,13 @@
     <Compile Include="Calendar\EventControl.xaml.cs">
       <DependentUpon>EventControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Calendar\GridSizeConverter.cs" />
-    <Compile Include="dataObjectsBL2\ClassData.cs" />
-    <Compile Include="dataObjectsBL2\EventData.cs" />
-    <Compile Include="dataObjectsBL2\EventType.cs" />
-    <Compile Include="dataObjectsBL2\IdName.cs" />
-    <Compile Include="dataObjectsBL2\PeriodData.cs" />
-    <Compile Include="dataObjectsBL2\SubjectData.cs" />
-    <Compile Include="dataObjectsBL2\UserData.cs" />
+    <Compile Include="dataObjectsNewWebService\ClassData.cs" />
+    <Compile Include="dataObjectsNewWebService\EventData.cs" />
+    <Compile Include="dataObjectsNewWebService\EventType.cs" />
+    <Compile Include="dataObjectsNewWebService\IdName.cs" />
+    <Compile Include="dataObjectsNewWebService\PeriodData.cs" />
+    <Compile Include="dataObjectsNewWebService\SubjectData.cs" />
+    <Compile Include="dataObjectsNewWebService\UserData.cs" />
     <Compile Include="dataObjects\ClassData.cs" />
     <Compile Include="dataObjects\EventType.cs" />
     <Compile Include="dataObjects\PeriodData.cs" />
@@ -103,12 +102,13 @@
     <Compile Include="dataObjects\IdName.cs" />
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="Cache\CacheProcess.cs" />
-    <Compile Include="Service References\BL2\Reference.cs">
+    <Compile Include="Calendar\GridSizeConverter.cs" />
+    <Compile Include="Service References\BusinessLayer\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\BusinessLayer\Reference.cs">
+    <Compile Include="Service References\BusinessWebService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -184,41 +184,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Service References\BL2\BusinessLayer.wsdl" />
-    <None Include="Service References\BL2\BusinessLayer.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BL2\BusinessLayer1.wsdl" />
-    <None Include="Service References\BL2\BusinessLayer1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BL2\BusinessLayer2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BL2\BusinessLayer3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.ClassData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.EventData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.IdName.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.PeriodData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.RoleData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.SubjectData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\BL2\Client.BL2.UserData.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\BusinessLayer\BusinessService.wsdl" />
     <None Include="Service References\BusinessLayer\BusinessService.xsd">
       <SubType>Designer</SubType>
@@ -242,13 +207,48 @@
     <None Include="Service References\BusinessLayer\Client.BusinessLayer.EventData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\BusinessWebService\BusinessLayer.wsdl" />
+    <None Include="Service References\BusinessWebService\BusinessLayer.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessWebService\BusinessLayer1.wsdl" />
+    <None Include="Service References\BusinessWebService\BusinessLayer1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessWebService\BusinessLayer2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessWebService\BusinessLayer3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.ClassData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.EventData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.IdName.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.PeriodData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.RoleData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.SubjectData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\BusinessWebService\Client.BusinessWebService.UserData.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Service References\BL2\" />
     <WCFMetadataStorage Include="Service References\BusinessLayer\" />
+    <WCFMetadataStorage Include="Service References\BusinessWebService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\BusinessLayer\BusinessService.disco" />
@@ -342,16 +342,16 @@
     <Resource Include="Icons\world.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BL2\BusinessLayer.disco" />
+    <None Include="Service References\BusinessWebService\BusinessLayer.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BL2\configuration91.svcinfo" />
+    <None Include="Service References\BusinessWebService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BL2\configuration.svcinfo" />
+    <None Include="Service References\BusinessWebService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\BL2\Reference.svcmap">
+    <None Include="Service References\BusinessWebService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

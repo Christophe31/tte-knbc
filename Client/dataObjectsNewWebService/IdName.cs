@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Client.BL2
+namespace Client.BusinessWebService
 {
 	/// <summary>
 	///  This class is a generic way to get an object,

@@ -34,11 +34,11 @@
                           <wsp:Policy>
                             <sp:ProtectionToken>
                               <wsp:Policy>
-                                <sp:SpnegoContextToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                                <mssp:SslContextToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient" xmlns:mssp="http://schemas.microsoft.com/ws/2005/07/securitypolicy">
                                   <wsp:Policy>
                                     <sp:RequireDerivedKeys />
                                   </wsp:Policy>
-                                </sp:SpnegoContextToken>
+                                </mssp:SslContextToken>
                               </wsp:Policy>
                             </sp:ProtectionToken>
                             <sp:AlgorithmSuite>
@@ -56,6 +56,15 @@
                             <sp:OnlySignEntireHeadersAndBody />
                           </wsp:Policy>
                         </sp:SymmetricBinding>
+                        <sp:SignedSupportingTokens>
+                          <wsp:Policy>
+                            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                              <wsp:Policy>
+                                <sp:WssUsernameToken10 />
+                              </wsp:Policy>
+                            </sp:UsernameToken>
+                          </wsp:Policy>
+                        </sp:SignedSupportingTokens>
                         <sp:Wss11>
                           <wsp:Policy />
                         </sp:Wss11>
@@ -561,7 +570,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="BusinessLayer_logIn_Input_policy">
+  <wsp:Policy wsu:Id="BusinessLayer_getUserRoles_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -584,7 +593,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="BusinessLayer_logIn_output_policy">
+  <wsp:Policy wsu:Id="BusinessLayer_getUserRoles_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -1964,14 +1973,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="logIn">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/logIn" style="document" />
+    <wsdl:operation name="getUserRoles">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getUserRoles" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#BusinessLayer_logIn_Input_policy" />
+        <wsp:PolicyReference URI="#BusinessLayer_getUserRoles_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#BusinessLayer_logIn_output_policy" />
+        <wsp:PolicyReference URI="#BusinessLayer_getUserRoles_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

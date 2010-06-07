@@ -32,15 +32,6 @@ namespace BusinessLayer
 		{
 			return new UserData(UserEntity, Class);
 		}
-		public static UserData UD(int Id , string Name, IdName Class)
-		{
-			return new UserData() 
-			{
-				Id=Id, 
-				Class=Class,
-				Name=Name
-			};
-		}
 
 		/// <sumClassName = ClassName;mary>
 		/// Date de Début de l'évènement.
@@ -59,6 +50,12 @@ namespace BusinessLayer
 		/// </summary>
 		[DataMember]
 		public string Name { get; set; }
+	
+		/// <summary>
+		/// Nom de l'utilisateur
+		/// </summary>
+		[DataMember]
+		public string Login { get; set; }
 
 		/// <summary>
 		/// Mot de passe de l'utilisateur... acessible pour les objets recus, envoyé uniquement à null.
