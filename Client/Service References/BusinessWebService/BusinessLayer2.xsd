@@ -122,6 +122,7 @@
       <xs:element minOccurs="0" name="Hours" type="xs:int" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SubjectId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ModalityData" nillable="true" type="tns:ModalityData" />

@@ -403,6 +403,9 @@ namespace Client.BusinessLayer {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SubjectIdField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -448,6 +451,19 @@ namespace Client.BusinessLayer {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SubjectId {
+            get {
+                return this.SubjectIdField;
+            }
+            set {
+                if ((this.SubjectIdField.Equals(value) != true)) {
+                    this.SubjectIdField = value;
+                    this.RaisePropertyChanged("SubjectId");
                 }
             }
         }

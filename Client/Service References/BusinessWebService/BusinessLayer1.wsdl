@@ -846,7 +846,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="BusinessLayer_getPeriods_Input_policy">
+  <wsp:Policy wsu:Id="BusinessLayer_getPromotions_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -869,7 +869,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="BusinessLayer_getPeriods_output_policy">
+  <wsp:Policy wsu:Id="BusinessLayer_getPromotions_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -2039,14 +2039,14 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getPeriods">
-      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getPeriods" style="document" />
+    <wsdl:operation name="getPromotions">
+      <soap12:operation soapAction="http://tempuri.org/IBusinessLayer/getPromotions" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#BusinessLayer_getPeriods_Input_policy" />
+        <wsp:PolicyReference URI="#BusinessLayer_getPromotions_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#BusinessLayer_getPeriods_output_policy" />
+        <wsp:PolicyReference URI="#BusinessLayer_getPromotions_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
