@@ -103,6 +103,16 @@ namespace Client.BusinessLayer
             }
         }
 
+        /// <summary>
+        /// Get or set the maximum number of simultaneous events for this event
+        /// </summary>
+        public int MaxNeighboursEvents { get; set; }
+
+        /// <summary>
+        /// Index of the current event in the displayed day (must be refreshed for each day drawing)
+        /// </summary>
+        public int EventIndex { get; set; }
+
         // Create the OnPropertyChanged method to raise the event
         protected void OnPropertyChanged(string name)
         {

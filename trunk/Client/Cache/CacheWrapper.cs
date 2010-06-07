@@ -60,7 +60,7 @@ namespace Client
 			return Server.getEventsByUniversity(Start, Stop);
 		}
 		public EventData[] getEventsByPeriod(IdName Period, DateTime Start, DateTime Stop) 
-            {
+        {
             if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Period)))
             {
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Period));

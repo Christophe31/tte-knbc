@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using Client.BusinessLayer;
+using Client.Calendar;
 
 namespace Client
 {
@@ -222,13 +223,55 @@ namespace Client
         /// <param name="date">Date to draw</param>
         public void DrawDay(Grid grid, DateTime date)
         {
+            ScrollViewer sw = (ScrollViewer)((Grid)grid.Parent).Parent;
+            ((Grid)grid.Parent).Measure(new Size(sw.ActualWidth, (double)new GridSizeConverter().Convert(sw.ActualHeight, null, null, null)));
             grid.Children.Clear();
-            double gridHeight = ((Grid)grid.Parent).Height;
+            double gridHeight = ((Grid)grid.Parent).ActualHeight;
+            double gridWidth = grid.ActualWidth;
 
             if (AllEvents != null)
-                foreach (EventData ev in AllEvents
+            {
+                var dayEvents = AllEvents
                     .Where(p => p.Start < date.AddDays(1) && p.End > date)
-                    .OrderBy(p => p.Start))
+                    .OrderBy(p => p.Start);
+
+                // Set the maximum nomber of neighbours events of each event
+                for (int i = 0; i < 24; i++)
+                {
+                    var hourEvents = dayEvents.Where(p => p.StartHour <= i && p.EndHour >= i+1);
+                    int eventsCount = hourEvents.Count();
+                    foreach (EventData ev in hourEvents)
+                    {
+                        ev.EventIndex = -1;
+                        ev.MaxNeighboursEvents = ev.MaxNeighboursEvents < eventsCount ? eventsCount : ev.MaxNeighboursEvents;
+                    }
+                }
+
+                // Normalise the MaxNeighboursEvents of each event (previous events can be incorrect)
+                int currentIndex = 0;
+                for (int i = 0; i < 24; i++)
+                {
+                    var hourEvents = dayEvents.Where(p => p.StartHour <= i && p.EndHour >= i+1);
+                    if (hourEvents.Count() > 0)
+                    {
+                        int maxEventsCount = hourEvents.Max(p => p.MaxNeighboursEvents);
+                        foreach (EventData ev in hourEvents)
+                        {
+                            if (currentIndex >= maxEventsCount)
+                                currentIndex = 0;
+
+                            if (ev.EventIndex == -1)
+                            {
+                                ev.EventIndex = currentIndex;
+                                currentIndex++;
+                            }
+
+                            ev.MaxNeighboursEvents = maxEventsCount;
+                        }
+                    }
+                }
+
+                foreach (EventData ev in dayEvents)
                 {
                     // Normalise start and end of the event
                     ev.Start = ev.Start < date ? date : ev.Start;
@@ -238,10 +281,17 @@ namespace Client
                     EventControl evc = new EventControl();
                     evc.DataContext = ev;
 
-                    evc.Margin = new Thickness(5, gridHeight * ev.Start.Hour / 24, 5, gridHeight * (24 - ev.End.Hour) / 24);
+                    double eventSize = gridWidth / ev.MaxNeighboursEvents;
+
+                    evc.Margin = new Thickness(
+                        2 + ev.EventIndex * eventSize,
+                        2 + gridHeight * ev.Start.Hour / 24,
+                        2 + eventSize * (ev.MaxNeighboursEvents - 1 - ev.EventIndex),
+                        2 + gridHeight * (24 - ev.End.Hour) / 24);
 
                     grid.Children.Add(evc);
                 }
+            }
         }
 
         public void RefreshDayGrid()
