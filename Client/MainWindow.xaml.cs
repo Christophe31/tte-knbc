@@ -69,15 +69,6 @@ namespace Client
 			Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
-			// ComboBoxes initialisation
-            ViewType.DataContext = EventType.EventTypeNames;
-			ViewType.SelectedIndex = 0;
-
-            CampusName.DataContext = Api.Server.getIdCampusNames(); ;
-            CampusName.SelectedIndex = 0;
-            PeriodName.DataContext = Api.Server.getIdPeriodsNames();
-            PeriodName.SelectedIndex = 0;
-
             // DatePickers
             StartDate.SelectedDate = DateTime.Now.AddMonths(-12);
             EndDate.SelectedDate = DateTime.Now.AddMonths(12);
@@ -88,6 +79,15 @@ namespace Client
             ((ScrollViewer)WeekGrid.Parent).ScrollToVerticalOffset(WeekGrid.Height * 7 / 24);
             WeekGrid.Children.Add(GetHoursGrid());
             DayGridDateSelection.SelectedDate = DateTime.Today;
+
+			// ComboBoxes initialisation
+            ViewType.DataContext = EventType.EventTypeNames;
+			ViewType.SelectedIndex = 0;
+
+            CampusName.DataContext = Api.Server.getIdCampusNames(); ;
+            CampusName.SelectedIndex = 0;
+            PeriodName.DataContext = Api.Server.getIdPeriodsNames();
+            PeriodName.SelectedIndex = 0;
 
             // Events DataGrid initialisation
             RefreshAllEvents();
@@ -311,7 +311,7 @@ namespace Client
 
         public void RefreshWeekGrid()
         {
-            DateTime selectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault();
+            DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
             DrawDay(MondayContentGrid, selectedDate.AddDays(1-(int)selectedDate.DayOfWeek));
             DrawDay(TuesdayContentGrid, selectedDate.AddDays(2-(int)selectedDate.DayOfWeek));
             DrawDay(WednesdayContentGrid, selectedDate.AddDays(3-(int)selectedDate.DayOfWeek));
@@ -464,5 +464,27 @@ namespace Client
         }
 
         #endregion
+
+        private void DayContentGrid_MouseEnter(object sender, MouseEventArgs e)
+        {
+            Grid day = (Grid)sender;
+            Grid week = ((Grid)day.Parent);
+
+            int col = Grid.GetColumn(day);
+
+            week.ColumnDefinitions[col].Width = new GridLength(3, GridUnitType.Star);
+            RefreshWeekGrid();
+        }
+
+        private void DayContentGrid_MouseLeave(object sender, MouseEventArgs e)
+        {
+            Grid day = (Grid)sender;
+            Grid week = ((Grid)day.Parent);
+
+            int col = Grid.GetColumn(day);
+            
+            week.ColumnDefinitions[col].Width = new GridLength(1, GridUnitType.Star);
+            RefreshWeekGrid();
+        }
     }
 }
