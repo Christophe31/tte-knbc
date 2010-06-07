@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.BL2 {
+namespace Client.BusinessWebService {
     using System.Runtime.Serialization;
     using System;
     
@@ -23,10 +23,13 @@ namespace Client.BL2 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BL2.IdName ClassField;
+        private Client.BusinessWebService.IdName ClassField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -45,7 +48,7 @@ namespace Client.BL2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BL2.IdName Class {
+        public Client.BusinessWebService.IdName Class {
             get {
                 return this.ClassField;
             }
@@ -66,6 +69,19 @@ namespace Client.BL2 {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
                 }
             }
         }
@@ -177,7 +193,7 @@ namespace Client.BL2 {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BL2.IdName CampusField;
+        private Client.BusinessWebService.IdName CampusField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
@@ -186,7 +202,7 @@ namespace Client.BL2 {
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BL2.IdName PeriodField;
+        private Client.BusinessWebService.IdName PeriodField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -199,7 +215,7 @@ namespace Client.BL2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BL2.IdName Campus {
+        public Client.BusinessWebService.IdName Campus {
             get {
                 return this.CampusField;
             }
@@ -238,7 +254,7 @@ namespace Client.BL2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BL2.IdName Period {
+        public Client.BusinessWebService.IdName Period {
             get {
                 return this.PeriodField;
             }
@@ -382,7 +398,7 @@ namespace Client.BL2 {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BL2.RoleData.RoleType RoleField;
+        private Client.BusinessWebService.RoleData.RoleType RoleField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> TargetIdField;
@@ -411,7 +427,7 @@ namespace Client.BL2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BL2.RoleData.RoleType Role {
+        public Client.BusinessWebService.RoleData.RoleType Role {
             get {
                 return this.RoleField;
             }
@@ -497,7 +513,7 @@ namespace Client.BL2 {
         private string SubjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<Client.BL2.EventData.TypeEnum> TypeField;
+        private System.Nullable<Client.BusinessWebService.EventData.TypeEnum> TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -627,7 +643,7 @@ namespace Client.BL2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<Client.BL2.EventData.TypeEnum> Type {
+        public System.Nullable<Client.BusinessWebService.EventData.TypeEnum> Type {
             get {
                 return this.TypeField;
             }
@@ -685,7 +701,7 @@ namespace Client.BL2 {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BL2.ModalityData[] ModalitiesField;
+        private Client.BusinessWebService.ModalityData[] ModalitiesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ModalityField;
@@ -730,7 +746,7 @@ namespace Client.BL2 {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BL2.ModalityData[] Modalities {
+        public Client.BusinessWebService.ModalityData[] Modalities {
             get {
                 return this.ModalitiesField;
             }
@@ -856,7 +872,7 @@ namespace Client.BL2 {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BL2.IBusinessLayer")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BusinessWebService.IBusinessLayer")]
     public interface IBusinessLayer {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delClass", ReplyAction="http://tempuri.org/IBusinessLayer/delClassResponse")]
@@ -881,106 +897,106 @@ namespace Client.BL2 {
         string delPromotion(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUser", ReplyAction="http://tempuri.org/IBusinessLayer/getUserResponse")]
-        Client.BL2.UserData getUser(int ID);
+        Client.BusinessWebService.UserData getUser(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getClass", ReplyAction="http://tempuri.org/IBusinessLayer/getClassResponse")]
-        Client.BL2.ClassData getClass(int ID);
+        Client.BusinessWebService.ClassData getClass(int ID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/getPeriodResponse")]
-        Client.BL2.PeriodData getPeriod(int ID);
+        Client.BusinessWebService.PeriodData getPeriod(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/logIn", ReplyAction="http://tempuri.org/IBusinessLayer/logInResponse")]
-        Client.BL2.RoleData[] logIn(string UserName, string UserPassword);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUserRoles", ReplyAction="http://tempuri.org/IBusinessLayer/getUserRolesResponse")]
+        Client.BusinessWebService.RoleData[] getUserRoles();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getEvents", ReplyAction="http://tempuri.org/IBusinessLayer/getEventsResponse")]
-        Client.BL2.EventData[] getEvents(int Planning, System.DateTime Start, System.DateTime Stop);
+        Client.BusinessWebService.EventData[] getEvents(int Planning, System.DateTime Start, System.DateTime Stop);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/isPlanningUpToDate", ReplyAction="http://tempuri.org/IBusinessLayer/isPlanningUpToDateResponse")]
         bool isPlanningUpToDate(int Planning, System.DateTime LastUpdate);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPlannings", ReplyAction="http://tempuri.org/IBusinessLayer/getPlanningsResponse")]
-        Client.BL2.IdName[] getPlannings(Client.BL2.EventData.TypeEnum Type);
+        Client.BusinessWebService.IdName[] getPlannings(Client.BusinessWebService.EventData.TypeEnum Type);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUniversity", ReplyAction="http://tempuri.org/IBusinessLayer/getUniversityResponse")]
-        Client.BL2.IdName getUniversity();
+        Client.BusinessWebService.IdName getUniversity();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUsers", ReplyAction="http://tempuri.org/IBusinessLayer/getUsersResponse")]
-        Client.BL2.IdName[] getUsers();
+        Client.BusinessWebService.IdName[] getUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPeriods", ReplyAction="http://tempuri.org/IBusinessLayer/getPeriodsResponse")]
-        Client.BL2.IdName[] getPeriods();
+        Client.BusinessWebService.IdName[] getPeriods();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSubjects", ReplyAction="http://tempuri.org/IBusinessLayer/getSubjectsResponse")]
-        Client.BL2.SubjectData[] getSubjects();
+        Client.BusinessWebService.SubjectData[] getSubjects();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSpeakers", ReplyAction="http://tempuri.org/IBusinessLayer/getSpeakersResponse")]
-        Client.BL2.IdName[] getSpeakers();
+        Client.BusinessWebService.IdName[] getSpeakers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTree", ReplyAction="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTreeResponse")]
-        System.Collections.Generic.Dictionary<Client.BL2.IdName, System.Collections.Generic.Dictionary<Client.BL2.IdName, Client.BL2.IdName[]>> getCampusPeriodClassTree();
+        System.Collections.Generic.Dictionary<Client.BusinessWebService.IdName, System.Collections.Generic.Dictionary<Client.BusinessWebService.IdName, Client.BusinessWebService.IdName[]>> getCampusPeriodClassTree();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addUser", ReplyAction="http://tempuri.org/IBusinessLayer/addUserResponse")]
-        string addUser(Client.BL2.UserData User);
+        string addUser(Client.BusinessWebService.UserData User);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addCampus", ReplyAction="http://tempuri.org/IBusinessLayer/addCampusResponse")]
         string addCampus(string CampusName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addClass", ReplyAction="http://tempuri.org/IBusinessLayer/addClassResponse")]
-        string addClass(Client.BL2.ClassData Class);
+        string addClass(Client.BusinessWebService.ClassData Class);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPromotion", ReplyAction="http://tempuri.org/IBusinessLayer/addPromotionResponse")]
         string addPromotion(string PromotionName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addSubject", ReplyAction="http://tempuri.org/IBusinessLayer/addSubjectResponse")]
-        string addSubject(Client.BL2.SubjectData Subject);
+        string addSubject(Client.BusinessWebService.SubjectData Subject);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/addPeriodResponse")]
-        string addPeriod(Client.BL2.PeriodData Period);
+        string addPeriod(Client.BusinessWebService.PeriodData Period);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/grantRole", ReplyAction="http://tempuri.org/IBusinessLayer/grantRoleResponse")]
         string grantRole(int UserId, System.Nullable<int> Target);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addEventResponse")]
-        string addEvent(Client.BL2.EventData Event);
+        string addEvent(Client.BusinessWebService.EventData Event);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPrivateEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addPrivateEventResponse")]
-        string addPrivateEvent(Client.BL2.EventData Event);
+        string addPrivateEvent(Client.BusinessWebService.EventData Event);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setUser", ReplyAction="http://tempuri.org/IBusinessLayer/setUserResponse")]
-        string setUser(Client.BL2.UserData UD);
+        string setUser(Client.BusinessWebService.UserData UD);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setCampus", ReplyAction="http://tempuri.org/IBusinessLayer/setCampusResponse")]
         string setCampus(int Id, string CampusName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setClass", ReplyAction="http://tempuri.org/IBusinessLayer/setClassResponse")]
-        string setClass(Client.BL2.ClassData CD);
+        string setClass(Client.BusinessWebService.ClassData CD);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPromotion", ReplyAction="http://tempuri.org/IBusinessLayer/setPromotionResponse")]
         string setPromotion(int Id, string PromotionName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setSubject", ReplyAction="http://tempuri.org/IBusinessLayer/setSubjectResponse")]
-        string setSubject(Client.BL2.SubjectData SD);
+        string setSubject(Client.BusinessWebService.SubjectData SD);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/setPeriodResponse")]
-        string setPeriod(Client.BL2.PeriodData PD);
+        string setPeriod(Client.BusinessWebService.PeriodData PD);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEvent", ReplyAction="http://tempuri.org/IBusinessLayer/setEventResponse")]
-        string setEvent(Client.BL2.EventData EditedEvent);
+        string setEvent(Client.BusinessWebService.EventData EditedEvent);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPrivateEvent", ReplyAction="http://tempuri.org/IBusinessLayer/setPrivateEventResponse")]
-        string setPrivateEvent(Client.BL2.EventData EditedEvent);
+        string setPrivateEvent(Client.BusinessWebService.EventData EditedEvent);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delUser", ReplyAction="http://tempuri.org/IBusinessLayer/delUserResponse")]
         string delUser(int Id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IBusinessLayerChannel : Client.BL2.IBusinessLayer, System.ServiceModel.IClientChannel {
+    public interface IBusinessLayerChannel : Client.BusinessWebService.IBusinessLayer, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class BusinessLayerClient : System.ServiceModel.ClientBase<Client.BL2.IBusinessLayer>, Client.BL2.IBusinessLayer {
+    public partial class BusinessLayerClient : System.ServiceModel.ClientBase<Client.BusinessWebService.IBusinessLayer>, Client.BusinessWebService.IBusinessLayer {
         
         public BusinessLayerClient() {
         }
@@ -1029,23 +1045,23 @@ namespace Client.BL2 {
             return base.Channel.delPromotion(Id);
         }
         
-        public Client.BL2.UserData getUser(int ID) {
+        public Client.BusinessWebService.UserData getUser(int ID) {
             return base.Channel.getUser(ID);
         }
         
-        public Client.BL2.ClassData getClass(int ID) {
+        public Client.BusinessWebService.ClassData getClass(int ID) {
             return base.Channel.getClass(ID);
         }
         
-        public Client.BL2.PeriodData getPeriod(int ID) {
+        public Client.BusinessWebService.PeriodData getPeriod(int ID) {
             return base.Channel.getPeriod(ID);
         }
         
-        public Client.BL2.RoleData[] logIn(string UserName, string UserPassword) {
-            return base.Channel.logIn(UserName, UserPassword);
+        public Client.BusinessWebService.RoleData[] getUserRoles() {
+            return base.Channel.getUserRoles();
         }
         
-        public Client.BL2.EventData[] getEvents(int Planning, System.DateTime Start, System.DateTime Stop) {
+        public Client.BusinessWebService.EventData[] getEvents(int Planning, System.DateTime Start, System.DateTime Stop) {
             return base.Channel.getEvents(Planning, Start, Stop);
         }
         
@@ -1053,35 +1069,35 @@ namespace Client.BL2 {
             return base.Channel.isPlanningUpToDate(Planning, LastUpdate);
         }
         
-        public Client.BL2.IdName[] getPlannings(Client.BL2.EventData.TypeEnum Type) {
+        public Client.BusinessWebService.IdName[] getPlannings(Client.BusinessWebService.EventData.TypeEnum Type) {
             return base.Channel.getPlannings(Type);
         }
         
-        public Client.BL2.IdName getUniversity() {
+        public Client.BusinessWebService.IdName getUniversity() {
             return base.Channel.getUniversity();
         }
         
-        public Client.BL2.IdName[] getUsers() {
+        public Client.BusinessWebService.IdName[] getUsers() {
             return base.Channel.getUsers();
         }
         
-        public Client.BL2.IdName[] getPeriods() {
+        public Client.BusinessWebService.IdName[] getPeriods() {
             return base.Channel.getPeriods();
         }
         
-        public Client.BL2.SubjectData[] getSubjects() {
+        public Client.BusinessWebService.SubjectData[] getSubjects() {
             return base.Channel.getSubjects();
         }
         
-        public Client.BL2.IdName[] getSpeakers() {
+        public Client.BusinessWebService.IdName[] getSpeakers() {
             return base.Channel.getSpeakers();
         }
         
-        public System.Collections.Generic.Dictionary<Client.BL2.IdName, System.Collections.Generic.Dictionary<Client.BL2.IdName, Client.BL2.IdName[]>> getCampusPeriodClassTree() {
+        public System.Collections.Generic.Dictionary<Client.BusinessWebService.IdName, System.Collections.Generic.Dictionary<Client.BusinessWebService.IdName, Client.BusinessWebService.IdName[]>> getCampusPeriodClassTree() {
             return base.Channel.getCampusPeriodClassTree();
         }
         
-        public string addUser(Client.BL2.UserData User) {
+        public string addUser(Client.BusinessWebService.UserData User) {
             return base.Channel.addUser(User);
         }
         
@@ -1089,7 +1105,7 @@ namespace Client.BL2 {
             return base.Channel.addCampus(CampusName);
         }
         
-        public string addClass(Client.BL2.ClassData Class) {
+        public string addClass(Client.BusinessWebService.ClassData Class) {
             return base.Channel.addClass(Class);
         }
         
@@ -1097,11 +1113,11 @@ namespace Client.BL2 {
             return base.Channel.addPromotion(PromotionName);
         }
         
-        public string addSubject(Client.BL2.SubjectData Subject) {
+        public string addSubject(Client.BusinessWebService.SubjectData Subject) {
             return base.Channel.addSubject(Subject);
         }
         
-        public string addPeriod(Client.BL2.PeriodData Period) {
+        public string addPeriod(Client.BusinessWebService.PeriodData Period) {
             return base.Channel.addPeriod(Period);
         }
         
@@ -1109,15 +1125,15 @@ namespace Client.BL2 {
             return base.Channel.grantRole(UserId, Target);
         }
         
-        public string addEvent(Client.BL2.EventData Event) {
+        public string addEvent(Client.BusinessWebService.EventData Event) {
             return base.Channel.addEvent(Event);
         }
         
-        public string addPrivateEvent(Client.BL2.EventData Event) {
+        public string addPrivateEvent(Client.BusinessWebService.EventData Event) {
             return base.Channel.addPrivateEvent(Event);
         }
         
-        public string setUser(Client.BL2.UserData UD) {
+        public string setUser(Client.BusinessWebService.UserData UD) {
             return base.Channel.setUser(UD);
         }
         
@@ -1125,7 +1141,7 @@ namespace Client.BL2 {
             return base.Channel.setCampus(Id, CampusName);
         }
         
-        public string setClass(Client.BL2.ClassData CD) {
+        public string setClass(Client.BusinessWebService.ClassData CD) {
             return base.Channel.setClass(CD);
         }
         
@@ -1133,19 +1149,19 @@ namespace Client.BL2 {
             return base.Channel.setPromotion(Id, PromotionName);
         }
         
-        public string setSubject(Client.BL2.SubjectData SD) {
+        public string setSubject(Client.BusinessWebService.SubjectData SD) {
             return base.Channel.setSubject(SD);
         }
         
-        public string setPeriod(Client.BL2.PeriodData PD) {
+        public string setPeriod(Client.BusinessWebService.PeriodData PD) {
             return base.Channel.setPeriod(PD);
         }
         
-        public string setEvent(Client.BL2.EventData EditedEvent) {
+        public string setEvent(Client.BusinessWebService.EventData EditedEvent) {
             return base.Channel.setEvent(EditedEvent);
         }
         
-        public string setPrivateEvent(Client.BL2.EventData EditedEvent) {
+        public string setPrivateEvent(Client.BusinessWebService.EventData EditedEvent) {
             return base.Channel.setPrivateEvent(EditedEvent);
         }
         

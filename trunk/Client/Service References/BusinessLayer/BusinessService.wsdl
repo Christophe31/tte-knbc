@@ -34,11 +34,11 @@
                           <wsp:Policy>
                             <sp:ProtectionToken>
                               <wsp:Policy>
-                                <sp:SpnegoContextToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                                <mssp:SslContextToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient" xmlns:mssp="http://schemas.microsoft.com/ws/2005/07/securitypolicy">
                                   <wsp:Policy>
                                     <sp:RequireDerivedKeys />
                                   </wsp:Policy>
-                                </sp:SpnegoContextToken>
+                                </mssp:SslContextToken>
                               </wsp:Policy>
                             </sp:ProtectionToken>
                             <sp:AlgorithmSuite>
@@ -56,6 +56,15 @@
                             <sp:OnlySignEntireHeadersAndBody />
                           </wsp:Policy>
                         </sp:SymmetricBinding>
+                        <sp:SignedSupportingTokens>
+                          <wsp:Policy>
+                            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+                              <wsp:Policy>
+                                <sp:WssUsernameToken10 />
+                              </wsp:Policy>
+                            </sp:UsernameToken>
+                          </wsp:Policy>
+                        </sp:SignedSupportingTokens>
                         <sp:Wss11>
                           <wsp:Policy />
                         </sp:Wss11>

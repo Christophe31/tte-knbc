@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using DDay.iCal;
 
-namespace Client.BL2
+namespace Client.BusinessWebService
 {
 	/// <summary>
 	/// This object represents all the events attributes to displays in the calandar, 

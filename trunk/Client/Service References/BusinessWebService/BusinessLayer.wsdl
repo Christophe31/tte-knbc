@@ -69,11 +69,11 @@
   <wsdl:message name="IBusinessLayer_getPeriod_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPeriodResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_logIn_InputMessage">
-    <wsdl:part name="parameters" element="tns:logIn" />
+  <wsdl:message name="IBusinessLayer_getUserRoles_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUserRoles" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_logIn_OutputMessage">
-    <wsdl:part name="parameters" element="tns:logInResponse" />
+  <wsdl:message name="IBusinessLayer_getUserRoles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUserRolesResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getEvents_InputMessage">
     <wsdl:part name="parameters" element="tns:getEvents" />
@@ -278,9 +278,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriod" message="tns:IBusinessLayer_getPeriod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriodResponse" message="tns:IBusinessLayer_getPeriod_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="logIn">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/logIn" message="tns:IBusinessLayer_logIn_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/logInResponse" message="tns:IBusinessLayer_logIn_OutputMessage" />
+    <wsdl:operation name="getUserRoles">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUserRoles" message="tns:IBusinessLayer_getUserRoles_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUserRolesResponse" message="tns:IBusinessLayer_getUserRoles_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getEvents">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getEvents" message="tns:IBusinessLayer_getEvents_InputMessage" />

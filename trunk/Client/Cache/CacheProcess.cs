@@ -6,6 +6,8 @@ using System.Text;
 using Client.BusinessLayer;
 using System.Threading;
 using System.Runtime.Serialization;
+using System.ServiceModel.Description;
+using System.ServiceModel;
 using DDay.iCal;
 
 
@@ -15,7 +17,8 @@ namespace Client
 	internal class CacheProcess
 	{
 		public BusinessServiceClient Server;
-		public BL2.BusinessLayerClient ServerBL2;
+		public BusinessWebService.BusinessLayerClient ServerBL2;
+		public BusinessWebService.RoleData[] UserRoles;
 		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
 		new System.Runtime.Serialization.NetDataContractSerializer formatter = new System.Runtime.Serialization.NetDataContractSerializer();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
@@ -29,12 +32,21 @@ namespace Client
 			static protected CacheProcess self;
 			protected CacheProcess()
 			{
-				ServerBL2 = new BL2.BusinessLayerClient();
+				ServerBL2 = new BusinessWebService.BusinessLayerClient();
 				Server = new BusinessServiceClient();
-				Server.Open();
-				//ServerBL2.Open();
-				//ServerBL2.logIn("popi", "popi");
-				//ServerBL2.getEvents(3, DateTime.Now, DateTime.Now);
+
+				
+				Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+				Server.ClientCredentials.UserName.UserName = "popi";
+				Server.ClientCredentials.UserName.Password = "popi";
+
+				ServerBL2.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode= System.ServiceModel.Security.X509CertificateValidationMode.None;
+				ServerBL2.ClientCredentials.UserName.UserName = "popi";
+				ServerBL2.ClientCredentials.UserName.Password = "popi";
+				//Server.Open();
+				ServerBL2.Open();
+				UserRoles=ServerBL2.getUserRoles();
+				ServerBL2.getEvents(8, DateTime.Now, DateTime.Now);
 			}
 
 			static public CacheProcess Current

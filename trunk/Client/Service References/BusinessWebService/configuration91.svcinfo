@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="KXkEwbYg8tAQBaWm+n+4ZpE+x9c=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="7fspeX6cEi5fACJ0IGQLuW1az9Q=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="wsHttpContextBinding" name="BusinessLayer2">
+    <bindingConfiguration bindingType="wsHttpContextBinding" name="BusinessLayer3">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessLayer2</serializedValue>
+          <serializedValue>BusinessLayer3</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>00:01:00</serializedValue>
@@ -112,7 +112,7 @@
           <serializedValue>System.ServiceModel.Configuration.NonDualMessageSecurityOverHttpElement</serializedValue>
         </property>
         <property path="/security/message/clientCredentialType" isComplexType="false" isExplicitlyDefined="true" clrType="System.ServiceModel.MessageCredentialType, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>Windows</serializedValue>
+          <serializedValue>UserName</serializedValue>
         </property>
         <property path="/security/message/negotiateServiceCredential" isComplexType="false" isExplicitlyDefined="true" clrType="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>True</serializedValue>
@@ -136,7 +136,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BusinessLayer1" contract="BL2.IBusinessLayer" bindingType="wsHttpContextBinding" address="http://localhost:2900/BusinessLayer.svc/BusinessLayer" bindingConfiguration="BusinessLayer2">
+    <endpoint name="BusinessLayer2" contract="BusinessWebService.IBusinessLayer" bindingType="wsHttpContextBinding" address="http://localhost:2900/BusinessLayer.svc/BusinessLayer" bindingConfiguration="BusinessLayer3">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:2900/BusinessLayer.svc/BusinessLayer</serializedValue>
@@ -148,10 +148,10 @@
           <serializedValue>wsHttpContextBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessLayer2</serializedValue>
+          <serializedValue>BusinessLayer3</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BL2.IBusinessLayer</serializedValue>
+          <serializedValue>BusinessWebService.IBusinessLayer</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>
@@ -211,7 +211,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessLayer1</serializedValue>
+          <serializedValue>BusinessLayer2</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

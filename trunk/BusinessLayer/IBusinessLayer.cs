@@ -11,7 +11,7 @@ namespace BusinessLayer
 	interface IBusinessLayer
 	{
 		[OperationContract]
-		RoleData[] logIn(string UserName,string UserPassword);
+		RoleData[] getUserRoles();
 		
 		#region Lecture d'évènements
 			[OperationContract]

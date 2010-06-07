@@ -11,7 +11,7 @@ namespace Client
 	{
 		CacheProcess cacheProcess;
 		public BusinessServiceClient Server;
-		public Client.BL2.BusinessLayerClient ServerBL2;
+		public Client.BusinessWebService.BusinessLayerClient ServerBL2;
 		public CacheWrapper()
 		{
 			cacheProcess = CacheProcess.Current;
