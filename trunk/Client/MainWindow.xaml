@@ -77,7 +77,8 @@
                         <TextBlock>Précédent</TextBlock>
                     </StackPanel>
                 </Button>
-                <DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DayGridDateSelection" SelectedDateChanged="DayGridDateSelection_SelectedDateChanged" />
+                <DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DayGridDateSelection"
+                            SelectedDateChanged="DayGridDateSelection_SelectedDateChanged" />
                 <Button Name="DayGridNextDay" Click="DayGridNextDay_Click">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="0,0,3,0">Suivant</TextBlock>
@@ -127,7 +128,7 @@
                     </Grid>
 
                     <ScrollViewer Grid.Column="0" Grid.Row="1">
-                        <Grid Name="WeekGrid"
+                        <Grid Name="WeekGrid" ShowGridLines="True"
                             Height="{Binding Converter={StaticResource GridSizeConverter},
                                             RelativeSource={RelativeSource FindAncestor,
                                                                             AncestorType=ScrollViewer,
@@ -149,13 +150,20 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             
-                            <Grid Name="MondayContentGrid" Grid.Row="1" Grid.Column="1"/>
-                            <Grid Name="TuesdayContentGrid" Grid.Row="1" Grid.Column="2"/>
-                            <Grid Name="WednesdayContentGrid" Grid.Row="1" Grid.Column="3"/>
-                            <Grid Name="ThursdayContentGrid" Grid.Row="1" Grid.Column="4"/>
-                            <Grid Name="FridayContentGrid" Grid.Row="1" Grid.Column="5"/>
-                            <Grid Name="SaturdayContentGrid" Grid.Row="1" Grid.Column="6"/>
-                            <Grid Name="SundayContentGrid" Grid.Row="1" Grid.Column="7"/>
+                            <Grid Name="MondayContentGrid" Grid.Row="1" Grid.Column="1" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid Name="TuesdayContentGrid" Grid.Row="1" Grid.Column="2" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid Name="WednesdayContentGrid" Grid.Row="1" Grid.Column="3" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid Name="ThursdayContentGrid" Grid.Row="1" Grid.Column="4" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid Name="FridayContentGrid" Grid.Row="1" Grid.Column="5" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid Name="SaturdayContentGrid" Grid.Row="1" Grid.Column="6" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid Name="SundayContentGrid" Grid.Row="1" Grid.Column="7" Focusable="True"
+                                  MouseEnter="DayContentGrid_MouseEnter" MouseLeave="DayContentGrid_MouseLeave" />
                         </Grid>
                     </ScrollViewer>
                 </Grid>
