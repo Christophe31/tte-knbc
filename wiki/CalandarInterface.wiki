@@ -2,14 +2,24 @@
 _par Breil Romaric_
 
 ==Todo list==
-  * Events list
-    * ~~Display/hide non mandatory events~~ (to be tested)
+
+  * General
     * Create an event
     * Update an event
     * Delete an event
+    * Display hours repports (planified/theorical): CSV ?
+
+  * Events list
+    * ~~Display/hide non mandatory events~~
 
   * Day/week calendar
-    * Creation of a control which displays an event
-    * Display of an event in each case of the grid
-    * Display of some events in a case
-    * Display of an event on many cases
+    * ~~Creation of a control which displays an event~~
+    * ~~Display of events on the controls~~
+    * Colored events
+    * Events display improvement
+
+  * Week calendar
+    * Display improvement (days extended when focused)
+
+  * Month calendar
+    * Each day contains a list of events in this day
