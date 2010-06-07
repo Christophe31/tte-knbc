@@ -15,7 +15,7 @@ _by Breil Romaric_
   * Day/week calendar
     * ~~Creation of a control which displays an event~~
     * ~~Display of events on the controls~~
-    * Coloured events
+    * Coloured events. Modalities are stored in a ComboBox _and_ in the EventControl. They are compared in the control to pre-existing modalities, or by planning if the modality doesn't exist
     * Events display improvement
 
   * Week calendar
