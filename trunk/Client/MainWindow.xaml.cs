@@ -85,6 +85,9 @@ namespace Client
             // Draw Grids
             ((ScrollViewer)DayGrid.Parent).ScrollToVerticalOffset(DayGrid.Height * 7 / 24);
             DayGrid.Children.Add(GetHoursGrid());
+            ((ScrollViewer)WeekGrid.Parent).ScrollToVerticalOffset(WeekGrid.Height * 7 / 24);
+            WeekGrid.Children.Add(GetHoursGrid());
+            DayGridDateSelection.SelectedDate = DateTime.Today;
 
             // Events DataGrid initialisation
             RefreshAllEvents();
@@ -186,6 +189,7 @@ namespace Client
             // Refresh views
             EventsGrid.DataContext = AllEvents;
             RefreshDayGrid();
+            RefreshWeekGrid();
         }
 
         /// <summary>
@@ -297,12 +301,39 @@ namespace Client
 
         public void RefreshDayGrid()
         {
-            DrawDay(DayContentGrid, new DateTime(2010, 10, 10));
+            DrawDay(DayContentGrid, DayGridDateSelection.SelectedDate.GetValueOrDefault());
         }
 
         private void DayGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             RefreshDayGrid();
+        }
+
+        public void RefreshWeekGrid()
+        {
+            DateTime selectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault();
+            DrawDay(MondayContentGrid, selectedDate.AddDays(1-(int)selectedDate.DayOfWeek));
+            DrawDay(TuesdayContentGrid, selectedDate.AddDays(2-(int)selectedDate.DayOfWeek));
+            DrawDay(WednesdayContentGrid, selectedDate.AddDays(3-(int)selectedDate.DayOfWeek));
+            DrawDay(ThursdayContentGrid, selectedDate.AddDays(4-(int)selectedDate.DayOfWeek));
+            DrawDay(FridayContentGrid, selectedDate.AddDays(5-(int)selectedDate.DayOfWeek));
+            DrawDay(SaturdayContentGrid, selectedDate.AddDays(6-(int)selectedDate.DayOfWeek));
+            DrawDay(SundayContentGrid, selectedDate.AddDays(-(int)selectedDate.DayOfWeek));
+        }
+
+        private void WeekGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            RefreshWeekGrid();
+        }
+
+        private void DayGridPreviousDay_Click(object sender, RoutedEventArgs e)
+        {
+            DayGridDateSelection.SelectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault().AddDays(-1);
+        }
+
+        private void DayGridNextDay_Click(object sender, RoutedEventArgs e)
+        {
+            DayGridDateSelection.SelectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault().AddDays(1);
         }
         #endregion
 
@@ -394,6 +425,12 @@ namespace Client
             }
             else
                 box.Text = "0";
+        }
+
+        private void DayGridDateSelection_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RefreshDayGrid();
+            RefreshWeekGrid();
         }
         #endregion
 

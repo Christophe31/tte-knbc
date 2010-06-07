@@ -68,6 +68,22 @@
             <ToolBar>
                 <Button Content="Administration" Click="button1_Click_1"/>
             </ToolBar>
+
+            <ToolBar>
+                <Button Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Icons\resultset_previous.png" Margin="0,0,3,0"/>
+                        <TextBlock>Précédent</TextBlock>
+                    </StackPanel>
+                </Button>
+                <DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DayGridDateSelection" SelectedDateChanged="DayGridDateSelection_SelectedDateChanged" />
+                <Button Name="DayGridNextDay" Click="DayGridNextDay_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="0,0,3,0">Suivant</TextBlock>
+                        <Image Source="Icons\resultset_next.png"/>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
         </ToolBarTray>
         
 		<TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
@@ -76,66 +92,95 @@
             <TabItem Header="Semaine">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                    	<ColumnDefinition />
-                    	<ColumnDefinition />
-                    	<ColumnDefinition />
-                    	<ColumnDefinition />
-                    	<ColumnDefinition />
-                    	<ColumnDefinition />
-                    	<ColumnDefinition />
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-            
                     <Grid.RowDefinitions>
-                    	<RowDefinition />
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
-            
-                    <TextBlock Grid.Column="0" Grid.Row="0"><Run Text="Lundi"/></TextBlock>
-                    <TextBlock Grid.Column="1" Grid.Row="0"><Run Text="Mardi"/></TextBlock>
-                    <TextBlock Grid.Column="2" Grid.Row="0"><Run Text="Mercredi"/></TextBlock>
-                    <TextBlock Grid.Column="3" Grid.Row="0"><Run Text="Jeudi"/></TextBlock>
-                    <TextBlock Grid.Column="4" Grid.Row="0"><Run Text="Vendredi"/></TextBlock>
-                    <TextBlock Grid.Column="5" Grid.Row="0"><Run Text="Samedi"/></TextBlock>
-                    <TextBlock Grid.Column="6" Grid.Row="0"><Run Text="Dimanche"/></TextBlock>
+
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Column="1" Grid.Row="0"><Run Text="Lundi"/></TextBlock>
+                        <TextBlock Grid.Column="2" Grid.Row="0"><Run Text="Mardi"/></TextBlock>
+                        <TextBlock Grid.Column="3" Grid.Row="0"><Run Text="Mercredi"/></TextBlock>
+                        <TextBlock Grid.Column="4" Grid.Row="0"><Run Text="Jeudi"/></TextBlock>
+                        <TextBlock Grid.Column="5" Grid.Row="0"><Run Text="Vendredi"/></TextBlock>
+                        <TextBlock Grid.Column="6" Grid.Row="0"><Run Text="Samedi"/></TextBlock>
+                        <TextBlock Grid.Column="7" Grid.Row="0"><Run Text="Dimanche"/></TextBlock>
+
+                    </Grid>
+
+                    <ScrollViewer Grid.Column="0" Grid.Row="1">
+                        <Grid Name="WeekGrid"
+                            Height="{Binding Converter={StaticResource GridSizeConverter},
+                                            RelativeSource={RelativeSource FindAncestor,
+                                                                            AncestorType=ScrollViewer,
+                                                                            AncestorLevel=1},
+                                            Path=ActualHeight}" SizeChanged="WeekGrid_SizeChanged">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid Name="MondayContentGrid" Grid.Row="1" Grid.Column="1"/>
+                            <Grid Name="TuesdayContentGrid" Grid.Row="1" Grid.Column="2"/>
+                            <Grid Name="WednesdayContentGrid" Grid.Row="1" Grid.Column="3"/>
+                            <Grid Name="ThursdayContentGrid" Grid.Row="1" Grid.Column="4"/>
+                            <Grid Name="FridayContentGrid" Grid.Row="1" Grid.Column="5"/>
+                            <Grid Name="SaturdayContentGrid" Grid.Row="1" Grid.Column="6"/>
+                            <Grid Name="SundayContentGrid" Grid.Row="1" Grid.Column="7"/>
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
             </TabItem>
             
             <TabItem Header="Jour">
-                <Grid x:Name="CalendarDay">
-                    <Grid.ColumnDefinitions>
-                    	<ColumnDefinition Width="Auto" />
-                    	<ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-
-                    <Grid.RowDefinitions>
-                    	<RowDefinition Height="Auto" />
-                    	<RowDefinition />
-                    </Grid.RowDefinitions>
-
-                    <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
-                        <TextBlock>Lundi</TextBlock>
-                    </StackPanel>
-
-                    <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
-                        <!--<local:EventControl x:Name="EventCtl" />-->
-                        <Grid ShowGridLines="True" Name="DayGrid"
-                              Height="{Binding Converter={StaticResource GridSizeConverter},
-                                               RelativeSource={RelativeSource FindAncestor,
-                                                                              AncestorType=ScrollViewer,
-                                                                              AncestorLevel=1},
-                                               Path=ActualHeight}" SizeChanged="DayGrid_SizeChanged">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
+                    <!--<local:EventControl x:Name="EventCtl" />-->
+                    <Grid Name="DayGrid"
+                            Height="{Binding Converter={StaticResource GridSizeConverter},
+                                            RelativeSource={RelativeSource FindAncestor,
+                                                                            AncestorType=ScrollViewer,
+                                                                            AncestorLevel=1},
+                                            Path=ActualHeight}" SizeChanged="DayGrid_SizeChanged">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
                             
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                             
-                            <Grid Name="DayContentGrid" Grid.Row="0" Grid.Column="1"/>
-                        </Grid>
-                    </ScrollViewer>
-                </Grid>
+                        <Grid Name="DayContentGrid" Grid.Row="0" Grid.Column="1"/>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
             
             <TabItem Header="Liste">
