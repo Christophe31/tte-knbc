@@ -88,8 +88,32 @@
             </ToolBar>
         </ToolBarTray>
         
-		<TabControl SelectedIndex="2" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
-            <TabItem Header="Mois"></TabItem>
+		<TabControl SelectedIndex="0" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
+            <TabItem Header="Mois">
+                <Grid Name="MonthGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Text="Lundi"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Text="Mardi"/>
+                    <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Text="Mercredi"/>
+                    <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Text="Jeudi"/>
+                    <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Text="Vendredi"/>
+                    <TextBlock Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center" Text="Samedi"/>
+                    <TextBlock Grid.Row="0" Grid.Column="6" HorizontalAlignment="Center" Text="Dimanche"/>
+                </Grid>
+            </TabItem>
             
             <TabItem Header="Semaine">
                 <Grid>
