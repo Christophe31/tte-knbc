@@ -60,6 +60,7 @@
     <Content Include="tte-bcdkn.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
     <None Include="Properties\DataSources\Entities.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

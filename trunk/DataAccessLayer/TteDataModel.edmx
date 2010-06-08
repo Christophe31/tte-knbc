@@ -370,7 +370,7 @@
           <NavigationProperty Name="Events" Relationship="TteDataModel.FK_Event_Subject" FromRole="Modality" ToRole="Event" />
           <NavigationProperty Name="Modalitys" Relationship="TteDataModel.FK_Modality_Subject" FromRole="Modality" ToRole="Modality1" />
           <NavigationProperty Name="OnSubject" Relationship="TteDataModel.FK_Modality_Subject" FromRole="Modality1" ToRole="Modality" />
-          <Property Type="Int32" Name="Hours" Nullable="false" />
+          <Property Type="Int32" Name="Hours" Nullable="true" />
         </EntityType>
         <EntityType Name="Period">
           <Key>
