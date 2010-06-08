@@ -6,7 +6,7 @@ using System.ComponentModel;
 using DDay.iCal;
 using System.Windows.Media;
 
-namespace Client.BusinessWebService
+namespace Client.BusinessService
 {
 	/// <summary>
 	/// This object represents all the events attributes to displays in the calandar, 
@@ -222,7 +222,7 @@ namespace Client.BusinessWebService
         void IEditableObject.EndEdit()
         {
             CacheWrapper Api = new CacheWrapper();
-            if (Api.ServerBL2.State == System.ServiceModel.CommunicationState.Opened)
+            if (Api.Server.State == System.ServiceModel.CommunicationState.Opened)
             {
                 // Event creation
                 if (Id == 0)
@@ -234,7 +234,7 @@ namespace Client.BusinessWebService
                 // Event edition
                 else
                 {
-                    Api.ServerBL2.setEvent(this);
+                    Api.Server.setEvent(this);
                 }
             }
         }

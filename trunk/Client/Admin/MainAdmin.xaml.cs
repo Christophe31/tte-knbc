@@ -10,7 +10,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Client.BusinessLayer;
+using Client.BusinessService;
+
+
 
 namespace Client
 {
@@ -34,7 +36,7 @@ namespace Client
          * est sélectionnée ou non pour choisir l'action à effectuer. ça permet de supprimer une ligne d'onglets,
          * et éventuellement d'intégrer ta fenêtre à la fenêtre principale, dans un onglet "Administration".
          */
-
+		/*
         #region Tuple utilisés par l'interface
             IdName[] classList = null;
 			IdName[] userList = null;
@@ -194,7 +196,7 @@ namespace Client
 
             //On tente de modifier l'utilisateur
             //string returnValue = Api.ChangeUser(username, passwordHashed, cbUserAdd_Class.SelectedItem.ToString());
-
+*/
             /*
             //Si la modification s'est correctement déroulée
             if (returnValue.Equals("ok"))
@@ -210,7 +212,7 @@ namespace Client
                 sbStatusText.Text = returnValue;
             }
             */
-        }
+  /*      }
 
         //Si l'administrateur souhaite supprimer un utilisateur
         private void bUserChange_DelUser_Click(object sender, RoutedEventArgs e)
@@ -809,5 +811,5 @@ namespace Client
 
         
         #endregion
-    }
+*/    }
 }

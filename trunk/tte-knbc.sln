@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{BF192F1E-A817-4F84-A557-0DC02DD2D6BF}"
@@ -26,16 +24,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}.Release|x86.ActiveCfg = Release|Any CPU
 		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADB5F73C-C9E2-4E41-9D45-18D243933E4F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Client.BusinessWebService;
+using Client.BusinessService;
 
 namespace Client
 {
@@ -113,7 +113,7 @@ namespace Client
 
         private void AdministrationControl_Loaded(object sender, RoutedEventArgs e)
         {
-            promoList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Promotion" } }.Concat(Api.ServerBL2.getPromotions()).ToArray();
+            promoList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Promotion" } }.Concat(Api.Server.getPromotions()).ToArray();
             cbPromo_Promotions.DataContext = promoList;
             cbPromo_Promotions.SelectedIndex = 0;
 
@@ -121,19 +121,19 @@ namespace Client
             //cbSubjects_Subjects.DataContext = subjectsList;
             //cbSubjects_Subjects.SelectedIndex = 0;
 
-            campusList = new IdName[] { new IdName() { Id = 0, Name = "Nouveau Campus" } }.Concat(Api.ServerBL2.getPlannings(EventData.TypeEnum.Campus)).ToArray();
+            campusList = new IdName[] { new IdName() { Id = 0, Name = "Nouveau Campus" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Campus)).ToArray();
             cbCampus_Campus.DataContext = campusList;
             cbCampus_Campus.SelectedIndex = 0;
 
-            periodsList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Période" } }.Concat(Api.ServerBL2.getPlannings(EventData.TypeEnum.Period)).ToArray();
+            periodsList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Période" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Period)).ToArray();
             cbPeriods_Period.DataContext = periodsList;
             cbPeriods_Period.SelectedIndex = 0;
             
-            classesList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Classe" } }.Concat(Api.ServerBL2.getPlannings(EventData.TypeEnum.Class)).ToArray();
+            classesList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Classe" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
             cbClasses_Classes.DataContext = classesList;
             cbClasses_Classes.SelectedIndex = 0;
 
-            usersList = new IdName[] { new IdName() { Id = 0, Name = "Nouvel Utilisateur" } }.Concat(Api.ServerBL2.getUsers()).ToArray();
+            usersList = new IdName[] { new IdName() { Id = 0, Name = "Nouvel Utilisateur" } }.Concat(Api.Server.getUsers()).ToArray();
             cbUsers_Users.DataContext = usersList;
             cbUsers_Users.SelectedIndex = 0;
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
-using DataModel;
+using DataAccessLayer;
 
 namespace BusinessLayer
 {
@@ -14,23 +14,6 @@ namespace BusinessLayer
 		public UserData()
 		{
 
-		}
-
-		/// <summary>
-		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
-		/// </summary>
-		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public UserData(User UserEntity, IdName Class)
-		{
-			this.Id = UserEntity.Id;
-			this.Name = UserEntity.Name;
-			this.Class = Class;
-			this.Password = null;
-		}
-
-		public static UserData UD(User UserEntity, IdName Class)
-		{
-			return new UserData(UserEntity, Class);
 		}
 
 

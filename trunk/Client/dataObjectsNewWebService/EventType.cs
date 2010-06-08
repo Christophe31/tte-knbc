@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Client.BusinessLayer;
 
-namespace Client.BusinessWebService
+namespace Client.BusinessService
 {
 	/// <summary>
 	/// Stores informations to manage and display event types.
