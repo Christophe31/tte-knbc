@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="QA3DOl2JprSDZlDFJYEI9zYzPs0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="PVplOAzJa7KRKoSlE8b6lv76gUw=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="wsHttpContextBinding" name="BusinessLayer4">
+    <bindingConfiguration bindingType="wsHttpContextBinding" name="BusinessLayer">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessLayer4</serializedValue>
+          <serializedValue>BusinessLayer</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>00:01:00</serializedValue>
@@ -136,7 +136,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BusinessLayer3" contract="BusinessService.IBusinessLayer" bindingType="wsHttpContextBinding" address="http://localhost:2900/BusinessLayer.svc/BusinessLayer" bindingConfiguration="BusinessLayer4">
+    <endpoint name="BusinessLayer" contract="BusinessService.IBusinessLayer" bindingType="wsHttpContextBinding" address="http://localhost:2900/BusinessLayer.svc/BusinessLayer" bindingConfiguration="BusinessLayer">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:2900/BusinessLayer.svc/BusinessLayer</serializedValue>
@@ -148,7 +148,7 @@
           <serializedValue>wsHttpContextBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessLayer4</serializedValue>
+          <serializedValue>BusinessLayer</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>BusinessService.IBusinessLayer</serializedValue>
@@ -211,7 +211,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessLayer3</serializedValue>
+          <serializedValue>BusinessLayer</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
