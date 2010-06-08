@@ -5,7 +5,7 @@ using System.Text;
 using System.ComponentModel;
 using DDay.iCal;
 
-namespace Client.BusinessLayer
+namespace Client.BusinessService
 {
 	/// <summary>
 	/// This object represents all the events attributes to displays in the calandar, 
@@ -181,7 +181,7 @@ namespace Client.BusinessLayer
             // Event creation
             if (Id == 0)
             {
-				Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker, Place);
+				Api.Server.addEvent(this,Api.Server.getUniversity(),null,null);
             }
 
             // Event edition
