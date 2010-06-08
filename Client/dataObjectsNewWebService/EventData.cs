@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using DDay.iCal;
+using System.Windows.Media;
 
 namespace Client.BusinessWebService
 {
@@ -108,6 +109,51 @@ namespace Client.BusinessWebService
         /// Index of the current event in the displayed day (must be refreshed for each day drawing)
         /// </summary>
         public int EventIndex { get; set; }
+
+        public SolidColorBrush BorderColor
+        {
+            get
+            {
+                // Modality specified
+                string[] modalities = SubjectData.PresetModalities;
+                if (Modality == modalities[0])
+                    return Brushes.MediumTurquoise;
+                else if (Modality == modalities[1])
+                    return Brushes.PaleTurquoise;
+                else if (Modality == modalities[2])
+                    return Brushes.PaleGreen;
+                else if (Modality == modalities[3])
+                    return Brushes.Lime;
+                else if (Modality == modalities[4])
+                    return Brushes.Orange;
+                else if (Modality == modalities[5])
+                    return Brushes.Red;
+
+                // Fallback to planning type
+                else if (Type == TypeEnum.University)
+                    return Brushes.Chartreuse;
+                else if (Type == TypeEnum.Campus)
+                    return Brushes.MediumSpringGreen;
+                else if (Type == TypeEnum.Period)
+                    return Brushes.PowderBlue;
+                else if (Type == TypeEnum.Class)
+                    return Brushes.Cyan;
+                else if (Type == TypeEnum.User)
+                    return Brushes.Silver;
+
+                return Brushes.White;
+            }
+        }
+
+        public SolidColorBrush BackgroundColor
+        {
+            get
+            {
+                SolidColorBrush color = new SolidColorBrush(BorderColor.Color);
+                color.Opacity = 0.1;
+                return color;
+            }
+        }
 
         #endregion Properties
 
