@@ -66,8 +66,8 @@ namespace BusinessLayer
 							Mandatory = p.Mandatory,
 							Name = p.Name,
 							Place = p.Place,
-							Subject = p.Modality.OnSubject.Name,
-							Modality = p.Modality.Name,
+							Subject = p.Modality==null?null:p.Modality.OnSubject.Name,
+							Modality = p.Modality==null?null:p.Modality.Name,
 							Speaker = p.SpeakerRef.Name,
 							Type = (EventData.TypeEnum)p.PlaningRef.Type
 					}).ToArray();
