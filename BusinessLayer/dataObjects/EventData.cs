@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Runtime.Serialization;
-using DataModel;
 
 namespace BusinessLayer
 {
@@ -29,34 +28,6 @@ namespace BusinessLayer
 		{
 
 		}
-		/// <summary>
-		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
-		/// </summary>
-		/// <param name="EventEntity">Entrée à rendre sérialisable</param>
-		public EventData(Event EventEntity, string Subject,string Modality, string Speaker, TypeEnum? aType)
-		{
-			this.Id = EventEntity.Id;
-			this.Start = EventEntity.Start;
-			this.End = EventEntity.End;
-			this.Mandatory = EventEntity.Mandatory;
-			this.Name = EventEntity.Name;
-			this.Place = EventEntity.Place;
-			this.Subject = Subject;
-			this.Modality = Modality;
-			this.Speaker = Speaker;
-			this.Type = aType;
-		}
-
-		/// <summary>
-		/// pour économiser le mot clef new dans les requetes déjà longues
-		/// </summary>
-		/// <returns>Nouvelle instance</returns>
-		public static EventData ED(Event EventEntity, string Subject, string Modality, string Speaker, TypeEnum aType)
-		{
-			return new EventData(EventEntity, Subject, Modality, Speaker, aType);
-		}
-
-
 
 		public EventData(DataAccessLayer.Event EventEntity, string Subject, string Modality, string Speaker, TypeEnum? aType)
 		{

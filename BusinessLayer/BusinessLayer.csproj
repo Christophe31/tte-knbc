@@ -65,7 +65,7 @@
   <ItemGroup>
     <Content Include="ApiTestWindowIcon.ico" />
     <Content Include="BusinessLayer.svc" />
-    <Content Include="BusinessService.svc" />
+    <Content Include="BusinessServiceOld.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -82,8 +82,8 @@
     <Compile Include="BusinessLayer.svc.cs">
       <DependentUpon>BusinessLayer.svc</DependentUpon>
     </Compile>
-    <Compile Include="BusinessService.svc.cs">
-      <DependentUpon>BusinessService.svc</DependentUpon>
+    <Compile Include="BusinessServiceOld.svc.cs">
+      <DependentUpon>BusinessServiceOld.svc</DependentUpon>
     </Compile>
     <Compile Include="CredentialsClass.cs" />
     <Compile Include="dataObjects\ClassData.cs" />
@@ -105,10 +105,6 @@
     <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
       <Project>{3E35A16F-1637-46B3-B84E-E84AAC4B9314}</Project>
       <Name>DataAccessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataModel\DataModel.csproj">
-      <Project>{5A3EC50E-9C9F-41D6-99FA-F990DE6AF2C8}</Project>
-      <Name>DataModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

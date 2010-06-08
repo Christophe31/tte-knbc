@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text;
-using Client.BusinessLayer;
+using Client.BusinessService;
 using System.Threading;
 using System.Runtime.Serialization;
 using System.ServiceModel.Description;
@@ -16,11 +16,10 @@ namespace Client
 {
 	internal class CacheProcess
 	{
-		public BusinessServiceClient Server;
-		public BusinessWebService.BusinessLayerClient ServerBL2;
-		public BusinessWebService.RoleData[] UserRoles;
+		public BusinessService.BusinessLayerClient Server;
+		public BusinessService.RoleData[] UserRoles;
 		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
-		new System.Runtime.Serialization.NetDataContractSerializer formatter = new System.Runtime.Serialization.NetDataContractSerializer();
+		System.Runtime.Serialization.NetDataContractSerializer formatter = new System.Runtime.Serialization.NetDataContractSerializer();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
 		#region delegate
 		public delegate EventData[] EventsGetterId(int Id, DateTime Start, DateTime Stop);
@@ -32,21 +31,16 @@ namespace Client
 			static protected CacheProcess self;
 			protected CacheProcess()
 			{
-				ServerBL2 = new BusinessWebService.BusinessLayerClient();
-				Server = new BusinessServiceClient();
+				Server = new BusinessService.BusinessLayerClient();
 
 				
 				Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
 				Server.ClientCredentials.UserName.UserName = "popi";
 				Server.ClientCredentials.UserName.Password = "popi";
 
-				ServerBL2.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode= System.ServiceModel.Security.X509CertificateValidationMode.None;
-				ServerBL2.ClientCredentials.UserName.UserName = "popi";
-				ServerBL2.ClientCredentials.UserName.Password = "popi";
-				//Server.Open();
-				ServerBL2.Open();
-				UserRoles=ServerBL2.getUserRoles();
-				ServerBL2.getEvents(8, DateTime.Now, DateTime.Now);
+				Server.Open();
+				UserRoles=Server.getUserRoles();
+				Server.getEvents(8, DateTime.Now, DateTime.Now);
 			}
 
 			static public CacheProcess Current
@@ -78,12 +72,8 @@ namespace Client
 			{
 				new CacheGetterId(refreshCache).BeginInvoke(eventGetter, idn, null,null);
 			}
-			public void RefreshCache(EventsGetter eventGetter, string name)
-			{
-				new CacheGetter(refreshCache).BeginInvoke(eventGetter, name, null, null);
-			}
 
-			private void refreshCache(EventsGetterId eventGetter,IdName idn)
+		private void refreshCache(EventsGetterId eventGetter,IdName idn)
             {
                 iCalendar iCal = new iCalendar();
 				EventData[] tmp = eventGetter(idn.Id, DateTime.MinValue, DateTime.MaxValue);
@@ -99,18 +89,6 @@ namespace Client
             {
                 return "cache_" + idn.Name + "_" + idn.Id + @".ics";
             }
-
-             [Obsolete]
-			private void refreshCache(EventsGetter eventGetter, string name)
-	        {
-                iCalendar iCal = new iCalendar();
-                foreach (var i in eventGetter( DateTime.MinValue, DateTime.MaxValue))
-                {
-                    i.AddEventToCalendar(ref iCal);
-                }
-                iCal.AddProperty("X-LastUpdate", DateTime.Now.ToString());
-				calSerializer.Serialize(iCal,"cache__"+ name + @".ics");
-             }
 		#endregion
 		
 	}

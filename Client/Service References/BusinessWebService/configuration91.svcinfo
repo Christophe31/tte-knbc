@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="7fspeX6cEi5fACJ0IGQLuW1az9Q=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="62buepoYdab5kv26ASnWKWnOlVk=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="wsHttpContextBinding" name="BusinessLayer3">
       <properties>
@@ -136,7 +136,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BusinessLayer2" contract="BusinessWebService.IBusinessLayer" bindingType="wsHttpContextBinding" address="http://localhost:2900/BusinessLayer.svc/BusinessLayer" bindingConfiguration="BusinessLayer3">
+    <endpoint name="BusinessLayer2" contract="BusinessService.IBusinessLayer" bindingType="wsHttpContextBinding" address="http://localhost:2900/BusinessLayer.svc/BusinessLayer" bindingConfiguration="BusinessLayer3">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:2900/BusinessLayer.svc/BusinessLayer</serializedValue>
@@ -151,7 +151,7 @@
           <serializedValue>BusinessLayer3</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BusinessWebService.IBusinessLayer</serializedValue>
+          <serializedValue>BusinessService.IBusinessLayer</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

@@ -6,7 +6,7 @@ using System.ServiceModel;
 using System.Security.Principal;
 using System.IdentityModel.Selectors;
 using System.IdentityModel;
-using DataModel;
+using DataAccessLayer;
 
 namespace BusinessLayer
 {
