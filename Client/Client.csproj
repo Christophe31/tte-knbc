@@ -363,6 +363,31 @@
   <ItemGroup>
     <Resource Include="Icons\TteLogo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\building32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\world32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\hourglass32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\group32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\user32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\book32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\medalgold32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\accept32.png" />
+    <Resource Include="Icons\error32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

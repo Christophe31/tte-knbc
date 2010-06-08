@@ -7,7 +7,7 @@
         Title="TimeTableEasy" 
 		mc:Ignorable="d" 
 		Icon="Icons\TteLogo.png"
-		Height="768" Width="1024" Loaded="Window_Loaded" xmlns:my="clr-namespace:Client.Calendar" MinHeight="575" MinWidth="787">
+		Height="768" Width="1024" Loaded="Window_Loaded" xmlns:my="clr-namespace:Client.Calendar" MinHeight="654" MinWidth="787">
     <Window.Resources>
         <my:GridSizeConverter x:Key="GridSizeConverter" />
     </Window.Resources>
