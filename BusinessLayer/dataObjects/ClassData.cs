@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
 
 	[DataContract]
-	public class ClassData
+	public class ClassData:IdName
 	{
 		/// <summary>
 		/// Permet de créer un évènement sérialisable à partir d'une entitée évènement.
@@ -31,23 +31,12 @@ namespace BusinessLayer
 		{
 			return new ClassData(ClassEntity, Campus, Period);
 		}
-		/// <sumClassName = ClassName;mary>
-		/// Id.
-		/// </summary>
-		[DataMember]
-		public int Id { get; set; }
 
 		/// <summary>
 		/// Campus de la classe
 		/// </summary>
 		[DataMember]
 		public IdName Campus { get; set; }
-
-		/// <summary>
-		/// Nom de la classe
-		/// </summary>
-		[DataMember]
-		public string Name { get; set; }
 
 		/// <summary>
 		/// Id de la periode

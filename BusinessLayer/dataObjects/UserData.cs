@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
 
 	[DataContract]
-	public class UserData
+	public class UserData:IdName
 	{
 		public UserData()
 		{
@@ -33,23 +33,12 @@ namespace BusinessLayer
 			return new UserData(UserEntity, Class);
 		}
 
-		/// <sumClassName = ClassName;mary>
-		/// Date de Début de l'évènement.
-		/// </summary>
-		[DataMember]
-		public int Id { get; set; }
 
 		/// <summary>
 		/// nom de la classe de l'utilisateur
 		/// </summary>
 		[DataMember]
 		public IdName Class { get; set; }
-
-		/// <summary>
-		/// Nom de l'utilisateur
-		/// </summary>
-		[DataMember]
-		public string Name { get; set; }
 	
 		/// <summary>
 		/// Nom de l'utilisateur

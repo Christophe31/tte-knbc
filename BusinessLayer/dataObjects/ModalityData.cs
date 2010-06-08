@@ -9,23 +9,11 @@ namespace BusinessLayer
 {
 
 	[DataContract]
-	public class ModalityData
+	public class ModalityData:IdName
 	{
 		public ModalityData()
 		{
 		}
-
-		/// <summary>
-		/// Id.
-		/// </summary>
-		[DataMember]
-		public int Id { get; set; }
-
-		/// <summary>
-		/// Nom de la modalité
-		/// </summary>
-		[DataMember]
-		public string Name { get; set; }
 
 		/// <summary>
 		/// Lien vers le sujet

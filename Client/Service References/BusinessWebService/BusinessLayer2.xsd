@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLayer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLayer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:complexType name="UserData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Class" nillable="true" type="tns:IdName" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:IdName">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Class" nillable="true" type="tns:IdName" />
+          <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="UserData" nillable="true" type="tns:UserData" />
   <xs:complexType name="IdName">
@@ -18,22 +20,26 @@
   </xs:complexType>
   <xs:element name="IdName" nillable="true" type="tns:IdName" />
   <xs:complexType name="ClassData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Campus" nillable="true" type="tns:IdName" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Period" nillable="true" type="tns:IdName" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:IdName">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Campus" nillable="true" type="tns:IdName" />
+          <xs:element minOccurs="0" name="Period" nillable="true" type="tns:IdName" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="ClassData" nillable="true" type="tns:ClassData" />
   <xs:complexType name="PeriodData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:IdName">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="End" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="PeriodData" nillable="true" type="tns:PeriodData" />
   <xs:complexType name="ArrayOfRoleData">
@@ -102,13 +108,15 @@
   </xs:complexType>
   <xs:element name="ArrayOfSubjectData" nillable="true" type="tns:ArrayOfSubjectData" />
   <xs:complexType name="SubjectData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Hours" type="xs:int" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Modalities" nillable="true" type="tns:ArrayOfModalityData" />
-      <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:IdName">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Hours" type="xs:int" />
+          <xs:element minOccurs="0" name="Modalities" nillable="true" type="tns:ArrayOfModalityData" />
+          <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="SubjectData" nillable="true" type="tns:SubjectData" />
   <xs:complexType name="ArrayOfModalityData">
@@ -118,12 +126,14 @@
   </xs:complexType>
   <xs:element name="ArrayOfModalityData" nillable="true" type="tns:ArrayOfModalityData" />
   <xs:complexType name="ModalityData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Hours" type="xs:int" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="SubjectId" type="xs:int" />
-    </xs:sequence>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:IdName">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Hours" type="xs:int" />
+          <xs:element minOccurs="0" name="SubjectId" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:element name="ModalityData" nillable="true" type="tns:ModalityData" />
 </xs:schema>

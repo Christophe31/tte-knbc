@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
 
 	[DataContract]
-	public class SubjectData
+	public class SubjectData:IdName
 	{
 		public SubjectData()
 		{
@@ -30,11 +30,6 @@ namespace BusinessLayer
 		{
 			return new SubjectData(SubjectEntity);
 		}
-		/// <sumSubjectName = SubjectName;mary>
-		/// Id.
-		/// </summary>
-		[DataMember]
-		public int Id { get; set; }
 
 		/// <summary>
 		/// Campus de la Subjecte
@@ -45,11 +40,6 @@ namespace BusinessLayer
 		[DataMember]
 		public ModalityData[]  Modalities { get; set; }
 
-		/// <summary>
-		/// Nom de la Subjecte
-		/// </summary>
-		[DataMember]
-		public string Name { get; set; }
 
 		/// <summary>
 		/// Id de la periode

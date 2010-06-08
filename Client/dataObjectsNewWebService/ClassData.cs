@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Client.BusinessWebService
 {
-	public partial class ClassData : object, System.Runtime.Serialization.IExtensibleDataObject
+	public partial class ClassData : IdName, System.Runtime.Serialization.IExtensibleDataObject
 	{
 		public ClassData()
 		{

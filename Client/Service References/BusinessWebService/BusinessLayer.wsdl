@@ -9,6 +9,12 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IBusinessLayer_delUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:delUser" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_delUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:delUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_delClass_InputMessage">
     <wsdl:part name="parameters" element="tns:delClass" />
   </wsdl:message>
@@ -80,6 +86,12 @@
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getEvents_OutputMessage">
     <wsdl:part name="parameters" element="tns:getEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSpeakerEvents_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSpeakerEvents" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSpeakerEvents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSpeakerEventsResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_isPlanningUpToDate_InputMessage">
     <wsdl:part name="parameters" element="tns:isPlanningUpToDate" />
@@ -231,13 +243,11 @@
   <wsdl:message name="IBusinessLayer_setPrivateEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:setPrivateEventResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:delUser" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delUserResponse" />
-  </wsdl:message>
   <wsdl:portType name="IBusinessLayer">
+    <wsdl:operation name="delUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="delClass">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delClass" message="tns:IBusinessLayer_delClass_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delClassResponse" message="tns:IBusinessLayer_delClass_OutputMessage" />
@@ -285,6 +295,10 @@
     <wsdl:operation name="getEvents">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getEvents" message="tns:IBusinessLayer_getEvents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getEventsResponse" message="tns:IBusinessLayer_getEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getSpeakerEvents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakerEvents" message="tns:IBusinessLayer_getSpeakerEvents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakerEventsResponse" message="tns:IBusinessLayer_getSpeakerEvents_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="isPlanningUpToDate">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/isPlanningUpToDate" message="tns:IBusinessLayer_isPlanningUpToDate_InputMessage" />
@@ -385,10 +399,6 @@
     <wsdl:operation name="setPrivateEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEvent" message="tns:IBusinessLayer_setPrivateEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEventResponse" message="tns:IBusinessLayer_setPrivateEvent_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="delUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="BusinessLayer">
