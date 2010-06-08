@@ -172,19 +172,42 @@ namespace Client.BusinessWebService
         }
 
 
-        public void AddEventToCalendar(ref iCalendar ic) 
-        {
-            Event e=ic.Create<Event>();
+		public static EventData CreateFromICalEvent(IEvent p)
+		{
+			EventData ED = new EventData();
+			try
+			{
+				ED.Id = int.Parse(p.UID);
+			}
+			catch (FormatException)
+			{
+				ED.Id = 0;
+			}
+			ED.Start = p.Start.Date;
+			ED.End = p.End.Date;
+			ED.Mandatory = p.Priority == 1;
+			ED.Place = p.Location;
+			ED.Name = p.Name;
+			ED.Speaker = p.Organizer.CommonName;
+			ED.Modality = p.Properties.Where(f => f.Key == "X-MODALITY").First().Value.ToString();
+			ED.Subject = p.Properties.Where(f => f.Key == "X-SUBJECT").First().Value.ToString();
+			return ED;
+		}
+
+		public void AddEventToCalendar(ref iCalendar ic)
+		{
+			Event e = ic.Create<Event>();
+			e.UID = this.Id.ToString();
 			e.Start = new iCalDateTime(this.Start);
 			e.End = new iCalDateTime(this.End);
-            e.Name = this.Name;
-            e.AddProperty(new CalendarProperty("X-Id",  this.Id));
-            e.AddProperty(new CalendarProperty("X-Mandatory", this.Mandatory));
-            e.AddProperty(new CalendarProperty("X-Modality", this.Modality));
-            e.AddProperty(new CalendarProperty("X-Place", this.Place));
-            e.AddProperty(new CalendarProperty("X-Speaker", this.Speaker));
-            e.AddProperty(new CalendarProperty("X-Subject", this.Subject));    
-        }
+			e.Name = this.Name;
+			e.Priority = this.Mandatory ? 1 : 0;
+			e.Location = this.Place;
+			e.Organizer = new Organizer() { CommonName = this.Speaker };
+			e.Summary = this.Name;
+			e.AddProperty(new CalendarProperty("X-MODALITY", this.Modality));
+			e.AddProperty(new CalendarProperty("X-SUBJECT", this.Subject));
+		}
 
         #region IEditableObject Members
 

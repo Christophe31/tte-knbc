@@ -98,6 +98,8 @@ namespace BusinessLayer
 			ClassData getClass(int ID);
 			[OperationContract]
 			PeriodData getPeriod(int ID);
+			[OperationContract]
+			EventData[] getSpeakerEvents(int ID);
 		#endregion
 	}
 }
