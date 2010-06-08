@@ -100,7 +100,7 @@ namespace BusinessLayer
 				Select(p => new SubjectData()
 				{
 					Id = p.Id,
-					Modalities = p.Modalitys.Select(m => new ModalityData() { Id = m.Id,SubjectId=p.Id, Name = m.Name, Hours = m.Hours }).ToArray(),
+					Modalities = p.Modalitys.Select(m => new ModalityData() { Id = m.Id,SubjectId=p.Id, Name = m.Name, Hours = m.Hours.GetValueOrDefault() }).ToArray(),
 					Name = p.Name
 				}).ToArray();
 		}
