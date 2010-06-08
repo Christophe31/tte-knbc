@@ -12,6 +12,12 @@ namespace Client.BusinessLayer
 
 		}
 
-
+        public static string[] PresetModalities
+        {
+            get
+            {
+                return new string[] { "Cours", "E-learning", "TD", "Examen", "TP", "Soutenance" };
+            }
+        }
 	}
 }

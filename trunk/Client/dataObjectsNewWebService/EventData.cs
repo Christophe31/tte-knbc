@@ -17,11 +17,7 @@ namespace Client.BusinessWebService
 	/// </summary>
     public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, INotifyPropertyChanged, IEditableObject
     {
-        /// <summary>
-        /// Defines to which type of element this event is linked (University, Campus, Period, Class or Private)
-        /// </summary>
-        //public EventType.Type Type { get; set; }
-
+        #region Properties
         /// <summary>
         /// Returns the string corresponding to the Type property
         /// </summary>
@@ -113,6 +109,7 @@ namespace Client.BusinessWebService
         /// </summary>
         public int EventIndex { get; set; }
 
+        #endregion Properties
 
         // Create the OnPropertyChanged method to raise the event
         protected void OnPropertyChanged(string name)
@@ -156,16 +153,20 @@ namespace Client.BusinessWebService
         void IEditableObject.EndEdit()
         {
             CacheWrapper Api = new CacheWrapper();
-            // Event creation
-            if (Id == 0)
+            if (Api.ServerBL2.State == System.ServiceModel.CommunicationState.Opened)
             {
-				Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker, Place);
-            }
+                // Event creation
+                if (Id == 0)
+                {
+                    //Api.ServerBL2.addEvent(this
+                    //Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker, Place);
+                }
 
-            // Event edition
-            else
-            {
-				Api.ServerBL2.setEvent(this);
+                // Event edition
+                else
+                {
+                    Api.ServerBL2.setEvent(this);
+                }
             }
         }
 
