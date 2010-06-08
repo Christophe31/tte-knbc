@@ -17,6 +17,8 @@ namespace BusinessLayer
 			[OperationContract]
 			EventData[] getEvents(int Planning, DateTime Start, DateTime Stop);
 			[OperationContract]
+			EventData[] getSpeakerEvents(int ID, DateTime Start, DateTime Stop);
+			[OperationContract]
 			bool isPlanningUpToDate(int Planning, DateTime LastUpdate);
 		#endregion
 		#region Identified completion
@@ -51,7 +53,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string grantRole(int UserId, int? Target);
 			[OperationContract]
-			string addEvent(EventData Event,int PlanningId);
+			string addEvent(EventData Event,int PlanningId, int? SpeakerId, int? Modality);
 			[OperationContract]
 			string addPrivateEvent(EventData Event);
 		#endregion
@@ -98,8 +100,6 @@ namespace BusinessLayer
 			ClassData getClass(int ID);
 			[OperationContract]
 			PeriodData getPeriod(int ID);
-			[OperationContract]
-			EventData[] getSpeakerEvents(int ID);
 		#endregion
 	}
 }

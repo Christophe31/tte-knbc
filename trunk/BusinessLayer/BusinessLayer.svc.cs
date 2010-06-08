@@ -16,6 +16,10 @@ namespace BusinessLayer
 		DateTime sqlMax = new DateTime(9998, 12, 31);
 		Entities db = new Entities();
 
+		string currentUserLogin
+		{
+			get { return OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name; }
+		}
 		public void centerToSqlDate(ref DateTime d)
 		{
 			d = ((d < sqlMin) ? sqlMin : ((d > sqlMax) ? sqlMax : d));
@@ -32,13 +36,13 @@ namespace BusinessLayer
 		}
 		Planning getUserPlanning() 
 		{
-			return db.User.Where(u => u.Login == OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name).First().Planning;
+			return db.User.Where(u => u.Login == currentUserLogin).First().Planning;
 		}
 
 		#region IBusinessLayer Members
 		public RoleData[] getUserRoles()
 		{
-			return db.Role.Where(p => p.UserRef.Login == OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name)
+			return db.Role.Where(p => p.UserRef.Login == currentUserLogin)
 				.Select(p => new
 				{
 					TargetId = p.Planning.Id,
@@ -304,8 +308,18 @@ namespace BusinessLayer
 			return "ok";
 		}
 
-		string IBusinessLayer.addEvent(EventData Event, int PlanningId)
+		string IBusinessLayer.addEvent(EventData even, int PlanningId,int? SpeakerId, int? ModalityId)
 		{
+			
+			 new Event() 
+			{
+				Name=even.Name,
+				OwnerRef=db.User.First(u=>u.Login==currentUserLogin).Planning,
+				Place=even.Place,
+				End=even.End,
+				Start=even.Start,
+				SpeakerRef=db.User.First(u=>u.Id==SpeakerId).Planning
+			};
 			return "ok";
 		}
 

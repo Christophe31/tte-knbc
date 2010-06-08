@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Client.BusinessLayer
 {
-    public partial class UserData : object, System.Runtime.Serialization.IExtensibleDataObject
+    public partial class UserData : IdName, System.Runtime.Serialization.IExtensibleDataObject
     {
         public UserData()
         {

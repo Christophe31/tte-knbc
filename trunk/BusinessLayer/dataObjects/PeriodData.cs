@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
 
 	[DataContract]
-	public class PeriodData
+	public class PeriodData:IdName
 	{
 		public PeriodData()
 		{
@@ -33,23 +33,12 @@ namespace BusinessLayer
 			return new PeriodData(PeriodEntity, PromotionName);
 		}
 
-		/// <sumClassName = ClassName;mary>
-		/// Id.
-		/// </summary>
-		[DataMember]
-		public int Id { get; set; }
-
 		/// <summary>
 		/// Promotion de la Periode
 		/// </summary>
 		[DataMember]
 		public string PromotionName { get; set; }
 
-		/// <summary>
-		/// Nom de la periode
-		/// </summary>
-		[DataMember]
-		public string Name { get; set; }
 
 		/// <summary>
 		/// Date de début de la periode

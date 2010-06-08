@@ -8,7 +8,7 @@ using DataModel;
 namespace BusinessLayer
 {
 	[DataContract]
-	public class EventData
+	public class EventData:object
 	{
 		[DataContract]
 		public enum TypeEnum

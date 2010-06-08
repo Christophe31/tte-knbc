@@ -20,5 +20,9 @@ namespace Client.BusinessWebService
 		{
 			return this.Name;
 		}
+		public static implicit operator int(IdName idn) { return idn.Id; }
+		public static implicit operator string(IdName idn) { return idn.Name; }
+		public static implicit operator IdName(int idn) { return new IdName() {Id=idn ,Name=null}; }
+		public static implicit operator IdName(string idn) { return new IdName() { Id = 0, Name = idn}; }
 	}
 }
