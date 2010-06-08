@@ -189,6 +189,7 @@ namespace Client
             EventsGrid.DataContext = AllEvents;
             RefreshDayGrid();
             RefreshWeekGrid();
+            RefreshMonthGrid();
         }
 
         /// <summary>
@@ -333,6 +334,44 @@ namespace Client
         private void DayGridNextDay_Click(object sender, RoutedEventArgs e)
         {
             DayGridDateSelection.SelectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault().AddDays(1);
+        }
+
+        public void RefreshMonthGrid()
+        {
+            foreach (UIElement elt in MonthGrid.Children)
+            {
+                if (elt is StackPanel)
+                {
+                    MonthGrid.Children.Remove(elt);
+                }
+            }
+
+            MonthGrid.RowDefinitions.RemoveRange(1, MonthGrid.RowDefinitions.Count - 1);
+
+            DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
+
+            int row = 1;
+
+            DateTime end = selectedDate.AddDays(1 - selectedDate.Day).AddMonths(1);
+            for (DateTime i = selectedDate.AddDays(1 - selectedDate.Day); i < end; i.AddDays(1))
+            {
+                if (i.DayOfWeek == DayOfWeek.Monday && i.Day != 1)
+                {
+                    MonthGrid.RowDefinitions.Add(new RowDefinition());
+                    row++;
+                }
+
+                StackPanel sp = new StackPanel();
+                Grid.SetRow(sp, row);
+                Grid.SetColumn(sp, ((int)i.DayOfWeek - 1) % 7);
+
+                foreach (EventData ev in AllEvents.Where(p => p.StartDate <= i && p.EndDate >= i))
+                {
+                    TextBlock tb = new TextBlock();
+                    tb.Text = String.IsNullOrEmpty(ev.Name) ? ev.Subject : ev.Name;
+                    sp.Children.Add(tb);
+                }
+            }
         }
         #endregion
 
