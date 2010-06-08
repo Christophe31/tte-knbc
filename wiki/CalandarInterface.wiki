@@ -8,6 +8,7 @@ _by Breil Romaric_
     * Update an event
     * Delete an event
     * Display hours reports (planed/theoretical): CSV ?
+    * CRUD activated only for user view, or if the user has rights
 
   * Events list
     * ~~Display/hide non mandatory events~~
