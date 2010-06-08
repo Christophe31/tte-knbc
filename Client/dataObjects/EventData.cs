@@ -130,30 +130,38 @@ namespace Client.BusinessLayer
         public static EventData CreateFromICalEvent(IEvent p)
         {
             EventData ED = new EventData();
-            ED.Id = int.Parse(p.Properties.Where(f => f.Key == "X-Id").First().Value.ToString());
-            ED.Mandatory = bool.Parse(p.Properties.Where(f => f.Key == "X-Mandatory").First().Value.ToString());
-            ED.Modality = p.Properties.Where(f => f.Key == "X-Modality").First().Value.ToString();
-            ED.Place = p.Properties.Where(f => f.Key == "X-Place").First().Value.ToString();
-            ED.Speaker = p.Properties.Where(f => f.Key == "X-Speaker").First().Value.ToString();
-            ED.Subject = p.Properties.Where(f => f.Key == "X-Subject").First().Value.ToString();
-            ED.Start = DateTime.Parse(p.Properties.Where(f => f.Key == "X-Start").First().Value.ToString());
-            ED.End = DateTime.Parse(p.Properties.Where(f => f.Key == "X-End").First().Value.ToString());
-            ED.Name = p.Properties.Where(f => f.Key == "X-Name").First().Value.ToString();
-            return ED;
+			try
+			{
+				ED.Id = int.Parse(p.UID);
+			}
+			catch (FormatException)
+			{
+				ED.Id = 0;
+			}
+			ED.Start = p.Start.Date;
+			ED.End = p.End.Date;
+			ED.Mandatory = p.Priority==1;
+			ED.Place = p.Location;
+			ED.Name = p.Name;
+			ED.Speaker = p.Organizer.CommonName;
+			ED.Modality = p.Properties.Where(f => f.Key == "X-MODALITY").First().Value.ToString();
+			ED.Subject = p.Properties.Where(f => f.Key == "X-SUBJECT").First().Value.ToString();
+			return ED;
         }
 
         public void AddEventToCalendar(ref iCalendar ic) 
         {
             Event e=ic.Create<Event>();
+			e.UID = this.Id.ToString();
 			e.Start = new iCalDateTime(this.Start);
 			e.End = new iCalDateTime(this.End);
             e.Name = this.Name;
-            e.AddProperty(new CalendarProperty("X-Id",  this.Id));
-            e.AddProperty(new CalendarProperty("X-Mandatory", this.Mandatory));
-            e.AddProperty(new CalendarProperty("X-Modality", this.Modality));
-            e.AddProperty(new CalendarProperty("X-Place", this.Place));
-            e.AddProperty(new CalendarProperty("X-Speaker", this.Speaker));
-            e.AddProperty(new CalendarProperty("X-Subject", this.Subject));    
+			e.Priority = this.Mandatory ? 1 : 0;
+			e.Location = this.Place;
+			e.Organizer = new Organizer(){CommonName=this.Speaker};
+			e.Summary=this.Name;
+            e.AddProperty(new CalendarProperty("X-MODALITY", this.Modality));
+            e.AddProperty(new CalendarProperty("X-SUBJECT", this.Subject));
         }
 
 

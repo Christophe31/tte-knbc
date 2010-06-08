@@ -97,7 +97,7 @@ namespace Client
 
             public string fileNameFromIdName(IdName idn)
             {
-                return "cache__" + idn.Name + "-" + idn.Id + @".ics";
+                return "cache_" + idn.Name + "_" + idn.Id + @".ics";
             }
 
              [Obsolete]

@@ -74,6 +74,20 @@ namespace BusinessLayer
 			};
 			throw new FaultException("try to access to a non valid or a non accessible planning");
 		}
+		EventData[] IBusinessLayer.getSpeakerEvents(int ID, DateTime Start, DateTime Stop)
+		{
+			return db.Planning.Where(p => p.Id == ID).Single().Events.
+				Where(p => p.Start < Stop && p.End > Start && p.Mandatory==true).
+					Select(p =>
+						new EventData()
+						{
+							Start = p.Start,
+							End = p.End,
+							Name = "Indisponnible",
+							Speaker = p.PlaningRef.Name,
+							Type = EventData.TypeEnum.User
+						}).ToArray();
+		}
 		bool IBusinessLayer.isPlanningUpToDate(int Planning, DateTime LastUpdate)
 		{
 			centerToSqlDate(ref LastUpdate);

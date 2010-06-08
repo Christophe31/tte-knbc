@@ -91,7 +91,7 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Subject" Type="int" />
-          <Property Name="Hours" Type="int" />
+          <Property Name="Hours" Type="int" Nullable="true" />
         </EntityType>
         <EntityType Name="Period">
           <Key>

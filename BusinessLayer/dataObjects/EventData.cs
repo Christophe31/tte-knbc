@@ -100,7 +100,7 @@ namespace BusinessLayer
 		public DateTime End { get; set; }
 
 		/// <summary>
-		/// bligation D'afficher l'évènement dans le calandrier
+		/// Obligation D'afficher l'évènement dans le calandrier
 		/// </summary>
 		[DataMember]
 		public bool Mandatory { get; set; }

@@ -15,7 +15,7 @@ namespace BusinessLayer
 		DataAccessLayer.Entities db = new DataAccessLayer.Entities();
 		public override void Validate(string userName, string password)
 		{
-			if (db.User.Where(p=>p.Login==userName && p.Password == password).FirstOrDefault()==null)
+			if (!db.User.Any(p=>p.Login==userName && p.Password == password))
 			{
 				// This throws an informative fault to the client.
 				throw new FaultException("Unknown Username or Incorrect Password");
