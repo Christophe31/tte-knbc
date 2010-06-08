@@ -12,6 +12,12 @@ namespace Client.BusinessWebService
 
 		}
 
-
+        public static string[] PresetModalities
+        {
+            get
+            {
+                return new string[] { "Cours", "E-learning", "TD", "TP", "Soutenance", "Examen" };
+            }
+        }
 	}
 }

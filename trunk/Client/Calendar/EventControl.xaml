@@ -9,7 +9,7 @@
 	UseLayoutRounding="True"
     d:DesignHeight="80" d:DesignWidth="140">
 
-    <Border CornerRadius="3" Background="LightBlue" BorderThickness="1" BorderBrush="Blue">
+    <Border CornerRadius="3" Background="{Binding BackgroundColor}" BorderThickness="1" BorderBrush="{Binding BorderColor}">
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
