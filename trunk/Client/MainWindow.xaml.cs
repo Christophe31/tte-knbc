@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
-using Client.BusinessLayer;
+using Client.BusinessWebService;
 using Client.Calendar;
 
 namespace Client
@@ -84,9 +84,9 @@ namespace Client
             ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 0;
 
-            CampusName.DataContext = Api.Server.getIdCampusNames(); ;
+            CampusName.DataContext = Api.ServerBL2.getPlannings(EventData.TypeEnum.Campus);
             CampusName.SelectedIndex = 0;
-            PeriodName.DataContext = Api.Server.getIdPeriodsNames();
+            PeriodName.DataContext = Api.ServerBL2.getPlannings(EventData.TypeEnum.Period);
             PeriodName.SelectedIndex = 0;
 
             // Events DataGrid initialisation
@@ -122,7 +122,6 @@ namespace Client
                 grid.Children.Add(tb);
             }
 
-            //((ScrollViewer)grid.Parent).ScrollToVerticalOffset(grid.Height * 7 / 24);
             return grid;
         }
         #endregion
@@ -141,7 +140,7 @@ namespace Client
                 viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
 
             // University
-            AllEvents = Api.getEventsByUniversity(start, end)
+            AllEvents = Api.ServerBL2.getEvents(Api.ServerBL2.getUniversity().Id, start, end)
                 .Where(p => p.Mandatory
                     || viewType == EventData.TypeEnum.University
                     || ShowOptionalUniversityEvents.IsChecked.GetValueOrDefault()).ToList();
@@ -152,7 +151,7 @@ namespace Client
 				|| viewType == EventData.TypeEnum.User)
                 && CampusName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.getEventsByCampus(CampusName.SelectedValue as IdName, start, end)
+                AllEvents.AddRange(Api.ServerBL2.getEvents((CampusName.SelectedValue as IdName).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Campus
                         || ShowOptionalCampusEvents.IsChecked.GetValueOrDefault()));
@@ -164,7 +163,7 @@ namespace Client
                 || viewType == EventData.TypeEnum.User)
                 && PeriodName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.getEventsByPeriod(PeriodName.SelectedValue as IdName, start, end)
+                AllEvents.AddRange(Api.ServerBL2.getEvents((PeriodName.SelectedValue as IdName).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Period
                         || ShowOptionalPeriodEvents.IsChecked.GetValueOrDefault()));
@@ -174,7 +173,7 @@ namespace Client
             if ((viewType == EventData.TypeEnum.Class || viewType == EventData.TypeEnum.User)
                 && ClassName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.getEventsByClass(ClassName.SelectedValue as IdName, start, end)
+                AllEvents.AddRange(Api.ServerBL2.getEvents((ClassName.SelectedValue as IdName).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Class
                         || ShowOptionalClassEvents.IsChecked.GetValueOrDefault()));
@@ -183,7 +182,7 @@ namespace Client
             // User
             if (viewType == EventData.TypeEnum.User)
             {
-                AllEvents.AddRange(Api.getPrivateEvents(start, end));
+                //AllEvents.AddRange(Api.getPrivateEvents(start, end));
             }
 
             // Refresh views

@@ -24,7 +24,7 @@ namespace Client
 		#region Lecture d'évènements
 		public EventData[] getEventsByCampus(IdName Campus, DateTime Start, DateTime Stop)
 		{
-            if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Campus)))
+            if (false)//System.IO.File.Exists(cacheProcess.fileNameFromIdName(Campus)))
             {
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Campus));
                 var lastUpdate = DateTime.Parse(calendars.Select(p => p.Properties.Where(f => f.Key == "X-LASTUPDATE").FirstOrDefault()).Where(f=>f!=null).First().Value.ToString());
@@ -55,13 +55,13 @@ namespace Client
                 }
             }
 		}
-		public EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
+		public BusinessWebService.EventData[] getEventsByUniversity(DateTime Start, DateTime Stop)
 		{
-			return Server.getEventsByUniversity(Start, Stop);
+            return ServerBL2.getEvents(ServerBL2.getUniversity().Id, Start, Stop);
 		}
 		public EventData[] getEventsByPeriod(IdName Period, DateTime Start, DateTime Stop) 
         {
-            if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Period)))
+            if (false)//System.IO.File.Exists(cacheProcess.fileNameFromIdName(Period)))
             {
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Period));
                 var lastUpdate =
@@ -97,7 +97,7 @@ namespace Client
 		}
 		public EventData[] getEventsByClass(IdName Class, DateTime Start, DateTime Stop)
 		{
-            if (System.IO.File.Exists(cacheProcess.fileNameFromIdName(Class)))
+            if (false)//System.IO.File.Exists(cacheProcess.fileNameFromIdName(Class)))
             {
                 var calendars = DDay.iCal.iCalendar.LoadFromFile(cacheProcess.fileNameFromIdName(Class));
                 var lastUpdate =
@@ -173,9 +173,9 @@ namespace Client
 		{
 			return Server.getModalities();
 		}
-        public Dictionary<IdName, Dictionary<IdName, IdName[]>> getCampusPeriodClassTree()
+        public Dictionary<BusinessWebService.IdName, Dictionary<BusinessWebService.IdName, BusinessWebService.IdName[]>> getCampusPeriodClassTree()
 		{
-			return Server.getIdCampusPeriodClassTree();
+			return ServerBL2.getCampusPeriodClassTree();
 		}
 		#endregion
 
