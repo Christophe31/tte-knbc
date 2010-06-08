@@ -131,7 +131,7 @@ namespace BusinessLayer
 										p.PeriodClasses.Any(cl=>cl.Planning.ParentPlanning.Id==camp.Id))
 							.Select(p=>new{
 									period = new IdName(){Id=p.Id,Name=p.Name},
-									cls= p.PeriodClasses.Select(cl => new IdName() {Id=cl.Id, Name=cl.Planning.Name}).ToArray()
+									cls= p.PeriodClasses.Select(cl => new IdName() {Id=cl.Id, Name=cl.Planning.Name})
 									}
 								)
 							)
@@ -139,7 +139,7 @@ namespace BusinessLayer
 				.ToDictionary(
 					p => p.campus,
 					p => p.val.ToDictionary(f=>f.period,
-							f => f.cls
+							f => f.cls.ToArray()
 					)
 				);
 		}
@@ -292,15 +292,13 @@ namespace BusinessLayer
 
 		string IBusinessLayer.addEvent(EventData Event, int PlanningId)
 		{
-			throw new NotImplementedException();
+			return "ok";
 		}
 
 		string IBusinessLayer.addPrivateEvent(EventData Event)
 		{
 			throw new NotImplementedException();
 		}
-
-
 
 		string IBusinessLayer.setUser(UserData UD)
 		{
