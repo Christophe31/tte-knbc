@@ -346,14 +346,14 @@ namespace Client
                 }
             }
 
-            MonthGrid.RowDefinitions.RemoveRange(1, MonthGrid.RowDefinitions.Count - 1);
+            //MonthGrid.RowDefinitions.RemoveRange(1, MonthGrid.RowDefinitions.Count - 1);
 
             DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
 
             int row = 1;
 
             DateTime end = selectedDate.AddDays(1 - selectedDate.Day).AddMonths(1);
-            for (DateTime i = selectedDate.AddDays(1 - selectedDate.Day); i < end; i.AddDays(1))
+            for (DateTime i = selectedDate.AddDays(1 - selectedDate.Day); i > end; i.AddDays(1))
             {
                 if (i.DayOfWeek == DayOfWeek.Monday && i.Day != 1)
                 {
