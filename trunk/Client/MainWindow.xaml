@@ -67,7 +67,9 @@
             </ToolBar>
             
             <ToolBar>
-                <Button Content="Administration" Click="button1_Click_1"/>
+                <Button Content="Import iCal" Click="iCal_import_Click"/>
+                <Button Content="Export iCal" Click="iCal_export_Click"/>
+                <Button Content="Rapports horaires" Click="report_Click"/>
             </ToolBar>
 
             <ToolBar>
