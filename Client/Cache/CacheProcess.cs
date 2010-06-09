@@ -40,23 +40,23 @@ namespace Client
 			static protected CacheProcess self;
 			protected CacheProcess()
 			{
-				Server = new BusinessService.BusinessLayerClient();
 			}
 
 			public bool logToWebService(string login, string password)
 			{
 				try
 				{
+					Server = new BusinessLayerClient();
 					Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
 					Server.ClientCredentials.UserName.UserName = login;
 					Server.ClientCredentials.UserName.Password = password;
 					Server.Open();
 					CurrentUser = Server.getUserData();
+					CurrentUser.Password = password;
 					return true;
 				}
 				catch (MessageSecurityException)
 				{
-					Server = new BusinessLayerClient();
 					return false;
 				}
 			}
