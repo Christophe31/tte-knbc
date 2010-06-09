@@ -39,7 +39,7 @@ namespace Client
 				Server.ClientCredentials.UserName.Password = "popi";
 
 				Server.Open();
-				CurrentUser=Server.getUserData();
+				CurrentUser=Server.getUser(8);
 				Server.getEvents(8, DateTime.Now, DateTime.Now);
 			}
 
