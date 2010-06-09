@@ -21,11 +21,6 @@ namespace Client
     /// </summary>
     public partial class Administration : UserControl
     {
-        public Administration()
-        {
-            InitializeComponent();
-            Api = new CacheWrapper();
-        }
 
 
         #region Definitions
@@ -90,6 +85,12 @@ namespace Client
         //Au chargement du contrôle d'administration, on charge toutes les combobox
         private void AdministrationControl_Loaded(object sender, RoutedEventArgs e)
         {
+			while (Api.Server == null)
+			{
+				Api.RelinkServer();
+				Thread.Sleep(500);
+			}
+
             refreshPromotions();
             //subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.ServerBL2.getSubjects()).ToArray();
             //cbSubjects_Subjects.DataContext = subjectsList;
@@ -301,9 +302,6 @@ namespace Client
         //L'utilisateur a cliqué sur "Supprimer"
         private void bCampus_Del_Click(object sender, RoutedEventArgs e)
         {
-			while (Api.Server == null)
-				Api.RelinkServer();
-				Thread.Sleep(500);
 
             promoList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Promotion" } }.Concat(Api.Server.getPromotions()).ToArray();
             cbPromo_Promotions.DataContext = promoList;
