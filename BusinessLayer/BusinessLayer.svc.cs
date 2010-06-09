@@ -119,6 +119,14 @@ namespace BusinessLayer
 			return db.Planning.Where(p => p.Type == null)
 				.Select(p => new IdName() { Id = p.Id, Name = p.Name }).ToArray();
 		}
+		Dictionary<IdName, string[]> IBusinessLayer.getCampusLocationsTree()
+		{
+			return db.Planning.Where(p => p.Type == (int)EventData.TypeEnum.Campus)
+				.Select(p => new { camp = p, classes = p.ChildrenPlannings })
+				.ToDictionary(p => new IdName() { Id = p.camp.Id, Name = p.camp.Name }
+							,p=>p.classes.SelectMany(c=>c.Events).Concat(p.camp.Events).Select(e=>e.Name).ToArray()
+							);
+		}
 		SubjectData[] IBusinessLayer.getSubjects()
 		{
 			return db.Modality.Where(p => p.OnSubject == null && p.Hours == null).
@@ -444,12 +452,18 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setEvent(EventData EditedEvent)
 		{
-			throw new NotImplementedException();
+			Event ev=db.Event.First(p=>EditedEvent.Id == p.Id);
+			ev.Subject= (EditedEvent.Modality==null ? null as int? : EditedEvent.Modality.Id);
+			ev.Place = EditedEvent.Place;
+			
+
+			
+			return "not implemented yet";
 		}
 
 		string IBusinessLayer.setPrivateEvent(EventData EditedEvent)
 		{
-			throw new NotImplementedException();
+			return "not implemented yet";
 		}
 		
 		string IBusinessLayer.delUser(int Id)
@@ -483,7 +497,6 @@ namespace BusinessLayer
 			db.Class.DeleteObject(clas);
 			db.Planning.DeleteObject(plan);
 			return "ok";
-			
 		}
 		string IBusinessLayer.delSubject(int Id)
 		{

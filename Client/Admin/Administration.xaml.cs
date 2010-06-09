@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 using Client.BusinessService;
 
 namespace Client
@@ -37,6 +38,11 @@ namespace Client
         public IdName[] classesList = null;
         public IdName[] usersList = null;
 
+        public Administration()
+        {
+            InitializeComponent();
+			Api = new CacheWrapper();
+		}
         public IdName[] promoList_Period = null;
         public IdName[] campusList_Class = null;
         public IdName[] periodsList_Class = null;
@@ -295,6 +301,12 @@ namespace Client
         //L'utilisateur a cliqué sur "Supprimer"
         private void bCampus_Del_Click(object sender, RoutedEventArgs e)
         {
+			while (Api.Server == null)
+				Api.RelinkServer();
+				Thread.Sleep(500);
+
+            promoList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Promotion" } }.Concat(Api.Server.getPromotions()).ToArray();
+            cbPromo_Promotions.DataContext = promoList;
             //S'il n'y a pas de campus sélectionné           
             if (cbCampus_Campus.SelectedIndex < 1)
             {

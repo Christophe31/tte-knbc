@@ -298,7 +298,7 @@
 
             <TabItem Header="Admin" Name="Administration">
                 <Grid>
-                    <!--<local:Administration x:Name="PanelAdmin" />-->
+                    <local:Administration x:Name="PanelAdmin" />
                 </Grid>
             </TabItem>
         </TabControl>
