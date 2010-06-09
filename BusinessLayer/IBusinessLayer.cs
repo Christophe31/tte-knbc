@@ -53,7 +53,7 @@ namespace BusinessLayer
 			[OperationContract]
 			string addPeriod(PeriodData Period);
 			[OperationContract]
-			string addEvent(EventData Event,int PlanningId, int? SpeakerId, int? Modality);
+			string addEvent(EventData Event);
 			[OperationContract]
 			string addPrivateEvent(EventData Event);
 		#endregion

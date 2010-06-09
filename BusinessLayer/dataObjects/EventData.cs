@@ -29,35 +29,25 @@ namespace BusinessLayer
 
 		}
 
-		public EventData(DataAccessLayer.Event EventEntity, string Subject, string Modality, string Speaker, TypeEnum? aType)
-		{
-			this.Id = EventEntity.Id;
-			this.Start = EventEntity.Start;
-			this.End = EventEntity.End;
-			this.Mandatory = EventEntity.Mandatory;
-			this.Name = EventEntity.Name;
-			this.Place = EventEntity.Place;
-			this.Subject = Subject;
-			this.Modality = Modality;
-			this.Speaker = Speaker;
-			this.Type = aType;
-		}
-		public static EventData ED(DataAccessLayer.Event EventEntity, string Subject, string Modality, string Speaker,int? atype)
-		{
-			
-			return new EventData(EventEntity, Subject, Modality, Speaker, 
-				atype==1? TypeEnum.University:
-					atype==2?TypeEnum.Campus:
-						atype==3?TypeEnum.Class:
-							atype==4?TypeEnum.Period:
-								TypeEnum.User);
-		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		[DataMember]
 		public TypeEnum? Type { get; set; }
 
+		/// <summary>
+		/// 
+		/// </summary>
+		[DataMember]
+		public IdName ParentPlanning { get; set; }
+
+		/// <summary>
+		/// 
+		/// </summary>
 		[DataMember]
 		public int Id { get; set; }
+		
 		/// <summary>
 		/// Date de Début de l'évènement.
 		/// </summary>
@@ -86,13 +76,13 @@ namespace BusinessLayer
 		/// Name de la matière
 		/// </summary>
 		[DataMember]
-		public string Subject { get; set; }
+		public IdName Subject { get; set; }
 
 		/// <summary>
 		/// Type d'évènement (Distanciel, Présentiel...)
 		/// </summary>
 		[DataMember]
-		public string Modality { get; set; }
+		public IdName Modality { get; set; }
 
 		/// <summary>
 		/// Titre/Name de l'évènement
@@ -104,6 +94,6 @@ namespace BusinessLayer
 		/// Nom du prof
 		/// </summary>
 		[DataMember]
-		public string Speaker { get; set; }
+		public IdName Speaker { get; set; }
 	}
 }
