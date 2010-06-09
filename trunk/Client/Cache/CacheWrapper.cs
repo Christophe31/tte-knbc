@@ -11,10 +11,13 @@ namespace Client
 	{
 		CacheProcess cacheProcess;
 		public Client.BusinessService.BusinessLayerClient Server;
+		public bool ServerAvailable{get{return cacheProcess.ServerReachable;}}
+		public UserData CurrentUser;
 		public CacheWrapper()
 		{
 			cacheProcess = CacheProcess.Current;
 			Server = cacheProcess.Server;
+			CurrentUser = cacheProcess.CurrentUser;
 		}
 
 		#region Lecture d'évènements

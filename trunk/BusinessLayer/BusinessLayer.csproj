@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ApiTestWindowIcon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
@@ -63,9 +64,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApiTestWindowIcon.ico" />
     <Content Include="BusinessLayer.svc" />
-    <Content Include="BusinessServiceOld.svc" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -82,9 +81,6 @@
     <Compile Include="BusinessLayer.svc.cs">
       <DependentUpon>BusinessLayer.svc</DependentUpon>
     </Compile>
-    <Compile Include="BusinessServiceOld.svc.cs">
-      <DependentUpon>BusinessServiceOld.svc</DependentUpon>
-    </Compile>
     <Compile Include="CredentialsClass.cs" />
     <Compile Include="dataObjects\ClassData.cs" />
     <Compile Include="dataObjects\ModalityData.cs" />
@@ -95,7 +91,6 @@
     <Compile Include="dataObjects\UserData.cs" />
     <Compile Include="dataObjects\EventData.cs" />
     <Compile Include="IBusinessLayer.cs" />
-    <Compile Include="IBusinessService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

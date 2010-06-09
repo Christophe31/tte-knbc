@@ -17,7 +17,7 @@ namespace Client
 	internal class CacheProcess
 	{
 		public BusinessService.BusinessLayerClient Server;
-		public BusinessService.RoleData[] UserRoles;
+		public BusinessService.UserData CurrentUser;
 		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
 		System.Runtime.Serialization.NetDataContractSerializer formatter = new System.Runtime.Serialization.NetDataContractSerializer();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
@@ -39,7 +39,7 @@ namespace Client
 				Server.ClientCredentials.UserName.Password = "popi";
 
 				Server.Open();
-				UserRoles=Server.getUserRoles();
+				CurrentUser=Server.getUserData();
 				Server.getEvents(8, DateTime.Now, DateTime.Now);
 			}
 

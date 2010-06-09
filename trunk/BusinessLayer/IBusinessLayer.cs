@@ -11,7 +11,7 @@ namespace BusinessLayer
 	interface IBusinessLayer
 	{
 		[OperationContract]
-		RoleData[] getUserRoles();
+		UserData getUserData();
 		
 		#region Lecture d'évènements
 			[OperationContract]
@@ -21,7 +21,7 @@ namespace BusinessLayer
 			[OperationContract]
 			bool isPlanningUpToDate(int Planning, DateTime LastUpdate);
 		#endregion
-		#region Identified completion
+		#region completion
 			[OperationContract]
 			IdName[] getPlannings(EventData.TypeEnum Type);
 			[OperationContract]
@@ -32,6 +32,8 @@ namespace BusinessLayer
 			IdName[] getPromotions();
 			[OperationContract]
 			SubjectData[] getSubjects();
+			[OperationContract]
+			ModalityData[] getModalities();
 			[OperationContract]
 			IdName[] getSpeakers();
 			[OperationContract]

@@ -34,5 +34,8 @@ namespace BusinessLayer
 		/// </summary>
 		[DataMember]
 		public string Password { get; set; }
+
+		[DataMember]
+		public RoleData[] Roles { get; set; } 
 	}
 }
