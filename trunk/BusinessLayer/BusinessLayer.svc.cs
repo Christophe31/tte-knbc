@@ -64,36 +64,38 @@ namespace BusinessLayer
 		EventData[] IBusinessLayer.getEvents(int Planning, DateTime Start, DateTime Stop)
 		{
 			centerToSqlDate(ref Start, ref Stop);
-			if (  db.Planning.Where(p=>p.Id==Planning).Any(p=>p.Type!=5) || currentUserId == Planning )
+			if (  db.Planning.Any(p=>p.Id==Planning && p.Type!=5) || currentUserId == Planning )
 			{
- 				return db.Planning.Where(p=>p.Id==Planning).Single().Events.Where(p=>p.Start < Stop && p.End > Start ).
-					Select(p=> 
-						new EventData(){
+				return db.Planning.Where(p => p.Id == Planning).Single().Events.Where(p => p.Start < Stop && p.End > Start).
+					Select(p =>
+						new EventData()
+						{
 							Id = p.Id,
 							Start = p.Start,
 							End = p.End,
 							Mandatory = p.Mandatory,
 							Name = p.Name,
 							Place = p.Place,
-							Subject = p.Modality==null?null:p.Modality.OnSubject.Name,
-							Modality = p.Modality==null?null:p.Modality.Name,
-							Speaker = p.SpeakerRef==null?null:p.SpeakerRef.Name,
+							ParentPlanning = new IdName() { Id = Planning, Name = db.Planning.First(pl => pl.Id == Planning).Name },
+							Subject = p.Modality == null ? null : new IdName() { Id = p.Modality.OnSubject.Id, Name = p.Modality.OnSubject.Name },
+							Modality = p.Modality == null ? null : new IdName() { Id = p.Modality.Id, Name = p.Modality.Name },
+							Speaker = p.SpeakerRef == null ? null : new IdName() { Id = p.SpeakerRef.Id, Name = p.SpeakerRef.Name },
 							Type = (EventData.TypeEnum)p.PlaningRef.Type
-					}).ToArray();
+						}).ToArray();
 			};
 			throw new FaultException("try to access to a non valid or a non accessible planning");
 		}
 		EventData[] IBusinessLayer.getSpeakerEvents(int ID, DateTime Start, DateTime Stop)
 		{
 			return db.Planning.Where(p => p.Id == ID).Single().Events.
-				Where(p => p.Start < Stop && p.End > Start && p.Mandatory==true).
+				Where(p => p.Start < Stop && p.End > Start && p.Mandatory == true).
 					Select(p =>
 						new EventData()
 						{
 							Start = p.Start,
 							End = p.End,
 							Name = "Indisponnible",
-							Speaker = p.PlaningRef.Name,
+							Speaker = new IdName() {Id= p.PlaningRef.Id, Name = p.PlaningRef.Name },
 							Type = EventData.TypeEnum.User
 						}).ToArray();
 		}
@@ -204,12 +206,12 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return "ok";
 		}
-		string IBusinessLayer.addCampus(string CampusName)
+		string IBusinessLayer.addCampus(string campusName)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			db.Planning.AddObject( new Planning(){
-				Name = CampusName,
+				Name = campusName,
 				LastChange = DateTime.Now,
 				Type = (int)EventData.TypeEnum.Campus,
 				ParentPlanning = db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First()
@@ -217,40 +219,40 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return "ok";
 		}
-		string IBusinessLayer.addClass(ClassData Class)
+		string IBusinessLayer.addClass(ClassData classToSet)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			if (validPlanning(Class.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(Class.Period.Id, EventData.TypeEnum.Period))
+			if (validPlanning(classToSet.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period))
 				return "Class or Campus link invalid";
-			if (db.Planning.Any(p => p.Id == Class.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == Class.Name)))
+			if (db.Planning.Any(p => p.Id == classToSet.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == classToSet.Name)))
 				return "Une classe ave ce nom existe déjà sur ce campus";
 			Planning plan = new Planning()
 			{
-				Name=Class.Name,
-				ParentPlanning = db.Planning.Where(p => Class.Campus.Id == p.Id).First(),
+				Name=classToSet.Name,
+				ParentPlanning = db.Planning.Where(p => classToSet.Campus.Id == p.Id).First(),
 				LastChange = DateTime.Now,
 				Type = (int)EventData.TypeEnum.Class
 			};
 			db.Planning.AddObject(plan);
 			db.Class.AddObject(new DataAccessLayer.Class()
 			{
-				PeriodPlanning = db.Planning.Where(p => Class.Period.Id == p.Id).First(),
+				PeriodPlanning = db.Planning.Where(p => classToSet.Period.Id == p.Id).First(),
 				Planning = plan
 			});
 			db.SaveChanges();
 			return "ok";
 		}
-		string IBusinessLayer.addPromotion(string PromotionName)
+		string IBusinessLayer.addPromotion(string promotionName)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			if (db.Planning.Any(p => p.Type == null && p.Name == PromotionName))
+			if (db.Planning.Any(p => p.Type == null && p.Name == promotionName))
 				return "cette promotion existe déjà";
 			db.Planning.AddObject( new Planning(){
-				Name = PromotionName,
+				Name = promotionName,
 				LastChange = null,
 				Type = null,
 				ParentPlanning = db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First()
@@ -259,17 +261,17 @@ namespace BusinessLayer
 			return "ok";
 			throw new NotImplementedException();
 		}
-		string IBusinessLayer.addSubject(SubjectData Subject)
+		string IBusinessLayer.addSubject(SubjectData subject)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			Modality sub = new Modality()
 			{
-				Name=Subject.Name,
+				Name=subject.Name,
 				Hours=0
 			};
 			db.Modality.AddObject(sub);
-			foreach (ModalityData m in Subject.Modalities)
+			foreach (ModalityData m in subject.Modalities)
 			{
 				Modality mod = new Modality()
 				{
@@ -303,113 +305,141 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return "ok";
 		}
-
-		string IBusinessLayer.addEvent(EventData even, int PlanningId,int? SpeakerId, int? ModalityId)
+		string IBusinessLayer.addEvent(EventData eventToAdd)
 		{
 			if(!(isUserAdmin || (db.Planning.Any(p=>p.Type==(int)EventData.TypeEnum.Campus && currentUserRoles.Any(r=>r.Target==p.Id)))))
 				return "Vous devez être administrateur pour faire ça.";
-			if (!validPlanning(PlanningId, even.Type))
+			if (!validPlanning(eventToAdd.ParentPlanning.Id, eventToAdd.Type))
 				return "Votre requète semble invalide";
+			db.Planning.First(p => p.Id == eventToAdd.ParentPlanning.Id).LastChange = DateTime.Now;
 			db.Event.AddObject(new Event()
 			{
-				Name = even.Name,
+				Name = eventToAdd.Name,
 				OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
-				Planning = PlanningId,
-				Place = even.Place,
-				End = even.End,
-				Start = even.Start,
-				Mandatory=even.Mandatory,
-				SpeakerRef = db.User.First(u => u.Id == SpeakerId).Planning
+				Planning = eventToAdd.ParentPlanning.Id,
+				Place = eventToAdd.Place,
+				End = eventToAdd.End,
+				Start = eventToAdd.Start,
+				Mandatory=eventToAdd.Mandatory,
+				SpeakerRef = db.User.First(u => u.Id == eventToAdd.Speaker.Id).Planning
 			});
 			db.SaveChanges();
 			return "ok";
 		}
-
-		string IBusinessLayer.addPrivateEvent(EventData even)
+		string IBusinessLayer.addPrivateEvent(EventData eventToAdd)
 		{
+			db.User.First(u => u.Login == currentUserLogin).Planning.LastChange = DateTime.Now;
 			db.Event.AddObject(new Event()
 			{
-				Name = even.Name,
+				Name = eventToAdd.Name,
 				OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
-				Place = even.Place,
+				Place = eventToAdd.Place,
 				Planning = currentUserId,
-				End = even.End,
-				Start = even.Start,
-				Mandatory = currentUserRoles.Any(r=>r.Target==null)?even.Mandatory:false
+				End = eventToAdd.End,
+				Start = eventToAdd.Start,
+				Mandatory = currentUserRoles.Any(r=>r.Target==null)?eventToAdd.Mandatory:false
 			});
+			
 			return "ok";
 		}
-
-		string IBusinessLayer.setUser(UserData UD)
+		string IBusinessLayer.setUser(UserData userToSet)
 		{
-			if ((!isUserAdmin)||(UD.Id!=currentUserId))
+			if ((!isUserAdmin)||(userToSet.Id!=currentUserId))
 				return "Vous devez être administrateur pour faire ça.";
-			User usr = db.User.First(u => u.Id == UD.Id);
+			User usr = db.User.First(u => u.Id == userToSet.Id);
 			if ( isUserAdmin)
 			{
-				if(!validPlanning(UD.Class.Id, EventData.TypeEnum.Class))
+				if(!validPlanning(userToSet.Class.Id, EventData.TypeEnum.Class))
 					return "Nouvelle classe invalide";
-				if (UD.Login != usr.Login && !db.User.Any(u => u.Login == UD.Login))
-					usr.Login = UD.Login;
-				usr.Planning.Parent = UD.Class.Id;
+				if (userToSet.Login != usr.Login && !db.User.Any(u => u.Login == userToSet.Login))
+					usr.Login = userToSet.Login;
+				usr.Planning.Parent = userToSet.Class.Id;
 				foreach(Role ro in usr.Roles)
 				{
-					if (!UD.Roles.Any(r => r.Id == ro.Id))
+					if (!userToSet.Roles.Any(r => r.Id == ro.Id))
 						db.Role.DeleteObject(ro);
 				}
-				foreach (RoleData ro in UD.Roles)
+				foreach (RoleData ro in userToSet.Roles)
 				{
 					if (!usr.Roles.Any(r => r.Id == ro.Id))
 						db.Role.AddObject(new Role()
 						{
 							Target = (ro.TargetId.HasValue ? (validPlanning(ro.TargetId.Value, EventData.TypeEnum.Campus) || validPlanning(ro.TargetId.Value, EventData.TypeEnum.University) ? ro.TargetId : null) : null),
-							User = UD.Id
+							User = userToSet.Id
 						});
 				}
 			}
-			usr.Password = UD.Password;
+			usr.Password = userToSet.Password;
 			db.SaveChanges();
 			throw new NotImplementedException();
 		}
-
 		string IBusinessLayer.setCampus(int Id, string CampusName)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-
-			throw new NotImplementedException();
+			db.Planning.First(p => p.Id == Id && p.Type == (int)EventData.TypeEnum.Campus).Name = CampusName;
+			db.SaveChanges();
+			return "ok";
 		}
-
-		string IBusinessLayer.setClass(ClassData CD)
+		string IBusinessLayer.setClass(ClassData classToSet)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-
-			throw new NotImplementedException();
+			if (!(validPlanning(classToSet.Campus.Id, EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period)))
+				return "référence invalide";
+			var classe = db.Planning.First(p => p.Id == classToSet.Id && p.Type == (int)EventData.TypeEnum.Campus);
+			classe.Name = classToSet.Name;
+			classe.Class.Period = classToSet.Period.Id;
+			classe.Parent = classToSet.Campus.Id;
+			return "ok";
 		}
-
 		string IBusinessLayer.setPromotion(int Id, string PromotionName)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-
-			throw new NotImplementedException();
+			db.Planning.First(p => p.Id == Id && p.Type == null).Name = PromotionName;
+			db.SaveChanges();
+			return "ok";
 		}
-
-		string IBusinessLayer.setSubject(SubjectData SD)
+		string IBusinessLayer.setSubject(SubjectData subjectToSet)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-
-			throw new NotImplementedException();
+			var sub = db.Modality.First(p => p.Id == subjectToSet.Id);
+			foreach (Modality dbMod in sub.Modalitys)
+			{
+				var newMod=subjectToSet.Modalities.FirstOrDefault(m => m.Id == dbMod.Id);
+				if (newMod==null)
+					db.Modality.DeleteObject(dbMod);
+				else
+				{
+					dbMod.Name = newMod.Name;
+					dbMod.Hours = newMod.Hours;
+				}
+			}
+			foreach (ModalityData mo in subjectToSet.Modalities)
+			{
+				if (!sub.Modalitys.Any(m => m.Id == mo.Id))
+					db.Modality.AddObject(new Modality()
+					{
+						OnSubject = sub,
+						Hours = mo.Hours,
+						Name=mo.Name
+					});
+			}
+			db.SaveChanges();
+			return "ok";
 		}
-
 		string IBusinessLayer.setPeriod(PeriodData PD)
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-
-			throw new NotImplementedException();
+			var myPeriod=db.Planning.First(p => p.Id == PD.Id && p.Type ==(int)EventData.TypeEnum.Period);
+			myPeriod.ParentPlanning=db.Planning.First(p => p.Name == PD.PromotionName && p.Type == null);
+			myPeriod.Name = PD.Name;
+			myPeriod.Period.End = PD.End;
+			myPeriod.Period.Start = PD.Start;
+			return "ok";
 		}
 
 		string IBusinessLayer.setEvent(EventData EditedEvent)
