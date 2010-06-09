@@ -26,7 +26,6 @@ namespace BusinessLayer
 
 		public EventData()
 		{
-
 		}
 
 

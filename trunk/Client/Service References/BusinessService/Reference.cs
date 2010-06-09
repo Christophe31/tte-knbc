@@ -15,390 +15,6 @@ namespace Client.BusinessService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="IdName", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.ClassData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.PeriodData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.SubjectData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.ModalityData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.UserData))]
-    public partial class IdName : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string NameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
-                return this.NameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
-                    this.NameField = value;
-                    this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ClassData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    public partial class ClassData : Client.BusinessService.IdName {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.IdName CampusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.IdName PeriodField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.IdName Campus {
-            get {
-                return this.CampusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CampusField, value) != true)) {
-                    this.CampusField = value;
-                    this.RaisePropertyChanged("Campus");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.IdName Period {
-            get {
-                return this.PeriodField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PeriodField, value) != true)) {
-                    this.PeriodField = value;
-                    this.RaisePropertyChanged("Period");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PeriodData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    public partial class PeriodData : Client.BusinessService.IdName {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime EndField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.IdName PromotionField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime StartField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime End {
-            get {
-                return this.EndField;
-            }
-            set {
-                if ((this.EndField.Equals(value) != true)) {
-                    this.EndField = value;
-                    this.RaisePropertyChanged("End");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.IdName Promotion {
-            get {
-                return this.PromotionField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PromotionField, value) != true)) {
-                    this.PromotionField = value;
-                    this.RaisePropertyChanged("Promotion");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Start {
-            get {
-                return this.StartField;
-            }
-            set {
-                if ((this.StartField.Equals(value) != true)) {
-                    this.StartField = value;
-                    this.RaisePropertyChanged("Start");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SubjectData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    public partial class SubjectData : Client.BusinessService.IdName {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.ModalityData[] ModalitiesField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.ModalityData[] Modalities {
-            get {
-                return this.ModalitiesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModalitiesField, value) != true)) {
-                    this.ModalitiesField = value;
-                    this.RaisePropertyChanged("Modalities");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ModalityData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    public partial class ModalityData : Client.BusinessService.IdName {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int HoursField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SubjectIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Hours {
-            get {
-                return this.HoursField;
-            }
-            set {
-                if ((this.HoursField.Equals(value) != true)) {
-                    this.HoursField = value;
-                    this.RaisePropertyChanged("Hours");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SubjectId {
-            get {
-                return this.SubjectIdField;
-            }
-            set {
-                if ((this.SubjectIdField.Equals(value) != true)) {
-                    this.SubjectIdField = value;
-                    this.RaisePropertyChanged("SubjectId");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UserData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    public partial class UserData : Client.BusinessService.IdName {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.IdName ClassField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LoginField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.RoleData[] RolesField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.IdName Class {
-            get {
-                return this.ClassField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ClassField, value) != true)) {
-                    this.ClassField = value;
-                    this.RaisePropertyChanged("Class");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Login {
-            get {
-                return this.LoginField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
-                    this.LoginField = value;
-                    this.RaisePropertyChanged("Login");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
-                return this.PasswordField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
-                    this.PasswordField = value;
-                    this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.RoleData[] Roles {
-            get {
-                return this.RolesField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RolesField, value) != true)) {
-                    this.RolesField = value;
-                    this.RaisePropertyChanged("Roles");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RoleData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-    [System.SerializableAttribute()]
-    public partial class RoleData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private Client.BusinessService.RoleData.RoleType RoleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.Nullable<int> TargetIdField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public Client.BusinessService.RoleData.RoleType Role {
-            get {
-                return this.RoleField;
-            }
-            set {
-                if ((this.RoleField.Equals(value) != true)) {
-                    this.RoleField = value;
-                    this.RaisePropertyChanged("Role");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> TargetId {
-            get {
-                return this.TargetIdField;
-            }
-            set {
-                if ((this.TargetIdField.Equals(value) != true)) {
-                    this.TargetIdField = value;
-                    this.RaisePropertyChanged("TargetId");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="RoleData.RoleType", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
-        public enum RoleType : int {
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Administrator = 0,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            CampusManager = 1,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Speaker = 2,
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="EventData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
     [System.SerializableAttribute()]
     public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -622,9 +238,396 @@ namespace Client.BusinessService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IdName", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.UserData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.ClassData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.PeriodData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.SubjectData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(Client.BusinessService.ModalityData))]
+    public partial class IdName : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UserData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class UserData : Client.BusinessService.IdName {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.IdName ClassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LoginField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PasswordField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.RoleData[] RolesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.IdName Class {
+            get {
+                return this.ClassField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ClassField, value) != true)) {
+                    this.ClassField = value;
+                    this.RaisePropertyChanged("Class");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Login {
+            get {
+                return this.LoginField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LoginField, value) != true)) {
+                    this.LoginField = value;
+                    this.RaisePropertyChanged("Login");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Password {
+            get {
+                return this.PasswordField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+                    this.PasswordField = value;
+                    this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.RoleData[] Roles {
+            get {
+                return this.RolesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RolesField, value) != true)) {
+                    this.RolesField = value;
+                    this.RaisePropertyChanged("Roles");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ClassData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class ClassData : Client.BusinessService.IdName {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.IdName CampusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.IdName PeriodField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.IdName Campus {
+            get {
+                return this.CampusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CampusField, value) != true)) {
+                    this.CampusField = value;
+                    this.RaisePropertyChanged("Campus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.IdName Period {
+            get {
+                return this.PeriodField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PeriodField, value) != true)) {
+                    this.PeriodField = value;
+                    this.RaisePropertyChanged("Period");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PeriodData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class PeriodData : Client.BusinessService.IdName {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EndField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.IdName PromotionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime StartField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime End {
+            get {
+                return this.EndField;
+            }
+            set {
+                if ((this.EndField.Equals(value) != true)) {
+                    this.EndField = value;
+                    this.RaisePropertyChanged("End");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.IdName Promotion {
+            get {
+                return this.PromotionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PromotionField, value) != true)) {
+                    this.PromotionField = value;
+                    this.RaisePropertyChanged("Promotion");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime Start {
+            get {
+                return this.StartField;
+            }
+            set {
+                if ((this.StartField.Equals(value) != true)) {
+                    this.StartField = value;
+                    this.RaisePropertyChanged("Start");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SubjectData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class SubjectData : Client.BusinessService.IdName {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.ModalityData[] ModalitiesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.ModalityData[] Modalities {
+            get {
+                return this.ModalitiesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModalitiesField, value) != true)) {
+                    this.ModalitiesField = value;
+                    this.RaisePropertyChanged("Modalities");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModalityData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class ModalityData : Client.BusinessService.IdName {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int HoursField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SubjectIdField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Hours {
+            get {
+                return this.HoursField;
+            }
+            set {
+                if ((this.HoursField.Equals(value) != true)) {
+                    this.HoursField = value;
+                    this.RaisePropertyChanged("Hours");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int SubjectId {
+            get {
+                return this.SubjectIdField;
+            }
+            set {
+                if ((this.SubjectIdField.Equals(value) != true)) {
+                    this.SubjectIdField = value;
+                    this.RaisePropertyChanged("SubjectId");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RoleData", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+    [System.SerializableAttribute()]
+    public partial class RoleData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.RoleData.RoleType RoleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> TargetIdField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.RoleData.RoleType Role {
+            get {
+                return this.RoleField;
+            }
+            set {
+                if ((this.RoleField.Equals(value) != true)) {
+                    this.RoleField = value;
+                    this.RaisePropertyChanged("Role");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> TargetId {
+            get {
+                return this.TargetIdField;
+            }
+            set {
+                if ((this.TargetIdField.Equals(value) != true)) {
+                    this.TargetIdField = value;
+                    this.RaisePropertyChanged("TargetId");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+        [System.Runtime.Serialization.DataContractAttribute(Name="RoleData.RoleType", Namespace="http://schemas.datacontract.org/2004/07/BusinessLayer")]
+        public enum RoleType : int {
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Administrator = 0,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            CampusManager = 1,
+            
+            [System.Runtime.Serialization.EnumMemberAttribute()]
+            Speaker = 2,
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="BusinessService.IBusinessLayer")]
     public interface IBusinessLayer {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPrivateEvent", ReplyAction="http://tempuri.org/IBusinessLayer/setPrivateEventResponse")]
+        string setPrivateEvent(Client.BusinessService.EventData EditedEvent);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delUser", ReplyAction="http://tempuri.org/IBusinessLayer/delUserResponse")]
         string delUser(int Id);
@@ -689,6 +692,9 @@ namespace Client.BusinessService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSpeakers", ReplyAction="http://tempuri.org/IBusinessLayer/getSpeakersResponse")]
         Client.BusinessService.IdName[] getSpeakers();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getCampusLocationsTree", ReplyAction="http://tempuri.org/IBusinessLayer/getCampusLocationsTreeResponse")]
+        System.Collections.Generic.Dictionary<Client.BusinessService.IdName, string[]> getCampusLocationsTree();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTree", ReplyAction="http://tempuri.org/IBusinessLayer/getCampusPeriodClassTreeResponse")]
         System.Collections.Generic.Dictionary<Client.BusinessService.IdName, System.Collections.Generic.Dictionary<Client.BusinessService.IdName, Client.BusinessService.IdName[]>> getCampusPeriodClassTree();
         
@@ -736,9 +742,6 @@ namespace Client.BusinessService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setEvent", ReplyAction="http://tempuri.org/IBusinessLayer/setEventResponse")]
         string setEvent(Client.BusinessService.EventData EditedEvent);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/setPrivateEvent", ReplyAction="http://tempuri.org/IBusinessLayer/setPrivateEventResponse")]
-        string setPrivateEvent(Client.BusinessService.EventData EditedEvent);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -766,6 +769,10 @@ namespace Client.BusinessService {
         
         public BusinessLayerClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public string setPrivateEvent(Client.BusinessService.EventData EditedEvent) {
+            return base.Channel.setPrivateEvent(EditedEvent);
         }
         
         public string delUser(int Id) {
@@ -852,6 +859,10 @@ namespace Client.BusinessService {
             return base.Channel.getSpeakers();
         }
         
+        public System.Collections.Generic.Dictionary<Client.BusinessService.IdName, string[]> getCampusLocationsTree() {
+            return base.Channel.getCampusLocationsTree();
+        }
+        
         public System.Collections.Generic.Dictionary<Client.BusinessService.IdName, System.Collections.Generic.Dictionary<Client.BusinessService.IdName, Client.BusinessService.IdName[]>> getCampusPeriodClassTree() {
             return base.Channel.getCampusPeriodClassTree();
         }
@@ -914,10 +925,6 @@ namespace Client.BusinessService {
         
         public string setEvent(Client.BusinessService.EventData EditedEvent) {
             return base.Channel.setEvent(EditedEvent);
-        }
-        
-        public string setPrivateEvent(Client.BusinessService.EventData EditedEvent) {
-            return base.Channel.setPrivateEvent(EditedEvent);
         }
     }
 }

@@ -21,7 +21,9 @@ namespace Client
 		}
 		public bool logCacheProcess(string login, string password)
 		{
-			return cacheProcess.logToWebService(login, password);
+			var b= cacheProcess.logToWebService(login, password);
+			Server = cacheProcess.Server;
+			return b;
 		}
  
 		#region Lecture d'évènements
@@ -102,7 +104,6 @@ namespace Client
 		public IdName[] getPromotions()
 		{
 			string fname = "Promotion" + "List.cache";
-
 			if (cacheProcess.ServerReachable)
 			{
 				IdName[] t = Server.getPromotions();
@@ -182,5 +183,10 @@ namespace Client
 			throw new Exception("No cache file, neither connexion to Web Service available");
 		}
 		#endregion
+
+		public void RelinkServer()
+		{
+			this.Server=cacheProcess.Server;
+		}
 	}
 }
