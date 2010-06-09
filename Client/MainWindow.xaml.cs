@@ -22,6 +22,31 @@ namespace Client
 	/// </summary>
 	public partial class MainWindow : Window
     {
+        #region Properties
+        public IdName SelectedPlanning
+        {
+            get
+            {
+                if (ViewType.SelectedValue != null)
+                {
+                    EventData.TypeEnum viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
+                    if (viewType == EventData.TypeEnum.University)
+                        return Api.getUniversity();
+                    else if (viewType == EventData.TypeEnum.Campus && CampusName.SelectedValue != null)
+                        return (IdName)CampusName.SelectedValue;
+                    else if (viewType == EventData.TypeEnum.Period && PeriodName.SelectedValue != null)
+                        return (IdName)PeriodName.SelectedValue;
+                    else if (viewType == EventData.TypeEnum.Class && ClassName.SelectedValue != null)
+                        return (IdName)ClassName.SelectedValue;
+                    else if (viewType == EventData.TypeEnum.User)
+                        return Api.CurrentUser;
+                }
+                
+                return new IdName() { Id = 0, Name = "No planning" };
+            }
+        }
+        #endregion Properties
+
         #region attributes
         /// <summary>
         /// Api allowing to manipulate data stored in the database

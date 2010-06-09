@@ -186,11 +186,11 @@ namespace Client.BusinessService
             }
         }
 
-        private static IdName[] _subjects = null;
+        private static SubjectData[] _subjects = null;
         /// <summary>
         /// Get a table of available subjects.
         /// </summary>
-        public IdName[] Subjects
+        public SubjectData[] Subjects
         {
             get
             {
@@ -208,6 +208,28 @@ namespace Client.BusinessService
             get
             {
                 return Array.FindIndex(Subjects, p => p.Id == Subject.Id);
+            }
+        }
+
+        /// <summary>
+        /// Get a table of available modalities for the current subject.
+        /// </summary>
+        public ModalityData[] Modalities
+        {
+            get
+            {
+                return Subjects[SubjectIndex] == null ? null : Subjects[SubjectIndex].Modalities;
+            }
+        }
+
+        /// <summary>
+        /// Get the index of the current modality in the available modalities.
+        /// </summary>
+        public int ModalityIndex
+        {
+            get
+            {
+                return Array.FindIndex(Modalities, p => p.Id == Modality.Id);
             }
         }
 
@@ -281,7 +303,7 @@ namespace Client.BusinessService
             // Event creation
             if (Id == 0)
             {
-				//Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker, Place);
+                Api.Server.addEvent(this);
             }
 
             // Event edition
