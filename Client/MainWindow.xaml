@@ -240,10 +240,21 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
-                            
-                        	<DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
-                            
-                        	<DataGridTemplateColumn Header="Début" SortMemberPath="Start">
+
+                            <DataGridTemplateColumn Header="Matière">
+                                <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Subject}"/>
+                                </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Subjects, Mode=OneTime}" SelectedIndex="{Binding SubjectIndex, Mode=OneWay}" SelectedValue="{Binding Subject, Mode=OneWayToSource}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Début" SortMemberPath="Start">
                         		<DataGridTemplateColumn.CellTemplate>
                         			<DataTemplate>
                         				<TextBlock Text="{Binding Start, StringFormat=\{0:g\}}" />

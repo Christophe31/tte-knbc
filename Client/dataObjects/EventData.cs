@@ -110,6 +110,9 @@ namespace Client.BusinessService
         /// </summary>
         public int EventIndex { get; set; }
 
+        /// <summary>
+        /// Get a color for borders around the event, depending on its modality or its type.
+        /// </summary>
         public SolidColorBrush BorderColor
         {
             get
@@ -144,7 +147,10 @@ namespace Client.BusinessService
                 return Brushes.White;
             }
         }
-
+        
+        /// <summary>
+        /// Get a color for background of the event (it is the border color, but lighter).
+        /// </summary>
         public SolidColorBrush BackgroundColor
         {
             get
@@ -156,6 +162,9 @@ namespace Client.BusinessService
         }
 
         private static IdName[] _speakers = null;
+        /// <summary>
+        /// Get a table of available speakers.
+        /// </summary>
         public IdName[] Speakers
         {
             get
@@ -166,11 +175,39 @@ namespace Client.BusinessService
             }
         }
 
+        /// <summary>
+        /// Get the index of the current speaker in the table Speakers.
+        /// </summary>
         public int SpeakerIndex
         {
             get
             {
                 return Array.FindIndex(Speakers, p => p.Id == Speaker.Id);
+            }
+        }
+
+        private static IdName[] _subjects = null;
+        /// <summary>
+        /// Get a table of available subjects.
+        /// </summary>
+        public IdName[] Subjects
+        {
+            get
+            {
+                if (_subjects == null)
+                    _subjects = new CacheWrapper().getSubjects();
+                return _subjects;
+            }
+        }
+
+        /// <summary>
+        /// Get the index of the current subject in the table Subjects.
+        /// </summary>
+        public int SubjectIndex
+        {
+            get
+            {
+                return Array.FindIndex(Subjects, p => p.Id == Subject.Id);
             }
         }
 
