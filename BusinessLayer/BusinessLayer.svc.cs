@@ -306,22 +306,38 @@ namespace BusinessLayer
 
 		string IBusinessLayer.addEvent(EventData even, int PlanningId,int? SpeakerId, int? ModalityId)
 		{
-			 db.Event.AddObject(new Event()
-			 {
-				 Name = even.Name,
-				 OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
-				 Place = even.Place,
-				 End = even.End,
-				 Start = even.Start,
-				 SpeakerRef = db.User.First(u => u.Id == SpeakerId).Planning
-			 });
-			 db.SaveChanges();
+			if(!(isUserAdmin || (db.Planning.Any(p=>p.Type==(int)EventData.TypeEnum.Campus && currentUserRoles.Any(r=>r.Target==p.Id)))))
+				return "Vous devez être administrateur pour faire ça.";
+			if (!validPlanning(PlanningId, even.Type))
+				return "Votre requète semble invalide";
+			db.Event.AddObject(new Event()
+			{
+				Name = even.Name,
+				OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
+				Planning = PlanningId,
+				Place = even.Place,
+				End = even.End,
+				Start = even.Start,
+				Mandatory=even.Mandatory,
+				SpeakerRef = db.User.First(u => u.Id == SpeakerId).Planning
+			});
+			db.SaveChanges();
 			return "ok";
 		}
 
-		string IBusinessLayer.addPrivateEvent(EventData Event)
+		string IBusinessLayer.addPrivateEvent(EventData even)
 		{
-			throw new NotImplementedException();
+			db.Event.AddObject(new Event()
+			{
+				Name = even.Name,
+				OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
+				Place = even.Place,
+				Planning = currentUserId,
+				End = even.End,
+				Start = even.Start,
+				Mandatory = currentUserRoles.Any(r=>r.Target==null)?even.Mandatory:false
+			});
+			return "ok";
 		}
 
 		string IBusinessLayer.setUser(UserData UD)
