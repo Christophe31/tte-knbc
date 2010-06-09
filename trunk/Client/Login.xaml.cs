@@ -17,30 +17,32 @@ namespace Client
 	/// <summary>
 	/// Classe de lancement et du splashscreen.
 	/// </summary>
-	public partial class TteSplash : Window
+	public partial class Login : Window
 	{
 		protected MainWindow t;
-		public TteSplash()
+		public Login()
 		{
 			InitializeComponent();
 			this.Show();
-			this.BeginStoryboard((Storyboard)FindResource("Storyboard1"));
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			
 			new Thread((ThreadStart)DelayedStart).Start();
-			t = new MainWindow();
+
 		}
+		CacheWrapper c;
 		private void DelayedStart()
 		{
-			CacheWrapper c = new CacheWrapper();
+			c = new CacheWrapper();
 			this.Dispatcher.BeginInvoke((ThreadStart)Hiding);
-			t.Dispatcher.BeginInvoke((ThreadStart)Ending);
+			Thread.Sleep(9000);
 		}
 
 		private void Hiding()
-		{	this.Visibility = System.Windows.Visibility.Hidden;
+		{
+			t = new MainWindow();
 			t.Visibility = System.Windows.Visibility.Hidden;
 		}
 		private void Ending()
@@ -48,7 +50,27 @@ namespace Client
 			t.Show();
 			Thread.Sleep(500);
 			t.Visibility = System.Windows.Visibility.Visible;
-			this.Close();
+			this.Visibility = System.Windows.Visibility.Collapsed;
+			//this.Close();
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			if (c.logCacheProcess(loginBox.Text, passwordBox.Password))
+				this.Dispatcher.BeginInvoke((ThreadStart)Ending);
+			else
+			{
+				errorImage.Visibility = System.Windows.Visibility.Visible;
+				errorMessage.Visibility = System.Windows.Visibility.Visible;
+			}
+
+		}
+
+		private void loginBox_KeyUp(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+				Button_Click(null, null);
+
 		}
 	}
 }
