@@ -53,8 +53,6 @@ namespace BusinessLayer
 			[OperationContract]
 			string addPeriod(PeriodData Period);
 			[OperationContract]
-			string grantRole(int UserId, int? Target);
-			[OperationContract]
 			string addEvent(EventData Event,int PlanningId, int? SpeakerId, int? Modality);
 			[OperationContract]
 			string addPrivateEvent(EventData Event);
@@ -86,8 +84,6 @@ namespace BusinessLayer
 			string delSubject(int Id);
 			[OperationContract]
 			string delPeriod(int Id);
-			[OperationContract]
-			string delRole(int Id);
 			[OperationContract]
 			string delEvent(int Id);
 			[OperationContract]

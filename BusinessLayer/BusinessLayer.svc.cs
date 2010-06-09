@@ -37,6 +37,10 @@ namespace BusinessLayer
 			get{ return db.User.First(u => u.Login == currentUserLogin).Roles.Any(r => r.Target.GetValueOrDefault() == db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First().Id);}
 		}
 		EntityCollection<Role> currentUserRoles { get { return db.User.First(u => u.Login == currentUserLogin).Roles; } }
+		bool validPlanning(int Id, EventData.TypeEnum? Type) 
+		{
+			return db.Planning.Any(p => p.Id == Id && p.Type == (int?)Type);
+		}
 
 		#region IBusinessLayer Members
 		UserData IBusinessLayer.getUserData()
@@ -176,7 +180,7 @@ namespace BusinessLayer
 				return "veillez spécifier un nom d'utilisateur";
 			if (db.User.Any(u => User.Login == u.Login))
 				return "cet utilisateur existe déjà";
-			if (!(User.Class.Id == 0) || !db.Class.Any(c => User.Class.Id == c.Id))
+			if ((User.Class.Id != 0) || !validPlanning(User.Class.Id, EventData.TypeEnum.Class))
 				return "veuillez définir une classe valide";
 			Planning plan = new Planning() 
 			{
@@ -191,6 +195,12 @@ namespace BusinessLayer
 				Password = User.Password,
 				Login = User.Login
 			});
+			foreach (var role in User.Roles)
+				db.Role.AddObject(new Role() 
+					{
+						Target = (role.TargetId.HasValue ? (validPlanning(role.TargetId.Value, EventData.TypeEnum.Campus)||validPlanning(role.TargetId.Value, EventData.TypeEnum.University) ? role.TargetId : null) : null),
+						User = User.Id
+					});
 			db.SaveChanges();
 			return "ok";
 		}
@@ -211,7 +221,7 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			if (db.Planning.Any(p => p.Type == (int)EventData.TypeEnum.Campus && Class.Campus.Id == p.Id) && db.Planning.Any(p => p.Type == (int)EventData.TypeEnum.Period && Class.Period.Id == p.Id))
+			if (validPlanning(Class.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(Class.Period.Id, EventData.TypeEnum.Period))
 				return "Class or Campus link invalid";
 			if (db.Planning.Any(p => p.Id == Class.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == Class.Name)))
 				return "Une classe ave ce nom existe déjà sur ce campus";
@@ -293,38 +303,19 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return "ok";
 		}
-		string IBusinessLayer.grantRole(int UserId, int? Target)
-		{
-			if (!isUserAdmin)
-				return "Vous devez être administrateur pour faire ça.";
-			if (!(db.User.Any(u => u.Id == UserId)
-				&&
-				(!Target.HasValue
-					||
-					db.Planning.Any(p =>
-						p.Id == Target
-						&&
-						(p.Type == (int)EventData.TypeEnum.Campus
-						||
-						p.Type == (int)EventData.TypeEnum.University)
-					))))
-				return "Utilisateur ou cible du droit invalide";
-			db.Role.AddObject(new Role() { Target = Target, UserRef=db.User.First(u=>u.Id==UserId) });
-			return "ok";
-		}
 
 		string IBusinessLayer.addEvent(EventData even, int PlanningId,int? SpeakerId, int? ModalityId)
 		{
-			
-			 new Event() 
-			{
-				Name=even.Name,
-				OwnerRef=db.User.First(u=>u.Login==currentUserLogin).Planning,
-				Place=even.Place,
-				End=even.End,
-				Start=even.Start,
-				SpeakerRef=db.User.First(u=>u.Id==SpeakerId).Planning
-			};
+			 db.Event.AddObject(new Event()
+			 {
+				 Name = even.Name,
+				 OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
+				 Place = even.Place,
+				 End = even.End,
+				 Start = even.Start,
+				 SpeakerRef = db.User.First(u => u.Id == SpeakerId).Planning
+			 });
+			 db.SaveChanges();
 			return "ok";
 		}
 
@@ -335,9 +326,33 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setUser(UserData UD)
 		{
-			if (!isUserAdmin)
+			if ((!isUserAdmin)||(UD.Id!=currentUserId))
 				return "Vous devez être administrateur pour faire ça.";
-
+			User usr = db.User.First(u => u.Id == UD.Id);
+			if ( isUserAdmin)
+			{
+				if(!validPlanning(UD.Class.Id, EventData.TypeEnum.Class))
+					return "Nouvelle classe invalide";
+				if (UD.Login != usr.Login && !db.User.Any(u => u.Login == UD.Login))
+					usr.Login = UD.Login;
+				usr.Planning.Parent = UD.Class.Id;
+				foreach(Role ro in usr.Roles)
+				{
+					if (!UD.Roles.Any(r => r.Id == ro.Id))
+						db.Role.DeleteObject(ro);
+				}
+				foreach (RoleData ro in UD.Roles)
+				{
+					if (!usr.Roles.Any(r => r.Id == ro.Id))
+						db.Role.AddObject(new Role()
+						{
+							Target = (ro.TargetId.HasValue ? (validPlanning(ro.TargetId.Value, EventData.TypeEnum.Campus) || validPlanning(ro.TargetId.Value, EventData.TypeEnum.University) ? ro.TargetId : null) : null),
+							User = UD.Id
+						});
+				}
+			}
+			usr.Password = UD.Password;
+			db.SaveChanges();
 			throw new NotImplementedException();
 		}
 
@@ -450,14 +465,6 @@ namespace BusinessLayer
 				return "D'autres objests en dépendent, merci de les suprimmer en premier lieu";
 			db.Period.DeleteObject(per);
 			db.Planning.DeleteObject(plan);
-			db.SaveChanges();
-			return "ok";
-		}
-		string IBusinessLayer.delRole(int Id)
-		{
-			if (!isUserAdmin)
-				return "Vous devez être administrateur pour faire ça.";
-			db.Role.DeleteObject(db.Role.Where(r => r.Id == Id).First());
 			db.SaveChanges();
 			return "ok";
 		}
