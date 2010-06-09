@@ -130,10 +130,11 @@ namespace BusinessLayer
 		SubjectData[] IBusinessLayer.getSubjects()
 		{
 			return db.Modality.Where(p => p.OnSubject == null && p.Hours == null).
-				Select(p => new SubjectData()
+				Select(p => new { Id = p.Id, Name=p.Name, Modalities=p.Modalitys.Select(m => new ModalityData() { Id = m.Id, SubjectId = p.Id, Name = m.Name, Hours = m.Hours??0 }) }).
+				ToArray().Select(p => new SubjectData()
 				{
 					Id = p.Id,
-					Modalities = p.Modalitys.Select(m => new ModalityData() { Id = m.Id,SubjectId=p.Id, Name = m.Name, Hours = m.Hours.GetValueOrDefault() }).ToArray(),
+					Modalities = p.Modalities.ToArray(),
 					Name = p.Name
 				}).ToArray();
 		}
@@ -214,19 +215,6 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return "ok";
 		}
-		string IBusinessLayer.addCampus(string campusName)
-		{
-			if (!isUserAdmin)
-				return "Vous devez être administrateur pour faire ça.";
-			db.Planning.AddObject( new Planning(){
-				Name = campusName,
-				LastChange = DateTime.Now,
-				Type = (int)EventData.TypeEnum.Campus,
-				ParentPlanning = db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First()
-			});
-			db.SaveChanges();
-			return "ok";
-		}
 		string IBusinessLayer.addClass(ClassData classToSet)
 		{
 			if (!isUserAdmin)
@@ -255,8 +243,6 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			if (!isUserAdmin)
-				return "Vous devez être administrateur pour faire ça.";
 			if (db.Planning.Any(p => p.Type == null && p.Name == promotionName))
 				return "cette promotion existe déjà";
 			db.Planning.AddObject( new Planning(){
@@ -267,7 +253,22 @@ namespace BusinessLayer
 			});
 			db.SaveChanges();
 			return "ok";
-			throw new NotImplementedException();
+		}
+		string IBusinessLayer.addCampus(string campusName)
+		{
+			if (!isUserAdmin)
+				return "Vous devez être administrateur pour faire ça.";
+			if (db.Planning.Any(p => p.Type == (int)EventData.TypeEnum.Campus && p.Name == campusName))
+				return "Le Campus ayant ce nom existe déjà.";
+			db.Planning.AddObject(new Planning()
+			{
+				Name = campusName,
+				//LastChange = DateTime.Now,
+				Type = (int)EventData.TypeEnum.Campus,
+				ParentPlanning = db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First()
+			});
+			db.SaveChanges();
+			return "ok";
 		}
 		string IBusinessLayer.addSubject(SubjectData subject)
 		{

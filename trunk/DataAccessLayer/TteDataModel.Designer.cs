@@ -895,7 +895,7 @@ namespace DataAccessLayer
             {
                 return _Id;
             }
-            set
+            private set
             {
                 if (_Id != value)
                 {
@@ -1257,7 +1257,7 @@ namespace DataAccessLayer
             {
                 return _Id;
             }
-            set
+            private set
             {
                 if (_Id != value)
                 {

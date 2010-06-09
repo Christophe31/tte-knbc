@@ -119,30 +119,32 @@ namespace Client.BusinessService
             {
                 // Modality specified
                 string[] modalities = SubjectData.PresetModalities;
-                if (Modality == modalities[0])
-                    return Brushes.MediumTurquoise;
-                else if (Modality == modalities[1])
-                    return Brushes.PaleTurquoise;
-                else if (Modality == modalities[2])
-                    return Brushes.PaleGreen;
-                else if (Modality == modalities[3])
-                    return Brushes.Lime;
-                else if (Modality == modalities[4])
-                    return Brushes.Orange;
-                else if (Modality == modalities[5])
-                    return Brushes.Red;
-
-                // Fallback to planning type
-                else if (Type == TypeEnum.University)
-                    return Brushes.Chartreuse;
-                else if (Type == TypeEnum.Campus)
-                    return Brushes.MediumSpringGreen;
-                else if (Type == TypeEnum.Period)
-                    return Brushes.PowderBlue;
-                else if (Type == TypeEnum.Class)
-                    return Brushes.Cyan;
-                else if (Type == TypeEnum.User)
-                    return Brushes.Silver;
+				if (Modality != null)
+				{
+					if (Modality == modalities[0])
+						return Brushes.MediumTurquoise;
+					else if (Modality == modalities[1])
+						return Brushes.PaleTurquoise;
+					else if (Modality == modalities[2])
+						return Brushes.PaleGreen;
+					else if (Modality == modalities[3])
+						return Brushes.Lime;
+					else if (Modality == modalities[4])
+						return Brushes.Orange;
+					else if (Modality == modalities[5])
+						return Brushes.Red;
+				}
+				// Fallback to planning type
+				else if (Type == TypeEnum.University)
+					return Brushes.Chartreuse;
+				else if (Type == TypeEnum.Campus)
+					return Brushes.MediumSpringGreen;
+				else if (Type == TypeEnum.Period)
+					return Brushes.PowderBlue;
+				else if (Type == TypeEnum.Class)
+					return Brushes.Cyan;
+				else if (Type == TypeEnum.User)
+					return Brushes.Silver;
 
                 return Brushes.White;
             }
