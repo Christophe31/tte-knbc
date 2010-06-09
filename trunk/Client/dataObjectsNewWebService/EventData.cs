@@ -192,7 +192,7 @@ namespace Client.BusinessService
 			ED.End = p.End.Date;
 			ED.Mandatory = p.Priority == 1;
 			ED.Place = p.Location;
-			ED.Name = p.Name;
+			ED.Name = p.Summary;
 			ED.Speaker = p.Organizer.CommonName;
 			ED.Modality = p.Properties.Where(f => f.Key == "X-MODALITY").First().Value.ToString();
 			ED.Subject = p.Properties.Where(f => f.Key == "X-SUBJECT").First().Value.ToString();
@@ -205,11 +205,12 @@ namespace Client.BusinessService
 			e.UID = this.Id.ToString();
 			e.Start = new iCalDateTime(this.Start);
 			e.End = new iCalDateTime(this.End);
-			e.Name = this.Name;
+			e.Name = "VEVENT";
 			e.Priority = this.Mandatory ? 1 : 0;
 			e.Location = this.Place;
 			e.Organizer = new Organizer() { CommonName = this.Speaker };
 			e.Summary = this.Name;
+			e.Description = this.Subject + ", " + this.Modality;
 			e.AddProperty(new CalendarProperty("X-MODALITY", this.Modality));
 			e.AddProperty(new CalendarProperty("X-SUBJECT", this.Subject));
 		}

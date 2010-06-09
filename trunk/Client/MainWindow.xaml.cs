@@ -403,7 +403,7 @@ namespace Client
                         b.Margin = new Thickness(1,1,1,0);
 
                         TextBlock tb = new TextBlock();
-                        tb.Text = ev.Start.ToShortTimeString() + " - " + (String.IsNullOrEmpty(ev.Name) ? ev.Subject : ev.Name);
+                        tb.Text = ev.Start.ToShortTimeString() + " - " + (String.IsNullOrEmpty(ev.Name) ? ev.Subject.Name : ev.Name);
 
                         b.Child = tb;
                         sp.Children.Add(b);
