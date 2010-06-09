@@ -18,6 +18,11 @@ namespace Client.BusinessService
 	/// </summary>
     public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, INotifyPropertyChanged, IEditableObject
     {
+        /// <summary>
+        /// Defines to which type of element this event is linked (University, Campus, Period, Class or Private)
+        /// </summary>
+        //public EventType.Type Type { get; set; }
+
         #region Properties
         /// <summary>
         /// Returns the string corresponding to the Type property
