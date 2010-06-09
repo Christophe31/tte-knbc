@@ -573,5 +573,17 @@ namespace Client
             week.ColumnDefinitions[col].Width = new GridLength(1, GridUnitType.Star);
             RefreshWeekGrid();
         }
+
+		private void iCal_export_Click(object sender, RoutedEventArgs e)
+		{
+		}
+
+		private void iCal_import_Click(object sender, RoutedEventArgs e)
+		{
+		}
+
+		private void report_Click(object sender, RoutedEventArgs e)
+		{
+		}
     }
 }
