@@ -154,6 +154,7 @@ namespace Client.BusinessService
                 return color;
             }
         }
+
         #endregion Properties
 
         // Create the OnPropertyChanged method to raise the event
@@ -183,7 +184,7 @@ namespace Client.BusinessService
 			}
 			ED.Start = p.Start.Date;
 			ED.End = p.End.Date;
-			ED.Mandatory = p.Priority==1;
+			ED.Mandatory = p.Priority == 1;
 			ED.Place = p.Location;
 			ED.Name = p.Name;
 			ED.Speaker = p.Organizer.CommonName;
@@ -224,7 +225,7 @@ namespace Client.BusinessService
             // Event creation
             if (Id == 0)
             {
-				Api.Server.addEvent(this,Api.Server.getUniversity(),null,null);
+				//Api.Server.addEventToUniversity(Name, Start, End, Mandatory, Speaker, Place);
             }
 
             // Event edition
