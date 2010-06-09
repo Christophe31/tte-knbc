@@ -341,32 +341,57 @@ namespace Client
             if (AllEvents != null)
             {
                 // Remove old elements
-                var elts = MonthGrid.Children.OfType<StackPanel>();
-                for (int i = 0; i < elts.Count(); i++)
-                {
-                    MonthGrid.Children.Remove(elts.First());
-                }
+                MonthGrid.Children.Clear();
 
                 // Remove grid lines
-                if (MonthGrid.RowDefinitions.Count > 1)
-                    MonthGrid.RowDefinitions.RemoveRange(1, MonthGrid.RowDefinitions.Count - 1);
+                MonthGrid.RowDefinitions.Clear();
+
+                // Set columns headers
+                RowDefinition header = new RowDefinition();
+                header.Height = new GridLength();
+                MonthGrid.RowDefinitions.Add(header);
+                string[] days = new string[] { "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche" };
+                for (int i = 0; i < 7; i++)
+                {
+                    Label day = new Label();
+                    day.Content = days[i];
+                    day.FontWeight = FontWeights.Bold;
+                    day.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    Grid.SetColumn(day, i);
+                    Grid.SetRow(day, 0);
+                    MonthGrid.Children.Add(day);
+                }
 
                 DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
 
                 // Current row
                 int row = 1;
+                MonthGrid.RowDefinitions.Add(new RowDefinition());
                 // For each day of month
-                DateTime end = selectedDate.AddDays(1 - selectedDate.Day).AddMonths(1);
+                DateTime end = selectedDate.AddDays(-selectedDate.Day).AddMonths(1);
                 for (DateTime i = selectedDate.AddDays(1 - selectedDate.Day); i <= end; i = i.AddDays(1))
                 {
+                    int col = i.DayOfWeek == DayOfWeek.Sunday ? 6 : ((int)i.DayOfWeek) - 1;
                     // Create and place a StackPanel
                     StackPanel sp = new StackPanel();
                     Grid.SetRow(sp, row);
-                    if (i.DayOfWeek == DayOfWeek.Sunday)
-                        Grid.SetColumn(sp, 6);
-                    else
-                        Grid.SetColumn(sp, ((int)i.DayOfWeek) - 1);
+                    Grid.SetColumn(sp, col);
+                    Grid.SetZIndex(sp, 1);
                     MonthGrid.Children.Add(sp);
+
+                    // Day number displayed in each cell
+                    TextBlock day = new TextBlock();
+                    day.Text = i.Day.ToString();
+                    
+                    day.FontSize *= 1.5;
+                    day.Foreground = Brushes.DarkGray;
+
+                    Grid.SetRow(day, row);
+                    Grid.SetColumn(day, col);
+                    day.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                    day.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
+                    day.Margin = new Thickness(3);
+                    MonthGrid.Children.Add(day);
 
                     // Place events in the StackPanel
                     foreach (EventData ev in AllEvents.Where(p => p.StartDate <= i && p.EndDate >= i).OrderBy(p => p.StartHour))
