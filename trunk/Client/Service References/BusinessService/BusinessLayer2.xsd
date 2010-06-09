@@ -58,7 +58,7 @@
       <xs:extension base="tns:IdName">
         <xs:sequence>
           <xs:element minOccurs="0" name="End" type="xs:dateTime" />
-          <xs:element minOccurs="0" name="PromotionName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Promotion" nillable="true" type="tns:IdName" />
           <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
         </xs:sequence>
       </xs:extension>
