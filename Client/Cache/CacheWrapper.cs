@@ -19,7 +19,11 @@ namespace Client
 			Server = cacheProcess.Server;
 			CurrentUser = cacheProcess.CurrentUser;
 		}
-
+		public bool logCacheProcess(string login, string password)
+		{
+			return cacheProcess.logToWebService(login, password);
+		}
+ 
 		#region Lecture d'évènements
 		public EventData[] getEvents(IdName Planning, DateTime Start, DateTime Stop)
 		{

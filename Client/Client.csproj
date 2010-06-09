@@ -102,8 +102,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="TteSplash.xaml.cs">
-      <DependentUpon>TteSplash.xaml</DependentUpon>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
     <Page Include="Admin\Administration.xaml">
       <SubType>Designer</SubType>
@@ -141,7 +141,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TteSplash.xaml">
+    <Page Include="Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -255,6 +255,7 @@
     <Resource Include="Icons\hourglass_delete.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Icons\lock_open32.png" />
     <Resource Include="Icons\report.png" />
     <Resource Include="Icons\report_user.png" />
   </ItemGroup>

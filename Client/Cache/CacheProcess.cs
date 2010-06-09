@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel.Description;
 using System.ServiceModel;
 using DDay.iCal;
+using System.ServiceModel.Security;
 
 
 
@@ -18,7 +19,15 @@ namespace Client
 	{
 		public BusinessService.BusinessLayerClient Server;
 		public BusinessService.UserData CurrentUser;
-		public bool ServerReachable { get { return Server.State==System.ServiceModel.CommunicationState.Opened; } }
+		public bool ServerReachable 
+		{
+			get 
+			{
+				if (Server!=null)
+					return Server.State==System.ServiceModel.CommunicationState.Opened;
+				return false;
+			} 
+		}
 		System.Runtime.Serialization.NetDataContractSerializer formatter = new System.Runtime.Serialization.NetDataContractSerializer();
 		DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
 		#region delegate
@@ -32,15 +41,24 @@ namespace Client
 			protected CacheProcess()
 			{
 				Server = new BusinessService.BusinessLayerClient();
+			}
 
-				
-				Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
-				Server.ClientCredentials.UserName.UserName = "popi";
-				Server.ClientCredentials.UserName.Password = "popi";
-
-				Server.Open();
-				CurrentUser=Server.getUser(8);
-				Server.getEvents(8, DateTime.Now, DateTime.Now);
+			public bool logToWebService(string login, string password)
+			{
+				try
+				{
+					Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+					Server.ClientCredentials.UserName.UserName = login;
+					Server.ClientCredentials.UserName.Password = password;
+					Server.Open();
+					CurrentUser = Server.getUserData();
+					return true;
+				}
+				catch (MessageSecurityException)
+				{
+					Server = new BusinessLayerClient();
+					return false;
+				}
 			}
 
 			static public CacheProcess Current

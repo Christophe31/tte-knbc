@@ -53,11 +53,14 @@ namespace Client
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+			Api = new CacheWrapper();
 			new Thread((ThreadStart)FillCombobox).Start();
         }
 
 		private void FillCombobox()
 		{
+			while (!Api.ServerAvailable)
+				Thread.Sleep(700);
 			this.Dispatcher.BeginInvoke((ThreadStart)FillControls);
 		}
 
@@ -66,7 +69,6 @@ namespace Client
         /// </summary>
 		private void FillControls()
 		{
-			Api = new CacheWrapper();
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
             // DatePickers
