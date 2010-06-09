@@ -88,7 +88,7 @@
             </ToolBar>
         </ToolBarTray>
         
-		<TabControl SelectedIndex="0" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
+		<TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
             <TabItem Header="Mois">
                 <Grid Name="MonthGrid" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
@@ -227,7 +227,20 @@
                         	<DataGridTextColumn Header="Type" Binding="{Binding LinkedTo, Mode=OneWay}"/>
                         	<DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
                         	<DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
-                        	<DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
+                            
+                            <DataGridTemplateColumn Header="Intervenant">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Speaker}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding Speakers}" SelectedValue="{Binding Speaker}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                            </DataGridTemplateColumn>
+                            
                         	<DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
                             
                         	<DataGridTemplateColumn Header="Début" SortMemberPath="Start">
