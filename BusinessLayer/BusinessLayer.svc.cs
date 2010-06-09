@@ -293,7 +293,7 @@ namespace BusinessLayer
 				Type=(int)EventData.TypeEnum.Period,
 				Name=period.Name, 
 				LastChange=DateTime.Now, 
-				ParentPlanning=db.Planning.First(p=>p.Name==period.PromotionName&&p.Type==null)
+				ParentPlanning=db.Planning.First(p=>p.Id==period.Promotion.Id&&p.Type==null)
 			};
 			db.Planning.AddObject(plan);
 			db.Period.AddObject(new Period()
@@ -435,7 +435,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var myPeriod=db.Planning.First(p => p.Id == PD.Id && p.Type ==(int)EventData.TypeEnum.Period);
-			myPeriod.ParentPlanning=db.Planning.First(p => p.Name == PD.PromotionName && p.Type == null);
+			myPeriod.ParentPlanning=db.Planning.First(p => p.Id == PD.Promotion.Id && p.Type == null);
 			myPeriod.Name = PD.Name;
 			myPeriod.Period.End = PD.End;
 			myPeriod.Period.Start = PD.Start;
@@ -578,13 +578,13 @@ namespace BusinessLayer
 		{
 			if (currentUserRoles.Count() > 0)
 				return db.Period.Where(p => p.Id == ID)
-					.Select(p => new PeriodData() 
+					.Select(p => new PeriodData()
 					{
- 						Id=ID,
-						Name=p.Planning.Name,
-						PromotionName=p.Planning.ParentPlanning.Name,
-						Start=p.Start,
-						End=p.End
+						Id = ID,
+						Name = p.Planning.Name,
+						Promotion = new IdName() { Id = p.Planning.ParentPlanning.Id, Name = p.Planning.ParentPlanning.Name },
+						Start = p.Start,
+						End = p.End
 					}).First();
 			return null;
 		}

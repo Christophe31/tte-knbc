@@ -20,7 +20,7 @@ namespace BusinessLayer
 		/// Promotion de la Periode
 		/// </summary>
 		[DataMember]
-		public string PromotionName { get; set; }
+		public IdName Promotion { get; set; }
 
 
 		/// <summary>

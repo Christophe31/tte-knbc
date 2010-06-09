@@ -128,7 +128,7 @@ namespace Client.BusinessService {
         private System.DateTime EndField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PromotionNameField;
+        private Client.BusinessService.IdName PromotionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartField;
@@ -147,14 +147,14 @@ namespace Client.BusinessService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PromotionName {
+        public Client.BusinessService.IdName Promotion {
             get {
-                return this.PromotionNameField;
+                return this.PromotionField;
             }
             set {
-                if ((object.ReferenceEquals(this.PromotionNameField, value) != true)) {
-                    this.PromotionNameField = value;
-                    this.RaisePropertyChanged("PromotionName");
+                if ((object.ReferenceEquals(this.PromotionField, value) != true)) {
+                    this.PromotionField = value;
+                    this.RaisePropertyChanged("Promotion");
                 }
             }
         }
