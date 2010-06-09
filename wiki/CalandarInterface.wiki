@@ -23,4 +23,4 @@ _by Breil Romaric_
     * Display improvement (days extended when focused)
 
   * Month calendar
-    * Each day contains a list of events in this day
+    * ~~Each day contains a list of events in this day~~
