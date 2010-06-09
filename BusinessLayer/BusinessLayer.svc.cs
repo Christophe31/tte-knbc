@@ -4,11 +4,11 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Data.Objects.DataClasses;
 using DataAccessLayer;
 
 namespace BusinessLayer
 {
-	// NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "BusinessLayer" in code, svc and config file together.
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
 	public partial class BusinessLayer : IBusinessLayer
 	{
@@ -16,10 +16,7 @@ namespace BusinessLayer
 		DateTime sqlMax = new DateTime(9998, 12, 31);
 		Entities db = new Entities();
 
-		string currentUserLogin
-		{
-			get { return OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name; }
-		}
+
 		public void centerToSqlDate(ref DateTime d)
 		{
 			d = ((d < sqlMin) ? sqlMin : ((d > sqlMax) ? sqlMax : d));
@@ -30,36 +27,40 @@ namespace BusinessLayer
 			d2 = ((d2 < sqlMin) ? sqlMin : ((d2 > sqlMax) ? sqlMax : d2));
 		}
 
-		bool isUserAdmin()
+		string currentUserLogin
 		{
-			return getUserRoles().Any(r => r.TargetId == db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First().Id);
+			get { return OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name; }
 		}
-		Planning getUserPlanning() 
+		int currentUserId { get { return db.User.First(u=>u.Login==currentUserLogin).Id; } }
+		bool isUserAdmin
 		{
-			return db.User.Where(u => u.Login == currentUserLogin).First().Planning;
+			get{ return db.User.First(u => u.Login == currentUserLogin).Roles.Any(r => r.Target.GetValueOrDefault() == db.Planning.Where(u => u.Type == (int)EventData.TypeEnum.University).First().Id);}
 		}
+		EntityCollection<Role> currentUserRoles { get { return db.User.First(u => u.Login == currentUserLogin).Roles; } }
 
 		#region IBusinessLayer Members
-		public RoleData[] getUserRoles()
+		UserData IBusinessLayer.getUserData()
 		{
-			return db.Role.Where(p => p.UserRef.Login == currentUserLogin)
-				.Select(p => new
-				{
-					TargetId = p.Planning.Id,
-					Role=	p.Planning.Type
-				}
-			).ToArray().Select(p => new RoleData()
+			var usr = db.User.First(p => p.Login == currentUserLogin);
+			return new UserData()
 			{
-				TargetId = p.TargetId,
-				Role = p.Role.HasValue ? RoleData.RoleType.Speaker :
-						p.Role.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator :
-						RoleData.RoleType.CampusManager
-			}).ToArray();
+				Id = usr.Planning.Id,
+				Class = new IdName() { Id = usr.Planning.ParentPlanning.Id, Name = usr.Planning.ParentPlanning.Name },
+				Name = usr.Planning.Name,
+				Roles = usr.Roles.Select(r =>
+					new RoleData()
+					{
+						TargetId = r.Target,
+						Role = r.Target.HasValue ? RoleData.RoleType.Speaker :
+							r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator :
+							RoleData.RoleType.CampusManager
+					}).ToArray()
+			};
 		}
 		EventData[] IBusinessLayer.getEvents(int Planning, DateTime Start, DateTime Stop)
 		{
 			centerToSqlDate(ref Start, ref Stop);
-			if (  db.Planning.Where(p=>p.Id==Planning).Any(p=>p.Type!=5) || getUserPlanning().Id == Planning )
+			if (  db.Planning.Where(p=>p.Id==Planning).Any(p=>p.Type!=5) || currentUserId == Planning )
 			{
  				return db.Planning.Where(p=>p.Id==Planning).Single().Events.Where(p=>p.Start < Stop && p.End > Start ).
 					Select(p=> 
@@ -122,9 +123,13 @@ namespace BusinessLayer
 					Name = p.Name
 				}).ToArray();
 		}
+		ModalityData[] IBusinessLayer.getModalities()
+		{
+			return db.Modality.Where(m => m.Hours != null).Select(m => new ModalityData() {Id=m.Id, Name=m.Name, SubjectId=m.Subject.GetValueOrDefault(), Hours=m.Hours.GetValueOrDefault()}).ToArray();
+		}
 		IdName[] IBusinessLayer.getUsers()
 		{
-			if(getUserRoles().Count()>0)
+			if(currentUserRoles.Count()>0)
 				return db.Planning.Where(p => p.Type ==(int)EventData.TypeEnum.User)
 					.Select(p => new IdName() { Id = p.Id, Name = p.Name }).ToArray();
 			return new IdName[] {};
@@ -163,7 +168,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addUser(UserData User)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (User.Password == null)
 				return "veuillez definir un mot de passe";
@@ -191,7 +196,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addCampus(string CampusName)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			db.Planning.AddObject( new Planning(){
 				Name = CampusName,
@@ -204,7 +209,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addClass(ClassData Class)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (db.Planning.Any(p => p.Type == (int)EventData.TypeEnum.Campus && Class.Campus.Id == p.Id) && db.Planning.Any(p => p.Type == (int)EventData.TypeEnum.Period && Class.Period.Id == p.Id))
 				return "Class or Campus link invalid";
@@ -228,9 +233,9 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addPromotion(string PromotionName)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (db.Planning.Any(p => p.Type == null && p.Name == PromotionName))
 				return "cette promotion existe déjà";
@@ -246,7 +251,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addSubject(SubjectData Subject)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			Modality sub = new Modality()
 			{
@@ -269,7 +274,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addPeriod(PeriodData period)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var plan=new Planning()
 			{
@@ -290,7 +295,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.grantRole(int UserId, int? Target)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (!(db.User.Any(u => u.Id == UserId)
 				&&
@@ -330,7 +335,7 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setUser(UserData UD)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 
 			throw new NotImplementedException();
@@ -338,7 +343,7 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setCampus(int Id, string CampusName)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 
 			throw new NotImplementedException();
@@ -346,7 +351,7 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setClass(ClassData CD)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 
 			throw new NotImplementedException();
@@ -354,7 +359,7 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setPromotion(int Id, string PromotionName)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 
 			throw new NotImplementedException();
@@ -362,7 +367,7 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setSubject(SubjectData SD)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 
 			throw new NotImplementedException();
@@ -370,7 +375,7 @@ namespace BusinessLayer
 
 		string IBusinessLayer.setPeriod(PeriodData PD)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 
 			throw new NotImplementedException();
@@ -388,7 +393,7 @@ namespace BusinessLayer
 		
 		string IBusinessLayer.delUser(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var usr = db.User.Where(p => p.Id == Id).First();
 			var plan = usr.Planning;
@@ -408,7 +413,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.delClass(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var clas = db.Class.Where(p => p.Id == Id).First();
 			var plan = clas.Planning;
@@ -421,7 +426,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.delSubject(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var sub = db.Modality.Where(m => m.Id == Id).First();
 			foreach (Event e in sub.Modalitys.SelectMany(p => p.Events))
@@ -437,7 +442,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.delPeriod(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var per= db.Period.Where(p => p.Id == Id).First();
 			var plan = per.Planning;
@@ -450,7 +455,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.delRole(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			db.Role.DeleteObject(db.Role.Where(r => r.Id == Id).First());
 			db.SaveChanges();
@@ -466,14 +471,14 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.delCampus(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var c = db.Planning.Where(camp => camp.Id == Id);
 			return "ok";
 		}
 		string IBusinessLayer.delPromotion(int Id)
 		{
-			if (!isUserAdmin())
+			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var plan = db.Planning.Where(p => p.Id == Id).First();
 			if (plan.ChildrenPlannings.Count > 0)
@@ -484,7 +489,7 @@ namespace BusinessLayer
 		}
 		UserData IBusinessLayer.getUser(int ID)
 		{
-			if(getUserRoles().Count()>0)
+			if(currentUserRoles.Count()>0)
 				return db.User.Where(u => u.Id == ID)
 					.Select(u => new UserData()
 					{Class = new IdName()
@@ -501,7 +506,7 @@ namespace BusinessLayer
 		}
 		ClassData IBusinessLayer.getClass(int ID)
 		{
-			if (getUserRoles().Count() > 0)
+			if (currentUserRoles.Count() > 0)
 				return db.Class.Where(c => c.Id == ID).
 					Select(c => new ClassData()
 					{
@@ -518,7 +523,7 @@ namespace BusinessLayer
 		}
 		PeriodData IBusinessLayer.getPeriod(int ID)
 		{
-			if (getUserRoles().Count() > 0)
+			if (currentUserRoles.Count() > 0)
 				return db.Period.Where(p => p.Id == ID)
 					.Select(p => new PeriodData() 
 					{

@@ -193,10 +193,10 @@
     <None Include="Service References\BusinessService\Client.BusinessService.IdName.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\BusinessService\Client.BusinessService.PeriodData.datasource">
+    <None Include="Service References\BusinessService\Client.BusinessService.ModalityData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\BusinessService\Client.BusinessService.RoleData.datasource">
+    <None Include="Service References\BusinessService\Client.BusinessService.PeriodData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\BusinessService\Client.BusinessService.SubjectData.datasource">
