@@ -86,9 +86,9 @@ namespace Client
             ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 0;
 
-            CampusName.DataContext = Api.Server.getPlannings(EventData.TypeEnum.Campus);
+            CampusName.DataContext = Api.getPlannings(EventData.TypeEnum.Campus);
             CampusName.SelectedIndex = 0;
-            PeriodName.DataContext = Api.Server.getPlannings(EventData.TypeEnum.Period);
+            PeriodName.DataContext = Api.getPlannings(EventData.TypeEnum.Period);
             PeriodName.SelectedIndex = 0;
 
             // Events DataGrid initialisation
@@ -142,7 +142,7 @@ namespace Client
                 viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
 
             // University
-            AllEvents = Api.Server.getEvents(Api.Server.getUniversity().Id, start, end)
+            AllEvents = Api.getEvents(Api.getUniversity().Id, start, end)
                 .Where(p => p.Mandatory
                     || viewType == EventData.TypeEnum.University
                     || ShowOptionalUniversityEvents.IsChecked.GetValueOrDefault()).ToList();
@@ -153,7 +153,7 @@ namespace Client
 				|| viewType == EventData.TypeEnum.User)
                 && CampusName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.Server.getEvents((CampusName.SelectedValue as IdName).Id, start, end)
+                AllEvents.AddRange(Api.getEvents((CampusName.SelectedValue as IdName).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Campus
                         || ShowOptionalCampusEvents.IsChecked.GetValueOrDefault()));
@@ -165,7 +165,7 @@ namespace Client
                 || viewType == EventData.TypeEnum.User)
                 && PeriodName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.Server.getEvents((PeriodName.SelectedValue as IdName).Id, start, end)
+                AllEvents.AddRange(Api.getEvents((PeriodName.SelectedValue as IdName).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Period
                         || ShowOptionalPeriodEvents.IsChecked.GetValueOrDefault()));
@@ -175,7 +175,7 @@ namespace Client
             if ((viewType == EventData.TypeEnum.Class || viewType == EventData.TypeEnum.User)
                 && ClassName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.Server.getEvents((ClassName.SelectedValue as IdName).Id, start, end)
+                AllEvents.AddRange(Api.getEvents((ClassName.SelectedValue as IdName).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Class
                         || ShowOptionalClassEvents.IsChecked.GetValueOrDefault()));
