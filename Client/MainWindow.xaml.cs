@@ -338,38 +338,59 @@ namespace Client
 
         public void RefreshMonthGrid()
         {
-            foreach (UIElement elt in MonthGrid.Children)
+            if (AllEvents != null)
             {
-                if (elt is StackPanel)
+                // Remove old elements
+                var elts = MonthGrid.Children.OfType<StackPanel>();
+                for (int i = 0; i < elts.Count(); i++)
                 {
-                    MonthGrid.Children.Remove(elt);
-                }
-            }
-
-            //MonthGrid.RowDefinitions.RemoveRange(1, MonthGrid.RowDefinitions.Count - 1);
-
-            DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
-
-            int row = 1;
-
-            DateTime end = selectedDate.AddDays(1 - selectedDate.Day).AddMonths(1);
-            for (DateTime i = selectedDate.AddDays(1 - selectedDate.Day); i > end; i.AddDays(1))
-            {
-                if (i.DayOfWeek == DayOfWeek.Monday && i.Day != 1)
-                {
-                    MonthGrid.RowDefinitions.Add(new RowDefinition());
-                    row++;
+                    MonthGrid.Children.Remove(elts.First());
                 }
 
-                StackPanel sp = new StackPanel();
-                Grid.SetRow(sp, row);
-                Grid.SetColumn(sp, ((int)i.DayOfWeek - 1) % 7);
+                // Remove grid lines
+                if (MonthGrid.RowDefinitions.Count > 1)
+                    MonthGrid.RowDefinitions.RemoveRange(1, MonthGrid.RowDefinitions.Count - 1);
 
-                foreach (EventData ev in AllEvents.Where(p => p.StartDate <= i && p.EndDate >= i))
+                DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
+
+                // Current row
+                int row = 1;
+                // For each day of month
+                DateTime end = selectedDate.AddDays(1 - selectedDate.Day).AddMonths(1);
+                for (DateTime i = selectedDate.AddDays(1 - selectedDate.Day); i <= end; i = i.AddDays(1))
                 {
-                    TextBlock tb = new TextBlock();
-                    tb.Text = String.IsNullOrEmpty(ev.Name) ? ev.Subject : ev.Name;
-                    sp.Children.Add(tb);
+                    // Create and place a StackPanel
+                    StackPanel sp = new StackPanel();
+                    Grid.SetRow(sp, row);
+                    if (i.DayOfWeek == DayOfWeek.Sunday)
+                        Grid.SetColumn(sp, 6);
+                    else
+                        Grid.SetColumn(sp, ((int)i.DayOfWeek) - 1);
+                    MonthGrid.Children.Add(sp);
+
+                    // Place events in the StackPanel
+                    foreach (EventData ev in AllEvents.Where(p => p.StartDate <= i && p.EndDate >= i).OrderBy(p => p.StartHour))
+                    {
+                        Border b = new Border();
+                        b.Background = ev.BackgroundColor;
+                        b.BorderBrush = ev.BorderColor;
+                        b.BorderThickness = new Thickness(1);
+                        b.Margin = new Thickness(1,1,1,0);
+
+                        TextBlock tb = new TextBlock();
+                        tb.Text = ev.Start.ToShortTimeString() + " - " + (String.IsNullOrEmpty(ev.Name) ? ev.Subject : ev.Name);
+
+                        b.Child = tb;
+                        sp.Children.Add(b);
+                    }
+
+                    // Change of line if needed
+                    if (i.DayOfWeek == DayOfWeek.Sunday)
+                    {
+                        MonthGrid.RowDefinitions.Add(new RowDefinition());
+                        row++;
+                    }
+
                 }
             }
         }
@@ -469,6 +490,7 @@ namespace Client
         {
             RefreshDayGrid();
             RefreshWeekGrid();
+            RefreshMonthGrid();
         }
         #endregion
 
