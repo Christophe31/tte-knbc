@@ -155,6 +155,25 @@ namespace Client.BusinessService
             }
         }
 
+        private static IdName[] _speakers = null;
+        public IdName[] Speakers
+        {
+            get
+            {
+                if (_speakers == null)
+                    _speakers = new CacheWrapper().Server.getSpeakers();
+                return _speakers;
+            }
+        }
+
+        public int SpeakerIndex
+        {
+            get
+            {
+                return Array.FindIndex(Speakers, p => p.Id == Speaker.Id);
+            }
+        }
+
         #endregion Properties
 
         // Create the OnPropertyChanged method to raise the event
