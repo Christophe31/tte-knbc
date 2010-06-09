@@ -17,31 +17,32 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Grid.Column="0" Visibility="Hidden" Name="ErrorBar" Background="Green">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
+        <Border BorderBrush="DarkGreen" BorderThickness="1" Name="ErrorBorder">
+            <Grid Grid.Row="0" Grid.Column="0" Visibility="Hidden" Name="ErrorBar" Background="Green">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <Label Grid.Column="1" Grid.Row="0"  Content="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage"/>
-                <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="..\Icons\accept32.png"/>
-            </Grid>
-            
-        </Grid>
 
+                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="1" Grid.Row="0"  Content="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage"/>
+                    <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="..\Icons\accept32.png"/>
+                </Grid>
+
+            </Grid>
+        </Border>
         <Grid Grid.Row="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Name="generalAdmin">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -169,7 +170,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbCampus_Campus" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center"/>
+                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbCampus_Campus" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbCampus_Campus_SelectionChanged" />
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -193,8 +194,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bCampus_AddMod" Margin="0,20,5,0"/>
-                        <Button Content="Supprimer" Grid.Column="1" Name="bCampus_Del" Margin="5,20,0,0"/>
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bCampus_AddMod" Margin="0,20,5,0" Click="bCampus_AddMod_Click" />
+                        <Button Content="Supprimer" Grid.Column="1" Name="bCampus_Del" Margin="5,20,0,0" Click="bCampus_Del_Click" />
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -218,7 +219,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPeriods_Period" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center"/>
+                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPeriods_Period" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPeriods_Period_SelectionChanged" />
                     <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -263,8 +264,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPeriods_AddMod" Margin="0,20,5,0"/>
-                        <Button Content="Supprimer" Grid.Column="1" Name="bPeriods_Del" Margin="5,20,0,0"/>
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPeriods_AddMod" Margin="0,20,5,0" Click="bPeriods_AddMod_Click" />
+                        <Button Content="Supprimer" Grid.Column="1" Name="bPeriods_Del" Margin="5,20,0,0" Click="bPeriods_Del_Click" />
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -316,8 +317,8 @@
                         <Label Content="Campus:" Grid.Column="0" Grid.Row="0" Name="lClasses_Campus" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                         <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
 
-                        <Label Content="Période:" Grid.Column="0" Grid.Row="1" Name="lClasses_Period2" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period2" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
+                        <Label Content="Période:" Grid.Column="0" Grid.Row="1" Name="lClasses_Period" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -330,8 +331,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bClasses_AddMod" Margin="0,20,5,0" Height="Auto" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bClasses_Del" Margin="5,20,0,0" Height="Auto"/>
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bClasses_AddMod" Margin="0,20,5,0" Height="Auto" Click="bClasses_AddMod_Click" />
+                        <Button Content="Supprimer" Grid.Column="1" Name="bClasses_Del" Margin="5,20,0,0" Height="Auto" Click="bClasses_Del_Click" />
                     </Grid>
 
                 </Grid>
@@ -355,6 +356,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -390,10 +393,33 @@
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Pass" Margin="0,10,0,0" IsEnabled="False" />
                     </Grid>
 
-                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,0" IsChecked="True" VerticalAlignment="Center"/>
+                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,0" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" />
 
+                    <Grid Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ComboBox Grid.Column="0" Grid.Row="0" Name="cbUsers_Rights" HorizontalContentAlignment="Center" SelectedIndex="0">
+                            <ComboBoxItem Content="Ajouter un droit" />
+                        </ComboBox>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbUsers_RightsType" HorizontalContentAlignment="Center" SelectedIndex="0"/>
+                    </Grid>
+
+                    <DataGrid Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" ItemsSource="{Binding}">
+                            <DataGrid.Columns>
+                            <DataGridTextColumn Header="Droit" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="Etendue"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    
+                    <Grid Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
@@ -401,19 +427,16 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Label Content="Droits:" Grid.Column="0" Grid.Row="0" Name="lUsers_Rights" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbUsers_Rights" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
 
-                        <Label Content="Classe:" Grid.Column="0" Grid.Row="1" Name="lUsers_Class" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                        <Label Content="Classe:" Grid.Column="0" Grid.Row="0" Name="lUsers_Class" HorizontalAlignment="Center" Margin="0,10,0,0"/>
                         <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0">
                             <ComboBoxItem Content="Aucune" />
                         </ComboBox>
                     </Grid>
 
 
-                    <Grid Grid.Column="0" Grid.Row="5" VerticalAlignment="Bottom">
+                    <Grid Grid.Column="0" Grid.Row="7" VerticalAlignment="Bottom">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -423,7 +446,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0"/>
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0" Click="bUsers_AddMod_Click" />
                         <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0"/>
                     </Grid>
                 </Grid>
