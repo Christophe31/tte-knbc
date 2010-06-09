@@ -33,12 +33,6 @@
   <wsdl:message name="IBusinessLayer_delPeriod_OutputMessage">
     <wsdl:part name="parameters" element="tns:delPeriodResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delRole_InputMessage">
-    <wsdl:part name="parameters" element="tns:delRole" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_delRole_OutputMessage">
-    <wsdl:part name="parameters" element="tns:delRoleResponse" />
-  </wsdl:message>
   <wsdl:message name="IBusinessLayer_delEvent_InputMessage">
     <wsdl:part name="parameters" element="tns:delEvent" />
   </wsdl:message>
@@ -75,11 +69,11 @@
   <wsdl:message name="IBusinessLayer_getPeriod_OutputMessage">
     <wsdl:part name="parameters" element="tns:getPeriodResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getUserRoles_InputMessage">
-    <wsdl:part name="parameters" element="tns:getUserRoles" />
+  <wsdl:message name="IBusinessLayer_getUserData_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUserData" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_getUserRoles_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getUserRolesResponse" />
+  <wsdl:message name="IBusinessLayer_getUserData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUserDataResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getEvents_InputMessage">
     <wsdl:part name="parameters" element="tns:getEvents" />
@@ -129,6 +123,12 @@
   <wsdl:message name="IBusinessLayer_getSubjects_OutputMessage">
     <wsdl:part name="parameters" element="tns:getSubjectsResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getModalities_InputMessage">
+    <wsdl:part name="parameters" element="tns:getModalities" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getModalities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getModalitiesResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_getSpeakers_InputMessage">
     <wsdl:part name="parameters" element="tns:getSpeakers" />
   </wsdl:message>
@@ -176,12 +176,6 @@
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_addPeriod_OutputMessage">
     <wsdl:part name="parameters" element="tns:addPeriodResponse" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_grantRole_InputMessage">
-    <wsdl:part name="parameters" element="tns:grantRole" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_grantRole_OutputMessage">
-    <wsdl:part name="parameters" element="tns:grantRoleResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_addEvent_InputMessage">
     <wsdl:part name="parameters" element="tns:addEvent" />
@@ -260,10 +254,6 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delPeriod" message="tns:IBusinessLayer_delPeriod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delPeriodResponse" message="tns:IBusinessLayer_delPeriod_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="delRole">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delRole" message="tns:IBusinessLayer_delRole_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delRoleResponse" message="tns:IBusinessLayer_delRole_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="delEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delEvent" message="tns:IBusinessLayer_delEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delEventResponse" message="tns:IBusinessLayer_delEvent_OutputMessage" />
@@ -288,9 +278,9 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriod" message="tns:IBusinessLayer_getPeriod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getPeriodResponse" message="tns:IBusinessLayer_getPeriod_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getUserRoles">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUserRoles" message="tns:IBusinessLayer_getUserRoles_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUserRolesResponse" message="tns:IBusinessLayer_getUserRoles_OutputMessage" />
+    <wsdl:operation name="getUserData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getUserData" message="tns:IBusinessLayer_getUserData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getUserDataResponse" message="tns:IBusinessLayer_getUserData_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getEvents">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getEvents" message="tns:IBusinessLayer_getEvents_InputMessage" />
@@ -324,6 +314,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjects" message="tns:IBusinessLayer_getSubjects_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSubjectsResponse" message="tns:IBusinessLayer_getSubjects_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getModalities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getModalities" message="tns:IBusinessLayer_getModalities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getModalitiesResponse" message="tns:IBusinessLayer_getModalities_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getSpeakers">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakers" message="tns:IBusinessLayer_getSpeakers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakersResponse" message="tns:IBusinessLayer_getSpeakers_OutputMessage" />
@@ -355,10 +349,6 @@
     <wsdl:operation name="addPeriod">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/addPeriod" message="tns:IBusinessLayer_addPeriod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/addPeriodResponse" message="tns:IBusinessLayer_addPeriod_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="grantRole">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/grantRole" message="tns:IBusinessLayer_grantRole_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/grantRoleResponse" message="tns:IBusinessLayer_grantRole_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="addEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/addEvent" message="tns:IBusinessLayer_addEvent_InputMessage" />

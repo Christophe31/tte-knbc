@@ -58,20 +58,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="delRole">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="Id" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="delRoleResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="delRoleResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="delEvent">
     <xs:complexType>
       <xs:sequence>
@@ -156,15 +142,15 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="getUserRoles">
+  <xs:element name="getUserData">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="getUserRolesResponse">
+  <xs:element name="getUserDataResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getUserRolesResult" nillable="true" type="q4:ArrayOfRoleData" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getUserDataResult" nillable="true" type="q4:UserData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -277,6 +263,18 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getModalities">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getModalitiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getModalitiesResult" nillable="true" type="q13:ArrayOfModalityData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getSpeakers">
     <xs:complexType>
       <xs:sequence />
@@ -285,7 +283,7 @@
   <xs:element name="getSpeakersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getSpeakersResult" nillable="true" type="q13:ArrayOfIdName" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="getSpeakersResult" nillable="true" type="q14:ArrayOfIdName" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -297,14 +295,14 @@
   <xs:element name="getCampusPeriodClassTreeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusPeriodClassTreeResult" nillable="true" type="q14:ArrayOfKeyValueOfIdNameArrayOfKeyValueOfIdNameArrayOfIdNameEz4IOnmdAhmTgu40" />
+        <xs:element xmlns:q15="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getCampusPeriodClassTreeResult" nillable="true" type="q15:ArrayOfKeyValueOfIdNameArrayOfKeyValueOfIdNameArrayOfIdNameEz4IOnmdAhmTgu40" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="addUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="User" nillable="true" type="q15:UserData" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="User" nillable="true" type="q16:UserData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -332,7 +330,7 @@
   <xs:element name="addClass">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Class" nillable="true" type="q16:ClassData" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Class" nillable="true" type="q17:ClassData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -360,7 +358,7 @@
   <xs:element name="addSubject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Subject" nillable="true" type="q17:SubjectData" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Subject" nillable="true" type="q18:SubjectData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -374,7 +372,7 @@
   <xs:element name="addPeriod">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Period" nillable="true" type="q18:PeriodData" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Period" nillable="true" type="q19:PeriodData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -385,28 +383,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="grantRole">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UserId" type="xs:int" />
-        <xs:element minOccurs="0" name="Target" nillable="true" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="grantRoleResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="grantRoleResult" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="addEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Event" nillable="true" type="q19:EventData" />
-        <xs:element minOccurs="0" name="PlanningId" type="xs:int" />
-        <xs:element minOccurs="0" name="SpeakerId" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:int" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Event" nillable="true" type="q20:EventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -420,7 +400,7 @@
   <xs:element name="addPrivateEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Event" nillable="true" type="q20:EventData" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="Event" nillable="true" type="q21:EventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -434,7 +414,7 @@
   <xs:element name="setUser">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="UD" nillable="true" type="q21:UserData" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="UD" nillable="true" type="q22:UserData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -463,7 +443,7 @@
   <xs:element name="setClass">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="CD" nillable="true" type="q22:ClassData" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="CD" nillable="true" type="q23:ClassData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -492,7 +472,7 @@
   <xs:element name="setSubject">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="SD" nillable="true" type="q23:SubjectData" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="SD" nillable="true" type="q24:SubjectData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -506,7 +486,7 @@
   <xs:element name="setPeriod">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="PD" nillable="true" type="q24:PeriodData" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="PD" nillable="true" type="q25:PeriodData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -520,7 +500,7 @@
   <xs:element name="setEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="EditedEvent" nillable="true" type="q25:EventData" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="EditedEvent" nillable="true" type="q26:EventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -534,7 +514,7 @@
   <xs:element name="setPrivateEvent">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="EditedEvent" nillable="true" type="q26:EventData" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/BusinessLayer" minOccurs="0" name="EditedEvent" nillable="true" type="q27:EventData" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

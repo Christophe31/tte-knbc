@@ -7,6 +7,7 @@
           <xs:element minOccurs="0" name="Class" nillable="true" type="tns:IdName" />
           <xs:element minOccurs="0" name="Login" nillable="true" type="xs:string" />
           <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Roles" nillable="true" type="tns:ArrayOfRoleData" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -19,6 +20,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="IdName" nillable="true" type="tns:IdName" />
+  <xs:complexType name="ArrayOfRoleData">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoleData" nillable="true" type="tns:RoleData" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRoleData" nillable="true" type="tns:ArrayOfRoleData" />
+  <xs:complexType name="RoleData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Role" type="tns:RoleData.RoleType" />
+      <xs:element minOccurs="0" name="TargetId" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RoleData" nillable="true" type="tns:RoleData" />
+  <xs:simpleType name="RoleData.RoleType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Administrator" />
+      <xs:enumeration value="CampusManager" />
+      <xs:enumeration value="Speaker" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="RoleData.RoleType" nillable="true" type="tns:RoleData.RoleType" />
   <xs:complexType name="ClassData">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:IdName">
@@ -42,28 +65,6 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="PeriodData" nillable="true" type="tns:PeriodData" />
-  <xs:complexType name="ArrayOfRoleData">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="RoleData" nillable="true" type="tns:RoleData" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfRoleData" nillable="true" type="tns:ArrayOfRoleData" />
-  <xs:complexType name="RoleData">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Role" type="tns:RoleData.RoleType" />
-      <xs:element minOccurs="0" name="TargetId" nillable="true" type="xs:int" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="RoleData" nillable="true" type="tns:RoleData" />
-  <xs:simpleType name="RoleData.RoleType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Administrator" />
-      <xs:enumeration value="CampusManager" />
-      <xs:enumeration value="Speaker" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="RoleData.RoleType" nillable="true" type="tns:RoleData.RoleType" />
   <xs:complexType name="ArrayOfEventData">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="EventData" nillable="true" type="tns:EventData" />
@@ -75,12 +76,13 @@
       <xs:element minOccurs="0" name="End" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="Mandatory" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Modality" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentPlanning" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Place" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Speaker" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Speaker" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Start" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="Subject" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Subject" nillable="true" type="tns:IdName" />
       <xs:element minOccurs="0" name="Type" nillable="true" type="tns:EventData.TypeEnum" />
     </xs:sequence>
   </xs:complexType>
@@ -111,9 +113,7 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:IdName">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Hours" type="xs:int" />
           <xs:element minOccurs="0" name="Modalities" nillable="true" type="tns:ArrayOfModalityData" />
-          <xs:element minOccurs="0" name="Modality" nillable="true" type="xs:string" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>

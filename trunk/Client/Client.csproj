@@ -199,9 +199,6 @@
     <None Include="Service References\BusinessService\Client.BusinessService.PeriodData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\BusinessService\Client.BusinessService.RoleData1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\BusinessService\Client.BusinessService.SubjectData.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

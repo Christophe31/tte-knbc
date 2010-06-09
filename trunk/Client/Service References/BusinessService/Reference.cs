@@ -180,26 +180,7 @@ namespace Client.BusinessService {
     public partial class SubjectData : Client.BusinessService.IdName {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int HoursField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private Client.BusinessService.ModalityData[] ModalitiesField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ModalityField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Hours {
-            get {
-                return this.HoursField;
-            }
-            set {
-                if ((this.HoursField.Equals(value) != true)) {
-                    this.HoursField = value;
-                    this.RaisePropertyChanged("Hours");
-                }
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Client.BusinessService.ModalityData[] Modalities {
@@ -210,19 +191,6 @@ namespace Client.BusinessService {
                 if ((object.ReferenceEquals(this.ModalitiesField, value) != true)) {
                     this.ModalitiesField = value;
                     this.RaisePropertyChanged("Modalities");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Modality {
-            get {
-                return this.ModalityField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModalityField, value) != true)) {
-                    this.ModalityField = value;
-                    this.RaisePropertyChanged("Modality");
                 }
             }
         }
@@ -282,6 +250,9 @@ namespace Client.BusinessService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.RoleData[] RolesField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public Client.BusinessService.IdName Class {
             get {
@@ -317,6 +288,19 @@ namespace Client.BusinessService {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.RoleData[] Roles {
+            get {
+                return this.RolesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RolesField, value) != true)) {
+                    this.RolesField = value;
+                    this.RaisePropertyChanged("Roles");
                 }
             }
         }
@@ -432,22 +416,25 @@ namespace Client.BusinessService {
         private bool MandatoryField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ModalityField;
+        private Client.BusinessService.IdName ModalityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Client.BusinessService.IdName ParentPlanningField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PlaceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SpeakerField;
+        private Client.BusinessService.IdName SpeakerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime StartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SubjectField;
+        private Client.BusinessService.IdName SubjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<Client.BusinessService.EventData.TypeEnum> TypeField;
@@ -502,7 +489,7 @@ namespace Client.BusinessService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Modality {
+        public Client.BusinessService.IdName Modality {
             get {
                 return this.ModalityField;
             }
@@ -528,6 +515,19 @@ namespace Client.BusinessService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public Client.BusinessService.IdName ParentPlanning {
+            get {
+                return this.ParentPlanningField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ParentPlanningField, value) != true)) {
+                    this.ParentPlanningField = value;
+                    this.RaisePropertyChanged("ParentPlanning");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string Place {
             get {
                 return this.PlaceField;
@@ -541,7 +541,7 @@ namespace Client.BusinessService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Speaker {
+        public Client.BusinessService.IdName Speaker {
             get {
                 return this.SpeakerField;
             }
@@ -567,7 +567,7 @@ namespace Client.BusinessService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Subject {
+        public Client.BusinessService.IdName Subject {
             get {
                 return this.SubjectField;
             }
@@ -638,9 +638,6 @@ namespace Client.BusinessService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/delPeriodResponse")]
         string delPeriod(int Id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delRole", ReplyAction="http://tempuri.org/IBusinessLayer/delRoleResponse")]
-        string delRole(int Id);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/delEvent", ReplyAction="http://tempuri.org/IBusinessLayer/delEventResponse")]
         string delEvent(int Id);
         
@@ -659,8 +656,8 @@ namespace Client.BusinessService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/getPeriodResponse")]
         Client.BusinessService.PeriodData getPeriod(int ID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUserRoles", ReplyAction="http://tempuri.org/IBusinessLayer/getUserRolesResponse")]
-        Client.BusinessService.RoleData[] getUserRoles();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getUserData", ReplyAction="http://tempuri.org/IBusinessLayer/getUserDataResponse")]
+        Client.BusinessService.UserData getUserData();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getEvents", ReplyAction="http://tempuri.org/IBusinessLayer/getEventsResponse")]
         Client.BusinessService.EventData[] getEvents(int Planning, System.DateTime Start, System.DateTime Stop);
@@ -686,6 +683,9 @@ namespace Client.BusinessService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSubjects", ReplyAction="http://tempuri.org/IBusinessLayer/getSubjectsResponse")]
         Client.BusinessService.SubjectData[] getSubjects();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getModalities", ReplyAction="http://tempuri.org/IBusinessLayer/getModalitiesResponse")]
+        Client.BusinessService.ModalityData[] getModalities();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/getSpeakers", ReplyAction="http://tempuri.org/IBusinessLayer/getSpeakersResponse")]
         Client.BusinessService.IdName[] getSpeakers();
         
@@ -710,11 +710,8 @@ namespace Client.BusinessService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPeriod", ReplyAction="http://tempuri.org/IBusinessLayer/addPeriodResponse")]
         string addPeriod(Client.BusinessService.PeriodData Period);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/grantRole", ReplyAction="http://tempuri.org/IBusinessLayer/grantRoleResponse")]
-        string grantRole(int UserId, System.Nullable<int> Target);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addEventResponse")]
-        string addEvent(Client.BusinessService.EventData Event, int PlanningId, System.Nullable<int> SpeakerId, System.Nullable<int> Modality);
+        string addEvent(Client.BusinessService.EventData Event);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IBusinessLayer/addPrivateEvent", ReplyAction="http://tempuri.org/IBusinessLayer/addPrivateEventResponse")]
         string addPrivateEvent(Client.BusinessService.EventData Event);
@@ -787,10 +784,6 @@ namespace Client.BusinessService {
             return base.Channel.delPeriod(Id);
         }
         
-        public string delRole(int Id) {
-            return base.Channel.delRole(Id);
-        }
-        
         public string delEvent(int Id) {
             return base.Channel.delEvent(Id);
         }
@@ -815,8 +808,8 @@ namespace Client.BusinessService {
             return base.Channel.getPeriod(ID);
         }
         
-        public Client.BusinessService.RoleData[] getUserRoles() {
-            return base.Channel.getUserRoles();
+        public Client.BusinessService.UserData getUserData() {
+            return base.Channel.getUserData();
         }
         
         public Client.BusinessService.EventData[] getEvents(int Planning, System.DateTime Start, System.DateTime Stop) {
@@ -851,6 +844,10 @@ namespace Client.BusinessService {
             return base.Channel.getSubjects();
         }
         
+        public Client.BusinessService.ModalityData[] getModalities() {
+            return base.Channel.getModalities();
+        }
+        
         public Client.BusinessService.IdName[] getSpeakers() {
             return base.Channel.getSpeakers();
         }
@@ -883,12 +880,8 @@ namespace Client.BusinessService {
             return base.Channel.addPeriod(Period);
         }
         
-        public string grantRole(int UserId, System.Nullable<int> Target) {
-            return base.Channel.grantRole(UserId, Target);
-        }
-        
-        public string addEvent(Client.BusinessService.EventData Event, int PlanningId, System.Nullable<int> SpeakerId, System.Nullable<int> Modality) {
-            return base.Channel.addEvent(Event, PlanningId, SpeakerId, Modality);
+        public string addEvent(Client.BusinessService.EventData Event) {
+            return base.Channel.addEvent(Event);
         }
         
         public string addPrivateEvent(Client.BusinessService.EventData Event) {
