@@ -236,7 +236,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.CellEditingTemplate>
                                     <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding Speakers}" SelectedValue="{Binding Speaker}"/>
+                                        <ComboBox ItemsSource="{Binding Speakers, Mode=OneTime}" SelectedIndex="{Binding SpeakerIndex, Mode=OneWay}" SelectedValue="{Binding Speaker, Mode=OneWayToSource}"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellEditingTemplate>
                             </DataGridTemplateColumn>
