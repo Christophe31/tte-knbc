@@ -153,6 +153,18 @@ namespace BusinessLayer
 		{
 			return db.Role.Where(p => p.Planning == null).Select(p => new IdName() {Id=p.User, Name=p.UserRef.Planning.Name }).ToArray();
 		}
+		string[] IBusinessLayer.getSpeakerBilan()
+		{
+			int usrId=currentUserId;
+			string[] s=new string[] {"Classe","Sujet","Modalité","Nombre d'heure théorique"};
+			return  db.Planning.First(usr => usrId == usr.Id).SpeakingEvents
+				.Select(ev => new { modality = ev.Modality,Parent=ev.PlaningRef, courseDuration = (ev.Start - ev.End).Hours })
+				.GroupBy(p => p.Parent).SelectMany(par => par
+					.GroupBy(p=>p.modality).Select(mod=>  new { modality =  mod.First().modality, coursesDuration = mod.Sum(ev => ev.courseDuration) })
+				.GroupBy(mod => mod.modality.Subject)
+				.SelectMany(sub => sub.Select(mod =>
+					mod.modality.OnSubject.Name + ";" + mod.modality.Name + ";" + mod.modality.Hours.ToString() + ";" + mod.coursesDuration.ToString()))).ToArray();
+		}
 		Dictionary<IdName, Dictionary<IdName, IdName[]>> IBusinessLayer.getCampusPeriodClassTree()
 		{
 			return db.Planning.Where(

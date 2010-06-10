@@ -658,6 +658,9 @@ namespace Client
 		
 		private void report_Click(object sender, RoutedEventArgs e)
 		{
+			 //Api.Server.getSubjects().Select(sub=>sub.Modalities.Select(mod=>sub.Name+";"+mod.Name+";"+mod.Hours+";"+Api.Server.SpeakingEvents);
+			
+		   //string[] colums= new string { "Subject", "Modality", "", "" };
 		}
     }
 }
