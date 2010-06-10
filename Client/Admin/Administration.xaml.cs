@@ -21,16 +21,11 @@ namespace Client
     /// </summary>
     public partial class Administration : UserControl
     {
-
-        private void waitServerConnection()
-        {
-            while (Api.Server == null)
-            {
-                Api.RelinkServer();
-                Thread.Sleep(500);
-            }
-        }
-
+		public Administration()
+		{
+			InitializeComponent();
+			Api = new CacheWrapper();
+		}
 
         #region Definitions
 
@@ -91,17 +86,31 @@ namespace Client
         //Au chargement du contrôle d'administration, on charge toutes les combobox
         private void AdministrationControl_Loaded(object sender, RoutedEventArgs e)
         {
-            waitServerConnection();
-            refreshPromotions();
-            //subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.ServerBL2.getSubjects()).ToArray();
-            //cbSubjects_Subjects.DataContext = subjectsList;
-            //cbSubjects_Subjects.SelectedIndex = 0;
-            refreshCampus();
-            refreshPeriods();
-            refreshClasses();
-            refreshUsers();
-            refreshRights();
+			((ThreadStart)waitServeReady).BeginInvoke(null, null);
         }
+
+		void waitServeReady()
+		{
+			while (Api.Server == null)
+			{
+				Api.RelinkServer();
+				Thread.Sleep(500);
+			}
+			this.Dispatcher.BeginInvoke((ThreadStart)refreshAllControls);
+		}
+ 
+		void refreshAllControls()
+        {
+			refreshPromotions();
+			//subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.ServerBL2.getSubjects()).ToArray();
+			//cbSubjects_Subjects.DataContext = subjectsList;
+			//cbSubjects_Subjects.SelectedIndex = 0;
+			refreshCampus();
+			refreshPeriods();
+			refreshClasses();
+			refreshUsers();
+			refreshRights();
+		}
 
         #endregion
 
