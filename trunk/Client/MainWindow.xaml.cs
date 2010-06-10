@@ -109,7 +109,7 @@ namespace Client
 
 			// ComboBoxes initialisation
             ViewType.DataContext = EventType.EventTypeNames;
-			ViewType.SelectedIndex = 0;
+			ViewType.SelectedIndex = 4;
 
             CampusName.DataContext = Api.getPlannings(EventData.TypeEnum.Campus);
             CampusName.SelectedIndex = 0;
@@ -176,14 +176,9 @@ namespace Client
 			if ((viewType == EventData.TypeEnum.Campus
 				|| viewType == EventData.TypeEnum.Class
 				|| viewType == EventData.TypeEnum.User)
-				&& (CampusName.SelectedValue != null || viewType==EventData.TypeEnum.User))
+                && CampusName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.getEvents(((CampusName.SelectedValue as IdName)
-											?? CampusPeriodClassTree.Where(
-												dc=> dc.Value.Any(
-													dp => dp.Value.Any(
-														cl=> cl.Id == Api.CurrentUser.Class.Id)))
-												.Select(dc=>dc.Key).First()), start, end)
+                AllEvents.AddRange(Api.getEvents(CampusName.SelectedValue as IdName, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Campus
                         || ShowOptionalCampusEvents.IsChecked.GetValueOrDefault()));
@@ -193,9 +188,9 @@ namespace Client
             if ((viewType == EventData.TypeEnum.Period
                 || viewType == EventData.TypeEnum.Class
                 || viewType == EventData.TypeEnum.User)
-				&& (PeriodName.SelectedValue != null || viewType == EventData.TypeEnum.User))
+                && PeriodName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.getEvents((PeriodName.SelectedValue as IdName), start, end)
+                AllEvents.AddRange(Api.getEvents(PeriodName.SelectedValue as IdName, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Period
                         || ShowOptionalPeriodEvents.IsChecked.GetValueOrDefault()));
@@ -203,9 +198,9 @@ namespace Client
 
             // Class
             if ((viewType == EventData.TypeEnum.Class || viewType == EventData.TypeEnum.User)
-				&& (ClassName.SelectedValue != null || viewType == EventData.TypeEnum.User))
+                && ClassName.SelectedValue != null)
             {
-                AllEvents.AddRange(Api.getEvents(((ClassName.SelectedValue as IdName)??Api.CurrentUser.Class ).Id, start, end)
+                AllEvents.AddRange(Api.getEvents(ClassName.SelectedValue as IdName, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Class
                         || ShowOptionalClassEvents.IsChecked.GetValueOrDefault()));
@@ -464,7 +459,7 @@ namespace Client
         {
             var selected = ((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key;
             // University or user
-            if (selected == EventData.TypeEnum.University || selected == EventData.TypeEnum.User)
+            if (selected == EventData.TypeEnum.University)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
@@ -492,6 +487,28 @@ namespace Client
                 CampusName.Visibility = System.Windows.Visibility.Visible;
                 PeriodName.Visibility = System.Windows.Visibility.Visible;
                 ClassName.Visibility = System.Windows.Visibility.Visible;
+            }
+            else if (selected == EventData.TypeEnum.User)
+            {
+                CampusName.Visibility = System.Windows.Visibility.Collapsed;
+                PeriodName.Visibility = System.Windows.Visibility.Collapsed;
+                ClassName.Visibility = System.Windows.Visibility.Collapsed;
+
+                IdName className = Api.CurrentUser.Class;
+
+                IdName campusName = CampusPeriodClassTree.Where(
+                                                dc => dc.Value.Any(
+                                                    dp => dp.Value.Any(
+                                                        cl => cl.Id == Api.CurrentUser.Class.Id)))
+                                                        .Select(p => p.Key).FirstOrDefault();
+                IdName periodName = CampusPeriodClassTree[campusName].Where(
+                    dp => dp.Value.Any(
+                        cl => cl.Id == Api.CurrentUser.Class.Id))
+                        .Select(p => p.Key).FirstOrDefault();
+
+                CampusName.SelectedValue = campusName;
+                PeriodName.SelectedValue = periodName;
+                ClassName.SelectedValue = className;
             }
 
             RefreshAllEvents();
