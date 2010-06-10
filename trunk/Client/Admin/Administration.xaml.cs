@@ -904,10 +904,10 @@ namespace Client
                 if (newRole == RoleData.RoleType.Administrator)
                 {
                     //On récupère les rôles de l'utilisateur actuel
-                    RoleData[] myRights = userInformations.Roles;
+                    RoleData[] myRights = userInformations.Roles??new RoleData[]{};
 
                     //On ajoute le nouveau rôle
-                    //myRights = myRights.Concat(new RoleData() { Id = 0, Role = newRole, TargetId = idRight }); //watchme
+                    myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId = idRight }}); //watchme
 
                     //On rafraichit la DataGrid des rôles
                     refreshRightsGrid();
