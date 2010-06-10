@@ -43,6 +43,8 @@ namespace Client
         public IdName[] classesList_Users = null;
         public IdName[] campuslist_UserRights = null;
         public IdName[] universitylist_UserRights = null;
+        public IdName[] universitylist_DataRights = null;
+        public IdName[] campuslist_DataRights = null;
         public UserData userInformations = null;
 
         #endregion
@@ -764,13 +766,15 @@ namespace Client
 
         private class RightsDisplay
         {
-            public string Role;
-            public string TargetName;
+            public int TargetIndex { get; set; }
+            public int RoleIndex { get; set; }
+            public IdName[] TargetContext { get; set; }
 
-            public RightsDisplay(string role, string targetName)
+            public RightsDisplay(int roleindex, int targetindex, IdName[] targetcontext)
             {
-                this.Role = role;
-                this.TargetName = targetName;
+                this.TargetIndex = targetindex;
+                this.RoleIndex = roleindex;
+                this.TargetContext = targetcontext;
             }
         }
 
@@ -790,7 +794,9 @@ namespace Client
         private void refreshRights()
         {
             universitylist_UserRights = new IdName[] { new IdName() { Id = 0, Name = "Choix de l'université" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.University)).ToArray();
+            universitylist_DataRights = Api.Server.getPlannings(EventData.TypeEnum.University).ToArray();
             campuslist_UserRights=new IdName[] { new IdName() { Id = 0, Name = "Choix du campus" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Campus)).ToArray();
+            campuslist_DataRights = Api.Server.getPlannings(EventData.TypeEnum.Campus).ToArray();
         }
 
         //Rafraichit la DataGrid des rôles
@@ -805,7 +811,7 @@ namespace Client
             //On remplit nos listes de campus et d'universités
             refreshRights();
 
-            string campusName="", universityName="";
+            int universityIndex, campusIndex;
 
             //On prépare notre liste de droits pour l'affichage
             List<RightsDisplay> myRights=new List<RightsDisplay>();
@@ -816,34 +822,40 @@ namespace Client
                 //Si le rôle est "Administrateur"
                 if (userRole.Role == RoleData.RoleType.Administrator)
                 {
-                    myRights.Add(new RightsDisplay("Administrateur", ""));
+                    universityIndex = 0;
+                    //-----------------------------
+                    //On cherche l'index de l'université
+                    foreach (IdName university in universitylist_DataRights)
+                    {
+                        if (university.Id == userRole.TargetId)
+                        {
+                            break;
+                        }
+                        universityIndex++;
+                    }
+
+
+                    //On ajoute le droit
+                    myRights.Add(new RightsDisplay(1, universityIndex, universitylist_DataRights));
+
                 } else if(userRole.Role == RoleData.RoleType.CampusManager) //Si le rôle est "Campus Manager"
                 {
-                    //On cherche le nom du campus du rôle //watchme
-                    foreach(IdName campus in campuslist_UserRights)
+                    campusIndex=0;
+                    //------------------------------------
+                    //On cherche l'index du campus du rôle //watchme
+                    foreach(IdName campus in campuslist_DataRights)
                     {
                         if(campus.Id==userRole.TargetId)
                         {
-                            campusName=campus.Name;
                             break;
                         }
+                        campusIndex++;
                     }
 
                     //On ajoute le droit
-                    myRights.Add(new RightsDisplay("Campus Manager", campusName));
+                    myRights.Add(new RightsDisplay(2, campusIndex, campuslist_DataRights));
                 } else { //Si le rôle est "Speaker"
-                    //On cherche le nom de l'université
-                    foreach(IdName university in universitylist_UserRights)
-                    {
-                        if(university.Id==userRole.TargetId)
-                        {
-                            universityName=university.Name;
-                            break;
-                        }
-                    }
-
-                    //On ajoute le droit
-                    myRights.Add(new RightsDisplay("Speaker", universityName));
+                    myRights.Add(new RightsDisplay(0, -1, null));
                 }
             }
 
@@ -858,7 +870,7 @@ namespace Client
             if (cbUsers_Users.SelectedIndex > 0)
             {
                 //On récupère ses informations
-                userInformations = Api.Server.getUser(usersList[cbUsers_Users.SelectedIndex]);
+                userInformations = Api.Server.getUser(usersList[cbUsers_Users.SelectedIndex].Id);
 
                 //On peuple les contrôles
                 tbUsers_Login.Text = userInformations.Login;
@@ -916,6 +928,8 @@ namespace Client
 
                     //On ajoute le nouveau rôle
                     myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId = null }}).ToArray(); //watchme
+                    userInformations.Roles = myRights;
+
                     //On rafraichit la DataGrid des rôles
                     refreshRightsGrid();
                 }
@@ -936,7 +950,7 @@ namespace Client
                 RoleData.RoleType newRole;
 
                 //On récupère les rôles de l'utilisateur actuel
-                RoleData[] myRights = userInformations.Roles;
+                RoleData[] myRights = userInformations.Roles ?? new RoleData[] { }; ;
 
                 //On récupère l'id du type de rôle choisi
                 if(cbUsers_Rights.SelectedIndex==2) //Si c'est le rôle "Administrateur"
@@ -950,6 +964,7 @@ namespace Client
                 
                 //On ajoute le nouveau droit
                 myRights = myRights.Concat(new RoleData[] { new RoleData() { Id = 0, Role = newRole, TargetId = idRight } }).ToArray(); //watchme
+                userInformations.Roles = myRights;
 
                 //On rafraichit la DataGrid des rôles
                 refreshRightsGrid();
@@ -1129,6 +1144,20 @@ namespace Client
         private void bSubjects_AddMod_Click(object sender, RoutedEventArgs e)
         {
            
+        }
+
+        private void RightsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        //Si l'utilisateur clique sur la combobox des rôles dans la DataGrid
+        private void cbUsers_RoleDataRights_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //DataGridRow row = RightsGrid.ItemContainerGenerator.ContainerFromIndex(RightsGrid.SelectedIndex) as DataGridRow;
+            //ComboBox ele = RightsGrid.Columns[0].GetCellContent(row) as ComboBox;
+            //MessageBox.Show(ele.SelectedItem.ToString());
+            //MessageBox.Show("test");
         }
 
         
