@@ -17,7 +17,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Border BorderBrush="DarkGreen" BorderThickness="1" Name="ErrorBorder">
+        <Border BorderBrush="DarkGreen" BorderThickness="0" Name="ErrorBorder">
             <Grid Grid.Row="0" Grid.Column="0" Visibility="Hidden" Name="ErrorBar" Background="Green">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -251,7 +251,7 @@
                         <TextBox Grid.Column="1" Grid.Row="1" Name="tbPeriods_EndDate" Margin="0,10,0,0"/>
 
                         <Label Content="Promotion:" Grid.Column="0" Grid.Row="2" Name="lPeriods_Promotion" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -315,10 +315,10 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Campus:" Grid.Column="0" Grid.Row="0" Name="lClasses_Campus" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0"/>
 
                         <Label Content="Période:" Grid.Column="0" Grid.Row="1" Name="lClasses_Period" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" Margin="0,10,0,0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -361,7 +361,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbUsers_Users" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center"/>
+                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbUsers_Users" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbUsers_Users_SelectionChanged" />
                     <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -393,30 +393,37 @@
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Pass" Margin="0,10,0,0" IsEnabled="False" />
                     </Grid>
 
-                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,0" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" />
+                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" />
 
                     <Grid Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ComboBox Grid.Column="0" Grid.Row="0" Name="cbUsers_Rights" HorizontalContentAlignment="Center" SelectedIndex="0">
-                            <ComboBoxItem Content="Ajouter un droit" />
+                        <ComboBox Grid.Column="1" Grid.Row="0" IsEnabled="False" Name="cbUsers_Rights" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="cbUsers_Rights_SelectionChanged" HorizontalAlignment="Left" Width="Auto" ToolTip="Ajouter d'abord un utilisateur pour lui donner des rôles.">
+                            <ComboBoxItem Content="Ajouter un rôle" />
+                            <ComboBoxItem Content="Administrateur" />
+                            <ComboBoxItem Content="Campus Manager" />
+                            <ComboBoxItem Content="Speaker" />
                         </ComboBox>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbUsers_RightsType" HorizontalContentAlignment="Center" SelectedIndex="0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="cbUsers_RightsType_SelectionChanged" />
+                        
+                        <DataGrid Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding}" Name="RightsGrid" Margin="0,3,0,10">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Rôle" Binding="{Binding Role}"/>
+                                <DataGridTextColumn Header="Etendue" Binding="{Binding TargetName}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </Grid>
 
-                    <DataGrid Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center" ItemsSource="{Binding}">
-                            <DataGrid.Columns>
-                            <DataGridTextColumn Header="Droit" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Etendue"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    
 
                     
                     <Grid Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">
@@ -430,9 +437,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Classe:" Grid.Column="0" Grid.Row="0" Name="lUsers_Class" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0">
-                            <ComboBoxItem Content="Aucune" />
-                        </ComboBox>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" />
                     </Grid>
 
 
@@ -447,7 +452,7 @@
                         </Grid.RowDefinitions>
 
                         <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0" Click="bUsers_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0"/>
+                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" Click="bUsers_Del_Click" />
                     </Grid>
                 </Grid>
             </GroupBox>

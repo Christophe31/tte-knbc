@@ -22,6 +22,15 @@ namespace Client
     public partial class Administration : UserControl
     {
 
+        private void waitServerConnection()
+        {
+            while (Api.Server == null)
+            {
+                Api.RelinkServer();
+                Thread.Sleep(500);
+            }
+        }
+
 
         #region Definitions
 
@@ -32,20 +41,17 @@ namespace Client
         public IdName[] periodsList = null;
         public IdName[] classesList = null;
         public IdName[] usersList = null;
-
-        public Administration()
-        {
-            InitializeComponent();
-			Api = new CacheWrapper();
-		}
         public IdName[] promoList_Period = null;
         public IdName[] campusList_Class = null;
         public IdName[] periodsList_Class = null;
         public IdName[] rightsList_Users = null;
         public IdName[] classesList_Users = null;
+        public IdName[] campuslist_UserRights = null;
+        public IdName[] universitylist_UserRights = null;
+        public UserData userInformations = null;
 
         #endregion
-        
+
         #region Error bar
         public void spawnErrorBar(string message, Boolean isError)
         {
@@ -76,7 +82,7 @@ namespace Client
             ErrorMessage.Content = message;
             macouleur.Opacity = 0.5;
             ErrorBar.Background = macouleur;
-
+            ErrorBorder.BorderThickness = new Thickness(1);
         }
         #endregion
 
@@ -85,12 +91,7 @@ namespace Client
         //Au chargement du contrôle d'administration, on charge toutes les combobox
         private void AdministrationControl_Loaded(object sender, RoutedEventArgs e)
         {
-			while (Api.Server == null)
-			{
-				Api.RelinkServer();
-				Thread.Sleep(500);
-			}
-
+            waitServerConnection();
             refreshPromotions();
             //subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.ServerBL2.getSubjects()).ToArray();
             //cbSubjects_Subjects.DataContext = subjectsList;
@@ -99,6 +100,7 @@ namespace Client
             refreshPeriods();
             refreshClasses();
             refreshUsers();
+            refreshRights();
         }
 
         #endregion
@@ -206,7 +208,7 @@ namespace Client
             if (returnValue.Equals("ok"))
             {
                 //On change la StatusBar
-                spawnErrorBar("Promotion"+cbPromo_Promotions.SelectedItem.ToString()+" supprimée avec succès!", false);
+                spawnErrorBar("Promotion "+cbPromo_Promotions.SelectedItem.ToString()+" supprimée avec succès!", false);
             }
             else
             {
@@ -297,14 +299,14 @@ namespace Client
                     spawnErrorBar(returnValue, true);
                 }
             }
+
+            //On rafraichit les contrôles
+            refreshCampus();
         }
 
         //L'utilisateur a cliqué sur "Supprimer"
         private void bCampus_Del_Click(object sender, RoutedEventArgs e)
         {
-
-            promoList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Promotion" } }.Concat(Api.Server.getPromotions()).ToArray();
-            cbPromo_Promotions.DataContext = promoList;
             //S'il n'y a pas de campus sélectionné           
             if (cbCampus_Campus.SelectedIndex < 1)
             {
@@ -751,6 +753,18 @@ namespace Client
 
         #region Utilisateurs
 
+        private class RightsDisplay
+        {
+            public string Role;
+            public string TargetName;
+
+            public RightsDisplay(string role, string targetName)
+            {
+                this.Role = role;
+                this.TargetName = targetName;
+            }
+        }
+
         //Rafraichissement des différents contrôles
         private void refreshUsers()
         {
@@ -758,10 +772,172 @@ namespace Client
             cbUsers_Users.DataContext = usersList;
             cbUsers_Users.SelectedIndex = 0;
 
-            //rightsList_Users=Api.Server.get... //watchme
-
             classesList_Users = new IdName[] { new IdName() { Id = 0, Name = "Aucune" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
             cbUsers_Class.DataContext = classesList_Users;
+            cbUsers_Class.SelectedIndex = 0;
+        }
+
+        //Remplissage des combobox des rôles
+        private void refreshRights()
+        {
+            universitylist_UserRights = new IdName[] { new IdName() { Id = 0, Name = "Choix de l'université" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.University)).ToArray();
+            campuslist_UserRights=new IdName[] { new IdName() { Id = 0, Name = "Choix du campus" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Campus)).ToArray();
+        }
+
+        //Rafraichit la DataGrid des rôles
+        private void refreshRightsGrid()
+        {
+            //On quitte si l'utilisateur n'est pas déjà dans la base ou s'il n'a aucun droit
+            if((userInformations == null) || (userInformations.Roles==null))
+            {
+                return;
+            }
+
+            //On remplit nos listes de campus et d'universités
+            refreshRights();
+
+            string campusName="", universityName="";
+
+            //On prépare notre liste de droits pour l'affichage
+            List<RightsDisplay> myRights=new List<RightsDisplay>();
+
+            //Pour chaque rôle de l'utilisateur actuel
+            foreach (RoleData userRole in userInformations.Roles)
+            {
+                //Si le rôle est "Administrateur"
+                if (userRole.Role == RoleData.RoleType.Administrator)
+                {
+                    myRights.Add(new RightsDisplay("Administrateur", ""));
+                } else if(userRole.Role == RoleData.RoleType.CampusManager) //Si le rôle est "Campus Manager"
+                {
+                    //On cherche le nom du campus du rôle //watchme
+                    foreach(IdName campus in campuslist_UserRights)
+                    {
+                        if(campus.Id==userRole.TargetId)
+                        {
+                            campusName=campus.Name;
+                            break;
+                        }
+                    }
+
+                    //On ajoute le droit
+                    myRights.Add(new RightsDisplay("Campus Manager", campusName));
+                } else { //Si le rôle est "Speaker"
+                    //On cherche le nom de l'université
+                    foreach(IdName university in universitylist_UserRights)
+                    {
+                        if(university.Id==userRole.TargetId)
+                        {
+                            universityName=university.Name;
+                            break;
+                        }
+                    }
+
+                    //On ajoute le droit
+                    myRights.Add(new RightsDisplay("Speaker", universityName));
+                }
+            }
+
+            //On rafraichit la DataGrid des rôles
+            RightsGrid.DataContext=myRights;
+            
+        }
+
+        //Si l'utilisateur à choisi... un utilisateur
+        private void cbUsers_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbUsers_Users.SelectedIndex > 0)
+            {
+                //On récupère ses informations
+                userInformations = Api.Server.getUser(usersList[cbUsers_Users.SelectedIndex]);
+
+                //On active les contrôles liés aux rôles
+                cbUsers_Rights.IsEnabled = true;
+            }
+            else
+            {
+                //On désactive les contrôles liés aux rôles
+                cbUsers_Rights.IsEnabled = false;
+            }
+        }
+
+        //Si l'utilisateur choisit un rôle
+        private void cbUsers_Rights_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((cbUsers_Rights.SelectedIndex > 0) && (cbUsers_Users.SelectedIndex > 0))
+            {
+                RoleData.RoleType newRole;
+
+                //On récupère le rôle choisi pour charger notre combobox
+                switch (cbUsers_Rights.SelectedIndex)
+                {
+                    case 1: //Si l'on veut ajouter un rôle "Administrateur"
+                        cbUsers_RightsType.Visibility = Visibility.Hidden;
+                        newRole = RoleData.RoleType.Administrator;
+                        break;
+                    case 2: //Si l'on veut ajouter un rôle "Campus Manager"
+                        cbUsers_RightsType.Visibility = Visibility.Visible;
+                        cbUsers_RightsType.DataContext = campuslist_UserRights;
+                        cbUsers_RightsType.SelectedIndex = 0;
+                        newRole = RoleData.RoleType.CampusManager;
+                        break;
+                    case 3: //Si l'on veut ajouter un rôle "Speaker"
+                        cbUsers_RightsType.Visibility = Visibility.Visible;
+                        cbUsers_RightsType.DataContext = universitylist_UserRights;
+                        cbUsers_RightsType.SelectedIndex = 0;
+                        newRole = RoleData.RoleType.Speaker;
+                        break;
+                    default:
+                        return;
+                }
+
+                //Si le rôle est administrateur
+                if (newRole == RoleData.RoleType.Administrator)
+                {
+                    //On récupère les rôles de l'utilisateur actuel
+                    RoleData[] myRights = userInformations.Roles;
+
+                    //On ajoute le nouveau rôle
+                    //myRights = myRights.Concat(new RoleData() { Id = 0, Role = newRole, TargetId = idRight }); //watchme
+
+                    //On rafraichit la DataGrid des rôles
+                    refreshRightsGrid();
+                }
+
+            }
+            else if (cbUsers_RightsType != null)//Si aucun rôle n'est choisi //watchme
+            {
+                cbUsers_RightsType.Visibility = Visibility.Hidden;
+            }
+        }
+
+        //Si l'utilisateur choisit la cible du rôle
+        private void cbUsers_RightsType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((cbUsers_RightsType.SelectedIndex > 0) && ( cbUsers_Users.SelectedIndex>0)) //Si l'utilisateur a bien choisi un type de droit et qu'un utilisateur est choisi
+            {
+                int idRight;
+                RoleData.RoleType newRole;
+
+                //On récupère les rôles de l'utilisateur actuel
+                RoleData[] myRights = userInformations.Roles;
+
+                //On récupère l'id du type de rôle choisi
+                if(cbUsers_Rights.SelectedIndex==2) //Si c'est le rôle "Campus Manager"
+                {
+                    idRight=campuslist_UserRights[cbUsers_RightsType.SelectedIndex];
+                    newRole=RoleData.RoleType.CampusManager;
+                } else { //Si c'est le rôle "Speaker"
+                    idRight=universitylist_UserRights[cbUsers_RightsType.SelectedIndex];
+                    newRole=RoleData.RoleType.Speaker;
+                }
+                
+                //On ajoute le nouveau droit
+                //myRights = myRights.Concat(new RoleData() { Id = 0, Role = newRole, TargetId = idRight }); //watchme
+
+                //On rafraichit la DataGrid des rôles
+                refreshRightsGrid();
+            }
         }
 
         //Si la checkbox du password est cochée
@@ -780,7 +956,7 @@ namespace Client
         private void bUsers_AddMod_Click(object sender, RoutedEventArgs e)
         {
             //S'il s'agit d'une modification...
-            if (cbClasses_Classes.SelectedIndex > 0)
+            if (cbUsers_Users.SelectedIndex > 0)
             {
                 //On récupère l'id de la classe sélectionnée
                 int idClass = classesList[cbClasses_Classes.SelectedIndex].Id;
@@ -862,14 +1038,85 @@ namespace Client
                 //On hashe le mot de passe
                 passwordHashed = RandomPassword.HashString(password);
 
-                //watchme
+                //On prépare notre utilisateur
+                UserData myUser = new UserData();
+                myUser.Name = tbUsers_Name.Text;
+                myUser.Login = tbUsers_Login.Text;
+                myUser.Password = passwordHashed;
+                myUser.Roles = null;
+
+                //Si aucune classe n'a été choisie
+                if (cbUsers_Class.SelectedIndex < 1)
+                {
+                    myUser.Class = null;
+                }
+                else //Sinon, on la récupère
+                {
+                    myUser.Class = classesList_Users[cbUsers_Class.SelectedIndex];
+                }
+
+                //On tente d'ajouter l'utilisateur
+                string returnValue = Api.Server.addUser(myUser);
+
+                //Si l'ajout s'est correctement déroulé
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Utilisateur inséré avec succès! (Nom: \"" + tbUsers_Name.Text + "\", Login: \""+tbUsers_Login.Text+"\", Password: \"" + password + "\")", false);
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    spawnErrorBar(returnValue, true);
+                }
+
+                //On rafraichit les contrôles
+                refreshUsers();
+
             }
 
             //On rafraichit les contrôles
             refreshUsers();
         }
 
+        //L'utilisateur a cliqué sur "Supprimer"
+        private void bUsers_Del_Click(object sender, RoutedEventArgs e)
+        {
+            //S'il n'y a pas d'utilisateur sélectionné
+            if (cbUsers_Users.SelectedIndex<1)
+            {
+                spawnErrorBar("Choisissez d'abord un utilisateur à supprimer!", true);
+                return;
+            }
+
+            //On récupère l'id de l'utilisateur
+            int idUser = usersList[cbUsers_Users.SelectedIndex].Id;
+
+            //On tente de le supprimer
+            string returnValue = Api.Server.delUser(idUser);
+
+            //Si la suppression s'est correctement déroulée
+            if (returnValue.Equals("ok"))
+            {
+                //On change la StatusBar
+                spawnErrorBar("Utilisateur " + cbUsers_Users.SelectedItem.ToString() + " supprimé avec succès!", false);
+            }
+            else
+            {
+                //On change la StatusBar avec le message d'erreur renvoyé
+                spawnErrorBar(returnValue, true);
+            }
+        }
+
         #endregion
+
+        
+
+        
+
+        
+
+        
 
         
 
