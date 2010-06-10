@@ -907,7 +907,7 @@ namespace Client
                     RoleData[] myRights = userInformations.Roles??new RoleData[]{};
 
                     //On ajoute le nouveau rôle
-                    myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId = idRight }}); //watchme
+                   // myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId =this.cbUsers_RightsType. }}); //watchme
 
                     //On rafraichit la DataGrid des rôles
                     refreshRightsGrid();
