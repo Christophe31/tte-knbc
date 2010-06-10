@@ -254,38 +254,49 @@ namespace Client.BusinessService
         public static EventData CreateFromICalEvent(IEvent p)
         {
             EventData ED = new EventData();
-			try
-			{
-				ED.Id = int.Parse(p.UID);
-			}
-			catch (FormatException)
-			{
-				ED.Id = 0;
-			}
 			ED.Start = p.Start.Date;
 			ED.End = p.End.Date;
 			ED.Mandatory = p.Priority == 1;
 			ED.Place = p.Location;
-			ED.Name = p.Name;
-			ED.Speaker = p.Organizer.CommonName;
-			ED.Modality = p.Properties.Where(f => f.Key == "X-MODALITY").First().Value.ToString();
-			ED.Subject = p.Properties.Where(f => f.Key == "X-SUBJECT").First().Value.ToString();
+			ED.Name = p.Summary;ED.Speaker = new IdName();ED.Modality = new IdName();ED.Subject = new IdName();
+			try
+			{
+				ED.Speaker.Id = int.Parse(p.Organizer.Encoding);
+				ED.Speaker.Name = p.Organizer.CommonName;
+				ED.Modality.Id = int.Parse(ED.Modality = p.Properties.Where(f => f.Key == "X-MODALITY-ID").First().Value.ToString());
+				ED.Modality.Name = p.Properties.Where(f => f.Key == "X-MODALITY-NAME").First().Value.ToString();
+				ED.Subject.Id = int.Parse(p.Properties.Where(f => f.Key == "X-SUBJECT-ID").First().Value.ToString());
+				ED.Subject.Name = p.Properties.Where(f => f.Key == "X-SUBJECT-NAME").First().Value.ToString();
+			}
+			catch { }
 			return ED;
         }
 
         public void AddEventToCalendar(ref iCalendar ic) 
         {
             Event e=ic.Create<Event>();
-			e.UID = this.Id.ToString();
 			e.Start = new iCalDateTime(this.Start);
 			e.End = new iCalDateTime(this.End);
-            e.Name = this.Name;
+            e.Name = "VEVENT";
 			e.Priority = this.Mandatory ? 1 : 0;
 			e.Location = this.Place;
-			e.Organizer = new Organizer(){CommonName=this.Speaker};
 			e.Summary=this.Name;
-            e.AddProperty(new CalendarProperty("X-MODALITY", this.Modality));
-            e.AddProperty(new CalendarProperty("X-SUBJECT", this.Subject));
+			if (Speaker!=null)
+				e.Organizer = new Organizer(){CommonName=this.Speaker.Name, Encoding=this.Speaker.Id.ToString()};
+			if (Modality != null && Subject != null)
+			{
+				e.AddProperty(new CalendarProperty("X-MODALITY-NAME", this.Modality.Name));
+				e.AddProperty(new CalendarProperty("X-MODALITY-ID", this.Modality.Name));
+				e.AddProperty(new CalendarProperty("X-SUBJECT-NAME", this.Subject.Id.ToString()));
+				e.AddProperty(new CalendarProperty("X-SUBJECT-ID", this.Subject.Id.ToString()));
+				e.Description = this.Modality + " " + this.Subject;
+			}
+			else
+			{
+				e.Description = this.Name;
+			}
+			
+
         }
 
 

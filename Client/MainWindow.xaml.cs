@@ -158,7 +158,7 @@ namespace Client
         /// Refresh the events list, for the period specified in the GUI, including (or excluding) mandatory events.
         /// </summary>
         private void RefreshAllEvents()
-        {
+		{
             DateTime start = StartDate.SelectedDate.GetValueOrDefault();
             DateTime end = EndDate.SelectedDate.GetValueOrDefault();
 
@@ -176,9 +176,14 @@ namespace Client
 			if ((viewType == EventData.TypeEnum.Campus
 				|| viewType == EventData.TypeEnum.Class
 				|| viewType == EventData.TypeEnum.User)
-                && CampusName.SelectedValue != null)
+				&& (CampusName.SelectedValue != null || viewType==EventData.TypeEnum.User))
             {
-                AllEvents.AddRange(Api.getEvents((CampusName.SelectedValue as IdName).Id, start, end)
+                AllEvents.AddRange(Api.getEvents(((CampusName.SelectedValue as IdName)
+											?? CampusPeriodClassTree.Where(
+												dc=> dc.Value.Any(
+													dp => dp.Value.Any(
+														cl=> cl.Id == Api.CurrentUser.Class.Id)))
+												.Select(dc=>dc.Key).First()), start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Campus
                         || ShowOptionalCampusEvents.IsChecked.GetValueOrDefault()));
@@ -188,9 +193,9 @@ namespace Client
             if ((viewType == EventData.TypeEnum.Period
                 || viewType == EventData.TypeEnum.Class
                 || viewType == EventData.TypeEnum.User)
-                && PeriodName.SelectedValue != null)
+				&& (PeriodName.SelectedValue != null || viewType == EventData.TypeEnum.User))
             {
-                AllEvents.AddRange(Api.getEvents((PeriodName.SelectedValue as IdName).Id, start, end)
+                AllEvents.AddRange(Api.getEvents((PeriodName.SelectedValue as IdName), start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Period
                         || ShowOptionalPeriodEvents.IsChecked.GetValueOrDefault()));
@@ -198,9 +203,9 @@ namespace Client
 
             // Class
             if ((viewType == EventData.TypeEnum.Class || viewType == EventData.TypeEnum.User)
-                && ClassName.SelectedValue != null)
+				&& (ClassName.SelectedValue != null || viewType == EventData.TypeEnum.User))
             {
-                AllEvents.AddRange(Api.getEvents((ClassName.SelectedValue as IdName).Id, start, end)
+                AllEvents.AddRange(Api.getEvents(((ClassName.SelectedValue as IdName)??Api.CurrentUser.Class ).Id, start, end)
                     .Where(p => p.Mandatory
                         || viewType == EventData.TypeEnum.Class
                         || ShowOptionalClassEvents.IsChecked.GetValueOrDefault()));
@@ -209,7 +214,7 @@ namespace Client
             // User
             if (viewType == EventData.TypeEnum.User)
             {
-                //AllEvents.AddRange(Api.getPrivateEvents(start, end));
+                AllEvents.AddRange(Api.getEvents(Api.CurrentUser,start, end));
             }
 
             // Refresh views
@@ -601,12 +606,56 @@ namespace Client
 
 		private void iCal_export_Click(object sender, RoutedEventArgs e)
 		{
+			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+			dlg.Filter = "ICalendar files (*.ics)|*.ics|All files (*.*)|*.*";
+			dlg.AddExtension = true;
+			dlg.ValidateNames = true;
+			dlg.ShowDialog(this);
+			try
+			{
+				DDay.iCal.Serialization.iCalendar.iCalendarSerializer calSerializer = new DDay.iCal.Serialization.iCalendar.iCalendarSerializer();
+				DDay.iCal.iCalendar ical = new DDay.iCal.iCalendar();
+				foreach( EventData even in Api.getEvents(this.SelectedPlanning,DateTime.MinValue,DateTime.MaxValue))
+					even.AddEventToCalendar(ref ical);
+				calSerializer.Serialize(ical, dlg.FileName);
+			}
+			catch
+			{
+				MessageBox.Show("Une erreur est survenue...", "et mince...", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			}
 		}
 
 		private void iCal_import_Click(object sender, RoutedEventArgs e)
 		{
-		}
+			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.Filter = "ICalendar files (*.ics)|*.ics|All files (*.*)|*.*";
+			dlg.Title="Calendar Import";
+			dlg.CheckFileExists = true;
+			dlg.ShowDialog();
+			string s = "Rapport:";
+			try
+			{
+				var calendars = DDay.iCal.iCalendar.LoadFromFile(dlg.FileName);
 
+				foreach (EventData even in calendars.First().Events.Select(
+							p => EventData.CreateFromICalEvent(p)
+							))
+				{
+					even.Type = ((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key;
+					even.ParentPlanning = SelectedPlanning;
+					s += "\r\n" + Api.Server.addEvent(even);
+				}
+			}
+			catch
+			{
+				MessageBox.Show("Une erreur est survenue...", "et mince...", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+			}
+			finally 
+			{ 
+				MessageBox.Show(s); 
+			}
+		}
+		
 		private void report_Click(object sender, RoutedEventArgs e)
 		{
 		}
