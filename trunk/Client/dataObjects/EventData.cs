@@ -318,7 +318,8 @@ namespace Client.BusinessService
         void IEditableObject.EndEdit()
         {
             CacheWrapper Api = new CacheWrapper();
-            ParentPlanning = SelectedPlanning;
+            if (ParentPlanning == null)
+                ParentPlanning = SelectedPlanning;
             // Event creation
             if (Id == 0)
             {
