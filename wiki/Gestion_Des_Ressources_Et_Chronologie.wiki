@@ -1,10 +1,13 @@
 _by Christophe Narbonne_
 
 = Introduction =
+Le Projet de groupe Time Table Easy proposé par SUPINFO est un défi que notre équipe semble mener à bien. Nous avons commencé ce projet en nous réunissant dans une équipe de personnalités différentes et complémentaires. Le fait de commencer par faire une équipe permet de ne pas délaisser dans la phase de choix de départs les membres de l'équipe.
 
-Le Projet de groupe Time Table Easy proposé par SUPINFO est un défi que notre équipe semble mener à bien. Nous avons commencé ce projet en nous réunissant dans une équipe de personnalités différentes et complémentaires. 
+= Choix technologiques =
 
-Notre première mission a été d'une part les choix technologiques... L'équipe étant dans l'ensemble assez ouverte sur le logiciel libre, nous avons pensé à pas mal de technologies autres que celles innitialement proposés, mais, pour choisir des technologies, nous avons réfléchi architecture. Bien que le cahier des charges ne fesait pas mention de toute la problématique sécurité, il nous était évident que l'on ferai un minimum au vues de l'utilisation attendue. Faire un utilisateur DB par étudiant aurait imposé des vues pour restraindre les droits de lecture sur les évènements privés, restreindre les accès à des procédure stoquées SQL nous a effleuré l'esprit mais nous nous doutions que nous ferions un service Front End en interface entre la base de donnée et internet. Coté client, notre équipe de base est assez multiplateforme et on a songé à l'intéroparabilité pour le dévloppement et pour l'utilisation. Une possibilité qui avais retenu notre attention, un client en XUL (Javascript utilisant le moteur de firefox) avec un service web en php. Le sujet proposait d'autres technologies et nous avons admis que SQL Serveur était déjà installé chez le client, le sujet suggérais que la base d'utilisateurs était presque exclusivement sous Windows... Ayant dans notre équipe deux personnes relativement expérimentés en .NET et nous pensons que Microsoft, lorsqu'il est utilisé sur l'ensemble de la chaîne, leurs technologies sont intéressantes et les outils assistent agréablement les développeurs. Il y avait pas mal de nouveautés interessantes, la sorti de .NET 4, Visual studio 2010, bref, comme le sujet semblait encourager ce choix que nous avons suivi.
+La première version du sujet ne nous laissait pas nous poser cette question importante... Quels outils allons nous choisir? Ce choix fut notre première mission en temps qu'équipe et elle ne devai pas être négligée...
+
+L'équipe étant dans l'ensemble assez ouverte sur le logiciel libre, nous avons pensé à pas mal de technologies autres que celles innitialement proposés, pour choisir des technologies, nous avons réfléchi architecture. Bien que le cahier des charges ne fesait pas mention de toute la problématique sécurité, il nous était évident que l'on ferai un minimum pour sécuriser un peu la base.. Faire un utilisateur DB par étudiant aurait imposé de nombreuses vues pour restreindre les droits de lecture sur les évènements privés, restreindre les accès aux donnés en n'accédant que par des procédure stoquées SQL nous a effleuré l'esprit mais nous nous doutions que nous ferions un service Front End en interface entre la base de donnée et internet. Coté client, notre équipe de base est assez hétérogène en therme de plateforme favorite, on a songé à l'intéroparabilité pour le développement et pour l'utilisation. Une possibilité qui avais retenu notre attention, un client en XUL (Javascript utilisant le moteur de firefox) avec un service web en php. Le sujet proposait d'autres technologies et nous avons admis que SQL Serveur était déjà installé chez le client, le sujet suggérais que la base d'utilisateurs était presque exclusivement sous Windows... Ayant dans notre équipe deux personnes relativement expérimentés en .NET et nous pensons que Microsoft, lorsqu'il est utilisé sur l'ensemble de la chaîne, leurs technologies sont intéressantes et les outils assistent agréablement les développeurs. Il y avait pas mal de nouveautés interessantes, la sorti de .NET 4, Visual studio 2010, bref, comme le sujet semblait encourager ce choix que nous avons suivi.
 
 
 = Ressources humaines =
@@ -37,9 +40,37 @@ Thomas :
     * Quelques lacunes en .NET.
     * Ouvert à la critique, attentif. 
 
- qui s'occupe de faire le calandrier, un administrateur qui préfèrerai pas toucher de code à l'ergonomie et au schéma de la base de donnée, un développeur qui aime pas faire des interfaces graphiques qui se retrouve au service web
-
 == Répartitions des tâches ==
+Voici le modèle de départ des tâches du projet:
+  * Configuration et design de la base de donnée: Romain
+  * Service Web: Christophe
+  * Interface Administration : Jeremy
+  * Interface Calandrier : Romaric
+
+Il n'y avais aucune hiérarchi explicite, mais deux points importants rendaient remarquable deux personnes. Romaric avait lu plusieur fois le cahier des charges et le connaissais nettement mieux que les autres membres et Christophe animait un peu l'équipe et s'occupait de la mise en place et configuration des outils de collaboration.
+
+Nous avons donc officialisé en interne ce qui se trammait la dessous en redéfinissant les rôles, de plus Thomas s'est ajouté à nos efectifs avec une deuxième révision:
+
+Breil Romaric :
+  * Responsable du respect du cahier des charges
+  * Contrôle calandrier
+  * Gros contributeur de l'organisation de la base de donnée
+Cheynet de beauprés Romain :
+  * Organisation avec Romaric de la base de donnée.
+  * Design et ergonomie de l'interface.
+Despax Thomas :
+  * Imports
+  * Exports
+  * Cache
+  * Interface entre l'interface graphique et le service web (pour gérer le cache)
+Kornylo Jeremy :
+  * Design et implémentation de toute l'interface d'administration hors ajout/suppression d'évènements
+Narbonne Christophe :
+  * Animateur du projet. Rôle de chef de projet, assez bonne vision d'ensemble car son service est en contact direct avec toutes les parties du développement.
+  * Implémentation du service WCF.
+  * Implémentation de la partie de connexion client/serveur.
+  * Menthor de Thomas.
+  * Gros contributeur de la gestion du cache.
+
 
 = Outils et moyens mis en place =
-
