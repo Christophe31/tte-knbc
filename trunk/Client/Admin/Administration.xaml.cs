@@ -363,7 +363,7 @@ namespace Client
         //Lorsque l'utilisateur choisit une période
         private void cbPeriods_Period_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cbCampus_Campus.SelectedIndex > 0)
+            if (cbPeriods_Period.SelectedIndex > 0)
             {
                 //On met a jour le textbox
                 tbPeriods_Name.Text = cbPeriods_Period.SelectedItem.ToString();
@@ -860,6 +860,13 @@ namespace Client
                 //On récupère ses informations
                 userInformations = Api.Server.getUser(usersList[cbUsers_Users.SelectedIndex]);
 
+                //On peuple les contrôles
+                tbUsers_Login.Text = userInformations.Login;
+                tbUsers_Name.Text = userInformations.Password;
+
+                //On rafraichit la DataGrid des rôles
+                refreshRightsGrid();
+
                 //On active les contrôles liés aux rôles
                 cbUsers_Rights.IsEnabled = true;
             }
@@ -867,6 +874,7 @@ namespace Client
             {
                 //On désactive les contrôles liés aux rôles
                 cbUsers_Rights.IsEnabled = false;
+                cbUsers_RightsType.Visibility = Visibility.Hidden;
             }
         }
 
@@ -880,35 +888,34 @@ namespace Client
                 //On récupère le rôle choisi pour charger notre combobox
                 switch (cbUsers_Rights.SelectedIndex)
                 {
-                    case 1: //Si l'on veut ajouter un rôle "Administrateur"
+                    case 1: //Si l'on veut ajouter un rôle "Speaker"
                         cbUsers_RightsType.Visibility = Visibility.Hidden;
+                        newRole = RoleData.RoleType.Speaker;
+                        break;
+                    case 2: //Si l'on veut ajouter un rôle "Administrateur"
+                        cbUsers_RightsType.Visibility = Visibility.Visible;
+                        cbUsers_RightsType.DataContext = universitylist_UserRights;
+                        cbUsers_RightsType.SelectedIndex = 0;
                         newRole = RoleData.RoleType.Administrator;
                         break;
-                    case 2: //Si l'on veut ajouter un rôle "Campus Manager"
+                    case 3: //Si l'on veut ajouter un rôle "Campus Manager"
                         cbUsers_RightsType.Visibility = Visibility.Visible;
                         cbUsers_RightsType.DataContext = campuslist_UserRights;
                         cbUsers_RightsType.SelectedIndex = 0;
                         newRole = RoleData.RoleType.CampusManager;
                         break;
-                    case 3: //Si l'on veut ajouter un rôle "Speaker"
-                        cbUsers_RightsType.Visibility = Visibility.Visible;
-                        cbUsers_RightsType.DataContext = universitylist_UserRights;
-                        cbUsers_RightsType.SelectedIndex = 0;
-                        newRole = RoleData.RoleType.Speaker;
-                        break;
                     default:
                         return;
                 }
 
-                //Si le rôle est administrateur
-                if (newRole == RoleData.RoleType.Administrator)
+                //Si le rôle est Speaker
+                if (newRole == RoleData.RoleType.Speaker)
                 {
                     //On récupère les rôles de l'utilisateur actuel
                     RoleData[] myRights = userInformations.Roles??new RoleData[]{};
 
                     //On ajoute le nouveau rôle
-                   // myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId =this.cbUsers_RightsType. }}); //watchme
-
+                    myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId = null }}).ToArray(); //watchme
                     //On rafraichit la DataGrid des rôles
                     refreshRightsGrid();
                 }
@@ -932,17 +939,17 @@ namespace Client
                 RoleData[] myRights = userInformations.Roles;
 
                 //On récupère l'id du type de rôle choisi
-                if(cbUsers_Rights.SelectedIndex==2) //Si c'est le rôle "Campus Manager"
+                if(cbUsers_Rights.SelectedIndex==2) //Si c'est le rôle "Administrateur"
                 {
-                    idRight=campuslist_UserRights[cbUsers_RightsType.SelectedIndex];
-                    newRole=RoleData.RoleType.CampusManager;
-                } else { //Si c'est le rôle "Speaker"
-                    idRight=universitylist_UserRights[cbUsers_RightsType.SelectedIndex];
-                    newRole=RoleData.RoleType.Speaker;
+                    idRight = universitylist_UserRights[cbUsers_RightsType.SelectedIndex];
+                    newRole = RoleData.RoleType.Administrator;
+                } else { //Si c'est le rôle "Campus Manager"
+                    idRight = campuslist_UserRights[cbUsers_RightsType.SelectedIndex];
+                    newRole = RoleData.RoleType.CampusManager;
                 }
                 
                 //On ajoute le nouveau droit
-                //myRights = myRights.Concat(new RoleData() { Id = 0, Role = newRole, TargetId = idRight }); //watchme
+                myRights = myRights.Concat(new RoleData[] { new RoleData() { Id = 0, Role = newRole, TargetId = idRight } }).ToArray(); //watchme
 
                 //On rafraichit la DataGrid des rôles
                 refreshRightsGrid();
@@ -1118,6 +1125,11 @@ namespace Client
         }
 
         #endregion
+
+        private void bSubjects_AddMod_Click(object sender, RoutedEventArgs e)
+        {
+           
+        }
 
         
 

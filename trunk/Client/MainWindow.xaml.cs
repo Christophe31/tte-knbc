@@ -568,36 +568,6 @@ namespace Client
         }
         #endregion
 
-        #region mugimasaka
-        #region Tableaux IdNames
-        IdName[] classList = null;
-        IdName[] userList = null;
-        IdName[] campusList = null;
-        IdName[] periodList = null;
-        IdName[] promoList = null;
-        #endregion
-
-        private void tcOnglets_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            /*if (sender == e.OriginalSource)
-            {
-                if (tcOnglets.SelectedIndex == 4)
-                //On charge la ComboBox
-                classList = Api.Server.getIdClassesNames().ToArray();
-                cbUsers_Class.DataContext = classList;
-
-                userList = Api.Server.getIdUsersNames().ToArray();
-                cbUsers_Users.DataContext = userList;
-
-                //On prépare la StatusBar
-                sbStatusText.Foreground = new SolidColorBrush(Colors.Green); ;
-                sbStatusText.Text = "Prêt";
-
-            }
-             */
-        }
-
-        #endregion
 
         private void DayContentGrid_MouseEnter(object sender, MouseEventArgs e)
         {
