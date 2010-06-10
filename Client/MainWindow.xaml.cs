@@ -31,18 +31,19 @@ namespace Client
                 {
                     EventData.TypeEnum viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
                     if (viewType == EventData.TypeEnum.University)
-                        return Api.getUniversity();
+                        EventData.SelectedPlanning = Api.getUniversity();
                     else if (viewType == EventData.TypeEnum.Campus && CampusName.SelectedValue != null)
-                        return (IdName)CampusName.SelectedValue;
+                        EventData.SelectedPlanning = (IdName)CampusName.SelectedValue;
                     else if (viewType == EventData.TypeEnum.Period && PeriodName.SelectedValue != null)
-                        return (IdName)PeriodName.SelectedValue;
+                        EventData.SelectedPlanning = (IdName)PeriodName.SelectedValue;
                     else if (viewType == EventData.TypeEnum.Class && ClassName.SelectedValue != null)
-                        return (IdName)ClassName.SelectedValue;
+                        EventData.SelectedPlanning = (IdName)ClassName.SelectedValue;
                     else if (viewType == EventData.TypeEnum.User)
-                        return Api.CurrentUser;
+                        EventData.SelectedPlanning = Api.CurrentUser;
                 }
-                
-                return new IdName() { Id = 0, Name = "No planning" };
+
+                EventData.SelectedPlanning = new IdName() { Id = 0, Name = "No planning" };
+                return EventData.SelectedPlanning;
             }
         }
         #endregion Properties
@@ -108,13 +109,10 @@ namespace Client
             DayGridDateSelection.SelectedDate = DateTime.Today;
 
 			// ComboBoxes initialisation
+            CampusName.DataContext = Api.getPlannings(EventData.TypeEnum.Campus);
+            PeriodName.DataContext = Api.getPlannings(EventData.TypeEnum.Period);
             ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 4;
-
-            CampusName.DataContext = Api.getPlannings(EventData.TypeEnum.Campus);
-            CampusName.SelectedIndex = 0;
-            PeriodName.DataContext = Api.getPlannings(EventData.TypeEnum.Period);
-            PeriodName.SelectedIndex = 0;
 
             // Events DataGrid initialisation
             RefreshAllEvents();
@@ -159,6 +157,9 @@ namespace Client
         /// </summary>
         private void RefreshAllEvents()
 		{
+            // Refresh selected planning
+            IdName selectedPlanning = SelectedPlanning;
+
             DateTime start = StartDate.SelectedDate.GetValueOrDefault();
             DateTime end = EndDate.SelectedDate.GetValueOrDefault();
 
@@ -224,7 +225,11 @@ namespace Client
         /// </summary>
         private void RefreshClassName()
         {
-            if (ViewType.SelectedValue != null && ((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key == EventData.TypeEnum.Class)
+            var viewType = (KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue;
+            if (ViewType.SelectedValue != null
+                && CampusName.SelectedValue != null
+                && PeriodName.SelectedValue != null
+                && (viewType.Key == EventData.TypeEnum.Class || viewType.Key == EventData.TypeEnum.User))
             {
                 try
                 {
@@ -506,9 +511,9 @@ namespace Client
                         cl => cl.Id == Api.CurrentUser.Class.Id))
                         .Select(p => p.Key).FirstOrDefault();
 
-                CampusName.SelectedValue = campusName;
-                PeriodName.SelectedValue = periodName;
-                ClassName.SelectedValue = className;
+                CampusName.SelectedIndex = Array.FindIndex((IdName[])CampusName.DataContext, p => p.Id == campusName.Id);
+                PeriodName.SelectedIndex = Array.FindIndex((IdName[])PeriodName.DataContext, p => p.Id == periodName.Id);
+                ClassName.SelectedIndex = Array.FindIndex((IdName[])ClassName.DataContext, p => p.Id == className.Id);
             }
 
             RefreshAllEvents();
@@ -533,12 +538,6 @@ namespace Client
         {
             RefreshAllEvents();
         }
-
-		private void button1_Click_1(object sender, RoutedEventArgs e)
-		{
-			MainAdmin fenetreAdmin = new MainAdmin();
-			fenetreAdmin.Show();
-		}
 
         /// <summary>
         /// Controls that the new value of the TextBox is a correct hour, and corrects it if required.
