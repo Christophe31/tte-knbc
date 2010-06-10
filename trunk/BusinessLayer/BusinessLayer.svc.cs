@@ -330,7 +330,7 @@ namespace BusinessLayer
 				End = eventToAdd.End,
 				Start = eventToAdd.Start,
 				Mandatory=eventToAdd.Mandatory,
-				SpeakerRef = db.User.First(u => u.Id == eventToAdd.Speaker.Id).Planning
+				SpeakerRef = eventToAdd.Speaker.Id==0?null:db.User.First(u => u.Id == eventToAdd.Speaker.Id).Planning
 			});
 			db.SaveChanges();
 			return "ok";
