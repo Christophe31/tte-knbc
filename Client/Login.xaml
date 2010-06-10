@@ -7,15 +7,15 @@
 	Title="Tte Login"
 	UseLayoutRounding="True"
 	Icon="Icons\TteLogo.png"
-	Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="196" Width="352">
+	Loaded="Window_Loaded" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Height="196" Width="352" Background="#FFABABAB">
 	<Grid HorizontalAlignment="Left"  VerticalAlignment="Top" Width="50">
-		<TextBox Name="loginBox" KeyUp="loginBox_KeyUp" HorizontalAlignment="Right" Margin="0,76,-267,70" TextWrapping="Wrap" Width="210" d:LayoutOverrides="GridBox"/>
-		<PasswordBox Name="passwordBox" KeyUp="loginBox_KeyUp" HorizontalAlignment="Right" Margin="0,0,-268,45" Width="210" d:LayoutOverrides="GridBox" VerticalAlignment="Bottom"  />
+		<TextBox Name="loginBox" KeyUp="loginBox_KeyUp" HorizontalAlignment="Right" Margin="0,76,-267,70" TextWrapping="Wrap" Width="210" d:LayoutOverrides="GridBox" Background="#FFE7E7E7"/>
+		<PasswordBox Name="passwordBox" KeyUp="loginBox_KeyUp" HorizontalAlignment="Right" Margin="0,0,-268,45" Width="211" d:LayoutOverrides="GridBox" VerticalAlignment="Bottom" Background="#FFE7E7E7"  />
 		<Image Height="42" Source="Icons/lock_open32.png" Stretch="Fill" VerticalAlignment="Top" Margin="19,24,-19,0"/>
 		<Label Content="Login" Margin="0,71,-40,70" HorizontalAlignment="Right" Width="59" d:LayoutOverrides="GridBox"/>
 		<Label Content="Password" Margin="0,0,-40,40" HorizontalAlignment="Right" Width="59" d:LayoutOverrides="GridBox" Height="28" VerticalAlignment="Bottom"/>
-		<Button Content="Connexion" HorizontalAlignment="Right" Height="23" Margin="0,0,-270,15" VerticalAlignment="Bottom" Width="64" Click="Button_Click" d:LayoutOverrides="GridBox" />
-		<Button Content="Hors Ligne" HorizontalAlignment="Right" Height="23" Margin="0,0,-45,14" VerticalAlignment="Bottom" Width="64" d:LayoutOverrides="GridBox"  />
+		<Button Content="Connexion" HorizontalAlignment="Right" Height="23" Margin="0,0,-267,14" VerticalAlignment="Bottom" Width="64" Click="Button_Click" d:LayoutOverrides="GridBox" />
+		<Button Content="Hors Ligne" HorizontalAlignment="Right" Height="23" Margin="0,0,-122,14" VerticalAlignment="Bottom" Width="64" d:LayoutOverrides="GridBox"  />
 		<Image Name="errorImage" Visibility="Hidden" Source="Icons\error32.png" Margin="0,12,-90,0" HorizontalAlignment="Right" Height="32" VerticalAlignment="Top" Width="32" />
 		<Label Name="errorMessage" Visibility="Hidden" Margin="0,12,-270,0" Content="Connexion au serveur échouée." HorizontalAlignment="Right" Height="32" VerticalAlignment="Top" Width="176" RenderTransformOrigin="-0.281,1.875">
 			<Label.Background>
