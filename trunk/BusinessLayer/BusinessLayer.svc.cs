@@ -328,11 +328,10 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addEvent(EventData eventToAdd)
 		{
-			if(!(isUserAdmin || (db.Planning.Any(p=>p.Type==(int)EventData.TypeEnum.Campus && currentUserRoles.Any(r=>r.Target==p.Id)))))
+			if(!(isUserAdmin || (db.Planning.Any(p=>(p.Type==(int)EventData.TypeEnum.Campus && currentUserRoles.Any(r=>r.Target==p.Id))))))
 				return "Vous devez être administrateur pour faire ça.";
 			if (!validPlanning(eventToAdd.ParentPlanning.Id, eventToAdd.Type))
 				return "Votre requète semble invalide";
-			db.Planning.First(p => p.Id == eventToAdd.ParentPlanning.Id).LastChange = DateTime.Now;
 			db.Event.AddObject(new Event()
 			{
 				Name = eventToAdd.Name,
@@ -344,23 +343,8 @@ namespace BusinessLayer
 				Mandatory=eventToAdd.Mandatory,
 				SpeakerRef = eventToAdd.Speaker.Id==0?null:db.User.First(u => u.Id == eventToAdd.Speaker.Id).Planning
 			});
+			db.Planning.First(p => p.Id == eventToAdd.ParentPlanning.Id).LastChange = DateTime.Now;
 			db.SaveChanges();
-			return "ok";
-		}
-		string IBusinessLayer.addPrivateEvent(EventData eventToAdd)
-		{
-			db.User.First(u => u.Login == currentUserLogin).Planning.LastChange = DateTime.Now;
-			db.Event.AddObject(new Event()
-			{
-				Name = eventToAdd.Name,
-				OwnerRef = db.User.First(u => u.Login == currentUserLogin).Planning,
-				Place = eventToAdd.Place,
-				Planning = currentUserId,
-				End = eventToAdd.End,
-				Start = eventToAdd.Start,
-				Mandatory = currentUserRoles.Any(r=>r.Target==null)?eventToAdd.Mandatory:false
-			});
-			
 			return "ok";
 		}
 		string IBusinessLayer.setUser(UserData userToSet)
@@ -408,7 +392,7 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			if (!(validPlanning(classToSet.Campus.Id, EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period)))
 				return "référence invalide";
-			var classe = db.Planning.First(p => p.Id == classToSet.Id && p.Type == (int)EventData.TypeEnum.Campus);
+			var classe = db.Planning.First(p => p.Id == classToSet.Id && p.Type == (int)EventData.TypeEnum.Class);
 			classe.Name = classToSet.Name;
 			classe.Class.Period = classToSet.Period.Id;
 			classe.Parent = classToSet.Campus.Id;
@@ -468,14 +452,13 @@ namespace BusinessLayer
 			Event ev=db.Event.First(p=>EditedEvent.Id == p.Id);
 			ev.Subject= (EditedEvent.Modality==null ? null as int? : EditedEvent.Modality.Id);
 			ev.Place = EditedEvent.Place;
-			
+			ev.End = EditedEvent.End;
+			ev.Start = EditedEvent.Start;
+			ev.Speaker = EditedEvent.Speaker == null ? null as int? : EditedEvent.Speaker.Id;
+			ev.Owner = currentUserId;
+			ev.Mandatory = EditedEvent.Mandatory;
 
-			
-			return "not implemented yet";
-		}
-
-		string IBusinessLayer.setPrivateEvent(EventData EditedEvent)
-		{
+			db.SaveChanges();
 			return "not implemented yet";
 		}
 		

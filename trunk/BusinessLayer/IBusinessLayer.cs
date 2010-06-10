@@ -58,8 +58,6 @@ namespace BusinessLayer
 			string addPeriod(PeriodData Period);
 			[OperationContract]
 			string addEvent(EventData Event);
-			[OperationContract]
-			string addPrivateEvent(EventData Event);
 		#endregion
 		#region set
 			[OperationContract]
@@ -76,8 +74,6 @@ namespace BusinessLayer
 			string setPeriod(PeriodData PD);
 			[OperationContract]
 			string setEvent(EventData EditedEvent);
-			[OperationContract]
-			string setPrivateEvent(EventData EditedEvent);
 		#endregion
 		#region del
 			[OperationContract]
