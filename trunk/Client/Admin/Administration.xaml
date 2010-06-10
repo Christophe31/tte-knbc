@@ -413,12 +413,29 @@
                             <ComboBoxItem Content="Administrateur" />
                             <ComboBoxItem Content="Campus Manager" />
                         </ComboBox>
-                        <ComboBox Grid.Row="1" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="cbUsers_RightsType_SelectionChanged" Grid.ColumnSpan="2" Height="22" Margin="0,0,1,0" VerticalAlignment="Bottom" />
-                        
-                        <DataGrid Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding}" Name="RightsGrid" Margin="0,3,0,10">
+                        <ComboBox Grid.Row="1" Grid.Column="1" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="cbUsers_RightsType_SelectionChanged" Grid.ColumnSpan="2" Height="22" Margin="0,0,1,0" VerticalAlignment="Bottom" />
+
+                        <DataGrid Grid.Column="1" Grid.Row="2" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding}" Name="RightsGrid" Margin="0,3,0,10" AutoGenerateColumns="False" SelectionChanged="RightsGrid_SelectionChanged">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Rôle" Binding="{Binding Role}"/>
-                                <DataGridTextColumn Header="Etendue" Binding="{Binding TargetName}"/>
+                                <DataGridTemplateColumn Header="Role">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox Name="cbUsers_RoleDataRights" SelectedIndex="{Binding RoleIndex}" SelectionChanged="cbUsers_RoleDataRights_SelectionChanged">
+                                                <ComboBoxItem Content="Speaker" />
+                                                <ComboBoxItem Content="Administrateur" />
+                                                <ComboBoxItem Content="Campus Manager" />
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+
+                                <DataGridTemplateColumn Header="Cible">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding TargetContext}" SelectedIndex="{Binding TargetIndex}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
