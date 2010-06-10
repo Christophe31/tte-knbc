@@ -11,6 +11,12 @@
     <Window.Resources>
         <my:GridSizeConverter x:Key="GridSizeConverter" />
     </Window.Resources>
+	<Window.Background>
+		<RadialGradientBrush>
+			<GradientStop Color="Black" Offset="0.44"/>
+			<GradientStop Color="#FF5C5C5C" Offset="1"/>
+		</RadialGradientBrush>
+	</Window.Background>
     
     <Grid Margin="3">
         <Grid.ColumnDefinitions>
@@ -24,9 +30,15 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <ToolBarTray Grid.Column="0" Grid.Row="1">
+        <ToolBarTray Grid.Column="0" Grid.Row="1" Background="{x:Null}">
             <ToolBar Header="Planning">
-                <ComboBox Margin="0,0,3,0" x:Name="ViewType" ItemsSource="{Binding}" SelectionChanged="ViewType_SelectionChanged">
+				<ToolBar.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
+						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
+					</LinearGradientBrush>
+				</ToolBar.Background>
+				<ComboBox Margin="0,0,3,0" x:Name="ViewType" ItemsSource="{Binding}" SelectionChanged="ViewType_SelectionChanged">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Value}"/>
@@ -39,59 +51,79 @@
                 <ComboBox Margin="0" Visibility="Collapsed" x:Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
             </ToolBar>
 
-            <ToolBar Header="Type de vue">
+            <ToolBar Header="Filtres : " Foreground="Black">
+            	<ToolBar.Background>
+            		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            			<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
+            			<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
+            		</LinearGradientBrush>
+            	</ToolBar.Background>
                 <CheckBox Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\world.png"/>
-                        <TextBlock>Université</TextBlock>
+                        <TextBlock Foreground="Black">Université</TextBlock>
                     </StackPanel>
                 </CheckBox>
                 <CheckBox Name="ShowOptionalCampusEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\building.png"/>
-                        <TextBlock>Campus</TextBlock>
+                        <TextBlock Foreground="Black">Campus</TextBlock>
                     </StackPanel>
                 </CheckBox>
                 <CheckBox Name="ShowOptionalPeriodEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
-                        <Image Margin="0,0,3,0" Source="Icons\hourglass.png"/>
-                        <TextBlock>Période</TextBlock>
+                        <Image Margin="0,0,3,0" Source="Icons\book.png"/>
+                        <TextBlock Foreground="Black"><Run Text="Cursus"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
                 <CheckBox Name="ShowOptionalClassEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\group.png"/>
-                        <TextBlock>Classe</TextBlock>
+                        <TextBlock Foreground="Black">Classe</TextBlock>
                     </StackPanel>
                 </CheckBox>
             </ToolBar>
-            
-            <ToolBar>
-                <Button Content="Import iCal" Click="iCal_import_Click"/>
-                <Button Content="Export iCal" Click="iCal_export_Click"/>
-                <Button Content="Rapports horaires" Click="report_Click"/>
+			
+			<ToolBar>
+				<ToolBar.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
+						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
+					</LinearGradientBrush>
+				</ToolBar.Background>
+				<Button Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="Icons\resultset_previous.png" Margin="0,0,3,0"/>
+						<TextBlock Foreground="Black">Précédent</TextBlock>
+					</StackPanel>
+				</Button>
+				<DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DayGridDateSelection"
+                            SelectedDateChanged="DayGridDateSelection_SelectedDateChanged" />
+				<Button Name="DayGridNextDay" Click="DayGridNextDay_Click">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Margin="0,0,3,0" Foreground="Black">Suivant</TextBlock>
+						<Image Source="Icons\resultset_next.png"/>
+					</StackPanel>
+				</Button>
+			</ToolBar>
+
+			<ToolBar>
+				<ToolBar.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
+						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
+					</LinearGradientBrush>
+				</ToolBar.Background>
+				<Button Content="Import iCal" Click="iCal_import_Click" Foreground="Black"/>
+                <Button Content="Export iCal" Click="iCal_export_Click" Foreground="Black"/>
+                <Button Content="Rapports horaires" Click="report_Click" Foreground="Black"/>
             </ToolBar>
 
-            <ToolBar>
-                <Button Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="Icons\resultset_previous.png" Margin="0,0,3,0"/>
-                        <TextBlock>Précédent</TextBlock>
-                    </StackPanel>
-                </Button>
-                <DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DayGridDateSelection"
-                            SelectedDateChanged="DayGridDateSelection_SelectedDateChanged" />
-                <Button Name="DayGridNextDay" Click="DayGridNextDay_Click">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="0,0,3,0">Suivant</TextBlock>
-                        <Image Source="Icons\resultset_next.png"/>
-                    </StackPanel>
-                </Button>
-            </ToolBar>
+
         </ToolBarTray>
         
-		<TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,3" x:Name="ViewsControl">
-            <TabItem Header="Mois">
+		<TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl" Grid.RowSpan="2">
+            <TabItem Header="Mois" Background="#FFA5A5A5" FontSize="13.333">
                 <Grid Name="MonthGrid" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -105,7 +137,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Semaine">
+            <TabItem Header="Semaine" Background="#FFA5A5A5" FontSize="13.333">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -183,7 +215,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Jour">
+            <TabItem Header="Jour" Background="#FFA5A5A5" FontSize="13.333">
                 <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
                     <!--<local:EventControl x:Name="EventCtl" />-->
                     <Grid Name="DayGrid"
@@ -206,7 +238,7 @@
                 </ScrollViewer>
             </TabItem>
             
-            <TabItem Header="Liste">
+            <TabItem Header="Liste" Background="#FFA5A5A5" FontSize="13.333" HorizontalAlignment="Left" Margin="-2,0,0,-1" Width="44.654">
                 <Grid>
                     <Grid.ColumnDefinitions>
                     	<ColumnDefinition/>
@@ -320,7 +352,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Admin" Name="Administration">
+            <TabItem Header="Admin" Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
                 <Grid>
                     <local:Administration x:Name="PanelAdmin" />
                 </Grid>
