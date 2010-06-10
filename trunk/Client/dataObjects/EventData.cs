@@ -235,6 +235,11 @@ namespace Client.BusinessService
             }
         }
 
+        /// <summary>
+        /// Get or set the selected planning.
+        /// </summary>
+        public static IdName SelectedPlanning { get; set; }
+
         #endregion Properties
 
         // Create the OnPropertyChanged method to raise the event
@@ -313,6 +318,7 @@ namespace Client.BusinessService
         void IEditableObject.EndEdit()
         {
             CacheWrapper Api = new CacheWrapper();
+            ParentPlanning = SelectedPlanning;
             // Event creation
             if (Id == 0)
             {
