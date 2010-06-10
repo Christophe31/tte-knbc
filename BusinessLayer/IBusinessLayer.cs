@@ -37,6 +37,8 @@ namespace BusinessLayer
 			[OperationContract]
 			IdName[] getSpeakers();
 			[OperationContract]
+			string[] getSpeakerBilan();
+			[OperationContract]
 			Dictionary<IdName, string[]> getCampusLocationsTree();
 			[OperationContract]
 			Dictionary<IdName, Dictionary<IdName, IdName[]>> getCampusPeriodClassTree();
