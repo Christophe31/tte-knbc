@@ -41,8 +41,9 @@ namespace Client
                     else if (viewType == EventData.TypeEnum.User)
                         EventData.SelectedPlanning = Api.CurrentUser;
                 }
+                else
+                    EventData.SelectedPlanning = new IdName() { Id = 0, Name = "No planning" };
 
-                EventData.SelectedPlanning = new IdName() { Id = 0, Name = "No planning" };
                 return EventData.SelectedPlanning;
             }
         }
