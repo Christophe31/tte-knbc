@@ -101,7 +101,8 @@ namespace BusinessLayer
 		}
 		bool IBusinessLayer.isPlanningUpToDate(int Planning, DateTime LastUpdate)
 		{
-			return db.Planning.Any(p=>p.Id == Planning && ((p.LastChange??DateTime.Now) >= centerToSqlDate(LastUpdate)));
+			var lu = centerToSqlDate(LastUpdate);
+			return db.Planning.Any(p=>p.Id == Planning && ((p.LastChange??DateTime.Now) >= lu));
 		}
 		IdName[] IBusinessLayer.getPlannings(EventData.TypeEnum Type)
 		{
@@ -291,15 +292,18 @@ namespace BusinessLayer
 				Hours=0
 			};
 			db.Modality.AddObject(sub);
-			foreach (ModalityData m in subject.Modalities)
+			if (subject.Modalities != null)
 			{
-				Modality mod = new Modality()
+				foreach (ModalityData m in subject.Modalities)
 				{
-					Name = m.Name,
-					OnSubject = sub,
-					Hours=m.Hours
-				};
-				db.Modality.AddObject(mod);
+					Modality mod = new Modality()
+					{
+						Name = m.Name,
+						OnSubject = sub,
+						Hours = m.Hours
+					};
+					db.Modality.AddObject(mod);
+				}
 			}
 			db.SaveChanges();
 			return "ok";
