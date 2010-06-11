@@ -1,0 +1,17 @@
+#summary Plan de la documentation
+
+= Introduction =
+
+Ce document est le sommaire de la documentation du projet TimeTableEasy.
+
+
+= Sommaire =
+
+  # Documentation commerciale
+    *
+
+  # Documentation utilisateur
+    *
+
+  # Documentation technique
+    *
