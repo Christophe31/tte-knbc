@@ -24,7 +24,7 @@ namespace Client
 			var b = cacheProcess.logToWebService(login, password);
 			if (b)
 			{
-				cacheProcess.writeToFile.BeginInvoke(cacheProcess.CurrentUser, cacheProcess.otherFileNames["CurrentUser"], null, null);
+				cacheProcess.WriteToFile(cacheProcess.CurrentUser, cacheProcess.otherFileNames["CurrentUser"]);
 			}
 			return b;
 		}
@@ -42,7 +42,7 @@ namespace Client
 				{
 					EventData[] t = Server.getEvents(Planning, Start, Stop);
 					cacheProcess.RefreshCache(Planning);
-					cacheProcess.writeToFile.BeginInvoke(DateTime.Now, lufname,null,null);
+					cacheProcess.WriteToFile(DateTime.Now, lufname);
 					return t;
 				}
 				return cacheProcess.ReadFromFile(fname) as EventData[];
@@ -50,7 +50,8 @@ namespace Client
 			if (cacheProcess.ServerAvailable)
 			{
 				EventData[] t = Server.getEvents(Planning, Start, Stop);
-				cacheProcess.writeToFile.BeginInvoke(t, fname,null,null);
+				cacheProcess.WriteToFile(t, fname);
+				cacheProcess.WriteToFile(DateTime.Now, lufname);
 				return t;
 			}
 			throw new Exception("No cache file, neither connexion to Web Service available");
@@ -65,7 +66,7 @@ namespace Client
 			if (cacheProcess.ServerAvailable)
 			{
 				IdName[] t = Server.getPlannings(type);
-				cacheProcess.writeToFile.BeginInvoke(t, fname,null,null);
+				cacheProcess.WriteToFile(t, fname);
 				return t;
 			}
 			if (System.IO.File.Exists(fname))
@@ -81,7 +82,7 @@ namespace Client
 			if (cacheProcess.ServerAvailable)
 			{
 				IdName[] t = Server.getPromotions();
-				cacheProcess.writeToFile.BeginInvoke(t, fname,null,null);
+				cacheProcess.WriteToFile(t, fname);
 				return t;
 			}
 			if (System.IO.File.Exists(fname))
@@ -98,7 +99,7 @@ namespace Client
 			if (cacheProcess.ServerAvailable)
 			{
 				SubjectData[] t = Server.getSubjects();
-				cacheProcess.writeToFile.BeginInvoke(t, fname,null,null);
+				cacheProcess.WriteToFile(t, fname);
 				return t;
 			}
 			if (System.IO.File.Exists(fname))
@@ -114,7 +115,7 @@ namespace Client
 			if (cacheProcess.ServerAvailable)
 			{
 				ModalityData[] t = Server.getModalities();
-				cacheProcess.writeToFile.BeginInvoke(t, fname,null, null);
+				cacheProcess.WriteToFile(t, fname);
 				return t;
 			}
 			if (System.IO.File.Exists(fname))
@@ -131,7 +132,7 @@ namespace Client
 			if (cacheProcess.ServerAvailable)
 			{
 				Dictionary<IdName, Dictionary<IdName, IdName[]>> t = Server.getCampusPeriodClassTree();
-				cacheProcess.writeToFile.BeginInvoke(t, fname,null,null);
+				cacheProcess.WriteToFile(t, fname);
 				return t;
 			}
 			if (System.IO.File.Exists(fname))

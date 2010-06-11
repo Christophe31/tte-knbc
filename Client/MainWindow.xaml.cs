@@ -89,7 +89,7 @@ namespace Client
 
 		private void FillCombobox()
 		{
-			while (!Api.ServerAvailable)
+			while (!Api.ServerAvailable&&!Api.CacheAvailable)
 				Thread.Sleep(700);
 			this.Dispatcher.BeginInvoke((ThreadStart)FillControls);
 		}

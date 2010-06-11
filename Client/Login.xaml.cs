@@ -42,12 +42,12 @@ namespace Client
 		private void Hiding()
 		{
 			this.cacheModeButton.IsEnabled = c.CacheAvailable;
+			t.Show();
 			t.Visibility = System.Windows.Visibility.Hidden;
+			
 		}
 		private void Ending()
 		{
-			t.Show();
-			Thread.Sleep(500);
 			t.Visibility = System.Windows.Visibility.Visible;
 			this.Visibility = System.Windows.Visibility.Collapsed;
 			this.Close();
@@ -74,7 +74,7 @@ namespace Client
 
 		private void cacheModeButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			this.Dispatcher.BeginInvoke((ThreadStart)Ending);
 		}
 	}
 }
