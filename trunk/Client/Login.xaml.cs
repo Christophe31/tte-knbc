@@ -25,6 +25,7 @@ namespace Client
 			InitializeComponent();
 			this.Show();
 			t = m;
+			c = new CacheWrapper();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -34,7 +35,6 @@ namespace Client
 		CacheWrapper c;
 		private void DelayedStart()
 		{
-			c = new CacheWrapper();
 			this.Dispatcher.BeginInvoke((ThreadStart)Hiding);
 			Thread.Sleep(9000);
 		}
@@ -55,7 +55,7 @@ namespace Client
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			if (c.logCacheProcess(loginBox.Text, passwordBox.Password))
+			if (c.logCacheProcess(loginBox.Text, passwordBox.Password, rememberBox.IsChecked.Value))
 				this.Dispatcher.BeginInvoke((ThreadStart)Ending);
 			else
 			{
