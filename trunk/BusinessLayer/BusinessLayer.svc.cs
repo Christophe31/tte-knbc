@@ -538,7 +538,7 @@ namespace BusinessLayer
 				e.PlaningRef.LastChange = DateTime.Now;
 				db.Event.DeleteObject(e);
 			}
-			foreach (Modality m in sub.Modalitys)
+			foreach (Modality m in sub.Modalitys.ToArray())
 				db.Modality.DeleteObject(m);
 			db.Modality.DeleteObject(sub);
 			db.SaveChanges();
@@ -607,14 +607,14 @@ namespace BusinessLayer
 						Id = ID,
 						Login=u.Login,
 						Name = u.Planning.Name,
-						Roles = u.Roles.Select(r => new RoleData()
+						Roles = u.Roles
+					}).ToArray().Select(u=>new UserData() {Id=u.Id, Roles= u.Roles.Select(r => new RoleData()
 						{
 							Id = r.Id,
 							Role = r.Target.HasValue ? RoleData.RoleType.Speaker :
 								r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager,
 							TargetId = r.Target
-						})
-					}).ToArray().Select(u=>new UserData() {Id=u.Id, Roles= u.Roles.ToArray(), Class=u.Class, Name= u.Name, Login=u.Login }).First();
+						}).ToArray(), Class=u.Class, Name= u.Name, Login=u.Login }).First();
 			return null;
 		}
 		ClassData IBusinessLayer.getClass(int ID)
