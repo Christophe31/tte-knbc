@@ -25,7 +25,8 @@ namespace Client
 			InitializeComponent();
 			this.Show();
 			t = m;
-			c = new CacheWrapper();
+			this.loginBox.Focus();
+			
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,8 +36,10 @@ namespace Client
 		CacheWrapper c;
 		private void DelayedStart()
 		{
+			c = new CacheWrapper();
 			this.Dispatcher.BeginInvoke((ThreadStart)Hiding);
-			Thread.Sleep(9000);
+			if (c.TryAutolog)
+				this.Dispatcher.BeginInvoke((ThreadStart) Ending);
 		}
 
 		private void Hiding()
