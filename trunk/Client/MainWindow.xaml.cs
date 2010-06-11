@@ -248,12 +248,13 @@ namespace Client
                 }
                 catch (KeyNotFoundException)
                 {
-                    ClassName.DataContext = null;
+                    ClassName.DataContext = new IdName[]{};
                 }
                 catch (ArgumentNullException)
                 {
-                    ClassName.DataContext = null;
+					ClassName.DataContext = new IdName[] { };
                 }
+				if (ClassName.DataContext == null) ClassName.DataContext = new IdName[] { };
             }
         }
 
@@ -517,7 +518,7 @@ namespace Client
 
                 CampusName.SelectedIndex = Array.FindIndex((IdName[])CampusName.DataContext, p => p.Id == campusName.Id);
                 PeriodName.SelectedIndex = Array.FindIndex((IdName[])PeriodName.DataContext, p => p.Id == periodName.Id);
-        //        ClassName.SelectedIndex = Array.FindIndex((IdName[])ClassName.DataContext, p => p.Id == className.Id);
+                ClassName.SelectedIndex = Array.FindIndex((IdName[])ClassName.DataContext??new IdName[]{}, p => p.Id == className.Id);
             }
 
             RefreshAllEvents();
