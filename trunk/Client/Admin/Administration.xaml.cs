@@ -48,7 +48,7 @@ namespace Client
         public UserData userInformations = null;
         public  List<ModalityData> modalityInformations=new List<ModalityData>();
         public List<RoleData> rolesInformations = new List<RoleData>();
-
+        List<RolesDisplay> userRoles = new List<RolesDisplay>();
         #endregion
 
         #region Error bar
@@ -111,6 +111,7 @@ namespace Client
 			refreshClasses();
 			refreshUsers();
 			refreshRights();
+            refreshRoleGrid(); //watchme delete me
 		}
 
         #endregion
@@ -781,11 +782,12 @@ namespace Client
         {
             public int Id { get; set; }
             public int? TargetId { get; set; }
+            public int RoleIndex { get; set; }
+            public int TargetIndex { get; set; }
             public string TargetName { get; set; }
             public RoleData.RoleType RoleEnum { get; set; }
             public string RoleName { get; set; }
             public IdName[] TargetList { get; set; }
-            public List<string> RoleList { get; set; }
         }
 
         //Rafraichissement des différents contrôles
@@ -811,15 +813,17 @@ namespace Client
 
         private void refreshRoleGrid()
         {
-            List<string> roles = new List<string>();
-            roles.Add("Administrateur");
-            roles.Add("Campus Manager");
-            roles.Add("Speaker");
-
-
+            int index;
             //On va construire notre affichage
-            List<RolesDisplay> userRoles = new List<RolesDisplay>();
+            
             RolesDisplay currentRole = null;
+
+            //---------- delete me
+            //rolesInformations = new List<RoleData>();
+            //rolesInformations.Add(new RoleData() { Role=RoleData.RoleType.Speaker, TargetId=null });
+            //rolesInformations.Add(new RoleData() { Role = RoleData.RoleType.Administrator, TargetId = 1 });
+
+            //---------- delete me
 
             //On rafraichit nos listes de cibles pour les droits au cas ou
             refreshRights();
@@ -831,27 +835,34 @@ namespace Client
                 currentRole.Id = myRole.Id;
                 currentRole.RoleEnum = myRole.Role;
                 currentRole.TargetId = myRole.TargetId;
-                currentRole.RoleList = roles;
-                currentRole.TargetList = universitylist_UserRights;
 
                 if (currentRole.RoleEnum == RoleData.RoleType.Administrator)
                 {
                     currentRole.RoleName = "Administrateur";
+                    currentRole.RoleIndex = 0;
+                    currentRole.TargetList = universitylist_DataRights;
 
                     //On cherche le nom de l'université
-                    foreach (IdName university in universitylist_UserRights)
+                    index = 0;
+                    foreach (IdName university in universitylist_DataRights)
                     {
                         if (university.Id == currentRole.TargetId)
                         {
+                            
                             currentRole.TargetName = university.Name;
                             break;
                         }
+                        index++;
                     }
+                    currentRole.TargetIndex = index;
                 }
                 else if (currentRole.RoleEnum == RoleData.RoleType.CampusManager)
                 {
                     currentRole.RoleName = "Campus Manager";
+                    currentRole.RoleIndex = 1;
+                    currentRole.TargetList = campuslist_DataRights;
 
+                    index = 0;
                     //On cherche le nom du campus
                     foreach (IdName campus in campuslist_UserRights)
                     {
@@ -860,11 +871,16 @@ namespace Client
                             currentRole.TargetName = campus.Name;
                             break;
                         }
+                        index++;
                     }
+                    currentRole.TargetIndex = index;
                 }
                 else
                 {
                     currentRole.RoleName = "Speaker";
+                    currentRole.RoleIndex = 2;
+                    currentRole.TargetList = null;
+                    currentRole.TargetIndex = -1;
                 }
 
                 //On ajoute le rôle à notre liste
@@ -964,6 +980,8 @@ namespace Client
                     rolesInformations = new List<RoleData>();
                 }
 
+
+                refreshRoleGrid();
                 //-----------
                 //On rafraichit la DataGrid des rôles
                 refreshRightsGrid();
@@ -1244,6 +1262,7 @@ namespace Client
             subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.Server.getSubjects()).ToArray();
             cbSubjects_Subjects.DataContext = subjectsList;
             cbSubjects_Subjects.SelectedIndex = 0;
+
         }
         
         //Rafraichissement de la DataGrid des modalités
@@ -1282,7 +1301,7 @@ namespace Client
                 //On essaie d'insérer la matière
                 string returnValue = Api.Server.addSubject(mySubject);
 
-                //Si la modification s'est correctement déroulée
+                //Si l'insertion s'est correctement déroulée
                 if (returnValue.Equals("ok"))
                 {
                     //On change la StatusBar
@@ -1300,6 +1319,41 @@ namespace Client
             }
             else if (cbSubjects_Subjects.SelectedIndex > 0) //S'il s'agit d'une modification
             {
+                //On vérifie que le nom de la matière est valide
+                if (tbSubjects_Name.Text.Trim().Equals(""))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Veuillez entrer une matière valide!", true);
+                    return;
+                }
+
+                //On prépare notre matière
+                SubjectData mySubject = new SubjectData();
+                mySubject.Name = tbSubjects_Name.Text;
+                if (modalityInformations.Count != 0)
+                {
+
+                    mySubject.Modalities = modalityInformations.ToArray();
+                }
+                else
+                {
+                    mySubject.Modalities = null;
+                }
+
+                //On essaie de modifier la matière
+                string returnValue = Api.Server.setSubject(mySubject);
+
+                //Si la modification s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Matière " + cbSubjects_Subjects.SelectedItem.ToString() + " modifiée avec succès!", false);
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    spawnErrorBar(returnValue, true);
+                }
             }
         }
 
@@ -1348,6 +1402,9 @@ namespace Client
             }
             else if (cbSubjects_Subjects.SelectedIndex > 0) //Si c'est une matière existante
             {
+                //On rafraichit le nom de la matière
+                tbSubjects_Name.Text = cbSubjects_Subjects.SelectedItem.ToString();
+
                 //On récupère les modalités de la matière actuelle
                 if (subjectsList[cbSubjects_Subjects.SelectedIndex].Modalities != null)
                 {
@@ -1377,7 +1434,7 @@ namespace Client
         //Si l'utilisateur clique sur la combobox des rôles dans la DataGrid
         private void cbUsers_RoleDataRights_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataGridRow row = RightsGrid.ItemContainerGenerator.ContainerFromIndex(RightsGrid.SelectedIndex) as DataGridRow;
+            //DataGridRow row = RightsGrid.ItemContainerGenerator.ContainerFromIndex(RightsGrid.SelectedIndex) as DataGridRow;
             //ComboBox ele = RightsGrid.Columns[0].GetCellContent(row) as ComboBox;
             //MessageBox.Show(ele.SelectedItem.ToString());
             //MessageBox.Show("test");
