@@ -653,5 +653,10 @@ namespace Client
 			
 		   //string[] colums= new string { "Subject", "Modality", "", "" };
 		}
+
+        private void Disconnect_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
