@@ -17,7 +17,7 @@ namespace BusinessLayer
 		}
 
 		/// <summary>
-		/// Modalité pédagogique.
+		/// Modalités pédagogiques.
 		/// </summary>
 		[DataMember]
 		public ModalityData[]  Modalities { get; set; }
