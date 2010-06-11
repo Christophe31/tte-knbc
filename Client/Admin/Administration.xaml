@@ -4,6 +4,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:col="clr-namespace:System.Collections;assembly=mscorlib"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="663" d:DesignWidth="990" Loaded="AdministrationControl_Loaded">
     
@@ -428,13 +430,33 @@
                         <DataGrid Name="RolesGrid" Grid.Column="1" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="True" CanUserDeleteRows="True" HorizontalAlignment="Center">
                             <DataGrid.Columns>
                                 <DataGridComboBoxColumn Header="Rôle">
-                                    <DataGridComboBoxColumn.ElementStyle>
-                                        <Style TargetType="ComboBox">
-                                            <Setter Property="ItemsSource" Value="{Binding Path=RoleList}" />
-                                        </Style>
-                                    </DataGridComboBoxColumn.ElementStyle>
+                                    <DataGridComboBoxColumn.ItemsSource>
+                                        <col:ArrayList>
+                                            <sys:String>Administrateur</sys:String>
+                                            <sys:String>Campus Manager</sys:String>
+                                            <sys:String>Speaker</sys:String>
+                                        </col:ArrayList>
+                                    </DataGridComboBoxColumn.ItemsSource>
                                 </DataGridComboBoxColumn>
                                 <DataGridComboBoxColumn Header="Cible" ItemsSource="{Binding TargetList}"/>
+                                <DataGridTemplateColumn Header="Role3">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox SelectedIndex="{Binding RoleIndex}">
+                                                <ComboBoxItem Content="Administrateur" />
+                                                <ComboBoxItem Content="Campus Manager" />
+                                                <ComboBoxItem Content="Speaker" />
+                                            </ComboBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Header="Cible3">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ComboBox ItemsSource="{Binding TargetList}" SelectedIndex="{Binding RoleIndex}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                         
