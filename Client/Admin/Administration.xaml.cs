@@ -95,7 +95,7 @@ namespace Client
 
 		void waitServeReady()
 		{
-			while (Api.Server == null)
+			while (!Api.ServerAvailable)
 			{
 				Thread.Sleep(500);
 			}

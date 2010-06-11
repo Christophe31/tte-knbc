@@ -16,7 +16,7 @@ namespace Client
 		public UserData CurrentUser;
 		public bool TryAutolog { 
 			get { 
-				if (cacheProcess.CurrentUser.Password != null) 
+				if (cacheProcess.CurrentUser.Password == null) 
 					return false;
 				return cacheProcess.logToWebService(cacheProcess.CurrentUser.Login, cacheProcess.CurrentUser.Password);
 			} 
