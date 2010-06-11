@@ -35,6 +35,7 @@ namespace Client
 		static protected CacheProcess self;
 		protected CacheProcess()
 		{
+			logToWebService("popi","popi");
 			if (!Directory.Exists(folder))
 				System.IO.Directory.CreateDirectory(folder);
 			initCacheVars();
@@ -58,6 +59,10 @@ namespace Client
 				return true;
 			}
 			catch (MessageSecurityException)
+			{
+				return false;
+			}
+			catch (ArgumentException)
 			{
 				return false;
 			}

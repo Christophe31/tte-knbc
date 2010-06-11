@@ -18,8 +18,9 @@ namespace Client
 		{
 			cacheProcess = CacheProcess.Current;
 			CurrentUser = cacheProcess.CurrentUser;
+
 		}
-		public bool logCacheProcess(string login, string password)
+		public bool logCacheProcess(string login, string password, bool savePassword)
 		{
 			var b = cacheProcess.logToWebService(login, password);
 			if (b)
