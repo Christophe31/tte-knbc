@@ -7,7 +7,7 @@ _by Romaric Breil_
     * CRUD
     * CRUD activated only for user view, or if the user has rights
     * Display hours reports (planed/theoretical)in CSV [half]
-    * Display events of a speaker
+    * Display events of a speaker, in user planning
 
   * Events list
     * ~~Display/hide non mandatory events~~
