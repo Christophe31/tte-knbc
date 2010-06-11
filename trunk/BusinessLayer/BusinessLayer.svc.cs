@@ -327,10 +327,22 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addEvent(EventData eventToAdd)
 		{
-			if(!(isUserAdmin || (db.Planning.Any(p=>(p.Type==(int)EventData.TypeEnum.Campus && currentUserRoles.Any(r=>r.Target==p.Id))))))
+			string eventsInSameLocation="";
+			if (!
+				(isUserAdmin ||
+				currentUserId == eventToAdd.ParentPlanning.Id ||
+				(db.Planning.Any(p =>
+					p.Type == (int)EventData.TypeEnum.Campus &&
+					currentUserRoles.Any(r => r.Target == p.Id &&
+						(p.Id == eventToAdd.ParentPlanning.Id ||
+						p.ChildrenPlannings.Any(cla => cla.Id == eventToAdd.ParentPlanning.Id))))))
+				) 
 				return "Vous devez être administrateur pour faire ça.";
-			if (!validPlanning(eventToAdd.ParentPlanning.Id, eventToAdd.Type))
-				return "Votre requète semble invalide";
+			/*if (!validPlanning(eventToAdd.ParentPlanning.Id, eventToAdd.Type))
+				return "Votre requète semble invalide";*/
+			eventsInSameLocation=db.Planning.Where(p=>p.Type==(int)EventData.TypeEnum.Campus && (p.Id==eventToAdd.ParentPlanning.Id ||p.ChildrenPlannings.Any(cla=>cla.Id==eventToAdd.ParentPlanning.Id)))
+					.Select(camp=>camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla=>cla.Events))).First()
+				.Where(ev=>ev.Start>=eventToAdd.End&&ev.End<=eventToAdd.Start&&ev.Place==eventToAdd.Place).SelectMany(names=>names.Name+", ") as string;
 			db.Event.AddObject(new Event()
 			{
 				Name = eventToAdd.Name,
@@ -344,7 +356,7 @@ namespace BusinessLayer
 			});
 			db.Planning.First(p => p.Id == eventToAdd.ParentPlanning.Id).LastChange = DateTime.Now;
 			db.SaveChanges();
-			return "ok";
+			return eventsInSameLocation.Count()>1?"Attention, la salle proposée semble déjà utilisée par un autre évènement: "+eventsInSameLocation:"ok";
 		}
 		string IBusinessLayer.setUser(UserData userToSet)
 		{
@@ -446,16 +458,34 @@ namespace BusinessLayer
 			return "ok";
 		}
 
-		string IBusinessLayer.setEvent(EventData EditedEvent)
+		string IBusinessLayer.setEvent(EventData eventToSet)
 		{
-			Event ev=db.Event.First(p=>EditedEvent.Id == p.Id);
-			ev.Subject= (EditedEvent.Modality==null ? null as int? : EditedEvent.Modality.Id);
-			ev.Place = EditedEvent.Place;
-			ev.End = EditedEvent.End;
-			ev.Start = EditedEvent.Start;
-			ev.Speaker = EditedEvent.Speaker == null ? null as int? : EditedEvent.Speaker.Id;
-			ev.Owner = currentUserId;
-			ev.Mandatory = EditedEvent.Mandatory;
+			if (!
+				(isUserAdmin || 
+				currentUserId == eventToSet.ParentPlanning.Id || 
+				(db.Planning.Any(p => 
+					p.Type == (int)EventData.TypeEnum.Campus && 
+					currentUserRoles.Any(r => r.Target == p.Id && 
+						(p.Id == eventToSet.ParentPlanning.Id ||
+						p.ChildrenPlannings.Any(cla => cla.Id == eventToSet.ParentPlanning.Id))))))
+				)
+				return "Vous devez être administrateur pour faire ça.";
+
+			string eventsInSameLocation = "";
+			eventsInSameLocation = db.Planning.Where(p => p.Type == (int)EventData.TypeEnum.Campus && (p.Id == eventToSet.ParentPlanning.Id || p.ChildrenPlannings.Any(cla => cla.Id == eventToSet.ParentPlanning.Id)))
+					.Select(camp => camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla => cla.Events))).First()
+				.Where(ev => ev.Start >= eventToSet.End && ev.End <= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
+
+			db.Planning.First(pl => pl.Id == eventToSet.ParentPlanning.Id).LastChange = DateTime.Now;
+
+			Event eve=db.Event.First(p=>eventToSet.Id == p.Id);
+			eve.Subject= (eventToSet.Modality==null ? null as int? : eventToSet.Modality.Id);
+			eve.Place = eventToSet.Place;
+			eve.End = eventToSet.End;
+			eve.Start = eventToSet.Start;
+			eve.Speaker = eventToSet.Speaker == null ? null as int? : eventToSet.Speaker.Id;
+			eve.Owner = currentUserId;
+			eve.Mandatory = eventToSet.Mandatory;
 
 			db.SaveChanges();
 			return "not implemented yet";
@@ -524,6 +554,16 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.delEvent(int Id)
 		{
+			if (!
+				(isUserAdmin ||
+				currentUserId == db.Event.Where(ev=>ev.Id==Id).First().PlaningRef.Id ||
+				(db.Planning.Any(p =>
+					p.Type == (int)EventData.TypeEnum.Campus &&
+					currentUserRoles.Any(r => r.Target == p.Id &&
+						(p.Id == db.Event.Where(ev => ev.Id == Id).First().PlaningRef.Id ||
+						p.ChildrenPlannings.Any(cla => cla.Id == db.Event.Where(ev => ev.Id == Id).First().PlaningRef.Id))))))
+				)
+				return "Vous devez être administrateur pour faire ça.";
 			var ev=db.Event.Where(p=>p.Id==Id).First();
 			ev.PlaningRef.LastChange = DateTime.Now;
 			db.Event.DeleteObject(ev);
