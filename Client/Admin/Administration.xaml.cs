@@ -46,6 +46,8 @@ namespace Client
         public IdName[] universitylist_DataRights = null;
         public IdName[] campuslist_DataRights = null;
         public UserData userInformations = null;
+        public  List<ModalityData> modalityInformations=new List<ModalityData>();
+        public List<RoleData> rolesInformations = new List<RoleData>();
 
         #endregion
 
@@ -103,9 +105,7 @@ namespace Client
 		void refreshAllControls()
         {
 			refreshPromotions();
-			//subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.ServerBL2.getSubjects()).ToArray();
-			//cbSubjects_Subjects.DataContext = subjectsList;
-			//cbSubjects_Subjects.SelectedIndex = 0;
+            refreshSubjects();
 			refreshCampus();
 			refreshPeriods();
 			refreshClasses();
@@ -777,6 +777,17 @@ namespace Client
             }
         }
 
+        private class RolesDisplay
+        {
+            public int Id { get; set; }
+            public int? TargetId { get; set; }
+            public string TargetName { get; set; }
+            public RoleData.RoleType RoleEnum { get; set; }
+            public string RoleName { get; set; }
+            public IdName[] TargetList { get; set; }
+            public List<string> RoleList { get; set; }
+        }
+
         //Rafraichissement des différents contrôles
         private void refreshUsers()
         {
@@ -796,6 +807,73 @@ namespace Client
             universitylist_DataRights = Api.Server.getPlannings(EventData.TypeEnum.University).ToArray();
             campuslist_UserRights=new IdName[] { new IdName() { Id = 0, Name = "Choix du campus" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Campus)).ToArray();
             campuslist_DataRights = Api.Server.getPlannings(EventData.TypeEnum.Campus).ToArray();
+        }
+
+        private void refreshRoleGrid()
+        {
+            List<string> roles = new List<string>();
+            roles.Add("Administrateur");
+            roles.Add("Campus Manager");
+            roles.Add("Speaker");
+
+
+            //On va construire notre affichage
+            List<RolesDisplay> userRoles = new List<RolesDisplay>();
+            RolesDisplay currentRole = null;
+
+            //On rafraichit nos listes de cibles pour les droits au cas ou
+            refreshRights();
+
+            //Pour chaque rôle de l'utilisateur
+            foreach (RoleData myRole in rolesInformations)
+            {
+                currentRole = new RolesDisplay();
+                currentRole.Id = myRole.Id;
+                currentRole.RoleEnum = myRole.Role;
+                currentRole.TargetId = myRole.TargetId;
+                currentRole.RoleList = roles;
+                currentRole.TargetList = universitylist_UserRights;
+
+                if (currentRole.RoleEnum == RoleData.RoleType.Administrator)
+                {
+                    currentRole.RoleName = "Administrateur";
+
+                    //On cherche le nom de l'université
+                    foreach (IdName university in universitylist_UserRights)
+                    {
+                        if (university.Id == currentRole.TargetId)
+                        {
+                            currentRole.TargetName = university.Name;
+                            break;
+                        }
+                    }
+                }
+                else if (currentRole.RoleEnum == RoleData.RoleType.CampusManager)
+                {
+                    currentRole.RoleName = "Campus Manager";
+
+                    //On cherche le nom du campus
+                    foreach (IdName campus in campuslist_UserRights)
+                    {
+                        if (campus.Id == currentRole.TargetId)
+                        {
+                            currentRole.TargetName = campus.Name;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    currentRole.RoleName = "Speaker";
+                }
+
+                //On ajoute le rôle à notre liste
+                userRoles.Add(currentRole);
+            }
+
+            //On rafraichit la DataGrid
+            RolesGrid.DataContext = userRoles;
+
         }
 
         //Rafraichit la DataGrid des rôles
@@ -873,20 +951,38 @@ namespace Client
 
                 //On peuple les contrôles
                 tbUsers_Login.Text = userInformations.Login;
-                tbUsers_Name.Text = userInformations.Password;
+                tbUsers_Name.Text = userInformations.Name;
 
+                if (userInformations.Roles != null)
+                {
+                    //On récupère ses rôles
+                    rolesInformations = userInformations.Roles.ToList();
+                }
+                else
+                {
+                    //On initialise une liste de rôles
+                    rolesInformations = new List<RoleData>();
+                }
+
+                //-----------
                 //On rafraichit la DataGrid des rôles
                 refreshRightsGrid();
 
                 //On active les contrôles liés aux rôles
                 cbUsers_Rights.IsEnabled = true;
             }
-            else
+            else if(cbUsers_Users.SelectedIndex==0)
             {
+                //On initialise une liste de rôles
+                rolesInformations = new List<RoleData>();
+                //-------------
                 //On désactive les contrôles liés aux rôles
                 cbUsers_Rights.IsEnabled = false;
                 cbUsers_RightsType.Visibility = Visibility.Hidden;
             }
+
+            //On rafraichit la DataGrid des rôles
+            refreshRoleGrid();
         }
 
         //Si l'utilisateur choisit un rôle
@@ -1082,7 +1178,7 @@ namespace Client
                 }
                 else //Sinon, on la récupère
                 {
-                    myUser.Class = classesList_Users[cbUsers_Class.SelectedIndex];
+                    myUser.Class = classesList_Users[cbUsers_Class.SelectedIndex].Id;
                 }
 
                 //On tente d'ajouter l'utilisateur
@@ -1140,10 +1236,138 @@ namespace Client
 
         #endregion
 
+        #region Matières
+
+        //Rafraichissement des différents contrôles
+        private void refreshSubjects()
+        {
+            subjectsList = new SubjectData[] { new SubjectData() { Id = 0, Name = "Nouvelle Matière" } }.Concat(Api.Server.getSubjects()).ToArray();
+            cbSubjects_Subjects.DataContext = subjectsList;
+            cbSubjects_Subjects.SelectedIndex = 0;
+        }
+        
+        //Rafraichissement de la DataGrid des modalités
+        private void refreshModalityGrid()
+        {
+            ModalityGrid.DataContext=modalityInformations;
+        }
+
+        //L'utilisateur a cliqué sur "Ajouter/Modifier"
         private void bSubjects_AddMod_Click(object sender, RoutedEventArgs e)
         {
-           
+            //S'il s'agit d'un ajout
+            if (cbSubjects_Subjects.SelectedIndex == 0)
+            {
+                //On vérifie que le nom de la matière est valide
+                if (tbSubjects_Name.Text.Trim().Equals(""))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Veuillez entrer une matière valide!", true);
+                    return;
+                }
+
+                //On prépare notre matière
+                SubjectData mySubject = new SubjectData();
+                mySubject.Name = tbSubjects_Name.Text;
+                if (modalityInformations.Count!=0)
+                {
+
+                    mySubject.Modalities = modalityInformations.ToArray();
+                }
+                else
+                {
+                    mySubject.Modalities = null;
+                }
+
+                //On essaie d'insérer la matière
+                string returnValue = Api.Server.addSubject(mySubject);
+
+                //Si la modification s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Matière " + tbSubjects_Name.Text + " insérée avec succès!", false);
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    spawnErrorBar(returnValue, true);
+                }
+
+                //On rafraichit les contrôles
+                refreshSubjects();
+
+            }
+            else if (cbSubjects_Subjects.SelectedIndex > 0) //S'il s'agit d'une modification
+            {
+            }
         }
+
+        //L'utilisateur a cliqué sur "Supprimer"
+        private void bSubjects_Del_Click(object sender, RoutedEventArgs e)
+        {
+            //Si l'utilisateur n'a pas choisi de matière à supprimer
+            if (cbSubjects_Subjects.SelectedIndex < 1)
+            {
+                //On change la StatusBar
+                spawnErrorBar("Selectionnez d'abord une matière à supprimer!", true);
+                return;
+            }
+
+            //On récupère l'id de la matière sélectionnée
+            int idSubjet=subjectsList[cbSubjects_Subjects.SelectedIndex].Id;
+
+            //On tente de supprimer la matière
+            string returnValue = Api.Server.delSubject(idSubjet);
+
+            //Si la suppression s'est correctement déroulée
+            if (returnValue.Equals("ok"))
+            {
+                //On change la StatusBar
+                spawnErrorBar("Matière " + cbSubjects_Subjects.SelectedItem.ToString() + " supprimée avec succès!", false);
+            }
+            else
+            {
+                //On change la StatusBar avec le message d'erreur renvoyé
+                spawnErrorBar(returnValue, true);
+            }
+        }
+
+        //Lorsque l'utilisateur choisit une matière
+        private void cbSubjects_Subjects_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Si c'est une nouvelle matière
+            if (cbSubjects_Subjects.SelectedIndex == 0)
+            {
+                //On initialise une nouvelle liste de modalités
+                modalityInformations = new List<ModalityData>();
+
+                //On rafraichit la Modalitygrid
+                refreshModalityGrid();
+
+            }
+            else if (cbSubjects_Subjects.SelectedIndex > 0) //Si c'est une matière existante
+            {
+                //On récupère les modalités de la matière actuelle
+                if (subjectsList[cbSubjects_Subjects.SelectedIndex].Modalities != null)
+                {
+
+                    modalityInformations = subjectsList[cbSubjects_Subjects.SelectedIndex].Modalities.ToList();
+                }
+                else
+                {
+                    modalityInformations = new List<ModalityData>();
+                }
+
+                //On rafraichit la Modalitygrid
+                refreshModalityGrid();
+            }
+        }
+
+        #endregion
+
+
+        
 
         private void RightsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -1153,11 +1377,17 @@ namespace Client
         //Si l'utilisateur clique sur la combobox des rôles dans la DataGrid
         private void cbUsers_RoleDataRights_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //DataGridRow row = RightsGrid.ItemContainerGenerator.ContainerFromIndex(RightsGrid.SelectedIndex) as DataGridRow;
+            DataGridRow row = RightsGrid.ItemContainerGenerator.ContainerFromIndex(RightsGrid.SelectedIndex) as DataGridRow;
             //ComboBox ele = RightsGrid.Columns[0].GetCellContent(row) as ComboBox;
             //MessageBox.Show(ele.SelectedItem.ToString());
             //MessageBox.Show("test");
+            ModalityData moda=new ModalityData();
+            SubjectData monsub = new SubjectData();
         }
+
+        
+
+        
 
         
 
