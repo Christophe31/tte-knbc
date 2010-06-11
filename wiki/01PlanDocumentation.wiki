@@ -11,7 +11,20 @@ Ce document est le sommaire de la documentation du projet TimeTableEasy.
     *
 
   # Documentation utilisateur
-    *
+
+    * Gestion des plannings
+
+      * Visualisation des plannings : navigation, cumuls...
+      * Ajout, modification et suppression d'évènements
+
+    * Administration des données
+
+      * Architecture des données : explication de la terminologie, des interactions entre les entités (campus, périodes, utilisateurs...)
+      * Gestion des données (CRUD)
 
   # Documentation technique
-    *
+
+    * Fonctionnement de la base de données
+    * Fonctionnement du web sevice
+    * Fonctionnement de l'interface (attention : n'est pas une doc utilisateur)
+    * Installation du serveur
