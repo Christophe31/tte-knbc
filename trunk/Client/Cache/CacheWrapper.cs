@@ -14,6 +14,13 @@ namespace Client
 		public bool ServerAvailable { get { return cacheProcess.ServerAvailable; } }
 		public bool CacheAvailable { get { return cacheProcess.CacheAvailable; } }
 		public UserData CurrentUser;
+		public bool TryAutolog { 
+			get { 
+				if (cacheProcess.CurrentUser.Password != null) 
+					return false;
+				return cacheProcess.logToWebService(cacheProcess.CurrentUser.Login, cacheProcess.CurrentUser.Password);
+			} 
+		}
 		public CacheWrapper()
 		{
 			cacheProcess = CacheProcess.Current;
@@ -25,11 +32,14 @@ namespace Client
 			var b = cacheProcess.logToWebService(login, password);
 			if (b)
 			{
+				if(savePassword)
+				{ cacheProcess.CurrentUser.Password = password;
+				cacheProcess.CurrentUser.Login = login;
+				};
 				cacheProcess.WriteToFile(cacheProcess.CurrentUser, cacheProcess.otherFileNames["CurrentUser"]);
 			}
 			return b;
 		}
-
 
 		#region Lecture d'évènements
 		public EventData[] getEvents(IdName Planning, DateTime Start, DateTime Stop)

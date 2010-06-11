@@ -605,7 +605,8 @@ namespace BusinessLayer
 							},
 						Id = ID,
 						Name = u.Planning.Name,
-						Login = u.Login,
+						Roles = u.Roles.Select(r=>new RoleData(){Id=r.Id, Role=r.Target.HasValue ? RoleData.RoleType.Speaker :
+							r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator :RoleData.RoleType.CampusManager, TargetId=r.Target}).ToArray(),
 						Password=null
 					}).First();
 			return null;
