@@ -65,6 +65,7 @@ namespace Client
 			{
 				return false;
 			}
+			catch (InvalidOperationException) { return false; }
 		}
 
 		static public CacheProcess Current
