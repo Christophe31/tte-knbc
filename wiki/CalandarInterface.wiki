@@ -6,7 +6,7 @@ _by Romaric Breil_
   * General
     * CRUD
     * CRUD activated only for user view, or if the user has rights
-    * Display hours reports (planed/theoretical)in CSV [half]
+    * Display hours reports (planed/theoretical)in CSV (half)
     * Display events of a speaker, in user planning
     * Messages to help users
 
