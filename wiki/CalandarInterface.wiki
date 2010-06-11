@@ -1,14 +1,13 @@
 =Calandrier=
-_by Breil Romaric_
+_by Romaric Breil_
 
 ==Todo list==
 
   * General
-    * Create an event
-    * Update an event
-    * Delete an event
-    * Display hours reports (planed/theoretical): CSV ?
+    * CRUD
     * CRUD activated only for user view, or if the user has rights
+    * Display hours reports (planed/theoretical)in CSV [half]
+    * Display events of a speaker
 
   * Events list
     * ~~Display/hide non mandatory events~~
