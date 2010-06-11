@@ -31,7 +31,7 @@ namespace Client
                 {
                     EventData.TypeEnum viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
                     if (viewType == EventData.TypeEnum.University)
-                        EventData.SelectedPlanning = Api.getUniversity();
+                        EventData.SelectedPlanning = Api.getPlannings(EventData.TypeEnum.University).First();
                     else if (viewType == EventData.TypeEnum.Campus && CampusName.SelectedValue != null)
                         EventData.SelectedPlanning = (IdName)CampusName.SelectedValue;
                     else if (viewType == EventData.TypeEnum.Period && PeriodName.SelectedValue != null)
@@ -172,7 +172,7 @@ namespace Client
                 viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
 
             // University
-            AllEvents = Api.getEvents(Api.getUniversity().Id, start, end)
+			AllEvents = Api.getEvents(Api.getPlannings(EventData.TypeEnum.University).First().Id, start, end)
                 .Where(p => p.Mandatory
                     || viewType == EventData.TypeEnum.University
                     || ShowOptionalUniversityEvents.IsChecked.GetValueOrDefault()).ToList();

@@ -341,11 +341,11 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Admin" Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
+<!--            <TabItem Header="Admin" Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
                 <Grid>
                     <local:Administration x:Name="PanelAdmin" />
                 </Grid>
-            </TabItem>
+            </TabItem>-->
         </TabControl>
 	</Grid>
 </Window>
