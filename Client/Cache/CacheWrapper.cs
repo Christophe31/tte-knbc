@@ -13,10 +13,10 @@ namespace Client
 		public Client.BusinessService.BusinessLayerClient Server { get { return cacheProcess.Server;} }
 		public bool ServerAvailable { get { return cacheProcess.ServerAvailable; } }
 		public bool CacheAvailable { get { return cacheProcess.CacheAvailable; } }
-		public UserData CurrentUser;
+		public UserData CurrentUser  { get { return cacheProcess.CurrentUser; } }
 		public bool TryAutolog { 
-			get { 
-				if (cacheProcess.CurrentUser.Password == null) 
+			get {
+				if (cacheProcess.CurrentUser.Password == null || cacheProcess.CurrentUser.Login == null) 
 					return false;
 				return cacheProcess.logToWebService(cacheProcess.CurrentUser.Login, cacheProcess.CurrentUser.Password);
 			} 
@@ -24,7 +24,6 @@ namespace Client
 		public CacheWrapper()
 		{
 			cacheProcess = CacheProcess.Current;
-			CurrentUser = cacheProcess.CurrentUser;
 
 		}
 		public bool logCacheProcess(string login, string password, bool savePassword)
@@ -151,5 +150,12 @@ namespace Client
 			throw new Exception("No cache file, neither connexion to Web Service available");
 		}
 		#endregion
+		public void Disconnect()
+		{
+			cacheProcess.Server.Close();
+			cacheProcess.CurrentUser.Login = null;
+			cacheProcess.CurrentUser.Password = null;
+			cacheProcess.WriteToFile(cacheProcess.CurrentUser, cacheProcess.otherFileNames["CurrentUser"]);
+		}
 	}
 }

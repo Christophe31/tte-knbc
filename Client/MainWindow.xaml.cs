@@ -70,8 +70,8 @@ namespace Client
 		delegate Login loginConstructorDelegate(MainWindow m);
         public MainWindow()
 		{
-			InitializeComponent();
 			this.Visibility = System.Windows.Visibility.Hidden;
+			InitializeComponent();
 			new Login(this); 
 		}
 
@@ -656,6 +656,9 @@ namespace Client
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {
+			Api.Disconnect();
+			this.Visibility = System.Windows.Visibility.Hidden;
+			new Login(this);
 
         }
     }

@@ -95,7 +95,21 @@ namespace BusinessLayer
 							Start = p.Start,
 							End = p.End,
 							Name = "Indisponnible",
-							Speaker = new IdName() {Id= p.PlaningRef.Id, Name = p.PlaningRef.Name },
+							Speaker = new IdName() { Id = p.PlaningRef.Id, Name = p.PlaningRef.Name },
+							Type = EventData.TypeEnum.User
+						}).ToArray();
+		}
+		EventData[] IBusinessLayer.getSpeakingEvents(int ID, DateTime Start, DateTime Stop)
+		{
+
+			return db.Planning.Where(p => p.Id == ID).Single().SpeakingEvents.
+					Select(p =>
+						new EventData()
+						{
+							Start = p.Start,
+							End = p.End,
+							Name = "Indisponnible",
+							Speaker = new IdName() { Id = p.PlaningRef.Id, Name = p.PlaningRef.Name },
 							Type = EventData.TypeEnum.User
 						}).ToArray();
 		}
@@ -331,10 +345,10 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addEvent(EventData eventToAdd)
 		{
-			string eventsInSameLocation="";
+			
 			if (!
-				(isUserAdmin ||
-				currentUserId == eventToAdd.ParentPlanning.Id ||
+				(currentUserId == eventToAdd.ParentPlanning.Id ||
+				isUserAdmin ||
 				(db.Planning.Any(p =>
 					p.Type == (int)EventData.TypeEnum.Campus &&
 					currentUserRoles.Any(r => r.Target == p.Id &&
@@ -342,12 +356,17 @@ namespace BusinessLayer
 						p.ChildrenPlannings.Any(cla => cla.Id == eventToAdd.ParentPlanning.Id))))))
 				) 
 				return "Vous devez être administrateur pour faire ça.";
-			/*if (!validPlanning(eventToAdd.ParentPlanning.Id, eventToAdd.Type))
-				return "Votre requète semble invalide";*/
 			var tmp=db.Planning.Where(p=>p.Type==(int)EventData.TypeEnum.Campus && (p.Id==eventToAdd.ParentPlanning.Id ||p.ChildrenPlannings.Any(cla=>cla.Id==eventToAdd.ParentPlanning.Id)))
 				.Select(camp=>camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla=>cla.Events))).FirstOrDefault();
-			if(tmp!=null)
-				eventsInSameLocation=tmp.Where(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start && ev.Place == eventToAdd.Place).SelectMany(names => names.Name + ", ") as string;
+			if (tmp != null)
+			{
+				string eventsInSameLocation=(eventsInSameLocation = tmp.Where(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start && ev.Place == eventToAdd.Place).SelectMany(names => names.Name + ", ") as string);
+				if (eventsInSameLocation.Length > 0)
+					return "la salle est déjà occupée";
+			}
+			string truc="";
+			if (db.User.Where(usr => usr.Id == eventToAdd.Speaker.Id).Select(usr => usr.Planning.SpeakingEvents.Concat(usr.Planning.Events.Where(ev => ev.Mandatory))).Any(t => t.Any(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start)))
+				truc = "Le speaker risque d'être déjà occupé";
 			db.Event.AddObject(new Event()
 			{
 				Name = eventToAdd.Name,
@@ -361,7 +380,7 @@ namespace BusinessLayer
 			});
 			db.Planning.First(p => p.Id == eventToAdd.ParentPlanning.Id).LastChange = DateTime.Now;
 			db.SaveChanges();
-			return (eventsInSameLocation==null)?"ok":eventsInSameLocation.Count()>1?"Attention, la salle proposée semble déjà utilisée par un autre évènement: "+eventsInSameLocation:"ok";
+			return truc.Length==0?"ok":truc;
 		}
 		string IBusinessLayer.setUser(UserData userToSet)
 		{
@@ -466,8 +485,8 @@ namespace BusinessLayer
 		string IBusinessLayer.setEvent(EventData eventToSet)
 		{
 			if (!
-				(isUserAdmin || 
-				currentUserId == eventToSet.ParentPlanning.Id || 
+				(currentUserId == eventToSet.ParentPlanning.Id ||
+				 isUserAdmin ||  
 				(db.Planning.Any(p => 
 					p.Type == (int)EventData.TypeEnum.Campus && 
 					currentUserRoles.Any(r => r.Target == p.Id && 

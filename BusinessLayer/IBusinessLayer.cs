@@ -36,6 +36,8 @@ namespace BusinessLayer
 			/// <returns></returns>
 			[OperationContract]
 			EventData[] getSpeakerEvents(int ID, DateTime Start, DateTime Stop);
+			[OperationContract]
+			EventData[] getSpeakingEvents(int ID, DateTime Start, DateTime Stop);
 			/// <summary>
 			/// To save bandwidth, this method will say if you already have an up to date planning before yo download all events.
 			/// </summary>
