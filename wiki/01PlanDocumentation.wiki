@@ -41,6 +41,15 @@ Il faut se placer selon le point de vue de chaque utilisateur qui devra manipule
 
 == Documentation technique ==
 
+== Analyse, modélisation ==
+
+Ici, il faut expliquer la démarche qui nous a amené à notre modèle de données, à la structuration du service, ainsi que l'interface utilisateur. Lâchez-vous, c'est le moment de dire tout ce que vous voulez pour décrire l'application.
+
+Attention quand même à ne pas décrire en détail le fonctionnement des modules de l'application, il faut laisser ça pour la partie suivante.
+
+
+=== Fonctionnement de l'application ===
+
 Cette partie explique comment fonctionnent les différents composants de l'application. Certaines pages existent déjà, et ont juste à être remaniées.
 
 Il ne s'agit pas de l'analyse, il faut essayer de réfléchir du point de vue du développeur qui voudrait modifier le code, et qui ne veut pas savoir comment on a réfléchi, mais _sur quelle base_ il peut réfléchir.
@@ -49,8 +58,3 @@ Il ne s'agit pas de l'analyse, il faut essayer de réfléchir du point de vue du
     * Fonctionnement du web sevice
     * Fonctionnement du cache
     * Fonctionnement de l'interface graphique (attention : n'est pas une doc utilisateur)
-
-
-== Analyse, modélisation ==
-
-Ici, il faut expliquer la démarche qui nous a amené à notre modèle de données, à la structuration du service, ainsi que l'interface utilisateur. Lâchez-vous, c'est le moment de dire tout ce que vous voulez pour décrire l'application.
