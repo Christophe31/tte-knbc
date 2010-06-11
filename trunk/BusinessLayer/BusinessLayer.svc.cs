@@ -340,9 +340,10 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			/*if (!validPlanning(eventToAdd.ParentPlanning.Id, eventToAdd.Type))
 				return "Votre requète semble invalide";*/
-			eventsInSameLocation=db.Planning.Where(p=>p.Type==(int)EventData.TypeEnum.Campus && (p.Id==eventToAdd.ParentPlanning.Id ||p.ChildrenPlannings.Any(cla=>cla.Id==eventToAdd.ParentPlanning.Id)))
-					.Select(camp=>camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla=>cla.Events))).First()
-				.Where(ev=>ev.Start>=eventToAdd.End&&ev.End<=eventToAdd.Start&&ev.Place==eventToAdd.Place).SelectMany(names=>names.Name+", ") as string;
+			var tmp=db.Planning.Where(p=>p.Type==(int)EventData.TypeEnum.Campus && (p.Id==eventToAdd.ParentPlanning.Id ||p.ChildrenPlannings.Any(cla=>cla.Id==eventToAdd.ParentPlanning.Id)))
+				.Select(camp=>camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla=>cla.Events))).FirstOrDefault();
+			if(tmp!=null)
+				eventsInSameLocation=tmp.Where(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start && ev.Place == eventToAdd.Place).SelectMany(names => names.Name + ", ") as string;
 			db.Event.AddObject(new Event()
 			{
 				Name = eventToAdd.Name,
@@ -352,11 +353,11 @@ namespace BusinessLayer
 				End = eventToAdd.End,
 				Start = eventToAdd.Start,
 				Mandatory=eventToAdd.Mandatory,
-				SpeakerRef = eventToAdd.Speaker.Id==0?null:db.User.First(u => u.Id == eventToAdd.Speaker.Id).Planning
+				SpeakerRef = eventToAdd.Speaker == null ? null : (eventToAdd.Speaker.Id==0?null:db.User.First(u => u.Id == eventToAdd.Speaker.Id).Planning)
 			});
 			db.Planning.First(p => p.Id == eventToAdd.ParentPlanning.Id).LastChange = DateTime.Now;
 			db.SaveChanges();
-			return eventsInSameLocation.Count()>1?"Attention, la salle proposée semble déjà utilisée par un autre évènement: "+eventsInSameLocation:"ok";
+			return (eventsInSameLocation==null)?"ok":eventsInSameLocation.Count()>1?"Attention, la salle proposée semble déjà utilisée par un autre évènement: "+eventsInSameLocation:"ok";
 		}
 		string IBusinessLayer.setUser(UserData userToSet)
 		{
@@ -470,11 +471,11 @@ namespace BusinessLayer
 						p.ChildrenPlannings.Any(cla => cla.Id == eventToSet.ParentPlanning.Id))))))
 				)
 				return "Vous devez être administrateur pour faire ça.";
-
 			string eventsInSameLocation = "";
-			eventsInSameLocation = db.Planning.Where(p => p.Type == (int)EventData.TypeEnum.Campus && (p.Id == eventToSet.ParentPlanning.Id || p.ChildrenPlannings.Any(cla => cla.Id == eventToSet.ParentPlanning.Id)))
-					.Select(camp => camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla => cla.Events))).First()
-				.Where(ev => ev.Start >= eventToSet.End && ev.End <= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
+			var tmp = db.Planning.Where(p => p.Type == (int)EventData.TypeEnum.Campus && (p.Id == eventToSet.ParentPlanning.Id || p.ChildrenPlannings.Any(cla => cla.Id == eventToSet.ParentPlanning.Id)))
+				.Select(camp => camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla => cla.Events))).FirstOrDefault();
+			if (tmp != null)
+				eventsInSameLocation = tmp.Where(ev => ev.Start >= eventToSet.End && ev.End <= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
 
 			db.Planning.First(pl => pl.Id == eventToSet.ParentPlanning.Id).LastChange = DateTime.Now;
 
@@ -564,9 +565,9 @@ namespace BusinessLayer
 						p.ChildrenPlannings.Any(cla => cla.Id == db.Event.Where(ev => ev.Id == Id).First().PlaningRef.Id))))))
 				)
 				return "Vous devez être administrateur pour faire ça.";
-			var ev=db.Event.Where(p=>p.Id==Id).First();
-			ev.PlaningRef.LastChange = DateTime.Now;
-			db.Event.DeleteObject(ev);
+			var eve=db.Event.Where(p=>p.Id==Id).First();
+			eve.PlaningRef.LastChange = DateTime.Now;
+			db.Event.DeleteObject(eve);
 			db.SaveChanges();
 			return "ok";
 		}

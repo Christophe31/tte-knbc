@@ -29,9 +29,7 @@ namespace Client
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			
 			new Thread((ThreadStart)DelayedStart).Start();
-
 		}
 		CacheWrapper c;
 		private void DelayedStart()
@@ -43,6 +41,7 @@ namespace Client
 
 		private void Hiding()
 		{
+			this.cacheModeButton.IsEnabled = c.CacheAvailable;
 			t.Visibility = System.Windows.Visibility.Hidden;
 		}
 		private void Ending()
@@ -70,6 +69,11 @@ namespace Client
 		{
 			if (e.Key == Key.Enter)
 				Button_Click(null, null);
+
+		}
+
+		private void cacheModeButton_Click(object sender, RoutedEventArgs e)
+		{
 
 		}
 	}

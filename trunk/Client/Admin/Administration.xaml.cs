@@ -95,7 +95,6 @@ namespace Client
 		{
 			while (Api.Server == null)
 			{
-				Api.RelinkServer();
 				Thread.Sleep(500);
 			}
 			this.Dispatcher.BeginInvoke((ThreadStart)refreshAllControls);
