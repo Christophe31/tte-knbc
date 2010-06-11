@@ -10,6 +10,8 @@ Ce document est le sommaire de la documentation du projet TimeTableEasy.
 
 == Documentation commerciale ==
 
+Ici, c'est la réponse à la question : *pourquoi notre programme est adapté à votre besoin ?*
+
 On doit mettre dans cette section la description des fonctionnalités du programme. Il faut lister les possibilités du programme, sans entrer dans les détails du _comment_, qui sont réservés à la documentation utilisateur.
 
 On doit y retrouver les grandes lignes du cahier des charges :
