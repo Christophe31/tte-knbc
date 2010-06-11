@@ -597,18 +597,24 @@ namespace BusinessLayer
 		{
 			if(currentUserRoles.Count()>0)
 				return db.User.Where(u => u.Id == ID)
-					.Select(u => new UserData()
-					{Class = new IdName()
-							{
-								Id = u.Planning.ParentPlanning.Parent ?? 0,
-								Name = u.Planning.ParentPlanning.Name
-							},
+					.Select(u => new
+					{
+						Class = new IdName()
+							   {
+								   Id = u.Planning.ParentPlanning.Parent ?? 0,
+								   Name = u.Planning.ParentPlanning.Name
+							   },
 						Id = ID,
+						Login=u.Login,
 						Name = u.Planning.Name,
-						Roles = u.Roles.Select(r=>new RoleData(){Id=r.Id, Role=r.Target.HasValue ? RoleData.RoleType.Speaker :
-							r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator :RoleData.RoleType.CampusManager, TargetId=r.Target}).ToArray(),
-						Password=null
-					}).First();
+						Roles = u.Roles.Select(r => new RoleData()
+						{
+							Id = r.Id,
+							Role = r.Target.HasValue ? RoleData.RoleType.Speaker :
+								r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager,
+							TargetId = r.Target
+						})
+					}).ToArray().Select(u=>new UserData() {Id=u.Id, Roles= u.Roles.ToArray(), Class=u.Class, Name= u.Name, Login=u.Login }).First();
 			return null;
 		}
 		ClassData IBusinessLayer.getClass(int ID)
