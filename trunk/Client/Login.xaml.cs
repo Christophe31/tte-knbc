@@ -20,10 +20,11 @@ namespace Client
 	public partial class Login : Window
 	{
 		protected MainWindow t;
-		public Login()
+		public Login(MainWindow m)
 		{
 			InitializeComponent();
 			this.Show();
+			t = m;
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -42,7 +43,6 @@ namespace Client
 
 		private void Hiding()
 		{
-			t = new MainWindow();
 			t.Visibility = System.Windows.Visibility.Hidden;
 		}
 		private void Ending()
@@ -51,7 +51,7 @@ namespace Client
 			Thread.Sleep(500);
 			t.Visibility = System.Windows.Visibility.Visible;
 			this.Visibility = System.Windows.Visibility.Collapsed;
-			//this.Close();
+			this.Close();
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)

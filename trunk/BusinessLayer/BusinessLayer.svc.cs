@@ -17,9 +17,9 @@ namespace BusinessLayer
 		Entities db = new Entities();
 
 
-		public void centerToSqlDate(ref DateTime d)
+		public DateTime centerToSqlDate(DateTime d)
 		{
-			d = ((d < sqlMin) ? sqlMin : ((d > sqlMax) ? sqlMax : d));
+			return ((d < sqlMin) ? sqlMin : ((d > sqlMax) ? sqlMax : d));
 		}
 		public void centerToSqlDate(ref DateTime d1, ref DateTime d2)
 		{
@@ -101,8 +101,7 @@ namespace BusinessLayer
 		}
 		bool IBusinessLayer.isPlanningUpToDate(int Planning, DateTime LastUpdate)
 		{
-			centerToSqlDate(ref LastUpdate);
-			return db.Planning.Any(p=>p.Id == Planning && ((p.LastChange??DateTime.Now) >= LastUpdate));
+			return db.Planning.Any(p=>p.Id == Planning && ((p.LastChange??DateTime.Now) >= centerToSqlDate(LastUpdate)));
 		}
 		IdName[] IBusinessLayer.getPlannings(EventData.TypeEnum Type)
 		{

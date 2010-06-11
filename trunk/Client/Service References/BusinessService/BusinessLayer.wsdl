@@ -9,12 +9,6 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IBusinessLayer_setPrivateEvent_InputMessage">
-    <wsdl:part name="parameters" element="tns:setPrivateEvent" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_setPrivateEvent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:setPrivateEventResponse" />
-  </wsdl:message>
   <wsdl:message name="IBusinessLayer_delUser_InputMessage">
     <wsdl:part name="parameters" element="tns:delUser" />
   </wsdl:message>
@@ -141,6 +135,12 @@
   <wsdl:message name="IBusinessLayer_getSpeakers_OutputMessage">
     <wsdl:part name="parameters" element="tns:getSpeakersResponse" />
   </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSpeakerBilan_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSpeakerBilan" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSpeakerBilan_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSpeakerBilanResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_getCampusLocationsTree_InputMessage">
     <wsdl:part name="parameters" element="tns:getCampusLocationsTree" />
   </wsdl:message>
@@ -195,12 +195,6 @@
   <wsdl:message name="IBusinessLayer_addEvent_OutputMessage">
     <wsdl:part name="parameters" element="tns:addEventResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_addPrivateEvent_InputMessage">
-    <wsdl:part name="parameters" element="tns:addPrivateEvent" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_addPrivateEvent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:addPrivateEventResponse" />
-  </wsdl:message>
   <wsdl:message name="IBusinessLayer_setUser_InputMessage">
     <wsdl:part name="parameters" element="tns:setUser" />
   </wsdl:message>
@@ -244,10 +238,6 @@
     <wsdl:part name="parameters" element="tns:setEventResponse" />
   </wsdl:message>
   <wsdl:portType name="IBusinessLayer">
-    <wsdl:operation name="setPrivateEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEvent" message="tns:IBusinessLayer_setPrivateEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPrivateEventResponse" message="tns:IBusinessLayer_setPrivateEvent_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="delUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
@@ -332,6 +322,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakers" message="tns:IBusinessLayer_getSpeakers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakersResponse" message="tns:IBusinessLayer_getSpeakers_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getSpeakerBilan">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakerBilan" message="tns:IBusinessLayer_getSpeakerBilan_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakerBilanResponse" message="tns:IBusinessLayer_getSpeakerBilan_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getCampusLocationsTree">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getCampusLocationsTree" message="tns:IBusinessLayer_getCampusLocationsTree_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getCampusLocationsTreeResponse" message="tns:IBusinessLayer_getCampusLocationsTree_OutputMessage" />
@@ -367,10 +361,6 @@
     <wsdl:operation name="addEvent">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/addEvent" message="tns:IBusinessLayer_addEvent_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/addEventResponse" message="tns:IBusinessLayer_addEvent_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="addPrivateEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/addPrivateEvent" message="tns:IBusinessLayer_addPrivateEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/addPrivateEventResponse" message="tns:IBusinessLayer_addPrivateEvent_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="setUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setUser" message="tns:IBusinessLayer_setUser_InputMessage" />
