@@ -10,14 +10,38 @@ namespace BusinessLayer
 	[ServiceContract]
 	interface IBusinessLayer
 	{
+		/// <summary>
+		/// This method return logged User
+		/// </summary>
+		/// <returns>current user related datas</returns>
 		[OperationContract]
 		UserData getUserData();
 		
 		#region Lecture d'évènements
+			/// <summary>
+			/// this function will allow you to get all the event related to a specific planning.
+			/// </summary>
+			/// <param name="Planning">Id of the planning</param>
+			/// <param name="Start">start date of the selection range</param>
+			/// <param name="Stop">end date of the selection range</param>
+			/// <returns>All the events from the planning.</returns>
 			[OperationContract]
 			EventData[] getEvents(int Planning, DateTime Start, DateTime Stop);
+			/// <summary>
+			/// This method get the mandatory data from the Speaker to warn others to not plan him courses here
+			/// </summary>
+			/// <param name="ID">Speaker Id</param>
+			/// <param name="Start">start date of the selection range</param>
+			/// <param name="Stop">end date of the selection range</param>
+			/// <returns></returns>
 			[OperationContract]
 			EventData[] getSpeakerEvents(int ID, DateTime Start, DateTime Stop);
+			/// <summary>
+			/// To save bandwidth, this method will say if you already have an up to date planning before yo download all events.
+			/// </summary>
+			/// <param name="Planning">Id of the planning to Check</param>
+			/// <param name="LastUpdate">client last update</param>
+			/// <returns>is client cache up to date</returns>
 			[OperationContract]
 			bool isPlanningUpToDate(int Planning, DateTime LastUpdate);
 		#endregion

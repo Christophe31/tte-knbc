@@ -67,9 +67,12 @@ namespace Client
         #endregion
 
         #region Window init
+		delegate Login loginConstructorDelegate(MainWindow m);
         public MainWindow()
 		{
 			InitializeComponent();
+			this.Visibility = System.Windows.Visibility.Hidden;
+			new Login(this); 
 		}
 
         /// <summary>
