@@ -289,7 +289,7 @@ namespace BusinessLayer
 			Modality sub = new Modality()
 			{
 				Name=subject.Name,
-				Hours=0
+				Hours=null
 			};
 			db.Modality.AddObject(sub);
 			if (subject.Modalities != null)

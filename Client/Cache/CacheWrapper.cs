@@ -35,25 +35,23 @@ namespace Client
 		public EventData[] getEvents(IdName Planning, DateTime Start, DateTime Stop)
 		{
 			string fname = cacheProcess.fileNameFromIdName(Planning);
-			string lufname = cacheProcess.fileNameFromIdName(Planning) + ".lu";
-			if (System.IO.File.Exists(fname) && System.IO.File.Exists(lufname))
+			Tuple<DateTime, EventData[]> t;
+			if (System.IO.File.Exists(fname) )
 			{
-
-				if (cacheProcess.ServerAvailable && !Server.isPlanningUpToDate(Planning, ((DateTime)cacheProcess.ReadFromFile(lufname))))
+				t=cacheProcess.ReadFromFile(fname) as Tuple<DateTime,EventData[]>;
+				if (cacheProcess.ServerAvailable && !Server.isPlanningUpToDate(Planning, t.Item1))
 				{
-					EventData[] t = Server.getEvents(Planning, Start, Stop);
+					t = new Tuple<DateTime,EventData[]>(DateTime.Now, Server.getEvents(Planning, Start, Stop));
 					cacheProcess.RefreshCache(Planning);
-					cacheProcess.WriteToFile(DateTime.Now, lufname);
-					return t;
+					return t.Item2;
 				}
-				return cacheProcess.ReadFromFile(fname) as EventData[];
+				return (cacheProcess.ReadFromFile(fname) as Tuple<DateTime, EventData[]>).Item2.Where(ev => ev.Start < Stop && ev.End > Start).ToArray();
 			}
 			if (cacheProcess.ServerAvailable)
 			{
-				EventData[] t = Server.getEvents(Planning, Start, Stop);
+				t = new Tuple<DateTime,EventData[]>(DateTime.Now,Server.getEvents(Planning, Start, Stop));
 				cacheProcess.WriteToFile(t, fname);
-				cacheProcess.WriteToFile(DateTime.Now, lufname);
-				return t;
+				return t.Item2;
 			}
 			throw new Exception("No cache file, neither connexion to Web Service available");
 		}

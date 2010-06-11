@@ -10,6 +10,7 @@ using System.ServiceModel.Description;
 using System.ServiceModel;
 using DDay.iCal;
 using System.ServiceModel.Security;
+using System.Xml;
 
 namespace Client
 {
@@ -44,7 +45,6 @@ namespace Client
 				CurrentUser = ReadFromFile(otherFileNames["CurrentUser"]) as UserData;
 			}
 		}
-
 		public bool logToWebService(string login, string password)
 		{
 			try
@@ -109,29 +109,32 @@ namespace Client
 		#endregion
 
 		#region foos
+
 		public void WriteToFile(object obj, string fileName)
 		{
-			//if (File.A fileName)
-			Stream str = File.OpenWrite(fileName);
-			formatter.Serialize(str, obj);
-			str.Close();
+
+			FileStream fs = new FileStream(fileName, FileMode.Create);
+			XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(fs);
+			NetDataContractSerializer ser =
+				new NetDataContractSerializer();
+			ser.WriteObject(writer, obj);
+			writer.Close();
 		}
 		public object ReadFromFile(string fileName)
 		{
-			Stream str = File.OpenRead(fileName);
-			object o;
-			try
-			{
-				o = formatter.ReadObject(str);
-			}
-			catch (SerializationException e)
-			{
-				str.Close();
-				File.Delete(fileName);
-				throw e;
-			}
-			str.Close();
+
+
+			FileStream fs = new FileStream(fileName,
+		FileMode.Open);
+			XmlDictionaryReader reader =
+				XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+			NetDataContractSerializer ser = new NetDataContractSerializer();
+
+			object o =
+				ser.ReadObject(reader, true);
+			fs.Close();
 			return o;
+	
 		}
 		public void RefreshCache(IdName idn)
 		{
@@ -140,7 +143,7 @@ namespace Client
 
 		private void refreshCache(IdName idn)
 		{
-			WriteToFile(Server.getEvents(idn.Id, DateTime.MinValue, DateTime.MaxValue), fileNameFromIdName(idn));
+			WriteToFile(new Tuple<DateTime,EventData[]>(DateTime.Now,Server.getEvents(idn.Id, DateTime.MinValue, DateTime.MaxValue)), fileNameFromIdName(idn));
 		}
 		#endregion
 	}
