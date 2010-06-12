@@ -429,7 +429,7 @@
 
                         <DataGrid Name="RolesGrid" Grid.Column="1" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="True" CanUserDeleteRows="True" HorizontalAlignment="Center">
                             <DataGrid.Columns>
-                                <DataGridComboBoxColumn Header="Rôle">
+                                <DataGridComboBoxColumn Header="Rôle" SelectedValueBinding="{Binding RoleName}">
                                     <DataGridComboBoxColumn.ItemsSource>
                                         <col:ArrayList>
                                             <sys:String>Administrateur</sys:String>
@@ -438,7 +438,14 @@
                                         </col:ArrayList>
                                     </DataGridComboBoxColumn.ItemsSource>
                                 </DataGridComboBoxColumn>
-                                <DataGridComboBoxColumn Header="Cible" ItemsSource="{Binding TargetList}"/>
+                                <DataGridComboBoxColumn Header="Cible" SelectedValueBinding="{Binding TargetIndex}">
+                                    <DataGridComboBoxColumn.EditingElementStyle>
+                                        <Style TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding Path=TargetList}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.EditingElementStyle>
+
+                                </DataGridComboBoxColumn>
                                 <DataGridTemplateColumn Header="Role3">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -453,7 +460,7 @@
                                 <DataGridTemplateColumn Header="Cible3">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding TargetList}" SelectedIndex="{Binding RoleIndex}"/>
+                                            <ComboBox ItemsSource="{Binding TargetList}" SelectedIndex="{Binding TargetIndex}"/>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
