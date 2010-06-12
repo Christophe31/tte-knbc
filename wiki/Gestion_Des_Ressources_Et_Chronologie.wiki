@@ -73,6 +73,12 @@ Narbonne Christophe :
   * Gros contributeur de la gestion du cache.
   * Mise en place et configuration des outils.
 
+Au final, on a pas mal collé à cette répartition des tâches de fonctionnement. Néanmoins il est heureux que nous n'ayont pas fait de diagrammes de Gant, Les gros bouleversements qu'ont entrénés une nouvelle base de donnée alors que l'ancienne  avait un service complet sur le plan fonctionnel, une nouvelle interface d'administration, (etc) nous a certe fais gagner une lisibilité de code, des appels et des fonctions plus génériques, mais était imprévisible et aurai chamboulé nos plans. Pour la documentation, chacun a été tenu de faire la documentation technique de sa partie. 
+
+Du coup Romain s'est occupé de la ducumentation de l'interface utilisateur et de la documentation de la base de donnée par exemple...
+
+Romaric ayant certaines compétances dans le domaines, il aura le mérite d'avoir relu l'intégralité de la documentation à la recherche d'éventuelles fautes de sens ou d'orthographe.
+
 = Outils et moyens mis en place =
 Cette partie prend une importance particulière du fait que la division supinfo/ingésup a littérallement scindé notre équipe, les heures allouées au projets de groupes no collaient même pas et nous nous croisions difficilement il fallait donc nécessairement centraliser la communication, permettre de limiter ce problème et avoir d'accessible tout notre projet pour tous nos membres...
 
