@@ -140,7 +140,7 @@
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbSubjects_Name" />
                     </Grid>
 
-                    <DataGrid Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10">
+                    <DataGrid MaxHeight="90" Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nom de la modalité" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Durée (en heures)" Binding="{Binding Hours}"/>
@@ -404,7 +404,7 @@
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Pass" Margin="0,10,0,0" IsEnabled="False" />
                     </Grid>
 
-                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" />
+                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" />
 
                     <Grid Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
@@ -415,87 +415,40 @@
 
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <ComboBox Grid.Column="0" Grid.Row="0" Name="cbUsers_Rights" HorizontalAlignment="Stretch" SelectedIndex="0" SelectionChanged="cbUsers_Rights_SelectionChanged">
+                            <ComboBoxItem Content="Ajouter un rôle" />
+                            <ComboBoxItem Content="Administrateur" />
+                            <ComboBoxItem Content="Campus Manager" />
+                            <ComboBoxItem Content="Intervenant" />
+                        </ComboBox>
+                        <ComboBox Grid.Row="0" Grid.Column="1" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalAlignment="Stretch" ItemsSource="{Binding}" Grid.ColumnSpan="2" Margin="0,0,1,0" VerticalAlignment="Bottom" SelectionChanged="cbUsers_RightsType_SelectionChanged" />
+                    </Grid>
+
+                    <Grid Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ComboBox Grid.Column="1" Grid.Row="0" IsEnabled="False" Name="cbUsers_Rights" HorizontalContentAlignment="Stretch" SelectedIndex="0" SelectionChanged="cbUsers_Rights_SelectionChanged" HorizontalAlignment="Left" Width="Auto" ToolTip="Ajouter d'abord un utilisateur pour lui donner des rôles.">
-                            <ComboBoxItem Content="Ajouter un rôle" />
-                            <ComboBoxItem Content="Speaker" />
-                            <ComboBoxItem Content="Administrateur" />
-                            <ComboBoxItem Content="Campus Manager" />
-                        </ComboBox>
-                        <ComboBox Grid.Row="1" Grid.Column="1" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalContentAlignment="Stretch" ItemsSource="{Binding}" SelectionChanged="cbUsers_RightsType_SelectionChanged" Grid.ColumnSpan="2" Height="22" Margin="0,0,1,0" VerticalAlignment="Bottom" />
 
-                        <DataGrid Name="RolesGrid" Grid.Column="1" Grid.Row="2" AutoGenerateColumns="False" ItemsSource="{Binding}" CanUserAddRows="True" CanUserDeleteRows="True" HorizontalAlignment="Center">
-                            <DataGrid.Columns>
-                                <DataGridComboBoxColumn Header="Rôle" SelectedValueBinding="{Binding RoleName}">
-                                    <DataGridComboBoxColumn.ItemsSource>
-                                        <col:ArrayList>
-                                            <sys:String>Administrateur</sys:String>
-                                            <sys:String>Campus Manager</sys:String>
-                                            <sys:String>Speaker</sys:String>
-                                        </col:ArrayList>
-                                    </DataGridComboBoxColumn.ItemsSource>
-                                </DataGridComboBoxColumn>
-                                <DataGridComboBoxColumn Header="Cible" SelectedValueBinding="{Binding TargetIndex}">
-                                    <DataGridComboBoxColumn.EditingElementStyle>
-                                        <Style TargetType="ComboBox">
-                                            <Setter Property="ItemsSource" Value="{Binding Path=TargetList}" />
-                                        </Style>
-                                    </DataGridComboBoxColumn.EditingElementStyle>
-
-                                </DataGridComboBoxColumn>
-                                <DataGridTemplateColumn Header="Role3">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox SelectedIndex="{Binding RoleIndex}">
-                                                <ComboBoxItem Content="Administrateur" />
-                                                <ComboBoxItem Content="Campus Manager" />
-                                                <ComboBoxItem Content="Speaker" />
-                                            </ComboBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn Header="Cible3">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding TargetList}" SelectedIndex="{Binding TargetIndex}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Content="Supprimer un rôle" ToolTip="Choisissez une ligne puis cliquez sur le bouton Supprimer pour supprimer le rôle" Name="bUsers_DelRight" Click="bUsers_DelRight_Click" />
                         
-                        
-                        <DataGrid Grid.Column="1" Grid.Row="3" HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" ItemsSource="{Binding}" Name="RightsGrid" Margin="0,3,0,10" AutoGenerateColumns="False" SelectionChanged="RightsGrid_SelectionChanged">
+                        <DataGrid Grid.Column="0" MaxHeight="90" VerticalAlignment="Top" Grid.Row="0" HorizontalAlignment="Center" ItemsSource="{Binding}" Name="RolesGrid" Margin="0,5,0,5" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" ToolTip="Choisissez une ligne et cliquez sur la touche SUPPR pour la supprimer">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Role">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox Name="cbUsers_RoleDataRights" SelectedIndex="{Binding RoleIndex}" SelectionChanged="cbUsers_RoleDataRights_SelectionChanged">
-                                                <ComboBoxItem Content="Speaker" />
-                                                <ComboBoxItem Content="Administrateur" />
-                                                <ComboBoxItem Content="Campus Manager" />
-                                            </ComboBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-
-                                <DataGridTemplateColumn Header="Cible">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ComboBox ItemsSource="{Binding TargetContext}" SelectedIndex="{Binding TargetIndex}"/>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Header="Role" Binding="{Binding RoleName}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Cible" Binding="{Binding TargetName}" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
 
-                    
 
-                    
+
+
+
                     <Grid Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -522,7 +475,7 @@
                         </Grid.RowDefinitions>
 
                         <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0" Click="bUsers_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" Click="bUsers_Del_Click" />
+                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" />
                     </Grid>
                 </Grid>
             </GroupBox>
