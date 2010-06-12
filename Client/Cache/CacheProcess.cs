@@ -20,6 +20,15 @@ namespace Client
 		public BusinessService.UserData CurrentUser;
 		public delegate void CacheGetter(IdName idn);
 		public delegate void FileWriter(object obj, string fileName);
+		public bool Autologable
+		{
+			get
+			{
+				if (CurrentUser == null || CurrentUser.Password == null ||CurrentUser.Login == null)
+					return false;
+				return true;
+			}
+		}
 
 		public bool ServerAvailable
 		{
@@ -43,6 +52,21 @@ namespace Client
 			{
 				CurrentUser = ReadFromFile(otherFileNames["CurrentUser"]) as UserData;
 			}
+		}
+		void continuousServerCheck()
+		{
+			while (true)
+			{
+				Thread.Sleep(500);
+				if (Server.State == CommunicationState.Closed || Server.State == CommunicationState.Closing || Server.State == CommunicationState.Faulted)
+					relog();
+			}
+		}
+		public bool relog()
+		{
+			if (Autologable)
+				return logToWebService(CurrentUser.Login, CurrentUser.Password);
+			return false;
 		}
 		public bool logToWebService(string login, string password)
 		{
