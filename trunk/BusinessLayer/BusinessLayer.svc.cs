@@ -55,9 +55,7 @@ namespace BusinessLayer
 					new RoleData()
 					{
 						TargetId = r.Target,
-						Role = r.Target.HasValue ? RoleData.RoleType.Speaker :
-							r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator :
-							RoleData.RoleType.CampusManager
+						Role = r.Planning.Type.HasValue?(r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager):RoleData.RoleType.Speaker
 					}).ToArray()
 			};
 		}
@@ -631,8 +629,7 @@ namespace BusinessLayer
 					}).ToArray().Select(u=>new UserData() {Id=u.Id, Roles= u.Roles.Select(r => new RoleData()
 						{
 							Id = r.Id,
-							Role = r.Target.HasValue ? RoleData.RoleType.Speaker :
-								r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager,
+							Role = r.Target.HasValue ? (r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager) : RoleData.RoleType.Speaker,
 							TargetId = r.Target
 						}).ToArray(), Class=u.Class, Name= u.Name, Login=u.Login }).First();
 			return null;
