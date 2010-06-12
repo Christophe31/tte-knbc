@@ -8,7 +8,7 @@ _by Romaric Breil_
     * ~~CRUD activated only for user view, or if the user has rights~~
     * ~~Display hours reports (planed/theoretical)in CSV (cancelled)~~
     * ~~Display events of a speaker, in user planning~~
-    * Click on an event fill the editor
+    * ~~Click on an event fill the editor~~
     * Messages to help users
     * Error display
 
