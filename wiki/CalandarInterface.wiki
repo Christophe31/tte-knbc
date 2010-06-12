@@ -4,11 +4,13 @@ _by Romaric Breil_
 ==Todo list==
 
   * General
-    * CRUD
-    * CRUD activated only for user view, or if the user has rights
-    * Display hours reports (planed/theoretical)in CSV (half)
+    * ~~CRUD~~
+    * Click on an event fill the editor
+    * CRUD activated only for user view, or if the user has rights (error display)
+    * ~~Display hours reports (planed/theoretical)in CSV (cancelled)~~
     * Display events of a speaker, in user planning
     * Messages to help users
+    * Error display
 
   * Events list
     * ~~Display/hide non mandatory events~~
