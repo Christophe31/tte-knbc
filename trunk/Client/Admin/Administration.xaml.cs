@@ -41,14 +41,13 @@ namespace Client
         public IdName[] periodsList_Class = null;
         public IdName[] rightsList_Users = null;
         public IdName[] classesList_Users = null;
-        public IdName[] campuslist_UserRights = null;
-        public IdName[] universitylist_UserRights = null;
-        public IdName[] universitylist_DataRights = null;
-        public IdName[] campuslist_DataRights = null;
-        public UserData userInformations = null;
         public  List<ModalityData> modalityInformations=new List<ModalityData>();
-        public List<RoleData> rolesInformations = new List<RoleData>();
-        List<RolesDisplay> userRoles = new List<RolesDisplay>();
+        #region Utilisateurs
+        public UserData userInformations=null;
+        public List<RoleData> rolesInformations = new List<RoleData>(); //Rôles de l'utilisateur actuel
+        public IdName[] universityList = null;
+        public IdName[] campusListRights = null;
+        #endregion
         #endregion
 
         #region Error bar
@@ -110,7 +109,7 @@ namespace Client
 			refreshPeriods();
 			refreshClasses();
 			refreshUsers();
-			refreshRights();
+			//refreshRights();
             //refreshRoleGrid(); //watchme delete me
 		}
 
@@ -121,7 +120,6 @@ namespace Client
         //Rafraichissement des différents contrôles
         private void refreshPromotions()
         {
-            Api.Server.getPromotions().ToArray();
             promoList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Promotion" } }.Concat(Api.Server.getPromotions()).ToArray();
             cbPromo_Promotions.DataContext = promoList;
             cbPromo_Promotions.SelectedIndex = 0;
@@ -762,533 +760,6 @@ namespace Client
 
         #endregion
 
-        #region Utilisateurs
-
-        private class RightsDisplay
-        {
-            public int TargetIndex { get; set; }
-            public int RoleIndex { get; set; }
-            public IdName[] TargetContext { get; set; }
-
-            public RightsDisplay(int roleindex, int targetindex, IdName[] targetcontext)
-            {
-                this.TargetIndex = targetindex;
-                this.RoleIndex = roleindex;
-                this.TargetContext = targetcontext;
-            }
-        }
-
-        private class RolesDisplay
-        {
-            public RolesDisplay(Client.Administration fenetre1)
-            {
-                this.fenetre = fenetre1;
-            }
-            Client.Administration fenetre;
-            public int Id { get; set; }
-            public int? TargetId { get; set; }
-            //public int RoleIndex { get; set; }
-
-            protected int roleIndex;
-            public int RoleIndex {
-                get { return roleIndex; }
-                set 
-                { //Quand l'utilisateur change de Rôle dans la combobox
-                    if(value==0) //Si c'est le rôle Administrateur
-                    {
-                        this.TargetList=fenetre.universitylist_DataRights;
-                    } else if(value==1) //Si c'est le rôle Campus Manager
-                    {
-                        this.TargetList=fenetre.campuslist_DataRights;
-                    } else if(value==2) //Si c'est le rôle Speaker
-                    {
-                        this.TargetList=null; //On ne met rien dans la deuxième combobox
-                    }
-                    roleIndex=value;
-                }
-            }
-            public int TargetIndex { get; set; }
-            public string TargetName { get; set; }
-            public RoleData.RoleType RoleEnum { get; set; }
-            public string RoleName { get; set; }
-            public IdName[] TargetList { get; set; }
-        }
-
-        //Rafraichissement des différents contrôles
-        private void refreshUsers()
-        {
-            usersList = new IdName[] { new IdName() { Id = 0, Name = "Nouvel Utilisateur" } }.Concat(Api.Server.getUsers()).ToArray();
-            cbUsers_Users.DataContext = usersList;
-            cbUsers_Users.SelectedIndex = 0;
-
-            classesList_Users = new IdName[] { new IdName() { Id = 0, Name = "Aucune" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
-            cbUsers_Class.DataContext = classesList_Users;
-            cbUsers_Class.SelectedIndex = 0;
-        }
-
-        //Remplissage des combobox des rôles
-        private void refreshRights()
-        {
-            universitylist_UserRights = new IdName[] { new IdName() { Id = 0, Name = "Choix de l'université" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.University)).ToArray();
-            universitylist_DataRights = Api.Server.getPlannings(EventData.TypeEnum.University).ToArray();
-            campuslist_UserRights=new IdName[] { new IdName() { Id = 0, Name = "Choix du campus" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Campus)).ToArray();
-            campuslist_DataRights = Api.Server.getPlannings(EventData.TypeEnum.Campus).ToArray();
-        }
-
-        private void refreshRoleGrid()
-        {
-            
-            int index;
-            //On va construire notre affichage
-
-            //userRoles = new List<RolesDisplay>();
-            RolesDisplay currentRole = null;
-
-            //---------- delete me
-            //rolesInformations = new List<RoleData>();
-            rolesInformations.Add(new RoleData() { Role=RoleData.RoleType.Speaker, TargetId=null });
-            rolesInformations.Add(new RoleData() { Role = RoleData.RoleType.Administrator, TargetId = 1 });
-
-            //---------- delete me
-
-            //On rafraichit nos listes de cibles pour les droits au cas ou
-            refreshRights();
-
-            //Pour chaque rôle de l'utilisateur
-            foreach (RoleData myRole in rolesInformations)
-            {
-                currentRole = new RolesDisplay(this);
-                currentRole.Id = myRole.Id;
-                currentRole.RoleEnum = myRole.Role;
-                currentRole.TargetId = myRole.TargetId;
-
-                if (currentRole.RoleEnum == RoleData.RoleType.Administrator)
-                {
-                    currentRole.RoleName = "Administrateur";
-                    currentRole.RoleIndex = 0;
-                    currentRole.TargetList = universitylist_DataRights;
-
-                    //On cherche le nom de l'université
-                    index = 0;
-                    foreach (IdName university in universitylist_DataRights)
-                    {
-                        if (university.Id == currentRole.TargetId)
-                        {
-                            
-                            currentRole.TargetName = university.Name;
-                            break;
-                        }
-                        index++;
-                    }
-                    currentRole.TargetIndex = index;
-                }
-                else if (currentRole.RoleEnum == RoleData.RoleType.CampusManager)
-                {
-                    currentRole.RoleName = "Campus Manager";
-                    currentRole.RoleIndex = 1;
-                    currentRole.TargetList = campuslist_DataRights;
-
-                    index = 0;
-                    //On cherche le nom du campus
-                    foreach (IdName campus in campuslist_DataRights)
-                    {
-                        if (campus.Id == currentRole.TargetId)
-                        {
-                            currentRole.TargetName = campus.Name;
-                            break;
-                        }
-                        index++;
-                    }
-                    currentRole.TargetIndex = index;
-                }
-                else
-                {
-                    currentRole.RoleName = "Speaker";
-                    currentRole.RoleIndex = 2;
-                    currentRole.TargetList = null;
-                    currentRole.TargetIndex = -1;
-                }
-
-                //On ajoute le rôle à notre liste
-                userRoles.Add(currentRole);
-            }
-
-            //On rafraichit la DataGrid
-            RolesGrid.DataContext = userRoles;
-
-        }
-
-        //Rafraichit la DataGrid des rôles
-        private void refreshRightsGrid()
-        {
-            //On quitte si l'utilisateur n'est pas déjà dans la base ou s'il n'a aucun droit
-            if((userInformations == null) || (userInformations.Roles==null))
-            {
-                return;
-            }
-
-            //On remplit nos listes de campus et d'universités
-            refreshRights();
-
-            int universityIndex, campusIndex;
-
-            //On prépare notre liste de droits pour l'affichage
-            List<RightsDisplay> myRights=new List<RightsDisplay>();
-
-            //Pour chaque rôle de l'utilisateur actuel
-            foreach (RoleData userRole in userInformations.Roles)
-            {
-                //Si le rôle est "Administrateur"
-                if (userRole.Role == RoleData.RoleType.Administrator)
-                {
-                    universityIndex = 0;
-                    //-----------------------------
-                    //On cherche l'index de l'université
-                    foreach (IdName university in universitylist_DataRights)
-                    {
-                        if (university.Id == userRole.TargetId)
-                        {
-                            break;
-                        }
-                        universityIndex++;
-                    }
-
-
-                    //On ajoute le droit
-                    myRights.Add(new RightsDisplay(1, universityIndex, universitylist_DataRights));
-
-                } else if(userRole.Role == RoleData.RoleType.CampusManager) //Si le rôle est "Campus Manager"
-                {
-                    campusIndex=0;
-                    //------------------------------------
-                    //On cherche l'index du campus du rôle //watchme
-                    foreach(IdName campus in campuslist_DataRights)
-                    {
-                        if(campus.Id==userRole.TargetId)
-                        {
-                            break;
-                        }
-                        campusIndex++;
-                    }
-
-                    //On ajoute le droit
-                    myRights.Add(new RightsDisplay(2, campusIndex, campuslist_DataRights));
-                } else { //Si le rôle est "Speaker"
-                    myRights.Add(new RightsDisplay(0, -1, null));
-                }
-            }
-
-            //On rafraichit la DataGrid des rôles
-            RightsGrid.DataContext=myRights;
-            
-        }
-
-        //Si l'utilisateur à choisi... un utilisateur
-        private void cbUsers_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbUsers_Users.SelectedIndex > 0)
-            {
-                //On récupère ses informations
-                userInformations = Api.Server.getUser(usersList[cbUsers_Users.SelectedIndex].Id);
-
-                //On peuple les contrôles
-                tbUsers_Login.Text = userInformations.Login;
-                tbUsers_Name.Text = userInformations.Name;
-
-                if (userInformations.Roles != null)
-                {
-                    //On récupère ses rôles
-                    rolesInformations = userInformations.Roles.ToList();
-                }
-                else
-                {
-                    //On initialise une liste de rôles
-                    rolesInformations = new List<RoleData>();
-                }
-
-                //On rafraichit la DataGrid des rôles
-                refreshRoleGrid();
-                userRoles = new List<RolesDisplay>();
-
-                //-----------
-                //On rafraichit la DataGrid des rôles
-                refreshRightsGrid();
-
-                //On active les contrôles liés aux rôles
-                cbUsers_Rights.IsEnabled = true;
-            }
-            else if(cbUsers_Users.SelectedIndex==0)
-            {
-                //On initialise une liste de rôles
-                rolesInformations = new List<RoleData>();
-                //-------------
-                //On désactive les contrôles liés aux rôles
-                cbUsers_Rights.IsEnabled = false;
-                cbUsers_RightsType.Visibility = Visibility.Hidden;
-
-                //On rafraichit la DataGrid des rôles
-                refreshRoleGrid();
-                userRoles = new List<RolesDisplay>();
-            }
-
-            
-            
-        }
-
-        //Si l'utilisateur choisit un rôle
-        private void cbUsers_Rights_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((cbUsers_Rights.SelectedIndex > 0) && (cbUsers_Users.SelectedIndex > 0))
-            {
-                RoleData.RoleType newRole;
-
-                //On récupère le rôle choisi pour charger notre combobox
-                switch (cbUsers_Rights.SelectedIndex)
-                {
-                    case 1: //Si l'on veut ajouter un rôle "Speaker"
-                        cbUsers_RightsType.Visibility = Visibility.Hidden;
-                        newRole = RoleData.RoleType.Speaker;
-                        break;
-                    case 2: //Si l'on veut ajouter un rôle "Administrateur"
-                        cbUsers_RightsType.Visibility = Visibility.Visible;
-                        cbUsers_RightsType.DataContext = universitylist_UserRights;
-                        cbUsers_RightsType.SelectedIndex = 0;
-                        newRole = RoleData.RoleType.Administrator;
-                        break;
-                    case 3: //Si l'on veut ajouter un rôle "Campus Manager"
-                        cbUsers_RightsType.Visibility = Visibility.Visible;
-                        cbUsers_RightsType.DataContext = campuslist_UserRights;
-                        cbUsers_RightsType.SelectedIndex = 0;
-                        newRole = RoleData.RoleType.CampusManager;
-                        break;
-                    default:
-                        return;
-                }
-
-                //Si le rôle est Speaker
-                if (newRole == RoleData.RoleType.Speaker)
-                {
-                    //On récupère les rôles de l'utilisateur actuel
-                    RoleData[] myRights = userInformations.Roles??new RoleData[]{};
-
-                    //On ajoute le nouveau rôle
-                    myRights = myRights.Concat(new RoleData[] {new RoleData(){ Id = 0, Role = newRole, TargetId = null }}).ToArray(); //watchme
-                    userInformations.Roles = myRights;
-
-                    //On rafraichit la DataGrid des rôles
-                    refreshRightsGrid();
-                }
-
-            }
-            else if (cbUsers_RightsType != null)//Si aucun rôle n'est choisi //watchme
-            {
-                cbUsers_RightsType.Visibility = Visibility.Hidden;
-            }
-        }
-
-        //Si l'utilisateur choisit la cible du rôle
-        private void cbUsers_RightsType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if ((cbUsers_RightsType.SelectedIndex > 0) && ( cbUsers_Users.SelectedIndex>0)) //Si l'utilisateur a bien choisi un type de droit et qu'un utilisateur est choisi
-            {
-                int idRight;
-                RoleData.RoleType newRole;
-
-                //On récupère les rôles de l'utilisateur actuel
-                RoleData[] myRights = userInformations.Roles ?? new RoleData[] { }; ;
-
-                //On récupère l'id du type de rôle choisi
-                if(cbUsers_Rights.SelectedIndex==2) //Si c'est le rôle "Administrateur"
-                {
-                    idRight = universitylist_UserRights[cbUsers_RightsType.SelectedIndex];
-                    newRole = RoleData.RoleType.Administrator;
-                } else { //Si c'est le rôle "Campus Manager"
-                    idRight = campuslist_UserRights[cbUsers_RightsType.SelectedIndex];
-                    newRole = RoleData.RoleType.CampusManager;
-                }
-                
-                //On ajoute le nouveau droit
-                myRights = myRights.Concat(new RoleData[] { new RoleData() { Id = 0, Role = newRole, TargetId = idRight } }).ToArray(); //watchme
-                userInformations.Roles = myRights;
-
-                //On rafraichit la DataGrid des rôles
-                refreshRightsGrid();
-            }
-        }
-
-        //Si la checkbox du password est cochée
-        private void cbUsers_GenPass_Checked(object sender, RoutedEventArgs e)
-        {
-            tbUsers_Pass.IsEnabled = false;
-        }
-
-        //Si la checkbox du password est décochée
-        private void cbUsers_GenPass_Unchecked(object sender, RoutedEventArgs e)
-        {
-            tbUsers_Pass.IsEnabled = true;
-        }
-
-        //L'utilisateur a cliqué sur "Ajouter/Modifier"
-        private void bUsers_AddMod_Click(object sender, RoutedEventArgs e)
-        {
-            //S'il s'agit d'une modification...
-            if (cbUsers_Users.SelectedIndex > 0)
-            {
-
-
-                //On récupère l'id de la classe sélectionnée
-                int idClass = classesList[cbClasses_Classes.SelectedIndex].Id;
-
-                //On vérifie que la classe entrée est valide
-                if (tbClasses_Name.Text.Trim().Equals(""))
-                {
-                    //On change la StatusBar
-                    spawnErrorBar("Veuillez entrer un nom de classe valide!", true);
-                    return;
-                }
-
-                //On vérifie qu'un campus et une période ont été entrés
-                if (cbClasses_Campus.SelectedIndex < 0 || cbClasses_Period.SelectedIndex < 0)
-                {
-                    //On change la StatusBar
-                    spawnErrorBar("Choissiez un Campus et une Période pour la classe!", true);
-                    return;
-                }
-
-                //On prépare notre classe
-                ClassData myClass = new ClassData();
-                myClass.Campus = campusList_Class[cbClasses_Campus.SelectedIndex];
-                myClass.Period = periodsList_Class[cbClasses_Period.SelectedIndex];
-                myClass.Name = tbClasses_Name.Text;
-                myClass.Id = idClass;
-
-                //On essaie de modifier la classe
-                string returnValue = Api.Server.setClass(myClass);
-
-                //Si la modification s'est correctement déroulée
-                if (returnValue.Equals("ok"))
-                {
-                    //On change la StatusBar
-                    spawnErrorBar("Classe " + cbClasses_Classes.SelectedItem.ToString() + " modifiée avec succès!", false);
-                }
-                else
-                {
-                    //On change la StatusBar avec le message d'erreur renvoyé
-                    spawnErrorBar(returnValue, true);
-                }
-            }
-            else if (cbUsers_Users.SelectedIndex == 0)//S'il s'agit d'un ajout
-            {
-                string password, passwordHashed;
-
-                //On vérifie que l'utilisateur entré est valide
-                if (tbUsers_Name.Text.Trim().Equals(""))
-                {
-                    //On change la StatusBar
-                    spawnErrorBar("Veuillez entrer un nom d'utilisateur valide!", true);
-                    return;
-                }
-
-                //On vérifie que le login entré est valide
-                if (tbUsers_Login.Text.Trim().Equals(""))
-                {
-                    //On change la StatusBar
-                    spawnErrorBar("Veuillez entrer un login valide!", true);
-                    return;
-                }
-
-                //On récupère le mot de passe
-                if (cbUsers_GenPass.IsChecked == true) //Si l'administrateur veut une génération aléatoire du mot de passe...
-                {
-                    password = RandomPassword.Generate(8, 10);
-                }
-                else //Si l'administrateur a défini lui même un mot de passe...
-                {
-                    if (tbUsers_Pass.Text.Trim().Equals(""))
-                    {
-                        //On change la StatusBar
-                        spawnErrorBar("Veuillez choisir un mot de passe valide!", true);
-                        return;
-                    }
-                    password = tbUsers_Pass.Text;
-                }
-
-                //On hashe le mot de passe
-                passwordHashed = RandomPassword.HashString(password);
-
-                //On prépare notre utilisateur
-                UserData myUser = new UserData();
-                myUser.Name = tbUsers_Name.Text;
-                myUser.Login = tbUsers_Login.Text;
-                myUser.Password = passwordHashed;
-                myUser.Roles = null;
-                myUser.Id = 0;
-
-                //Si aucune classe n'a été choisie
-                if (cbUsers_Class.SelectedIndex < 1)
-                {
-                    myUser.Class = null;
-                }
-                else //Sinon, on la récupère
-                {
-                    myUser.Class = classesList_Users[cbUsers_Class.SelectedIndex].Id;
-                }
-
-                //On tente d'ajouter l'utilisateur
-                string returnValue = Api.Server.addUser(myUser);
-
-                //Si l'ajout s'est correctement déroulé
-                if (returnValue.Equals("ok"))
-                {
-                    //On change la StatusBar
-                    spawnErrorBar("Utilisateur inséré avec succès! (Nom: \"" + tbUsers_Name.Text + "\", Login: \""+tbUsers_Login.Text+"\", Password: \"" + password + "\")", false);
-                }
-                else
-                {
-                    //On change la StatusBar avec le message d'erreur renvoyé
-                    spawnErrorBar(returnValue, true);
-                }
-
-                //On rafraichit les contrôles
-                refreshUsers();
-
-            }
-
-            //On rafraichit les contrôles
-            refreshUsers();
-        }
-
-        //L'utilisateur a cliqué sur "Supprimer"
-        private void bUsers_Del_Click(object sender, RoutedEventArgs e)
-        {
-            //S'il n'y a pas d'utilisateur sélectionné
-            if (cbUsers_Users.SelectedIndex<1)
-            {
-                spawnErrorBar("Choisissez d'abord un utilisateur à supprimer!", true);
-                return;
-            }
-
-            //On récupère l'id de l'utilisateur
-            int idUser = usersList[cbUsers_Users.SelectedIndex].Id;
-
-            //On tente de le supprimer
-            string returnValue = Api.Server.delUser(idUser);
-
-            //Si la suppression s'est correctement déroulée
-            if (returnValue.Equals("ok"))
-            {
-                //On change la StatusBar
-                spawnErrorBar("Utilisateur " + cbUsers_Users.SelectedItem.ToString() + " supprimé avec succès!", false);
-            }
-            else
-            {
-                //On change la StatusBar avec le message d'erreur renvoyé
-                spawnErrorBar(returnValue, true);
-            }
-        }
-
-        #endregion
-
         #region Matières
 
         //Rafraichissement des différents contrôles
@@ -1354,6 +825,9 @@ namespace Client
             }
             else if (cbSubjects_Subjects.SelectedIndex > 0) //S'il s'agit d'une modification
             {
+                //On récupère l'id de la matière actuelle
+                int idSubject = subjectsList[cbSubjects_Subjects.SelectedIndex].Id;
+
                 //On vérifie que le nom de la matière est valide
                 if (tbSubjects_Name.Text.Trim().Equals(""))
                 {
@@ -1365,6 +839,7 @@ namespace Client
                 //On prépare notre matière
                 SubjectData mySubject = new SubjectData();
                 mySubject.Name = tbSubjects_Name.Text;
+                mySubject.Id = idSubject;
                 if (modalityInformations.Count != 0)
                 {
 
@@ -1461,85 +936,400 @@ namespace Client
 
         #endregion
 
+        #region Utilisateurs
 
-        
-
-        private void RightsGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //Rafraichissement des contrôles
+        public void refreshUsers()
         {
+            usersList = new IdName[] { new IdName() { Id = 0, Name = "Nouvel Utilisateur" } }.Concat(Api.Server.getUsers()).ToArray();
+            cbUsers_Users.DataContext = usersList;
+            cbUsers_Users.SelectedIndex = 0;
 
+            classesList_Users = new IdName[] { new IdName() { Id = 0, Name = "Aucune" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
+            cbUsers_Class.DataContext = classesList_Users;
+            cbUsers_Class.SelectedIndex = 0;
         }
 
-        //Si l'utilisateur clique sur la combobox des rôles dans la DataGrid
-        private void cbUsers_RoleDataRights_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //Si l'utilisateur à choisi... un utilisateur
+        private void cbUsers_Users_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //DataGridRow row = RightsGrid.ItemContainerGenerator.ContainerFromIndex(RightsGrid.SelectedIndex) as DataGridRow;
-            //ComboBox ele = RightsGrid.Columns[0].GetCellContent(row) as ComboBox;
-            //MessageBox.Show(ele.SelectedItem.ToString());
-            //MessageBox.Show("test");
-            ModalityData moda=new ModalityData();
-            SubjectData monsub = new SubjectData();
+            //Si l'utilisateur est déjà dans la base
+            if (cbUsers_Users.SelectedIndex > 0)
+            {
+                //On récupère ses informations
+                userInformations = Api.Server.getUser(usersList[cbUsers_Users.SelectedIndex].Id);
+
+                //On peuple les contrôles
+                tbUsers_Login.Text = userInformations.Login;
+                tbUsers_Name.Text = userInformations.Name;
+
+                //Si l'utilisateur fait parti d'une classe
+                if (userInformations.Class != null)
+                {
+
+                    int index = 0;
+                    //On cherche l'index de la classe
+                    foreach (IdName classe in classesList_Users)
+                    {
+                        if (classe.Id == userInformations.Class.Id)
+                        {
+                            break;
+                        }
+                        index++;
+                    }
+
+                    //On sélectionne la classe de l'utilisateur
+                    cbUsers_Class.SelectedIndex = index;
+                }
+
+                //S'il a des rôles
+                if (userInformations.Roles != null)
+                {
+                    //On les récupère
+                    rolesInformations = userInformations.Roles.ToList();
+
+                    //On récupère la liste des universités
+                    universityList = Api.Server.getPlannings(EventData.TypeEnum.University);
+
+                    //Et celle des campus
+                    campusListRights = Api.getPlannings(EventData.TypeEnum.Campus);
+
+                    //Pour chaque rôle
+                    foreach (RoleData myRole in rolesInformations)
+                    {
+                        
+                        if (myRole.Role == RoleData.RoleType.Administrator) //Si le rôle est "Administrateur"
+                        {
+                            //On remplit les champs manquants
+                            myRole.RoleName = "Administrateur";
+
+                            //Pour chaque université
+                            foreach (IdName university in universityList)
+                            {
+                                if (university.Id == myRole.TargetId) //Si c'est l'université que l'on recherche
+                                {
+                                    //On récupère son nom
+                                    myRole.TargetName = university.Name;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (myRole.Role == RoleData.RoleType.CampusManager) //Si c'est le rôle Campus Manager
+                        {
+                            //On remplit les champs manquants
+                            myRole.RoleName = "Campus Manager";
+
+                            //Pour chaque campus
+                            foreach (IdName campus in campusListRights)
+                            {
+                                if (campus.Id == myRole.TargetId) //Si c'est le campus que l'on recherche
+                                {
+                                    //On récupère son nom
+                                    myRole.TargetName = campus.Name;
+                                    break;
+                                }
+                            }
+                        }
+                        else //Si c'est le rôle "Speaker"
+                        {
+                            //On remplit les champs manquants
+                            myRole.RoleName = "Intervenant";
+                        }
+                    }
+                }
+                else
+                {
+                    //On initialise une nouvelle liste de rôles
+                    rolesInformations = new List<RoleData>();
+                }
+
+                //On rafraichit la DataGrid des rôles
+                refreshRoleGrid();
+            }
+            else if (cbUsers_Users.SelectedIndex == 0) //Si c'est la création d'un nouvel utilisateur
+            {
+                //On initialise une nouvelle liste de rôles
+                rolesInformations = new List<RoleData>();
+
+                //On rafraichit la DataGrid des rôles
+                refreshRoleGrid();
+            }
         }
 
-        private void RolesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //Lorsque l'utilisateur choisit un rôle
+        private void cbUsers_Rights_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //Si c'est le rôle "Administrateur"
+            if (cbUsers_Rights.SelectedIndex == 1)
+            {
+
+                //On charge la deuxieme combobox avec les universités
+                universityList = Api.Server.getPlannings(EventData.TypeEnum.University);
+                cbUsers_RightsType.DataContext = universityList;
+
+                //On affiche la deuxième combobox des rôles
+                cbUsers_RightsType.Visibility = Visibility.Visible;
+            }
+            else if (cbUsers_Rights.SelectedIndex == 2) //Si c'est le rôle "Campus Manager"
+            {
+                //On charge la deuxieme combobox avec les campus
+                campusListRights = Api.getPlannings(EventData.TypeEnum.Campus);
+                cbUsers_RightsType.DataContext = campusListRights;
+
+                //On affiche la deuxième combobox des rôles
+                cbUsers_RightsType.Visibility = Visibility.Visible;
+
+            }
+            else if (cbUsers_Rights.SelectedIndex == 3) //Si c'est le rôle "Speaker"
+            {
+                //On ajoute le rôle à notre liste de rôles
+                rolesInformations.Add(new RoleData() { Id = 0, Role = RoleData.RoleType.Speaker, RoleName = "Intervenant", TargetName = "", TargetId = null });
+
+                //On revient sur "Ajouter un rôle"
+                cbUsers_Rights.SelectedIndex = 0;
+
+                //On cache la deuxième combobox des rôles
+                cbUsers_RightsType.Visibility = Visibility.Hidden;
+
+                //On rafraichit la DataGrid des rôles
+                refreshRoleGrid();
+            }
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //Lorsque l'utilisateur choisit une cible pour le rôle
+        private void cbUsers_RightsType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            //Si le rôle était "Administrateur"
+            if (cbUsers_Rights.SelectedIndex == 1)
+            {
+                //On ajoute le nouveau rôle
+                rolesInformations.Add(new RoleData() { Id = 0, Role = RoleData.RoleType.Administrator, RoleName = "Administrateur", TargetId = universityList[cbUsers_RightsType.SelectedIndex].Id, TargetName = cbUsers_RightsType.SelectedItem.ToString() });
+
+                //On se remet sur "Ajouter un rôle"
+                cbUsers_Rights.SelectedIndex = 0;
+                cbUsers_RightsType.SelectedIndex = -1;
+
+                //On rafraichit la DataGrid des rôles
+                refreshRoleGrid();
+            }
+            else if (cbUsers_Rights.SelectedIndex == 2) //Si le rôle est "Campus Manager"
+            {
+                //On ajoute le nouveau rôle
+                rolesInformations.Add(new RoleData() { Id = 0, Role = RoleData.RoleType.CampusManager, RoleName = "Campus Manager", TargetId = campusListRights[cbUsers_RightsType.SelectedIndex].Id, TargetName = cbUsers_RightsType.SelectedItem.ToString() });
+
+                //On se remet sur "Ajouter un rôle"
+                cbUsers_Rights.SelectedIndex = 0;
+                cbUsers_RightsType.SelectedIndex = -1;
+
+                //On rafraichit la DataGrid des rôles
+                refreshRoleGrid();
+            }
         }
 
-        private void RolesGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        //Si l'utilisateur souhaite supprimer un rôle
+        private void bUsers_DelRight_Click(object sender, RoutedEventArgs e)
         {
- 
+            //On récupère le rôle sélectionné
+            RoleData myRole = (RoleData)RolesGrid.SelectedItem;
+            if (myRole == null)
+            {
+                spawnErrorBar("Selectionnez d'abord un rôle dans la liste pour le supprimer!", true);
+                return;
+            }
+            rolesInformations.Remove(myRole);
+            refreshRoleGrid();
         }
 
-        private void RolesGrid_CurrentCellChanged(object sender, EventArgs e)
+        //Rafraichissement de la DataGrid des rôles
+        public void refreshRoleGrid()
         {
-            //refreshRoleGrid();
+            RolesGrid.DataContext = rolesInformations.ToArray(); ;
         }
 
-        
+        //Si l'utilisateur choisit "Ajouter/Modifier"
+        private void bUsers_AddMod_Click(object sender, RoutedEventArgs e)
+        {
+            //S'il s'agit d'une modification...
+            if (cbUsers_Users.SelectedIndex > 0)
+            {
+                //On récupère l'id de l'utilisateur
+                int idUser = usersList[cbUsers_Users.SelectedIndex].Id;
+
+                string password, passwordHashed;
+
+                //On vérifie que l'utilisateur entré est valide
+                if (tbUsers_Name.Text.Trim().Equals(""))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Veuillez entrer un nom d'utilisateur valide!", true);
+                    return;
+                }
+
+                //On vérifie que le login entré est valide
+                if (tbUsers_Login.Text.Trim().Equals(""))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Veuillez entrer un login valide!", true);
+                    return;
+                }
+
+                //On récupère le mot de passe
+                if (cbUsers_GenPass.IsChecked == true) //Si l'administrateur veut une génération aléatoire du mot de passe...
+                {
+                    password = RandomPassword.Generate(8, 10);
+                }
+                else //Si l'administrateur a défini lui même un mot de passe...
+                {
+                    if (tbUsers_Pass.Text.Trim().Equals(""))
+                    {
+                        //On change la StatusBar
+                        spawnErrorBar("Veuillez choisir un mot de passe valide!", true);
+                        return;
+                    }
+                    password = tbUsers_Pass.Text;
+                }
+
+                //On hashe le mot de passe
+                passwordHashed = RandomPassword.HashString(password);
+
+                //On prépare notre utilisateur
+                UserData myUser = new UserData();
+                myUser.Name = tbUsers_Name.Text;
+                myUser.Login = tbUsers_Login.Text;
+                myUser.Password = passwordHashed;
+                myUser.Id = idUser;
+
+                if (rolesInformations.Count() == 0)
+                {
+                    myUser.Roles = null;
+                }
+                else
+                {
+                    myUser.Roles = rolesInformations.ToArray();
+                }
+
+                //Si aucune classe n'a été choisie
+                if (cbUsers_Class.SelectedIndex < 1)
+                {
+                    myUser.Class = null;
+                }
+                else //Sinon, on la récupère
+                {
+                    myUser.Class = classesList_Users[cbUsers_Class.SelectedIndex].Id;
+                }
+
+                //On tente de modifier l'utilisateur
+                string returnValue = Api.Server.setUser(myUser);
+
+                //Si la modification s'est correctement déroulé
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Utilisateur modifié avec succès! (Nom: \"" + cbUsers_Users.SelectedItem.ToString() + "\", Login: \"" + tbUsers_Login.Text + "\", Password: \"" + password + "\")", false);
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    spawnErrorBar(returnValue, true);
+                }
+
+                //On rafraichit les contrôles
+                refreshUsers();
+
+            }
+            else if (cbUsers_Users.SelectedIndex == 0)//S'il s'agit d'un ajout
+            {
+                string password, passwordHashed;
+
+                //On vérifie que l'utilisateur entré est valide
+                if (tbUsers_Name.Text.Trim().Equals(""))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Veuillez entrer un nom d'utilisateur valide!", true);
+                    return;
+                }
+
+                //On vérifie que le login entré est valide
+                if (tbUsers_Login.Text.Trim().Equals(""))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Veuillez entrer un login valide!", true);
+                    return;
+                }
+
+                //On récupère le mot de passe
+                if (cbUsers_GenPass.IsChecked == true) //Si l'administrateur veut une génération aléatoire du mot de passe...
+                {
+                    password = RandomPassword.Generate(8, 10);
+                }
+                else //Si l'administrateur a défini lui même un mot de passe...
+                {
+                    if (tbUsers_Pass.Text.Trim().Equals(""))
+                    {
+                        //On change la StatusBar
+                        spawnErrorBar("Veuillez choisir un mot de passe valide!", true);
+                        return;
+                    }
+                    password = tbUsers_Pass.Text;
+                }
+
+                //On hashe le mot de passe
+                passwordHashed = RandomPassword.HashString(password);
+
+                //On prépare notre utilisateur
+                UserData myUser = new UserData();
+                myUser.Name = tbUsers_Name.Text;
+                myUser.Login = tbUsers_Login.Text;
+                myUser.Password = passwordHashed;
+                myUser.Id = 0;
+
+                //S'il n'y a pas de rôles à envoyer
+                if (rolesInformations.Count() == 0)
+                {
+                    myUser.Roles = null; //On met à null
+                }
+                else
+                {
+                    myUser.Roles = rolesInformations.ToArray(); //Sinon, on les envoie
+                }
+
+                
+
+                //Si aucune classe n'a été choisie
+                if (cbUsers_Class.SelectedIndex < 1)
+                {
+                    myUser.Class = null;
+                }
+                else //Sinon, on la récupère
+                {
+                    myUser.Class = classesList_Users[cbUsers_Class.SelectedIndex];
+                }
+
+                //On tente d'ajouter l'utilisateur
+                string returnValue = Api.Server.addUser(myUser);
+
+                //Si l'ajout s'est correctement déroulé
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Utilisateur inséré avec succès! (Nom: \"" + tbUsers_Name.Text + "\", Login: \"" + tbUsers_Login.Text + "\", Password: \"" + password + "\")", false);
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    spawnErrorBar(returnValue, true);
+                }
+
+                //On rafraichit les contrôles
+                refreshUsers();
+            }
+        }
+
+        #endregion
+
+
 
         
 
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-        
-
-
-
-        
-
-        
-
-
-        
     }
 }
