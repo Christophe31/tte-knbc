@@ -71,6 +71,51 @@ Narbonne Christophe :
   * Implémentation de la partie de connexion client/serveur.
   * Menthor de Thomas.
   * Gros contributeur de la gestion du cache.
-
+  * Mise en place et configuration des outils.
 
 = Outils et moyens mis en place =
+Cette partie prend une importance particulière du fait que la division supinfo/ingésup a littérallement scindé notre équipe, les heures allouées au projets de groupes no collaient même pas et nous nous croisions difficilement il fallait donc nécessairement centraliser la communication, permettre de limiter ce problème et avoir d'accessible tout notre projet pour tous nos membres...
+
+==Centralisation du contenu==
+Comme nous avons un gout pour le logiciel libre, ça nous a simplifer l'hébergement, beaucoup de sites permettent d'héberger du contenu libre. Nous avons choisi Google Code pour leur réputation de fiabilité des serveurs, d'efficacité de service, et car tout le monde dans notre groupe avait déjà un compte Google...
+
+Ce service propose:
+  * Système de gestion de révision (SVN ou mercurial).
+  * Wiki.
+  * hébergement de fichiers.
+  * Bug tracker.
+
+Il était évident que nous aurions utilisé un système de gestion de révision, après, la question SVN, Mercurial... on a pensé que SVN serait plus simple pour les plus néophites de notre équipe mais lors de gros changements, ou même dans certains contextes de merge, il manquait une bonne gestion des branche et la possibilité de commiter en local sans rendre la source au centre boguée.
+
+Le wiki c'est avéré un moyen logique de centraliser notre documentation, centralisé, accessible, facile à retrouver.
+
+L'hébergement de fichier a permis entre autre à Romain de nous soumettre des ressources sans passer par SVN et donc sans le client SVN.
+
+Comme nous somme dans une petite équipe sans "béta testeurs" en dehors, nous n'avons pas utilisé le Bug tracker.
+
+==Centralisation de la communication==
+Pour la centralisation de la communication, nous avons utilisé différents outils, le wiki n'est pas un moyen adapté, il n'a pas de RSS par page ou de bon moyen de se tenir au courrent lors de nouvautés.
+
+Nous avons utilisé une Mailing List pour permettre de communiquer avec les membres du groupe sans changer leurs habitudes.
+Elle a été utilisée pour parler des points d'avancement important, pour fixer des deadlines, pour organiser des réunions, pour demmander et soumettre des suggestions publiques, à l'ensemble de l'équipe...
+Pour ce service, ayant déjà sur google code notre projet, nous avons utilisé "google groups" pour éviter de faire des comptes partout.
+
+Après pour le débug rapide, les demandes personnelles, nous avons pas mal utilisé la messagerie instentanée (Jabber, MSN).
+
+Nous avons aussi mis en place un serveur Mumble, un espèce de Chat VOIP qui a pu permettre certaines petites réunions privés voire d'avoir virtuellement une personne indisponible lors d'une réunion. Il a aussi été utilisé "en tâche de fond" pendant le développement pour poser vite et clairement les questions... le problème de cet outil était principalement que jérémy vivant dans une cité universitaire, il son réseau ne laissait pas se connecter.
+
+=Bilans Personnels=
+Ces bilans ont étés écrits par les membres eux mèmes et sont donc à la première personne, comme des simples réflexions personelles.
+==Breil Romaric==
+==Cheynet Romain==
+==Despax Thomas==
+==Kornylo Jérémy==
+==Narbonne Christophe==
+Cette experiance fut une riche pour moi. C'est la première fois que j'ai véritablement l'impression de coder en groupe, je me suis beaucoup impliqué dans ce projet. Du fait de ma motivation, en espérant pouvoir tirer le projet de l'avant, j'ai proposé à l'équipe d'en prendre les rennes. Il n'y a pas eu d'oppositions. Ce projet a aussi été pour moi une de mes premières expériences de management. J'ai certainement commis des erreurs, il est parfois difficile de savoir si critiquer les autres vas les faire avancer ou les démoraliser, si être prétencieux et arrogant vas motiver un esprit de défi ou démotiver, si guider de près une personne vas l'aider à comprendre ou la rendre dépendente...
+
+J'ai fais ce que sur le moment je pensais être le mieux et je n'ai pas vraiment les moyens de savoir ce qui aurait changé si j'avais fait différemment... J'ai eu la chance d'avoir une équipe qui accepte bien les critiques dans l'ensemble, même quand elles sont franches et tranchantes.
+
+Sur le plan développement, je suis assez coutimier de git, c'est la première fois que j'utilise vraiment SVN, j'ai été un peu déçus par son incapacité à comprendre les déplacements de fichiers, les supression/renomages de dossiers en un nom qui existait déjà...
+WCF est très simple, j'ai trouvé l'outil très bon à un détail prêt.... la configuration ma pris des plombes... Avoir une authentification, ou un stockage de variables par session avec une session non sécurisée... Une misère... j'ai du perdre 4 demies journées pour avoir une chose qui me satisfait vraiment. Maintenant que j'ai ça sous le coude, je pense que j'irai plus vite la prochaine fois.
+
+Pour ce qui est du cache, du WPF, de la base de donnée, j'ai pas mal appris même si j'ai certainement gardé mes lacunes en gestion d'interfaces graphiques vu que je n'ai fait que la fenetre de login ;-).
