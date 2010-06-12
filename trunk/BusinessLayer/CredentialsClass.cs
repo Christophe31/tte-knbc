@@ -13,7 +13,7 @@ namespace BusinessLayer
 	/// <summary>
 	/// Validation du login/mot de passe
 	/// </summary>
-	public class AuthValidator : UserNamePasswordValidator, IDisposable
+	public sealed class AuthValidator : UserNamePasswordValidator, IDisposable
 	{
 		DataAccessLayer.Entities db = new DataAccessLayer.Entities();
 		/// <summary>
@@ -36,9 +36,13 @@ namespace BusinessLayer
 
 		#region IDisposable Members
 
+		/// <summary>
+		/// Dispose the db properly
+		/// </summary>
 		public void Dispose()
 		{
 			db.Dispose();
+			GC.SuppressFinalize(this);
 		}
 
 		#endregion
