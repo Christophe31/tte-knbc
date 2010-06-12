@@ -382,7 +382,7 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.setUser(UserData userToSet)
 		{
-			if ((!isUserAdmin)||(userToSet.Id!=currentUserId))
+			if (!(isUserAdmin||userToSet.Id==currentUserId))
 				return "Vous devez être administrateur pour faire ça.";
 			User usr = db.User.First(u => u.Id == userToSet.Id);
 			if ( isUserAdmin)
@@ -444,7 +444,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var sub = db.Modality.First(p => p.Id == subjectToSet.Id);
-			foreach (Modality dbMod in sub.Modalitys.ToArray())
+			foreach (Modality dbMod in sub.Modalitys.Distinct().ToArray())
 			{
 				var newMod=subjectToSet.Modalities.FirstOrDefault(m => m.Id == dbMod.Id);
 				if (newMod==null)

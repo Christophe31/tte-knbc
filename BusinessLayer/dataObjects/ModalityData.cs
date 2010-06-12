@@ -7,7 +7,9 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-
+	/// <summary>
+	/// Classe représentant les modalités
+	/// </summary>
 	[DataContract]
 	public class ModalityData:IdName
 	{

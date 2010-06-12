@@ -6,20 +6,41 @@ using System.Runtime.Serialization;
 
 namespace BusinessLayer
 {
+	/// <summary>
+	/// Classe de représentation d'un évènement
+	/// </summary>
 	[DataContract]
 	public class EventData:object
 	{
+		/// <summary>
+		/// Enum indicant le planning parrent.
+		/// </summary>
 		[DataContract]
 		public enum TypeEnum
         {
+			/// <summary>
+			/// Représente l'université
+			/// </summary>
 			[EnumMember]
             University,
+			/// <summary>
+			/// Campus
+			/// </summary>
 			[EnumMember]
             Campus,
+			/// <summary>
+			/// Période
+			/// </summary>
 			[EnumMember]
             Period,
+			/// <summary>
+			/// Classe
+			/// </summary>
 			[EnumMember]
             Class,
+			/// <summary>
+			/// Utilisateur
+			/// </summary>
 			[EnumMember]
             User
         }
@@ -42,7 +63,7 @@ namespace BusinessLayer
 		public IdName ParentPlanning { get; set; }
 
 		/// <summary>
-		/// 
+		/// Identifiant
 		/// </summary>
 		[DataMember]
 		public int Id { get; set; }

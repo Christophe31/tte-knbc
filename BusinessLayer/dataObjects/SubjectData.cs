@@ -7,7 +7,9 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	[DataContract]
 	public class SubjectData:IdName
 	{
