@@ -24,11 +24,13 @@ namespace Client
 		public Administration()
 		{
 			InitializeComponent();
+
+            //Instanciation du pointeur vers le serveur distant
 			Api = new CacheWrapper();
 		}
 
-        #region Definitions
 
+        #region Definitions - Ensemble des différents objets utilisés par l'interface d'administration
         protected CacheWrapper Api;
         public IdName[] promoList = null;
         public SubjectData[] subjectsList = null;
@@ -50,25 +52,28 @@ namespace Client
         #endregion
         #endregion
 
-        #region Error bar
+        #region Status Bar - Barre d'état affichant les messages de réussite ou d'erreur lors de la manipulation de l'interface d'administration
+
+        //Gestion de la barre
         public void spawnErrorBar(string message, Boolean isError)
         {
-            //On affiche la barre d'erreurs
+            //On affiche la barre d'état
             ErrorBar.Visibility = Visibility.Visible;
+            ErrorBorder.Visibility = Visibility.Visible;
             Uri uri = null;
             SolidColorBrush macouleur = null;
 
             //Si c'est un message d'erreur...
             if (isError)
             {
-                //On change le fond, la bordure et l'image de la barre d'erreur
+                //On change le fond, la bordure et l'image de la barre
                 macouleur = new SolidColorBrush(System.Windows.Media.Brushes.Orange.Color);
                 uri = new Uri(@"..\Icons\error32.png", UriKind.Relative);
                 ErrorBorder.BorderBrush = System.Windows.Media.Brushes.Orange;
             }
-            else //Si c'est un message d'information
+            else //Si c'est un message d'information / de réussite
             {
-                //On change le fond, la bordure et l'image de la barre d'information
+                //On change le fond, la bordure et l'image de la barre
                 macouleur = new SolidColorBrush(System.Windows.Media.Brushes.LimeGreen.Color);
                 uri = new Uri(@"..\Icons\accept32.png", UriKind.Relative);
                 ErrorBorder.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
@@ -83,13 +88,16 @@ namespace Client
             ErrorBorder.BorderThickness = new Thickness(1);
         }
 
+        //Permet de fermer la barre de Statut
         private void CloseErrorBar_Click(object sender, RoutedEventArgs e)
         {
             ErrorBar.Visibility = System.Windows.Visibility.Collapsed;
+            ErrorBorder.Visibility = System.Windows.Visibility.Collapsed;
         }
         #endregion
 
-        #region Chargement du contrôle
+
+        #region Chargement du contrôle - Routines lancées au démarrage de l'UserControl ou servant à sa gestion
 
         //Au chargement du contrôle d'administration, on charge toutes les combobox
         private void AdministrationControl_Loaded(object sender, RoutedEventArgs e)
@@ -97,6 +105,7 @@ namespace Client
 			((ThreadStart)waitServeReady).BeginInvoke(null, null);
         }
 
+        //Permet de gérer la connection avec le serveur distant
 		void waitServeReady()
 		{
 			while (!Api.ServerAvailable)
@@ -106,6 +115,7 @@ namespace Client
 			this.Dispatcher.BeginInvoke((ThreadStart)refreshAllControls);
 		}
  
+        //Rafraichissement complet de la fenêtre d'Administration
 		void refreshAllControls()
         {
 			refreshPromotions();
@@ -114,8 +124,6 @@ namespace Client
 			refreshPeriods();
 			refreshClasses();
 			refreshUsers();
-			//refreshRights();
-            //refreshRoleGrid(); //watchme delete me
 		}
 
         #endregion
@@ -905,6 +913,9 @@ namespace Client
                 //On change la StatusBar avec le message d'erreur renvoyé
                 spawnErrorBar(returnValue, true);
             }
+
+            //On rafraichit les contrôles
+            refreshSubjects();
         }
 
         //Lorsque l'utilisateur choisit une matière
@@ -1146,11 +1157,15 @@ namespace Client
         {
             //On récupère le rôle sélectionné
             RoleData myRole = (RoleData)RolesGrid.SelectedItem;
+
+            //S'il n'y avait pas de rôle sélectionné, on affiche un message d'erreur
             if (myRole == null)
             {
                 spawnErrorBar("Selectionnez d'abord un rôle dans la liste pour le supprimer!", true);
                 return;
             }
+
+            //Sinon, on le supprime et on met à jour l'affichage de la DataGrid
             rolesInformations.Remove(myRole);
             refreshRoleGrid();
         }
@@ -1372,27 +1387,19 @@ namespace Client
             }
         }
 
-        //Si l'utilisateur coche la checkbox
+        //Si l'utilisateur coche la checkbox du password
         private void cbUsers_GenPass_Checked(object sender, RoutedEventArgs e)
         {
             tbUsers_Pass.IsEnabled = false;
         }
 
-        //Si l'utilisateur coche la décheckbox
+        //Si l'utilisateur décoche la checkbox du password
         private void cbUsers_GenPass_Unchecked(object sender, RoutedEventArgs e)
         {
             tbUsers_Pass.IsEnabled = true;
         }
 
         #endregion
-
-        
-
-        
-
-
-
-        
 
     }
 }
