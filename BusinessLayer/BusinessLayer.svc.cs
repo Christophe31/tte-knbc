@@ -114,7 +114,7 @@ namespace BusinessLayer
 		bool IBusinessLayer.isPlanningUpToDate(int Planning, DateTime LastUpdate)
 		{
 			var lu = centerToSqlDate(LastUpdate);
-			return db.Planning.Any(p=>p.Id == Planning && ((p.LastChange??DateTime.Now) >= lu));
+			return db.Planning.Any(p=>p.Id == Planning && (p.LastChange <= lu));
 		}
 		IdName[] IBusinessLayer.getPlannings(EventData.TypeEnum Type)
 		{
@@ -215,7 +215,7 @@ namespace BusinessLayer
 				return "veillez spécifier un nom d'utilisateur";
 			if (db.User.Any(u => User.Login == u.Login))
 				return "cet utilisateur existe déjà";
-			if (User.Class!=null && ((User.Class.Id != 0) || !validPlanning(User.Class.Id, EventData.TypeEnum.Class)))
+			if (!(User.Class==null || ((User.Class.Id != 0) || !validPlanning(User.Class.Id, EventData.TypeEnum.Class))))
 				return "veuillez définir une classe valide";
 			Planning plan = new Planning() 
 			{
@@ -387,7 +387,7 @@ namespace BusinessLayer
 			User usr = db.User.First(u => u.Id == userToSet.Id);
 			if ( isUserAdmin)
 			{
-				if(!validPlanning(userToSet.Class.Id, EventData.TypeEnum.Class))
+				if(!validPlanning(userToSet.Class==null?0:userToSet.Class.Id, EventData.TypeEnum.Class))
 					return "Nouvelle classe invalide";
 				if (userToSet.Login != usr.Login && !db.User.Any(u => u.Login == userToSet.Login))
 					usr.Login = userToSet.Login;
