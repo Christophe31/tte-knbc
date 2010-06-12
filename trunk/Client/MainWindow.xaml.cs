@@ -763,7 +763,7 @@ namespace Client
             {
                 selectedEvent.Mandatory = EditEvent_Mandatory.IsChecked.GetValueOrDefault();
                 selectedEvent.Name = EditEvent_Name.Text;
-                selectedEvent.Place = EditEvent_Place.Text = selectedEvent.Place;
+                selectedEvent.Place = EditEvent_Place.Text;
                 selectedEvent.Speaker = (IdName)EditEvent_Speaker.SelectedValue;
                 selectedEvent.Subject = (IdName)EditEvent_Subject.SelectedValue;
                 selectedEvent.Modality = (IdName)EditEvent_Modality.SelectedValue;
