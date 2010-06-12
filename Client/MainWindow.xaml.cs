@@ -332,6 +332,7 @@ namespace Client
                     // Draw the control
                     EventControl evc = new EventControl();
                     evc.DataContext = ev;
+                    evc.MouseLeftButtonUp += new MouseButtonEventHandler(EventControl_MouseLeftButtonUp);
 
                     double eventSize = gridWidth / ev.MaxNeighboursEvents;
 
@@ -344,6 +345,15 @@ namespace Client
                     grid.Children.Add(evc);
                 }
             }
+        }
+
+        private void EventControl_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TextBlock)
+                selectedEvent = ((TextBlock)sender).DataContext as EventData;
+            else if (sender is EventControl)
+                selectedEvent = ((EventControl)sender).DataContext as EventData;
+            FillEditEventToolbar();
         }
 
         public void RefreshDayGrid()
@@ -451,6 +461,9 @@ namespace Client
 
                         TextBlock tb = new TextBlock();
                         tb.Text = ev.Start.ToShortTimeString() + " - " + (String.IsNullOrEmpty(ev.Name) ? ev.Subject.Name : ev.Name);
+
+                        tb.DataContext = ev;
+                        tb.MouseLeftButtonUp += new MouseButtonEventHandler(EventControl_MouseLeftButtonUp);
 
                         b.Child = tb;
                         sp.Children.Add(b);
