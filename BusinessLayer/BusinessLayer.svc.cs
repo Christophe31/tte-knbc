@@ -678,9 +678,13 @@ namespace BusinessLayer
 
 		#region IDisposable Members
 
+		/// <summary>
+		/// dispose the db properly
+		/// </summary>
 		public void Dispose()
 		{
 			this.db.Dispose();
+			GC.SuppressFinalize(this);
 		}
 
 		#endregion

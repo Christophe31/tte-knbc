@@ -76,9 +76,11 @@ public class RandomPassword
         System.Security.Cryptography.MD5CryptoServiceProvider myCryptoProvider = new System.Security.Cryptography.MD5CryptoServiceProvider();
         byte[] data = System.Text.Encoding.ASCII.GetBytes(Value);
         data = myCryptoProvider.ComputeHash(data);
+		myCryptoProvider.Dispose();
         string returnValue = "";
         for (int i = 0; i < data.Length; i++)
             returnValue += data[i].ToString("x2").ToLower();
+		
         return returnValue;
     }
 
@@ -144,6 +146,7 @@ public class RandomPassword
         // Generate 4 random bytes.
         RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
         rng.GetBytes(randomBytes);
+		rng.Dispose();
 
         // Convert 4 bytes into a 32-bit integer value.
         int seed = (randomBytes[0] & 0x7f) << 24 |
@@ -250,7 +253,6 @@ public class RandomPassword
                 lastLeftGroupsOrderIdx--;
             }
         }
-
         // Convert password characters into a string and return the result.
         return new string(password);
     }

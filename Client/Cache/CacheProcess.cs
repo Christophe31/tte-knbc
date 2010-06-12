@@ -14,7 +14,7 @@ using System.Xml;
 
 namespace Client
 {
-	internal class CacheProcess
+	internal class CacheProcess: IDisposable
 	{
 		public BusinessService.BusinessLayerClient Server;
 		public BusinessService.UserData CurrentUser;
@@ -117,9 +117,10 @@ namespace Client
 		{
 			FileStream fs = new FileStream(fileName, FileMode.Create);
 			XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(fs);
-			NetDataContractSerializer ser =
-				new NetDataContractSerializer();
+			NetDataContractSerializer ser = new NetDataContractSerializer();
 			ser.WriteObject(writer, obj);
+			fs.Close();
+			fs.Dispose();
 			writer.Close();
 		}
 		public object ReadFromFile(string fileName)
@@ -129,6 +130,7 @@ namespace Client
 			NetDataContractSerializer ser = new NetDataContractSerializer();
 			object o =	ser.ReadObject(reader, true);
 			fs.Close();
+			fs.Dispose() ;
 			return o;
 		}
 		public void RefreshCache(IdName idn)
@@ -140,6 +142,15 @@ namespace Client
 		{
 			WriteToFile(new Tuple<DateTime,EventData[]>(DateTime.Now,Server.getEvents(idn.Id, DateTime.MinValue, DateTime.MaxValue)), fileNameFromIdName(idn));
 		}
+		#endregion
+
+		#region IDisposable Members
+
+		public void Dispose()
+		{
+			Server.Close();
+		}
+
 		#endregion
 	}
 }
