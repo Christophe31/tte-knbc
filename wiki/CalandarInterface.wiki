@@ -9,8 +9,8 @@ _by Romaric Breil_
     * ~~Display hours reports (planed/theoretical)in CSV (cancelled)~~
     * ~~Display events of a speaker, in user planning~~
     * ~~Click on an event fill the editor~~
+    * ~~Error display~~
     * Messages to help users
-    * Error display
 
   * Events list
     * ~~Display/hide non mandatory events~~
