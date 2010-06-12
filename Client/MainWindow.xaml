@@ -30,8 +30,8 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <ToolBarTray Grid.Column="0" Grid.Row="1" Background="{x:Null}">
-            <ToolBar Header="Planning">
+        <ToolBarTray Grid.Column="0" Grid.Row="1">
+            <ToolBar Header="Planning" Band="1">
 				<ToolBar.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
@@ -51,7 +51,7 @@
                 <ComboBox Margin="0" Visibility="Collapsed" x:Name="ClassName" ItemsSource="{Binding}" SelectionChanged="ClassName_SelectionChanged" />
             </ToolBar>
 
-            <ToolBar Header="Filtres : " Foreground="Black">
+            <ToolBar Header="Filtres" Foreground="Black" Band="1">
             	<ToolBar.Background>
             		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             			<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
@@ -83,8 +83,31 @@
                     </StackPanel>
                 </CheckBox>
             </ToolBar>
+
+			<ToolBar Band="1">
+				<ToolBar.Background>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
+						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
+					</LinearGradientBrush>
+				</ToolBar.Background>
+				<Button Content="Import iCal" Click="iCal_import_Click" Foreground="Black"/>
+                <Button Content="Export iCal" Click="iCal_export_Click" Foreground="Black"/>
+                <Button Content="Rapports horaires" Click="report_Click" Foreground="Black"/>
+            </ToolBar>
+
+            <ToolBar Band="1">
+                <ToolBar.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFEBEBEB" Offset="0.272"/>
+                        <GradientStop Color="#FFA2A2A2" Offset="0.996"/>
+                    </LinearGradientBrush>
+                </ToolBar.Background>
+                
+                <Button Content="Déconnexion" Click="Disconnect_Click" Foreground="Black"/>
+            </ToolBar>
 			
-			<ToolBar>
+			<ToolBar Band="2">
 				<ToolBar.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
@@ -97,8 +120,8 @@
 						<TextBlock Foreground="Black">Précédent</TextBlock>
 					</StackPanel>
 				</Button>
-				<DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DayGridDateSelection"
-                            SelectedDateChanged="DayGridDateSelection_SelectedDateChanged" />
+				<DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DisplayedDate"
+                            SelectedDateChanged="DisplayedDate_SelectedDateChanged" />
 				<Button Name="DayGridNextDay" Click="DayGridNextDay_Click">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Margin="0,0,3,0" Foreground="Black">Suivant</TextBlock>
@@ -107,19 +130,7 @@
 				</Button>
 			</ToolBar>
 
-			<ToolBar>
-				<ToolBar.Background>
-					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
-						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
-					</LinearGradientBrush>
-				</ToolBar.Background>
-				<Button Content="Import iCal" Click="iCal_import_Click" Foreground="Black"/>
-                <Button Content="Export iCal" Click="iCal_export_Click" Foreground="Black"/>
-                <Button Content="Rapports horaires" Click="report_Click" Foreground="Black"/>
-            </ToolBar>
-
-            <ToolBar>
+            <ToolBar Band="2" Header="Editer un évènement" Name="EditEvent">
                 <ToolBar.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFEBEBEB" Offset="0.272"/>
@@ -127,7 +138,21 @@
                     </LinearGradientBrush>
                 </ToolBar.Background>
                 
-                <Button Content="Déconnexion" Click="Disconnect_Click" Foreground="Black"/>
+                <Label Name="EditEvent_Type" Content="Type"/>
+                <CheckBox Name="EditEvent_Mandatory" Content="Obligatoire"/>
+                <TextBox Name="EditEvent_Name" Text="Evènement"/>
+                <ComboBox Name="EditEvent_Place" Text="Salle" />
+                <ComboBox Name="EditEvent_Speaker" Text="Intervenant" />
+                <ComboBox Name="EditEvent_Subject" Text="Matière" SelectionChanged="EditEvent_Subject_SelectionChanged" />
+                <ComboBox Name="EditEvent_Modality" Text="Modalité"/>
+                <DatePicker Name="EditEvent_StartDate"/>
+                <ComboBox Name="EditEvent_StartHour"/>
+                <DatePicker Name="EditEvent_EndDate"/>
+                <ComboBox Name="EditEvent_EndHour"/>
+
+                <Button Content="Reset" Click="EditEvent_Reset_Click"/>
+                <Button Content="Apply" Click="EditEvent_Apply_Click"/>
+                <Button Content="Delete" Click="EditEvent_Delete_Click"/>
             </ToolBar>
         </ToolBarTray>
         
@@ -248,109 +273,23 @@
             </TabItem>
             
             <TabItem Header="Liste" Background="#FFA5A5A5" FontSize="13.333" HorizontalAlignment="Left" Margin="-2,0,0,-1" Width="44.654">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                    	<ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                    	<RowDefinition Height="auto"/>
-                    	<RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <Label Content="Début"/>
-                        <DatePicker x:Name="StartDate"/>
-                        <Label Content="Fin"/>
-                        <DatePicker x:Name="EndDate"/>
-                    </StackPanel>
-                    
-                    <DataGrid Grid.Row="1" x:Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"
-                              CanUserAddRows="True" CanUserDeleteRows="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Type" Binding="{Binding LinkedTo, Mode=OneWay}"/>
-                            <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
-                        	<DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
-                            
-                            <DataGridTemplateColumn Header="Intervenant">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Speaker}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding Speakers, Mode=OneTime}" SelectedIndex="{Binding SpeakerIndex, Mode=OneWay}" SelectedValue="{Binding Speaker, Mode=OneWayToSource}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn Header="Matière">
-                                <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Subject}"/>
-                                </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding Subjects, Mode=OneTime}" SelectedIndex="{Binding SubjectIndex, Mode=OneWay}" SelectedValue="{Binding Subject, Mode=OneWayToSource}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn Header="Modalité">
-                                <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Modality}"/>
-                                </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                                <DataGridTemplateColumn.CellEditingTemplate>
-                                    <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding Modalities, Mode=OneTime}" SelectedIndex="{Binding ModalityIndex, Mode=OneWay}" SelectedValue="{Binding Modality, Mode=OneWayToSource}"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellEditingTemplate>
-                            </DataGridTemplateColumn>
-
-                            <DataGridTemplateColumn Header="Début" SortMemberPath="Start">
-                        		<DataGridTemplateColumn.CellTemplate>
-                        			<DataTemplate>
-                        				<TextBlock Text="{Binding Start, StringFormat=\{0:g\}}" />
-                        			</DataTemplate>
-                        		</DataGridTemplateColumn.CellTemplate>
-                        		<DataGridTemplateColumn.CellEditingTemplate>
-                        			<DataTemplate>
-                        				<StackPanel Orientation="Horizontal">
-                        					<DatePicker SelectedDate="{Binding StartDate, StringFormat=\{0:d\}}"/>
-                        					<TextBox Text="{Binding StartHour}" TextChanged="TimeBox_TextChanged" />
-                        					<Label Content=":00"/>
-                        				</StackPanel>
-                        			</DataTemplate>
-                        		</DataGridTemplateColumn.CellEditingTemplate>
-                        	</DataGridTemplateColumn>
-
-                        	<DataGridTemplateColumn Header="Fin" SortMemberPath="End">
-                        		<DataGridTemplateColumn.CellTemplate>
-                        			<DataTemplate>
-                        				<TextBlock Text="{Binding End, Mode=TwoWay, NotifyOnSourceUpdated=True, StringFormat=\{0:g\}}" />
-                        			</DataTemplate>
-                        		</DataGridTemplateColumn.CellTemplate>
-                        		<DataGridTemplateColumn.CellEditingTemplate>
-                        			<DataTemplate>
-                        				<StackPanel Orientation="Horizontal">
-                        					<DatePicker SelectedDate="{Binding EndDate, Mode=TwoWay, StringFormat=\{0:d\}}" />
-                        					<TextBox Text="{Binding EndHour, Mode=TwoWay}" TextChanged="TimeBox_TextChanged" />
-                        					<Label Content=":00"/>
-                        				</StackPanel>
-                        			</DataTemplate>
-                        		</DataGridTemplateColumn.CellEditingTemplate>
-                        	</DataGridTemplateColumn>
-                            
-                        	<DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                <DataGrid Grid.Row="1" x:Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"
+                            IsReadOnly="True" SelectedCellsChanged="EventsGrid_SelectedCellsChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Type" Binding="{Binding LinkedTo, Mode=OneWay}"/>
+                        <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
+                        <DataGridTextColumn Header="Desctiption" Binding="{Binding Name}"/>
+                        <DataGridTextColumn Header="Salle" Binding="{Binding Place}"/>
+                        <DataGridTextColumn Header="Intervenant" Binding="{Binding Speaker}"/>
+                        <DataGridTextColumn Header="Matière" Binding="{Binding Subject}"/>
+                        <DataGridTextColumn Header="Modalité" Binding="{Binding Modality}"/>
+                        <DataGridTextColumn Header="Début" SortMemberPath="Start" Binding="{Binding Start, StringFormat=\{0:g\}}" />
+                        <DataGridTextColumn Header="Fin" SortMemberPath="End" Binding="{Binding End, Mode=TwoWay, NotifyOnSourceUpdated=True, StringFormat=\{0:g\}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </TabItem>
 
-	            <TabItem Header="Admin" Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
+	        <TabItem Header="Admin" Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
                 <Grid>
                     <local:Administration x:Name="PanelAdmin" />
                 </Grid>
