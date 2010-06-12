@@ -7,7 +7,9 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-
+	/// <summary>
+	/// Period
+	/// </summary>
 	[DataContract]
 	public class PeriodData:IdName
 	{

@@ -7,7 +7,9 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-
+	/// <summary>
+	/// 
+	/// </summary>
 	[DataContract]
 	public class RoleData
 	{
@@ -17,10 +19,19 @@ namespace BusinessLayer
 		[DataContract]
 		public enum RoleType
 		{
+			/// <summary>
+			/// 
+			/// </summary>
 			[EnumMember]
 			Administrator,
+			/// <summary>
+			/// 
+			/// </summary>
 			[EnumMember]
 			CampusManager,
+			/// <summary>
+			/// 
+			/// </summary>
 			[EnumMember]
 			Speaker
 		}

@@ -6,12 +6,20 @@ using System.Runtime.Serialization;
 
 namespace BusinessLayer
 {
+	/// <summary>
+	/// Classe contenant Id et nom
+	/// </summary>
 	[DataContract]
 	public class IdName
 	{
-
+		/// <summary>
+		/// Id de l'objet représenté
+		/// </summary>
 		[DataMember]
 		public int Id{get;set;}
+		/// <summary>
+		/// nom de l'objet représenté
+		/// </summary>
 		[DataMember]
 		public string Name { get; set; }
 
