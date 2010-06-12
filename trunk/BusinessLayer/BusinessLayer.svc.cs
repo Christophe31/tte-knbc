@@ -618,7 +618,7 @@ namespace BusinessLayer
 					{
 						Class = new IdName()
 							   {
-								   Id = u.Planning.ParentPlanning.Parent ?? 0,
+								   Id = u.Planning.ParentPlanning ==null ?0: u.Planning.ParentPlanning.Id,
 								   Name = u.Planning.ParentPlanning.Name
 							   },
 						Id = ID,
