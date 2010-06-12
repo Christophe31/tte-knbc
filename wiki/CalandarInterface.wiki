@@ -5,15 +5,18 @@ _by Romaric Breil_
 
   * General
     * ~~CRUD~~
-    * Click on an event fill the editor
     * ~~CRUD activated only for user view, or if the user has rights~~
     * ~~Display hours reports (planed/theoretical)in CSV (cancelled)~~
-    * Display events of a speaker, in user planning
+    * ~~Display events of a speaker, in user planning~~
+    * Click on an event fill the editor
     * Messages to help users
     * Error display
 
   * Events list
     * ~~Display/hide non mandatory events~~
+
+  * Month calendar
+    * ~~Each day contains a list of events in this day~~
 
   * Day/week calendar
     * ~~Creation of a control which displays an event~~
@@ -23,6 +26,3 @@ _by Romaric Breil_
 
   * Week calendar
     * Display improvement (days extended when focused)
-
-  * Month calendar
-    * ~~Each day contains a list of events in this day~~
