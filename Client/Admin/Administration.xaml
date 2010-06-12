@@ -39,7 +39,17 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <Label Grid.Column="1" Grid.Row="0"  Content="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage" >
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="{x:Null}"/>
+                                <Setter Property="BorderThickness" Value="4"/>
+                                <Setter Property="IsTabStop" Value="False"/>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    
                     <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="..\Icons\accept32.png"/>
                 </Grid>
 
@@ -58,7 +68,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <GroupBox Grid.Row="0" Grid.Column="0" Name="gbPromotions" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <GroupBox Grid.Row="0" Grid.Column="0" Name="gbPromotions" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="..\Icons\medalgold32.png"/>
@@ -76,7 +86,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPromo_Promotions" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPromo_Promotions_SelectionChanged" />
+                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPromo_Promotions" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPromo_Promotions_SelectionChanged" VerticalAlignment="Top"/>
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -84,7 +94,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lPromo_Name" HorizontalAlignment="Center" />
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbPromo_Name" />
@@ -100,13 +110,13 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPromo_AddMod" Margin="0,20,5,0" Click="bPromo_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bPromo_Del" Margin="5,20,0,0" Click="bPromo_Del_Click" />
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPromo_AddMod" Margin="0,20,5,0" Click="bPromo_AddMod_Click" VerticalAlignment="Bottom"/>
+                        <Button Content="Supprimer" Grid.Column="1" Name="bPromo_Del" Margin="5,20,0,0" Click="bPromo_Del_Click" VerticalAlignment="Bottom"/>
                     </Grid>
                 </Grid>
             </GroupBox>
 
-            <GroupBox Grid.Row="0" Grid.Column="1" Name="gbSubjects" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <GroupBox Grid.Row="0" Grid.Column="1" Name="gbSubjects" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="..\Icons\book32.png"/>
@@ -163,7 +173,7 @@
                 </Grid>
             </GroupBox>
 
-            <GroupBox Grid.Row="0" Grid.Column="2" Name="gbCampus" HorizontalAlignment="Stretch" VerticalAlignment="Bottom">
+            <GroupBox Grid.Row="0" Grid.Column="2" Name="gbCampus" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="..\Icons\building32.png"/>
@@ -181,7 +191,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbCampus_Campus" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbCampus_Campus_SelectionChanged" />
+                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbCampus_Campus" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbCampus_Campus_SelectionChanged" VerticalAlignment="Top"/>
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -189,7 +199,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lCampus_Name" HorizontalAlignment="Center" />
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbCampus_Name" />
@@ -205,8 +215,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bCampus_AddMod" Margin="0,20,5,0" Click="bCampus_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bCampus_Del" Margin="5,20,0,0" Click="bCampus_Del_Click" />
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bCampus_AddMod" Margin="0,20,5,0" Click="bCampus_AddMod_Click" VerticalAlignment="Bottom"/>
+                        <Button Content="Supprimer" Grid.Column="1" Name="bCampus_Del" Margin="5,20,0,0" Click="bCampus_Del_Click" VerticalAlignment="Bottom"/>
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -218,7 +228,7 @@
                         <TextBlock Text="Périodes" VerticalAlignment="Center"/>
                     </StackPanel>
                 </GroupBox.Header>
-                <Grid Margin="10,10,10,0">
+                <Grid Margin="10,10,10,0" VerticalAlignment="Stretch" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
@@ -262,7 +272,7 @@
                         <TextBox Grid.Column="1" Grid.Row="1" Name="tbPeriods_EndDate" Margin="0,10,0,0"/>
 
                         <Label Content="Promotion:" Grid.Column="0" Grid.Row="2" Name="lPeriods_Promotion" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -272,7 +282,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
-                            <RowDefinition />
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
                         <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPeriods_AddMod" Margin="0,20,5,0" Click="bPeriods_AddMod_Click" />
@@ -326,10 +336,10 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Campus:" Grid.Column="0" Grid.Row="0" Name="lClasses_Campus" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0" VerticalAlignment="Center"/>
 
                         <Label Content="Période:" Grid.Column="0" Grid.Row="1" Name="lClasses_Period" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0" VerticalAlignment="Center"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -460,7 +470,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Classe:" Grid.Column="0" Grid.Row="0" Name="lUsers_Class" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" />
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center"/>
                     </Grid>
 
 

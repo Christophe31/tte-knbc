@@ -77,7 +77,7 @@ namespace Client
             //On applique les changements que l'on vient de faire
             ImageSource imgSource = new BitmapImage(uri);
             ErrorIcon.Source = imgSource;
-            ErrorMessage.Content = message;
+            ErrorMessage.Text = message;
             macouleur.Opacity = 0.5;
             ErrorBar.Background = macouleur;
             ErrorBorder.BorderThickness = new Thickness(1);
@@ -686,6 +686,8 @@ namespace Client
             }
             else if (cbClasses_Classes.SelectedIndex == 0)//S'il s'agit d'un ajout
             {
+                MessageBox.Show(cbSubjects_Subjects.ActualHeight.ToString());
+
                 //On vérifie que la classe entrée est valide
                 if (tbClasses_Name.Text.Trim().Equals(""))
                 {
@@ -1093,6 +1095,14 @@ namespace Client
 
                 //On rafraichit la DataGrid des rôles
                 refreshRoleGrid();
+            }
+            else if (cbUsers_Rights.SelectedIndex == 0) //Si l'utilisateur reclique sur "Ajouter un rôle"
+            {
+                if (cbUsers_RightsType != null) //Pour éviter le chargement lors de l'init du UserControl
+                {
+                    //On cache la deuxième combobox des rôles
+                    cbUsers_RightsType.Visibility = Visibility.Hidden;
+                }
             }
         }
 
