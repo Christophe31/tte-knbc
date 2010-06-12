@@ -11,6 +11,7 @@ _by Romaric Breil_
     * ~~Click on an event fill the editor~~
     * ~~Error display~~
     * Messages to help users
+    * CRUD: Places editable
 
   * Events list
     * ~~Display/hide non mandatory events~~
