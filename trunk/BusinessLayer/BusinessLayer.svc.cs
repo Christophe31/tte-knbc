@@ -210,13 +210,13 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (User.Password == null)
-				return "veuillez definir un mot de passe";
+				return "Veuillez définir un mot de passe.";
 			if (User.Name == null)
-				return "veillez spécifier un nom d'utilisateur";
+				return "Veuillez spécifier un nom d'utilisateur.";
 			if (db.User.Any(u => User.Login == u.Login))
-				return "cet utilisateur existe déjà";
+				return "Cet utilisateur existe déjà.";
 			if (!(User.Class==null || ((User.Class.Id != 0) || !validPlanning(User.Class.Id, EventData.TypeEnum.Class))))
-				return "veuillez définir une classe valide";
+				return "Veuillez définir une classe valide.";
 			Planning plan = new Planning() 
 			{
 				 Name = User.Name,
@@ -245,9 +245,9 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (validPlanning(classToSet.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period))
-				return "Class or Campus link invalid";
+				return "Période et/ou Campus invalide(s).";
 			if (db.Planning.Any(p =>classToSet.Campus!=null && p.Id == classToSet.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == classToSet.Name)))
-				return "Une classe ave ce nom existe déjà sur ce campus";
+				return "Une classe avec ce nom existe déjà sur ce campus.";
 			Planning plan = new Planning()
 			{
 				Name=classToSet.Name,
@@ -269,7 +269,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (db.Planning.Any(p => p.Type == null && p.Name == promotionName))
-				return "cette promotion existe déjà";
+				return "Cette promotion existe déjà!";
 			db.Planning.AddObject( new Planning(){
 				Name = promotionName,
 				LastChange = null,
@@ -284,7 +284,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (db.Planning.Any(p => p.Type == (int)EventData.TypeEnum.Campus && p.Name == campusName))
-				return "Le Campus ayant ce nom existe déjà.";
+				return "Un Campus ayant ce nom existe déjà.";
 			db.Planning.AddObject(new Planning()
 			{
 				Name = campusName,
@@ -360,11 +360,11 @@ namespace BusinessLayer
 			{
 				string eventsInSameLocation=(eventsInSameLocation = tmp.Where(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start && ev.Place == eventToAdd.Place).SelectMany(names => names.Name + ", ") as string);
 				if (eventsInSameLocation.Length > 0)
-					return "la salle est déjà occupée";
+					return "La salle est déjà occupée.";
 			}
 			string truc="";
 			if (db.User.Where(usr => usr.Id == (eventToAdd.Speaker==null?0:eventToAdd.Id)).Select(usr => usr.Planning.SpeakingEvents.Concat(usr.Planning.Events.Where(ev => ev.Mandatory))).Any(t => t.Any(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start)))
-				truc = "Le speaker risque d'être déjà occupé";
+				truc = "L'intervenant est déjà occupé à cet horaire.";
 			db.Event.AddObject(new Event()
 			{
 				Name = eventToAdd.Name,
@@ -388,7 +388,7 @@ namespace BusinessLayer
 			if ( isUserAdmin)
 			{
 				if(!validPlanning(userToSet.Class==null?0:userToSet.Class.Id, EventData.TypeEnum.Class))
-					return "Nouvelle classe invalide";
+					return "Nouvelle classe invalide.";
 				if (userToSet.Login != usr.Login && !db.User.Any(u => u.Login == userToSet.Login))
 					usr.Login = userToSet.Login;
 				usr.Planning.Parent = userToSet.Class.Id;
@@ -424,7 +424,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			if (!(validPlanning(classToSet.Campus.Id, EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period)))
-				return "référence invalide";
+				return "Référence invalide!";
 			var classe = db.Planning.First(p => p.Id == classToSet.Id && p.Type == (int)EventData.TypeEnum.Class);
 			classe.Name = classToSet.Name;
 			classe.Class.Period = classToSet.Period.Id;
@@ -510,7 +510,7 @@ namespace BusinessLayer
 			eve.Mandatory = eventToSet.Mandatory;
 
 			db.SaveChanges();
-			return "not implemented yet";
+			return "ok";
 		}
 		
 		string IBusinessLayer.delUser(int Id)
@@ -540,7 +540,7 @@ namespace BusinessLayer
 			var clas = db.Class.Where(p => p.Id == Id).First();
 			var plan = clas.Planning;
 			if(plan.ChildrenPlannings.Count>0)
-				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu";
+				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu.";
 			db.Class.DeleteObject(clas);
 			db.Planning.DeleteObject(plan);
 			return "ok";
@@ -568,7 +568,7 @@ namespace BusinessLayer
 			var per= db.Period.Where(p => p.Id == Id).First();
 			var plan = per.Planning;
 			if (plan.PeriodClasses.Count>0)
-				return "D'autres objests en dépendent, merci de les suprimmer en premier lieu";
+				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu.";
 			db.Period.DeleteObject(per);
 			db.Planning.DeleteObject(plan);
 			db.SaveChanges();
@@ -605,7 +605,7 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			var plan = db.Planning.Where(p => p.Id == Id).First();
 			if (plan.ChildrenPlannings.Count > 0)
-				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu";
+				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu.";
 			db.Planning.DeleteObject(plan);
 			db.SaveChanges();
 			return "ok";
