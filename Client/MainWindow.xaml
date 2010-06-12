@@ -196,7 +196,7 @@
             </Grid>
         </Border>
 
-        <TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl" Grid.RowSpan="2">
+        <TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl">
             <TabItem Header="Mois" Background="#FFA5A5A5" FontSize="13.333">
                 <Grid Name="MonthGrid" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
