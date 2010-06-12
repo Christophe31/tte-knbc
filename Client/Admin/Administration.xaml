@@ -33,6 +33,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
 
                     <Grid.RowDefinitions>
@@ -49,8 +50,11 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    
+
                     <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="..\Icons\accept32.png"/>
+                    <Button Click="CloseErrorBar_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
+                        <Image Source="..\Icons\cross.png"/>
+                    </Button>
                 </Grid>
 
             </Grid>

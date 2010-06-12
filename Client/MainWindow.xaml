@@ -27,10 +27,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         
-        <ToolBarTray Grid.Column="0" Grid.Row="1">
+        <ToolBarTray Grid.Column="0" Grid.Row="0">
             <ToolBar Header="Planning" Band="1">
 				<ToolBar.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -156,7 +155,48 @@
             </ToolBar>
         </ToolBarTray>
         
-		<TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl" Grid.RowSpan="2">
+        <Border BorderBrush="DarkGreen" BorderThickness="0" Name="ErrorBorder" Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="0" Grid.Column="0" Visibility="Collapsed" Name="ErrorBar" Background="Green">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage" >
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="BorderBrush" Value="{x:Null}"/>
+                                <Setter Property="BorderThickness" Value="4"/>
+                                <Setter Property="IsTabStop" Value="False"/>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="Icons\accept32.png"/>
+                    <Button Click="CloseErrorBar_Click" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <Image Source="Icons\cross.png"/>
+                    </Button>
+                </Grid>
+
+            </Grid>
+        </Border>
+
+        <TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl" Grid.RowSpan="2">
             <TabItem Header="Mois" Background="#FFA5A5A5" FontSize="13.333">
                 <Grid Name="MonthGrid" ShowGridLines="True">
                     <Grid.ColumnDefinitions>
