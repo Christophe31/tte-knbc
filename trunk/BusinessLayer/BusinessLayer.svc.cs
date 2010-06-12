@@ -529,11 +529,11 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			var usr = db.User.Where(p => p.Id == Id).First();
 			var plan = usr.Planning;
-			foreach (Role r in usr.Roles)
+			foreach (Role r in usr.Roles.ToArray())
 			{
 				db.Role.DeleteObject(r);
 			}
-			foreach(Event e in plan.Events.Concat(plan.OwnedEvents).Distinct())
+			foreach(Event e in plan.Events.Concat(plan.OwnedEvents).Distinct().ToArray())
 			{
 				e.PlaningRef.LastChange = DateTime.Now;
 				db.Event.DeleteObject(e);
