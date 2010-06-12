@@ -140,7 +140,7 @@
                 <Label Name="EditEvent_Type" Content="Type"/>
                 <CheckBox Name="EditEvent_Mandatory" Content="Obligatoire"/>
                 <TextBox Name="EditEvent_Name" Text="Evènement"/>
-                <ComboBox Name="EditEvent_Place" Text="Salle" />
+                <ComboBox Name="EditEvent_Place" Text="Salle" IsEditable="True" />
                 <ComboBox Name="EditEvent_Speaker" Text="Intervenant" />
                 <ComboBox Name="EditEvent_Subject" Text="Matière" SelectionChanged="EditEvent_Subject_SelectionChanged" />
                 <ComboBox Name="EditEvent_Modality" Text="Modalité"/>
