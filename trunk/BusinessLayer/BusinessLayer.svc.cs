@@ -503,7 +503,7 @@ namespace BusinessLayer
 				.Select(camp => camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla => cla.Events))).FirstOrDefault();
 			if (tmp != null)
 			{
-				eventsInSameLocation = tmp.Where(ev => ev.Start >= eventToSet.End && ev.End <= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
+				eventsInSameLocation = tmp.Where(ev => ev.Start <= eventToSet.End && ev.End >= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
 				if (eventsInSameLocation.Length > 0)
 					return "Les salles " + eventsInSameLocation+"Sont occupées.";
 			}
