@@ -23,6 +23,7 @@ namespace Client
 	public partial class MainWindow : Window
     {
         #region Properties
+        private IdName _selectedPlanning;
         public IdName SelectedPlanning
         {
             get
@@ -31,20 +32,22 @@ namespace Client
                 {
                     EventData.TypeEnum viewType = ((KeyValuePair<EventData.TypeEnum, string>) ViewType.SelectedValue).Key;
                     if (viewType == EventData.TypeEnum.University)
-                        EventData.SelectedPlanning = Api.getPlannings(EventData.TypeEnum.University).First();
+                        _selectedPlanning = Api.getPlannings(EventData.TypeEnum.University).First() as IdName;
                     else if (viewType == EventData.TypeEnum.Campus && CampusName.SelectedValue != null)
-                        EventData.SelectedPlanning = (IdName)CampusName.SelectedValue;
+                        _selectedPlanning = CampusName.SelectedValue as IdName;
                     else if (viewType == EventData.TypeEnum.Period && PeriodName.SelectedValue != null)
-                        EventData.SelectedPlanning = (IdName)PeriodName.SelectedValue;
+                        _selectedPlanning = PeriodName.SelectedValue as IdName;
                     else if (viewType == EventData.TypeEnum.Class && ClassName.SelectedValue != null)
-                        EventData.SelectedPlanning = (IdName)ClassName.SelectedValue;
+                        _selectedPlanning = ClassName.SelectedValue as IdName;
                     else if (viewType == EventData.TypeEnum.User)
-                        EventData.SelectedPlanning = Api.CurrentUser;
+                        _selectedPlanning = Api.CurrentUser as IdName;
+
+                    _selectedPlanning = new IdName() { Id = _selectedPlanning.Id, Name = _selectedPlanning.Name };
                 }
                 else
                     EventData.SelectedPlanning = new IdName() { Id = 0, Name = "No planning" };
 
-                return EventData.SelectedPlanning;
+                return _selectedPlanning;
             }
         }
         #endregion Properties
@@ -62,8 +65,10 @@ namespace Client
         /// List storing all events to be displayed.
         /// </summary>
         protected List<EventData> AllEvents;
-        //private double HourControlsWidth = 0;
-        //private int HourControlsCount = 0;
+        /// <summary>
+        /// Event currently selected (for edition).
+        /// </summary>
+        protected EventData selectedEvent;
         #endregion
 
         #region Window init
@@ -101,23 +106,28 @@ namespace Client
 		{
             CampusPeriodClassTree = Api.getCampusPeriodClassTree();
 
-            // DatePickers
-            StartDate.SelectedDate = DateTime.Now.AddMonths(-12);
-            EndDate.SelectedDate = DateTime.Now.AddMonths(12);
+            DisplayedDate.SelectedDate = DateTime.Today;
 
             // Draw Grids
             ((ScrollViewer)DayGrid.Parent).ScrollToVerticalOffset(DayGrid.Height * 7 / 24);
             DayGrid.Children.Add(GetHoursGrid());
             ((ScrollViewer)WeekGrid.Parent).ScrollToVerticalOffset(WeekGrid.Height * 7 / 24);
             WeekGrid.Children.Add(GetHoursGrid());
-            DayGridDateSelection.SelectedDate = DateTime.Today;
 
 			// ComboBoxes initialisation
             CampusName.DataContext = Api.getPlannings(EventData.TypeEnum.Campus);
             PeriodName.DataContext = Api.getPlannings(EventData.TypeEnum.Period);
             ViewType.DataContext = EventType.EventTypeNames;
 			ViewType.SelectedIndex = 4;
+            for (int i = 0; i < 24; i++)
+            {
+                EditEvent_StartHour.Items.Add(i);
+                EditEvent_EndHour.Items.Add(i);
+			}
 
+            // Set a null event
+            EditEvent_Reset_Click(null, null);
+            
             // Events DataGrid initialisation
             RefreshAllEvents();
 		}
@@ -164,8 +174,8 @@ namespace Client
             // Refresh selected planning
             IdName selectedPlanning = SelectedPlanning;
 
-            DateTime start = StartDate.SelectedDate.GetValueOrDefault();
-            DateTime end = EndDate.SelectedDate.GetValueOrDefault();
+            DateTime start = DisplayedDate.SelectedDate.GetValueOrDefault().AddMonths(-6);
+            DateTime end = DisplayedDate.SelectedDate.GetValueOrDefault().AddMonths(6);
 
             EventData.TypeEnum viewType = EventData.TypeEnum.University;
             if (ViewType.SelectedValue != null)
@@ -338,7 +348,7 @@ namespace Client
 
         public void RefreshDayGrid()
         {
-            DrawDay(DayContentGrid, DayGridDateSelection.SelectedDate.GetValueOrDefault());
+            DrawDay(DayContentGrid, DisplayedDate.SelectedDate.GetValueOrDefault());
         }
 
         private void DayGrid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -348,7 +358,7 @@ namespace Client
 
         public void RefreshWeekGrid()
         {
-            DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
+            DateTime selectedDate = DisplayedDate.SelectedDate.HasValue ? DisplayedDate.SelectedDate.GetValueOrDefault() : DateTime.Today;
             DrawDay(MondayContentGrid, selectedDate.AddDays(1-(int)selectedDate.DayOfWeek));
             DrawDay(TuesdayContentGrid, selectedDate.AddDays(2-(int)selectedDate.DayOfWeek));
             DrawDay(WednesdayContentGrid, selectedDate.AddDays(3-(int)selectedDate.DayOfWeek));
@@ -365,12 +375,12 @@ namespace Client
 
         private void DayGridPreviousDay_Click(object sender, RoutedEventArgs e)
         {
-            DayGridDateSelection.SelectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault().AddDays(-1);
+            DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(-1);
         }
 
         private void DayGridNextDay_Click(object sender, RoutedEventArgs e)
         {
-            DayGridDateSelection.SelectedDate = DayGridDateSelection.SelectedDate.GetValueOrDefault().AddDays(1);
+            DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(1);
         }
 
         public void RefreshMonthGrid()
@@ -399,7 +409,7 @@ namespace Client
                     MonthGrid.Children.Add(day);
                 }
 
-                DateTime selectedDate = DayGridDateSelection.SelectedDate.HasValue ? DayGridDateSelection.SelectedDate.GetValueOrDefault() : DateTime.Today;
+                DateTime selectedDate = DisplayedDate.SelectedDate.HasValue ? DisplayedDate.SelectedDate.GetValueOrDefault() : DateTime.Today;
 
                 // Current row
                 int row = 1;
@@ -468,12 +478,14 @@ namespace Client
         private void ViewType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selected = ((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key;
-            // University or user
+            bool enableEditor = false;
+            // University
             if (selected == EventData.TypeEnum.University)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
+                enableEditor = Api.CurrentUser.Roles.Any(p => p.Role == RoleData.RoleType.Administrator);
             }
             // Campus
             else if (selected == EventData.TypeEnum.Campus)
@@ -481,6 +493,8 @@ namespace Client
                 CampusName.Visibility = System.Windows.Visibility.Visible;
                 PeriodName.Visibility = System.Windows.Visibility.Collapsed;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
+                enableEditor = Api.CurrentUser.Roles.Any(p => p.Role == RoleData.RoleType.Administrator
+                    || p.Role == RoleData.RoleType.CampusManager);
             }
             // Period
             else if (selected == EventData.TypeEnum.Period)
@@ -488,6 +502,7 @@ namespace Client
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
                 PeriodName.Visibility = System.Windows.Visibility.Visible;
                 ClassName.Visibility = System.Windows.Visibility.Collapsed;
+                enableEditor = Api.CurrentUser.Roles.Any(p => p.Role == RoleData.RoleType.Administrator);
             }
             // Class
             else if (selected == EventData.TypeEnum.Class)
@@ -497,7 +512,10 @@ namespace Client
                 CampusName.Visibility = System.Windows.Visibility.Visible;
                 PeriodName.Visibility = System.Windows.Visibility.Visible;
                 ClassName.Visibility = System.Windows.Visibility.Visible;
+                enableEditor = Api.CurrentUser.Roles.Any(p => p.Role == RoleData.RoleType.Administrator
+                    || p.Role == RoleData.RoleType.CampusManager);
             }
+            // User
             else if (selected == EventData.TypeEnum.User)
             {
                 CampusName.Visibility = System.Windows.Visibility.Collapsed;
@@ -506,21 +524,33 @@ namespace Client
 
                 IdName className = Api.CurrentUser.Class;
 
-                IdName campusName = CampusPeriodClassTree.Where(
-                                                dc => dc.Value.Any(
-                                                    dp => dp.Value.Any(
-                                                        cl => cl.Id == Api.CurrentUser.Class.Id)))
-                                                        .Select(p => p.Key).FirstOrDefault();
-                IdName periodName = CampusPeriodClassTree[campusName].Where(
-                    dp => dp.Value.Any(
-                        cl => cl.Id == Api.CurrentUser.Class.Id))
-                        .Select(p => p.Key).FirstOrDefault();
+                if (className != null)
+                {
+                    IdName campusName = CampusPeriodClassTree.Where(
+                                                    dc => dc.Value.Any(
+                                                        dp => dp.Value.Any(
+                                                            cl => cl.Id == Api.CurrentUser.Class.Id)))
+                                                            .Select(p => p.Key).FirstOrDefault();
+                    IdName periodName = CampusPeriodClassTree[campusName].Where(
+                        dp => dp.Value.Any(
+                            cl => cl.Id == Api.CurrentUser.Class.Id))
+                            .Select(p => p.Key).FirstOrDefault();
 
-                CampusName.SelectedIndex = Array.FindIndex((IdName[])CampusName.DataContext, p => p.Id == campusName.Id);
-                PeriodName.SelectedIndex = Array.FindIndex((IdName[])PeriodName.DataContext, p => p.Id == periodName.Id);
-                ClassName.SelectedIndex = Array.FindIndex((IdName[])ClassName.DataContext??new IdName[]{}, p => p.Id == className.Id);
+                    CampusName.SelectedIndex = Array.FindIndex((IdName[])CampusName.DataContext, p => p.Id == campusName.Id);
+                    PeriodName.SelectedIndex = Array.FindIndex((IdName[])PeriodName.DataContext, p => p.Id == periodName.Id);
+                    ClassName.SelectedIndex = Array.FindIndex((IdName[])ClassName.DataContext ?? new IdName[] { }, p => p.Id == className.Id);
+                }
+                else
+                {
+                    CampusName.SelectedIndex = -1;
+                    PeriodName.SelectedIndex = -1;
+                    ClassName.SelectedIndex = -1;
+                }
+
+                enableEditor = true;
             }
 
+            EditEvent.Visibility = enableEditor ? System.Windows.Visibility.Visible : System.Windows.Visibility.Collapsed;
             RefreshAllEvents();
         }
 
@@ -564,7 +594,7 @@ namespace Client
                 box.Text = "0";
         }
 
-        private void DayGridDateSelection_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        private void DisplayedDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             RefreshDayGrid();
             RefreshWeekGrid();
@@ -660,6 +690,94 @@ namespace Client
 			this.Visibility = System.Windows.Visibility.Hidden;
 			new Login(this);
 
+        }
+
+        private void FillEditEventToolbar()
+        {
+            if (Api.ServerAvailable)
+            {
+                EditEvent_Type.Content = selectedEvent.LinkedTo;
+                EditEvent_Mandatory.IsChecked = selectedEvent.Mandatory;
+                EditEvent_Name.Text = selectedEvent.Name;
+                EditEvent_Place.Text = selectedEvent.Place;
+                EditEvent_Speaker.DataContext = Api.Server.getSubjects();
+                EditEvent_Speaker.SelectedValue = selectedEvent.Speaker;
+                EditEvent_Subject.DataContext = Api.getSubjects();
+                if ((EditEvent_Subject.DataContext as SubjectData[]).Count() > 0)
+                {
+                    EditEvent_Subject.SelectedValue = selectedEvent.Subject;
+                    EditEvent_Modality.SelectedValue = selectedEvent.Modality;
+                }
+                EditEvent_StartDate.SelectedDate = selectedEvent.StartDate;
+                EditEvent_StartHour.SelectedValue = selectedEvent.StartHour;
+                EditEvent_EndDate.SelectedDate = selectedEvent.EndDate;
+                EditEvent_EndHour.SelectedValue = selectedEvent.EndHour;
+            }
+        }
+
+        private void EditEvent_Subject_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SubjectData subject = (SubjectData)EditEvent_Subject.SelectedValue;
+            if (subject != null)
+                EditEvent_Modality.DataContext = subject.Modalities;
+        }
+
+        private void EventsGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        {
+            selectedEvent = EventsGrid.SelectedValue as EventData;
+            if (selectedEvent != null)
+                FillEditEventToolbar();
+        }
+
+        private void EditEvent_Reset_Click(object sender, RoutedEventArgs e)
+        {
+            EventData.TypeEnum type = EventData.TypeEnum.User;
+            if (ViewType.SelectedValue != null)
+                type = (EventData.TypeEnum)((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key;
+
+            selectedEvent = new EventData()
+            {
+                Type = type,
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today
+            };
+            FillEditEventToolbar();
+        }
+
+        private void EditEvent_Apply_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedEvent != null && Api.ServerAvailable)
+            {
+                selectedEvent.Mandatory = EditEvent_Mandatory.IsChecked.GetValueOrDefault();
+                selectedEvent.Name = EditEvent_Name.Text;
+                selectedEvent.Place = EditEvent_Place.Text = selectedEvent.Place;
+                selectedEvent.Speaker = (IdName)EditEvent_Speaker.SelectedValue;
+                selectedEvent.Subject = (IdName)EditEvent_Subject.SelectedValue;
+                selectedEvent.Modality = (IdName)EditEvent_Modality.SelectedValue;
+
+                selectedEvent.ParentPlanning = SelectedPlanning;
+                
+                selectedEvent.StartDate = EditEvent_StartDate.SelectedDate.GetValueOrDefault();
+                selectedEvent.StartHour = (int)EditEvent_StartHour.SelectedValue;
+                selectedEvent.EndDate = EditEvent_EndDate.SelectedDate.GetValueOrDefault();
+                selectedEvent.EndHour = (int)EditEvent_EndHour.SelectedValue;
+
+                if (selectedEvent.Id == 0)
+                    Api.Server.addEvent(selectedEvent);
+                else
+                    Api.Server.setEvent(selectedEvent);
+
+                RefreshAllEvents();
+            }
+        }
+
+        private void EditEvent_Delete_Click(object sender, RoutedEventArgs e)
+        {
+            if (selectedEvent.Id != 0 && Api.ServerAvailable)
+            {
+                Api.Server.delEvent(selectedEvent.Id);
+                RefreshAllEvents();
+            }
         }
     }
 }
