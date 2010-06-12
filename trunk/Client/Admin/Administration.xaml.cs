@@ -1221,7 +1221,7 @@ namespace Client
                 //On tente de modifier l'utilisateur
                 string returnValue = Api.Server.setUser(myUser);
 
-                //Si la modification s'est correctement déroulé
+                //Si la modification s'est correctement déroulée
                 if (returnValue.Equals("ok"))
                 {
                     //On change la StatusBar
@@ -1325,7 +1325,55 @@ namespace Client
             }
         }
 
+        //Si l'utilisateur choisit "Supprimer"
+        private void bUsers_Del_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbUsers_Users.SelectedIndex > 0)
+            {
+                //On récupère l'id de l'utilisateur
+                int idUser = usersList[cbUsers_Users.SelectedIndex].Id;
+
+                //On tente de le supprimer
+                string returnValue = Api.Server.delUser(idUser);
+
+                //Si la suppression s'est correctement déroulée
+                if (returnValue.Equals("ok"))
+                {
+                    //On change la StatusBar
+                    spawnErrorBar("Utilisateur supprimé avec succès! (Nom: \"" + cbUsers_Users.SelectedItem.ToString() + "\")", false);
+                }
+                else
+                {
+                    //On change la StatusBar avec le message d'erreur renvoyé
+                    spawnErrorBar(returnValue, true);
+                }
+
+                //On rafraichit les contrôles
+                refreshUsers();
+            }
+            else
+            {
+                spawnErrorBar("Sélectionnez d'abord un utilisateur!", true);
+            }
+        }
+
+        //Si l'utilisateur coche la checkbox
+        private void cbUsers_GenPass_Checked(object sender, RoutedEventArgs e)
+        {
+            tbUsers_Pass.IsEnabled = false;
+        }
+
+        //Si l'utilisateur coche la décheckbox
+        private void cbUsers_GenPass_Unchecked(object sender, RoutedEventArgs e)
+        {
+            tbUsers_Pass.IsEnabled = true;
+        }
+
         #endregion
+
+        
+
+        
 
 
 
