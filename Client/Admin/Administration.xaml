@@ -404,7 +404,7 @@
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Pass" Margin="0,10,0,0" IsEnabled="False" />
                     </Grid>
 
-                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" />
+                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" />
 
                     <Grid Grid.Column="0" Grid.Row="4" HorizontalAlignment="Center">
                         <Grid.ColumnDefinitions>
@@ -475,7 +475,7 @@
                         </Grid.RowDefinitions>
 
                         <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0" Click="bUsers_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" />
+                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" Click="bUsers_Del_Click" />
                     </Grid>
                 </Grid>
             </GroupBox>
