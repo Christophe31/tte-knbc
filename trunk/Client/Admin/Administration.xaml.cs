@@ -82,6 +82,11 @@ namespace Client
             ErrorBar.Background = macouleur;
             ErrorBorder.BorderThickness = new Thickness(1);
         }
+
+        private void CloseErrorBar_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorBar.Visibility = System.Windows.Visibility.Collapsed;
+        }
         #endregion
 
         #region Chargement du contrôle

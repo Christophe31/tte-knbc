@@ -336,11 +336,11 @@ namespace Client
 
                     double eventSize = gridWidth / ev.MaxNeighboursEvents;
 
-                    evc.Margin = new Thickness(
+                    /*evc.Margin = new Thickness(
                         2 + ev.EventIndex * eventSize,
                         2 + gridHeight * ev.Start.Hour / 24,
                         2 + eventSize * (ev.MaxNeighboursEvents - 1 - ev.EventIndex),
-                        2 + gridHeight * (24 - ev.End.Hour) / 24);
+                        2 + gridHeight * (24 - ev.End.Hour) / 24);*/
 
                     grid.Children.Add(evc);
                 }
@@ -776,9 +776,17 @@ namespace Client
                 selectedEvent.EndHour = (int)EditEvent_EndHour.SelectedValue;
 
                 if (selectedEvent.Id == 0)
-                    Api.Server.addEvent(selectedEvent);
+                {
+                    string message = Api.Server.addEvent(selectedEvent);
+                    if (!message.Equals("ok"))
+                        spawnErrorBar(message, true);
+                }
                 else
-                    Api.Server.setEvent(selectedEvent);
+                {
+                    string message = Api.Server.setEvent(selectedEvent);
+                    if (!message.Equals("ok"))
+                        spawnErrorBar(message, true);
+                }
 
                 RefreshAllEvents();
             }
@@ -788,9 +796,50 @@ namespace Client
         {
             if (selectedEvent.Id != 0 && Api.ServerAvailable)
             {
-                Api.Server.delEvent(selectedEvent.Id);
+                string message = Api.Server.delEvent(selectedEvent.Id);
+                if (!message.Equals("ok"))
+                    spawnErrorBar(message, true);
                 RefreshAllEvents();
             }
         }
+
+        #region Error bar
+        public void spawnErrorBar(string message, Boolean isError)
+        {
+            //On affiche la barre d'erreurs
+            ErrorBar.Visibility = Visibility.Visible;
+            Uri uri = null;
+            SolidColorBrush macouleur = null;
+
+            //Si c'est un message d'erreur...
+            if (isError)
+            {
+                //On change le fond, la bordure et l'image de la barre d'erreur
+                macouleur = new SolidColorBrush(System.Windows.Media.Brushes.Orange.Color);
+                uri = new Uri(@"Icons\error32.png", UriKind.Relative);
+                ErrorBorder.BorderBrush = System.Windows.Media.Brushes.Orange;
+            }
+            else //Si c'est un message d'information
+            {
+                //On change le fond, la bordure et l'image de la barre d'information
+                macouleur = new SolidColorBrush(System.Windows.Media.Brushes.LimeGreen.Color);
+                uri = new Uri(@"Icons\accept32.png", UriKind.Relative);
+                ErrorBorder.BorderBrush = System.Windows.Media.Brushes.DarkGreen;
+            }
+
+            //On applique les changements que l'on vient de faire
+            ImageSource imgSource = new BitmapImage(uri);
+            ErrorIcon.Source = imgSource;
+            ErrorMessage.Text = message;
+            macouleur.Opacity = 0.5;
+            ErrorBar.Background = macouleur;
+            ErrorBorder.BorderThickness = new Thickness(1);
+        }
+
+        private void CloseErrorBar_Click(object sender, RoutedEventArgs e)
+        {
+            ErrorBar.Visibility = System.Windows.Visibility.Collapsed;
+        }
+        #endregion
     }
 }
