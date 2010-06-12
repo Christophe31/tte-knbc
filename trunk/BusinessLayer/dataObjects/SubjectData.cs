@@ -13,6 +13,9 @@ namespace BusinessLayer
 	[DataContract]
 	public class SubjectData:IdName
 	{
+		/// <summary>
+		/// Default Constructor
+		/// </summary>
 		public SubjectData()
 		{
 

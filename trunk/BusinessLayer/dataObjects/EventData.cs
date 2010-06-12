@@ -45,19 +45,22 @@ namespace BusinessLayer
             User
         }
 
+		/// <summary>
+		/// constructeur par défaut
+		/// </summary>
 		public EventData()
 		{
 		}
 
 
 		/// <summary>
-		/// 
+		/// Type du planning parent.
 		/// </summary>
 		[DataMember]
 		public TypeEnum? Type { get; set; }
 
 		/// <summary>
-		/// 
+		/// Id et Nom du planning parent
 		/// </summary>
 		[DataMember]
 		public IdName ParentPlanning { get; set; }

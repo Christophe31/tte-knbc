@@ -13,6 +13,9 @@ namespace BusinessLayer
 	[DataContract]
 	public class UserData:IdName
 	{
+		/// <summary>
+		/// constructeur par défaut.
+		/// </summary>
 		public UserData()
 		{
 
@@ -37,6 +40,9 @@ namespace BusinessLayer
 		[DataMember]
 		public string Password { get; set; }
 
+		/// <summary>
+		/// Roles de l'utilisateur.
+		/// </summary>
 		[DataMember]
 		public RoleData[] Roles { get; set; } 
 	}

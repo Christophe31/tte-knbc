@@ -23,24 +23,12 @@ namespace BusinessLayer
 		[DataMember]
 		public string Name { get; set; }
 
-		public static IdName IN(int? i,string s)
-		{
-			if (i == null)
-			{ return null; }
-			return new IdName((int)i,s);
-		}
+
+		/// <summary>
+		/// Constructeur par défaut.
+		/// </summary>
 		public IdName()
 		{
-		}
-
-		public IdName(int i, string s)
-		{
-			Id = i;
-			Name = s;
-		}
-		public override string ToString()
-		{
-			return Name;
 		}
 	}
 }
