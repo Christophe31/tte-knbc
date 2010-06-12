@@ -409,7 +409,7 @@ namespace BusinessLayer
 			}
 			usr.Password = userToSet.Password;
 			db.SaveChanges();
-			throw new NotImplementedException();
+			return "ok";
 		}
 		string IBusinessLayer.setCampus(int Id, string CampusName)
 		{
