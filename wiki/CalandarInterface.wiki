@@ -6,7 +6,7 @@ _by Romaric Breil_
   * General
     * ~~CRUD~~
     * Click on an event fill the editor
-    * CRUD activated only for user view, or if the user has rights (error display)
+    * ~~CRUD activated only for user view, or if the user has rights~~
     * ~~Display hours reports (planed/theoretical)in CSV (cancelled)~~
     * Display events of a speaker, in user planning
     * Messages to help users
