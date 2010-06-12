@@ -38,8 +38,8 @@ namespace Client
 		CacheWrapper c;
 		private void DelayedStart()
 		{
-			this.Dispatcher.BeginInvoke((ThreadStart)Hiding);
 			c = new CacheWrapper();
+			this.Dispatcher.BeginInvoke((ThreadStart)Hiding); 
 			if (c.Autologable)
 			{
 				this.Dispatcher.BeginInvoke((ThreadStart)DisableControls);
