@@ -38,16 +38,38 @@ namespace Client
 		CacheWrapper c;
 		private void DelayedStart()
 		{
-            c = new CacheWrapper();
 			this.Dispatcher.BeginInvoke((ThreadStart)Hiding);
-			if (c.TryAutolog)
+			c = new CacheWrapper();
+			if (c.Autologable)
 			{
+				this.Dispatcher.BeginInvoke((ThreadStart)DisableControls);
+				if (!c.relog())
+				{
+					this.Dispatcher.BeginInvoke((ThreadStart)ReEnnableControls);
+					return;
+				}
 				this.Dispatcher.BeginInvoke((ThreadStart)Ending);
 			}
-		}
 
+			
+		}
+		private void DisableControls()
+		{
+			passwordBox.IsEnabled = false;
+			loginBox.IsEnabled = false;
+			connexionButton.IsEnabled = false;
+		}
+		private void ReEnnableControls()
+		{
+			connexionButton.IsEnabled = true;
+			passwordBox.IsEnabled = true;
+			loginBox.IsEnabled = true;
+			errorImage.Visibility = System.Windows.Visibility.Visible;
+			errorMessage.Visibility = System.Windows.Visibility.Visible;
+		}
 		private void Hiding()
 		{
+
 			this.cacheModeButton.IsEnabled = c.CacheAvailable;
 			t.Show();
 			t.Visibility = System.Windows.Visibility.Hidden;

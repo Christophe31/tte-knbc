@@ -52,13 +52,13 @@ namespace BusinessLayer
 			return new UserData()
 			{
 				Id = usr.Planning.Id,
-				Class = new IdName() { Id = usr.Planning.ParentPlanning.Id, Name = usr.Planning.ParentPlanning.Name },
+				Class = usr.Planning.Parent == null ? new IdName() {Id=0,Name=null } : new IdName() { Id = usr.Planning.ParentPlanning.Id, Name = usr.Planning.ParentPlanning.Name },
 				Name = usr.Planning.Name,
 				Roles = usr.Roles.Select(r =>
 					new RoleData()
 					{
 						TargetId = r.Target,
-						Role = r.Planning.Type.HasValue?(r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager):RoleData.RoleType.Speaker
+						Role = r.Planning.Type.HasValue ? (r.Planning.Type.Value == (int)EventData.TypeEnum.University ? RoleData.RoleType.Administrator : RoleData.RoleType.CampusManager) : RoleData.RoleType.Speaker
 					}).ToArray()
 			};
 		}

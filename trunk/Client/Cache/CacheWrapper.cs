@@ -14,11 +14,11 @@ namespace Client
 		public bool ServerAvailable { get { return cacheProcess.ServerAvailable; } }
 		public bool CacheAvailable { get { return cacheProcess.CacheAvailable; } }
 		public UserData CurrentUser  { get { return cacheProcess.CurrentUser; } }
-		public bool TryAutolog { 
+		public bool Autologable { 
 			get {
                 if (cacheProcess.CurrentUser==null||cacheProcess.CurrentUser.Password == null || cacheProcess.CurrentUser.Login == null) 
 					return false;
-				return cacheProcess.logToWebService(cacheProcess.CurrentUser.Login, cacheProcess.CurrentUser.Password);
+				return true;
 			} 
 		}
 		public CacheWrapper()
@@ -26,6 +26,12 @@ namespace Client
 			cacheProcess = CacheProcess.Current;
 		}
 
+		public bool relog()
+		{
+			if(Autologable)
+				return cacheProcess.logToWebService(cacheProcess.CurrentUser.Login, cacheProcess.CurrentUser.Password);
+			return false;
+		}
 		public bool logCacheProcess(string login, string password, bool savePassword)
 		{
 			var b = cacheProcess.logToWebService(login, password);
