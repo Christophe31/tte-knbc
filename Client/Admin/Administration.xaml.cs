@@ -111,7 +111,7 @@ namespace Client
 			refreshClasses();
 			refreshUsers();
 			refreshRights();
-            refreshRoleGrid(); //watchme delete me
+            //refreshRoleGrid(); //watchme delete me
 		}
 
         #endregion
@@ -780,9 +780,33 @@ namespace Client
 
         private class RolesDisplay
         {
+            public RolesDisplay(Client.Administration fenetre1)
+            {
+                this.fenetre = fenetre1;
+            }
+            Client.Administration fenetre;
             public int Id { get; set; }
             public int? TargetId { get; set; }
-            public int RoleIndex { get; set; }
+            //public int RoleIndex { get; set; }
+
+            protected int roleIndex;
+            public int RoleIndex {
+                get { return roleIndex; }
+                set 
+                { //Quand l'utilisateur change de Rôle dans la combobox
+                    if(value==0) //Si c'est le rôle Administrateur
+                    {
+                        this.TargetList=fenetre.universitylist_DataRights;
+                    } else if(value==1) //Si c'est le rôle Campus Manager
+                    {
+                        this.TargetList=fenetre.campuslist_DataRights;
+                    } else if(value==2) //Si c'est le rôle Speaker
+                    {
+                        this.TargetList=null; //On ne met rien dans la deuxième combobox
+                    }
+                    roleIndex=value;
+                }
+            }
             public int TargetIndex { get; set; }
             public string TargetName { get; set; }
             public RoleData.RoleType RoleEnum { get; set; }
@@ -813,15 +837,17 @@ namespace Client
 
         private void refreshRoleGrid()
         {
+            
             int index;
             //On va construire notre affichage
-            
+
+            //userRoles = new List<RolesDisplay>();
             RolesDisplay currentRole = null;
 
             //---------- delete me
             //rolesInformations = new List<RoleData>();
-            //rolesInformations.Add(new RoleData() { Role=RoleData.RoleType.Speaker, TargetId=null });
-            //rolesInformations.Add(new RoleData() { Role = RoleData.RoleType.Administrator, TargetId = 1 });
+            rolesInformations.Add(new RoleData() { Role=RoleData.RoleType.Speaker, TargetId=null });
+            rolesInformations.Add(new RoleData() { Role = RoleData.RoleType.Administrator, TargetId = 1 });
 
             //---------- delete me
 
@@ -831,7 +857,7 @@ namespace Client
             //Pour chaque rôle de l'utilisateur
             foreach (RoleData myRole in rolesInformations)
             {
-                currentRole = new RolesDisplay();
+                currentRole = new RolesDisplay(this);
                 currentRole.Id = myRole.Id;
                 currentRole.RoleEnum = myRole.Role;
                 currentRole.TargetId = myRole.TargetId;
@@ -864,7 +890,7 @@ namespace Client
 
                     index = 0;
                     //On cherche le nom du campus
-                    foreach (IdName campus in campuslist_UserRights)
+                    foreach (IdName campus in campuslist_DataRights)
                     {
                         if (campus.Id == currentRole.TargetId)
                         {
@@ -980,8 +1006,10 @@ namespace Client
                     rolesInformations = new List<RoleData>();
                 }
 
-
+                //On rafraichit la DataGrid des rôles
                 refreshRoleGrid();
+                userRoles = new List<RolesDisplay>();
+
                 //-----------
                 //On rafraichit la DataGrid des rôles
                 refreshRightsGrid();
@@ -997,10 +1025,14 @@ namespace Client
                 //On désactive les contrôles liés aux rôles
                 cbUsers_Rights.IsEnabled = false;
                 cbUsers_RightsType.Visibility = Visibility.Hidden;
+
+                //On rafraichit la DataGrid des rôles
+                refreshRoleGrid();
+                userRoles = new List<RolesDisplay>();
             }
 
-            //On rafraichit la DataGrid des rôles
-            refreshRoleGrid();
+            
+            
         }
 
         //Si l'utilisateur choisit un rôle
@@ -1102,6 +1134,8 @@ namespace Client
             //S'il s'agit d'une modification...
             if (cbUsers_Users.SelectedIndex > 0)
             {
+
+
                 //On récupère l'id de la classe sélectionnée
                 int idClass = classesList[cbClasses_Classes.SelectedIndex].Id;
 
@@ -1188,6 +1222,7 @@ namespace Client
                 myUser.Login = tbUsers_Login.Text;
                 myUser.Password = passwordHashed;
                 myUser.Roles = null;
+                myUser.Id = 0;
 
                 //Si aucune classe n'a été choisie
                 if (cbUsers_Class.SelectedIndex < 1)
@@ -1354,6 +1389,9 @@ namespace Client
                     //On change la StatusBar avec le message d'erreur renvoyé
                     spawnErrorBar(returnValue, true);
                 }
+
+                //On rafraichit les contrôles
+                refreshSubjects();
             }
         }
 
@@ -1440,6 +1478,25 @@ namespace Client
             //MessageBox.Show("test");
             ModalityData moda=new ModalityData();
             SubjectData monsub = new SubjectData();
+        }
+
+        private void RolesGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void RolesGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+ 
+        }
+
+        private void RolesGrid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            //refreshRoleGrid();
         }
 
         
