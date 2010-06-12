@@ -344,7 +344,6 @@ namespace BusinessLayer
 		}
 		string IBusinessLayer.addEvent(EventData eventToAdd)
 		{
-			
 			if (!
 				(currentUserId == eventToAdd.ParentPlanning.Id ||
 				isUserAdmin ||
@@ -364,7 +363,7 @@ namespace BusinessLayer
 					return "la salle est déjà occupée";
 			}
 			string truc="";
-			if (db.User.Where(usr => usr.Id == eventToAdd.Speaker.Id).Select(usr => usr.Planning.SpeakingEvents.Concat(usr.Planning.Events.Where(ev => ev.Mandatory))).Any(t => t.Any(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start)))
+			if (db.User.Where(usr => usr.Id == (eventToAdd.Speaker==null?0:eventToAdd.Id)).Select(usr => usr.Planning.SpeakingEvents.Concat(usr.Planning.Events.Where(ev => ev.Mandatory))).Any(t => t.Any(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start)))
 				truc = "Le speaker risque d'être déjà occupé";
 			db.Event.AddObject(new Event()
 			{
