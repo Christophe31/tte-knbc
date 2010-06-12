@@ -13,6 +13,9 @@ namespace BusinessLayer
 	[DataContract]
 	public class PeriodData:IdName
 	{
+		/// <summary>
+		/// Constructeur par défaut.
+		/// </summary>
 		public PeriodData()
 		{
 

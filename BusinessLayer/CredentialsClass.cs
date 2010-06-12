@@ -10,9 +10,17 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-	public class AuthValidator : UserNamePasswordValidator
+	/// <summary>
+	/// Validation du login/mot de passe
+	/// </summary>
+	public class AuthValidator : UserNamePasswordValidator, IDisposable
 	{
 		DataAccessLayer.Entities db = new DataAccessLayer.Entities();
+		/// <summary>
+		/// Validation du login mot de passe
+		/// </summary>
+		/// <param name="userName">nom de l'utilisateur</param>
+		/// <param name="password">mot de passe.</param>
 		public override void Validate(string userName, string password)
 		{
 			if (!db.User.Any(p=>p.Login==userName && p.Password == password))
@@ -25,5 +33,14 @@ namespace BusinessLayer
 			}
 		}
 
+
+		#region IDisposable Members
+
+		public void Dispose()
+		{
+			db.Dispose();
+		}
+
+		#endregion
 	}
 }

@@ -9,25 +9,28 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
+	/// <summary>
+	/// Implémentation de l'interface et du webService.
+	/// </summary>
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerSession)]
-	public partial class BusinessLayer : IBusinessLayer
+	public partial class BusinessLayer : IBusinessLayer, IDisposable
 	{
 		DateTime sqlMin = new DateTime(1753, 1, 2);
 		DateTime sqlMax = new DateTime(9998, 12, 31);
 		Entities db = new Entities();
 
 
-		public DateTime centerToSqlDate(DateTime d)
+		DateTime centerToSqlDate(DateTime d)
 		{
 			return ((d < sqlMin) ? sqlMin : ((d > sqlMax) ? sqlMax : d));
 		}
-		public void centerToSqlDate(ref DateTime d1, ref DateTime d2)
+		void centerToSqlDate(ref DateTime d1, ref DateTime d2)
 		{
 			d1 = ((d1 < sqlMin) ? sqlMin : ((d1 > sqlMax) ? sqlMax : d1));
 			d2 = ((d2 < sqlMin) ? sqlMin : ((d2 > sqlMax) ? sqlMax : d2));
 		}
 
-		string currentUserLogin
+		static string currentUserLogin
 		{
 			get { return OperationContext.Current.ServiceSecurityContext.PrimaryIdentity.Name; }
 		}
@@ -64,7 +67,10 @@ namespace BusinessLayer
 			centerToSqlDate(ref Start, ref Stop);
 			if (  db.Planning.Any(p=>p.Id==Planning && p.Type!=5) || currentUserId == Planning )
 			{
-				return db.Planning.Where(p => p.Id == Planning).Single().Events.Where(p => p.Start < Stop && p.End > Start).
+				EntityCollection<Event> t= new EntityCollection<Event>();
+				if(db.Planning.Any(p=>p.Id==Planning && p.Type==5))
+					t = db.Planning.Where(p => p.Id == Planning).Single().SpeakingEvents;
+				return db.Planning.Where(p => p.Id == Planning).Single().Events.Concat(t).Where(p => p.Start < Stop && p.End > Start).
 					Select(p =>
 						new EventData()
 						{
@@ -169,13 +175,13 @@ namespace BusinessLayer
 		{
 			int usrId=currentUserId;
 			string[] s=new string[] {"Classe","Sujet","Modalité","Nombre d'heure théorique"};
-			return  db.Planning.First(usr => usrId == usr.Id).SpeakingEvents
+			return  s.Concat(db.Planning.First(usr => usrId == usr.Id).SpeakingEvents
 				.Select(ev => new { modality = ev.Modality,Parent=ev.PlaningRef, courseDuration = (ev.Start - ev.End).Hours })
 				.GroupBy(p => p.Parent).SelectMany(par => par
 					.GroupBy(p=>p.modality).Select(mod=>  new { modality =  mod.First().modality, coursesDuration = mod.Sum(ev => ev.courseDuration) })
 				.GroupBy(mod => mod.modality.Subject)
 				.SelectMany(sub => sub.Select(mod =>
-					mod.modality.OnSubject.Name + ";" + mod.modality.Name + ";" + mod.modality.Hours.ToString() + ";" + mod.coursesDuration.ToString()))).ToArray();
+					mod.modality.OnSubject.Name + ";" + mod.modality.Name + ";" + mod.modality.Hours.ToString() + ";" + mod.coursesDuration.ToString())))).ToArray();
 		}
 		Dictionary<IdName, Dictionary<IdName, IdName[]>> IBusinessLayer.getCampusPeriodClassTree()
 		{
@@ -496,7 +502,11 @@ namespace BusinessLayer
 			var tmp = db.Planning.Where(p => p.Type == (int)EventData.TypeEnum.Campus && (p.Id == eventToSet.ParentPlanning.Id || p.ChildrenPlannings.Any(cla => cla.Id == eventToSet.ParentPlanning.Id)))
 				.Select(camp => camp.Events.Concat(camp.ChildrenPlannings.SelectMany(cla => cla.Events))).FirstOrDefault();
 			if (tmp != null)
+			{
 				eventsInSameLocation = tmp.Where(ev => ev.Start >= eventToSet.End && ev.End <= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
+				if (eventsInSameLocation.Length > 0)
+					return "Les salles " + eventsInSameLocation+"Sont occupées.";
+			}
 
 			db.Planning.First(pl => pl.Id == eventToSet.ParentPlanning.Id).LastChange = DateTime.Now;
 
@@ -596,7 +606,7 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			var c = db.Planning.Where(camp => camp.Id == Id);
+			db.Planning.DeleteObject(db.Planning.Where(camp => camp.Id == Id && camp.Type==(int)EventData.TypeEnum.Campus).First());
 			return "ok";
 		}
 		string IBusinessLayer.delPromotion(int Id)
@@ -664,6 +674,15 @@ namespace BusinessLayer
 					}).First();
 			return null;
 		}
+		#endregion
+
+		#region IDisposable Members
+
+		public void Dispose()
+		{
+			this.db.Dispose();
+		}
+
 		#endregion
 	}
 }

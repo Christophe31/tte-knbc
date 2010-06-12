@@ -24,18 +24,28 @@ namespace Client
 		public CacheWrapper()
 		{
 			cacheProcess = CacheProcess.Current;
-
 		}
+
 		public bool logCacheProcess(string login, string password, bool savePassword)
 		{
 			var b = cacheProcess.logToWebService(login, password);
 			if (b)
 			{
-				if(savePassword)
-				{ cacheProcess.CurrentUser.Password = password;
-				cacheProcess.CurrentUser.Login = login;
-				};
-				cacheProcess.WriteToFile(cacheProcess.CurrentUser, cacheProcess.otherFileNames["CurrentUser"]);
+				if (savePassword)
+				{
+					cacheProcess.CurrentUser.Password = password;
+					cacheProcess.CurrentUser.Login = login;
+					cacheProcess.WriteToFile(cacheProcess.CurrentUser, cacheProcess.otherFileNames["CurrentUser"]);
+				}
+				else 
+				{
+					UserData u = new UserData();
+					u.Class = cacheProcess.CurrentUser.Class;
+					u.Id = cacheProcess.CurrentUser.Id;
+					u.Name = cacheProcess.CurrentUser.Name;
+					u.Roles = cacheProcess.CurrentUser.Roles;
+					cacheProcess.WriteToFile(u, cacheProcess.otherFileNames["CurrentUser"]);
+				}
 			}
 			return b;
 		}
@@ -45,12 +55,12 @@ namespace Client
 		{
 			string fname = cacheProcess.fileNameFromIdName(Planning);
 			Tuple<DateTime, EventData[]> t;
-			if (System.IO.File.Exists(fname) )
+			if (System.IO.File.Exists(fname))
 			{
-				t=cacheProcess.ReadFromFile(fname) as Tuple<DateTime,EventData[]>;
+				t = cacheProcess.ReadFromFile(fname) as Tuple<DateTime, EventData[]>;
 				if (cacheProcess.ServerAvailable && !Server.isPlanningUpToDate(Planning, t.Item1))
 				{
-					t = new Tuple<DateTime,EventData[]>(DateTime.Now, Server.getEvents(Planning, Start, Stop));
+					t = new Tuple<DateTime, EventData[]>(DateTime.Now, Server.getEvents(Planning, Start, Stop));
 					cacheProcess.RefreshCache(Planning);
 					return t.Item2;
 				}
@@ -58,7 +68,7 @@ namespace Client
 			}
 			if (cacheProcess.ServerAvailable)
 			{
-				t = new Tuple<DateTime,EventData[]>(DateTime.Now,Server.getEvents(Planning, Start, Stop));
+				t = new Tuple<DateTime, EventData[]>(DateTime.Now, Server.getEvents(Planning, Start, Stop));
 				cacheProcess.WriteToFile(t, fname);
 				return t.Item2;
 			}

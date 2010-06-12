@@ -49,12 +49,15 @@ namespace Client
 			try
 			{
 				Server = new BusinessLayerClient();
-				Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
-				Server.ClientCredentials.UserName.UserName = login;
-				Server.ClientCredentials.UserName.Password = password;
-				Server.Open();
-				CurrentUser = Server.getUserData();
-				CurrentUser.Password = password;
+				lock (Server)
+				{
+					
+					Server.ClientCredentials.ServiceCertificate.Authentication.CertificateValidationMode = System.ServiceModel.Security.X509CertificateValidationMode.None;
+					Server.ClientCredentials.UserName.UserName = login??CurrentUser.Login;
+					Server.ClientCredentials.UserName.Password = password??CurrentUser.Password;
+					Server.Open();
+					CurrentUser = Server.getUserData();
+				}
 				return true;
 			}
 			catch (MessageSecurityException)
@@ -112,7 +115,6 @@ namespace Client
 
 		public void WriteToFile(object obj, string fileName)
 		{
-
 			FileStream fs = new FileStream(fileName, FileMode.Create);
 			XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(fs);
 			NetDataContractSerializer ser =
@@ -122,19 +124,12 @@ namespace Client
 		}
 		public object ReadFromFile(string fileName)
 		{
-
-
-			FileStream fs = new FileStream(fileName,
-		FileMode.Open);
-			XmlDictionaryReader reader =
-				XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+			FileStream fs = new FileStream(fileName, FileMode.Open);
+			XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
 			NetDataContractSerializer ser = new NetDataContractSerializer();
-
-			object o =
-				ser.ReadObject(reader, true);
+			object o =	ser.ReadObject(reader, true);
 			fs.Close();
 			return o;
-	
 		}
 		public void RefreshCache(IdName idn)
 		{

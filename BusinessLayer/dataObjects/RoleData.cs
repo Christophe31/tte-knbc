@@ -35,20 +35,11 @@ namespace BusinessLayer
 			[EnumMember]
 			Speaker
 		}
-
+		/// <summary>
+		/// Constructeur par défaut.
+		/// </summary>
 		public RoleData() 
 		{ 
-		}
-		
-		public RoleData(int? TargetId,RoleType type)
-		{
-			this.TargetId = TargetId;
-			this.Role = Role;
-		}
-
-		public static RoleData RD(int? TargetId, RoleType type)
-		{
-			return new RoleData(TargetId, type);
 		}
 
 		/// <summary>

@@ -13,6 +13,9 @@ namespace BusinessLayer
 	[DataContract]
 	public class ModalityData:IdName
 	{
+		/// <summary>
+		/// Constructeur par défaut.
+		/// </summary>
 		public ModalityData()
 		{
 		}

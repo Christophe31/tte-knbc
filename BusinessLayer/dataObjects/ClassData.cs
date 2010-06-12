@@ -7,11 +7,15 @@ using DataAccessLayer;
 
 namespace BusinessLayer
 {
-
+	/// <summary>
+	/// class representation
+	/// </summary>
 	[DataContract]
 	public class ClassData:IdName
 	{
-
+		/// <summary>
+		/// Contsructeur par défaut.
+		/// </summary>
 		public ClassData()
 		{
 		}
