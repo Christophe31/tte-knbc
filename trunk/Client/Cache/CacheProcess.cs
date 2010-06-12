@@ -119,9 +119,9 @@ namespace Client
 			XmlDictionaryWriter writer = XmlDictionaryWriter.CreateTextWriter(fs);
 			NetDataContractSerializer ser = new NetDataContractSerializer();
 			ser.WriteObject(writer, obj);
+			writer.Close();
 			fs.Close();
 			fs.Dispose();
-			writer.Close();
 		}
 		public object ReadFromFile(string fileName)
 		{
