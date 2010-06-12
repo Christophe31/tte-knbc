@@ -217,12 +217,12 @@ namespace BusinessLayer
 				return "veillez spécifier un nom d'utilisateur";
 			if (db.User.Any(u => User.Login == u.Login))
 				return "cet utilisateur existe déjà";
-			if ((User.Class.Id != 0) || !validPlanning(User.Class.Id, EventData.TypeEnum.Class))
+			if (User.Class!=null && ((User.Class.Id != 0) || !validPlanning(User.Class.Id, EventData.TypeEnum.Class)))
 				return "veuillez définir une classe valide";
 			Planning plan = new Planning() 
 			{
 				 Name = User.Name,
-				 ParentPlanning = db.Planning.Where(cl=>cl.Id==User.Class.Id).FirstOrDefault(),
+				 ParentPlanning =  User.Class == null ? null :db.Planning.Where(cl => cl.Id == (User.Class.Id)).FirstOrDefault(),
 				 LastChange = DateTime.Now,
 				 Type = (int)EventData.TypeEnum.User
 			};
@@ -232,12 +232,13 @@ namespace BusinessLayer
 				Password = User.Password,
 				Login = User.Login
 			});
-			foreach (var role in User.Roles)
-				db.Role.AddObject(new Role() 
-					{
-						Target = (role.TargetId.HasValue ? (validPlanning(role.TargetId.Value, EventData.TypeEnum.Campus)||validPlanning(role.TargetId.Value, EventData.TypeEnum.University) ? role.TargetId : null) : null),
-						User = User.Id
-					});
+			if(User.Roles!=null)
+				foreach (var role in User.Roles)
+					db.Role.AddObject(new Role() 
+						{
+							Target = (role.TargetId.HasValue ? (validPlanning(role.TargetId.Value, EventData.TypeEnum.Campus)||validPlanning(role.TargetId.Value, EventData.TypeEnum.University) ? role.TargetId : null) : null),
+							User = User.Id
+						});
 			db.SaveChanges();
 			return "ok";
 		}
@@ -247,7 +248,7 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			if (validPlanning(classToSet.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period))
 				return "Class or Campus link invalid";
-			if (db.Planning.Any(p => p.Id == classToSet.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == classToSet.Name)))
+			if (db.Planning.Any(p =>classToSet.Campus!=null && p.Id == classToSet.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == classToSet.Name)))
 				return "Une classe ave ce nom existe déjà sur ce campus";
 			Planning plan = new Planning()
 			{
@@ -446,7 +447,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			var sub = db.Modality.First(p => p.Id == subjectToSet.Id);
-			foreach (Modality dbMod in sub.Modalitys)
+			foreach (Modality dbMod in sub.Modalitys.ToArray())
 			{
 				var newMod=subjectToSet.Modalities.FirstOrDefault(m => m.Id == dbMod.Id);
 				if (newMod==null)
