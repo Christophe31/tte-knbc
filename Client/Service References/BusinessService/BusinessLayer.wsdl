@@ -9,6 +9,12 @@
       <xsd:import schemaLocation="http://localhost:2900/BusinessLayer.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IBusinessLayer_setEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:setEvent" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_setEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setEventResponse" />
+  </wsdl:message>
   <wsdl:message name="IBusinessLayer_delUser_InputMessage">
     <wsdl:part name="parameters" element="tns:delUser" />
   </wsdl:message>
@@ -86,6 +92,12 @@
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_getSpeakerEvents_OutputMessage">
     <wsdl:part name="parameters" element="tns:getSpeakerEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSpeakingEvents_InputMessage">
+    <wsdl:part name="parameters" element="tns:getSpeakingEvents" />
+  </wsdl:message>
+  <wsdl:message name="IBusinessLayer_getSpeakingEvents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getSpeakingEventsResponse" />
   </wsdl:message>
   <wsdl:message name="IBusinessLayer_isPlanningUpToDate_InputMessage">
     <wsdl:part name="parameters" element="tns:isPlanningUpToDate" />
@@ -231,13 +243,11 @@
   <wsdl:message name="IBusinessLayer_setPeriod_OutputMessage">
     <wsdl:part name="parameters" element="tns:setPeriodResponse" />
   </wsdl:message>
-  <wsdl:message name="IBusinessLayer_setEvent_InputMessage">
-    <wsdl:part name="parameters" element="tns:setEvent" />
-  </wsdl:message>
-  <wsdl:message name="IBusinessLayer_setEvent_OutputMessage">
-    <wsdl:part name="parameters" element="tns:setEventResponse" />
-  </wsdl:message>
   <wsdl:portType name="IBusinessLayer">
+    <wsdl:operation name="setEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEvent" message="tns:IBusinessLayer_setEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventResponse" message="tns:IBusinessLayer_setEvent_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="delUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/delUser" message="tns:IBusinessLayer_delUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/delUserResponse" message="tns:IBusinessLayer_delUser_OutputMessage" />
@@ -289,6 +299,10 @@
     <wsdl:operation name="getSpeakerEvents">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakerEvents" message="tns:IBusinessLayer_getSpeakerEvents_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakerEventsResponse" message="tns:IBusinessLayer_getSpeakerEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getSpeakingEvents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakingEvents" message="tns:IBusinessLayer_getSpeakingEvents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/getSpeakingEventsResponse" message="tns:IBusinessLayer_getSpeakingEvents_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="isPlanningUpToDate">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/isPlanningUpToDate" message="tns:IBusinessLayer_isPlanningUpToDate_InputMessage" />
@@ -385,10 +399,6 @@
     <wsdl:operation name="setPeriod">
       <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setPeriod" message="tns:IBusinessLayer_setPeriod_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setPeriodResponse" message="tns:IBusinessLayer_setPeriod_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="setEvent">
-      <wsdl:input wsaw:Action="http://tempuri.org/IBusinessLayer/setEvent" message="tns:IBusinessLayer_setEvent_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IBusinessLayer/setEventResponse" message="tns:IBusinessLayer_setEvent_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:service name="BusinessLayer">
