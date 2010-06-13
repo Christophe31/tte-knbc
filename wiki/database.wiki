@@ -1,74 +1,57 @@
-=Base de donnée=
-_par Cheynet Romain_
-==Schéma==
-Voici le schéma de la base de donnée:
+#summary Description de la base de données
 
-http://www.mypicturesbox.com/photos/originales/crovax31/54920.png
+= Introduction =
 
-(Les noms de liens précédées d'un slash rouge mentionne le coté cible et une croix à droite d'un champ mentionne qu'il peut être mis à null)
-==Tables==
-===Campus===
-Représente la région de l'école
-cette tables n'as que deux champ, l'ID et le nom (exemple: Toulouse)
-===Classe===
-La classe est la représentation d'une periode sur un campus particulier.
-Elle a 4 champs:
-	# ID
-	# Name	:nom de la classe (B3B Toulouse)
-	# Campus	:pointe vers le campus ou réside la classe
-	# Period	:pointe vers la periode à la quelle est sujette la classe
-===Droit===
-Droit est la table qui permet de déterminer si l'utilisateur qui envoie une requete de modification a le droit de les exécuter.
-cette table a 4 champs:
-	# ID
-	# Type
-	# Campus
-	# Utilisateur	:pointe vers l'utilisateur soumis au droit
-===Evenement===
-Evenement est la table dans laquelle sont stockés tous les evenements, privés ou publiques.
+Ce modèle remplace l'ancien schéma de base de données, en étant plus simple et extensible que le précédent, et en permettant de faire des méthodes et des requêtes plus génériques.
 
-si un des 4 champs nullables, est null, alors l'evenement est privé.
+= Organisation =
 
-	# ID
-	# Place : la salle du cours
-	# Name : Nom de l'evenement 
-	# Start : date et heure de debut
-	# End : date et heure de fin
-	# Mandatory : obligatoire ?
-	# Campus : (nullable) Le ampus du cours
-	# Class : (nullable) La classe du cours
-	# Speaker : (nullable) Le professeur
-	# Subject : (nullable) La matière enseignée
-	# Period : cursus
-	# Creator : Créateur de l'évènement
+== Schéma ==
 
-===Matiere===
-Subject est la table dans laquelle sont inscrites toutes les matières enseignés dans l'etablissement.
+http://www.mypicturesbox.com/photos/originales/crovax31/55007.png
 
-	# ID
-	# Name : le nom de la matière
-	# Hours : le nombre d'heure necessaires pour cette matière 
-	# Modality : les modalités du cours
-	# Events : 
 
-===Periode===
+== Explications ==
 
-	# ID
-	# Name : Nom de la période 
-	# Start : date et heure de debut
-	# End : date et heure de fin
-	# Promotion : la promotion à laquelle s'applique cette période
+La base est organisée autour de deux tables principales, Planning et Event. D'autres tables, enrichissent les plannings, quand certaines données sont spécifiques à certains types de plannings (voir la section suviante). Les données de ces tables étant très fortement liées aux plannings, les clés primaires de ces tables sont identiques à celles de la table principale, et sont également des clés étrangères (liaison 1 à 1).
 
-===Promotion===
-Promotion est la table dans laquelle sont référencés toutes les promotions de l'établissement.
 
-	# ID
-	# Name : Nom de la promotion
+=== Plannings ===
 
-===Utilisateur===
-Utilisateur est la table dans laquelle sont inscrits touts les élèves, enseignant, ou membres de l'administration de l'établissement.
+Le cahier des charges demande de stocker des évènements liés, au choix, à l'université, un campus, une période d'études, une classe ou un utilisateur (évènements privés). Le moyen le plus simple pour centraliser la gestion de ces entités est de toutes les considérer comme des plannings, et de lier tous les évènements à un planning particulier. En effet, elles partagent un ensemble d'informations : un nom, une date de dernière modification et un _parent_.
 
-	# ID
-	# Name : Nom de l'élève
-	# Password : Le mot de passe de l'utilisateur
-	# Class : classe de l'utilisateur
+Toutes ces entités dépendent les unes des autres, on peut modéliser ces dépendances sous la forme d'un arbre :
+
+{{{
+Université (racine de l'arbre : son parent est nul)
+  |
+  +-> Campus
+  |    |
+  |    +-> Classe
+  |         |
+  |         +-> Utilisateur (peut ne pas être rattaché à une classe, si l'utilisateur n'est pas étudiant)
+  +-> Promotion
+       |
+       +-> Période d'études
+}}}
+
+Un autre champ apparait dans une ligne de Planning, son type (un entier lié à une énumération dans le code C#). Il permet de préciser la place d'un planning dans l'aborescence, tout en évitant les conflits (un utilisateur pourrait être confondu avec l'université, si sont parent est nul). Seule la promotion n'a pas de type (null), puisqu'elle n'est pas un vrai planning (elle n'a pas d'évènements).
+
+Deux tables, Class et Period, ajoutent quelques informations au planning correspondant :
+
+  * Class ajoute un lien entre une période et une classe, puisqu'il ne peut pas être stocké dans l'arbre
+  * Period précise la date de début et de fin d'une période
+
+
+=== Utilisateurs ===
+
+La table User, moins liée à Planning que les précédentes, est la table utilisateur, qui stocke les logins et mots de passe. Le nom de l'utilisateur est stocké dans le champ "Name" de son planning.
+
+La table Role permet de stocker les rôles des utilisateurs. Suivant le planning vers lequel pointe la colonne Target, le service web déduit le rôle. Si le planning pointé est l'université, alors il est administrateur, si c'est vers un campus, alors il est campus manager, sinon (cible nulle), il est intervenant (la présence des intervenanats ici permet d'optimiser les requêtes permettant de retrouver cette liste.
+
+
+=== Evènements ===
+
+Les évènements sont stockés dans la table Event, qui contient un titre, le planning dont il dépend, les dates de début et de fin, son caractère obligatoire, le lieu où il se déroule, l'intervenant et le propriétaire de l'objet (qui pointent vers les plannings de ces utilisateurs), ainsi que la matière, s'il s'agit d'un cours.
+
+Les matières sont stockées dans une dernière table, Modality, qui stocke les matières et les modalités. Chaque modalité stocke son nom et son nombre d'heures, et pointe vers sa matière parent (dans la même table), qui stocke uniquement son nom.
