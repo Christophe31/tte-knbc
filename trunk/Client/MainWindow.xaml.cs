@@ -140,7 +140,6 @@ namespace Client
         public Grid GetHoursGrid()
         {
             Grid grid = new Grid();
-            grid.ShowGridLines = true;
             grid.ColumnDefinitions.Add(new ColumnDefinition());
             Grid.SetColumn(grid, 0);
             Grid.SetRow(grid, 0);
@@ -151,14 +150,19 @@ namespace Client
                 // Create the row
                 grid.RowDefinitions.Add(new RowDefinition());
 
+                Border b = new Border();
+                b.BorderThickness = new Thickness(0, 1, 0, 0);
+                b.BorderBrush = Brushes.LightBlue;
+
                 // Create the TextBlock
                 TextBlock tb = new TextBlock();
                 tb.Text = i.ToString() + ":00";
                 tb.Margin = new Thickness(0,0,5,0);
+                b.Child = tb;
 
-                Grid.SetColumn(tb, 0);
-                Grid.SetRow(tb, i);
-                grid.Children.Add(tb);
+                Grid.SetColumn(b, 0);
+                Grid.SetRow(b, i);
+                grid.Children.Add(b);
             }
 
             return grid;
@@ -342,11 +346,29 @@ namespace Client
                             Grid.SetRow(evc, start.Hour);
                             TimeSpan span = end - start;
                             Grid.SetRowSpan(evc, span.Days * 24 + span.Hours);
+                            Grid.SetZIndex(evc, 1);
 
                             grid.Children.Add(evc);
+                            colsState[index] = ev;
                         }
                     }
                 }
+            }
+
+            // Draw grid lines
+            col = new ColumnDefinition();
+            col.Width = new GridLength(1, GridUnitType.Star);
+            grid.ColumnDefinitions.Add(col);
+            int nbCols = grid.ColumnDefinitions.Count;
+            for (int i = 0; i < 24; i++)
+            {
+                Border b = new Border();
+                b.BorderBrush = Brushes.LightBlue;
+                b.BorderThickness = new Thickness(1, 1, 0, 0);
+                Grid.SetRow(b, i);
+                Grid.SetColumn(b, 0);
+                Grid.SetColumnSpan(b, nbCols);
+                grid.Children.Add(b);
             }
         }
 
@@ -610,29 +632,6 @@ namespace Client
         }
         #endregion
 
-
-        private void DayContentGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            Grid day = (Grid)sender;
-            Grid week = ((Grid)day.Parent);
-
-            int col = Grid.GetColumn(day);
-
-            week.ColumnDefinitions[col].Width = new GridLength(1, GridUnitType.Auto);
-            RefreshWeekGrid();
-        }
-
-        private void DayContentGrid_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Grid day = (Grid)sender;
-            Grid week = ((Grid)day.Parent);
-
-            int col = Grid.GetColumn(day);
-            
-            week.ColumnDefinitions[col].Width = new GridLength(1, GridUnitType.Star);
-            RefreshWeekGrid();
-        }
-
 		private void iCal_export_Click(object sender, RoutedEventArgs e)
 		{
 			Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
@@ -829,5 +828,21 @@ namespace Client
             ErrorBar.Visibility = System.Windows.Visibility.Collapsed;
         }
         #endregion
+
+        private void WeekColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+            int colIndex = Grid.GetColumn((Button)sender);
+
+            ColumnDefinition col = WeekGrid.ColumnDefinitions[colIndex];
+
+            col.Width = new GridLength(1, col.Width.IsStar ? GridUnitType.Auto : GridUnitType.Star);
+            for (int i = 1; i < 8; i++)
+            {
+                if (WeekGrid.ColumnDefinitions[i] != col)
+                    WeekGrid.ColumnDefinitions[i].Width = new GridLength(1, GridUnitType.Star);
+            }
+
+            RefreshWeekGrid();
+        }
     }
 }

@@ -3,13 +3,56 @@
         xmlns:local="clr-namespace:Client"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:my="clr-namespace:Client.Calendar" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" 
 		x:Class="Client.MainWindow"
         Title="TimeTableEasy" 
 		mc:Ignorable="d" 
 		Icon="Icons\TteLogo.png"
-		Height="768" Width="1024" Loaded="Window_Loaded" xmlns:my="clr-namespace:Client.Calendar" MinHeight="654" MinWidth="787">
+		Height="768" Width="1024" Loaded="Window_Loaded" MinHeight="654" MinWidth="787">
     <Window.Resources>
         <my:GridSizeConverter x:Key="GridSizeConverter" />
+    	<Style x:Key="ButtonFocusVisual">
+    		<Setter Property="Control.Template">
+    			<Setter.Value>
+    				<ControlTemplate>
+    					<Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="Black" StrokeThickness="1" StrokeDashArray="1 2"/>
+    				</ControlTemplate>
+    			</Setter.Value>
+    		</Setter>
+    	</Style>
+    	<LinearGradientBrush x:Key="ButtonNormalBackground" EndPoint="0,1" StartPoint="0,0">
+    		<GradientStop Color="#F3F3F3" Offset="0"/>
+    		<GradientStop Color="#EBEBEB" Offset="0.5"/>
+    		<GradientStop Color="#DDDDDD" Offset="0.5"/>
+    		<GradientStop Color="#CDCDCD" Offset="1"/>
+    	</LinearGradientBrush>
+    	<SolidColorBrush x:Key="ButtonNormalBorder" Color="#FF707070"/>
+    	<Style x:Key="WeekButtonsStyle" TargetType="{x:Type Button}">
+    		<Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}"/>
+    		<Setter Property="Background" Value="{StaticResource ButtonNormalBackground}"/>
+    		<Setter Property="BorderBrush" Value="{StaticResource ButtonNormalBorder}"/>
+    		<Setter Property="BorderThickness" Value="1"/>
+    		<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+    		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+    		<Setter Property="VerticalContentAlignment" Value="Center"/>
+    		<Setter Property="Padding" Value="1"/>
+    		<Setter Property="Template">
+    			<Setter.Value>
+    				<ControlTemplate TargetType="{x:Type Button}">
+    					<Border HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" BorderBrush="LightBlue" Background="#34ADD8E6" BorderThickness="1" Padding="2">
+    						<ContentPresenter RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" OpacityMask="Black"/>
+    					</Border>
+    					<ControlTemplate.Triggers>
+    						<Trigger Property="IsKeyboardFocused" Value="true"/>
+    						<Trigger Property="ToggleButton.IsChecked" Value="true"/>
+    						<Trigger Property="IsEnabled" Value="false">
+    							<Setter Property="Foreground" Value="#ADADAD"/>
+    						</Trigger>
+    					</ControlTemplate.Triggers>
+    				</ControlTemplate>
+    			</Setter.Value>
+    		</Setter>
+    	</Style>
     </Window.Resources>
 	<Window.Background>
 		<RadialGradientBrush>
@@ -57,28 +100,28 @@
             			<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
             		</LinearGradientBrush>
             	</ToolBar.Background>
-                <CheckBox Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\world.png"/>
-                        <TextBlock Foreground="Black">Université</TextBlock>
+                        <TextBlock Foreground="Black"><Run Text="Université"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox Name="ShowOptionalCampusEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalCampusEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\building.png"/>
-                        <TextBlock Foreground="Black">Campus</TextBlock>
+                        <TextBlock Foreground="Black"><Run Text="Campus"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox Name="ShowOptionalPeriodEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalPeriodEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\book.png"/>
                         <TextBlock Foreground="Black"><Run Text="Cursus"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox Name="ShowOptionalClassEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalClassEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\group.png"/>
-                        <TextBlock Foreground="Black">Classe</TextBlock>
+                        <TextBlock Foreground="Black"><Run Text="Classe"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
             </ToolBar>
@@ -112,23 +155,23 @@
 						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
 					</LinearGradientBrush>
 				</ToolBar.Background>
-				<Button Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click">
+				<Button x:Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Icons\resultset_previous.png" Margin="0,0,3,0"/>
-						<TextBlock Foreground="Black">Précédent</TextBlock>
+						<TextBlock Foreground="Black"><Run Text="Précédent"/></TextBlock>
 					</StackPanel>
 				</Button>
-				<DatePicker SelectedDateFormat="Long" Margin="3,0" Name="DisplayedDate"
+				<DatePicker SelectedDateFormat="Long" Margin="3,0" x:Name="DisplayedDate"
                             SelectedDateChanged="DisplayedDate_SelectedDateChanged" />
-				<Button Name="DayGridNextDay" Click="DayGridNextDay_Click">
+				<Button x:Name="DayGridNextDay" Click="DayGridNextDay_Click">
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Margin="0,0,3,0" Foreground="Black">Suivant</TextBlock>
+						<TextBlock Margin="0,0,3,0" Foreground="Black"><Run Text="Suivant"/></TextBlock>
 						<Image Source="Icons\resultset_next.png"/>
 					</StackPanel>
 				</Button>
 			</ToolBar>
 
-            <ToolBar Band="2" Header="Editer un évènement" Name="EditEvent">
+            <ToolBar Band="2" Header="Editer un évènement" x:Name="EditEvent">
                 <ToolBar.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFEBEBEB" Offset="0.272"/>
@@ -136,17 +179,17 @@
                     </LinearGradientBrush>
                 </ToolBar.Background>
                 
-                <Label Name="EditEvent_Type" Content="Type"/>
-                <CheckBox Name="EditEvent_Mandatory" Content="Obligatoire"/>
-                <TextBox Name="EditEvent_Name" Text="Evènement"/>
-                <ComboBox Name="EditEvent_Place" Text="Salle" IsEditable="True" />
-                <ComboBox Name="EditEvent_Speaker" Text="Intervenant" />
-                <ComboBox Name="EditEvent_Subject" Text="Matière" SelectionChanged="EditEvent_Subject_SelectionChanged" />
-                <ComboBox Name="EditEvent_Modality" Text="Modalité"/>
-                <DatePicker Name="EditEvent_StartDate"/>
-                <ComboBox Name="EditEvent_StartHour"/>
-                <DatePicker Name="EditEvent_EndDate"/>
-                <ComboBox Name="EditEvent_EndHour"/>
+                <Label x:Name="EditEvent_Type" Content="Type"/>
+                <CheckBox x:Name="EditEvent_Mandatory" Content="Obligatoire"/>
+                <TextBox x:Name="EditEvent_Name" Text="Evènement"/>
+                <ComboBox x:Name="EditEvent_Place" Text="Salle" IsEditable="True" />
+                <ComboBox x:Name="EditEvent_Speaker" Text="Intervenant" />
+                <ComboBox x:Name="EditEvent_Subject" Text="Matière" SelectionChanged="EditEvent_Subject_SelectionChanged" />
+                <ComboBox x:Name="EditEvent_Modality" Text="Modalité"/>
+                <DatePicker x:Name="EditEvent_StartDate"/>
+                <ComboBox x:Name="EditEvent_StartHour"/>
+                <DatePicker x:Name="EditEvent_EndDate"/>
+                <ComboBox x:Name="EditEvent_EndHour"/>
 
                 <Button Content="Reset" Click="EditEvent_Reset_Click"/>
                 <Button Content="Apply" Click="EditEvent_Apply_Click"/>
@@ -154,8 +197,8 @@
             </ToolBar>
         </ToolBarTray>
         
-        <Border BorderBrush="DarkGreen" BorderThickness="0" Name="ErrorBorder" Grid.Row="1" Grid.Column="0">
-            <Grid Grid.Row="0" Grid.Column="0" Visibility="Collapsed" Name="ErrorBar" Background="Green">
+        <Border BorderBrush="DarkGreen" BorderThickness="0" x:Name="ErrorBorder" Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="0" Grid.Column="0" Visibility="Collapsed" x:Name="ErrorBar" Background="Green">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
@@ -175,9 +218,9 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBox Grid.Column="1" Grid.Row="0" Text="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" Name="ErrorMessage" >
+                    <TextBox Grid.Column="1" Grid.Row="0" Text="Mission complete!" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="ErrorMessage" >
                         <TextBox.Style>
-                            <Style TargetType="TextBox">
+                            <Style TargetType="{x:Type TextBox}">
                                 <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="BorderBrush" Value="{x:Null}"/>
                                 <Setter Property="BorderThickness" Value="4"/>
@@ -186,7 +229,7 @@
                         </TextBox.Style>
                     </TextBox>
 
-                    <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="Icons\accept32.png"/>
+                    <Image Grid.Column="0" Grid.Row="0" x:Name="ErrorIcon"  HorizontalAlignment="Left" Source="Icons\accept32.png"/>
                     <Button Click="CloseErrorBar_Click" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <Image Source="Icons\cross.png"/>
                     </Button>
@@ -195,9 +238,9 @@
             </Grid>
         </Border>
 
-        <TabControl SelectedIndex="3" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl">
+        <TabControl SelectedIndex="1" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl">
             <TabItem Header="Mois" Background="#FFA5A5A5" FontSize="13.333">
-                <Grid Name="MonthGrid" ShowGridLines="True">
+                <Grid x:Name="MonthGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -230,32 +273,29 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
+                            <ColumnDefinition Width="14" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Lundi"/></TextBlock>
-                        <TextBlock Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Mardi"/></TextBlock>
-                        <TextBlock Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Mercredi"/></TextBlock>
-                        <TextBlock Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Jeudi"/></TextBlock>
-                        <TextBlock Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Vendredi"/></TextBlock>
-                        <TextBlock Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Samedi"/></TextBlock>
-                        <TextBlock Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center"><Run Text="Dimanche"/></TextBlock>
+                        <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" Content="Lundi" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
+                        <Button Grid.Column="2" Grid.Row="0" HorizontalAlignment="Center" Content="Mardi" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
+                        <Button Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" Content="Mercredi" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
+                        <Button Grid.Column="4" Grid.Row="0" HorizontalAlignment="Center" Content="Jeudi" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
+                        <Button Grid.Column="5" Grid.Row="0" HorizontalAlignment="Center" Content="Vendredi" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
+                        <Button Grid.Column="6" Grid.Row="0" HorizontalAlignment="Center" Content="Samedi" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
+                        <Button Grid.Column="7" Grid.Row="0" HorizontalAlignment="Center" Content="Dimanche" Click="WeekColumnHeader_Click" Style="{DynamicResource WeekButtonsStyle}"/>
 
                     </Grid>
 
                     <ScrollViewer Grid.Column="0" Grid.Row="1">
-                        <Grid Name="WeekGrid" ShowGridLines="True"
-                            Height="{Binding Converter={StaticResource GridSizeConverter},
-                                            RelativeSource={RelativeSource FindAncestor,
-                                                                            AncestorType=ScrollViewer,
-                                                                            AncestorLevel=1},
-                                            Path=ActualHeight}" SizeChanged="WeekGrid_SizeChanged">
+                        <Grid x:Name="WeekGrid"
+                            Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}" SizeChanged="WeekGrid_SizeChanged">
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="auto" Name="WeekHoursColumn"/>
+                                <ColumnDefinition Width="auto" x:Name="WeekHoursColumn"/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
@@ -269,20 +309,13 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             
-                            <Grid Name="MondayContentGrid" Grid.Row="1" Grid.Column="1" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
-                            <Grid Name="TuesdayContentGrid" Grid.Row="1" Grid.Column="2" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
-                            <Grid Name="WednesdayContentGrid" Grid.Row="1" Grid.Column="3" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
-                            <Grid Name="ThursdayContentGrid" Grid.Row="1" Grid.Column="4" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
-                            <Grid Name="FridayContentGrid" Grid.Row="1" Grid.Column="5" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
-                            <Grid Name="SaturdayContentGrid" Grid.Row="1" Grid.Column="6" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
-                            <Grid Name="SundayContentGrid" Grid.Row="1" Grid.Column="7" Focusable="True" ShowGridLines="True"
-                                  MouseLeftButtonUp="DayContentGrid_MouseLeftButtonUp" MouseLeave="DayContentGrid_MouseLeave" />
+                            <Grid x:Name="MondayContentGrid" Grid.Row="1" Grid.Column="1"/>
+                            <Grid x:Name="TuesdayContentGrid" Grid.Row="1" Grid.Column="2"/>
+                            <Grid x:Name="WednesdayContentGrid" Grid.Row="1" Grid.Column="3"/>
+                            <Grid x:Name="ThursdayContentGrid" Grid.Row="1" Grid.Column="4"/>
+                            <Grid x:Name="FridayContentGrid" Grid.Row="1" Grid.Column="5"/>
+                            <Grid x:Name="SaturdayContentGrid" Grid.Row="1" Grid.Column="6"/>
+                            <Grid x:Name="SundayContentGrid" Grid.Row="1" Grid.Column="7"/>
                         </Grid>
                     </ScrollViewer>
                 </Grid>
@@ -290,12 +323,8 @@
             
             <TabItem Header="Jour" Background="#FFA5A5A5" FontSize="13.333">
                 <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
-                    <Grid Name="DayGrid"
-                            Height="{Binding Converter={StaticResource GridSizeConverter},
-                                            RelativeSource={RelativeSource FindAncestor,
-                                                                            AncestorType=ScrollViewer,
-                                                                            AncestorLevel=1},
-                                            Path=ActualHeight}" SizeChanged="DayGrid_SizeChanged">
+                    <Grid x:Name="DayGrid"
+                            Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}" SizeChanged="DayGrid_SizeChanged">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
@@ -305,7 +334,7 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <Grid Name="DayContentGrid" Grid.Row="0" Grid.Column="1" ShowGridLines="True"/>
+                        <Grid x:Name="DayContentGrid" Grid.Row="0" Grid.Column="1"/>
                     </Grid>
                 </ScrollViewer>
             </TabItem>
@@ -327,7 +356,7 @@
                 </DataGrid>
             </TabItem>
 
-	        <TabItem Header="Admin" Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
+	        <TabItem Header="Admin" x:Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
                 <Grid>
                     <local:Administration x:Name="PanelAdmin" />
                 </Grid>
