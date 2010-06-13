@@ -246,6 +246,27 @@ namespace BusinessLayer
 			db.SaveChanges();
 			return "ok";
 		}
+		string IBusinessLayer.addPeriod(PeriodData period)
+		{
+			if (!isUserAdmin)
+				return "Vous devez être administrateur pour faire ça.";
+			var plan = new Planning()
+			{
+				Type = (int)EventData.TypeEnum.Period,
+				Name = period.Name,
+				LastChange = DateTime.Now,
+				ParentPlanning = db.Planning.First(p => p.Id == period.Promotion.Id && p.Type == null)
+			};
+			db.Planning.AddObject(plan);
+			db.Period.AddObject(new Period()
+			{
+				Planning = plan,
+				Start = period.Start,
+				End = period.End
+			});
+			db.SaveChanges();
+			return "ok";
+		}
 		string IBusinessLayer.addClass(ClassData classToSet)
 		{
 			if (!isUserAdmin)
@@ -257,14 +278,14 @@ namespace BusinessLayer
 			Planning plan = new Planning()
 			{
 				Name=classToSet.Name,
-				ParentPlanning = db.Planning.Where(p => classToSet.Campus.Id == p.Id).First(),
+				ParentPlanning = db.Planning.First(p => classToSet.Campus.Id == p.Id),
 				LastChange = DateTime.Now,
 				Type = (int)EventData.TypeEnum.Class
 			};
 			db.Planning.AddObject(plan);
 			db.Class.AddObject(new DataAccessLayer.Class()
 			{
-				PeriodPlanning = db.Planning.Where(p => classToSet.Period.Id == p.Id).First(),
+				PeriodPlanning = db.Planning.First(p => classToSet.Period.Id == p.Id),
 				Planning = plan
 			});
 			db.SaveChanges();
@@ -324,27 +345,6 @@ namespace BusinessLayer
 					db.Modality.AddObject(mod);
 				}
 			}
-			db.SaveChanges();
-			return "ok";
-		}
-		string IBusinessLayer.addPeriod(PeriodData period)
-		{
-			if (!isUserAdmin)
-				return "Vous devez être administrateur pour faire ça.";
-			var plan=new Planning()
-			{
-				Type=(int)EventData.TypeEnum.Period,
-				Name=period.Name, 
-				LastChange=DateTime.Now, 
-				ParentPlanning=db.Planning.First(p=>p.Id==period.Promotion.Id&&p.Type==null)
-			};
-			db.Planning.AddObject(plan);
-			db.Period.AddObject(new Period()
-			{
-				Planning=plan,
-				Start=period.Start,
-				End=period.End
-			});
 			db.SaveChanges();
 			return "ok";
 		}
