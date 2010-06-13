@@ -90,6 +90,8 @@ Nous avons en effet décidé de créer une nouvelle base de données, qui suppri
 
 Le deuxième remaniement a été le déplacement de l'interface d'administration d'une fenêtre externe vers l'intérieur de la fenêtre principale, ce qui a obligé à remanier le code XAML.
 
+Après avoir mis en place l'infrastructure permettant de gérer les bilans horaires, dans la base de données et en partie dans le service web, nous avons du abandonner cette partie du cahier des charges, faute de temps. D'autant plus que le barême semblait indiquer que cette partie était moins importante que les autres fonctionnalités. Cependant, une grande partie de la structure étant en place, seules quelques heures supplémentaires nous auraient permis de terminer la gestion des bilans.
+
 Romain s'est ensuite occupé de la documentation de l'interface utilisateur et de la documentation de la base de données.
 
 Romaric ayant certaines compétences dans le domaine, il aura relu l'intégralité de la documentation à la recherche d'éventuelles fautes de sens ou d'orthographe.
@@ -144,20 +146,20 @@ Malgrès ces contre-temps, le projet a été en grande partie mené à bien, et 
 Ce projet m'a tout d'abord fait peur, car je le trouvais long et difficile, dans un domaine qui ne m'intéressait pas particulièrement. Je suis plutôt intéressé par la sécurité, le réseau et l'administration système et le développement PHP .
 Cependant après quelques réunions avec mon groupe la situation s'est apaisé, le projet s'est structuré, et j'ai eu la chance d'avoir un groupe cherchant à mettre les atouts des uns et des autres en avant.
 
-Ayant une certaine habitude des bases de données et des interfaces utilisateurs très« friendly-user », j’ai donc était désigné responsable de ces deux parties.
+Ayant une certaine habitude des bases de données et des interfaces utilisateurs très « friendly-user », j’ai donc était désigné responsable de ces deux parties.
 La base de donnée à certainement était pour moi la partie la plus compliquée, car le cahier des charges était très long à comprendre. Après une première version, Christophe et Romaric m’ont informé que celle-ci pouvait être simplifiée, et amélioré pour le web service. Une deuxième version à donc était dessinée en très grande collaboration avec eux.
 
-Pour l’interface utilisateur, je me suis servi de mon expérience dans le domaine, et j’ai privilégié la simplicité, et l’ergonomie, au design. L’interface n’arbore donc pas d’animations, de formes arrondies, mais reste dans un environnement très familier des utilisateurs lambda. Seuls quelques couleurs donnent un peu de charme à l’application. Toutes les informations sont regroupées en onglets, et dés qu’un utlilisateur veut faire une action, il sait directement ou se diriger.
+Pour l’interface utilisateur, je me suis servi de mon expérience dans le domaine, et j’ai privilégié la simplicité, et l’ergonomie, au design. L’interface n’arbore donc pas d’animations, de formes arrondies, mais reste dans un environnement très familier des utilisateurs lambda. Seuls quelques couleurs donnent un peu de charme à l’application. Toutes les informations sont regroupées en onglets, et dés qu’un utilisateur veut faire une action, il sait directement où se diriger.
 
-Ce projet m’a énormément apprit sur le travail en groupe, sur l’acceptation des critiques que l’on à pu me faire ainsi que sur la manière dont je peux faires des remarques, sans blessé les gens.
-Notre plus gros problème fut la séparation des deux sites de Toulouse, avec 3 personnes restés à ingesup et deux autres à supinfo, avec des horaires qui ne correspondaient pas du tout et des réunions très difficiles à planifiées.
+Ce projet m’a énormément appris sur le travail en groupe, sur l’acceptation des critiques que l’on à pu me faire ainsi que sur la manière dont je peux faire des remarques, sans blesser les gens.
+Notre plus gros problème fut la séparation des deux sites de Toulouse, avec 3 personnes restés à Ingésup et deux autres à Supinfo, avec des horaires qui ne correspondaient pas du tout et des réunions très difficiles à planifier.
 Je suis content d’avoir réalisé ce projet avec mon groupe, une bonne entraide à eu lieu, et un travail important à était effectué par tous.
 
 
 ==Despax Thomas==
-A première vue, le projet proposé par Supinfo était long et compliquer à réaliser dans son ensemble. Avec un cahier des charges plutôt complèxe dans un premier temps, il me paraissait difficile de finir à temps le projet.
+A première vue, le projet proposé par Supinfo était long et compliqué à réaliser dans son ensemble. Avec un cahier des charges plutôt complexe dans un premier temps, il me paraissait difficile de finir à temps le projet.
 
-Je suis arriver en dernier dans ce groupe, et j'ai de suite été mis à l'aise et en confiance par les différents membres. J'ai des lacunes en C#, et j'ai eu la chance de pouvoir compter sur l'aide des membres plus à l'aise que moi avec cette technologie, pour mener à bien la partie de mon projet.
+Je suis arrivé en dernier dans ce groupe, et j'ai de suite été mis à l'aise et en confiance par les différents membres. J'ai des lacunes en C#, et j'ai eu la chance de pouvoir compter sur l'aide des membres plus à l'aise que moi avec cette technologie, pour mener à bien la partie de mon projet.
 J'ai surtout travaillé sous la tutelle de Christophe, qui m'a aidé à améliorer mon bagage technique plutôt pauvre au départ du projet.
 
 J'ai trouvé qu'il y avait une bonne entente au sein de l'équipe, les critiques de chacuns étaient pris en compte, l'entraide n'était jamais refusée. Je pense que l'expérience du travail de groupe pour un projet aussi lourd au départ, et aussi long, a été enrichissante pour tous.
