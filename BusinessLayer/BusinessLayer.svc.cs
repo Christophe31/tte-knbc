@@ -558,6 +558,11 @@ namespace BusinessLayer
 			var plan = clas.Planning;
 			if(plan.ChildrenPlannings.Count>0)
 				return "D'autres objets en dépendent, merci de les supprimer en premier lieu.";
+			foreach (Event e in plan.Events.ToArray())
+			{
+				db.Event.DeleteObject(e);
+			}
+
 			db.Class.DeleteObject(clas);
 			db.Planning.DeleteObject(plan);
 			return "ok";
@@ -586,6 +591,10 @@ namespace BusinessLayer
 			var plan = per.Planning;
 			if (plan.PeriodClasses.Count>0)
 				return "D'autres objets en dépendent, merci de les supprimer en premier lieu.";
+			foreach (Event e in per.Planning.Events.ToArray())
+			{
+				db.Event.DeleteObject(e);
+			}			
 			db.Period.DeleteObject(per);
 			db.Planning.DeleteObject(plan);
 			db.SaveChanges();
@@ -613,7 +622,14 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			db.Planning.DeleteObject(db.Planning.Where(camp => camp.Id == Id && camp.Type==(int)EventData.TypeEnum.Campus).First());
+			Planning campus=db.Planning.Where(camp => camp.Id == Id && camp.Type==(int)EventData.TypeEnum.Campus).FirstOrDefault();
+			if (campus == null || campus.ChildrenPlannings.Count > 0)
+				return "Votre campus contien des classes, veuillez gérer les supressions dans l'ordre.";
+			foreach (Event e in campus.Events.ToArray())
+			{
+				db.Event.DeleteObject(e);
+			}
+			db.Planning.DeleteObject(campus);
 			db.SaveChanges();
 			return "ok";
 		}
