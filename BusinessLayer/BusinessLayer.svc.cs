@@ -511,6 +511,7 @@ namespace BusinessLayer
 			db.Planning.First(pl => pl.Id == eventToSet.ParentPlanning.Id).LastChange = DateTime.Now;
 
 			Event eve=db.Event.First(p=>eventToSet.Id == p.Id);
+            eve.Name = eventToSet.Name;
 			eve.Subject= (eventToSet.Modality==null ? null as int? : eventToSet.Modality.Id);
 			eve.Place = eventToSet.Place;
 			eve.End = eventToSet.End;
