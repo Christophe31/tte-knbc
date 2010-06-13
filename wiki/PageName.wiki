@@ -1,22 +1,26 @@
 #summary Explication du DataBinding
 
-Le DataBinding est un moyen simple de présenter et d'interagir avec de l'information.
-On utilise souvent le DataBinding pour lier la couche IHM avec la couche métier.
+== Présentation ==
+
+Le DataBinding est un moyen simple de présenter des informations et d'interagir avec elles. On utilise souvent le DataBinding pour lier la couche IHM avec la couche métier.
 
 Avec WPF, l'information en question peut être de types très différents, que ce soit des données présentes dans une base de données ou tout simplement une collection d'objets.
 Nous pouvons par exemple lier (binder) facilement une Combobox ou une Listbox (soit des listes déroulantes) avec nos informations pour les afficher simplement à l'utilisateur et lui permettre ensuite de les modifier.
 
-De nombreux contrôles ont des fonctionnalités déjà faites permettant une manipulation ou un affichage simplifié des données. Nous pouvons par exemple effectuer un pré-traitement avant d'afficher ou de modifier l'information, ou même encore trier l'information avant de la délivrer à l'utilisateur.
+De nombreux contrôles proposent des fonctionnalités permettant une manipulation ou un affichage simplifié des données. Nous pouvons par exemple effectuer un pré-traitement avant d'afficher ou de modifier l'information, ou même encore trier l'information avant de la délivrer à l'utilisateur.
 
-Prenons maintenant un exemple concret: celui de l'interface d'administration de notre logiciel. Commençons avec un exemple simple: la gestion des périodes.
+
+== Cas concret : la ComboBox ==
+
+Prenons maintenant un exemple concret : celui de l'interface d'administration de notre logiciel, et plus précisément la gestion des périodes.
 La liste déroulante comprend la liste des périodes actuellement dans la base de données.
 Évidemment, nous n'avons pas rentré ces données en dur dans l'IHM: la liste est en effet "liée" à une liste d'objets, cette dernière étant récupérée grâce au web service.
 
 Voila ce qui se passe au niveau du code pour réaliser une liaison similaire:
 
+{{{
 public class Periode {
    public string Name;
-
    public int Id;
 
    public override string ToString()
@@ -24,59 +28,72 @@ public class Periode {
         return this.Name;
    }
 }
+}}}
 
 Nous définissons ici une classe comportant un champ Id qui est un entier, et un champ Name qui est une chaîne de caractères.
-Nous avons ensuite redéfini la fonction ToString(), ce qui va nous permettre de choisir ce que va voir l'utilisateur. Pourquoi cela est nécessaire? Si nous ne le faisions pas, lors de la liaison entre nos objets "Periode" et la liste déroulante, cette dernière ne saurait pas ce quelle doit afficher: l'entier Id? la chaîne Name? les deux?
+Nous avons ensuite redéfini la fonction ToString(), ce qui va nous permettre de choisir ce que va voir l'utilisateur. Pourquoi cela est nécessaire? Si nous ne le faisions pas, lors de la liaison entre nos objets "Periode" et la liste déroulante, cette dernière ne saurait pas ce quelle doit afficher: l'entier Id ? la chaîne Name ? les deux ?
 
-Admettons maintenant que le web service utilise cette classe pour communiquer avec l'interface utilisateur. Nous pourrions alors nous construire un tableau contenant toutes les périodes et leurs identifiants avec une requête comme:
+Admettons maintenant que le web service utilise cette classe pour communiquer avec l'interface utilisateur. Nous pourrions alors nous construire un tableau contenant toutes les périodes et leurs identifiants avec une requête comme :
 
+{{{
 Periode[] mesPeriodes = Api.Server.getPeriodes();
+}}}
 
-Maintenant que nous avons notre tableau de périodes, il ne suffit plus que de le lier à notre liste déroulante (nommée ici cbPeriodes):
+Maintenant que nous avons notre tableau de périodes, il suffit de le lier à notre liste déroulante (nommée ici cbPeriodes) :
 
+{{{
 cbPeriodes.DataContext = mesPeriods;
+}}}
 
 La liste déroulante va alors afficher la liste des périodes contenu dans notre tableau, en affichant seulement leur nom car c'est le seul champ que retourne notre méthode ToString();
 
 
+== Autre exemple : la DataGrid ==
 
-
-
-Partons sur un exemple plus intéressant: la DataGrid. Ce contrôle disponible sous WPF est une sorte de tableau très flexible pouvant contenir un grand nombre d'informations différentes. Prenons l'exemple de la partie "Matières" dans l'interface d'administration.
+Partons sur un exemple plus intéressant: la DataGrid. Ce contrôle disponible sous WPF est un tableau très flexible pouvant contenir un grand nombre d'informations différentes. Prenons l'exemple de la partie "Matières" dans l'interface d'administration.
 
 La DataGrid de cette partie de l'interface permet à l'utilisateur de voir, modifier et supprimer les modalités d'une matière. Le fonctionnement du DataBinding avec une DataGrid est légèrement différent de celui que nous avons vu avec la liste déroulante.
-En effet, la DataGrid peut contenir plusieurs colonnes, et donc afficher plusieurs types d'informations en même temps. Voyons un exemple simple de DataGrid (code XAML):
+En effet, la DataGrid peut contenir plusieurs colonnes, et donc afficher plusieurs types d'informations en même temps. Voyons un exemple simple de DataGrid (code XAML) :
 
+{{{
 <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True">
     <DataGrid.Columns>
         <DataGridTextColumn Header="Nom de la modalité" Binding="{Binding Name}"/>
         <DataGridTextColumn Header="Durée (en heures)" Binding="{Binding Hours}"/>
     </DataGrid.Columns>
 </DataGrid>
+}}}
 
 Les propriétés importantes ici sont ItemsSource et Binding.
-La propriété ItemsSource="{Binding}" de la DataGrid permet, comme nous l'avons vu pour la liste déroulante, de lier notre DataGrid avec de l'information. Nous voyons ici que l'information désiré est le nom de la matière (une chaine de caractère) et son nombre d'heures (un entier). Nous pourrions alors utiliser une classe comme celle-ci:
 
+La propriété ItemsSource="{Binding}" de la DataGrid permet, comme nous l'avons vu pour la liste déroulante, de lier notre DataGrid avec de l'information. Nous voyons ici que l'information désiré est le nom de la matière (une chaine de caractère) et son nombre d'heures (un entier). Nous pouvons alors utiliser une classe comme celle-ci :
+
+{{{
 public class Modalites()
 {
     public string Name { get; set; }
-
     public string Hours { get; set; }
 }
+}}}
 
 Vous remarquez que nous ne redéfinissons pas ToString(), nous allons voir pourquoi.
-Admetons que nous ayons récupéré la liste des modalités d'une période dans un tableau:
+Admetons que nous ayons récupéré la liste des modalités d'une période dans un tableau :
 
+{{{
 Modalites[] mesModalites = Api.Server.getModalites(idClasse);
+}}}
 
-Nous pouvons alors faire comme vu auparavant:
-ModalityGrid.DataContext=mesModalites;
-ce qui va binder notre tableau de modalités avec la DataGrid.
+Nous pouvons alors faire comme auparavant :
 
-Et maintenant, comment choisir quels champs vont s'afficher et ou?
+{{{
+ModalityGrid.DataContext = mesModalites;
+}}}
+
+Ce qui va binder notre tableau de modalités avec la DataGrid. Et maintenant, comment choisir quels champs vont s'afficher et ou ?
+
 Ce sont tout simplement les propriétés Binding de chaque colonne de la DataGrid, qui nous servent à indiquer où la DataGrid va puiser ses informations. Ici, nous lui donnons les noms des champs de notre classe ("Name" et "Hours") afin qu'elle sache les afficher.
 
-Attention: vous avez vu que cette fois, nous avons défini les getter et les setter pour les deux chaines de caractères de notre classe. C'est important car c'est eux qui permettent à la DataGrid d'afficher (getter) ou de modifier (setter) nos modalités.
+Attention : vous avez vu que cette fois, nous avons défini les accesseurs pour les deux chaines de caractères de notre classe. C'est important car c'est eux qui permettent à la DataGrid d'afficher (getter) ou de modifier (setter) nos modalités.
 Ils peuvent permettre également de modifier le comportement de nos objets lorsque la DataGrid souhaite les consulter ou les modifier.
 
 Enfin, parlons de deux propriétés importantes de notre DataGrid: CanUserAddRows et CanUserDeleteRows. Ces dernières, une fois à TRUE, permettent respectivement à l'utilisateur d'ajouter ou de supprimer des objets dans notre tableau. Il ne faut pas en effet oublier que notre tableau d'objets est lié à notre DataGrid, et que cette liaison peut (ou pas, selon les attentes du développeur) être dans les deux sens. Ces propriétés vont alors permettre directement, et sans code supplémentaire, de gérer l'ajout et la suppression d'objets "Modalites" dans notre tableau de modalités, pour dans un second temps envoyer ce nouveau tableau vers le web service en vue d'une modification dans la base de données par exemple.
