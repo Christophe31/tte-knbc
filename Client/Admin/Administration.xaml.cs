@@ -275,7 +275,6 @@ namespace Client
                 //On rafraichit la combobox des Promotions dans le groupbox Périodes
                 promoList_Period = Api.Server.getPromotions().ToArray();
                 cbPeriods_Promotion.DataContext = promoList_Period;
-                //cbPeriods_Period_SelectionChanged(null, null);
             }
             else
             {
