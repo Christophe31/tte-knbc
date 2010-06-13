@@ -10,4 +10,4 @@ WCF (_*W* indows *C* omunication *F* undation_) m'as permis d'exposer une API po
 http://www.mypicturesbox.com/photos/originales/crovax31/55010.png
 
 ==Fonctionnement==
-Les évènements étant des objets échangés en quantité, et étant le coeur de l'application il paraissait important de les cadrer clairement, nous avons donc aggrégé la partie publique (c'est à la partie qui interesse le client) dans une classe avec le nombre de champs le plus mince nécessaire.
+Les évènements étant des objets échangés en quantité, et étant le coeur de l'application il paraissait important de les cadrer clairement, nous avons donc aggrégé la partie publique (c'est à la partie qui interesse le client) dans une classe avec le nombre de champs le plus petit possible.
