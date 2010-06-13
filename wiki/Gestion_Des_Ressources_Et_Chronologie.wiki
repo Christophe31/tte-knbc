@@ -11,7 +11,7 @@ L'équipe étant dans l'ensemble assez ouverte sur le logiciel libre, nous avons
 
 Bien que le cahier des charges ne faisait pas mention de toute la problématique sécurité, il nous avait paru évident qu'il faudrait un minimum de travail pour sécuriser la base de données... Faire un utilisateur par étudiant dans la base de données aurait imposé de nombreuses vues pour restreindre les droits de lecture sur les évènements privés. Nous avions aussi pensé restreindre les accès aux données en n'accédant que par des procédure stockées SQL, mais nous nous doutions que nous ferions au final un service de type "Front End" utilisé comme interface entre la base de données et Internet.
 
-Coté client, notre équipe de base était assez partagée en termes de plateforme favorite, nous avons alors songé à l'interopérabilité pour le développement et pour l'utilisation. Une possibilité qui avait retenu notre attention: un client en XUL (langage d'interfaces graphiques utilisé par Mozilla Firefox) avec un service web en PHP.
+Coté client, notre équipe de base était assez partagée en termes de plateforme favorite, nous avons alors songé à l'interopérabilité pour le développement et pour l'utilisation. Une possibilité qui avait retenu notre attention: un client en XUL (langage d'interfaces graphiques utilisée par Mozilla Firefox) avec un service web en PHP.
 
 Le sujet proposait d'autres technologies et nous avons admis que SQL Server était déjà installé chez le client, le sujet suggérant que la base d'utilisateurs était presque exclusivement sous Windows... Ayant dans notre équipe deux personnes ayant une certaine expérience en .NET, et en tenant compte du fait que les technologies Microsoft, lorsqu'elles sont utilisées dans l'ensemble de la chaine de développement, sont très intéressantes et possèdent des outils qui assistent agréablement le développeur, nous nous sommes donc conformés au sujet. D'ailleurs le framework .NET 4, utilisé avec Visual Studio 2010, semblait posséder des nouveautés intéressantes pour notre développement.
 
@@ -34,7 +34,7 @@ Romain :
     * Efficace, synthétique, clair dans sa vision et son esprit
 	
 Jérémy :
-    * Connaissance générale dans de nombreux domaines
+    * Conaissance générale dans de nombreux domaines
     * Pas de lacunes notables
     * Serviable
 	
@@ -59,7 +59,7 @@ Voici le modèle de départ des tâches du projet:
 
 Il n'y avait aucune hiérarchie explicite, mais deux points importants rendaient remarquable deux personnes. Romaric avait lu plusieurs fois le cahier des charges et le connaissait nettement mieux que les autres membres et Christophe animait un peu l'équipe et s'occupait de la mise en place et configuration des outils de collaboration.
 
-Nous nous sommes donc naturellement attribué les rôles, suivant les compétences et les attraits de chacun. De plus, Thomas s'est ajouté à nos effectifs avec une deuxième révision :
+Nous nous sommes donc naturellement attribué les rôles, suivant les compétentces et les attraits de chacun. De plus, Thomas s'est ajouté à nos effectifs avec une deuxième révision :
 
 Breil Romaric :
   * Responsable du respect du cahier des charges
@@ -98,53 +98,51 @@ Romaric ayant certaines compétences dans le domaine, il aura relu l'intégralit
 Cette partie prend une importance particulière du fait de la division Supinfo/Ingésup qui a littéralement scindé notre équipe, les heures allouées aux projets de groupe étant différentes selon le campus et ne nous permettant pas de travailler ensemble. Il fallait donc nécessairement centraliser la communication, et avoir un projet accessible pour tous nos membres afin de limiter ce problème.
 
 ==Centralisation du contenu==
-Comme nous avons un goût pour le logiciel libre, cela nous a simplifié l'hébergement, beaucoup de sites permettant d'héberger du contenu libre. Nous avons choisi Google Code pour leur réputation de fiabilité des serveurs, d'efficacité de service, et car tout le monde dans notre groupe avait déjà un compte Google...
+Comme nous avons un goût pour le logiciel libre, cela nous a simplifié l'hébergement, beaucoup de sites permettant d'héberger ce type de logiciel. Nous avons choisi Google Code pour leur réputation de fiabilité et d'efficacité de leurs services (et car tout le monde dans notre groupe avait déjà un compte Google).
 
 Ce service propose:
-  * Système de gestion de révision (SVN ou mercurial).
-  * Wiki.
-  * Hébergement de fichiers.
-  * Bug tracker.
+  * Système de gestion de révision (Subversion ou mercurial)
+  * Wiki
+  * Hébergement de fichiers
+  * Bug tracker
 
-Il était évident que nous devions utiliser un système de gestion de révision. Pour ce qui est de la question SVN / Mercurial, nous avons pensé que SVN serait plus simple pour les plus néophytes de notre équipe, mais lors de gros changements, ou même dans certains contextes de "Merge", il manquait une bonne gestion des branche et la possibilité de "Commiter" en local sans rendre la source au centre boguée.
+Il était évident que nous devions utiliser un système de gestion de révision. Pour ce qui est de la question SVN / Mercurial, nous avons pensé que SVN serait plus simple pour les membres néophytes de notre équipe, mais lors de changements importants, les limites de Subversion se sont fait sentir, notamment en l'absance d'une bonne gestion des branche (ce qui aurait permis de travailler chacun sur sa partie sans risquer de casser la version présente dans le dépot central).
 
-Le wiki s'est avéré un moyen logique de centraliser notre documentation: centralisée, accessible, facile à retrouver.
+Le wiki s'est avéré un moyen logique de centraliser notre documentation.
 
 L'hébergement de fichiers a permis, notamment à Romain, de soumettre des ressources sans passer par SVN, et donc sans le client SVN.
 
 Comme nous sommes dans une petite équipe sans "béta testeurs" externes, nous n'avons pas utilisé le Bug tracker.
 
 ==Centralisation de la communication==
-Pour la centralisation de la communication, nous avons utilisé différents outils, le wiki n'étant pas un moyen adapté car il n'a pas de flux RSS par page ou de bons moyens de se tenir au courant des nouveautés.
+Pour la centralisation de la communication, nous avons utilisé différents outils, le wiki n'étant pas un moyen adapté car il ne possède pas de moyens efficaces de se tenir au courant des nouveautés.
 
-Nous avons utilisé une Mailing List pour permettre de communiquer avec les membres du groupe sans changer leurs habitudes.
-Elle a été utilisée pour parler des points d'avancement important, pour fixer des deadlines, pour organiser des réunions, pour demander et soumettre des suggestions publiques, à l'ensemble de l'équipe...
-Pour ce service, ayant déjà notre projet sur Google Code, nous avons utilisé "Google Groups" ce qui nous a d'ailleurs permis de ne pas avoir à recréer de compte.
+Nous avons utilisé une Mailing List pour permettre de communiquer avec les membres du groupe sans changer leurs habitudes. Elle a été utilisée pour parler des points d'avancement important, pour fixer des deadlines, pour organiser des réunions, pour demander et soumettre des suggestions publiques à l'ensemble de l'équipe. Pour ce service, ayant déjà notre projet sur Google Code, nous avons utilisé "Google Groups" ce qui nous a d'ailleurs permis de ne pas avoir à recréer de compte.
 
 Pour ce qui est du "débug rapide" et pour les demandes personnelles, nous avons également beaucoup utilisé la messagerie instantanée (Jabber, MSN).
 
-Nous avons aussi mis en place un serveur Mumble, sorte de Chat VOIP qui a permis certaines petites réunions privées, voire d'avoir virtuellement une personne physiquement indisponible lors d'une réunion. Il a aussi été utilisé "en tâche de fond" pendant le développement, pour poser vite et clairement des questions... Le problème de cet outil était principalement que Jérémy, vivant dans une cité universitaire, ne pouvait s'y connecter pour cause de filtrage réseau.
+Nous avons aussi mis en place un serveur Mumble (communications vocales par internet) qui a permis d'organiser des réunions quand nous ne pouvions pas nous réunir physiquement. Il a aussi été utilisé pendant le développement, pour communiquer plus rapidement qu'avec une messagerie instantannée. Le problème de cet outil était principalement que Jérémy, vivant dans une cité universitaire, ne pouvait s'y connecter à cause d'un filtrage réseau.
 
 =Bilans Personnels=
-Ces bilans ont étés écrits par les membres eux-mêmes et sont donc à la première personne, comme de simples réflexions personnelles.
+Ces bilans ont étés écrits par chaque membres, qui peuvent ici exposer leurs remarques sur le déroulement du projet.
 ==Breil Romaric==
 ==Cheynet Romain==
 ==Despax Thomas==
 ==Kornylo Jérémy==
-Lorsque j'ai découvert le projet de groupe proposé par Supinfo, j'ai tout d'abord été impressionné. Je n'avais alors qu'une très courte expérience dans le Csharp, acquise lors de mon entrée en troisième année, et la richesse du cahier des charges prévoyait un projet long, complet et peut être difficile.
+Lorsque j'ai découvert le projet de groupe proposé par Supinfo, j'ai tout d'abord été impressionné. Je n'avais alors qu'une très courte expérience dans le C#, acquise lors de mon entrée en troisième année, et la richesse du cahier des charges prévoyait un projet long, complet et peut être difficile.
 
-Heureusement, j'avais déjà de bonnes bases générales en programmation, ce qui m'a permis de rapidement m'adapter au Csharp et de fournir des résultats fonctionnels. J'ai eu la chance de me retrouver dans une équipe sérieuse et motivée, et nous avons pu rapidement nous organiser pour réaliser un vrai travail d'équipe. C'est pour moi l'une des meilleures expériences de travail en équipe à laquelle j'ai pu participer.
+Heureusement, j'avais déjà de bonnes bases générales en programmation, ce qui m'a permis de rapidement m'adapter au C# et de fournir des résultats fonctionnels. J'ai eu la chance de me retrouver dans une équipe sérieuse et motivée, et nous avons pu rapidement nous organiser pour réaliser un vrai travail d'équipe. C'est pour moi l'une des meilleures expériences de travail en équipe à laquelle j'ai pu participer.
 
 Un des points clefs de notre travail d'équipe à été l'utilisation de SVN, qui m'était alors inconnu. J'ai pu découvrir ses atouts et faiblesses tout au long du développement, ce qui m'a permis d'évaluer globalement sa qualité en vue d'une réutilisation dans un projet ultérieur. 
 
 Mon travail étant centré sur l'interface d'administration et sa communication avec le service WCF, j'ai souvent été amené à discuter avec Christophe du fonctionnement et des problèmes rencontrés entre la communication de nos deux parties. La modélisation de l'interface d'administration m'a également permis d'acquérir de bonnes bases en XAML qui me permettront par la suite de réaliser des interfaces orientées vers la simplicité d'utilisation et sur l'ergonomie.
 
 ==Narbonne Christophe==
-Cette expérience fut riche pour moi. C'est la première fois que j'ai véritablement l'impression de coder en groupe, je me suis beaucoup impliqué dans ce projet. Du fait de ma motivation, en espérant pouvoir tirer le projet vers l'avant, j'ai proposé à l'équipe d'en prendre les rennes. Il n'y a pas eu d'oppositions. Ce projet a aussi été pour moi une de mes premières expériences de management. J'ai certainement commis des erreurs, il est parfois difficile de savoir si critiquer les autres va les faire avancer ou les démoraliser, si être prétentieux et arrogant vas motiver un esprit de défi ou démotiver, si guider de près une personne vas l'aider à comprendre ou la rendre dépendante...
+Cette expérience fut riche pour moi. C'est la première fois que j'ai véritablement l'impression de coder en groupe, je me suis beaucoup impliqué dans ce projet. Du fait de ma motivation, en espérant pouvoir tirer le projet vers l'avant, j'ai proposé à l'équipe d'en prendre les rênes. Il n'y a pas eu d'oppositions. Ce projet a aussi été pour moi une de mes premières expériences de management. J'ai certainement commis des erreurs, il est parfois difficile de savoir si critiquer les autres va les faire avancer ou les démoraliser, si être prétentieux et arrogant vas motiver un esprit de défi ou démotiver, si guider de près une personne va l'aider à comprendre ou la rendre dépendante...
 
-J'ai fais ce que sur le moment je pensais être le mieux et je n'ai pas vraiment les moyens de savoir ce qui aurait changé si j'avais fait différemment... J'ai eu la chance d'avoir une équipe qui accepte bien les critiques dans l'ensemble, même quand elles sont franches et tranchantes.
+J'ai fait ce que sur le moment je pensais être le mieux et je n'ai pas vraiment les moyens de savoir ce qui aurait changé si j'avais fait différemment... J'ai eu la chance d'avoir une équipe qui accepte bien les critiques dans l'ensemble, même quand elles sont franches et tranchantes.
 
 Sur le plan développement, je suis assez coutumier de Git, c'est la première fois que j'utilise vraiment SVN, j'ai été un peu déçu par son incapacité à comprendre les déplacements de fichiers, les suppressions/renommages de dossiers en un nom qui existait déjà...
-WCF est très simple, j'ai trouvé l'outil très bon à un détail prêt.... la configuration m'a pris un temps considérable... Avoir une authentification, ou un stockage de variables par session avec une session non sécurisée... Une vraie difficulté... J'ai du perdre quatre demi-journées pour avoir une chose qui me satisfait vraiment. Maintenant que je l'ai fais, je pense que j'irai plus vite la prochaine fois.
+WCF est très simple, j'ai trouvé l'outil très bon à un détail près : la configuration m'a pris un temps considérable. Avoir une authentification, ou un stockage de variables par session avec une session non sécurisée... Une vraie difficulté... J'ai du perdre quatre demi-journées pour avoir un fonctionnement qui me satisfasse vraiment. Maintenant que je l'ai fait, je pense que j'irai plus vite la prochaine fois.
 
-Pour ce qui est du cache, du WPF, de la base de données, j'ai beaucoup appris même si j'ai certainement gardé mes lacunes en gestion d'interfaces graphique vu que je n'ai fait que la fenêtre de login.
+Pour ce qui est du cache, du WPF, de la base de données, j'ai beaucoup appris même si j'ai certainement gardé mes lacunes en gestion d'interfaces graphique, pusique que je n'ai fait que la fenêtre de login.
