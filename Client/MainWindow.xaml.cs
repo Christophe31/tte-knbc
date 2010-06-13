@@ -696,7 +696,7 @@ namespace Client
         {
             if (Api.ServerAvailable)
             {
-                EditEvent_Type.Content = selectedEvent.LinkedTo;
+                EditEvent_Type.Text = selectedEvent.LinkedTo;
                 EditEvent_Mandatory.IsChecked = selectedEvent.Mandatory;
                 EditEvent_Name.Text = selectedEvent.Name;
                 EditEvent_Place.Text = selectedEvent.Place;
