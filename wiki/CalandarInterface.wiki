@@ -10,8 +10,8 @@ _by Romaric Breil_
     * ~~Display events of a speaker, in user planning~~
     * ~~Click on an event fill the editor~~
     * ~~Error display~~
+    * ~~day selection arrows adapt jumps to current views~~
     * Messages to help users
-    * day selection arrows adapt jumps to current views
 
   * Events list
     * ~~Display/hide non mandatory events~~
