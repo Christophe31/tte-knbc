@@ -13,7 +13,7 @@ Bien que le cahier des charges ne faisait pas mention de toute la problématique
 
 Coté client, notre équipe de base était assez partagée en termes de plateforme favorite, nous avons alors songé à l'interopérabilité pour le développement et pour l'utilisation. Une possibilité qui avait retenu notre attention: un client en XUL (Javascript utilisant le moteur de Firefox) avec un service web en Php.
 
-Le sujet proposait d'autres technologies et nous avons admis que SQL Server était déjà installé chez le client, le sujet suggérant que la base d'utilisateurs était presque exclusivement sous Windows... Ayant dans notre équipe deux personnes relativement expérimentés en .NET, et en tenant compte du fait que les technologies Microsoft, lorsqu'elles sont utilisées dans l'ensemble de la chaine de développement, sont très intéressantes et possèdent des outils qui assistent agréablement le développeur, nous avons donc fait ce choix qui semblait être encouragé par le sujet. D'ailleurs le framework .NET 4, utilisés avec Visual Studio 2010, semblait posséder des nouveautés intéressantes pour notre développement.
+Le sujet proposait d'autres technologies et nous avons admis que SQL Server était déjà installé chez le client, le sujet suggérant que la base d'utilisateurs était presque exclusivement sous Windows... Ayant dans notre équipe deux personnes relativement expérimentés en .NET, et en tenant compte du fait que les technologies Microsoft, lorsqu'elles sont utilisées dans l'ensemble de la chaine de développement, sont très intéressantes et possèdent des outils qui assistent agréablement le développeur, nous avons donc fait ce choix qui semblait être encouragé par le sujet. D'ailleurs le framework .NET 4, utilisé avec Visual Studio 2010, semblait posséder des nouveautés intéressantes pour notre développement.
 
 
 = Ressources humaines =
@@ -21,7 +21,7 @@ Le sujet proposait d'autres technologies et nous avons admis que SQL Server éta
 La répartition des tâches fonctionnelles a été assez naturelle dans l'équipe de départ. Voici la liste des membres et leurs points forts/points faibles:
 
 
-*équipe de départ*
+*Equipe de départ*
 
 Romaric :
     * Expériences en développement web et en .NET (ASPX).
@@ -84,7 +84,7 @@ Au final, nous avons assez collé à cette répartition des tâches de fonctionn
 
 Romain s'est alors occupé de la documentation de l'interface utilisateur et de la documentation de la base de données par exemple...
 
-Romaric ayant certaines compétences dans le domaines, il aura le mérite d'avoir relu l'intégralité de la documentation à la recherche d'éventuelles fautes de sens ou d'orthographe.
+Romaric ayant certaines compétences dans le domaine, il aura le mérite d'avoir relu l'intégralité de la documentation à la recherche d'éventuelles fautes de sens ou d'orthographe.
 
 = Outils et moyens mis en place =
 Cette partie prend une importance particulière du fait de la division Supinfo/Ingésup qui a littéralement scindé notre équipe, les heures allouées aux projets de groupe étant différentes selon l'école, et nous nous croisions difficilement. Il fallait donc nécessairement centraliser la communication, et avoir un projet accessible pour tous nos membres afin de limiter ce problème...
@@ -115,7 +115,7 @@ Pour ce service, ayant déjà notre projet sur Google Code, nous avons utilisé 
 
 Pour ce qui est du "débug rapide" et pour les demandes personnelles, nous avons également beaucoup utilisé la messagerie instantanée (Jabber, MSN).
 
-Nous avons aussi mis en place un serveur Mumble, une sorte de Chat VOIP qui a permis certaines petites réunions privées, voire d'avoir virtuellement une personne physiquement indisponible lors d'une réunion. Il a aussi été utilisé "en tâche de fond" pendant le développement, pour poser vite et clairement des questions... Le problème de cet outil était principalement que Jérémy, vivant dans une cité universitaire, ne pouvait s'y connecter pour cause de filtrage réseau.
+Nous avons aussi mis en place un serveur Mumble, sorte de Chat VOIP qui a permis certaines petites réunions privées, voire d'avoir virtuellement une personne physiquement indisponible lors d'une réunion. Il a aussi été utilisé "en tâche de fond" pendant le développement, pour poser vite et clairement des questions... Le problème de cet outil était principalement que Jérémy, vivant dans une cité universitaire, ne pouvait s'y connecter pour cause de filtrage réseau.
 
 =Bilans Personnels=
 Ces bilans ont étés écrits par les membres eux-mêmes et sont donc à la première personne, comme de simples réflexions personnelles.
@@ -123,6 +123,14 @@ Ces bilans ont étés écrits par les membres eux-mêmes et sont donc à la prem
 ==Cheynet Romain==
 ==Despax Thomas==
 ==Kornylo Jérémy==
+Lorsque j'ai découvert le projet de groupe proposé par Supinfo, j'ai tout d'abord été impressionné. Je n'avais alors qu'une très courte expérience dans le Csharp, acquise lors de mon entrée en troisième année, et la richesse du cahier des charges prévoyait un projet long, complet et peut être difficile.
+
+Heureusement, j'avais déjà de bonnes bases générales en programmation, ce qui m'a permis de rapidement m'adapter au Csharp et de fournir des résultats fonctionnels. J'ai eu la chance de me retrouver dans une équipe sérieuse et motivée, et nous avons pu rapidement nous organiser pour réaliser un vrai travail d'équipe. C'est pour moi l'une des meilleures expériences de travail en équipe à laquelle j'ai pu participer.
+
+Un des points clefs de notre travail d'équipe à été l'utilisation de SVN, qui m'était alors inconnu. J'ai pu découvrir ses atouts et faiblesses tout au long du développement, ce qui m'a permis d'évaluer globalement sa qualité en vue d'une réutilisation dans un projet ultérieur. 
+
+Mon travail étant centré sur l'interface d'administration et sa communication avec le service WCF, j'ai souvent été amené à discuter avec Christophe du fonctionnement et des problèmes rencontrés entre la communication de nos deux parties. La modélisation de l'interface d'administration m'a également permis d'acquérir de bonnes bases en XAML qui me permettront par la suite de réaliser des interfaces orientées vers la simplicité d'utilisation et sur l'ergonomie.
+
 ==Narbonne Christophe==
 Cette expérience fut riche pour moi. C'est la première fois que j'ai véritablement l'impression de coder en groupe, je me suis beaucoup impliqué dans ce projet. Du fait de ma motivation, en espérant pouvoir tirer le projet vers l'avant, j'ai proposé à l'équipe d'en prendre les rennes. Il n'y a pas eu d'oppositions. Ce projet a aussi été pour moi une de mes premières expériences de management. J'ai certainement commis des erreurs, il est parfois difficile de savoir si critiquer les autres va les faire avancer ou les démoraliser, si être prétentieux et arrogant vas motiver un esprit de défi ou démotiver, si guider de près une personne vas l'aider à comprendre ou la rendre dépendante...
 
