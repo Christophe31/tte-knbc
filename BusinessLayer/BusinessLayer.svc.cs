@@ -369,7 +369,7 @@ namespace BusinessLayer
 					return "La salle est déjà occupée.";
 			}
 			string truc="";
-			if (db.User.Where(usr => usr.Id == (eventToAdd.Speaker==null?0:eventToAdd.Id)).Select(usr => usr.Planning.SpeakingEvents.Concat(usr.Planning.Events.Where(ev => ev.Mandatory))).Any(t => t.Any(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start)))
+			if (!(eventToAdd.Speaker == null) && db.User.Where(usr => usr.Id == (eventToAdd.Id)).Select(usr => usr.Planning.SpeakingEvents.Concat(usr.Planning.Events.Where(ev => ev.Mandatory))).Any(t => t.Any(ev => ev.Start >= eventToAdd.End && ev.End <= eventToAdd.Start)))
 				truc = "L'intervenant est déjà occupé à cet horaire.";
 			db.Event.AddObject(new Event()
 			{
