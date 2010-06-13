@@ -5,7 +5,7 @@ _par Narbonne Christophe_
 Le choix de mettre en place un service web s'est pris assez vite. Exposer une base de donnée nue, si on veut une gestion fine des droits, ça a ses limites.
 
 
-WCF (_*W*indows *C*omunication *F*ondation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'intérêt est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
+WCF (_*W* indows *C* omunication *F* undation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'intérêt est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
 
 http://www.mypicturesbox.com/photos/originales/crovax31/55010.png
 
