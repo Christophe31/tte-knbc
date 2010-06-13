@@ -41,8 +41,8 @@ namespace Client.BusinessService
             }
             set
             {
-                Start = Start.Date;
-                Start.AddHours(value);
+                //Start = Start.Date;
+                Start = Start.Date.AddHours(value);
                 OnPropertyChanged("Start");
             }
         }
@@ -76,8 +76,8 @@ namespace Client.BusinessService
             }
             set
             {
-                End = End.Date;
-                End.AddHours(value);
+                //End = End.Date;
+                End=End.Date.AddHours(value);
                 OnPropertyChanged("End");
             }
         }
@@ -259,8 +259,8 @@ namespace Client.BusinessService
         public static EventData CreateFromICalEvent(IEvent p)
         {
             EventData ED = new EventData();
-			ED.Start = p.Start.Date;
-			ED.End = p.End.Date;
+			ED.Start = p.Start.Value;
+			ED.End = p.End.Value;
 			ED.Mandatory = p.Priority == 1;
 			ED.Place = p.Location;
 			ED.Name = p.Summary;ED.Speaker = new IdName();ED.Modality = new IdName();ED.Subject = new IdName();

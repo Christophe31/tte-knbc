@@ -465,7 +465,7 @@ namespace Client
                         b.Margin = new Thickness(1,1,1,0);
 
                         TextBlock tb = new TextBlock();
-                        tb.Text = ev.Start.ToShortTimeString() + " - " + (String.IsNullOrEmpty(ev.Name) ? ev.Subject.Name : ev.Name);
+                        tb.Text = ev.Start.ToShortTimeString() + " - " + (String.IsNullOrEmpty(ev.Name) ? (ev.Subject==null?"":ev.Subject.Name) : ev.Name);
 
                         tb.DataContext = ev;
                         tb.MouseLeftButtonUp += new MouseButtonEventHandler(EventControl_MouseLeftButtonUp);
