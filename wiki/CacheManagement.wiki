@@ -12,3 +12,27 @@ pas très compliqué, on efface tout et on recommence... d'où l'intéret de la 
 ==Les entrées et sorties du module==
 Wrape les fonctions WCF et de fait a des signatures identiques.
 Le tout étant stocké en ICal...
+
+
+[[Partie Thomas]]
+{{{
+Choix Technologique:
+
+- Le choix technologique du projet semblait plus tourner sur les technologies Microsoft, de ce fait, nous avons préférés continuer dans ce sens et avons utilisés la techno .net.
+- Nous nous sommes également aider de la librairie DDAY, qui a une licence gratuite, et qui possède déjà les objets dont nous avons besoin.
+- Nous n'avons pas fait de reactor pour gérer une partie du cache, pour éviter les tâches qui étaient susceptible de tourner inutilement en fond (pas de mis à jour des events quand l'application n'en a pas besoin). De plus grâce à cela, nous avons fait en sorte d'éviter les accés concurrents (les conflits entre les données), et nous avons rendu l'application plus réactive.
+
+
+
+
+
+
+Architecture:
+
+- Toujours dans un soucis de réactivité, nous avons implémenter un singleton (design pattern: modèle architectural de code) dans la partie cache, qui interdit de faire plus de 2 instances du même objet, ce qui évite les doublons.
+- Le CacheProcess est une entité qui créé/stocke les objets. C'est là qu'est gérer le singleton par exemple. C'est lui qui lance et gère les méthodes qui s'éxécutent en fond.
+- Le CacheWrapper gère l'accès du client. Il contient juste des méthodes qui renvoie sur le CacheProcess. Il s'occupe de répondre aux demandes du client. C'est aussi dedans qu'est géré l'accès aux ressources (qui a priorité sur qui).
+Comment il marche ? Dans un premier temps, il regarde si il y a un accès à la base de données. Si oui, il regarde le dernier update de l'ical, si il est à jour, il renvoie l'ical stocké dans le cache, sinon il récupère les données mises à jour sur le server et mets l'ical à jour. Si le server n'est pas disponible, il renvoi le dernier ical stocké dans le cache.
+
+
+}}}
