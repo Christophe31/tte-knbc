@@ -140,6 +140,20 @@ Je pense que la plus grande source de problèmes a été la séparation du group
 Malgrès ces contre-temps, le projet a été en grande partie mené à bien, et le programme respecte les contraintes imposées.
 
 ==Cheynet Romain==
+
+Ce projet m'a tout d'abord fait peur, car je le trouvais long et difficile, dans un domaine qui ne m'intéressait pas particulièrement. Je suis plutôt intéressé par la sécurité, le réseau et l'administration système et le développement PHP .
+Cependant après quelques réunions avec mon groupe la situation s'est apaisé, le projet s'est structuré, et j'ai eu la chance d'avoir un groupe cherchant à mettre les atouts des uns et des autres en avant.
+
+Ayant une certaine habitude des bases de données et des interfaces utilisateurs très« friendly-user », j’ai donc était désigné responsable de ces deux parties.
+La base de donnée à certainement était pour moi la partie la plus compliquée, car le cahier des charges était très long à comprendre. Après une première version, Christophe et Romaric m’ont informé que celle-ci pouvait être simplifiée, et amélioré pour le web service. Une deuxième version à donc était dessinée en très grande collaboration avec eux.
+
+Pour l’interface utilisateur, je me suis servi de mon expérience dans le domaine, et j’ai privilégié la simplicité, et l’ergonomie, au design. L’interface n’arbore donc pas d’animations, de formes arrondies, mais reste dans un environnement très familier des utilisateurs lambda. Seuls quelques couleurs donnent un peu de charme à l’application. Toutes les informations sont regroupées en onglets, et dés qu’un utlilisateur veut faire une action, il sait directement ou se diriger.
+
+Ce projet m’a énormément apprit sur le travail en groupe, sur l’acceptation des critiques que l’on à pu me faire ainsi que sur la manière dont je peux faires des remarques, sans blessé les gens.
+Notre plus gros problème fut la séparation des deux sites de Toulouse, avec 3 personnes restés à ingesup et deux autres à supinfo, avec des horaires qui ne correspondaient pas du tout et des réunions très difficiles à planifiées.
+Je suis content d’avoir réalisé ce projet avec mon groupe, une bonne entraide à eu lieu, et un travail important à était effectué par tous.
+
+
 ==Despax Thomas==
 ==Kornylo Jérémy==
 Lorsque j'ai découvert le projet de groupe proposé par Supinfo, j'ai tout d'abord été impressionné. Je n'avais alors qu'une très courte expérience dans le C#, acquise lors de mon entrée en troisième année, et la richesse du cahier des charges prévoyait un projet long, complet et peut être difficile.
