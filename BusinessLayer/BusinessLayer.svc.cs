@@ -273,7 +273,7 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			if (!(validPlanning(classToSet.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period)))
 				return "Période et/ou Campus invalide(s).";
-			if (db.Planning.Any(p =>classToSet.Campus!=null && p.Id == classToSet.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == classToSet.Name)))
+			if (classToSet.Campus != null && db.Planning.Where(p => p.Id == classToSet.Campus.Id).First().ChildrenPlannings.Any(c => c.Name == classToSet.Name))
 				return "Une classe avec ce nom existe déjà sur ce campus.";
 			Planning plan = new Planning()
 			{
@@ -482,6 +482,8 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
+			if (db.Planning.Any(p => p.Name == PD.Name && p.Type == (int)EventData.TypeEnum.Period))
+				return "Une periode de ce nom existe déjà.";
 			var myPeriod=db.Planning.First(p => p.Id == PD.Id && p.Type ==(int)EventData.TypeEnum.Period);
 			myPeriod.ParentPlanning=db.Planning.First(p => p.Id == PD.Promotion.Id && p.Type == null);
 			myPeriod.Name = PD.Name;
