@@ -413,7 +413,8 @@ namespace BusinessLayer
 						});
 				}
 			}
-			usr.Password = userToSet.Password;
+			if (!(userToSet.Password == null || userToSet.Password==""))
+				usr.Password = userToSet.Password;
 			db.SaveChanges();
 			return "ok";
 		}
