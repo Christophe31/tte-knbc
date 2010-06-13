@@ -173,26 +173,48 @@
 			</ToolBar>
         </ToolBarTray>
 
-        <StackPanel Orientation="Horizontal" x:Name="EditEvent" Grid.Column="0" Grid.Row="1" Background="LightGray">
-            <Label Margin="0,0,5,0">
-                <TextBlock>Editer un évènement (<Run x:Name="EditEvent_Type"/>)</TextBlock>
-            </Label>
-            
-            <CheckBox x:Name="EditEvent_Mandatory" Content="Obligatoire"/>
-            <TextBox x:Name="EditEvent_Name"/>
-            <ComboBox x:Name="EditEvent_Place" IsEditable="True" />
-            <ComboBox x:Name="EditEvent_Speaker"/>
-            <ComboBox x:Name="EditEvent_Subject" SelectionChanged="EditEvent_Subject_SelectionChanged" />
-            <ComboBox x:Name="EditEvent_Modality"/>
-            <DatePicker x:Name="EditEvent_StartDate"/>
-            <ComboBox x:Name="EditEvent_StartHour"/>
-            <DatePicker x:Name="EditEvent_EndDate"/>
-            <ComboBox x:Name="EditEvent_EndHour"/>
+        <WrapPanel x:Name="EditEvent" Grid.Column="0" Grid.Row="1" Background="LightGray">
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="0,0,5,0">
+                    <TextBlock>Editer un évènement (<Run x:Name="EditEvent_Type"/>)</TextBlock>
+                </Label>
+            </StackPanel>
 
-            <Button Content="Reset" Click="EditEvent_Reset_Click"/>
-            <Button Content="Apply" Click="EditEvent_Apply_Click"/>
-            <Button Content="Delete" Click="EditEvent_Delete_Click"/>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <CheckBox x:Name="EditEvent_Mandatory" Content="Obligatoire" VerticalAlignment="Center" Margin="0,0,3,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Titre</Label>
+                <TextBox x:Name="EditEvent_Name" Margin="0,0,3,0" MinWidth="80" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Salle</Label>
+                <ComboBox x:Name="EditEvent_Place" IsEditable="True" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
+                <Label>Intervenant</Label>
+                <ComboBox x:Name="EditEvent_Speaker" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Matière</Label>
+                <ComboBox x:Name="EditEvent_Subject" SelectionChanged="EditEvent_Subject_SelectionChanged" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
+                <Label>Modalité</Label>
+                <ComboBox x:Name="EditEvent_Modality" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Début</Label>
+                <DatePicker x:Name="EditEvent_StartDate" Margin="0,0,3,0"/>
+                <ComboBox x:Name="EditEvent_StartHour" Margin="0,0,3,0" MinWidth="30" ItemsSource="{Binding}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label>Fin</Label>
+                <DatePicker x:Name="EditEvent_EndDate" Margin="0,0,3,0"/>
+                <ComboBox x:Name="EditEvent_EndHour" Margin="0,0,5,0" MinWidth="30" ItemsSource="{Binding}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Vider les champs" Click="EditEvent_Reset_Click" Margin="0,0,3,0"/>
+                <Button Content="Enregistrer" Click="EditEvent_Apply_Click" Margin="0,0,3,0"/>
+                <Button Content="Supprimer" Click="EditEvent_Delete_Click"/>
+            </StackPanel>
+        </WrapPanel>
         
         <Border BorderBrush="DarkGreen" BorderThickness="0" x:Name="ErrorBorder" Grid.Row="2" Grid.Column="0">
             <Grid Grid.Row="0" Grid.Column="0" Visibility="Collapsed" x:Name="ErrorBar" Background="Green">
@@ -355,7 +377,7 @@
 
 	        <TabItem Header="Admin" x:Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
                 <Grid>
-                    <local:Administration x:Name="PanelAdmin" />
+                    <!--<local:Administration x:Name="PanelAdmin" />-->
                 </Grid>
             </TabItem>
         </TabControl>

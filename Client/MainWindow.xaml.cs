@@ -45,7 +45,7 @@ namespace Client
                     _selectedPlanning = new IdName() { Id = _selectedPlanning.Id, Name = _selectedPlanning.Name };
                 }
                 else
-                    EventData.SelectedPlanning = new IdName() { Id = 0, Name = "No planning" };
+                    _selectedPlanning = new IdName() { Id = 0, Name = "No planning" };
 
                 return _selectedPlanning;
             }
@@ -689,14 +689,25 @@ namespace Client
                 EditEvent_Type.Text = selectedEvent.LinkedTo;
                 EditEvent_Mandatory.IsChecked = selectedEvent.Mandatory;
                 EditEvent_Name.Text = selectedEvent.Name;
+
+
+                EventData.TypeEnum? type = selectedEvent.Type;
+                if (type == null)
+                    type = (EventData.TypeEnum)((KeyValuePair<EventData.TypeEnum, string>)ViewType.SelectedValue).Key;
+                if ((type == EventData.TypeEnum.Campus || type == EventData.TypeEnum.Class)
+                    && Api.Server.getCampusLocationsTree().ContainsKey((IdName)CampusName.SelectedValue))
+                    EditEvent_Place.DataContext = Api.Server.getCampusLocationsTree()[(IdName)CampusName.SelectedValue];
+                else
+                    EditEvent_Place.DataContext = null;
+
                 EditEvent_Place.Text = selectedEvent.Place;
-                EditEvent_Speaker.DataContext = Api.Server.getSubjects();
-                EditEvent_Speaker.SelectedValue = selectedEvent.Speaker;
-                EditEvent_Subject.DataContext = Api.getSubjects();
+                EditEvent_Speaker.DataContext = selectedEvent.Speakers;
+                EditEvent_Speaker.SelectedIndex = selectedEvent.SpeakerIndex;
+                EditEvent_Subject.DataContext = selectedEvent.Subjects;
                 if ((EditEvent_Subject.DataContext as SubjectData[]).Count() > 0)
                 {
-                    EditEvent_Subject.SelectedValue = selectedEvent.Subject;
-                    EditEvent_Modality.SelectedValue = selectedEvent.Modality;
+                    EditEvent_Subject.SelectedIndex = selectedEvent.SubjectIndex;
+                    EditEvent_Modality.SelectedIndex = selectedEvent.ModalityIndex;
                 }
                 EditEvent_StartDate.SelectedDate = selectedEvent.StartDate;
                 EditEvent_StartHour.SelectedValue = selectedEvent.StartHour;
@@ -742,8 +753,16 @@ namespace Client
                 selectedEvent.Name = EditEvent_Name.Text;
                 selectedEvent.Place = EditEvent_Place.Text;
                 selectedEvent.Speaker = (IdName)EditEvent_Speaker.SelectedValue;
-                selectedEvent.Subject = (IdName)EditEvent_Subject.SelectedValue;
-                selectedEvent.Modality = (IdName)EditEvent_Modality.SelectedValue;
+                selectedEvent.Subject = new IdName()
+                {
+                    Name = ((IdName)EditEvent_Subject.SelectedValue).Name,
+                    Id = ((IdName)EditEvent_Subject.SelectedValue).Id
+                };
+                selectedEvent.Modality = new IdName()
+                {
+                    Name = ((IdName)EditEvent_Modality.SelectedValue).Name,
+                    Id = ((IdName)EditEvent_Modality.SelectedValue).Id
+                };
 
                 if (selectedEvent.ParentPlanning == null)
                     selectedEvent.ParentPlanning = SelectedPlanning;

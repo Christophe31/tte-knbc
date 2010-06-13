@@ -16,7 +16,7 @@ namespace Client.BusinessService
 	/// INotifyPropertyChanged,
 	/// IEditableObject
 	/// </summary>
-    public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject, INotifyPropertyChanged, IEditableObject
+    public partial class EventData : object, System.Runtime.Serialization.IExtensibleDataObject
     {
         #region Properties
         /// <summary>
@@ -41,9 +41,7 @@ namespace Client.BusinessService
             }
             set
             {
-                //Start = Start.Date;
                 Start = Start.Date.AddHours(value);
-                OnPropertyChanged("Start");
             }
         }
 
@@ -61,7 +59,6 @@ namespace Client.BusinessService
                 int hour = Start.Hour;
                 Start = value.Date;
                 Start.AddHours(hour);
-                OnPropertyChanged("Start");
             }
         }
 
@@ -76,9 +73,7 @@ namespace Client.BusinessService
             }
             set
             {
-                //End = End.Date;
                 End=End.Date.AddHours(value);
-                OnPropertyChanged("End");
             }
         }
 
@@ -96,19 +91,8 @@ namespace Client.BusinessService
                 int hour = End.Hour;
                 End = value.Date;
                 End.AddHours(hour);
-                OnPropertyChanged("End");
             }
         }
-
-        /// <summary>
-        /// Get or set the maximum number of simultaneous events for this event
-        /// </summary>
-        public int MaxNeighboursEvents { get; set; }
-
-        /// <summary>
-        /// Index of the current event in the displayed day (must be refreshed for each day drawing)
-        /// </summary>
-        public int EventIndex { get; set; }
 
         /// <summary>
         /// Get a color for borders around the event, depending on its modality or its type.
@@ -163,7 +147,6 @@ namespace Client.BusinessService
             }
         }
 
-        private static IdName[] _speakers = null;
         /// <summary>
         /// Get a table of available speakers.
         /// </summary>
@@ -171,9 +154,7 @@ namespace Client.BusinessService
         {
             get
             {
-                if (_speakers == null)
-                    _speakers = new CacheWrapper().Server.getSpeakers();
-                return _speakers;
+                return new CacheWrapper().Server.getSpeakers();
             }
         }
 
@@ -184,11 +165,13 @@ namespace Client.BusinessService
         {
             get
             {
-                return Array.FindIndex(Speakers, p => p.Id == Speaker.Id);
+                if (Speaker != null)
+                    return Array.FindIndex(Speakers, p => p.Id == Speaker.Id);
+                else
+                    return -1;
             }
         }
 
-        private static SubjectData[] _subjects = null;
         /// <summary>
         /// Get a table of available subjects.
         /// </summary>
@@ -196,9 +179,7 @@ namespace Client.BusinessService
         {
             get
             {
-                if (_subjects == null)
-                    _subjects = new CacheWrapper().getSubjects();
-                return _subjects;
+                return new CacheWrapper().getSubjects();
             }
         }
 
@@ -209,7 +190,10 @@ namespace Client.BusinessService
         {
             get
             {
-                return Array.FindIndex(Subjects, p => p.Id == Subject.Id);
+                if (Subject != null)
+                    return Array.FindIndex(Subjects, p => p.Id == Subject.Id);
+                else
+                    return -1;
             }
         }
 
@@ -220,7 +204,10 @@ namespace Client.BusinessService
         {
             get
             {
-                return Subjects[SubjectIndex] == null ? null : Subjects[SubjectIndex].Modalities;
+                if (Subjects.Count() > 0)
+                    return Subjects[SubjectIndex] == null ? null : Subjects[SubjectIndex].Modalities;
+                else
+                    return new ModalityData[0];
             }
         }
 
@@ -231,31 +218,15 @@ namespace Client.BusinessService
         {
             get
             {
-                return Array.FindIndex(Modalities, p => p.Id == Modality.Id);
+                if (Modality != null)
+                    return Array.FindIndex(Modalities, p => p.Id == Modality.Id);
+                else
+                    return -1;
             }
         }
-
-        /// <summary>
-        /// Get or set the selected planning.
-        /// </summary>
-        public static IdName SelectedPlanning { get; set; }
-
         #endregion Properties
 
-        // Create the OnPropertyChanged method to raise the event
-		protected void OnPropertyChanged(string name)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(name));
-            }
-        }
-
-        public EventData()
-        {
-        }
-
+        #region iCal
         public static EventData CreateFromICalEvent(IEvent p)
         {
             EventData ED = new EventData();
@@ -300,39 +271,11 @@ namespace Client.BusinessService
 			{
 				e.Description = this.Name;
 			}
-			
-
         }
+        #endregion iCal
 
-
-        #region IEditableObject Members
-
-        void IEditableObject.BeginEdit()
+        public EventData()
         {
         }
-
-        void IEditableObject.CancelEdit()
-        {
-        }
-
-        void IEditableObject.EndEdit()
-        {
-            CacheWrapper Api = new CacheWrapper();
-            if (ParentPlanning == null)
-                ParentPlanning = SelectedPlanning;
-            // Event creation
-            if (Id == 0)
-            {
-                Api.Server.addEvent(this);
-            }
-
-            // Event edition
-            else
-            {
-				Api.Server.setEvent(this);
-            }
-        }
-
-        #endregion
-	}
+    }
 }
