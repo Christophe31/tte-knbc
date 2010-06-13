@@ -550,7 +550,7 @@ namespace BusinessLayer
 			var clas = db.Class.Where(p => p.Id == Id).First();
 			var plan = clas.Planning;
 			if(plan.ChildrenPlannings.Count>0)
-				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu.";
+				return "D'autres objets en dépendent, merci de les supprimer en premier lieu.";
 			db.Class.DeleteObject(clas);
 			db.Planning.DeleteObject(plan);
 			return "ok";
@@ -578,7 +578,7 @@ namespace BusinessLayer
 			var per= db.Period.Where(p => p.Id == Id).First();
 			var plan = per.Planning;
 			if (plan.PeriodClasses.Count>0)
-				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu.";
+				return "D'autres objets en dépendent, merci de les supprimer en premier lieu.";
 			db.Period.DeleteObject(per);
 			db.Planning.DeleteObject(plan);
 			db.SaveChanges();
@@ -615,7 +615,7 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			var plan = db.Planning.Where(p => p.Id == Id).First();
 			if (plan.ChildrenPlannings.Count > 0)
-				return "D'autres objets en dépendent, merci de les suprimmer en premier lieu.";
+				return "D'autres objets en dépendent, merci de les supprimer en premier lieu.";
 			db.Planning.DeleteObject(plan);
 			db.SaveChanges();
 			return "ok";
