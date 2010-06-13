@@ -18,7 +18,7 @@ La base est organisée autour de deux tables principales, Planning et Event. D'a
 
 === Plannings ===
 
-Le cahier des charges demande de stocker des évènements liés, au choix, à l'université, un campus, une période d'études, une classe ou un utilisateur (évènements privés). Le moyen le plus simple pour centraliser la gestion de ces entités est de toutes les considérer comme des plannings, et de lier tous les évènements à un planning particulier. En effet, elles partagent un ensemble d'informations : un nom, une date de dernière modification et un _parent_.
+Le cahier des charges demande de stocker des évènements liés, au choix, à l'université, un campus, une période d'études, une classe ou un utilisateur (évènements privés). Le moyen le plus simple pour centraliser la gestion de ces entités est de toutes les considérer comme des plannings, et de lier tous les évènements à un planning particulier. En effet, elles partagent un ensemble d'informations : un nom, une date de dernière modification (pour le cache) et un _parent_.
 
 Toutes ces entités dépendent les unes des autres, on peut modéliser ces dépendances sous la forme d'un arbre :
 
@@ -47,11 +47,11 @@ Deux tables, Class et Period, ajoutent quelques informations au planning corresp
 
 La table User, moins liée à Planning que les précédentes, est la table utilisateur, qui stocke les logins et mots de passe. Le nom de l'utilisateur est stocké dans le champ "Name" de son planning.
 
-La table Role permet de stocker les rôles des utilisateurs. Suivant le planning vers lequel pointe la colonne Target, le service web déduit le rôle. Si le planning pointé est l'université, alors il est administrateur, si c'est vers un campus, alors il est campus manager, sinon (cible nulle), il est intervenant (la présence des intervenanats ici permet d'optimiser les requêtes permettant de retrouver cette liste.
+La table Role permet de stocker les rôles des utilisateurs. Suivant le planning vers lequel pointe la colonne Target, le service web déduit le rôle. Si le planning pointé est l'université, alors il est administrateur, si c'est vers un campus, alors il est campus manager, sinon (cible nulle), il est intervenant (la présence des intervenanats ici permet d'optimiser les requêtes permettant de retrouver cette liste).
 
 
 === Evènements ===
 
 Les évènements sont stockés dans la table Event, qui contient un titre, le planning dont il dépend, les dates de début et de fin, son caractère obligatoire, le lieu où il se déroule, l'intervenant et le propriétaire de l'objet (qui pointent vers les plannings de ces utilisateurs), ainsi que la matière, s'il s'agit d'un cours.
 
-Les matières sont stockées dans une dernière table, Modality, qui stocke les matières et les modalités. Chaque modalité stocke son nom et son nombre d'heures, et pointe vers sa matière parent (dans la même table), qui stocke uniquement son nom.
+Les matières sont stockées dans une dernière table, Modality, qui stocke les matières et les modalités. Chaque modalité stocke son nom et son nombre d'heures, et pointe vers sa matière parent (dans la même table), qui stocke uniquement son nom. Ici aussi, il s'agit d'une arborescence, mais beaucoup moins complexe.
