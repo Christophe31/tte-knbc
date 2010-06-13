@@ -390,12 +390,22 @@ namespace Client
 
         private void DayGridPreviousDay_Click(object sender, RoutedEventArgs e)
         {
-            DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(-1);
+            if (ViewsControl.SelectedIndex == 2 || ViewsControl.SelectedIndex == 3)
+                DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(-1);
+            else if (ViewsControl.SelectedIndex == 1)
+                DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(-7);
+            else if (ViewsControl.SelectedIndex == 0)
+                DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddMonths(-1);
         }
 
         private void DayGridNextDay_Click(object sender, RoutedEventArgs e)
         {
-            DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(1);
+            if (ViewsControl.SelectedIndex == 2 || ViewsControl.SelectedIndex == 3)
+                DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(1);
+            else if (ViewsControl.SelectedIndex == 1)
+                DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddDays(7);
+            else if (ViewsControl.SelectedIndex == 0)
+                DisplayedDate.SelectedDate = DisplayedDate.SelectedDate.GetValueOrDefault().AddMonths(1);
         }
 
         public void RefreshMonthGrid()
@@ -590,26 +600,6 @@ namespace Client
         private void ShowOptionalEvents_Changed(object sender, RoutedEventArgs e)
         {
             RefreshAllEvents();
-        }
-
-        /// <summary>
-        /// Controls that the new value of the TextBox is a correct hour, and corrects it if required.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TimeBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            TextBox box = (TextBox) sender;
-            int value = 0;
-            if (Int32.TryParse(box.Text, out value))
-            {
-                if (value < 0)
-                    box.Text = "0";
-                else if (value >= 24)
-                    box.Text = "23";
-            }
-            else
-                box.Text = "0";
         }
 
         private void DisplayedDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
