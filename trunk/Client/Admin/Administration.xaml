@@ -52,7 +52,7 @@
                     </TextBox>
                     <Image Grid.Column="0" Grid.Row="0" Name="ErrorIcon"  HorizontalAlignment="Left" Source="..\Icons\accept32.png"/>
                     <Button Click="CloseErrorBar_Click" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2">
-                        <Image Source="..\Icons\cross.png"/>
+                        <Image Source="..\Icons\cross.png" ToolTip="Fermer la barre d'état."/>
                     </Button>
                 </Grid>
 
@@ -92,7 +92,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPromo_Promotions" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPromo_Promotions_SelectionChanged" VerticalAlignment="Top"/>
+                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPromo_Promotions" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPromo_Promotions_SelectionChanged" VerticalAlignment="Top" ToolTip="Choisissez une promotion à modifier/supprimer dans cette liste. Vous pouvez également choisir 'Nouvelle Promotion' pour en créer une nouvelle."/>
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -103,7 +103,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lPromo_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPromo_Name" PreviewKeyUp="tbPromo_Name_PreviewKeyUp" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPromo_Name" PreviewKeyUp="tbPromo_Name_PreviewKeyUp" ToolTip="Entrez un nom unique pour la promotion."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="2">
@@ -116,8 +116,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPromo_AddMod" Margin="0,20,5,0" Click="bPromo_AddMod_Click" VerticalAlignment="Bottom"/>
-                        <Button Content="Supprimer" Grid.Column="1" Name="bPromo_Del" Margin="5,20,0,0" Click="bPromo_Del_Click" VerticalAlignment="Bottom"/>
+                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPromo_AddMod" Margin="0,20,5,0" Click="bPromo_AddMod_Click" VerticalAlignment="Bottom" ToolTip="Cliquez ici pour ajouter (si vous avez choisi 'Nouvelle Promotion') ou modifier (si vous avez choisi une promotion existante) une promotion."/>
+                        <Button Content="Supprimer" Grid.Column="1" Name="bPromo_Del" Margin="5,20,0,0" Click="bPromo_Del_Click" VerticalAlignment="Bottom" ToolTip="Cliquez ici pour supprimer une promotion sélectionnée dans la liste."/>
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -142,7 +142,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbSubjects_Subjects" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbSubjects_Subjects_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbSubjects_Subjects" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbSubjects_Subjects_SelectionChanged" ToolTip="Choisissez une matière à modifier/supprimer dans cette liste. Vous pouvez également choisir 'Nouvelle Matière' pour en créer une nouvelle."/>
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -153,10 +153,10 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lSubjects_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbSubjects_Name" PreviewKeyUp="tbSubjects_Name_PreviewKeyUp" />
+                            <TextBox Grid.Column="1" Grid.Row="0" Name="tbSubjects_Name" PreviewKeyUp="tbSubjects_Name_PreviewKeyUp" ToolTip="Entrez un nom pour la matière."/>
                     </Grid>
 
-                    <DataGrid MaxHeight="90" Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10" ToolTip="Modalités prédéfinies : Cours, E-learning, TD, TP, Soutenance, Examen">
+                    <DataGrid MaxHeight="90" Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10" ToolTip="Modalités prédéfinies : Cours, E-learning, TD, TP, Soutenance, Examen. Entrez le nom de la modalité à ajouter, son nombre d'heures, puis 'ENTRER' pour l'ajouter à la matière.">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nom de la modalité" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Durée (en heures)" Binding="{Binding Hours}"/>
@@ -173,8 +173,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bSubjects_AddMod" Margin="0,20,5,0" Click="bSubjects_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bSubjects_Del" Margin="5,20,0,0" Click="bSubjects_Del_Click" />
+                            <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bSubjects_AddMod" Margin="0,20,5,0" Click="bSubjects_AddMod_Click" ToolTip="Cliquez ici pour ajouter (si vous avez choisi 'Nouvelle Matière') ou modifier (si vous avez choisi une matière existante) une matière."/>
+                            <Button Content="Supprimer" Grid.Column="1" Name="bSubjects_Del" Margin="5,20,0,0" Click="bSubjects_Del_Click" ToolTip="Cliquez ici pour supprimer une matière sélectionnée dans la liste."/>
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -197,7 +197,7 @@
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbCampus_Campus" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbCampus_Campus_SelectionChanged" VerticalAlignment="Top"/>
+                        <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbCampus_Campus" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbCampus_Campus_SelectionChanged" VerticalAlignment="Top" ToolTip="Choisissez un campus à modifier/supprimer dans cette liste. Vous pouvez également choisir 'Nouveau Campus' pour en créer un nouveau."/>
                     <Grid Grid.Column="0" Grid.Row="1">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -208,7 +208,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lCampus_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbCampus_Name" PreviewKeyUp="tbCampus_Name_PreviewKeyUp" />
+                            <TextBox Grid.Column="1" Grid.Row="0" Name="tbCampus_Name" PreviewKeyUp="tbCampus_Name_PreviewKeyUp" ToolTip="Entrez un nom unique pour le campus."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="2">
@@ -221,8 +221,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bCampus_AddMod" Margin="0,20,5,0" Click="bCampus_AddMod_Click" VerticalAlignment="Bottom"/>
-                        <Button Content="Supprimer" Grid.Column="1" Name="bCampus_Del" Margin="5,20,0,0" Click="bCampus_Del_Click" VerticalAlignment="Bottom"/>
+                            <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bCampus_AddMod" Margin="0,20,5,0" Click="bCampus_AddMod_Click" VerticalAlignment="Bottom" ToolTip="Cliquez ici pour ajouter (si vous avez choisi 'Nouveau Campus') ou modifier (si vous avez choisi un campus existant) un campus."/>
+                            <Button Content="Supprimer" Grid.Column="1" Name="bCampus_Del" Margin="5,20,0,0" Click="bCampus_Del_Click" VerticalAlignment="Bottom" ToolTip="Cliquez ici pour supprimer un campus sélectionné dans la liste."/>
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -246,7 +246,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPeriods_Period" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPeriods_Period_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbPeriods_Period" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbPeriods_Period_SelectionChanged" ToolTip="Choisissez une période à modifier/supprimer dans cette liste. Vous pouvez également choisir 'Nouvelle Période' pour en créer une nouvelle."/>
                     <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -257,7 +257,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lPeriods_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPeriods_Name" />
+                            <TextBox Grid.Column="1" Grid.Row="0" Name="tbPeriods_Name" ToolTip="Entrez un nom pour la période."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
@@ -272,13 +272,13 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Date de début:" Grid.Column="0" Grid.Row="0" Name="lPeriods_StartDate" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPeriods_StartDate" Margin="0,10,0,0"/>
+                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPeriods_StartDate" Margin="0,10,0,0" ToolTip="Entrez une date de début pour la période, sous la forme '22/01/2010' ou encore '20/01/2010 09:30'."/>
 
                         <Label Content="Date de fin:" Grid.Column="0" Grid.Row="1" Name="lPeriods_EndDate" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Name="tbPeriods_EndDate" Margin="0,10,0,0"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Name="tbPeriods_EndDate" Margin="0,10,0,0" ToolTip="Entrez une date de fin pour la période, sous la forme '22/01/2010' ou encore '20/01/2010 09:30'."/>
 
                         <Label Content="Promotion:" Grid.Column="0" Grid.Row="2" Name="lPeriods_Promotion" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center" HorizontalContentAlignment="Center" ToolTip="Choisissez une promotion pour la période."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -291,8 +291,8 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPeriods_AddMod" Margin="0,20,5,0" Click="bPeriods_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bPeriods_Del" Margin="5,20,0,0" Click="bPeriods_Del_Click" />
+                            <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bPeriods_AddMod" Margin="0,20,5,0" Click="bPeriods_AddMod_Click" ToolTip="Cliquez ici pour ajouter (si vous avez choisi 'Nouvelle Période') ou modifier (si vous avez choisi une période existante) une période."/>
+                            <Button Content="Supprimer" Grid.Column="1" Name="bPeriods_Del" Margin="5,20,0,0" Click="bPeriods_Del_Click" ToolTip="Cliquez ici pour supprimer une période sélectionnée dans la liste."/>
                     </Grid>
                 </Grid>
             </GroupBox>
@@ -316,7 +316,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbClasses_Classes" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbClasses_Classes_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbClasses_Classes" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbClasses_Classes_SelectionChanged" ToolTip="Choisissez une classe à modifier/supprimer dans cette liste. Vous pouvez également choisir 'Nouvelle Classe' pour en créer une nouvelle."/>
                     <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="92*"/>
@@ -328,7 +328,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Name="lClasses_Name" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Column="2" Name="tbClasses_Name"/>
+                            <TextBox Grid.Column="2" Name="tbClasses_Name" ToolTip="Entrez un nom pour la classe."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
@@ -342,10 +342,10 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Campus:" Grid.Column="0" Grid.Row="0" Name="lClasses_Campus" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" Grid.Row="0" Name="cbClasses_Campus" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0" VerticalAlignment="Center" ToolTip="Choisissez un campus pour la classe."/>
 
                         <Label Content="Période:" Grid.Column="0" Grid.Row="1" Name="lClasses_Period" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Name="cbClasses_Period" HorizontalContentAlignment="Center" ItemsSource="{Binding}" Margin="0,10,0,0" VerticalAlignment="Center" ToolTip="Choisissez une période pour la classe."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -358,8 +358,8 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bClasses_AddMod" Margin="0,20,5,0" Height="Auto" Click="bClasses_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bClasses_Del" Margin="5,20,0,0" Height="Auto" Click="bClasses_Del_Click" />
+                            <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bClasses_AddMod" Margin="0,20,5,0" Height="Auto" Click="bClasses_AddMod_Click" ToolTip="Cliquez ici pour ajouter (si vous avez choisi 'Nouvelle Classe') ou modifier (si vous avez choisi une classe existante) une classe."/>
+                            <Button Content="Supprimer" Grid.Column="1" Name="bClasses_Del" Margin="5,20,0,0" Height="Auto" Click="bClasses_Del_Click" ToolTip="Cliquez ici pour supprimer une classe sélectionnée dans la liste."/>
                     </Grid>
 
                 </Grid>
@@ -388,7 +388,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbUsers_Users" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbUsers_Users_SelectionChanged" />
+                        <ComboBox Grid.Column="0" Grid.Row="0" ItemsSource="{Binding}" Name="cbUsers_Users" Margin="0,0,0,20" SelectedIndex="-1" HorizontalContentAlignment="Center" SelectionChanged="cbUsers_Users_SelectionChanged" ToolTip="Choisissez un utilisateur à modifier/supprimer dans cette liste. Vous pouvez également choisir 'Nouvel Utilisateur' pour en créer un nouveau."/>
                     <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
@@ -400,10 +400,10 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lUsers_Name" HorizontalAlignment="Center"/>
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Name" />
+                            <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Name" ToolTip="Entrez un nom pour l'utilisateur."/>
 
                         <Label Content="Login:" Grid.Column="0" Grid.Row="1" Name="lUsers_Login" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <TextBox Grid.Column="1" Grid.Row="1" Name="tbUsers_Login" Margin="0,10,0,0"/>
+                            <TextBox Grid.Column="1" Grid.Row="1" Name="tbUsers_Login" Margin="0,10,0,0" ToolTip="Entrez un login unique pour l'utilisateur."/>
 
                     </Grid>
 
@@ -417,10 +417,10 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Label Content="Mot de passe:" Grid.Column="0" Grid.Row="0" Name="lUsers_Pass" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Pass" Margin="0,10,0,0" IsEnabled="False" />
+                            <TextBox Grid.Column="1" Grid.Row="0" Name="tbUsers_Pass" Margin="0,10,0,0" IsEnabled="False" ToolTip="Définissez un mot de passe pour l'utilisateur, ou choisissez de le générer aléatoirement."/>
                     </Grid>
 
-                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" />
+                    <CheckBox Content="Générer un mot de pass aléatoire" Grid.Column="0" Grid.Row="3" Name="cbUsers_GenPass" HorizontalAlignment="Center" Margin="0,5,0,10" IsChecked="True" VerticalAlignment="Center" Checked="cbUsers_GenPass_Checked" Unchecked="cbUsers_GenPass_Unchecked" ToolTip="Cochez cette case pour une génération aléatoire de mot de passe."/>
 
                     <Grid Grid.Column="0" Grid.Row="4" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
@@ -432,13 +432,13 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbUsers_Rights" HorizontalAlignment="Stretch" SelectedIndex="0" SelectionChanged="cbUsers_Rights_SelectionChanged">
+                        <ComboBox Grid.Column="1" Grid.Row="0" Name="cbUsers_Rights" HorizontalAlignment="Stretch" SelectedIndex="0" SelectionChanged="cbUsers_Rights_SelectionChanged" ToolTip="Choisissez un type de rôle à ajouter pour l'utilisateur. Choisissez ensuite la cible du rôle (si nécessaire) grâce à la liste apparaissant à droite.">
                             <ComboBoxItem Content="Ajouter un rôle" />
                             <ComboBoxItem Content="Administrateur" />
                             <ComboBoxItem Content="Campus Manager" />
                             <ComboBoxItem Content="Intervenant" />
                         </ComboBox>
-                        <ComboBox Margin="2,0,0,0" Grid.Row="0" Grid.Column="2" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalAlignment="Left" ItemsSource="{Binding}" Grid.ColumnSpan="2" VerticalAlignment="Bottom" SelectionChanged="cbUsers_RightsType_SelectionChanged" />
+                        <ComboBox Margin="2,0,0,0" Grid.Row="0" Grid.Column="2" Visibility="Hidden" Name="cbUsers_RightsType" HorizontalAlignment="Left" ItemsSource="{Binding}" Grid.ColumnSpan="2" VerticalAlignment="Bottom" SelectionChanged="cbUsers_RightsType_SelectionChanged" ToolTip="Choisissez ici la cible du rôle (un campus pour un Campus Manager, une université pour un Administrateur)."/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="5" HorizontalAlignment="Center">
@@ -451,9 +451,9 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Content="Supprimer un rôle" ToolTip="Choisissez une ligne puis cliquez sur le bouton Supprimer pour supprimer le rôle" Name="bUsers_DelRight" Click="bUsers_DelRight_Click" />
+                        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Content="Supprimer un rôle" Name="bUsers_DelRight" Click="bUsers_DelRight_Click" ToolTip="Après avoir sélectionné un rôle dans le tableau, cliquez ici pour le supprimer."/>
                         
-                        <DataGrid Grid.Column="0" MaxHeight="90" VerticalAlignment="Top" Grid.Row="0" HorizontalAlignment="Center" ItemsSource="{Binding}" Name="RolesGrid" Margin="0,5,0,5" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" ToolTip="Choisissez une ligne et cliquez sur la touche SUPPR pour la supprimer">
+                        <DataGrid Grid.Column="0" MaxHeight="90" VerticalAlignment="Top" Grid.Row="0" HorizontalAlignment="Center" ItemsSource="{Binding}" Name="RolesGrid" Margin="0,5,0,5" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="True" ToolTip="Ce tableau indique les rôles actuels de l'utilisateur. Les modifications ne sont faites que localement, et seront par la suite enregistrées lors de l'ajout ou la modification de l'utilisateur.">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Role" Binding="{Binding RoleName}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Cible" Binding="{Binding TargetName}" IsReadOnly="True"/>
@@ -476,7 +476,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Classe:" Grid.Column="0" Grid.Row="0" Name="lUsers_Class" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center" />
+                            <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center" ToolTip="Choisissez une classe pour l'utilisateur."/>
                     </Grid>
 
 
@@ -490,8 +490,8 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
-                        <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0" Click="bUsers_AddMod_Click" />
-                        <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" Click="bUsers_Del_Click" />
+                            <Button Content="Ajouter/Modifier" Grid.Column="0" Name="bUsers_AddMod" Margin="0,20,5,0" Click="bUsers_AddMod_Click" ToolTip="Cliquez ici pour ajouter (si vous avez choisi 'Nouvel Utilisateur') ou modifier (si vous avez choisi un utilisateur existant) un utilisateur."/>
+                            <Button Content="Supprimer" Grid.Column="1" Name="bUsers_Del" Margin="5,20,0,0" Click="bUsers_Del_Click" ToolTip="Cliquez ici pour supprimer un utilisateur sélectionné dans la liste."/>
                     </Grid>
                 </Grid>
             </GroupBox>
