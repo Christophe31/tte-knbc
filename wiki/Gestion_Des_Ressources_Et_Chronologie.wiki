@@ -155,6 +155,13 @@ Je suis content d’avoir réalisé ce projet avec mon groupe, une bonne entraid
 
 
 ==Despax Thomas==
+A première vue, le projet proposé par Supinfo était long et compliquer à réaliser dans son ensemble. Avec un cahier des charges plutôt complèxe dans un premier temps, il me paraissait difficile de finir à temps le projet.
+
+Je suis arriver en dernier dans ce groupe, et j'ai de suite été mis à l'aise et en confiance par les différents membres. J'ai des lacunes en C#, et j'ai eu la chance de pouvoir compter sur l'aide des membres plus à l'aise que moi avec cette technologie, pour mener à bien la partie de mon projet.
+J'ai surtout travaillé sous la tutelle de Christophe, qui m'a aidé à améliorer mon bagage technique plutôt pauvre au départ du projet.
+
+J'ai trouvé qu'il y avait une bonne entente au sein de l'équipe, les critiques de chacuns étaient pris en compte, l'entraide n'était jamais refusée. Je pense que l'expérience du travail de groupe pour un projet aussi lourd au départ, et aussi long, a été enrichissante pour tous.
+
 ==Kornylo Jérémy==
 Lorsque j'ai découvert le projet de groupe proposé par Supinfo, j'ai tout d'abord été impressionné. Je n'avais alors qu'une très courte expérience dans le C#, acquise lors de mon entrée en troisième année, et la richesse du cahier des charges prévoyait un projet long, complet et peut être difficile.
 
