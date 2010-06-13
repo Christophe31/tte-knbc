@@ -745,7 +745,8 @@ namespace Client
                 selectedEvent.Subject = (IdName)EditEvent_Subject.SelectedValue;
                 selectedEvent.Modality = (IdName)EditEvent_Modality.SelectedValue;
 
-                selectedEvent.ParentPlanning = SelectedPlanning;
+                if (selectedEvent.ParentPlanning == null)
+                    selectedEvent.ParentPlanning = SelectedPlanning;
                 
                 selectedEvent.StartDate = EditEvent_StartDate.SelectedDate.GetValueOrDefault();
                 selectedEvent.StartHour = (int)EditEvent_StartHour.SelectedValue;
