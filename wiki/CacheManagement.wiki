@@ -14,7 +14,7 @@ Wrape les fonctions WCF et de fait a des signatures identiques.
 Le tout étant stocké en ICal...
 
 
-[[Partie Thomas]]
+=Partie Thomas=
 {{{
 Choix Technologique:
 
