@@ -275,11 +275,20 @@ namespace Client
         /// <param name="date">Date to draw</param>
         public void DrawDay(Grid grid, DateTime date)
         {
+            if (grid.RowDefinitions.Count == 0)
+            {
+                for (int i = 0; i < 24; i++)
+                {
+                    grid.RowDefinitions.Add(new RowDefinition());
+                }
+            }
+
             ScrollViewer sw = (ScrollViewer)((Grid)grid.Parent).Parent;
-            ((Grid)grid.Parent).Measure(new Size(sw.ActualWidth, (double)new GridSizeConverter().Convert(sw.ActualHeight, null, null, null)));
             grid.Children.Clear();
-            double gridHeight = ((Grid)grid.Parent).ActualHeight;
-            double gridWidth = grid.ActualWidth;
+            grid.ColumnDefinitions.Clear();
+            ColumnDefinition col = new ColumnDefinition();
+            col.Width = new GridLength(1, GridUnitType.Auto);
+            grid.ColumnDefinitions.Add(col);
 
             if (AllEvents != null)
             {
@@ -287,62 +296,56 @@ namespace Client
                     .Where(p => p.Start < date.AddDays(1) && p.End > date)
                     .OrderBy(p => p.Start);
 
-                // Set the maximum nomber of neighbours events of each event
+                // List of events already displayed in the next process
+                List<EventData> colsState = new List<EventData>() { null };
                 for (int i = 0; i < 24; i++)
                 {
-                    var hourEvents = dayEvents.Where(p => p.StartHour <= i && p.EndHour >= i+1);
-                    int eventsCount = hourEvents.Count();
+                    var hourEvents = dayEvents.Where(p => p.Start <= date.AddHours(i) && p.End >= date.AddHours(i+1));
+
+                    // Clean of colsState
+                    for (int j = 0; j < colsState.Count; j++)
+                    {
+                        if (!hourEvents.Any(p => p == colsState[j]))
+                            colsState[j] = null;
+                    }
+
+                    // Place new events
                     foreach (EventData ev in hourEvents)
                     {
-                        ev.EventIndex = -1;
-                        ev.MaxNeighboursEvents = ev.MaxNeighboursEvents < eventsCount ? eventsCount : ev.MaxNeighboursEvents;
-                    }
-                }
-
-                // Normalise the MaxNeighboursEvents of each event (previous events can be incorrect)
-                int currentIndex = 0;
-                for (int i = 0; i < 24; i++)
-                {
-                    var hourEvents = dayEvents.Where(p => p.StartHour <= i && p.EndHour >= i+1);
-                    if (hourEvents.Count() > 0)
-                    {
-                        int maxEventsCount = hourEvents.Max(p => p.MaxNeighboursEvents);
-                        foreach (EventData ev in hourEvents)
+                        // If it is a new event
+                        if (!colsState.Any(p => p == ev))
                         {
-                            if (currentIndex >= maxEventsCount)
-                                currentIndex = 0;
-
-                            if (ev.EventIndex == -1)
+                            // Find (or create) the column to place the EventControl in
+                            int index = colsState.FindIndex(p => p == null);
+                            if (index == -1)
                             {
-                                ev.EventIndex = currentIndex;
-                                currentIndex++;
+                                index = grid.ColumnDefinitions.Count;
+                                col = new ColumnDefinition();
+                                col.Width = new GridLength(1, GridUnitType.Auto);
+                                grid.ColumnDefinitions.Add(col);
+                                colsState.Add(ev);
                             }
 
-                            ev.MaxNeighboursEvents = maxEventsCount;
+                            // Add the event
+                            // Normalise start and end of the event
+                            DateTime start = ev.Start < date ? date : ev.Start;
+                            DateTime end = ev.End > date.AddDays(1) ? date.AddDays(1) : ev.End;
+
+                            // Draw the control
+                            EventControl evc = new EventControl();
+                            evc.DataContext = ev;
+                            evc.MouseLeftButtonUp += new MouseButtonEventHandler(EventControl_MouseLeftButtonUp);
+                            evc.Margin = new Thickness(2);
+
+                            // Place it in the grid
+                            Grid.SetColumn(evc, index);
+                            Grid.SetRow(evc, start.Hour);
+                            TimeSpan span = end - start;
+                            Grid.SetRowSpan(evc, span.Days * 24 + span.Hours);
+
+                            grid.Children.Add(evc);
                         }
                     }
-                }
-
-                foreach (EventData ev in dayEvents)
-                {
-                    // Normalise start and end of the event
-                    ev.Start = ev.Start < date ? date : ev.Start;
-                    ev.End = ev.End > date.AddDays(1) ? date.AddDays(1) : ev.End;
-
-                    // Draw the control
-                    EventControl evc = new EventControl();
-                    evc.DataContext = ev;
-                    evc.MouseLeftButtonUp += new MouseButtonEventHandler(EventControl_MouseLeftButtonUp);
-
-                    double eventSize = gridWidth / ev.MaxNeighboursEvents;
-
-                    /*evc.Margin = new Thickness(
-                        2 + ev.EventIndex * eventSize,
-                        2 + gridHeight * ev.Start.Hour / 24,
-                        2 + eventSize * (ev.MaxNeighboursEvents - 1 - ev.EventIndex),
-                        2 + gridHeight * (24 - ev.End.Hour) / 24);*/
-
-                    grid.Children.Add(evc);
                 }
             }
         }
@@ -369,13 +372,15 @@ namespace Client
         public void RefreshWeekGrid()
         {
             DateTime selectedDate = DisplayedDate.SelectedDate.HasValue ? DisplayedDate.SelectedDate.GetValueOrDefault() : DateTime.Today;
-            DrawDay(MondayContentGrid, selectedDate.AddDays(1-(int)selectedDate.DayOfWeek));
-            DrawDay(TuesdayContentGrid, selectedDate.AddDays(2-(int)selectedDate.DayOfWeek));
-            DrawDay(WednesdayContentGrid, selectedDate.AddDays(3-(int)selectedDate.DayOfWeek));
-            DrawDay(ThursdayContentGrid, selectedDate.AddDays(4-(int)selectedDate.DayOfWeek));
-            DrawDay(FridayContentGrid, selectedDate.AddDays(5-(int)selectedDate.DayOfWeek));
-            DrawDay(SaturdayContentGrid, selectedDate.AddDays(6-(int)selectedDate.DayOfWeek));
-            DrawDay(SundayContentGrid, selectedDate.AddDays(-(int)selectedDate.DayOfWeek));
+            int addDay = selectedDate.DayOfWeek == DayOfWeek.Sunday ? 7 : 0;
+            int sunAddDay = selectedDate.DayOfWeek == DayOfWeek.Sunday ? 0 : 7;
+            DrawDay(MondayContentGrid, selectedDate.AddDays(1 - (int)selectedDate.DayOfWeek - addDay));
+            DrawDay(TuesdayContentGrid, selectedDate.AddDays(2 - (int)selectedDate.DayOfWeek - addDay));
+            DrawDay(WednesdayContentGrid, selectedDate.AddDays(3 - (int)selectedDate.DayOfWeek - addDay));
+            DrawDay(ThursdayContentGrid, selectedDate.AddDays(4 - (int)selectedDate.DayOfWeek - addDay));
+            DrawDay(FridayContentGrid, selectedDate.AddDays(5 - (int)selectedDate.DayOfWeek - addDay));
+            DrawDay(SaturdayContentGrid, selectedDate.AddDays(6 - (int)selectedDate.DayOfWeek - addDay));
+            DrawDay(SundayContentGrid, selectedDate.AddDays(sunAddDay - (int)selectedDate.DayOfWeek));
         }
 
         private void WeekGrid_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -616,14 +621,14 @@ namespace Client
         #endregion
 
 
-        private void DayContentGrid_MouseEnter(object sender, MouseEventArgs e)
+        private void DayContentGrid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Grid day = (Grid)sender;
             Grid week = ((Grid)day.Parent);
 
             int col = Grid.GetColumn(day);
 
-            week.ColumnDefinitions[col].Width = new GridLength(3, GridUnitType.Star);
+            week.ColumnDefinitions[col].Width = new GridLength(1, GridUnitType.Auto);
             RefreshWeekGrid();
         }
 
@@ -688,13 +693,6 @@ namespace Client
 			{ 
 				MessageBox.Show(s); 
 			}
-		}
-		
-		private void report_Click(object sender, RoutedEventArgs e)
-		{
-			 //Api.Server.getSubjects().Select(sub=>sub.Modalities.Select(mod=>sub.Name+";"+mod.Name+";"+mod.Hours+";"+Api.Server.SpeakingEvents);
-			
-		   //string[] colums= new string { "Subject", "Modality", "", "" };
 		}
 
         private void Disconnect_Click(object sender, RoutedEventArgs e)
