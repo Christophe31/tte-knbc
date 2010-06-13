@@ -72,8 +72,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
-        <ToolBarTray Grid.Column="0" Grid.Row="0">
-            <ToolBar Header="Planning" Band="1">
+        <ToolBarTray Grid.Column="0" Grid.Row="0" Background="{x:Null}">
+            <ToolBar Header="Planning" Band="1" ToolTip="Séléctionner les plannings à afficher">
 				<ToolBar.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
@@ -100,25 +100,25 @@
             			<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
             		</LinearGradientBrush>
             	</ToolBar.Background>
-                <CheckBox x:Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalUniversityEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed" ToolTip="Afficher les évènements factulatifs de l'université">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\world.png"/>
                         <TextBlock Foreground="Black"><Run Text="Université"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox x:Name="ShowOptionalCampusEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalCampusEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed" ToolTip="Afficher les évènements factultatifs du campus">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\building.png"/>
                         <TextBlock Foreground="Black"><Run Text="Campus"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox x:Name="ShowOptionalPeriodEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalPeriodEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed" ToolTip="Afficher les évènements factultatifs de la periode d'étude">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\book.png"/>
                         <TextBlock Foreground="Black"><Run Text="Cursus"/></TextBlock>
                     </StackPanel>
                 </CheckBox>
-                <CheckBox x:Name="ShowOptionalClassEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed">
+                <CheckBox x:Name="ShowOptionalClassEvents" Checked="ShowOptionalEvents_Changed" Unchecked="ShowOptionalEvents_Changed" ToolTip="Afficher les évènements factultatifs de la classe">
                     <StackPanel Orientation="Horizontal">
                         <Image Margin="0,0,3,0" Source="Icons\group.png"/>
                         <TextBlock Foreground="Black"><Run Text="Classe"/></TextBlock>
@@ -133,8 +133,8 @@
 						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
 					</LinearGradientBrush>
 				</ToolBar.Background>
-				<Button Content="Import iCal" Click="iCal_import_Click" Foreground="Black"/>
-                <Button Content="Export iCal" Click="iCal_export_Click" Foreground="Black"/>
+				<Button Content="Import iCal" Click="iCal_import_Click" Foreground="Black" ToolTip="Importer un calendrier ical"/>
+                <Button Content="Export iCal" Click="iCal_export_Click" Foreground="Black" ToolTip="Sauvegarder son calendrier en format ical"/>
             </ToolBar>
 
             <ToolBar Band="1">
@@ -145,17 +145,17 @@
                     </LinearGradientBrush>
                 </ToolBar.Background>
                 
-                <Button Content="Déconnexion" Click="Disconnect_Click" Foreground="Black"/>
+                <Button Content="Déconnexion" Click="Disconnect_Click" Foreground="Black" ToolTip="Déconnexion de l'interface"/>
             </ToolBar>
 			
-			<ToolBar Band="2">
+			<ToolBar Band="1">
 				<ToolBar.Background>
 					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
 						<GradientStop Color="#FFEBEBEB" Offset="0.272"/>
 						<GradientStop Color="#FFA2A2A2" Offset="0.996"/>
 					</LinearGradientBrush>
 				</ToolBar.Background>
-				<Button x:Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click">
+				<Button x:Name="DayGridPreviousDay" Click="DayGridPreviousDay_Click" ToolTip="Sélectionner le jour précédent">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Icons\resultset_previous.png" Margin="0,0,3,0"/>
 						<TextBlock Foreground="Black"><Run Text="Précédent"/></TextBlock>
@@ -163,7 +163,7 @@
 				</Button>
 				<DatePicker SelectedDateFormat="Long" Margin="3,0" x:Name="DisplayedDate"
                             SelectedDateChanged="DisplayedDate_SelectedDateChanged" />
-				<Button x:Name="DayGridNextDay" Click="DayGridNextDay_Click">
+				<Button x:Name="DayGridNextDay" Click="DayGridNextDay_Click" ToolTip="Sélectionner le jour suivant">
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Margin="0,0,3,0" Foreground="Black"><Run Text="Suivant"/></TextBlock>
 						<Image Source="Icons\resultset_next.png"/>
@@ -214,7 +214,7 @@
         </Border>
 
         <TabControl SelectedIndex="1" Grid.Column="0" Grid.Row="2" Margin="0,8,0,-11" x:Name="ViewsControl">
-            <TabItem Header="Mois" Background="#FFA5A5A5" FontSize="13.333">
+            <TabItem Header="Mois" Background="#FF818181" FontSize="13.333" ToolTip="Vue du planning sur le mois" Foreground="Black" BorderBrush="{x:Null}">
                 <Grid x:Name="MonthGrid">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -228,7 +228,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Semaine" Background="#FFA5A5A5" FontSize="13.333">
+            <TabItem Header="Semaine" Background="#FF818181" FontSize="13.333" Foreground="Black" BorderBrush="{x:Null}" ToolTip="Vue du planning sur la semaine">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -296,7 +296,7 @@
                 </Grid>
             </TabItem>
             
-            <TabItem Header="Jour" Background="#FFA5A5A5" FontSize="13.333">
+            <TabItem Header="Jour" Background="#FF818181" FontSize="13.333" Foreground="Black" BorderBrush="{x:Null}" ToolTip="Vue du planning sur le jour">
                 <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
                     <Grid x:Name="DayGrid"
                             Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}">
@@ -314,9 +314,9 @@
                 </ScrollViewer>
             </TabItem>
 
-            <TabItem Header="Liste" Background="#FFA5A5A5" FontSize="13.333" HorizontalAlignment="Left" Margin="-2,0,0,-1" Width="44.654">
+            <TabItem Header="Liste" Background="#FF818181" FontSize="13.333" Foreground="Black" BorderBrush="{x:Null}" ToolTip="Liste des évènements">
 
-                <Grid>
+                <Grid Margin="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
@@ -325,7 +325,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <WrapPanel x:Name="EditEvent" Background="LightGray" Grid.Column="0" Grid.Row="0">
+                    <WrapPanel x:Name="EditEvent" Background="#FFC5CDFF" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Margin="0">
                         <StackPanel Orientation="Horizontal">
                             <Label Margin="0,0,5,0">
                                 <TextBlock>Editer un évènement (<Run x:Name="EditEvent_Type"/>)</TextBlock>
@@ -333,43 +333,43 @@
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
-                            <CheckBox x:Name="EditEvent_Mandatory" Content="Obligatoire" VerticalAlignment="Center" Margin="0,0,3,0"/>
+                            <CheckBox x:Name="EditEvent_Mandatory" Content="Obligatoire" VerticalAlignment="Center" Margin="0,0,3,0" ToolTip="Votre évènement est-il obligatoire ?"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label>Titre</Label>
-                            <TextBox x:Name="EditEvent_Name" Margin="0,0,3,0" MinWidth="80" />
+                            <Label ToolTip="Titre de votre évènement">Titre</Label>
+                            <TextBox x:Name="EditEvent_Name" Margin="0,0,3,0" MinWidth="80" ToolTip="Titre de votre évènement" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label>Salle</Label>
-                            <ComboBox x:Name="EditEvent_Place" IsEditable="True" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
-                            <Label>Intervenant</Label>
-                            <ComboBox x:Name="EditEvent_Speaker" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
+                            <Label ToolTip="Salle de votre évènement">Salle</Label>
+                            <ComboBox x:Name="EditEvent_Place" IsEditable="True" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" ToolTip="Salle de votre évènement" />
+                            <Label ToolTip="Intervenant pour cet évènement">Intervenant</Label>
+                            <ComboBox x:Name="EditEvent_Speaker" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" ToolTip="Intervenant pour cet évènement" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label>Matière</Label>
-                            <ComboBox x:Name="EditEvent_Subject" SelectionChanged="EditEvent_Subject_SelectionChanged" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
+                            <Label ToolTip="Matière ratachée à votre évènement">Matière</Label>
+                            <ComboBox x:Name="EditEvent_Subject" SelectionChanged="EditEvent_Subject_SelectionChanged" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" ToolTip="Matière ratachée à votre évènement" />
                             <Label>Modalité</Label>
                             <ComboBox x:Name="EditEvent_Modality" Margin="0,0,3,0" ItemsSource="{Binding}" MinWidth="60" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" ToolTip="Sélectionner la date de debut de l'évènement">
                             <Label>Début</Label>
                             <DatePicker x:Name="EditEvent_StartDate" Margin="0,0,3,0"/>
                             <ComboBox x:Name="EditEvent_StartHour" Margin="0,0,3,0" MinWidth="30" ItemsSource="{Binding}" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" ToolTip="Sélectionner la date de fin de l'évènement">
                             <Label>Fin</Label>
                             <DatePicker x:Name="EditEvent_EndDate" Margin="0,0,3,0"/>
                             <ComboBox x:Name="EditEvent_EndHour" Margin="0,0,5,0" MinWidth="30" ItemsSource="{Binding}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Button Content="Vider les champs" Click="EditEvent_Reset_Click" Margin="0,0,3,0"/>
-                            <Button Content="Enregistrer" Click="EditEvent_Apply_Click" Margin="0,0,3,0"/>
-                            <Button Content="Supprimer" Click="EditEvent_Delete_Click"/>
+                            <Button Content="Vider les champs" Click="EditEvent_Reset_Click" Margin="0,0,3,0" ToolTip="remettre à zero tous les champs"/>
+                            <Button Content="Enregistrer" Click="EditEvent_Apply_Click" Margin="0,0,3,0" ToolTip="Enregistrer et publier cet évènement"/>
+                            <Button Content="Supprimer" Click="EditEvent_Delete_Click" ToolTip="Supprimer cet évènement"/>
                         </StackPanel>
                     </WrapPanel>
 
                     <DataGrid Grid.Row="1" Grid.Column="0" x:Name="EventsGrid" AutoGenerateColumns="False" ItemsSource="{Binding}"
-                            IsReadOnly="True" SelectedCellsChanged="EventsGrid_SelectedCellsChanged">
+                            IsReadOnly="True" SelectedCellsChanged="EventsGrid_SelectedCellsChanged" Height="589.833" VerticalAlignment="Bottom" Margin="0,0,0,-16.033">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Type" Binding="{Binding LinkedTo, Mode=OneWay}"/>
                             <DataGridCheckBoxColumn Header="Obligatoire" Binding="{Binding Mandatory}"/>
@@ -385,7 +385,7 @@
                 </Grid>
             </TabItem>
 
-	        <TabItem Header="Administration" x:Name="Administration" Background="#FFA5A5A5" Margin="14,0,-18,-1" FontSize="13.333">
+	        <TabItem Header="Administration" x:Name="Administration" Background="#FF818181" Margin="14,0,-18,-1" FontSize="13.333" ToolTip="Onglet d'administration" BorderBrush="{x:Null}">
                 <Grid>
                     <local:Administration x:Name="PanelAdmin" />
                 </Grid>
