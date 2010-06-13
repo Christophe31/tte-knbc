@@ -393,11 +393,11 @@ namespace BusinessLayer
 			User usr = db.User.First(u => u.Id == userToSet.Id);
 			if ( isUserAdmin)
 			{
-				if(!validPlanning(userToSet.Class==null?0:userToSet.Class.Id, EventData.TypeEnum.Class))
+				if(!(userToSet.Class==null||userToSet.Class.Id==0 || validPlanning(userToSet.Class.Id, EventData.TypeEnum.Class)))
 					return "Nouvelle classe invalide.";
 				if (userToSet.Login != usr.Login && !db.User.Any(u => u.Login == userToSet.Login))
 					usr.Login = userToSet.Login;
-				usr.Planning.Parent = userToSet.Class.Id;
+				usr.Planning.Parent = (userToSet.Class==null)? (int?)null:userToSet.Class.Id;
 				foreach(Role ro in usr.Roles)
 				{
 					if (!userToSet.Roles.Any(r => r.Id == ro.Id))
@@ -624,7 +624,7 @@ namespace BusinessLayer
 				return "Vous devez être administrateur pour faire ça.";
 			Planning campus=db.Planning.Where(camp => camp.Id == Id && camp.Type==(int)EventData.TypeEnum.Campus).FirstOrDefault();
 			if (campus == null || campus.ChildrenPlannings.Count > 0)
-				return "Votre campus contien des classes, veuillez gérer les supressions dans l'ordre.";
+				return "Votre campus contient des classes, veuillez gérer les suppressions dans l'ordre.";
 			foreach (Event e in campus.Events.ToArray())
 			{
 				db.Event.DeleteObject(e);
