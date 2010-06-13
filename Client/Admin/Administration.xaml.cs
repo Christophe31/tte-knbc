@@ -1070,6 +1070,10 @@ namespace Client
                 tbUsers_Login.Text = userInformations.Login;
                 tbUsers_Name.Text = userInformations.Name;
 
+                //On indique un semblant de mot de passe
+                cbUsers_GenPass.IsChecked = false;
+                tbUsers_Pass.Text = "";
+
                 //Si l'utilisateur fait parti d'une classe
                 if (userInformations.Class != null)
                 {
@@ -1157,6 +1161,9 @@ namespace Client
             {
                 //On initialise une nouvelle liste de rôles
                 rolesInformations = new List<RoleData>();
+
+                //On repasse en mode génération aléatoire de mot de passe
+                cbUsers_GenPass.IsChecked = true;
 
                 //On rafraichit la DataGrid des rôles
                 refreshRoleGrid();
@@ -1274,7 +1281,7 @@ namespace Client
                 //On récupère l'id de l'utilisateur
                 int idUser = usersList[cbUsers_Users.SelectedIndex].Id;
 
-				string password;
+				string password, passwordHashed;
 
                 //On vérifie que l'utilisateur entré est valide
                 if (tbUsers_Name.Text.Trim().Equals(""))
@@ -1299,32 +1306,46 @@ namespace Client
                 }
                 else //Si l'administrateur a défini lui même un mot de passe...
                 {
+                    //Si l'utilisateur n'a pas indiqué de mot de passe, on le ne change pas
                     if (tbUsers_Pass.Text.Trim().Equals(""))
                     {
-                        //On change la StatusBar
-                        spawnErrorBar("Veuillez choisir un mot de passe valide!", true);
-                        return;
+                        password = "";
                     }
-                    password = tbUsers_Pass.Text;
+                    else
+                    {
+                        //S'il en a indiqué un nouveau, on le récupère
+                        password = tbUsers_Pass.Text;
+                    }
                 }
 
-                //On hashe le mot de passe
-                //passwordHashed = RandomPassword.HashString(password);
-
                 //On prépare notre utilisateur
+                string additionnalInformations = "";
                 UserData myUser = new UserData();
                 myUser.Name = tbUsers_Name.Text;
                 myUser.Login = tbUsers_Login.Text;
-                //myUser.Password = passwordHashed;
                 myUser.Id = idUser;
 
+                //Si l'utilisateur souhaite changer le mot de passe
+                if (password != "")
+                {
+                    //On hashe le mot de passe
+                    additionnalInformations = "\""+password+"\"";
+                    passwordHashed = RandomPassword.HashString(password);
+                    myUser.Password = passwordHashed;
+                }
+                else //Si le mot de passe n'est pas modifié
+                {
+                    additionnalInformations = "inchangé";
+                }
+
+                //Si l'utilisateur n'a pas de rôle
                 if (rolesInformations.Count() == 0)
                 {
-                    myUser.Roles = null;
+                    myUser.Roles = null; //On l'indique
                 }
                 else
                 {
-                    myUser.Roles = rolesInformations.ToArray();
+                    myUser.Roles = rolesInformations.ToArray(); //Sinon, on les récupère
                 }
 
                 //Si aucune classe n'a été choisie
@@ -1344,7 +1365,7 @@ namespace Client
                 if (returnValue.Equals("ok"))
                 {
                     //On change la StatusBar
-                    spawnErrorBar("Utilisateur modifié avec succès! (Nom: \"" + cbUsers_Users.SelectedItem.ToString() + "\", Login: \"" + tbUsers_Login.Text + "\", Password: \"" + password + "\")", false);
+                    spawnErrorBar("Utilisateur modifié avec succès! (Nom: \"" + cbUsers_Users.SelectedItem.ToString() + "\", Login: \"" + tbUsers_Login.Text + "\", Password: " + additionnalInformations + ")", false);
                 }
                 else
                 {
@@ -1489,6 +1510,8 @@ namespace Client
         }
 
         #endregion
+
+        
 
     }
 }
