@@ -289,7 +289,7 @@
 
                     <ScrollViewer Grid.Column="0" Grid.Row="1">
                         <Grid x:Name="WeekGrid"
-                            Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}" SizeChanged="WeekGrid_SizeChanged">
+                            Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}">
 
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto" x:Name="WeekHoursColumn"/>
@@ -321,7 +321,7 @@
             <TabItem Header="Jour" Background="#FFA5A5A5" FontSize="13.333">
                 <ScrollViewer Margin="0" Grid.Column="1" Grid.Row="1">
                     <Grid x:Name="DayGrid"
-                            Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}" SizeChanged="DayGrid_SizeChanged">
+                            Height="{Binding ActualHeight, Converter={StaticResource GridSizeConverter}, RelativeSource={RelativeSource FindAncestor, AncestorLevel=1, AncestorType={x:Type ScrollViewer}}}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>

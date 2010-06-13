@@ -109,9 +109,7 @@ namespace Client
             DisplayedDate.SelectedDate = DateTime.Today;
 
             // Draw Grids
-            ((ScrollViewer)DayGrid.Parent).ScrollToVerticalOffset(DayGrid.Height * 7 / 24);
             DayGrid.Children.Add(GetHoursGrid());
-            ((ScrollViewer)WeekGrid.Parent).ScrollToVerticalOffset(WeekGrid.Height * 7 / 24);
             WeekGrid.Children.Add(GetHoursGrid());
 
 			// ComboBoxes initialisation
@@ -384,11 +382,7 @@ namespace Client
         public void RefreshDayGrid()
         {
             DrawDay(DayContentGrid, DisplayedDate.SelectedDate.GetValueOrDefault());
-        }
-
-        private void DayGrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            RefreshDayGrid();
+            ((ScrollViewer)DayGrid.Parent).ScrollToVerticalOffset(DayGrid.Height * 7 / 24);
         }
 
         public void RefreshWeekGrid()
@@ -403,11 +397,7 @@ namespace Client
             DrawDay(FridayContentGrid, selectedDate.AddDays(5 - (int)selectedDate.DayOfWeek - addDay));
             DrawDay(SaturdayContentGrid, selectedDate.AddDays(6 - (int)selectedDate.DayOfWeek - addDay));
             DrawDay(SundayContentGrid, selectedDate.AddDays(sunAddDay - (int)selectedDate.DayOfWeek));
-        }
-
-        private void WeekGrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            RefreshWeekGrid();
+            ((ScrollViewer)WeekGrid.Parent).ScrollToVerticalOffset(WeekGrid.Height * 7 / 24);
         }
 
         private void DayGridPreviousDay_Click(object sender, RoutedEventArgs e)
