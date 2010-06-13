@@ -1,6 +1,0 @@
-=Interface d'administration=
-_par Kornylo Jeremy_
-
-Une petite étude de workflow?
-Recherche des cas pratique?
-ScreenShots?
