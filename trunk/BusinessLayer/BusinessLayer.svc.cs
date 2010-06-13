@@ -504,7 +504,7 @@ namespace BusinessLayer
 			if (tmp != null)
 			{
 				eventsInSameLocation = tmp.Where(ev => ev.Start <= eventToSet.End && ev.End >= eventToSet.Start && ev.Place == eventToSet.Place).SelectMany(names => names.Name + ", ") as string;
-				if (eventsInSameLocation.Length > 0)
+				if (eventsInSameLocation==null?false:eventsInSameLocation.Length > 0)
 					return "Les salles " + eventsInSameLocation+"Sont occupées.";
 			}
 
