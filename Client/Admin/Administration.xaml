@@ -74,7 +74,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <GroupBox Grid.Row="0" Grid.Column="0" Name="gbPromotions" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <GroupBox Grid.Row="0" Grid.Column="0" Name="gbPromotions" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="..\Icons\medalgold32.png"/>
@@ -103,7 +103,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lPromo_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPromo_Name" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbPromo_Name" PreviewKeyUp="tbPromo_Name_PreviewKeyUp" />
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="2">
@@ -153,7 +153,7 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lSubjects_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbSubjects_Name" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbSubjects_Name" PreviewKeyUp="tbSubjects_Name_PreviewKeyUp" />
                     </Grid>
 
                     <DataGrid MaxHeight="90" Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10">
@@ -278,7 +278,7 @@
                         <TextBox Grid.Column="1" Grid.Row="1" Name="tbPeriods_EndDate" Margin="0,10,0,0"/>
 
                         <Label Content="Promotion:" Grid.Column="0" Grid.Row="2" Name="lPeriods_Promotion" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Grid.Row="2" Name="cbPeriods_Promotion" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center" HorizontalContentAlignment="Center"/>
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom">
@@ -476,7 +476,7 @@
                         </Grid.RowDefinitions>
 
                         <Label Content="Classe:" Grid.Column="0" Grid.Row="0" Name="lUsers_Class" HorizontalAlignment="Center" Margin="0,10,0,0"/>
-                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center"/>
+                        <ComboBox Grid.Column="1" Grid.Row="1" Name="cbUsers_Class" SelectedIndex="0" HorizontalContentAlignment="Center" Margin="0,10,0,0" ItemsSource="{Binding}" VerticalAlignment="Center" />
                     </Grid>
 
 

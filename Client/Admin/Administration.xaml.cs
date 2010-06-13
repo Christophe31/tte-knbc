@@ -96,7 +96,6 @@ namespace Client
         }
         #endregion
 
-
         #region Chargement du contrôle - Routines lancées au démarrage de l'UserControl ou servant à sa gestion
 
         //Au chargement du contrôle d'administration, on charge toutes les combobox
@@ -118,13 +117,48 @@ namespace Client
         //Rafraichissement complet de la fenêtre d'Administration
 		void refreshAllControls()
         {
-			refreshPromotions();
-            refreshSubjects();
-			refreshCampus();
-			refreshPeriods();
-			refreshClasses();
-			refreshUsers();
+                refreshPromotions();
+                refreshSubjects();
+                refreshCampus();
+                refreshPeriods();
+                refreshPromo_Periods();
+                refreshPeriods_Classes();
+                refreshClasses();
+                refreshCampus_Classes();
+                refreshUsers();
+                refreshClasses_Users();
 		}
+
+        #region Gestion des PreviewKeyUp
+
+        private void tbPromo_Name_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                bPromo_AddMod_Click(null, null);
+                bPromo_AddMod.Focus();
+            }
+        }
+
+        private void tbSubjects_Name_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                bSubjects_AddMod_Click(null, null);
+                bSubjects_AddMod.Focus();
+            }
+        }
+
+        private void tbCampus_Name_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                bCampus_AddMod_Click(null, null);
+                bCampus_AddMod.Focus();
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -173,6 +207,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Promotion "+cbPromo_Promotions.SelectedItem.ToString()+" modifiée avec succès!", false);
+
+                    //On rafraichit la combobox des Promotions dans le groupbox Périodes
+                    refreshPromo_Periods();
                 }
                 else
                 {
@@ -198,6 +235,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Promotion "+tbClasses_Name.Text+" insérée avec succès!", false);
+
+                    //On rafraichit la combobox des Promotions dans le groupbox Périodes
+                    refreshPromo_Periods();
                 }
                 else
                 {
@@ -231,6 +271,11 @@ namespace Client
             {
                 //On change la StatusBar
                 spawnErrorBar("Promotion "+cbPromo_Promotions.SelectedItem.ToString()+" supprimée avec succès!", false);
+
+                //On rafraichit la combobox des Promotions dans le groupbox Périodes
+                promoList_Period = Api.Server.getPromotions().ToArray();
+                cbPeriods_Promotion.DataContext = promoList_Period;
+                //cbPeriods_Period_SelectionChanged(null, null);
             }
             else
             {
@@ -289,6 +334,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Campus "+cbCampus_Campus.SelectedItem.ToString()+" modifié avec succès!", false);
+
+                    //On rafraichit la combobox des campus dans le groupbox Classes
+                    refreshCampus_Classes();
                 }
                 else
                 {
@@ -314,6 +362,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Campus "+tbCampus_Name.Text+" inséré avec succès!", false);
+
+                    //On rafraichit la combobox des campus dans le groupbox Classes
+                    refreshCampus_Classes();
                 }
                 else
                 {
@@ -347,6 +398,9 @@ namespace Client
             {
                 //On change la StatusBar
                 spawnErrorBar("Campus "+cbCampus_Campus.SelectedItem.ToString()+" supprimé avec succès!", false);
+
+                //On rafraichit la combobox des campus dans le groupbox Classes
+                refreshCampus_Classes();
             }
             else
             {
@@ -362,6 +416,12 @@ namespace Client
 
         #region Périodes
 
+        public void refreshPromo_Periods()
+        {
+            promoList_Period = Api.Server.getPromotions().ToArray();
+            cbPeriods_Promotion.DataContext = promoList_Period;
+        }
+
         //Rafraichissement des différents contrôles
         private void refreshPeriods()
         {
@@ -369,8 +429,7 @@ namespace Client
             cbPeriods_Period.DataContext = periodsList;
             cbPeriods_Period.SelectedIndex = 0;
 
-            promoList_Period = Api.Server.getPromotions().ToArray();
-            cbPeriods_Promotion.DataContext = promoList_Period;
+            
         }
 
         //Lorsque l'utilisateur choisit une période
@@ -473,6 +532,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Période "+cbPeriods_Period.SelectedItem.ToString()+" modifiée avec succès!", false);
+
+                    //On rafraichit la combobox des périodes dans le groupbox classes
+                    refreshPeriods_Classes();
                 }
                 else
                 {
@@ -536,6 +598,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Période insérée "+tbPeriods_Name.Text+" avec succès!", false);
+
+                    //On rafraichit la combobox des périodes dans le groupbox classes
+                    refreshPeriods_Classes();
                 }
                 else
                 {
@@ -569,6 +634,9 @@ namespace Client
             {
                 //On change la StatusBar
                 spawnErrorBar("Période "+cbPeriods_Period.SelectedItem.ToString()+" supprimée avec succès!", false);
+
+                //On rafraichit la combobox des périodes dans le groupbox classes
+                    refreshPeriods_Classes();
             }
             else
             {
@@ -584,18 +652,24 @@ namespace Client
 
         #region Classes
 
+        private void refreshCampus_Classes()
+        {
+            campusList_Class = Api.Server.getPlannings(EventData.TypeEnum.Campus).ToArray();
+            cbClasses_Campus.DataContext = campusList_Class;
+        }
+
+        private void refreshPeriods_Classes()
+        {
+            periodsList_Class = Api.Server.getPlannings(EventData.TypeEnum.Period).ToArray();
+            cbClasses_Period.DataContext = periodsList_Class;
+        }
+
         //Rafraichissement des différents contrôles
         private void refreshClasses()
         {
             classesList = new IdName[] { new IdName() { Id = 0, Name = "Nouvelle Classe" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
             cbClasses_Classes.DataContext = classesList;
             cbClasses_Classes.SelectedIndex = 0;
-
-            campusList_Class = Api.Server.getPlannings(EventData.TypeEnum.Campus).ToArray();
-            cbClasses_Campus.DataContext = campusList_Class;
-
-            periodsList_Class = Api.Server.getPlannings(EventData.TypeEnum.Period).ToArray();
-            cbClasses_Period.DataContext = periodsList_Class;
         }
 
         //Lorsque l'utilisateur choisit une classe
@@ -690,6 +764,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Classe "+cbClasses_Classes.SelectedItem.ToString()+" modifiée avec succès!", false);
+
+                    //On rafraichit la combobox des classes dans le groupbox Utilisateurs
+                    refreshClasses_Users();
                 }
                 else
                 {
@@ -699,7 +776,6 @@ namespace Client
             }
             else if (cbClasses_Classes.SelectedIndex == 0)//S'il s'agit d'un ajout
             {
-                MessageBox.Show(cbSubjects_Subjects.ActualHeight.ToString());
 
                 //On vérifie que la classe entrée est valide
                 if (tbClasses_Name.Text.Trim().Equals(""))
@@ -714,7 +790,7 @@ namespace Client
                 if (cbClasses_Campus.SelectedIndex < 0 || cbClasses_Period.SelectedIndex < 0)
                 {
                     //On change la StatusBar
-                    spawnErrorBar("Choissiez un Campus et une Période pour la classe!", true);
+                    spawnErrorBar("Choisissez un Campus et une Période pour la classe!", true);
                     return;
                 }
 
@@ -732,6 +808,9 @@ namespace Client
                 {
                     //On change la StatusBar
                     spawnErrorBar("Classe "+tbClasses_Name.Text+" insérée avec succès!", false);
+
+                    //On rafraichit la combobox des classes dans le groupbox Utilisateurs
+                    refreshClasses_Users();
                 }
                 else
                 {
@@ -765,6 +844,9 @@ namespace Client
             {
                 //On change la StatusBar
                 spawnErrorBar("Classe " + cbClasses_Classes.SelectedItem.ToString() + " supprimée avec succès!", false);
+
+                //On rafraichit la combobox des classes dans le groupbox Utilisateurs
+                refreshClasses_Users();
             }
             else
             {
@@ -956,16 +1038,19 @@ namespace Client
 
         #region Utilisateurs
 
+        private void refreshClasses_Users()
+        {
+            classesList_Users = new IdName[] { new IdName() { Id = 0, Name = "Aucune" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
+            cbUsers_Class.DataContext = classesList_Users;
+            cbUsers_Class.SelectedIndex = 0;
+        }
+
         //Rafraichissement des contrôles
         public void refreshUsers()
         {
             usersList = new IdName[] { new IdName() { Id = 0, Name = "Nouvel Utilisateur" } }.Concat(Api.Server.getUsers()).ToArray();
             cbUsers_Users.DataContext = usersList;
             cbUsers_Users.SelectedIndex = 0;
-
-            classesList_Users = new IdName[] { new IdName() { Id = 0, Name = "Aucune" } }.Concat(Api.Server.getPlannings(EventData.TypeEnum.Class)).ToArray();
-            cbUsers_Class.DataContext = classesList_Users;
-            cbUsers_Class.SelectedIndex = 0;
         }
 
         //Si l'utilisateur à choisi... un utilisateur
