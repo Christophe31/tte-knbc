@@ -753,16 +753,20 @@ namespace Client
                 selectedEvent.Name = EditEvent_Name.Text;
                 selectedEvent.Place = EditEvent_Place.Text;
                 selectedEvent.Speaker = (IdName)EditEvent_Speaker.SelectedValue;
-                selectedEvent.Subject = new IdName()
+
+                if (EditEvent_Subject.SelectedValue != null && EditEvent_Modality.SelectedValue != null)
                 {
-                    Name = ((IdName)EditEvent_Subject.SelectedValue).Name,
-                    Id = ((IdName)EditEvent_Subject.SelectedValue).Id
-                };
-                selectedEvent.Modality = new IdName()
-                {
-                    Name = ((IdName)EditEvent_Modality.SelectedValue).Name,
-                    Id = ((IdName)EditEvent_Modality.SelectedValue).Id
-                };
+                    selectedEvent.Subject = new IdName()
+                    {
+                        Name = ((IdName)EditEvent_Subject.SelectedValue).Name,
+                        Id = ((IdName)EditEvent_Subject.SelectedValue).Id
+                    };
+                    selectedEvent.Modality = new IdName()
+                    {
+                        Name = ((IdName)EditEvent_Modality.SelectedValue).Name,
+                        Id = ((IdName)EditEvent_Modality.SelectedValue).Id
+                    };
+                }
 
                 if (selectedEvent.ParentPlanning == null)
                     selectedEvent.ParentPlanning = SelectedPlanning;
