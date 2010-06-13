@@ -9,25 +9,25 @@ La première version du sujet ne nous laissait pas nous poser cette question imp
 
 L'équipe étant dans l'ensemble assez ouverte sur le logiciel libre, nous avons pensé à pas mal de technologies autres que celles innitialement proposés, pour choisir des technologies, nous avons réfléchi architecture. Bien que le cahier des charges ne fesait pas mention de toute la problématique sécurité, il nous était évident que l'on ferai un minimum pour sécuriser un peu la base.. Faire un utilisateur DB par étudiant aurait imposé de nombreuses vues pour restreindre les droits de lecture sur les évènements privés, restreindre les accès aux donnés en n'accédant que par des procédure stoquées SQL nous a effleuré l'esprit mais nous nous doutions que nous ferions un service Front End en interface entre la base de donnée et internet. Coté client, notre équipe de base est assez hétérogène en therme de plateforme favorite, on a songé à l'intéroparabilité pour le développement et pour l'utilisation. Une possibilité qui avais retenu notre attention, un client en XUL (Javascript utilisant le moteur de firefox) avec un service web en php. Le sujet proposait d'autres technologies et nous avons admis que SQL Serveur était déjà installé chez le client, le sujet suggérais que la base d'utilisateurs était presque exclusivement sous Windows... Ayant dans notre équipe deux personnes relativement expérimentés en .NET et nous pensons que Microsoft, lorsqu'il est utilisé sur l'ensemble de la chaîne, leurs technologies sont intéressantes et les outils assistent agréablement les développeurs. Il y avait pas mal de nouveautés interessantes, la sorti de .NET 4, Visual studio 2010, bref, comme le sujet semblait encourager ce choix que nous avons suivi.
 
-
 = Ressources humaines =
 == Présentation de membres ==
 La répartition des tâches fonctionelles a été assez naturelle dans l'équipe de départ. Voici la liste des membres et leurs points forts/points faibles:
+
 
 *équipe de départ*
 
 Romaric :
     * Experiences en développement web et en .NET (ASPX).
     * Pas de lacunes particulières...
-    * Calme, posé, bonne orthographe et compréhension, timide.
+    * Calme, posé, bonne orthographe et compréhension.
 Romain : 
     * Experiences d'administrateur web.
     * Pas d'attraits particuliers pour le C#.
     * Efficace, synthétique, clair dans sa vision et son esprit.
 Jeremy :
-    * Experiences en sécurité.
+    * Experiences non spécialisées.
     * Pas de lacunes notables.
-    * Serviable, réservé.
+    * Serviable.
 Christophe : 
     * Experiences en Linq et en NET.
     * Peu de compétances en interfaces graphique et en SQL.
