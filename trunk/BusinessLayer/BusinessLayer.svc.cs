@@ -250,7 +250,7 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
-			if (validPlanning(classToSet.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period))
+			if (!(validPlanning(classToSet.Campus.Id ,EventData.TypeEnum.Campus) && validPlanning(classToSet.Period.Id, EventData.TypeEnum.Period)))
 				return "Période et/ou Campus invalide(s).";
 			if (db.Planning.Any(p =>classToSet.Campus!=null && p.Id == classToSet.Campus.Id && p.ChildrenPlannings.Any(c => c.Name == classToSet.Name)))
 				return "Une classe avec ce nom existe déjà sur ce campus.";
@@ -421,6 +421,8 @@ namespace BusinessLayer
 		{
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
+			if (db.Planning.Any(camp => camp.Id != Id && CampusName == camp.Name))
+				return "Un campus ayant ce nom existe déjà.";
 			db.Planning.First(p => p.Id == Id && p.Type == (int)EventData.TypeEnum.Campus).Name = CampusName;
 			db.SaveChanges();
 			return "ok";
@@ -435,6 +437,7 @@ namespace BusinessLayer
 			classe.Name = classToSet.Name;
 			classe.Class.Period = classToSet.Period.Id;
 			classe.Parent = classToSet.Campus.Id;
+			db.SaveChanges();
 			return "ok";
 		}
 		string IBusinessLayer.setPromotion(int Id, string PromotionName)
@@ -608,6 +611,7 @@ namespace BusinessLayer
 			if (!isUserAdmin)
 				return "Vous devez être administrateur pour faire ça.";
 			db.Planning.DeleteObject(db.Planning.Where(camp => camp.Id == Id && camp.Type==(int)EventData.TypeEnum.Campus).First());
+			db.SaveChanges();
 			return "ok";
 		}
 		string IBusinessLayer.delPromotion(int Id)
