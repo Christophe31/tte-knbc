@@ -36,12 +36,20 @@ makecert -iv SignRoot.pvk -ic signroot.cer -cy end -pe -n CN="localhost" -eku 1.
 }}}
 Cette commande fait le certificat qui servira au serveur à chiffrer son flux de donnée. Il arrive qu'après redémarage le service n'arrive plus à utiliser le certificat, il suffit de lancer VisualStudio en administrateur ou de changer les droits NTFS des dossiers dans `C:\Users\All Users\Microsoft\Crypto\RSA`. 
 
-==Serveur de production==
-Dans le paneau de controlle cherchez "Ajouter ou enlever des fonctionnalités de windows", puis Cochez IIS
+=Serveur de production=
 
-Téléchergez SqlServer (et son interface d'administration?).
-Installez le puis exécutez notre script tte-bcdkn.sql sur une base que vous aurez créée du nom tte-bcdkn.
+Pour le serveur de production, il nous faudra IIS d'installer (à cocher dans les fonctionnalités de windows), un SQLServeur, .NET 4, et enfin,  si vous voulez générer votre propre certificat, le SDK Windows propre a votre version (il y en a un pour windows 7, pour windows serveur 2008...)
+
+Exécutez notre script tte-bcdkn.sql sur une base que vous aurez créée du nom tte-bcdkn.
 
 Lancez le centre de management de IIS, allez dans sécuritez et renseignez y le certificat de votre domaine (dans notre contexte de développement, nous utilisons localhost).
 
-Si vous n'avez pas de certificats, vous pouvez le générer avec makecert, commande entre autre dans le SDK windows...
+Si vous n'avez pas de certificats, procédez comme pour les développeurs mais avec le prompt du SDK.
+
+Dans le gestionnaire IIS, ajoutez un nouveau site qui utilisera le port 2900 en http.
+Vous pouvez changer la Connection String dans le web.config
+
+=Client=
+Copier le dossier \Client\bin\Release en local.
+Editez Client.exe.config pour qu'il se conecte sur le bon serveur.
+C'est pret.
