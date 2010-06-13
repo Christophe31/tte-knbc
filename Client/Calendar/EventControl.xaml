@@ -7,6 +7,7 @@
 	x:Class="Client.EventControl"
 	x:Name="UserControl"
 	UseLayoutRounding="True"
+    MinWidth="140"
     d:DesignHeight="80" d:DesignWidth="140">
 
     <Border CornerRadius="3" Background="{Binding BackgroundColor}" BorderThickness="1" BorderBrush="{Binding BorderColor}">
