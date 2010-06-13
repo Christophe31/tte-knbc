@@ -1274,7 +1274,7 @@ namespace Client
                 //On récupère l'id de l'utilisateur
                 int idUser = usersList[cbUsers_Users.SelectedIndex].Id;
 
-                string password, passwordHashed;
+				string password;
 
                 //On vérifie que l'utilisateur entré est valide
                 if (tbUsers_Name.Text.Trim().Equals(""))
@@ -1309,13 +1309,13 @@ namespace Client
                 }
 
                 //On hashe le mot de passe
-                passwordHashed = RandomPassword.HashString(password);
+                //passwordHashed = RandomPassword.HashString(password);
 
                 //On prépare notre utilisateur
                 UserData myUser = new UserData();
                 myUser.Name = tbUsers_Name.Text;
                 myUser.Login = tbUsers_Login.Text;
-                myUser.Password = passwordHashed;
+                //myUser.Password = passwordHashed;
                 myUser.Id = idUser;
 
                 if (rolesInformations.Count() == 0)
