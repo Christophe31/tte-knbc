@@ -2,18 +2,12 @@
 _par Narbonne Christophe_
 
 ==Analyse==
-Le choix de mettre en place un service web c'est pris assez vite. Exposer une base de donnée nue si on veut une gestion fine des droits, ça a ses limites.
+Le choix de mettre en place un service web s'est pris assez vite. Exposer une base de donnée nue, si on veut une gestion fine des droits, ça a ses limites.
 
 
-WCF (_*W* indows *C* omunication *F* ondation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'intérêt est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
+WCF (_*W*indows *C*omunication *F*ondation_) m'as permis d'exposer une API pour interfacer la base de donnée tant pour la lecture que pour l'écriture. L'intérêt est multiple, comme mentionné ça permet une gestion fine des droits mais ça permet aussi de pouvoir déporter le service sur un serveur distinct de la base de donnée et de réduire la part du code métier dans l'interface (avantageux si nous venions à en faire une seconde pour mobile par exemple).
 
 http://www.mypicturesbox.com/photos/originales/crovax31/55010.png
 
 ==Fonctionnement==
-Les évènements étant des objets échangés en quantité, et étant le coeur de l'application il paraissait important de les cadrer clairement, nous avons donc aggrégé la partie publique c'est à la partie qui interesse le client dans une classe avec le nombre de champs le plus mince nécessaire.
-
-==Implémentation API==
-Voilà la partie/API publique du service avec les signatures des méthodes (Comme cette interface est encore en modification régulière, je lie le fichier plutot que d'en actualiser le contenu manuellement).
-http://code.google.com/p/tte-knbc/source/browse/trunk/BusinessLayer/IBusinessLayer.cs
-
-Pour comprendre la teneur des objets en jeux, je vous recommande de vous référer à [Database2 la partie traitant de la DB]
+Les évènements étant des objets échangés en quantité, et étant le coeur de l'application il paraissait important de les cadrer clairement, nous avons donc aggrégé la partie publique (c'est à la partie qui interesse le client) dans une classe avec le nombre de champs le plus mince nécessaire.
