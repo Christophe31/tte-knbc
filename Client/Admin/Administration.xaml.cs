@@ -109,8 +109,13 @@ namespace Client
 		{
 			while (!Api.ServerAvailable)
 			{
-				Thread.Sleep(500);
+				while (!Api.ServerAvailable)
+				{
+					Thread.Sleep(500);
+				}
+				Thread.Sleep(1000);
 			}
+			
 			this.Dispatcher.BeginInvoke((ThreadStart)refreshAllControls);
 		}
  
