@@ -1,0 +1,47 @@
+#Comment installer tte-knbc??
+
+= Introduction =
+Le tronc commun est d'installer le framework .NET 4 à cette adresse:
+http://www.microsoft.com/downloads/details.aspx?displaylang=fr&FamilyID=9cfb2d51-5ff4-4491-b0e5-b386f32c0992
+
+L'ensemble de notre projet le nécessite.
+Notez qu'un redémarrage est nécessaire à postériori.
+
+Il y a dans cette plusieur profils d'installation: Développeur, Client, Serveur
+
+
+Le respect des noms proposés ici vous permettra de garder la connexion string et la conf de certificat X509 par défaut. 
+
+=Développeur=
+Pour un développeur, seuls Visual Studio 2010 ainsi qu'expression blend 4 ont on bon support de la dernière implémentation du format de projet qui est utilisé dans notre solution.
+
+Il vous faut donc: VisualStudio, si vous voulez contribuer avoir la version la plus à jour un plugun subversion, un serveur SQLSERVER (.\SQLEXPRESS).
+
+Connectez votre serveur sql dans le server explorer de Visual Studio, précisez manuellement le nom de la nouvelle base (tte-bcdkn). Dans le projet DataAccessLayer, ouvrez le script "tte-knbc.sql", connectez le server SQL dans les toolbox qui apparaissent et exécutez le script sur la nouvelle base.
+
+Maintenant, la gestion des certificats, on as réussi pour un usage local a simplifier la tâche de mise en place au maximum:
+
+Ouvrez en administrateur le prompt visual studio: Start->AllPrograms->VS2010->VS tools->VS Command Prompt
+
+ensuite, il faut y exécuter une à une les commandes suivantes:
+
+{{{
+makecert -sv SignRoot.pvk -cy authority -r signroot.cer -a sha1 -n "CN=Dev Certification Authority" -ss my -sr localmachine
+}}}
+
+Cette première commande crée un certificat auto signé qui servira à prouver l'authentification du second certificat, notez le mot de passe que vous y entrez, il vous sera redemendé.
+
+{{{
+makecert -iv SignRoot.pvk -ic signroot.cer -cy end -pe -n CN="localhost" -eku 1.3.6.1.5.5.7.3.1 -ss my -sr localmachine -sky exchange -sp "Microsoft RSA SChannel Cryptographic Provider" -sy 12
+}}}
+Cette commande fait le certificat qui servira au serveur à chiffrer son flux de donnée. Il arrive qu'après redémarage le service n'arrive plus à utiliser le certificat, il suffit de lancer VisualStudio en administrateur ou de changer les droits NTFS des dossiers dans `C:\Users\All Users\Microsoft\Crypto\RSA`. 
+
+==Serveur de production==
+Dans le paneau de controlle cherchez "Ajouter ou enlever des fonctionnalités de windows", puis Cochez IIS
+
+Téléchergez SqlServer (et son interface d'administration?).
+Installez le puis exécutez notre script tte-bcdkn.sql sur une base que vous aurez créée du nom tte-bcdkn.
+
+Lancez le centre de management de IIS, allez dans sécuritez et renseignez y le certificat de votre domaine (dans notre contexte de développement, nous utilisons localhost).
+
+Si vous n'avez pas de certificats, vous pouvez le générer avec makecert, commande entre autre dans le SDK windows...
