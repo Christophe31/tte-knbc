@@ -208,7 +208,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Label Content="Nom:" Grid.Column="0" Grid.Row="0" Name="lCampus_Name" HorizontalAlignment="Center" />
-                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbCampus_Name" />
+                        <TextBox Grid.Column="1" Grid.Row="0" Name="tbCampus_Name" PreviewKeyUp="tbCampus_Name_PreviewKeyUp" />
                     </Grid>
 
                     <Grid Grid.Column="0" Grid.Row="2">
