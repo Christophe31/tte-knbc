@@ -125,7 +125,20 @@ Nous avons aussi mis en place un serveur Mumble (communications vocales par inte
 
 =Bilans Personnels=
 Ces bilans ont étés écrits par chaque membres, qui peuvent ici exposer leurs remarques sur le déroulement du projet.
+
 ==Breil Romaric==
+La première lecture du cahier des charges (la première version) m'a d'abord laissé sceptique sur la possibilité de mener ce projet à terme, d'autant plus qu'il était beaucoup moins clair que la version suivante. Cependant, après de nombreuses relectures et interprétations (une matinée entière), j'ai fini par avoir une vision claire de ce qui était attendu. La réunion Webex organisée peu après m'a conforté dans la plupart de mes choix, ainsi que la nouvelle version du cahier des charges.
+
+J'ai d'abord été tenté par l'utilisation des technologies de Mozilla (XUL) pour réaliser une application qui me paraissait fortement orientée "service en ligne", avec un service réalisé en PHP, par exemple (utilisé par un client lourd). Cependant, nous nous sommes mis d'accord sur l'utilisation exclusive du framework .NET, devant les avantages fournis par son utilisation exclusive.
+
+Une fois l'équipe formée, j'ai naturellement aidé à la compréhension du cahier des charges, ce qui a permis d'élaborer rapidement une première version de la base de données. Cependant, après de nombreux remaniements pour intégrer de nouvelles données (oubliées durant la conception initiale), j'ai très vite proposé de refaire la base de données, ce qui a été fait dès qu'un schéma plus élégant a été trouvé, bien qu'un peu tardivement.
+
+Concernant l'affichage des plannings en XAML, mon développement s'est amélioré au fur et à mesure de mon appropriation de cette technologie, et peu de code initial reste encore dans le projet.
+
+Je pense que la plus grande source de problèmes a été la séparation du groupe en deux, suite à l'ouverture de deux locaux en parallèle. Les personnes qui auraient dû être le plus suivies n'ont pas pu travailler efficacement, puisque les créneaux alloués au projet étaient incompatibles. Une part importante du travail a donc dû être réalisée par seulement trois membres sur cinq.
+
+Malgrès ces contre-temps, le projet a été en grande partie mené à bien, et le programme respecte les contraintes imposées.
+
 ==Cheynet Romain==
 ==Despax Thomas==
 ==Kornylo Jérémy==
