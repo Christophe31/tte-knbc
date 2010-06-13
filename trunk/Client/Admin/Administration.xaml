@@ -156,7 +156,7 @@
                         <TextBox Grid.Column="1" Grid.Row="0" Name="tbSubjects_Name" PreviewKeyUp="tbSubjects_Name_PreviewKeyUp" />
                     </Grid>
 
-                    <DataGrid MaxHeight="90" Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10">
+                    <DataGrid MaxHeight="90" Grid.RowSpan="2" Grid.Column="0" Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Center" AutoGenerateColumns="False" ItemsSource="{Binding}" Name="ModalityGrid" CanUserAddRows="True" CanUserDeleteRows="True" SelectedIndex="0" Margin="0,10" ToolTip="Modalités prédéfinies : Cours, E-learning, TD, TP, Soutenance, Examen">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Nom de la modalité" Binding="{Binding Name}"/>
                             <DataGridTextColumn Header="Durée (en heures)" Binding="{Binding Hours}"/>
