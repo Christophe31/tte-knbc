@@ -2,7 +2,7 @@
 
 Cette video ne montre que l'activité du début du projet (faite le 1 mai 2010)
 
-<wiki:video url="http://www.youtube.com/watch?v=W0bQ0SNGRos" />
+<wiki:video url="http://www.youtube.com/watch?v=LzqF7yi2mUg" />
 
 =Fonctionnalités=
  * Gestion de Calandriers publics
